@@ -10,6 +10,10 @@ internal partial class Program {
 
 	private static async Task Main(string[] args)
 		=> await BuildAvaloniaApp()
+
+			// NOTE: See the 'Licensing' documentation topic for details on how to register an evaluation or paid license here:
+			// .RegisterActiproLicense(licensee, licenseKey)
+
 			.WithInterFont()
 			.AfterSetup(x => {
 				// ApplicationViewModel platform-specific configuration
