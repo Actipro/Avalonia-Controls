@@ -1,0 +1,123 @@
+<UserControl
+	x:Class="ActiproSoftware.ProductSamples.SharedSamples.Controls.CopyButtonIntro.MainControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="CopyButton is a convenient button that, when invoked, will copy any text to the clipboard.">
+
+
+		<sampleBrowser:ControlExample
+			Header="Basic usage"
+			Footer="This sample binds the clipboard text to the current text of a TextBox. Actipro native button themes and variants are fully supported."
+			DataContext="{Binding #sample}"
+			>
+
+			<StackPanel Spacing="30">
+				<StackPanel>
+					<TextBlock Classes="theme-form-control-label" Text="Use the CopyButton to copy from this control" />
+					<DockPanel>
+						<actipro:CopyButton x:Name="sample" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True" DockPanel.Dock="Right"
+											CopyText="{Binding #sampleTextBox.Text}"
+											Classes.theme-outline="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Outline'}"
+											Classes.theme-solid="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Solid'}"
+											Classes.theme-soft="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Soft'}"
+											Classes.theme-subtle="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Subtle'}"
+											Classes.theme-link="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Link'}"
+											Classes.accent="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Accent'}"
+											Classes.success="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Success'}"
+											Classes.warning="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Warning'}"
+											Classes.danger="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Danger'}"
+											/>
+						<TextBox x:Name="sampleTextBox" Text="This text is bound to CopyButton.CopyText" Margin="0,0,10,0" />
+					</DockPanel>
+				</StackPanel>
+				<StackPanel>
+					<TextBlock Classes="theme-form-control-label" Text="Copied text can be pasted below" />
+					<TextBox MaxLines="3" TextWrapping="Wrap" />
+				</StackPanel>
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Theme" />
+						<ComboBox x:Name="sampleTheme" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Outline, Solid, Soft, Subtle, Link'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Variant" />
+						<ComboBox x:Name="sampleVariant" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Feedback" />
+						<ComboBox x:Name="sampleFeedback" ItemsSource="{actipro:DelimitedArray Type={x:Type actipro:CopyButtonFeedbackKind}}" SelectedItem="{Binding FeedbackKind}" />
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<DockPanel>
+	<actipro:CopyButton$(ClassesAttribute)$(FeedbackKindAttribute) DockPanel.Dock="Right"
+		CopyText="{Binding #source.Text}" />
+	<TextBox x:Name="source" />
+</DockPanel>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
+															   IsEnabled="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), StringFormat=' Classes=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="FeedbackKindAttribute"
+															   IsEnabled="{Binding FeedbackKind, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='All'}"
+															   Value="{Binding FeedbackKind, StringFormat=' FeedbackKind=&quot;{0}&quot;'}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Command model"
+			Footer="Use the command model to explicitly define a command that updates the clipboard."
+			DataContext="{Binding #commandSample}"
+			>
+
+			<StackPanel Spacing="30">
+				<StackPanel>
+					<TextBlock Classes="theme-form-control-label" Text="Use the CopyButton to copy using a command" />
+					<actipro:CopyButton x:Name="commandSample" HorizontalAlignment="Left" />
+				</StackPanel>
+				<StackPanel>
+					<TextBlock Classes="theme-form-control-label" Text="Copied text can be pasted below" />
+					<TextBox MaxLines="3" TextWrapping="Wrap" />
+				</StackPanel>
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<CheckBox x:Name="commandIsEnabledCheckBox" IsChecked="True" Content="Command enabled" IsCheckedChanged="OnCommandEnabledCheckBoxIsCheckedChanged" />
+					<CheckBox x:Name="simulateErrorOnCopyCheckBox" IsChecked="False" Content="Simulate error on copy" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<!-- This sample assumes a view model with a command is the DataContext -->
+<actipro:CopyButton Command="{Binding CopyCommand}" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+</UserControl>

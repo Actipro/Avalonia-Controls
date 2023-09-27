@@ -1,0 +1,64 @@
+<UserControl
+	x:DataType="sampleBrowser:ApplicationViewModel"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Styles>
+
+		<Style Selector="actipro|WindowResizeGrip">
+			<Setter Property="Background" Value="{actipro:ThemeResource ControlBackgroundBrushEmphasizedWarning}" />
+
+			<Style Selector="^.transparent">
+				<Setter Property="Background" Value="Transparent" />
+			</Style>
+		</Style>
+
+	</UserControl.Styles>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="WindowResizeGrip can be used in the bottom right corner of a Window to provide a larger target area for resizing the window.  The pointer shows a resize cursor when over the control.">
+
+
+		<sampleBrowser:ControlExample
+			Header="Basic usage"
+			Footer="This example's resize grip is disabled and will not show a resize cursor.  Use the enabled resize grip in the bottom right corner of the containing Window to see the resize grip in action."
+			>
+
+			<Border Background="{actipro:ThemeResource DefaultBackgroundBrush}" 
+					BorderBrush="{actipro:ThemeResource Container3BorderBrush}" BorderThickness="0,0,1,1" CornerRadius="0,0,10,0">
+				<Border Margin="0,50,0,0" Background="{actipro:ThemeResource Container3BackgroundBrush}" actipro:BorderChildClipConverter.ClipToContainingBorder="True">
+					<Grid ColumnDefinitions="*,Auto">
+						<TextBlock Margin="0,4" Text="{Binding ProductData.ProductVersionAndDateSummaryText}" HorizontalAlignment="Right" />
+						<actipro:WindowResizeGrip Grid.Column="1" Classes.transparent="{Binding !#showTargetAreaCheckBox.IsChecked}" IsEnabled="False" />
+					</Grid>
+				</Border>
+			</Border>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<CheckBox x:Name="showTargetAreaCheckBox" Content="Show target area" IsChecked="True" />
+
+					<TextBlock Classes="theme-form-control-message" Text="When checked, the WindowResizeGrip will show its location by rendering in orange."
+							   Foreground="{actipro:ThemeResource DefaultForegroundBrushSecondary}" />
+
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<Window>
+	<Grid>
+		<!-- Other controls -->
+		<actipro:WindowResizeGrip />
+	</Grid>
+</Window>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+</UserControl>

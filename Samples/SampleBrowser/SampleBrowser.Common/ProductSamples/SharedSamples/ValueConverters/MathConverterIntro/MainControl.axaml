@@ -1,0 +1,353 @@
+<UserControl
+	x:Name="sampleRootControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="The MathConverter class can perform basic mathematical calculations using the values that are passed into it.">
+
+
+		<sampleBrowser:ControlExample
+			Header="Basic usage"
+			Footer="Expressions support addition (+), subtraction (-), multiplication (*), division (/), parenthetical grouping, and some basic functions."
+			>
+
+			<StackPanel Spacing="30">
+				<StackPanel>
+					<TextBlock Classes="theme-form-control-label" Text="Mathematical expression" />
+					<TextBox Text="x + y * z" IsReadOnly="True" />
+				</StackPanel>
+				<StackPanel>
+					<TextBlock Classes="theme-form-control-label" Text="Result" />
+					<TextBox IsReadOnly="True">
+						<TextBox.Resources>
+							<actipro:MathConverter x:Key="TextResultMathConverter" />
+						</TextBox.Resources>
+						<TextBox.Text>
+							<MultiBinding Converter="{StaticResource TextResultMathConverter}" ConverterParameter="x + y * z">
+								<Binding ElementName="basicValueX" Path="Value" />
+								<Binding ElementName="basicValueY" Path="Value" />
+								<Binding ElementName="basicValueZ" Path="Value" />
+							</MultiBinding>
+						</TextBox.Text>
+					</TextBox>
+					<TextBlock Classes="theme-form-control-message">
+						<Run Text="{Binding #basicValueX.Value}" />
+						<Run Text=" + " />
+						<Run Text="{Binding #basicValueY.Value}" />
+						<Run Text=" * " />
+						<Run Text="{Binding #basicValueZ.Value}" />
+					</TextBlock>
+				</StackPanel>
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Margin="0" Text="{Binding #basicValueX.Value, StringFormat='X = {0}'}" />
+						<Slider x:Name="basicValueX" Minimum="-10" Maximum="10" IsSnapToTickEnabled="True" TickFrequency="1" Value="1" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Margin="0" Text="{Binding #basicValueY.Value, StringFormat='Y = {0}'}" />
+						<Slider x:Name="basicValueY" Minimum="-10" Maximum="10" IsSnapToTickEnabled="True" TickFrequency="1" Value="3" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Margin="0" Text="{Binding #basicValueZ.Value, StringFormat='Z = {0}'}" />
+						<Slider x:Name="basicValueZ" Minimum="-10" Maximum="10" IsSnapToTickEnabled="True" TickFrequency="1" Value="-5" />
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<TextBox IsReadOnly="True">
+	<TextBox.Resources>
+		<actipro:MathConverter x:Key="TextResultMathConverter" />
+	</TextBox.Resources>
+	<TextBox.Text>
+		<MultiBinding
+			Converter="{StaticResource TextResultMathConverter}"
+			ConverterParameter="x + y * z">
+			
+			<!-- X value -->
+			<Binding ElementName="sourceElementValueX" Path="Value" />
+			
+			<!-- Y value -->
+			<Binding ElementName="sourceElementValueY" Path="Value" />
+			
+			<!-- Z value -->
+			<Binding ElementName="sourceElementValueZ" Path="Value" />
+			
+		</MultiBinding>
+	</TextBox.Text>
+</TextBox>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Max function"
+			Footer="Use the 'max' function in an expression to return the higher of two numbers."
+			>
+
+			<StackPanel Spacing="30">
+				<StackPanel>
+					<TextBlock Classes="theme-form-control-label" Text="Mathematical expression" />
+					<TextBox Text="max(x, y)" IsReadOnly="True" />
+				</StackPanel>
+				<StackPanel>
+					<TextBlock Classes="theme-form-control-label" Text="Result" />
+					<TextBox IsReadOnly="True">
+						<TextBox.Resources>
+							<actipro:MathConverter x:Key="MaxTextResultMathConverter" />
+						</TextBox.Resources>
+						<TextBox.Text>
+							<MultiBinding Converter="{StaticResource MaxTextResultMathConverter}" ConverterParameter="max(x, y)">
+								<Binding ElementName="maxSlider1" Path="Value" />
+								<Binding ElementName="maxSlider2" Path="Value" />
+							</MultiBinding>
+						</TextBox.Text>
+					</TextBox>
+					<TextBlock Classes="theme-form-control-message">
+						<Run Text="max(" />
+						<Run Text="{Binding #maxSlider1.Value}" />
+						<Run Text=", " />
+						<Run Text="{Binding #maxSlider2.Value}" />
+						<Run Text=")" />
+					</TextBlock>
+				</StackPanel>
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Margin="0" Text="{Binding #maxSlider1.Value, StringFormat='Value 1 = {0}'}" />
+						<Slider x:Name="maxSlider1" Minimum="-100" Maximum="100" IsSnapToTickEnabled="True" TickFrequency="1" Value="-35" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Margin="0" Text="{Binding #maxSlider2.Value, StringFormat='Value 2 = {0}'}" />
+						<Slider x:Name="maxSlider2" Minimum="-100" Maximum="100" IsSnapToTickEnabled="True" TickFrequency="1" Value="20" />
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<TextBox IsReadOnly="True">
+	<TextBox.Resources>
+		<actipro:MathConverter x:Key="MaxTextResultMathConverter" />
+	</TextBox.Resources>
+	<TextBox.Text>
+		<MultiBinding
+			Converter="{StaticResource MaxTextResultMathConverter}"
+			ConverterParameter="max(x, y)">
+			
+			<Binding ElementName="maxSlider1" Path="Value" />
+			<Binding ElementName="maxSlider2" Path="Value" />
+
+		</MultiBinding>
+	</TextBox.Text>
+</TextBox>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Min function"
+			Footer="Use the 'min' function in an expression to return the lesser of two numbers."
+			>
+
+			<StackPanel Spacing="30">
+				<StackPanel>
+					<TextBlock Classes="theme-form-control-label" Text="Mathematical expression" />
+					<TextBox Text="min(x, y)" IsReadOnly="True" />
+				</StackPanel>
+				<StackPanel>
+					<TextBlock Classes="theme-form-control-label" Text="Result" />
+					<TextBox IsReadOnly="True">
+						<TextBox.Resources>
+							<actipro:MathConverter x:Key="MinTextResultMathConverter" />
+						</TextBox.Resources>
+						<TextBox.Text>
+							<MultiBinding Converter="{StaticResource MinTextResultMathConverter}" ConverterParameter="min(x, y)">
+								<Binding ElementName="minSlider1" Path="Value" />
+								<Binding ElementName="minSlider2" Path="Value" />
+							</MultiBinding>
+						</TextBox.Text>
+					</TextBox>
+					<TextBlock Classes="theme-form-control-message">
+						<Run Text="min(" />
+						<Run Text="{Binding #minSlider1.Value}" />
+						<Run Text=", " />
+						<Run Text="{Binding #minSlider2.Value}" />
+						<Run Text=")" />
+					</TextBlock>
+				</StackPanel>
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Margin="0" Text="{Binding #minSlider1.Value, StringFormat='Value 1 = {0}'}" />
+						<Slider x:Name="minSlider1" Minimum="-100" Maximum="100" IsSnapToTickEnabled="True" TickFrequency="1" Value="-35" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Margin="0" Text="{Binding #minSlider2.Value, StringFormat='Value 2 = {0}'}" />
+						<Slider x:Name="minSlider2" Minimum="-100" Maximum="100" IsSnapToTickEnabled="True" TickFrequency="1" Value="20" />
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<TextBox IsReadOnly="True">
+	<TextBox.Resources>
+		<actipro:MathConverter x:Key="MinTextResultMathConverter" />
+	</TextBox.Resources>
+	<TextBox.Text>
+		<MultiBinding
+			Converter="{StaticResource MinTextResultMathConverter}"
+			ConverterParameter="min(x, y)">
+			
+			<Binding ElementName="minSlider1" Path="Value" />
+			<Binding ElementName="minSlider2" Path="Value" />
+
+		</MultiBinding>
+	</TextBox.Text>
+</TextBox>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Round function"
+			Footer="Use the 'round' function in an expression to round a value to the nearest whole number."
+			>
+
+			<StackPanel Spacing="30">
+				<StackPanel>
+					<TextBlock Classes="theme-form-control-label" Text="Mathematical expression" />
+					<TextBox Text="round(x)" IsReadOnly="True" />
+				</StackPanel>
+				<StackPanel>
+					<TextBlock Classes="theme-form-control-label" Text="Result" />
+					<TextBox IsReadOnly="True">
+						<TextBox.Resources>
+							<actipro:MathConverter x:Key="RoundTextResultMathConverter" />
+						</TextBox.Resources>
+						<TextBox.Text>
+							<MultiBinding Converter="{StaticResource RoundTextResultMathConverter}" ConverterParameter="round(x)">
+								<Binding ElementName="roundSlider" Path="Value" />
+							</MultiBinding>
+						</TextBox.Text>
+					</TextBox>
+					<TextBlock Classes="theme-form-control-message">
+						<Run Text="round(" />
+						<Run Text="{Binding #roundSlider.Value, StringFormat={}{0:0.00}, Mode=OneWay}" />
+						<Run Text=")" />
+					</TextBlock>
+				</StackPanel>
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Margin="0" Text="{Binding #roundSlider.Value, StringFormat='Value = {0:0.00}'}" />
+						<Slider x:Name="roundSlider" Minimum="-100" Maximum="100" IsSnapToTickEnabled="True" LargeChange="1" SmallChange="0.01" TickFrequency=".01" Value="3.14" />
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<TextBox IsReadOnly="True">
+	<TextBox.Resources>
+		<actipro:MathConverter x:Key="RoundTextResultMathConverter" />
+	</TextBox.Resources>
+	<TextBox.Text>
+		<MultiBinding
+			Converter="{StaticResource RoundTextResultMathConverter}"
+			ConverterParameter="round(x)">
+			
+			<Binding ElementName="roundSlider" Path="Value" />
+
+		</MultiBinding>
+	</TextBox.Text>
+</TextBox>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Font-relative sizing"
+			Footer="The shape next to the text is sized based on the font size relative to 14pt and always rounded to whole numbers."
+			>
+
+			<StackPanel Orientation="Horizontal" Spacing="10">
+				<Border x:Name="fontShape" Width="{Binding $self.Height}" Background="{actipro:ThemeResource ControlBackgroundBrushEmphasizedAccent}">
+					<Border.Resources>
+						<actipro:MathConverter x:Key="HeightMathConverter" />
+					</Border.Resources>
+					<Border.Height>
+						<MultiBinding Converter="{StaticResource HeightMathConverter}" ConverterParameter="round((x / 14) * 20)">
+							<Binding ElementName="fontTextBlock" Path="FontSize" />
+						</MultiBinding>
+					</Border.Height>
+				</Border>
+				<TextBlock x:Name="fontTextBlock" Text="The base size at 14pt is 20x20" VerticalAlignment="Center" />
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Margin="0" Text="{Binding #fontTextBlock.FontSize, StringFormat='Font size = {0}pt'}" />
+						<Slider x:Name="fontSizeSlider" Minimum="8" Maximum="48" IsSnapToTickEnabled="True" TickFrequency="1" Value="{Binding #fontTextBlock.FontSize}" />
+					</StackPanel>
+					<TextBox Watermark="Shape height" UseFloatingWatermark="True" IsReadOnly="True" Text="{Binding #fontShape.Height}" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<Border Width="{Binding $self.Height}">
+	<Border.Resources>
+		<actipro:MathConverter x:Key="HeightMathConverter" />
+	</Border.Resources>
+	<Border.Height>
+		<!--
+			Expression Notes:
+				x        = Font size
+				20       = Desired height at the base font size
+				(x / 14) = Ratio of the current font to the base font size of 14
+		-->
+		<MultiBinding
+			Converter="{StaticResource HeightMathConverter}"
+			ConverterParameter="round((x / 14) * 20)">
+			
+			<!-- X value -->
+			<Binding ElementName="textBlock" Path="FontSize" />
+			
+		</MultiBinding>
+	</Border.Height>
+</Border>
+
+<TextBlock x:Name="textBlock" ... />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+</UserControl>

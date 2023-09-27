@@ -1,0 +1,270 @@
+<UserControl
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:system="using:System"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Pre-defined classes are available that can be applied to a native slider to achieve a variety of styles.">
+
+
+		<sampleBrowser:ControlExample
+			Header="Slider usage"
+			Footer="Actipro provides multiple themes and variants to alter the appearance of a slider."
+			DataContext="{Binding #sample}"
+			>
+
+			<Panel>
+				<Slider x:Name="sample" Orientation="Horizontal" Width="200" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
+						IsVisible="{Binding #sampleOrientation.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Horizontal'}"
+						Minimum="0" Maximum="100" Value="50"
+						HorizontalAlignment="Center"
+						IsDirectionReversed="False"
+						TickFrequency="10"
+						TickPlacement="BottomRight"
+						Classes.theme-outline="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Outline'}"
+						Classes.theme-solid="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Solid'}"
+						Classes.accent="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Accent'}"
+						Classes.success="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Success'}"
+						Classes.warning="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Warning'}"
+						Classes.danger="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Danger'}"
+						/>
+				<Slider x:Name="sampleVertical" Orientation="Vertical" Height="200" actipro:ThemeProperties.CopyClassesFrom="{Binding #sample}"
+						IsVisible="{Binding #sampleOrientation.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Vertical'}"
+						Minimum="{Binding Minimum}" Maximum="{Binding Maximum}" Value="{Binding Value}"
+						HorizontalAlignment="Center"
+						IsDirectionReversed="{Binding IsDirectionReversed}"
+						IsEnabled="{Binding IsEnabled}"
+						TickFrequency="{Binding TickFrequency}"
+						TickPlacement="{Binding TickPlacement}"
+						/>
+			</Panel>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Theme" />
+						<ComboBox x:Name="sampleTheme" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Outline, Solid'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Variant" />
+						<ComboBox x:Name="sampleVariant" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Orientation" />
+						<ComboBox x:Name="sampleOrientation" ItemsSource="{actipro:DelimitedArray Type={x:Type Orientation}}" SelectedIndex="0" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Tick placement" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type={x:Type TickPlacement}}" SelectedValue="{Binding TickPlacement}" />
+					</StackPanel>
+					<TextBox Text="{Binding Value, Mode=OneWay, StringFormat='{}{0:N0}'}" IsReadOnly="True" Watermark="Value" UseFloatingWatermark="True" />
+					<CheckBox IsChecked="{Binding IsDirectionReversed}">Direction reversed</CheckBox>
+					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<Slider$(ClassesAttribute)$(OrientationAttribute)$(TickPlacementAttribute)$(IsDirectionReversedAttribute)$(IsEnabledAttribute)
+	Minimum="$(Minimum)" Maximum="$(Maximum)" />
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
+															   IsEnabled="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), StringFormat=' Classes=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsDirectionReversedAttribute"
+															   IsEnabled="{Binding IsDirectionReversed}"
+															   Value=" IsDirectionReversed=&quot;True&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute"
+															   IsEnabled="{Binding !IsEnabled}"
+															   Value=" IsEnabled=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="Minimum" Value="{Binding Minimum}" />
+						<sampleBrowser:CodeExampleSubstitution Key="Maximum" Value="{Binding Maximum}" />
+						<sampleBrowser:CodeExampleSubstitution Key="OrientationAttribute"
+															   IsEnabled="{Binding #sampleOrientation.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Vertical'}"
+															   Value=" Orientation=&quot;Vertical&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="TickPlacementAttribute"
+															   IsEnabled="{Binding TickPlacement, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='None'}"
+															   Value="{Binding TickPlacement, StringFormat=' TickPlacement=&quot;{0}&quot;'}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Themes"
+			Footer="Slider has an outline theme by default or use class 'theme-solid' for an alternate look."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Outline" HorizontalAlignment="Center" />
+					<Slider Classes="theme-outline" MaxWidth="200" Minimum="0" Maximum="100" Value="50" />
+					<Slider Classes="theme-outline" MaxWidth="200" Minimum="0" Maximum="100" Value="50" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Solid" HorizontalAlignment="Center" />
+					<Slider Classes="theme-solid" MaxWidth="200" Minimum="0" Maximum="100" Value="50" />
+					<Slider Classes="theme-solid" MaxWidth="200" Minimum="0" Maximum="100" Value="50" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<Slider Classes="theme-outline" Minimum="0" Maximum="100" Value="50" />
+
+<Slider Classes="theme-solid" Minimum="0" Maximum="100" Value="50" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Accent variants"
+			Footer="Add the 'accent' class to a slider and the theme accent color will be used to provide emphasis."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Outline" HorizontalAlignment="Center" />
+					<Slider Classes="theme-outline accent" MaxWidth="200" Minimum="0" Maximum="100" Value="50" />
+					<Slider Classes="theme-outline accent" MaxWidth="200" Minimum="0" Maximum="100" Value="50" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Solid" HorizontalAlignment="Center" />
+					<Slider Classes="theme-solid accent" MaxWidth="200" Minimum="0" Maximum="100" Value="50" />
+					<Slider Classes="theme-solid accent" MaxWidth="200" Minimum="0" Maximum="100" Value="50" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<Slider Classes="theme-outline accent" Minimum="0" Maximum="100" Value="50" />
+
+<Slider Classes="theme-solid accent" Minimum="0" Maximum="100" Value="50" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Success variants"
+			Footer="Add the 'success' class to a slider and a color will be used to indicate success."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Outline" HorizontalAlignment="Center" />
+					<Slider Classes="theme-outline success" MaxWidth="200" Minimum="0" Maximum="100" Value="50" />
+					<Slider Classes="theme-outline success" MaxWidth="200" Minimum="0" Maximum="100" Value="50" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Solid" HorizontalAlignment="Center" />
+					<Slider Classes="theme-solid success" MaxWidth="200" Minimum="0" Maximum="100" Value="50" />
+					<Slider Classes="theme-solid success" MaxWidth="200" Minimum="0" Maximum="100" Value="50" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<Slider Classes="theme-outline success" Minimum="0" Maximum="100" Value="50" />
+
+<Slider Classes="theme-solid success" Minimum="0" Maximum="100" Value="50" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Warning variants"
+			Footer="Add the 'warning' class to a slider and a color will be used to indicate caution."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Outline" HorizontalAlignment="Center" />
+					<Slider Classes="theme-outline warning" MaxWidth="200" Minimum="0" Maximum="100" Value="50" />
+					<Slider Classes="theme-outline warning" MaxWidth="200" Minimum="0" Maximum="100" Value="50" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Solid" HorizontalAlignment="Center" />
+					<Slider Classes="theme-solid warning" MaxWidth="200" Minimum="0" Maximum="100" Value="50" />
+					<Slider Classes="theme-solid warning" MaxWidth="200" Minimum="0" Maximum="100" Value="50" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<Slider Classes="theme-outline warning" Minimum="0" Maximum="100" Value="50" />
+
+<Slider Classes="theme-solid warning" Minimum="0" Maximum="100" Value="50" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Danger variants"
+			Footer="Add the 'danger' class to a slider and a color will be used to indicate extreme caution."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Outline" HorizontalAlignment="Center" />
+					<Slider Classes="theme-outline danger" MaxWidth="200" Minimum="0" Maximum="100" Value="50" />
+					<Slider Classes="theme-outline danger" MaxWidth="200" Minimum="0" Maximum="100" Value="50" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Solid" HorizontalAlignment="Center" />
+					<Slider Classes="theme-solid danger" MaxWidth="200" Minimum="0" Maximum="100" Value="50" />
+					<Slider Classes="theme-solid danger" MaxWidth="200" Minimum="0" Maximum="100" Value="50" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<Slider Classes="theme-outline danger" Minimum="0" Maximum="100" Value="50" />
+
+<Slider Classes="theme-solid danger" Minimum="0" Maximum="100" Value="50" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Data validation errors"
+			Footer="Slider with a validation error."
+			>
+
+			<Slider MaxWidth="400" Minimum="0" Maximum="100" Value="50">
+				<DataValidationErrors.Error>
+					<system:Exception />
+				</DataValidationErrors.Error>
+			</Slider>
+
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

@@ -1,0 +1,88 @@
+<UserControl
+	x:Name="sampleRootControl"
+	x:Class="ActiproSoftware.ProductSamples.SharedSamples.ValueConverters.ThicknessConverterIntro.MainControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:systemColl="using:System.Collections"
+	>
+	<UserControl.Resources>
+		<actipro:ThicknessConverter x:Key="ThicknessConverter" BaseThickness="1,2,3,4" />
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="The ThicknessConverter class can be used to convert values to a thickness commonly used for margin or padding value.">
+
+
+		<sampleBrowser:ControlExample
+			Header="Basic usage"
+			Footer="ThicknessConverter can convert a Double to uniform thickness or use Thickness.Parse for other value types. Use a filter to limit which sides of the thickness are populated during conversion."
+			>
+
+			<StackPanel Spacing="30">
+				<StackPanel>
+					<TextBlock Classes="theme-form-control-label" Text="Original value" />
+					<TextBox x:Name="basicSample" Text="5, 10" Watermark="Enter a thickness value" />
+					<TextBlock Classes="theme-form-control-message" Text='Examples: "5", "5, 10", or "5, 10, 5, 10' />
+				</StackPanel>
+				<StackPanel>
+					<Grid ColumnDefinitions="Auto,Auto,Auto" RowDefinitions="Auto,Auto,Auto" HorizontalAlignment="Center">
+						<Grid.Styles>
+							<Style Selector="TextBlock">
+								<Setter Property="HorizontalAlignment" Value="Center" />
+								<Setter Property="VerticalAlignment" Value="Center" />
+								<Setter Property="Margin" Value="8,5" />
+							</Style>
+						</Grid.Styles>
+						<TextBlock Grid.Row="0" Grid.Column="1" Text="{Binding #basicSampleBorder.BorderThickness.Top}" />
+						<TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding #basicSampleBorder.BorderThickness.Left}" />
+						<TextBlock Grid.Row="1" Grid.Column="2" Text="{Binding #basicSampleBorder.BorderThickness.Right}" />
+						<TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding #basicSampleBorder.BorderThickness.Bottom}" />
+						<!-- NOTE: BorderThickness binding is set in code so it can be updated when the converter is updated 
+								BorderThickness="{Binding #basicSample.Text, Converter={StaticResource ThicknessConverter}}"
+						-->
+						<Border x:Name="basicSampleBorder" Grid.Row="1" Grid.Column="1" Width="200" Height="200"
+								Background="{actipro:ThemeResource Container1BackgroundBrush}"
+								BorderBrush="{actipro:ThemeResource DefaultForegroundBrush}"
+								/>
+					</Grid>
+				</StackPanel>
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Filter sides" />
+						<CheckBox x:Name="filterLeftCheckBox" IsChecked="True" Content="Left" />
+						<CheckBox x:Name="filterTopCheckBox" Margin="0,5,0,0" IsChecked="True" Content="Top" />
+						<CheckBox x:Name="filterRightCheckBox" Margin="0,5,0,0" IsChecked="True" Content="Right" />
+						<CheckBox x:Name="filterBottomCheckBox" Margin="0,5,0,0" IsChecked="True" Content="Bottom" />
+					</StackPanel>
+					<TextBox Text="1, 2, 3, 4" IsEnabled="False" Watermark="Base thickness" UseFloatingWatermark="True" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<!-- Define the converter as a resource -->
+<UserControl.Resources>
+	<actipro:ThicknessConverter x:Key="ThicknessConverter"$(FilterAttribute) BaseThickness="1,2,3,4" />
+</UserControl.Resources>
+
+<!-- Must use OneWay binding for properties that default to TwoWay -->
+<Border Background="White" BorderBrush="Black"
+	BorderThickness="{Binding Path, Converter={StaticResource ThicknessConverter}}" />
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="FilterAttribute"
+															   IsEnabled="{Binding #sampleRootControl.FilterSampleCode, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding #sampleRootControl.FilterSampleCode, StringFormat=' Filter=&quot;{0}&quot;'}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+</UserControl>

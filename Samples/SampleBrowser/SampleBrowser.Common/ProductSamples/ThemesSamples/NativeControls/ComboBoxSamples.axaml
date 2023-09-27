@@ -1,0 +1,258 @@
+<UserControl 
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:system="using:System"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
+
+		<actipro:Array x:Key="SimpleItemArray">
+			<x:String>First item</x:String>
+			<x:String>Second item</x:String>
+			<x:String>Third item</x:String>
+		</actipro:Array>
+
+		<actipro:Array x:Key="OutlineItemArray">
+			<x:String>Outline</x:String>
+			<x:String>Outline 2</x:String>
+			<x:String>Outline 3</x:String>
+		</actipro:Array>
+
+		<actipro:Array x:Key="SoftItemArray">
+			<x:String>Soft</x:String>
+			<x:String>Soft 2</x:String>
+			<x:String>Soft 3</x:String>
+		</actipro:Array>
+
+		<actipro:Array x:Key="DisabledItemArray">
+			<x:String>Disabled</x:String>
+		</actipro:Array>
+
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Pre-defined classes are available that can be applied to native combobox to achieve a variety of styles.">
+
+		<sampleBrowser:ControlExample
+			Header="Combobox usage"
+			Footer="Actipro provides multiple themes and variants to alter the appearance of a combobox."
+			DataContext="{Binding #sample}"
+			>
+
+			<ComboBox x:Name="sample" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
+					  ItemsSource="{StaticResource SimpleItemArray}"
+					  PlaceholderText="Actipro themes for combobox"
+					  Classes.theme-outline="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Outline'}"
+					  Classes.theme-soft="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Soft'}"
+					  Classes.accent="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Accent'}"
+					  Classes.success="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Success'}"
+					  Classes.warning="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Warning'}"
+					  Classes.danger="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Danger'}"
+					  />
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Theme" />
+						<ComboBox x:Name="sampleTheme" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Outline, Soft'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Variant" />
+						<ComboBox x:Name="sampleVariant" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
+					</StackPanel>
+					<TextBox Text="{Binding PlaceholderText}" Watermark="Placeholder text" UseFloatingWatermark="True" />
+					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<ComboBox $(ClassesAttribute)ItemsSource="{Binding Items}"
+	$(PlaceholderTextAttribute)$(IsEnabledAttribute)/>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
+															   IsEnabled="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), StringFormat='Classes=&quot;{0}&quot;&#xA;&#x9;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute"
+															   IsEnabled="{Binding !IsEnabled}"
+															   Value="IsEnabled=&quot;False&quot; " />
+						<sampleBrowser:CodeExampleSubstitution Key="PlaceholderTextAttribute"
+															   IsEnabled="{Binding PlaceholderText, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding PlaceholderText, StringFormat='PlaceholderText=&quot;{0}&quot; '}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Themes"
+			Footer="The appearance can be changed from the default with the use of the 'theme-outline' or 'theme-soft' classes."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<ComboBox Classes="theme-outline" ItemsSource="{StaticResource OutlineItemArray}" SelectedIndex="0" />
+					<ComboBox Classes="theme-outline" ItemsSource="{StaticResource DisabledItemArray}" SelectedIndex="0" IsEnabled="False" />
+					<ComboBox Classes="theme-outline" ItemsSource="{StaticResource OutlineItemArray}" PlaceholderText="Placeholder" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<ComboBox Classes="theme-soft" ItemsSource="{StaticResource SoftItemArray}" SelectedIndex="0" />
+					<ComboBox Classes="theme-soft" ItemsSource="{StaticResource DisabledItemArray}" SelectedIndex="0" IsEnabled="False" />
+					<ComboBox Classes="theme-soft" ItemsSource="{StaticResource SoftItemArray}" PlaceholderText="Placeholder" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<ComboBox Classes="theme-outline" ItemsSource="{Binding Items}" />
+
+<ComboBox Classes="theme-soft" ItemsSource="{Binding Items}" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Accent variants"
+			Footer="Add the 'accent' class to a combobox and the theme accent color will be used to provide emphasis."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<ComboBox Classes="theme-outline accent" ItemsSource="{StaticResource OutlineItemArray}" SelectedIndex="0" />
+					<ComboBox Classes="theme-outline accent" ItemsSource="{StaticResource DisabledItemArray}" SelectedIndex="0" IsEnabled="False" />
+					<ComboBox Classes="theme-outline accent" ItemsSource="{StaticResource OutlineItemArray}" PlaceholderText="Placeholder" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<ComboBox Classes="theme-soft accent" ItemsSource="{StaticResource SoftItemArray}" SelectedIndex="0" />
+					<ComboBox Classes="theme-soft accent" ItemsSource="{StaticResource DisabledItemArray}" SelectedIndex="0" IsEnabled="False" />
+					<ComboBox Classes="theme-soft accent" ItemsSource="{StaticResource SoftItemArray}" PlaceholderText="Placeholder" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<ComboBox Classes="theme-outline accent" ItemsSource="{Binding Items}" />
+
+<ComboBox Classes="theme-soft accent" ItemsSource="{Binding Items}" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Success variants"
+			Footer="Add the 'success' class to a combobox and a color will be used to indicate success."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<ComboBox Classes="theme-outline success" ItemsSource="{StaticResource OutlineItemArray}" SelectedIndex="0" />
+					<ComboBox Classes="theme-outline success" ItemsSource="{StaticResource DisabledItemArray}" SelectedIndex="0" IsEnabled="False" />
+					<ComboBox Classes="theme-outline success" ItemsSource="{StaticResource OutlineItemArray}" PlaceholderText="Placeholder" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<ComboBox Classes="theme-soft success" ItemsSource="{StaticResource SoftItemArray}" SelectedIndex="0" />
+					<ComboBox Classes="theme-soft success" ItemsSource="{StaticResource DisabledItemArray}" SelectedIndex="0" IsEnabled="False" />
+					<ComboBox Classes="theme-soft success" ItemsSource="{StaticResource SoftItemArray}" PlaceholderText="Placeholder" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<ComboBox Classes="theme-outline success" ItemsSource="{Binding Items}" />
+
+<ComboBox Classes="theme-soft success" ItemsSource="{Binding Items}" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Warning variants"
+			Footer="Add the 'warning' class to a combobox and a color will be used to indicate caution."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<ComboBox Classes="theme-outline warning" ItemsSource="{StaticResource OutlineItemArray}" SelectedIndex="0" />
+					<ComboBox Classes="theme-outline warning" ItemsSource="{StaticResource DisabledItemArray}" SelectedIndex="0" IsEnabled="False" />
+					<ComboBox Classes="theme-outline warning" ItemsSource="{StaticResource OutlineItemArray}" PlaceholderText="Placeholder" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<ComboBox Classes="theme-soft warning" ItemsSource="{StaticResource SoftItemArray}" SelectedIndex="0" />
+					<ComboBox Classes="theme-soft warning" ItemsSource="{StaticResource DisabledItemArray}" SelectedIndex="0" IsEnabled="False" />
+					<ComboBox Classes="theme-soft warning" ItemsSource="{StaticResource SoftItemArray}" PlaceholderText="Placeholder" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<ComboBox Classes="theme-outline warning" ItemsSource="{Binding Items}" />
+
+<ComboBox Classes="theme-soft warning" ItemsSource="{Binding Items}" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Danger variants"
+			Footer="Add the 'danger' class to a combobox and a color will be used to indicate extreme caution."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<ComboBox Classes="theme-outline danger" ItemsSource="{StaticResource OutlineItemArray}" SelectedIndex="0" />
+					<ComboBox Classes="theme-outline danger" ItemsSource="{StaticResource DisabledItemArray}" SelectedIndex="0" IsEnabled="False" />
+					<ComboBox Classes="theme-outline danger" ItemsSource="{StaticResource OutlineItemArray}" PlaceholderText="Placeholder" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<ComboBox Classes="theme-soft danger" ItemsSource="{StaticResource SoftItemArray}" SelectedIndex="0" />
+					<ComboBox Classes="theme-soft danger" ItemsSource="{StaticResource DisabledItemArray}" SelectedIndex="0" IsEnabled="False" />
+					<ComboBox Classes="theme-soft danger" ItemsSource="{StaticResource SoftItemArray}" PlaceholderText="Placeholder" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<ComboBox Classes="theme-outline danger" ItemsSource="{Binding Items}" />
+
+<ComboBox Classes="theme-soft danger" ItemsSource="{Binding Items}" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Data validation errors"
+			Footer="ComboBox with a validation error."
+			>
+
+			<ComboBox ItemsSource="{StaticResource SimpleItemArray}" SelectedIndex="0">
+				<DataValidationErrors.Error>
+					<system:Exception />
+				</DataValidationErrors.Error>
+			</ComboBox>
+
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

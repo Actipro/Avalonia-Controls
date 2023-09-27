@@ -1,0 +1,58 @@
+<ResourceDictionary 
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+	<ControlTheme x:Key="{x:Type sampleBrowser:CategorizedSampleItemsControl}" TargetType="sampleBrowser:CategorizedSampleItemsControl" BasedOn="{actipro:ControlTheme ItemsControl}">
+		<ControlTheme.Resources>
+
+			<actipro:ComparisonConverter x:Key="BlurbTextFontSizeConverter" TrueResult="{StaticResource {actipro:ThemeResourceKey DefaultFontSizeMedium}}">
+				<actipro:ComparisonConverter.FalseResult>
+					<x:Double>0.5</x:Double>
+				</actipro:ComparisonConverter.FalseResult>
+			</actipro:ComparisonConverter>
+			
+		</ControlTheme.Resources>
+		
+		<Setter Property="Grid.IsSharedSizeScope" Value="True" />
+		<Setter Property="IsTabStop" Value="False" />
+		<Setter Property="Margin" Value="0,50,0,30" />
+		<Setter Property="ItemTemplate">
+			<DataTemplate>
+
+				<Grid Margin="0,0,0,20">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto" SharedSizeGroup="GroupedSampleTitle" />
+						<ColumnDefinition Width="30" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+
+					<sampleBrowser:SectionHeading MaxWidth="145" Text="{ReflectionBinding Key}" />
+					<ItemsControl Grid.Column="2" ItemsSource="{ReflectionBinding}" IsTabStop="False">
+						<ItemsControl.ItemsPanel>
+							<ItemsPanelTemplate>
+								<actipro:MultiColumnPanel MinColumnWidth="150" MaxColumnCount="3" HorizontalSpacing="30" />
+							</ItemsPanelTemplate>
+						</ItemsControl.ItemsPanel>
+						<ItemsControl.ItemTemplate>
+							<DataTemplate x:DataType="sampleBrowser:ProductItemInfo">
+								<DockPanel>
+									<Rectangle DockPanel.Dock="Left" Margin="20,8,9,0" Width="6" Height="6" Fill="{actipro:ThemeResource ActiproBrandBrush}" VerticalAlignment="Top" />
+
+									<actipro:HyperlinkTextBlock Command="{Binding NavigateViewToItemInfoCommand}" CommandParameter="{Binding}">
+										<Run Text="{Binding BlurbText, StringFormat='{}{0} '}" FontSize="{Binding HasBlurbText, Converter={StaticResource BlurbTextFontSizeConverter}}"
+											 Foreground="{actipro:ThemeResource ControlBackgroundBrushSolidDanger}" /><Run Text="{Binding Title}" />
+									</actipro:HyperlinkTextBlock>
+								</DockPanel>
+							</DataTemplate>
+						</ItemsControl.ItemTemplate>
+					</ItemsControl>
+				</Grid>
+
+			</DataTemplate>
+		</Setter>
+	</ControlTheme>
+	
+</ResourceDictionary>

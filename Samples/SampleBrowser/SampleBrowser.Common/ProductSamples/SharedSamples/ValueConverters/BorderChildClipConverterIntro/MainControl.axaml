@@ -1,0 +1,61 @@
+<UserControl
+	x:Name="sampleRootControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="The BorderChildClipConverter class can be used to clip the child of a Border control that uses rounded corners.">
+
+
+		<sampleBrowser:ControlExample
+			Header="Basic usage"
+			>
+
+			<StackPanel HorizontalAlignment="Center" Orientation="Horizontal" Spacing="40">
+				<StackPanel Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="With Clipping" HorizontalAlignment="Center" />
+					<Border BorderBrush="{actipro:ThemeResource DefaultForegroundBrush}"
+							BorderThickness="4"
+							CornerRadius="48"
+							HorizontalAlignment="Center">
+					
+						<Panel Height="200" Width="200"
+							   Background="{actipro:ThemeResource ControlBackgroundBrushSolidSuccess}" 
+							   actipro:BorderChildClipConverter.ClipToContainingBorder="True"/>
+					
+					</Border>
+				</StackPanel>
+				
+				<StackPanel Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Without Clipping" HorizontalAlignment="Center" />
+					<Border BorderBrush="{actipro:ThemeResource DefaultForegroundBrush}"
+							BorderThickness="4"
+							CornerRadius="48"
+							HorizontalAlignment="Center">
+
+						<Panel Height="200" Width="200"
+							   Background="{actipro:ThemeResource ControlBackgroundBrushSolidDanger}"/>
+
+					</Border>
+				</StackPanel>
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<Border ... CornerRadius="8">
+
+	<Panel actipro:BorderChildClipConverter.ClipToContainingBorder="True" />
+
+</Border>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+</UserControl>

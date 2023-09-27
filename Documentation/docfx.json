@@ -1,0 +1,94 @@
+{
+	"metadata": [
+		{
+			"src": [
+				{
+					"src": "../../Source/bin/Release/net6.0",
+					"files": [
+						// Actipro assemblies
+						"ActiproSoftware.*.dll"
+					]
+				}
+			],
+			"dest": "topics/api",
+			"filter": "api-filter.yml"
+		}
+	],
+	"build": {
+		"content": [
+			{
+				"src": "topics",
+				"files": [
+					"**.md",
+					"api/ActiproSoftware.yml",
+					"api/ActiproSoftware.*.yml",
+					"api/Avalonia.yml",
+					"api/Avalonia.*.yml",
+					"api/toc.yml",
+					"toc.yml"
+				]
+			}
+		],
+		"resource": [
+			{
+				"src": "topics",
+				"files": [
+					"**.png",
+					"**.gif",
+					"**.jpg"
+				]
+			}
+		],
+		"overwrite": [
+			{
+				"files": [
+					"topics/apidoc/**.md"
+				],
+				"exclude": [
+					"obj/**",
+					"wwwroot/**"
+				]
+			}
+		],
+		"dest": "wwwroot",
+		"globalMetadata": {
+			"_appTitle": "Actipro Avalonia UI Docs",
+			"_docsCompanyHref": "https://www.actiprosoftware.com/products/controls/avalonia",
+			"_docsCompanyName": "Actipro Software LLC",
+			"_docsCopyrightYears": "2021-2023",
+			"_docsProductHref": "https://www.actiprosoftware.com/products/controls/avalonia",
+			"_docsProductName": "Avalonia UI",
+			"_docsProductVersion": "23.1",
+			"_disableContribution": true,
+			"_enableNewTab": true,
+			"_gitContribute": {
+				"repo": "https://github.com/Actipro/Avalonia-Controls",
+				"branch": "develop",
+				"path": "Documentation/topics",
+				"apiSpecFolder": "Documentation/topics/apidoc"
+			},
+			"_conditionalFlags": "avalonia",
+			"_replaceTokens": {
+				"PlatformAssemblySuffix": "Avalonia",
+				"PlatformName": "Avalonia UI",
+				"PlatformTitle": "Avalonia UI"
+			},
+			"_rootNamespaceAliases": {
+				"ActiproUIRoot": "ActiproSoftware.UI.Avalonia",
+				"WindowsUIRoot": "System.Windows"
+			}
+		},
+		"globalMetadataFiles": [],
+		"fileMetadataFiles": [],
+		"template": [
+			"default",
+			"../../Deploy/DocFX-Template"
+		],
+		"postProcessors": [],
+		"markdownEngineName": "markdig",
+		"noLangKeyword": false,
+		"xrefService": [
+			"https://xref.docs.microsoft.com/query?uid={uid}"
+		]
+	}
+}

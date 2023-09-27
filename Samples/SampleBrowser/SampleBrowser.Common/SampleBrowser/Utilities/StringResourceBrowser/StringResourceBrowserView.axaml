@@ -1,0 +1,60 @@
+<UserControl
+	x:Class="ActiproSoftware.SampleBrowser.Utilities.StringResourceBrowser.StringResourceBrowserView"
+	x:DataType="resourceBrowser:StringResourceBrowserViewModel"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:actiproPrimitives="using:ActiproSoftware.UI.Avalonia.Controls.Primitives"
+	xmlns:resourceBrowser="using:ActiproSoftware.SampleBrowser.Utilities.StringResourceBrowser"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	Classes="sample-presenter"
+	>
+	
+	<Grid Classes="sample-layout-panel" RowDefinitions="Auto,*,Auto">
+
+		<StackPanel>
+			<TextBlock Classes="theme-text-body size-lg" Text="Use this utility to view all string resources in the various Actipro assemblies.  All string resources have default values that can be customized for localization purposes.  See the 'Customizing String Resources' documentation topic for more information." />
+
+			<TextBlock Margin="0,20,0,0" Classes="theme-form-control-label" Text="Assembly" />
+			<ComboBox x:Name="assemblyComboBox" ItemsSource="{Binding All}">
+				<ComboBox.ItemTemplate>
+					<DataTemplate x:DataType="resourceBrowser:AssemblyStringResourcesModel">
+						<TextBlock Text="{Binding AssemblyName}" />
+					</DataTemplate>
+				</ComboBox.ItemTemplate>
+			</ComboBox>
+		</StackPanel>
+
+		<ListBox x:Name="stringResourceListBox" Grid.Row="1" Margin="0,10,0,30" ItemsSource="{ReflectionBinding #assemblyComboBox.SelectedItem.Resources}">
+			<ListBox.ItemTemplate>
+				<DataTemplate x:DataType="resourceBrowser:StringResourceModel">
+					<Grid ColumnDefinitions="*,30,*">
+						<TextBlock Text="{Binding Name}" TextTrimming="CharacterEllipsis" />
+						<TextBlock Grid.Column="2" Text="{Binding Value}"
+								   Foreground="{actipro:ThemeResource DefaultForegroundBrushSecondary}"
+								   TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" />
+					</Grid>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+
+		<StackPanel Grid.Row="2" x:DataType="resourceBrowser:StringResourceModel" DataContext="{Binding #stringResourceListBox.SelectedItem}">
+			<TextBlock Margin="0,0,0,20" Classes="theme-text-heading" Text="Customize Selected String Resource" />
+			<TextBlock Classes="theme-form-control-label" Text="{Binding Name, StringFormat='{}Custom {0} value'}" />
+			<TextBox x:Name="customValueTextBox" Margin="0,0,0,10" Text="{Binding Value, Mode=OneWay}" />
+			
+			<TextBlock Classes="theme-form-control-label" Text="C# code" />
+			<Grid ColumnDefinitions="*,Auto">
+				<Border Background="{actipro:ThemeResource EditBackgroundBrushDisabled}" BorderBrush="{actipro:ThemeResource EditBorderBrush}" BorderThickness="1"
+						CornerRadius="{actipro:ThemeResource EditCornerRadius}" Padding="{actipro:ThemeResource EditPadding}">
+					<SelectableTextBlock x:Name="codeTextBlock" Classes="theme-text-code size-sm" sampleBrowser:CodeTextBlockProperties.CodeLanguage="C#" TextWrapping="Wrap" />
+				</Border>
+
+				<actipro:CopyButton Margin="3,0,0,0" Classes="theme-subtle" Grid.Column="1" ToolTip.Tip="{Binding Name, StringFormat={}Copy {0} string resource customization}"
+									CopyText="{Binding #codeTextBlock.Text}" />
+			</Grid>
+		</StackPanel>
+		
+	</Grid>
+	
+</UserControl>

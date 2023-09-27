@@ -1,0 +1,172 @@
+<ResourceDictionary 
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:actiproImages="using:ActiproSoftware.UI.Avalonia.Images"
+    xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+    >
+    
+	<sampleBrowser:ProductData x:Key="{x:Static sampleBrowser:ApplicationViewModel.ProductDataResourceKey}">
+
+		<sampleBrowser:ProductData.FeaturedSamples>
+			<sampleBrowser:ListItemInfo Title="Shadow Chrome" ImageUri="avares://SampleBrowser/Images/Screenshots/Shared-ShadowChrome-200x150.png" TargetUri="https://ActiproSoftware/ProductSamples/SharedSamples/Controls/ShadowChromeIntro/MainControl" />
+			<sampleBrowser:ListItemInfo Title="User Prompt" ImageUri="avares://SampleBrowser/Images/Screenshots/Fundamentals-UserPrompt-200x150.png" TargetUri="https://ActiproSoftware/ProductSamples/FundamentalsSamples/Controls/UserPromptIntro/MainControl" />
+			<sampleBrowser:ListItemInfo Title="Button Themes" ImageUri="avares://SampleBrowser/Images/Screenshots/Themes-Button-200x150.png" TargetUri="https://ActiproSoftware/ProductSamples/ThemesSamples/NativeControls/ButtonSamples" />
+			<sampleBrowser:ListItemInfo Title="Typography" ImageUri="avares://SampleBrowser/Images/Screenshots/Themes-Typography-200x150.png" TargetUri="https://ActiproSoftware/ProductSamples/ThemesSamples/Styling/TypographySamples" />
+		</sampleBrowser:ProductData.FeaturedSamples>
+
+		<sampleBrowser:ProductData.ReleaseHistory>
+			<sampleBrowser:ProductFamilyInfo ShortTitle="Release History" Title="Release History">
+				<sampleBrowser:ProductFamilyInfo.LogoImageSource>
+					<actiproImages:ReleaseHistoryLogo48 />
+				</sampleBrowser:ProductFamilyInfo.LogoImageSource>
+				
+				<sampleBrowser:ProductItemInfo Category="Versions" Title="v23.1" Path="/SampleBrowser/Documents/ReleaseHistories/v23.1.md" />
+			</sampleBrowser:ProductFamilyInfo>
+		</sampleBrowser:ProductData.ReleaseHistory>
+
+		<sampleBrowser:ProductData.Utilities>
+			<sampleBrowser:ProductFamilyInfo>
+				<sampleBrowser:ProductFamilyInfo.LogoImageSource>
+					<actiproImages:ActiproLogo48 />
+				</sampleBrowser:ProductFamilyInfo.LogoImageSource>
+
+				<sampleBrowser:ProductItemInfo Category="Utilities" Title="String Resource Browser" Path="/SampleBrowser/Utilities/StringResourceBrowser/StringResourceBrowserView"/>
+				
+				
+			</sampleBrowser:ProductFamilyInfo>
+		</sampleBrowser:ProductData.Utilities>
+
+		<!--
+			Themes
+		-->
+		<sampleBrowser:ProductFamilyInfo ShortTitle="Themes" Title="Themes" Summary="Free themes for Actipro, custom, and native Avalonia controls">
+			<sampleBrowser:ProductFamilyInfo.LogoImageSource>
+				<actiproImages:ThemesLogo48 />
+			</sampleBrowser:ProductFamilyInfo.LogoImageSource>
+
+			<sampleBrowser:ProductFamilyInfo.News>
+				<sampleBrowser:ListItemInfo Title="Professionally-designed styles and templates for all native Avalonia controls" />
+				<sampleBrowser:ListItemInfo Title="Customizable theme generator" />
+			</sampleBrowser:ProductFamilyInfo.News>
+
+			<sampleBrowser:ProductFamilyInfo.TeaserBulletItems>
+				<x:String>Dynamic theme generation</x:String>
+				<x:String>Styles and templates for all native controls</x:String>
+				<x:String>Reusable theme resources like brushes</x:String>
+			</sampleBrowser:ProductFamilyInfo.TeaserBulletItems>
+
+			<sampleBrowser:ProductFamilyInfo.OverviewItem>
+				<sampleBrowser:ProductItemInfo Title="Overview" Path="/ProductSamples/ThemesSamples/Overview" />
+			</sampleBrowser:ProductFamilyInfo.OverviewItem>
+
+			<sampleBrowser:ProductItemInfo Category="Demos" Title="Profile Form" Path="/ProductSamples/ThemesSamples/Demos/ProfileForm/MainControl"/>
+
+			<sampleBrowser:ProductItemInfo Category="Utilities" Title="Color Palette" Path="/SampleBrowser/Utilities/ColorPalette/ColorPaletteView"/>
+			<sampleBrowser:ProductItemInfo Category="Utilities" Title="Theme Resource Browser" Path="/SampleBrowser/Utilities/ThemeResourceBrowser/ThemeResourceBrowserView"/>
+
+			<sampleBrowser:ProductItemInfo Category="Styling" Title="Containers" Path="/ProductSamples/ThemesSamples/Styling/ContainerSamples"/>
+			<sampleBrowser:ProductItemInfo Category="Styling" Title="Typography" Path="/ProductSamples/ThemesSamples/Styling/TypographySamples"/>
+
+			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="AutoCompleteBox" Path="/ProductSamples/ThemesSamples/NativeControls/AutoCompleteBoxSamples"/>
+			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="Button" Path="/ProductSamples/ThemesSamples/NativeControls/ButtonSamples"/>
+			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="ButtonSpinner" Path="/ProductSamples/ThemesSamples/NativeControls/ButtonSpinnerSamples"/>
+			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="Calendar" Path="/ProductSamples/ThemesSamples/NativeControls/CalendarSamples"/>
+			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="CalendarDatePicker" Path="/ProductSamples/ThemesSamples/NativeControls/CalendarDatePickerSamples"/>
+			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="CheckBox" Path="/ProductSamples/ThemesSamples/NativeControls/CheckBoxSamples"/>
+			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="ColorPicker" Path="/ProductSamples/ThemesSamples/NativeControls/ColorPickerSamples"/>
+			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="ComboBox" Path="/ProductSamples/ThemesSamples/NativeControls/ComboBoxSamples"/>
+			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="DataGrid" Path="/ProductSamples/ThemesSamples/NativeControls/DataGridSamples"/>
+			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="DatePicker" Path="/ProductSamples/ThemesSamples/NativeControls/DatePickerSamples"/>
+			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="DropDownButton" Path="/ProductSamples/ThemesSamples/NativeControls/DropDownButtonSamples"/>
+			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="Expander" Path="/ProductSamples/ThemesSamples/NativeControls/ExpanderSamples"/>
+			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="ListBox" Path="/ProductSamples/ThemesSamples/NativeControls/ListBoxSamples"/>
+			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="Menu" Path="/ProductSamples/ThemesSamples/NativeControls/MenuSamples"/>
+			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="NumericUpDown" Path="/ProductSamples/ThemesSamples/NativeControls/NumericUpDownSamples"/>
+			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="ProgressBar" Path="/ProductSamples/ThemesSamples/NativeControls/ProgressBarSamples"/>
+			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="RadioButton" Path="/ProductSamples/ThemesSamples/NativeControls/RadioButtonSamples"/>
+			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="Scroll" Path="/ProductSamples/ThemesSamples/NativeControls/ScrollSamples"/>
+			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="Slider" Path="/ProductSamples/ThemesSamples/NativeControls/SliderSamples"/>
+			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="SplitButton" Path="/ProductSamples/ThemesSamples/NativeControls/SplitButtonSamples"/>
+			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="Tab" Path="/ProductSamples/ThemesSamples/NativeControls/TabSamples"/>
+			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="TextBox" Path="/ProductSamples/ThemesSamples/NativeControls/TextBoxSamples"/>
+			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="TimePicker" Path="/ProductSamples/ThemesSamples/NativeControls/TimePickerSamples"/>
+			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="ToggleButton" Path="/ProductSamples/ThemesSamples/NativeControls/ToggleButtonSamples"/>
+			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="ToggleSplitButton" Path="/ProductSamples/ThemesSamples/NativeControls/ToggleSplitButtonSamples"/>
+			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="ToggleSwitch" Path="/ProductSamples/ThemesSamples/NativeControls/ToggleSwitchSamples"/>
+			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="TreeView" Path="/ProductSamples/ThemesSamples/NativeControls/TreeViewSamples"/>
+			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="Other Controls" Path="/ProductSamples/ThemesSamples/NativeControls/OtherControlsSamples"/>
+			
+
+		</sampleBrowser:ProductFamilyInfo>
+
+		<!--
+			Shared Library
+		-->
+		<sampleBrowser:ProductFamilyInfo ShortTitle="Shared" Title="Shared Library" Summary="Free useful components and controls for the Avalonia UI framework">
+			<sampleBrowser:ProductFamilyInfo.LogoImageSource>
+				<actiproImages:SharedLogo48 />
+			</sampleBrowser:ProductFamilyInfo.LogoImageSource>
+
+			<sampleBrowser:ProductFamilyInfo.News>
+				<sampleBrowser:ListItemInfo Title="A number of helpful controls that work in tandem with native Avalonia controls" />
+			</sampleBrowser:ProductFamilyInfo.News>
+
+			<sampleBrowser:ProductFamilyInfo.TeaserBulletItems>
+				<x:String>Dynamic image</x:String>
+				<x:String>Shadow chrome</x:String>
+				<x:String>An assortment of other controls</x:String>
+				<x:String>Value converters</x:String>
+			</sampleBrowser:ProductFamilyInfo.TeaserBulletItems>
+
+			<sampleBrowser:ProductFamilyInfo.OverviewItem>
+				<sampleBrowser:ProductItemInfo Title="Overview" Path="/ProductSamples/SharedSamples/Overview" />
+			</sampleBrowser:ProductFamilyInfo.OverviewItem>
+
+			<sampleBrowser:ProductItemInfo Category="Controls" Title="Copy Button" Path="/ProductSamples/SharedSamples/Controls/CopyButtonIntro/MainControl"/>
+			<sampleBrowser:ProductItemInfo Category="Controls" Title="Dynamic Image" Path="/ProductSamples/SharedSamples/Controls/DynamicImageIntro/MainControl"/>
+			<sampleBrowser:ProductItemInfo Category="Controls" Title="Hyperlink Text Block" Path="/ProductSamples/SharedSamples/Controls/HyperlinkTextBlockIntro/MainControl"/>
+			<sampleBrowser:ProductItemInfo Category="Controls" Title="Mesh Gradient Presenter" Path="/ProductSamples/SharedSamples/Controls/MeshGradientPresenterIntro/MainControl"/>
+			<sampleBrowser:ProductItemInfo Category="Controls" Title="Shadow Chrome" Path="/ProductSamples/SharedSamples/Controls/ShadowChromeIntro/MainControl"/>
+			<sampleBrowser:ProductItemInfo Category="Controls" Title="Toggle Theme Button" Path="/ProductSamples/SharedSamples/Controls/ToggleThemeButtonIntro/MainControl"/>
+			<sampleBrowser:ProductItemInfo Category="Controls" Title="Window Resize Grip" Path="/ProductSamples/SharedSamples/Controls/WindowResizeGripIntro/MainControl"/>
+
+			<sampleBrowser:ProductItemInfo Category="Value Converters" Title="Border Child Clip" Path="/ProductSamples/SharedSamples/ValueConverters/BorderChildClipConverterIntro/MainControl"/>
+			<sampleBrowser:ProductItemInfo Category="Value Converters" Title="Math" Path="/ProductSamples/SharedSamples/ValueConverters/MathConverterIntro/MainControl"/>
+			<sampleBrowser:ProductItemInfo Category="Value Converters" Title="String" Path="/ProductSamples/SharedSamples/ValueConverters/StringConvertersIntro/MainControl"/>
+			<sampleBrowser:ProductItemInfo Category="Value Converters" Title="Thickness" Path="/ProductSamples/SharedSamples/ValueConverters/ThicknessConverterIntro/MainControl"/>
+
+		</sampleBrowser:ProductFamilyInfo>
+
+		<!--
+			Fundamentals
+		-->
+		<sampleBrowser:ProductFamilyInfo IsPro="True" ShortTitle="Fundamentals" Title="Fundamentals" Summary="Advanced components and controls for the Avalonia UI framework">
+			<sampleBrowser:ProductFamilyInfo.LogoImageSource>
+				<actiproImages:FundamentalsLogo48 />
+			</sampleBrowser:ProductFamilyInfo.LogoImageSource>
+
+			<sampleBrowser:ProductFamilyInfo.News>
+				<sampleBrowser:ListItemInfo Title="A user prompt control that provides traditional MessageBox and task dialog functionality" />
+			</sampleBrowser:ProductFamilyInfo.News>
+
+			<sampleBrowser:ProductFamilyInfo.TeaserBulletItems>
+				<x:String>User prompt for displaying messages and task dialogs</x:String>
+				<x:String>Multi-column panel that supports responsive layouts</x:String>
+				<x:String>More coming soon</x:String>
+			</sampleBrowser:ProductFamilyInfo.TeaserBulletItems>
+
+			<sampleBrowser:ProductFamilyInfo.OverviewItem>
+				<sampleBrowser:ProductItemInfo Title="Overview" Path="/ProductSamples/FundamentalsSamples/OVerview" />
+			</sampleBrowser:ProductFamilyInfo.OverviewItem>
+
+			<sampleBrowser:ProductItemInfo Category="Controls" Title="MessageBox" Path="/ProductSamples/FundamentalsSamples/Controls/MessageBoxIntro/MainControl"/>
+			<sampleBrowser:ProductItemInfo Category="Controls" Title="User Prompt" Path="/ProductSamples/FundamentalsSamples/Controls/UserPromptIntro/MainControl"/>
+			
+			<sampleBrowser:ProductItemInfo Category="Panels" Title="Multi-Column Panel" Path="/ProductSamples/FundamentalsSamples/Panels/MultiColumnPanelIntro/MainControl"/>
+
+		</sampleBrowser:ProductFamilyInfo>
+
+	</sampleBrowser:ProductData>
+
+</ResourceDictionary>

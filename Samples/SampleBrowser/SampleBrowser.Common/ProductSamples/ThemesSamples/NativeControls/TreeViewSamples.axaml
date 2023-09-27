@@ -1,0 +1,48 @@
+<UserControl
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Actipro's control themes create a modern appearance for TreeView control.">
+
+
+		<sampleBrowser:ControlExample
+			Header="TreeView usage"
+			DataContext="{Binding #sample}"
+			>
+
+			<TreeView x:Name="sample" BorderThickness="1" Height="400">
+				<TreeViewItem Header="First" IsExpanded="True">
+					<TreeViewItem Header="Child 1-1" IsSelected="True"/>
+					<TreeViewItem Header="Child 1-2"/>
+				</TreeViewItem>
+				<TreeViewItem Header="Second">
+					<TreeViewItem Header="Child 2-1"/>
+					<TreeViewItem Header="Child 2-2">
+						<TreeViewItem Header="Child 2-2-a"/>
+						<TreeViewItem Header="Child 2-2-b"/>
+						<TreeViewItem Header="Child 2-2-c"/>
+					</TreeViewItem>
+					<TreeViewItem Header="Child 2-3"/>
+					<TreeViewItem Header="Child 2-4"/>
+					<TreeViewItem Header="Child 2-5"/>
+				</TreeViewItem>
+				<TreeViewItem Header="Disabled" IsEnabled="False">
+					<TreeViewItem Header="Child"/>
+				</TreeViewItem>
+			</TreeView>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

@@ -1,0 +1,4 @@
+*.yml
+.manifest
+
+!.toc-generator.yml

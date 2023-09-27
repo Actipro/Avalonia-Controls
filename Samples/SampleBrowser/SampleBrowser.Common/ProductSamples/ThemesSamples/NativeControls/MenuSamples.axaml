@@ -1,0 +1,782 @@
+<UserControl 
+	x:Class="ActiproSoftware.ProductSamples.ThemeSamples.NativeControls.MenuSamples"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Actipro's control themes create modern appearances for Menu, ContextMenu, FlyoutMenu, and MenuItem controls with full support for headers, gesture text, icons, checkmarks, and radio buttons.">
+
+
+		<sampleBrowser:ControlExample
+			Header="Typical menu"
+			Footer="A typical menu with a mix of sub-menus, input gestures, icons, separators, and disabled items."
+			>
+
+			<Menu>
+				<MenuItem Header="_File">
+					<MenuItem Header="_New">
+						<MenuItem.Icon>
+							<actipro:DynamicImage Source="/Images/Icons/New16.png" />
+						</MenuItem.Icon>
+						<MenuItem Header="Text Document" Click="OnMenuItemClicked">
+							<MenuItem.Icon>
+								<actipro:DynamicImage Source="/Images/Icons/TextDocument16.png" />
+							</MenuItem.Icon>
+						</MenuItem>
+						<MenuItem Header="Rich Text Document" Click="OnMenuItemClicked" IsEnabled="False">
+							<MenuItem.Icon>
+								<actipro:DynamicImage Source="/Images/Icons/RichTextDocument16.png" />
+							</MenuItem.Icon>
+						</MenuItem>
+					</MenuItem>
+					<MenuItem Header="_Open" Click="OnMenuItemClicked" InputGesture="Ctrl+O">
+						<MenuItem.Icon>
+							<actipro:DynamicImage Source="/Images/Icons/Open16.png" />
+						</MenuItem.Icon>
+					</MenuItem>
+					<MenuItem Header="Open _Recent" Click="OnMenuItemClicked" IsEnabled="False">
+						<MenuItem Header="Resume.rtf" />
+					</MenuItem>
+					<MenuItem Header="_Save" Click="OnMenuItemClicked" InputGesture="Ctrl+S" IsEnabled="False">
+						<MenuItem.Icon>
+							<actipro:DynamicImage Source="/Images/Icons/Save16.png" />
+						</MenuItem.Icon>
+					</MenuItem>
+					<Separator />
+					<MenuItem Header="E_xit" Click="OnMenuItemClicked" />
+				</MenuItem>
+				<MenuItem Header="_Edit">
+					<MenuItem Header="_Undo" Click="OnMenuItemClicked" InputGesture="Ctrl+Z">
+						<MenuItem.Icon>
+							<actipro:DynamicImage Source="/Images/Icons/Undo16.png" />
+						</MenuItem.Icon>
+					</MenuItem>
+					<Separator />
+					<MenuItem Header="Cu_t" Click="OnMenuItemClicked" InputGesture="Ctrl+X">
+						<MenuItem.Icon>
+							<actipro:DynamicImage Source="/Images/Icons/Cut16.png" />
+						</MenuItem.Icon>
+					</MenuItem>
+					<MenuItem Header="Cop_y" Click="OnMenuItemClicked" InputGesture="Ctrl+C">
+						<MenuItem.Icon>
+							<actipro:DynamicImage Source="/Images/Icons/Copy16.png" />
+						</MenuItem.Icon>
+					</MenuItem>
+					<MenuItem Header="_Paste" Click="OnMenuItemClicked" InputGesture="Ctrl+V">
+						<MenuItem.Icon>
+							<actipro:DynamicImage Source="/Images/Icons/Paste16.png" />
+						</MenuItem.Icon>
+					</MenuItem>
+				</MenuItem>
+				<MenuItem Header="_View">
+					<MenuItem Classes="theme-menuitem-heading" Header="Tool Windows" />
+					<MenuItem Header="_Error List" Click="OnMenuItemClicked">
+						<MenuItem.Icon>
+							<CheckBox IsChecked="True" />
+						</MenuItem.Icon>
+					</MenuItem>
+					<MenuItem Header="_Output Window" Click="OnMenuItemClicked">
+						<MenuItem.Icon>
+							<CheckBox IsChecked="True" />
+						</MenuItem.Icon>
+					</MenuItem>
+					<Separator />
+					<MenuItem Classes="theme-menuitem-heading" Header="Zoom" />
+					<MenuItem Header="125%" Click="OnMenuItemClicked">
+						<MenuItem.Icon>
+							<RadioButton GroupName="ZoomLevel" />
+						</MenuItem.Icon>
+					</MenuItem>
+					<MenuItem Header="100%" Click="OnMenuItemClicked">
+						<MenuItem.Icon>
+							<RadioButton GroupName="ZoomLevel" IsChecked="True"/>
+						</MenuItem.Icon>
+					</MenuItem>
+					<MenuItem Header="75%" Click="OnMenuItemClicked">
+						<MenuItem.Icon>
+							<RadioButton GroupName="ZoomLevel" />
+						</MenuItem.Icon>
+					</MenuItem>
+					<MenuItem Header="50%" Click="OnMenuItemClicked">
+						<MenuItem.Icon>
+							<RadioButton GroupName="ZoomLevel" />
+						</MenuItem.Icon>
+					</MenuItem>
+					<MenuItem Header="25%" Click="OnMenuItemClicked">
+						<MenuItem.Icon>
+							<RadioButton GroupName="ZoomLevel" />
+						</MenuItem.Icon>
+					</MenuItem>
+					<Separator />
+					<MenuItem Header="_Reset Zoom" Click="OnMenuItemClicked" />
+				</MenuItem>
+				<MenuItem Header="_Help">
+					<MenuItem Header="_About" Click="OnMenuItemClicked" InputGesture="F1">
+						<MenuItem.Icon>
+							<actipro:DynamicImage Source="/Images/Icons/Help16.png" />
+						</MenuItem.Icon>
+					</MenuItem>
+				</MenuItem>
+			</Menu>
+
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Simple menu"
+			>
+
+			<Menu>
+				<MenuItem Header="_File">
+					<MenuItem Header="_New" Click="OnMenuItemClicked" />
+					<MenuItem Header="_Open" Click="OnMenuItemClicked" />
+					<MenuItem Header="_Save" Click="OnMenuItemClicked" />
+					<Separator />
+					<MenuItem Header="E_xit" Click="OnMenuItemClicked" />
+				</MenuItem>
+				<MenuItem Header="_Edit">
+					<MenuItem Header="_Undo" Click="OnMenuItemClicked" />
+					<Separator />
+					<MenuItem Header="Cu_t" Click="OnMenuItemClicked" />
+					<MenuItem Header="Cop_y" Click="OnMenuItemClicked" />
+					<MenuItem Header="_Paste" Click="OnMenuItemClicked" />
+				</MenuItem>
+				<MenuItem Header="_Help">
+					<MenuItem Header="_About" Click="OnMenuItemClicked" />
+				</MenuItem>
+			</Menu>
+			
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<Menu>
+	<MenuItem Header="_File">
+		<MenuItem Header="_New" />
+		<MenuItem Header="_Open" />
+		<MenuItem Header="_Save" />
+		<Separator />
+		<MenuItem Header="E_xit" />
+	</MenuItem>
+	<MenuItem Header="_Edit">
+		<MenuItem Header="_Undo" />
+		<Separator />
+		<MenuItem Header="Cu_t" />
+		<MenuItem Header="Cop_y" />
+		<MenuItem Header="_Paste" />
+	</MenuItem>
+	<MenuItem Header="_Help">
+		<MenuItem Header="_About" />
+	</MenuItem>
+</Menu>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Menu with gestures"
+			Footer="The gesture is only used for display purposes within the menu and will not invoke a menu item."
+			>
+
+			<Menu>
+				<MenuItem Header="_File">
+					<MenuItem Header="_New" Click="OnMenuItemClicked" InputGesture="Ctrl+N" />
+					<MenuItem Header="_Open" Click="OnMenuItemClicked" InputGesture="Ctrl+O" />
+					<MenuItem Header="_Save" Click="OnMenuItemClicked" InputGesture="Ctrl+S" />
+					<Separator />
+					<MenuItem Header="E_xit" Click="OnMenuItemClicked" InputGesture="Ctrl+E" />
+				</MenuItem>
+				<MenuItem Header="_Edit">
+					<MenuItem Header="_Undo" Click="OnMenuItemClicked" InputGesture="Ctrl+Z" />
+					<Separator />
+					<MenuItem Header="Cu_t" Click="OnMenuItemClicked" InputGesture="Ctrl+X" />
+					<MenuItem Header="Cop_y" Click="OnMenuItemClicked" InputGesture="Ctrl+C" />
+					<MenuItem Header="_Paste" Click="OnMenuItemClicked" InputGesture="Ctrl+V" />
+				</MenuItem>
+				<MenuItem Header="_Help">
+					<MenuItem Header="_About" Click="OnMenuItemClicked" InputGesture="F1" />
+				</MenuItem>
+			</Menu>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<Menu>
+	<MenuItem Header="_File">
+		<MenuItem Header="_New" InputGesture="Ctrl+N" />
+		<MenuItem Header="_Open" InputGesture="Ctrl+O" />
+		<MenuItem Header="_Save" InputGesture="Ctrl+S" />
+		<Separator />
+		<MenuItem Header="E_xit" InputGesture="Ctrl+E" />
+	</MenuItem>
+	<MenuItem Header="_Edit">
+		<MenuItem Header="_Undo" InputGesture="Ctrl+Z" />
+		<Separator />
+		<MenuItem Header="Cu_t" InputGesture="Ctrl+X" />
+		<MenuItem Header="Cop_y" InputGesture="Ctrl+C" />
+		<MenuItem Header="_Paste" InputGesture="Ctrl+V" />
+	</MenuItem>
+	<MenuItem Header="_Help">
+		<MenuItem Header="_About" InputGesture="F1" />
+	</MenuItem>
+</Menu>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Menu with icons"
+			Footer="Menu icons can use the Actipro DynamicImage control to automatically adapt the images for use in dark theme."
+			>
+
+			<Menu>
+				<MenuItem Header="_File">
+					<MenuItem Header="_New" Click="OnMenuItemClicked">
+						<MenuItem.Icon>
+							<actipro:DynamicImage Source="/Images/Icons/New16.png" />
+						</MenuItem.Icon>
+					</MenuItem>
+					<MenuItem Header="_Open" Click="OnMenuItemClicked">
+						<MenuItem.Icon>
+							<actipro:DynamicImage Source="/Images/Icons/Open16.png" />
+						</MenuItem.Icon>
+					</MenuItem>
+					<MenuItem Header="_Save" Click="OnMenuItemClicked">
+						<MenuItem.Icon>
+							<actipro:DynamicImage Source="/Images/Icons/Save16.png" />
+						</MenuItem.Icon>
+					</MenuItem>
+					<Separator />
+					<MenuItem Header="E_xit" Click="OnMenuItemClicked">
+						<MenuItem.Icon>
+							<actipro:DynamicImage Source="/Images/Icons/Exit16.png" />
+						</MenuItem.Icon>
+					</MenuItem>
+				</MenuItem>
+				<MenuItem Header="_Edit">
+					<MenuItem Header="_Undo" Click="OnMenuItemClicked">
+						<MenuItem.Icon>
+							<actipro:DynamicImage Source="/Images/Icons/Undo16.png" />
+						</MenuItem.Icon>
+					</MenuItem>
+					<Separator />
+					<MenuItem Header="Cu_t" Click="OnMenuItemClicked">
+						<MenuItem.Icon>
+							<actipro:DynamicImage Source="/Images/Icons/Cut16.png" />
+						</MenuItem.Icon>
+					</MenuItem>
+					<MenuItem Header="Cop_y" Click="OnMenuItemClicked">
+						<MenuItem.Icon>
+							<actipro:DynamicImage Source="/Images/Icons/Copy16.png" />
+						</MenuItem.Icon>
+					</MenuItem>
+					<MenuItem Header="_Paste" Click="OnMenuItemClicked">
+						<MenuItem.Icon>
+							<actipro:DynamicImage Source="/Images/Icons/Paste16.png" />
+						</MenuItem.Icon>
+					</MenuItem>
+				</MenuItem>
+				<MenuItem Header="_Help">
+					<MenuItem Header="_About" Click="OnMenuItemClicked">
+						<MenuItem.Icon>
+							<actipro:DynamicImage Source="/Images/Icons/Help16.png" />
+						</MenuItem.Icon>
+					</MenuItem>
+				</MenuItem>
+			</Menu>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<Menu>
+	<MenuItem Header="_File">
+		<MenuItem Header="_New">
+			<MenuItem.Icon><actipro:DynamicImage Source="/Images/Icons/New16.png" /></MenuItem.Icon>
+		</MenuItem>
+		<MenuItem Header="_Open">
+			<MenuItem.Icon><actipro:DynamicImage Source="/Images/Icons/Open16.png" /></MenuItem.Icon>
+		</MenuItem>
+		<MenuItem Header="_Save">
+			<MenuItem.Icon><actipro:DynamicImage Source="/Images/Icons/Save16.png" /></MenuItem.Icon>
+		</MenuItem>
+		<Separator />
+		<MenuItem Header="E_xit">
+			<MenuItem.Icon><actipro:DynamicImage Source="/Images/Icons/Exit16.png" /></MenuItem.Icon>
+		</MenuItem>
+	</MenuItem>
+	<MenuItem Header="_Edit">
+		<MenuItem Header="_Undo">
+			<MenuItem.Icon><actipro:DynamicImage Source="/Images/Icons/Undo16.png" /></MenuItem.Icon>
+		</MenuItem>
+		<Separator />
+		<MenuItem Header="Cu_t">
+			<MenuItem.Icon><actipro:DynamicImage Source="/Images/Icons/Cut16.png" /></MenuItem.Icon>
+		</MenuItem>
+		<MenuItem Header="Cop_y">
+			<MenuItem.Icon><actipro:DynamicImage Source="/Images/Icons/Copy16.png" /></MenuItem.Icon>
+		</MenuItem>
+		<MenuItem Header="_Paste">
+			<MenuItem.Icon><actipro:DynamicImage Source="/Images/Icons/Paste16.png" /></MenuItem.Icon>
+		</MenuItem>
+	</MenuItem>
+	<MenuItem Header="_Help">
+		<MenuItem Header="_About">
+			<MenuItem.Icon><actipro:DynamicImage Source="/Images/Icons/Help16.png" /></MenuItem.Icon>
+		</MenuItem>
+	</MenuItem>
+</Menu>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Headered menu items"
+			Footer="Apply the &quot;theme-menuitem-heading&quot; class to a menu item to render it like a header."
+			>
+
+			<Menu>
+				<MenuItem Header="_File">
+					<MenuItem Classes="theme-menuitem-heading" Header="File Options" />
+					<MenuItem Header="_New" Click="OnMenuItemClicked" />
+					<MenuItem Header="_Open" Click="OnMenuItemClicked" />
+					<MenuItem Header="_Save" Click="OnMenuItemClicked" />
+					<Separator />
+					<MenuItem Header="E_xit" Click="OnMenuItemClicked" />
+				</MenuItem>
+				<MenuItem Header="_Edit">
+					<MenuItem Classes="theme-menuitem-heading" Header="Edit Options" />
+					<MenuItem Header="_Undo" Click="OnMenuItemClicked" />
+					<Separator />
+					<MenuItem Header="Cu_t" Click="OnMenuItemClicked" />
+					<MenuItem Header="Cop_y" Click="OnMenuItemClicked" />
+					<MenuItem Header="_Paste" Click="OnMenuItemClicked" />
+				</MenuItem>
+				<MenuItem Header="_Help">
+					<MenuItem Classes="theme-menuitem-heading" Header="Help Options" />
+					<MenuItem Header="_About" Click="OnMenuItemClicked" />
+				</MenuItem>
+			</Menu>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<Menu>
+	<MenuItem Header="_File">
+		<MenuItem Classes="theme-menuitem-heading" Header="File Options" />
+		<MenuItem Header="_New" />
+		<MenuItem Header="_Open" />
+		<MenuItem Header="_Save" />
+		<Separator />
+		<MenuItem Header="E_xit" />
+	</MenuItem>
+	<MenuItem Header="_Edit">
+		<MenuItem Classes="theme-menuitem-heading" Header="Edit Options" />
+		<MenuItem Header="_Undo" />
+		<Separator />
+		<MenuItem Header="Cu_t" />
+		<MenuItem Header="Cop_y" />
+		<MenuItem Header="_Paste" />
+	</MenuItem>
+	<MenuItem Header="_Help">
+		<MenuItem Classes="theme-menuitem-heading" Header="Help Options" />
+		<MenuItem Header="_About" />
+	</MenuItem>
+</Menu>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Menu with checkboxes and radio buttons"
+			Footer="This sample shows how a checkbox or radio button can be used as the 'icon' content instead of an image."
+			>
+
+			<Menu>
+				<MenuItem Header="_View">
+					<MenuItem Classes="theme-menuitem-heading" Header="Tool Windows" />
+					<MenuItem Header="_Error List" Click="OnMenuItemClicked">
+						<MenuItem.Icon>
+							<CheckBox IsChecked="True" />
+						</MenuItem.Icon>
+					</MenuItem>
+					<MenuItem Header="_Output Window" Click="OnMenuItemClicked">
+						<MenuItem.Icon>
+							<CheckBox IsChecked="True" />
+						</MenuItem.Icon>
+					</MenuItem>
+					<Separator />
+					<MenuItem Classes="theme-menuitem-heading" Header="Zoom" />
+					<MenuItem Header="125%" Click="OnMenuItemClicked">
+						<MenuItem.Icon>
+							<RadioButton GroupName="ZoomLevel2" />
+						</MenuItem.Icon>
+					</MenuItem>
+					<MenuItem Header="100%" Click="OnMenuItemClicked">
+						<MenuItem.Icon>
+							<RadioButton GroupName="ZoomLevel2" IsChecked="True"/>
+						</MenuItem.Icon>
+					</MenuItem>
+					<MenuItem Header="75%" Click="OnMenuItemClicked">
+						<MenuItem.Icon>
+							<RadioButton GroupName="ZoomLevel2" />
+						</MenuItem.Icon>
+					</MenuItem>
+					<MenuItem Header="50%" Click="OnMenuItemClicked">
+						<MenuItem.Icon>
+							<RadioButton GroupName="ZoomLevel2" />
+						</MenuItem.Icon>
+					</MenuItem>
+					<MenuItem Header="25%" Click="OnMenuItemClicked">
+						<MenuItem.Icon>
+							<RadioButton GroupName="ZoomLevel2" />
+						</MenuItem.Icon>
+					</MenuItem>
+					<Separator />
+					<MenuItem Header="_Reset Zoom" Click="OnMenuItemClicked" />
+				</MenuItem>
+				<MenuItem Header="_Help">
+					<MenuItem Header="_About" Click="OnMenuItemClicked" />
+				</MenuItem>
+			</Menu>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample Language="XAML" xml:space="preserve">
+					<![CDATA[
+<Menu>
+	<MenuItem Header="_View">
+		<MenuItem Classes="theme-menuitem-heading" Header="Tool Windows" />
+		<MenuItem Header="_Error List" Click="OnMenuItemClicked">
+			<MenuItem.Icon>
+				<CheckBox IsChecked="True" />
+			</MenuItem.Icon>
+		</MenuItem>
+		<MenuItem Header="_Output Window" Click="OnMenuItemClicked">
+			<MenuItem.Icon>
+				<CheckBox IsChecked="True" />
+			</MenuItem.Icon>
+		</MenuItem>
+		<Separator />
+		<MenuItem Classes="theme-menuitem-heading" Header="Zoom" />
+		<MenuItem Header="125%" Click="OnMenuItemClicked">
+			<MenuItem.Icon>
+				<RadioButton GroupName="ZoomLevel" />
+			</MenuItem.Icon>
+		</MenuItem>
+		<MenuItem Header="100%" Click="OnMenuItemClicked">
+			<MenuItem.Icon>
+				<RadioButton GroupName="ZoomLevel" IsChecked="True"/>
+			</MenuItem.Icon>
+		</MenuItem>
+		<MenuItem Header="75%" Click="OnMenuItemClicked">
+			<MenuItem.Icon>
+				<RadioButton GroupName="ZoomLevel" />
+			</MenuItem.Icon>
+		</MenuItem>
+		<MenuItem Header="50%" Click="OnMenuItemClicked">
+			<MenuItem.Icon>
+				<RadioButton GroupName="ZoomLevel" />
+			</MenuItem.Icon>
+		</MenuItem>
+		<MenuItem Header="25%" Click="OnMenuItemClicked">
+			<MenuItem.Icon>
+				<RadioButton GroupName="ZoomLevel" />
+			</MenuItem.Icon>
+		</MenuItem>
+		<Separator />
+		<MenuItem Header="_Reset Zoom" />
+	</MenuItem>
+	<MenuItem Header="_Help">
+		<MenuItem Header="_About" />
+	</MenuItem>
+</Menu>
+					]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+private void OnMenuItemClicked(object? sender, Avalonia.Interactivity.RoutedEventArgs e) {
+	if (sender is MenuItem menuItem) {
+		if (menuItem.Icon is CheckBox checkBox) {
+			// Toggle check state
+			checkBox.IsChecked = !checkBox.IsChecked;
+		}
+		else if (menuItem.Icon is RadioButton radioButton) {
+			// Select new radio button and other radio buttons
+			// with same group name will be unselected
+			radioButton.IsChecked = true;
+		}
+		...
+	}
+}
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Vertically scrolling menu"
+			Footer="When a menu has too many items to display at once, vertical scrolling is utilized. Expand the &quot;Demo&quot; menu for an example."
+			>
+
+			<Menu>
+				<MenuItem Header="_Demo">
+					<MenuItem Header="Expand for tall menu">
+						<MenuItem Classes="theme-menuitem-heading" Header="Menu supports vertical scrolling" />
+						<Separator />
+						<MenuItem Header="Menu Item 1-0" />
+						<MenuItem Header="Menu Item 1-1" />
+						<MenuItem Header="Menu Item 1-2" />
+						<MenuItem Header="Menu Item 1-3" />
+						<MenuItem Header="Menu Item 1-4" />
+						<MenuItem Header="Menu Item 1-5" />
+						<MenuItem Header="Menu Item 1-6" />
+						<MenuItem Header="Menu Item 1-7" />
+						<MenuItem Header="Menu Item 1-8" />
+						<MenuItem Header="Menu Item 1-9" />
+						<Separator />
+						<MenuItem Header="Menu Item 2-0" />
+						<MenuItem Header="Menu Item 2-1" />
+						<MenuItem Header="Menu Item 2-2" />
+						<MenuItem Header="Menu Item 2-3" />
+						<MenuItem Header="Menu Item 2-4" />
+						<MenuItem Header="Menu Item 2-5" />
+						<MenuItem Header="Menu Item 2-6" />
+						<MenuItem Header="Menu Item 2-7" />
+						<MenuItem Header="Menu Item 2-8" />
+						<MenuItem Header="Menu Item 2-9" />
+						<Separator />
+						<MenuItem Header="Menu Item 3-0" />
+						<MenuItem Header="Menu Item 3-1" />
+						<MenuItem Header="Menu Item 3-2" />
+						<MenuItem Header="Menu Item 3-3" />
+						<MenuItem Header="Menu Item 3-4" />
+						<MenuItem Header="Menu Item 3-5" />
+						<MenuItem Header="Menu Item 3-6" />
+						<MenuItem Header="Menu Item 3-7" />
+						<MenuItem Header="Menu Item 3-8" />
+						<MenuItem Header="Menu Item 3-9" />
+						<Separator />
+						<MenuItem Header="Menu Item 4-0" />
+						<MenuItem Header="Menu Item 4-1" />
+						<MenuItem Header="Menu Item 4-2" />
+						<MenuItem Header="Menu Item 4-3" />
+						<MenuItem Header="Menu Item 4-4" />
+						<MenuItem Header="Menu Item 4-5" />
+						<MenuItem Header="Menu Item 4-6" />
+						<MenuItem Header="Menu Item 4-7" />
+						<MenuItem Header="Menu Item 4-8" />
+						<MenuItem Header="Menu Item 4-9" />
+						<Separator />
+						<MenuItem Header="Menu Item 5-0" />
+						<MenuItem Header="Menu Item 5-1" />
+						<MenuItem Header="Menu Item 5-2" />
+						<MenuItem Header="Menu Item 5-3" />
+						<MenuItem Header="Menu Item 5-4" />
+						<MenuItem Header="Menu Item 5-5" />
+						<MenuItem Header="Menu Item 5-6" />
+						<MenuItem Header="Menu Item 5-7" />
+						<MenuItem Header="Menu Item 5-8" />
+						<MenuItem Header="Menu Item 5-9" />
+						<Separator />
+						<MenuItem Header="Menu Item 6-0" />
+						<MenuItem Header="Menu Item 6-1" />
+						<MenuItem Header="Menu Item 6-2" />
+						<MenuItem Header="Menu Item 6-3" />
+						<MenuItem Header="Menu Item 6-4" />
+						<MenuItem Header="Menu Item 6-5" />
+						<MenuItem Header="Menu Item 6-6" />
+						<MenuItem Header="Menu Item 6-7" />
+						<MenuItem Header="Menu Item 6-8" />
+						<MenuItem Header="Menu Item 6-9" />
+						<Separator />
+						<MenuItem Header="Menu Item 7-0" />
+						<MenuItem Header="Menu Item 7-1" />
+						<MenuItem Header="Menu Item 7-2" />
+						<MenuItem Header="Menu Item 7-3" />
+						<MenuItem Header="Menu Item 7-4" />
+						<MenuItem Header="Menu Item 7-5" />
+						<MenuItem Header="Menu Item 7-6" />
+						<MenuItem Header="Menu Item 7-7" />
+						<MenuItem Header="Menu Item 7-8" />
+						<MenuItem Header="Menu Item 7-9" />
+						<Separator />
+						<MenuItem Header="Menu Item 8-0" />
+						<MenuItem Header="Menu Item 8-1" />
+						<MenuItem Header="Menu Item 8-2" />
+						<MenuItem Header="Menu Item 8-3" />
+						<MenuItem Header="Menu Item 8-4" />
+						<MenuItem Header="Menu Item 8-5" />
+						<MenuItem Header="Menu Item 8-6" />
+						<MenuItem Header="Menu Item 8-7" />
+						<MenuItem Header="Menu Item 8-8" />
+						<MenuItem Header="Menu Item 8-9" />
+						<Separator />
+						<MenuItem Header="Menu Item 9-0" />
+						<MenuItem Header="Menu Item 9-1" />
+						<MenuItem Header="Menu Item 9-2" />
+						<MenuItem Header="Menu Item 9-3" />
+						<MenuItem Header="Menu Item 9-4" />
+						<MenuItem Header="Menu Item 9-5" />
+						<MenuItem Header="Menu Item 9-6" />
+						<MenuItem Header="Menu Item 9-7" />
+						<MenuItem Header="Menu Item 9-8" />
+						<MenuItem Header="Menu Item 9-9" />
+					</MenuItem>
+				</MenuItem>
+				<MenuItem Header="_Help">
+					<MenuItem Header="_About" />
+				</MenuItem>
+			</Menu>
+
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Context menu usage"
+			>
+
+			<StackPanel Spacing="10">
+				<TextBox Watermark="This textbox has a default context menu" />
+
+				<TextBox Watermark="This textbox has a custom context menu">
+					<TextBox.ContextMenu>
+						<ContextMenu>
+							<MenuItem Header="Cu_t" Command="{Binding $parent[TextBox].Cut}" IsEnabled="{Binding $parent[TextBox].CanCut}">
+								<MenuItem.Icon>
+									<actipro:DynamicImage Source="/Images/Icons/Cut16.png" />
+								</MenuItem.Icon>
+							</MenuItem>
+							<MenuItem Header="Cop_y" Command="{Binding $parent[TextBox].Copy}" IsEnabled="{Binding $parent[TextBox].CanCopy}">
+								<MenuItem.Icon>
+									<actipro:DynamicImage Source="/Images/Icons/Copy16.png" />
+								</MenuItem.Icon>
+							</MenuItem>
+							<MenuItem Header="_Paste" Command="{Binding $parent[TextBox].Paste}" IsEnabled="{Binding $parent[TextBox].CanPaste}">
+								<MenuItem.Icon>
+									<actipro:DynamicImage Source="/Images/Icons/Paste16.png" />
+								</MenuItem.Icon>
+							</MenuItem>
+							<Separator />
+							<MenuItem Header="_Select All" Command="{Binding $parent[TextBox].SelectAll}" IsEnabled="{Binding $parent[TextBox].Text, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+						</ContextMenu>
+					</TextBox.ContextMenu>
+				</TextBox>
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<TextBox>
+	<TextBox.ContextMenu>
+		<ContextMenu>
+			<MenuItem Header="Cu_t"
+				Command="{Binding $parent[TextBox].Cut}"
+				IsEnabled="{Binding $parent[TextBox].CanCut}">
+				<MenuItem.Icon>
+					<actipro:DynamicImage Source="/Images/Icons/Cut16.png" />
+				</MenuItem.Icon>
+			</MenuItem>
+			<MenuItem Header="Cop_y"
+				Command="{Binding $parent[TextBox].Copy}"
+				IsEnabled="{Binding $parent[TextBox].CanCopy}">
+				<MenuItem.Icon>
+					<actipro:DynamicImage Source="/Images/Icons/Copy16.png" />
+				</MenuItem.Icon>
+			</MenuItem>
+			<MenuItem Header="_Paste"
+				Command="{Binding $parent[TextBox].Paste}"
+				IsEnabled="{Binding $parent[TextBox].CanPaste}">
+				<MenuItem.Icon>
+					<actipro:DynamicImage Source="/Images/Icons/Paste16.png" />
+				</MenuItem.Icon>
+			</MenuItem>
+			<Separator />
+			<MenuItem Header="_Select All"
+				Command="{Binding $parent[TextBox].SelectAll}"
+				IsEnabled="{Binding $parent[TextBox].Text, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+		</ContextMenu>
+	</TextBox.ContextMenu>
+</TextBox>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Flyout menu usage"
+			Footer="A flyout menu works like a context menu but can be shared between controls. This sample automatically applies the same custom context menu to all textbox controls."
+			>
+
+			<StackPanel Spacing="10">
+				<StackPanel.Resources>
+					<MenuFlyout x:Key="CustomTextBoxContextFlyout">
+						<MenuItem Header="Cu_t" Command="{Binding $parent[TextBox].Cut}" IsEnabled="{Binding $parent[TextBox].CanCut}" />
+						<MenuItem Header="Cop_y" Command="{Binding $parent[TextBox].Copy}" IsEnabled="{Binding $parent[TextBox].CanCopy}" />
+						<MenuItem Header="_Paste" Command="{Binding $parent[TextBox].Paste}" IsEnabled="{Binding $parent[TextBox].CanPaste}" />
+						<Separator />
+						<MenuItem Header="_Select All" Command="{Binding $parent[TextBox].SelectAll}" IsEnabled="{Binding $parent[TextBox].Text, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+					</MenuFlyout>
+				</StackPanel.Resources>
+				<StackPanel.Styles>
+					<Style Selector="TextBox">
+						<Setter Property="ContextFlyout" Value="{StaticResource CustomTextBoxContextFlyout}" />
+					</Style>
+				</StackPanel.Styles>
+
+				<TextBox Watermark="This textbox auto-configured with custom context menu" />
+				<TextBox Watermark="This textbox auto-configured with custom context menu" />
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<Application.Resources>
+	<!-- Define the custom menu as a resource -->
+	<MenuFlyout x:Key="CustomTextBoxContextFlyout">
+		<MenuItem Header="Cu_t"
+			Command="{Binding $parent[TextBox].Cut}"
+			IsEnabled="{Binding $parent[TextBox].CanCut}" />
+		<MenuItem Header="Cop_y"
+			Command="{Binding $parent[TextBox].Copy}"
+			IsEnabled="{Binding $parent[TextBox].CanCopy}" />
+		<MenuItem Header="_Paste"
+			Command="{Binding $parent[TextBox].Paste}"
+			IsEnabled="{Binding $parent[TextBox].CanPaste}" />
+		<Separator />
+		<MenuItem Header="_Select All"
+			Command="{Binding $parent[TextBox].SelectAll}"
+			IsEnabled="{Binding $parent[TextBox].Text, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+	</MenuFlyout>
+</Application.Resources>
+
+<Application.Styles>
+	<!-- Apply a style to each TextBox to configure the custom context menu -->
+	<Style Selector="TextBox">
+		<Setter Property="ContextFlyout" Value="{StaticResource CustomTextBoxContextFlyout}" />
+	</Style>
+</Application.Styles>
+
+...
+
+<!-- No additional configuration necessary on TextBox -->
+<TextBox Watermark="This textbox auto-configured with custom context menu" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

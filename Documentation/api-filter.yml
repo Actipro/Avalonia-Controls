@@ -1,0 +1,29 @@
+apiRules:
+
+# Exclude compatibility and core product code
+- exclude:
+    uidRegex: ^ActiproSoftware\.Compatibility$
+    type: Namespace
+- exclude:
+    uidRegex: ^ActiproSoftware\.Licensing
+    type: Namespace
+- exclude:
+    uidRegex: ^ActiproSoftware\..*\.Internal
+    type: Namespace
+
+# Exclude third-party code
+- exclude:
+    uidRegex: ^Antlr
+    type: Namespace
+- exclude:
+    uidRegex: ^Irony
+    type: Namespace
+- exclude:
+    uidRegex: ^Microsoft\.
+    type: Namespace
+- exclude:
+    uidRegex: ^System\.
+    type: Namespace
+- exclude:
+    uidRegex: ^XamlGeneratedNamespace
+    type: Namespace

@@ -1,0 +1,138 @@
+items:
+- name: "Welcome"
+  href: index.md
+- name: "Actipro Fundamentals"
+  href: fundamentals/index.md
+  items:
+  - name: "Overview"
+    href: fundamentals/index.md
+  - name: "User Prompt"
+    href: fundamentals/user-prompt/index.md
+    items:
+    - name: "Overview"
+      href: fundamentals/user-prompt/index.md
+    - name: "MessageBox"
+      href: fundamentals/user-prompt/message-box.md
+    - name: "Builder Pattern"
+      href: fundamentals/user-prompt/builder-pattern.md
+    - name: "User Prompt Content"
+      href: fundamentals/user-prompt/user-prompt-content.md
+    - name: "User Prompt Buttons"
+      href: fundamentals/user-prompt/user-prompt-buttons.md
+    - name: "Display and Results"
+      href: fundamentals/user-prompt/display-and-results.md
+    - name: "Extension Methods"
+      href: fundamentals/user-prompt/extension-methods.md
+    - name: "Customizing Appearance"
+      href: fundamentals/user-prompt/appearance.md
+    - name: "Clipboard Support"
+      href: fundamentals/user-prompt/clipboard.md
+    - name: "Localization"
+      href: fundamentals/user-prompt/localization.md
+  - name: "Panels"
+    href: fundamentals/panels/index.md
+    items:
+    - name: "Multi-Column Panel"
+      href: fundamentals/panels/multi-column-panel.md
+- name: "Actipro Themes"
+  href: themes/index.md
+  items:
+  - name: "Overview"
+    href: themes/index.md
+  - name: "Getting Started"
+    href: themes/getting-started.md
+  - name: "Native Control Themes"
+    href: themes/native-control-themes.md
+  - name: "Theme Definitions"
+    href: themes/theme-definitions.md
+  - name: "Theme Generator"
+    href: themes/theme-generator.md
+  - name: "Theme Assets"
+    href: themes/theme-assets.md
+  - name: "Containers"
+    href: themes/containers.md
+  - name: "Typography"
+    href: themes/typography.md
+  - name: "Scrolling"
+    href: themes/scrolling.md
+  - name: "Image Provider"
+    href: themes/image-provider.md
+- name: "Actipro Shared Library"
+  href: shared/index.md
+  items:
+  - name: "Overview"
+    href: shared/index.md
+  - name: "Controls"
+    href: shared/controls/index.md
+    items:
+    - name: "Overview"
+      href: shared/controls/index.md
+    - name: "AnimatedExpanderDecorator"
+      href: shared/controls/animated-expander-decorator.md
+    - name: "ChromedTitleBar"
+      href: shared/controls/chromed-title-bar.md
+    - name: "CopyButton"
+      href: shared/controls/copy-button.md
+    - name: "DynamicImage"
+      href: shared/controls/dynamic-image.md
+    - name: "HyperlinkTextBlock"
+      href: shared/controls/hyperlink-textblock.md
+    - name: "MeasureAdjuster"
+      href: shared/controls/measure-adjuster.md
+    - name: "MeshGradientPresenter"
+      href: shared/controls/mesh-gradient-presenter.md
+    - name: "ShadowChrome"
+      href: shared/controls/shadow-chrome.md
+    - name: "ToggleThemeButton"
+      href: shared/controls/toggle-theme-button.md
+    - name: "WindowResizeGrip"
+      href: shared/controls/window-resize-grip.md
+  - name: "Media"
+    href: shared/media.md
+  - name: "Extension Methods"
+    href: shared/extension-methods.md
+  - name: "Value Converters"
+    href: shared/value-converters.md
+- name: "Actipro Core Library"
+  href: core/index.md
+  items:
+  - name: "Overview"
+    href: core/index.md
+  - name: "Object Model"
+    href: core/object-model.md
+  - name: "Extension Methods"
+    href: core/extension-methods.md
+- name: "Customizing String Resources"
+  href: customizing-string-resources.md
+- name: "Licensing"
+  href: licensing.md
+- name: "NuGet Packages and Feeds"
+  href: nuget.md
+- name: "Deployment"
+  href: deployment.md
+- name: "Samples"
+  href: samples.md
+- name: "Utilities"
+  href: utilities/index.md
+  items:
+  - name: "Overview"
+    href: utilities/index.md
+  - name: "Color Palette"
+    href: utilities/color-palette.md
+  - name: "Theme Resource Browser"
+    href: utilities/theme-resource-browser.md
+  - name: "String Resource Browser"
+    href: utilities/string-resource-browser.md
+- name: "Troubleshooting (General)"
+  href: troubleshooting.md
+- name: "Supported Technologies"
+  href: supported-technologies.md
+- name: "GitHub Open-Source"
+  href: open-source.md
+- name: "Support"
+  href: support.md
+- name: "Third-Party Software"
+  href: third-party.md
+- name: "API Reference"
+  href: api/
+  homepage: api/index.md

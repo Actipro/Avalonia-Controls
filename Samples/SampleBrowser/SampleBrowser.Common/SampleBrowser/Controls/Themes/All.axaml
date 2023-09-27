@@ -1,0 +1,26 @@
+<Styles
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	>
+	
+	<Styles.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+
+				<MergeResourceInclude Source="/SampleBrowser/Controls/Themes/CategorizedSampleItemsControl.axaml" />
+				<MergeResourceInclude Source="/SampleBrowser/Controls/Themes/DocumentViewer.axaml" />
+				<MergeResourceInclude Source="/SampleBrowser/Controls/Themes/FeaturedSampleItemsControl.axaml" />
+				<MergeResourceInclude Source="/SampleBrowser/Controls/Themes/ControlExample.axaml" />
+				<MergeResourceInclude Source="/SampleBrowser/Controls/Themes/ControlExampleItemsControl.axaml" />
+				<MergeResourceInclude Source="/SampleBrowser/Controls/Themes/PrivateIndicator.axaml" />
+				<MergeResourceInclude Source="/SampleBrowser/Controls/Themes/ProductFamilyItemsControl.axaml" />
+				<MergeResourceInclude Source="/SampleBrowser/Controls/Themes/ProductOverviewHeader.axaml" />
+				<MergeResourceInclude Source="/SampleBrowser/Controls/Themes/ProIndicator.axaml" />
+				<MergeResourceInclude Source="/SampleBrowser/Controls/Themes/SectionHeading.axaml" />
+				<MergeResourceInclude Source="/SampleBrowser/Controls/Themes/WhatsNewItemsControl.axaml" />
+
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</Styles.Resources>
+
+</Styles>

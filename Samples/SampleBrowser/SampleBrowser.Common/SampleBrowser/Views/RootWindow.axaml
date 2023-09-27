@@ -1,0 +1,15 @@
+<Window
+	x:Class="ActiproSoftware.SampleBrowser.RootWindow"
+	x:Name="rootWindow"
+	xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+    Title="Actipro Avalonia Controls"
+	Icon="/Images/Icons/Actipro.ico"
+	Width="1200" Height="800"
+	MinWidth="800" MinHeight="480"
+	>
+
+	<sampleBrowser:RootView Margin="{Binding #rootWindow.OffScreenMargin}" />
+	
+</Window>

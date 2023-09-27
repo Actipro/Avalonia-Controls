@@ -1,0 +1,211 @@
+<UserControl
+	x:DataType="sampleBrowser:ApplicationViewModel"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+	<ScrollViewer Classes="theme-scroll-overlay" HorizontalScrollBarVisibility="Disabled">
+		<StackPanel>
+
+			<sampleBrowser:ProductOverviewHeader>
+				Actipro provides beautiful themes for native Avalonia controls that can help you create stunning applications.
+				The themes make use of hundreds of dynamically-built resources like brushes that the Actipro theme generator creates.
+				All of Actipro's custom controls utilize the same theme resources for a professional and consistent app-wide appearance.
+				A handful of native control examples using Actipro themes are presented below.
+			</sampleBrowser:ProductOverviewHeader>
+
+			<actipro:MultiColumnPanel Classes="sample-layout-panel" Margin="50,0" MinColumnWidth="390" HorizontalSpacing="30" VerticalSpacing="30">
+				<Border Background="{actipro:ThemeResource Container2BackgroundBrush}" 
+						BorderBrush="{actipro:ThemeResource Container2BorderBrush}" BorderThickness="1" CornerRadius="10" Padding="30">
+					<StackPanel>
+						<TextBox Classes="has-clear-button" Text="sales@actiprosoftware.com" UseFloatingWatermark="True" Watermark="E-mail Address" />
+						
+						<TextBox Margin="0,10,0,0" Classes="has-reveal-password-button danger" UseFloatingWatermark="True" Watermark="Password" PasswordChar="{actipro:ThemeResource EditPasswordChar}" />
+						<TextBlock Classes="theme-form-control-message danger" Text="Password is required." />
+						
+						<CheckBox Classes="theme-solid accent" Margin="0,10,0,0" Content="Remember me" IsChecked="True" />
+
+						<Grid Margin="0,20,0,0" ColumnDefinitions="*,Auto">
+							<UniformGrid Columns="2" HorizontalAlignment="Left">
+								<Button Classes="theme-solid accent" Content="Log In" />
+								<Button Margin="10,0,0,0" Classes="theme-soft" Content="Cancel" />
+							</UniformGrid>
+							<Button Grid.Column="1" Margin="10,0,0,0" Classes="theme-subtle" Content="Forgot Password" />
+						</Grid>
+					</StackPanel>
+				</Border>
+
+				<Grid ColumnDefinitions="*,30,*">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Preferred button theme" />
+						<StackPanel Spacing="5">
+							<RadioButton Classes="accent" Content="Outline" IsChecked="True" />
+							<RadioButton Classes="accent" Content="Solid" />
+							<RadioButton Classes="accent" Content="Soft" />
+							<RadioButton Classes="accent" Content="Subtle" />
+							<RadioButton Classes="accent" Content="Link" />
+							<RadioButton Classes="accent" Content="Card" />
+						</StackPanel>
+					</StackPanel>
+
+					<StackPanel Grid.Column="2">
+						<ToggleSwitch Margin="0,0,0,30" Classes="theme-solid accent" Content="Do you love Avalonia?" OnContent="Yes" OffContent="No" IsChecked="True" />
+
+						<TextBlock Classes="theme-form-control-label" Text="Favorite color" />
+						<ColorPicker Color="#8E8CD8" />
+					</StackPanel>
+				</Grid>
+
+				<Border Background="{actipro:ThemeResource Container2BackgroundBrush}"
+						BorderBrush="{actipro:ThemeResource Container2BorderBrush}" BorderThickness="1" CornerRadius="5" Padding="2">
+					<Menu>
+						<MenuItem Header="_File">
+							<MenuItem Header="_New">
+								<MenuItem.Icon>
+									<actipro:DynamicImage Source="/Images/Icons/New16.png" />
+								</MenuItem.Icon>
+							</MenuItem>
+							<MenuItem Header="_Open">
+								<MenuItem.Icon>
+									<actipro:DynamicImage Source="/Images/Icons/Open16.png" />
+								</MenuItem.Icon>
+							</MenuItem>
+							<MenuItem Header="_Save">
+								<MenuItem.Icon>
+									<actipro:DynamicImage Source="/Images/Icons/Save16.png" />
+								</MenuItem.Icon>
+							</MenuItem>
+							<Separator />
+							<MenuItem Header="E_xit">
+								<MenuItem.Icon>
+									<actipro:DynamicImage Source="/Images/Icons/Exit16.png" />
+								</MenuItem.Icon>
+							</MenuItem>
+						</MenuItem>
+						<MenuItem Header="_Edit">
+							<MenuItem Header="_Undo">
+								<MenuItem.Icon>
+									<actipro:DynamicImage Source="/Images/Icons/Undo16.png" />
+								</MenuItem.Icon>
+							</MenuItem>
+							<Separator />
+							<MenuItem Header="Cu_t">
+								<MenuItem.Icon>
+									<actipro:DynamicImage Source="/Images/Icons/Cut16.png" />
+								</MenuItem.Icon>
+							</MenuItem>
+							<MenuItem Header="Cop_y">
+								<MenuItem.Icon>
+									<actipro:DynamicImage Source="/Images/Icons/Copy16.png" />
+								</MenuItem.Icon>
+							</MenuItem>
+							<MenuItem Header="_Paste">
+								<MenuItem.Icon>
+									<actipro:DynamicImage Source="/Images/Icons/Paste16.png" />
+								</MenuItem.Icon>
+							</MenuItem>
+						</MenuItem>
+						<MenuItem Header="_Help">
+							<MenuItem Header="_About">
+								<MenuItem.Icon>
+									<actipro:DynamicImage Source="/Images/Icons/Help16.png" />
+								</MenuItem.Icon>
+							</MenuItem>
+						</MenuItem>
+					</Menu>
+				</Border>
+
+				<Expander Header="Fun Fact" IsExpanded="True">
+					<TextBlock Classes="theme-text-body" Text="Interestingly, Avalonia was also the name of a microcontinent near Newfoundland back in the Paleozoic era." />
+				</Expander>
+
+				<TabStrip Classes="theme-subtle">
+					<TabStripItem Content="Communication" />
+					<TabStripItem Content="Comments" />
+					<TabStripItem Content="Attachments" />
+					<TabStripItem Content="History" />
+				</TabStrip>
+
+				<Grid ColumnDefinitions="*,30,*">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Direction" />
+						<ComboBox SelectedIndex="0">
+							<ComboBoxItem Content="North" />
+							<ComboBoxItem Content="South" />
+							<ComboBoxItem Content="East" />
+							<ComboBoxItem Content="West" />
+						</ComboBox>
+					</StackPanel>
+					
+					<StackPanel Grid.Column="2">
+						<TextBlock Classes="theme-form-control-label" Text="Birthday" />
+						<CalendarDatePicker SelectedDate="{x:Static x:DateTime.Today}" />
+					</StackPanel>
+				</Grid>
+
+				<Grid ColumnDefinitions="*,30,*">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Continent" />
+						<ListBox Height="130" SelectedIndex="5">
+							<ListBox.Styles>
+								<Style Selector="ScrollViewer">
+									<Setter Property="Theme" Value="{actipro:ControlTheme ScrollViewerOverlay}" />
+								</Style>
+							</ListBox.Styles>
+
+							<ListBoxItem Content="Africa" />
+							<ListBoxItem Content="Antarctica" />
+							<ListBoxItem Content="Asia" />
+							<ListBoxItem Content="Australia" />
+							<ListBoxItem Content="Europe" />
+							<ListBoxItem Content="North America" />
+							<ListBoxItem Content="South America" />
+						</ListBox>
+					</StackPanel>
+					
+					<StackPanel Grid.Column="2">
+						<TextBlock Classes="theme-form-control-label" Text="Elapsed days" />
+						<NumericUpDown Margin="0,0,0,30" Minimum="0" Maximum="30" Value="3" Increment="1" />
+
+						<DockPanel>
+							<Button Width="36" Height="36" CornerRadius="99" ContentTemplate="{actipro:GlyphTemplate ExternalLink16}" Padding="0" 
+									ToolTip.Tip="Open in new window" VerticalAlignment="Center" />
+
+							<SplitButton Margin="30,0,0,0" Content="New" VerticalAlignment="Center">
+								<SplitButton.Flyout>
+									<MenuFlyout Placement="Bottom">
+										<MenuItem Header="Tab" />
+										<MenuItem Header="Window" />
+									</MenuFlyout>
+								</SplitButton.Flyout>
+							</SplitButton>
+						</DockPanel>
+					</StackPanel>
+				</Grid>
+
+				<StackPanel>
+					<TextBlock Classes="theme-form-control-label" Text="Progress" />
+					<Grid ColumnDefinitions="*,30,*">
+						<Slider x:Name="progressSlider" Classes="accent" Minimum="0" Maximum="100" Value="60" />
+					
+						<ProgressBar Grid.Column="2" Classes="success" Value="{Binding #progressSlider.Value}" />
+					</Grid>
+				</StackPanel>
+			</actipro:MultiColumnPanel>
+			
+			<TextBlock Classes="theme-text-body" Margin="50" Text="Dive into our individual samples linked below for many more detailed examples." 
+					   FontStyle="Italic" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" TextAlignment="Center" />
+
+			<Border Background="{actipro:ThemeResource Container2BackgroundBrush}">
+				<StackPanel Classes="sample-layout-panel" Margin="50,0">
+					<sampleBrowser:CategorizedSampleItemsControl ItemsSource="{Binding ViewItemInfo.ProductFamily.GroupedItems}" />
+				</StackPanel>
+			</Border>
+			
+		</StackPanel>
+	</ScrollViewer>
+
+</UserControl>

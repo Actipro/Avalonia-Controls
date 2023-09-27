@@ -1,0 +1,118 @@
+<UserControl
+	x:Class="ActiproSoftware.ProductSamples.SharedSamples.Controls.HyperlinkTextBlockIntro.MainControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="HyperlinkTextBlock is a TextBlock styled like a link and will raise a Click event and/or execute a command when clicked.">
+
+
+		<sampleBrowser:ControlExample
+			Header="Basic usage"
+			Footer="HyperlinkTextBlock can respond to clicks just like a Button control."
+			DataContext="{Binding #basicSample}"
+			HorizontalContentAlignment="Center"
+			>
+
+			<actipro:HyperlinkTextBlock x:Name="basicSample" Text="This is a HyperlinkTextBlock" Click="OnHyperlinkTextBlockClicked" />
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<TextBox Text="{Binding Text}" Watermark="Text" UseFloatingWatermark="True" />
+					<CheckBox IsChecked="{Binding IsEnabled}" Content="Enabled" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:HyperlinkTextBlock Click="OnHyperlinkTextBlockClicked"$(IsEnabledAttribute)
+	 Text="$(Text)" />
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="Text" Value="{Binding Text}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute" IsEnabled="{Binding !IsEnabled}" Value=" IsEnabled=&quot;False&quot;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+private void OnHyperlinkTextBlockClicked(object? sender, RoutedEventArgs e) {
+	// Handle click here
+}
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Command model"
+			Footer="Use the command model to automatically update the enabled state and invoke the command when clicked."
+			DataContext="{Binding #commandSample}"
+			HorizontalContentAlignment="Center"
+			>
+
+			<actipro:HyperlinkTextBlock x:Name="commandSample" Text="HyperlinkTextBlock bound to an ICommand" />
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<CheckBox x:Name="commandIsEnabledCheckBox" IsChecked="True" Content="Command enabled" Click="OnCommandEnabledCheckBoxClick" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<!-- This sample assumes a view model with a command is the DataContext -->
+<actipro:HyperlinkTextBlock Command="{Binding HyperlinkCommand}"
+	Text="$(Text)" />
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="Text" Value="{Binding Text}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Inline usage"
+			Footer="Use an InlineUIContainer to combine a hyperlink with other text runs."
+			HorizontalContentAlignment="Center"
+			>
+
+			<TextBlock Margin="30">
+				<Run>Click </Run>
+				<InlineUIContainer>
+					<actipro:HyperlinkTextBlock Click="OnHyperlinkTextBlockClicked">here</actipro:HyperlinkTextBlock>
+				</InlineUIContainer>
+				<Run> for more information</Run>
+			</TextBlock>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<TextBlock>
+	<Run>Click </Run>
+	<InlineUIContainer>
+		<actipro:HyperlinkTextBlock Click="OnHyperlinkTextBlockClicked">here</actipro:HyperlinkTextBlock>
+	</InlineUIContainer>
+	<Run> for more information</Run>
+</TextBlock>
+					]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+private void OnHyperlinkTextBlockClicked(object? sender, RoutedEventArgs e) {
+	// Handle click here
+}
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+	</sampleBrowser:ControlExampleItemsControl>
+</UserControl>

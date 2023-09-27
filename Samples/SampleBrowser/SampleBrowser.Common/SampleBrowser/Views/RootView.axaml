@@ -1,0 +1,131 @@
+<UserControl
+	x:Class="ActiproSoftware.SampleBrowser.RootView"
+	x:DataType="sampleBrowser:ApplicationViewModel"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+	<DockPanel>
+		<!-- Title Bar -->
+		<actipro:ChromedTitleBar DockPanel.Dock="Top">
+			
+			<actipro:ChromedTitleBar.Resources>
+				<actipro:ComparisonConverter x:Key="RightContentMarginConverter">
+					<actipro:ComparisonConverter.TrueResult>
+						<Thickness>0,0,20,0</Thickness>
+					</actipro:ComparisonConverter.TrueResult>
+					<actipro:ComparisonConverter.FalseResult>
+						<Thickness>0,0,0,0</Thickness>
+					</actipro:ComparisonConverter.FalseResult>
+				</actipro:ComparisonConverter>
+			</actipro:ChromedTitleBar.Resources>
+			
+			<actipro:ChromedTitleBar.LeftContent>
+				<StackPanel Orientation="Horizontal">
+					<Button x:Name="applicationButton" Margin="0,0,20,0" Command="{Binding ToggleDrawerOpenCommand}"
+							ContentTemplate="{actipro:GlyphTemplate Menu16}"
+							Theme="{actipro:ControlTheme TitleBarButton}"
+							ToolTip.Tip="Toggle Sidebar" />
+					
+					<Image x:Name="viewImage" DockPanel.Dock="Left" Width="24" Height="24" Source="{Binding ViewImageSource}" VerticalAlignment="Center" IsHitTestVisible="False">
+						<Image.Effect>
+							<DropShadowEffect OffsetX="0" OffsetY="1" BlurRadius="3" Opacity="{DynamicResource {actipro:ThemeResourceKey ShadowOpacity}}" />
+						</Image.Effect>
+					</Image>
+
+					<StackPanel Margin="10,7,0,7" VerticalAlignment="Center" IsHitTestVisible="False">
+						<TextBlock Text="{Binding ViewSubTitle}" FontSize="12" TextTrimming="CharacterEllipsis" Opacity="0.85" />
+						<TextBlock Margin="0,-2,0,0" Text="{Binding ViewTitle}" FontSize="18" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
+					</StackPanel>
+				</StackPanel>
+			</actipro:ChromedTitleBar.LeftContent>
+
+			<actipro:ChromedTitleBar.RightContent>
+				<StackPanel Margin="{Binding $parent[actipro:ChromedTitleBar].HasCaptionButtons, Converter={StaticResource RightContentMarginConverter}}" Orientation="Horizontal">
+					<Button ContentTemplate="{actipro:GlyphTemplate Home16}"
+							Command="{Binding NavigateViewToHomeCommand}"
+							IsVisible="{Binding !ViewIsHome}"
+							Theme="{actipro:ControlTheme TitleBarButton}"
+							ToolTip.Tip="Home" />
+					<Button Command="{Binding NavigateViewToPreviousItemInfoCommand}"
+							ContentTemplate="{actipro:GlyphTemplate Previous16}"
+							IsVisible="{Binding !ViewUsesHomeDrawer}"
+							Theme="{actipro:ControlTheme TitleBarButton}"
+							ToolTip.Tip="Previous" />
+					<Button Command="{Binding NavigateViewToNextItemInfoCommand}"
+							ContentTemplate="{actipro:GlyphTemplate Next16}"
+							IsVisible="{Binding !ViewUsesHomeDrawer}"
+							Theme="{actipro:ControlTheme TitleBarButton}"
+							ToolTip.Tip="Next" />
+					<actipro:ToggleThemeButton 
+							Theme="{actipro:ControlTheme TitleBarToggleThemeButton}"
+							ToolTip.Tip="Toggle Theme" />
+					<Button Theme="{actipro:ControlTheme TitleBarButton}"
+							ToolTip.Tip="View">
+						<Button.Flyout>
+							<MenuFlyout Placement="Bottom">
+								<MenuItem Classes="theme-menuitem-heading" Header="Avalonia Controls" />
+								<MenuItem Header="Release History" Command="{Binding NavigateViewToItemInfoCommand}" CommandParameter="{Binding ProductData.ReleaseHistory.FirstItem}" />
+								<MenuItem Header="Product Documentation" Command="{Binding OpenUrlCommand}" CommandParameter="{Binding PlatformDocumentationUrl}" />
+								<Separator />
+								<MenuItem Header="Purchase Licenses" Command="{Binding OpenUrlCommand}" CommandParameter="{Binding PlatformPurchaseLicensesUrl}" />
+								<Separator />
+								<MenuItem Classes="theme-menuitem-heading" Header="Utilities" />
+								<MenuItem Header="Color Palette" Command="{Binding NavigateViewToItemInfoCommand}" CommandParameter="https://ActiproSoftware/SampleBrowser/Utilities/ColorPalette/ColorPaletteView" />
+								<MenuItem Header="Theme Resource Browser" Command="{Binding NavigateViewToItemInfoCommand}" CommandParameter="https://ActiproSoftware/SampleBrowser/Utilities/ThemeResourceBrowser/ThemeResourceBrowserView" />
+								<MenuItem Header="String Resource Browser" Command="{Binding NavigateViewToItemInfoCommand}" CommandParameter="https://ActiproSoftware/SampleBrowser/Utilities/StringResourceBrowser/StringResourceBrowserView" />
+								<Separator />
+								<MenuItem Classes="theme-menuitem-heading" Header="Actipro Software" />
+								<MenuItem Header="Actipro Web Site" Command="{Binding OpenUrlCommand}" CommandParameter="{Binding PlatformProductsUrl}" />
+								<MenuItem Header="The Actipro Blog" Command="{Binding OpenUrlCommand}" CommandParameter="{Binding ActiproBlogUrl}" />
+								<MenuItem Header="@Actipro" Command="{Binding OpenUrlCommand}" CommandParameter="{Binding ActiproTwitterUrl}" />
+								<Separator />
+								<MenuItem Header="Contact Us" Command="{Binding OpenUrlCommand}" CommandParameter="{Binding ActiproContactUrl}" />
+								
+							</MenuFlyout>
+						</Button.Flyout>
+						<StackPanel Orientation="Horizontal">
+							<ContentPresenter ContentTemplate="{actipro:GlyphTemplate Views16}" />
+							<ContentPresenter Margin="0,0,-3,0" ContentTemplate="{actipro:GlyphTemplate DropDownArrow12}" VerticalAlignment="Center" />
+						</StackPanel>
+					</Button>
+				</StackPanel>
+			</actipro:ChromedTitleBar.RightContent>
+
+		</actipro:ChromedTitleBar>
+
+		<!-- Status Bar -->
+		<Border DockPanel.Dock="Bottom" Background="{actipro:ThemeResource StatusBarBackgroundBrush}"
+				BorderBrush="{actipro:ThemeResource StatusBarBorderBrush}" BorderThickness="{actipro:ThemeResource StatusBarBorderThickness}"
+				TextElement.Foreground="{actipro:ThemeResource StatusBarForegroundBrush}">
+			<Grid Margin="0,0,0,1" ColumnDefinitions="*,Auto,Auto" IsVisible="{Binding !ViewHasCustomStatusBar}">
+				<TextBlock Margin="20,4" Text="{Binding StatusMessage}" />
+				<TextBlock Grid.Column="1" Margin="0,4" Text="{Binding ProductData.ProductVersionAndDateSummaryText}" />
+				<actipro:WindowResizeGrip Grid.Column="2" />
+			</Grid>
+		</Border>
+
+		<!-- Client Area -->
+		<Border Background="Transparent" BorderBrush="{actipro:ThemeResource Container2BorderBrush}" BorderThickness="0,1,0,0">
+			<SplitView x:Name="splitView" DisplayMode="Inline" IsPaneOpen="{Binding IsDrawerOpen}" OpenPaneLength="232" PanePlacement="Left">
+				<SplitView.Pane>
+					<sampleBrowser:ApplicationDrawerView Width="{Binding #splitView.OpenPaneLength}" />
+				</SplitView.Pane>
+
+				<!-- NOTE: Remove custom transition class and switch back to PageSlide once TransitioningContentControl has a direction property that can be bound to ViewTransitionForward -->
+				<TransitioningContentControl x:Name="transitionControl" Content="{Binding ViewElement}">
+					<TransitioningContentControl.PageTransition>
+						<sampleBrowser:DirectionalPageSlide
+							Orientation="Horizontal"
+							Duration="{actipro:AnimationSetting EmphasizedMoveDuration}"
+							SlideInEasing="{actipro:AnimationSetting EmphasizedMoveEasing}"
+							SlideOutEasing="{actipro:AnimationSetting EmphasizedMoveEasing}" />
+					</TransitioningContentControl.PageTransition>
+				</TransitioningContentControl>
+			</SplitView>
+		</Border>
+	</DockPanel>
+
+</UserControl>

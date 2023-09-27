@@ -1,0 +1,263 @@
+<UserControl
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
+
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Pre-defined classes are available that can be applied to native toggle switches to achieve a variety of styles.">
+
+
+		<sampleBrowser:ControlExample
+			Header="ToggleSwitch usage"
+			Footer="Actipro provides multiple themes and variants to alter the appearance of a toggle switch."
+			DataContext="{Binding #sample}"
+			>
+
+			<ToggleSwitch x:Name="sample"
+						  sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
+						  Classes.theme-outline="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Outline'}"
+						  Classes.theme-solid="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Solid'}"
+						  Classes.accent="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Accent'}"
+						  Classes.success="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Success'}"
+						  Classes.warning="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Warning'}"
+						  Classes.danger="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Danger'}"
+						  Content="{Binding #sampleLabel.Text}" OnContent="{Binding #sampleOnContent.Text}" OffContent="{Binding #sampleOffContent.Text}"
+						  IsChecked="True"
+						  HorizontalAlignment="Center"
+						  />
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Theme" />
+						<ComboBox x:Name="sampleTheme" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Outline, Solid'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Variant" />
+						<ComboBox x:Name="sampleVariant" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
+					</StackPanel>
+					<TextBox x:Name="sampleOnContent" Text="On" Watermark="On Content" UseFloatingWatermark="True" />
+					<TextBox x:Name="sampleOffContent" Text="Off" Watermark="Off Content" UseFloatingWatermark="True" />
+					<TextBox x:Name="sampleLabel" Text="Label Content" Watermark="Label" UseFloatingWatermark="True" />
+					<CheckBox IsChecked="{Binding IsChecked}">Checked</CheckBox>
+					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<ToggleSwitch$(ClassesAttribute)$(IsCheckedAttribute)$(IsEnabledAttribute)
+	OnContent="$(OnContent)" OffContent="$(OffContent)">
+	$(Content)
+</ToggleSwitch>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
+															   IsEnabled="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), StringFormat=' Classes=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="OnContent" Value="{Binding #sampleOnContent.Text}" />
+						<sampleBrowser:CodeExampleSubstitution Key="OffContent" Value="{Binding #sampleOffContent.Text}" />
+						<sampleBrowser:CodeExampleSubstitution Key="Content" Value="{Binding #sampleLabel.Text}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsCheckedAttribute" IsEnabled="{Binding IsChecked, Converter={x:Static ObjectConverters.IsNotNull}}" Value="{Binding IsChecked, StringFormat=' IsChecked=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute" IsEnabled="{Binding !IsEnabled}" Value=" IsEnabled=&quot;False&quot;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Themes"
+			Footer="The appearance can be changed from the default with the use of the 'theme-outline' or 'theme-solid' classes."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<ToggleSwitch Classes="theme-outline" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Outline" />
+					<ToggleSwitch Classes="theme-outline" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Disabled" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<ToggleSwitch Classes="theme-solid" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Solid" />
+					<ToggleSwitch Classes="theme-solid" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Disabled" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.Options>
+				<CheckBox x:Name="isToggledCheckBox" IsChecked="True" Content="Checked" />
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<ToggleSwitch Classes="theme-outline" Content="Outline" />
+
+<ToggleSwitch Classes="theme-solid" Content="Solid" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+		
+		<sampleBrowser:ControlExample
+			Header="Accent variants"
+			Footer="Add the 'accent' class to a toggle switch and the theme accent color will be used to provide emphasis."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<ToggleSwitch Classes="theme-outline accent" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Outline" />
+					<ToggleSwitch Classes="theme-outline accent" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Disabled" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<ToggleSwitch Classes="theme-solid accent" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Solid" />
+					<ToggleSwitch Classes="theme-solid accent" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Disabled" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.Options>
+				<CheckBox IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Checked" />
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<ToggleSwitch Classes="theme-outline accent" Content="Outline" />
+
+<ToggleSwitch Classes="theme-solid accent" Content="Solid" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Success variants"
+			Footer="Add the 'success' class to a toggle switch and a color will be used to indicate success."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<ToggleSwitch Classes="theme-outline success" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Outline" />
+					<ToggleSwitch Classes="theme-outline success" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Disabled" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<ToggleSwitch Classes="theme-solid success" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Solid" />
+					<ToggleSwitch Classes="theme-solid success" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Disabled" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.Options>
+				<CheckBox IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Checked" />
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<ToggleSwitch Classes="theme-outline success" Content="Outline" />
+
+<ToggleSwitch Classes="theme-solid success" Content="Solid" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Warning variants"
+			Footer="Add the 'warning' class to a toggle switch and a color will be used to indicate caution."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<ToggleSwitch Classes="theme-outline warning" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Outline" />
+					<ToggleSwitch Classes="theme-outline warning" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Disabled" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<ToggleSwitch Classes="theme-solid warning" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Solid" />
+					<ToggleSwitch Classes="theme-solid warning" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Disabled" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.Options>
+				<CheckBox IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Checked" />
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<ToggleSwitch Classes="theme-outline warning" Content="Outline" />
+
+<ToggleSwitch Classes="theme-solid warning" Content="Solid" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Danger variants"
+			Footer="Add the 'danger' class to a toggle switch and a color will be used to indicate extreme caution."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<ToggleSwitch Classes="theme-outline danger" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Outline" />
+					<ToggleSwitch Classes="theme-outline danger" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Disabled" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<ToggleSwitch Classes="theme-solid danger" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Solid" />
+					<ToggleSwitch Classes="theme-solid danger" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Disabled" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.Options>
+				<CheckBox IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Checked" />
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<ToggleSwitch Classes="theme-outline danger" Content="Outline" />
+
+<ToggleSwitch Classes="theme-solid danger" Content="Solid" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Switch UI scale"
+			Footer="The size of the switch UI scales with the control's font size."
+			>
+			<StackPanel Spacing="10">
+				<ToggleSwitch Classes="size-xl" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Extra large font size" />
+				<ToggleSwitch Classes="size-lg" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Large font size" />
+				<ToggleSwitch Classes="size-md" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Medium font size" />
+				<ToggleSwitch Classes="size-sm" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Small font size" />
+				<ToggleSwitch Classes="size-xs" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Extra small font size" />
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<CheckBox IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Checked" />
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<!-- Themes use 'size-md' by default -->
+<ToggleSwitch Classes="size-xl" Content="Extra large font size" />
+<ToggleSwitch Classes="size-lg" Content="Large font size" />
+<ToggleSwitch Content="Medium font size" />
+<ToggleSwitch Classes="size-sm" Content="Small font size" />
+<ToggleSwitch Classes="size-xs" Content="Extra small font size" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

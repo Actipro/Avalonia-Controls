@@ -1,0 +1,37 @@
+<UserControl
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Actipro's control themes create a modern appearance for ListBox control.">
+
+
+		<sampleBrowser:ControlExample
+			Header="ListBox usage"
+			DataContext="{Binding #sample}"
+			>
+
+			<ListBox x:Name="sample" BorderThickness="1" Height="150">
+				<ListBoxItem Content="Item 1" IsSelected="True" />
+				<ListBoxItem Content="Item 2" />
+				<ListBoxItem Content="Item 3 (Disabled)" IsEnabled="False" />
+				<ListBoxItem Content="Item 4" />
+				<ListBoxItem Content="Item 5" />
+				<ListBoxItem Content="Item 6" />
+				<ListBoxItem Content="Item 7" />
+			</ListBox>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

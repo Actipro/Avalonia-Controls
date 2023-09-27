@@ -1,0 +1,51 @@
+<Styles
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	>
+	
+	<Styles.Resources>
+
+		<x:Double x:Key="SampleWideMaxWidth">1350</x:Double>
+		<x:Double x:Key="SampleNormalMaxWidth">800</x:Double>
+		<x:Double x:Key="SampleNarrowMaxWidth">600</x:Double>
+		<x:Double x:Key="SampleThinMaxWidth">400</x:Double>
+
+	</Styles.Resources>
+
+
+	<!-- Control.sample-presenter -->
+	<Style Selector=":is(Control).sample-presenter">
+		<Style Selector="^ > ScrollViewer">
+			<Setter Property="HorizontalScrollBarVisibility" Value="Disabled"/>
+			<Setter Property="VerticalScrollBarVisibility" Value="Auto"/>
+
+			<!-- This should really select Panel but needs to somehow ignore the Grid within the ScrollViewer template -->
+			<Style Selector="^ > :is(StackPanel)">
+				<Setter Property="Margin" Value="50"/>
+				<Setter Property="MaxWidth" Value="{StaticResource SampleWideMaxWidth}"/>
+			</Style>
+		</Style>
+	</Style>
+
+	<!-- Panel.sample-layout-panel-->
+	<Style Selector=":is(Panel).sample-layout-panel">
+		<Setter Property="Margin" Value="50"/>
+		<Setter Property="MaxWidth" Value="{StaticResource SampleWideMaxWidth}"/>
+	</Style>
+
+	<!-- actipro:MeshGradientPresenter.banner -->
+	<Style Selector="actipro|MeshGradientPresenter.banner">
+		<Setter Property="Background" Value="#6898ed" />
+		<Setter Property="CornerRadius" Value="10" />
+		<Setter Property="Nodes">
+			<actipro:MeshGradientNodes>
+				<actipro:MeshGradientNode Center="51%,64%" Color="#5cbadd" />
+				<actipro:MeshGradientNode Center="3%,22%" Color="#6871ed" />
+				<actipro:MeshGradientNode Center="26%,31%" Color="#6898ed" />
+				<actipro:MeshGradientNode Center="94%,7%" Color="#6871ed" />
+			</actipro:MeshGradientNodes>
+		</Setter>
+	</Style>
+
+</Styles>

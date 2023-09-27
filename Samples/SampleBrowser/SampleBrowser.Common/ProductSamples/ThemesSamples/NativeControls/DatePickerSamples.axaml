@@ -1,0 +1,240 @@
+<UserControl
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:system="using:System"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
+
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Pre-defined classes are available that can be applied to native date picker to achieve a variety of styles.">
+
+		<sampleBrowser:ControlExample
+			Header="Date picker usage"
+			DataContext="{Binding #sample}"
+			>
+
+			<DatePicker x:Name="sample" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
+						Classes.theme-outline="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Outline'}"
+						Classes.theme-soft="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Soft'}"
+						Classes.accent="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Accent'}"
+						Classes.success="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Success'}"
+						Classes.warning="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Warning'}"
+						Classes.danger="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Danger'}"
+						/>
+			
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Theme" />
+						<ComboBox x:Name="sampleTheme" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Outline, Soft'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Variant" />
+						<ComboBox x:Name="sampleVariant" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
+					</StackPanel>
+					<CheckBox IsChecked="{Binding YearVisible}">Show year</CheckBox>
+					<CheckBox IsChecked="{Binding MonthVisible}">Show month</CheckBox>
+					<CheckBox IsChecked="{Binding DayVisible}">Show day</CheckBox>
+					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<DatePicker $(ClassesAttribute)$(YearVisibleAttribute)$(MonthVisibleAttribute)$(DayVisibleAttribute)$(IsEnabledAttribute)/>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
+															   IsEnabled="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), StringFormat='Classes=&quot;{0}&quot;&#xA;&#x9;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute"
+															   IsEnabled="{Binding !IsEnabled}"
+															   Value="IsEnabled=&quot;False&quot; " />
+						<sampleBrowser:CodeExampleSubstitution Key="YearVisibleAttribute"
+															   IsEnabled="{Binding !YearVisible}"
+															   Value="YearVisible=&quot;False&quot; " />
+						<sampleBrowser:CodeExampleSubstitution Key="MonthVisibleAttribute"
+															   IsEnabled="{Binding !MonthVisible}"
+															   Value="MonthVisible=&quot;False&quot; " />
+						<sampleBrowser:CodeExampleSubstitution Key="DayVisibleAttribute"
+															   IsEnabled="{Binding !DayVisible}"
+															   Value="DayVisible=&quot;False&quot; " />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Themes"
+			Footer="The appearance can be changed from the default with the use of the 'theme-outline' or 'theme-soft' classes."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Outline" HorizontalAlignment="Center" />
+					<DatePicker Classes="theme-outline" />
+					<DatePicker Classes="theme-outline" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Soft" HorizontalAlignment="Center" />
+					<DatePicker Classes="theme-soft" />
+					<DatePicker Classes="theme-soft" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<DatePicker Classes="theme-outline" />
+
+<DatePicker Classes="theme-soft" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Accent variants"
+			Footer="Add the 'accent' class to a date picker and the theme accent color will be used to provide emphasis."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Outline" HorizontalAlignment="Center" />
+					<DatePicker Classes="theme-outline accent" />
+					<DatePicker Classes="theme-outline accent" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Soft" HorizontalAlignment="Center" />
+					<DatePicker Classes="theme-soft accent" />
+					<DatePicker Classes="theme-soft accent" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<DatePicker Classes="theme-outline accent" />
+
+<DatePicker Classes="theme-soft accent" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Success variants"
+			Footer="Add the 'success' class to a date picker and a color will be used to indicate success."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Outline" HorizontalAlignment="Center" />
+					<DatePicker Classes="theme-outline success" />
+					<DatePicker Classes="theme-outline success" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Soft" HorizontalAlignment="Center" />
+					<DatePicker Classes="theme-soft success" />
+					<DatePicker Classes="theme-soft success" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<DatePicker Classes="theme-outline success" />
+
+<DatePicker Classes="theme-soft success" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Warning variants"
+			Footer="Add the 'warning' class to a date picker and a color will be used to indicate caution."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Outline" HorizontalAlignment="Center" />
+					<DatePicker Classes="theme-outline warning" />
+					<DatePicker Classes="theme-outline warning" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Soft" HorizontalAlignment="Center" />
+					<DatePicker Classes="theme-soft warning" />
+					<DatePicker Classes="theme-soft warning" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<DatePicker Classes="theme-outline warning" />
+
+<DatePicker Classes="theme-soft warning" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Danger variants"
+			Footer="Add the 'danger' class to a date picker and a color will be used to indicate extreme caution."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Outline" HorizontalAlignment="Center" />
+					<DatePicker Classes="theme-outline danger" />
+					<DatePicker Classes="theme-outline danger" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Soft" HorizontalAlignment="Center" />
+					<DatePicker Classes="theme-soft danger" />
+					<DatePicker Classes="theme-soft danger" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<DatePicker Classes="theme-outline danger" />
+
+<DatePicker Classes="theme-soft danger" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Data validation errors"
+			Footer="DatePicker with a validation error."
+			>
+
+			<DatePicker>
+				<DataValidationErrors.Error>
+					<system:Exception />
+				</DataValidationErrors.Error>
+			</DatePicker>
+
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

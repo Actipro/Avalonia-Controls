@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+
+	<PropertyGroup>
+		<ActiproVersion>23.1.0</ActiproVersion>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="ActiproSoftware.Controls.Avalonia.Pro" Version="$(ActiproVersion)" />
+		<PackageReference Include="ActiproSoftware.Controls.Avalonia.Themes.ColorPicker" Version="$(ActiproVersion)" />
+		<PackageReference Include="ActiproSoftware.Controls.Avalonia.Themes.DataGrid" Version="$(ActiproVersion)" />
+	</ItemGroup>
+
+</Project>

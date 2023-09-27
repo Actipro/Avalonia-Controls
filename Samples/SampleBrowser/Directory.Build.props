@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+
+	<PropertyGroup>
+
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+
+		<Version>23.1.0.0</Version>
+		<InformationalVersion>23.1.1.0 - 20230627</InformationalVersion>
+
+		<Product>Avalonia Controls Sample Browser</Product>
+		<Title>Avalonia Controls Sample Browser</Title>
+		<Description>Sample application to demo features of the Actipro Avalonia controls.</Description>
+
+		<RootNamespace>ActiproSoftware</RootNamespace>
+		<Authors>Actipro Software LLC</Authors>
+		<Copyright>Copyright (c) 2021-2023 Actipro Software LLC.  All rights reserved.</Copyright>
+
+		<DefineConstants>AVALONIA</DefineConstants>
+		<GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+
+	</PropertyGroup>
+	
+</Project>

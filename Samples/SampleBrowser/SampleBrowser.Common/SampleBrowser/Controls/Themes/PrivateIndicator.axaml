@@ -1,0 +1,35 @@
+<ResourceDictionary 
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+	<ControlTheme x:Key="{x:Type sampleBrowser:PrivateIndicator}" TargetType="sampleBrowser:PrivateIndicator">
+		<Setter Property="Background" Value="{actipro:ThemeResource ControlBackgroundBrushSolidDanger}" />
+		<Setter Property="CornerRadius" Value="999" />
+		<Setter Property="Focusable" Value="False" />
+		<Setter Property="FontFamily" Value="{actipro:ThemeResource HeadingFontFamily}" />
+		<Setter Property="FontSize" Value="{actipro:ThemeResource HeadingFontSizeExtraSmall}" />
+		<Setter Property="Foreground" Value="{actipro:ThemeResource ControlForegroundBrushSolidDanger}" />
+		<Setter Property="HorizontalAlignment" Value="Center" />
+		<Setter Property="Padding" Value="5,1" />
+		<Setter Property="ToolTip.Tip" Value="Private content not included in the public project." />
+		<Setter Property="Template">
+			<ControlTemplate>
+
+				<Border
+					Background="{TemplateBinding Background}"
+					BorderBrush="{TemplateBinding BorderBrush}"
+					BorderThickness="{TemplateBinding BorderThickness}"
+					CornerRadius="{TemplateBinding CornerRadius}"
+					Padding="{TemplateBinding Padding}"
+					>
+					<TextBlock Classes="size-xs" Text="PRIVATE" TextAlignment="Center" />
+				</Border>
+
+			</ControlTemplate>
+		</Setter>
+	</ControlTheme>
+	
+</ResourceDictionary>

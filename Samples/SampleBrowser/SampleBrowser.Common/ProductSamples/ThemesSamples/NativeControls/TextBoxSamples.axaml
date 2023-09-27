@@ -1,0 +1,435 @@
+<UserControl 
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:system="using:System"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
+
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Pre-defined classes are available that can be applied to native textbox to achieve a variety of styles.">
+
+
+		<sampleBrowser:ControlExample
+			Header="Textbox usage"
+			Footer="Actipro provides multiple themes and variants to alter the appearance of a textbox."
+			DataContext="{Binding #sampleTextBox}"
+			>
+
+			<TextBox x:Name="sampleTextBox" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
+					 Text="Sample text here"
+					 Watermark="Actipro themes for textbox" UseFloatingWatermark="True"
+					 Classes.has-clear-button="{Binding #sampleTextBoxHasClearButton.IsChecked}"
+					 Classes.theme-outline="{Binding #sampleTextBoxTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Outline'}"
+					 Classes.theme-soft="{Binding #sampleTextBoxTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Soft'}"
+					 Classes.accent="{Binding #sampleTextBoxVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Accent'}"
+					 Classes.success="{Binding #sampleTextBoxVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Success'}"
+					 Classes.warning="{Binding #sampleTextBoxVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Warning'}"
+					 Classes.danger="{Binding #sampleTextBoxVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Danger'}"
+					 />
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Theme" />
+						<ComboBox x:Name="sampleTextBoxTheme" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Outline, Soft'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Variant" />
+						<ComboBox x:Name="sampleTextBoxVariant" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
+					</StackPanel>
+					<TextBox Text="{Binding Watermark}" Watermark="Watermark" UseFloatingWatermark="True" />
+					<CheckBox IsChecked="{Binding UseFloatingWatermark}">Use floating watermark</CheckBox>
+					<CheckBox IsChecked="True" x:Name="sampleTextBoxHasClearButton">Has clear button</CheckBox>
+					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
+					<CheckBox IsChecked="{Binding IsReadOnly}">Read-only</CheckBox>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<TextBox $(ClassesAttribute)Text="Define text here"
+	$(WatermarkAttribute)$(UseFloatingWatermarkAttribute)$(IsEnabledAttribute)$(IsReadOnlyAttribute)/>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
+															   IsEnabled="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), StringFormat='Classes=&quot;{0}&quot;&#xA;&#x9;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute"
+															   IsEnabled="{Binding !IsEnabled}"
+															   Value="IsEnabled=&quot;False&quot; " />
+						<sampleBrowser:CodeExampleSubstitution Key="IsReadOnlyAttribute"
+															   IsEnabled="{Binding IsReadOnly}"
+															   Value="IsReadOnly=&quot;True&quot; " />
+						<sampleBrowser:CodeExampleSubstitution Key="UseFloatingWatermarkAttribute"
+															   IsEnabled="{Binding UseFloatingWatermark}"
+															   Value="UseFloatingWatermark=&quot;True&quot; " />
+						<sampleBrowser:CodeExampleSubstitution Key="WatermarkAttribute"
+															   IsEnabled="{Binding Watermark, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding Watermark, StringFormat='Watermark=&quot;{0}&quot; '}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Password usage"
+			Footer="Themes and variants can also be used with passwords."
+			DataContext="{Binding #samplePasswordBox}"
+			>
+
+			<TextBox x:Name="samplePasswordBox" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
+					 PasswordChar="{actipro:ThemeResource EditPasswordChar}" Text="Sample text here"
+					 Watermark="Password" UseFloatingWatermark="True"
+					 Classes.has-reveal-password-button="{Binding #samplePasswordBoxHasRevealPasswordButton.IsChecked}"
+					 Classes.theme-outline="{Binding #samplePasswordBoxTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Outline'}"
+					 Classes.theme-soft="{Binding #samplePasswordBoxTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Soft'}"
+					 Classes.accent="{Binding #samplePasswordBoxVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Accent'}"
+					 Classes.success="{Binding #samplePasswordBoxVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Success'}"
+					 Classes.warning="{Binding #samplePasswordBoxVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Warning'}"
+					 Classes.danger="{Binding #samplePasswordBoxVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Danger'}"
+					 />
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Theme" />
+						<ComboBox x:Name="samplePasswordBoxTheme" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Outline, Soft'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Variant" />
+						<ComboBox x:Name="samplePasswordBoxVariant" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Watermark" />
+						<TextBox Text="{Binding Watermark}" />
+					</StackPanel>
+					<CheckBox IsChecked="{Binding UseFloatingWatermark}">Use floating watermark</CheckBox>
+					<CheckBox IsChecked="True" x:Name="samplePasswordBoxHasRevealPasswordButton">Has password reveal button</CheckBox>
+					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<TextBox $(ClassesAttribute)PasswordChar="{actipro:ThemeResource EditPasswordChar}" Text="Define text here"
+	$(WatermarkAttribute)$(UseFloatingWatermarkAttribute)$(IsEnabledAttribute)/>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
+															   IsEnabled="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), StringFormat='Classes=&quot;{0}&quot;&#xA;&#x9;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute"
+															   IsEnabled="{Binding !IsEnabled}"
+															   Value="IsEnabled=&quot;False&quot; " />
+						<sampleBrowser:CodeExampleSubstitution Key="UseFloatingWatermarkAttribute"
+															   IsEnabled="{Binding UseFloatingWatermark}"
+															   Value="UseFloatingWatermark=&quot;True&quot; " />
+						<sampleBrowser:CodeExampleSubstitution Key="WatermarkAttribute"
+															   IsEnabled="{Binding Watermark, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding Watermark, StringFormat='Watermark=&quot;{0}&quot; '}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Masked textbox usage"
+			Footer="Themes and variants can also be used with masked textbox."
+			DataContext="{Binding #sampleMaskedTextBox}"
+			>
+
+			<MaskedTextBox x:Name="sampleMaskedTextBox" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
+						   Mask="(000) 000-0000" Watermark="Phone number" UseFloatingWatermark="True"
+						   Classes.has-clear-button="{Binding #sampleMaskedTextBoxHasClearButton.IsChecked}"
+						   Classes.theme-outline="{Binding #sampleMaskedTextBoxTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Outline'}"
+						   Classes.theme-soft="{Binding #sampleMaskedTextBoxTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Soft'}"
+						   Classes.accent="{Binding #sampleMaskedTextBoxVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Accent'}"
+						   Classes.success="{Binding #sampleMaskedTextBoxVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Success'}"
+						   Classes.warning="{Binding #sampleMaskedTextBoxVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Warning'}"
+						   Classes.danger="{Binding #sampleMaskedTextBoxVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Danger'}"
+						   />
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Theme" />
+						<ComboBox x:Name="sampleMaskedTextBoxTheme" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Outline, Soft'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Variant" />
+						<ComboBox x:Name="sampleMaskedTextBoxVariant" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
+					</StackPanel>
+					<TextBox Text="{Binding Watermark}" Watermark="Watermark" UseFloatingWatermark="True" />
+					<TextBox Text="{Binding Mask}" Watermark="Mask" UseFloatingWatermark="True" />
+					<CheckBox IsChecked="{Binding UseFloatingWatermark}">Use floating watermark</CheckBox>
+					<CheckBox IsChecked="True" x:Name="sampleMaskedTextBoxHasClearButton">Has clear button</CheckBox>
+					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<MaskedTextBox $(ClassesAttribute)Mask="$(Mask)" Text="Define text here"
+	$(WatermarkAttribute)$(UseFloatingWatermarkAttribute)$(IsEnabledAttribute)/>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
+															   IsEnabled="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), StringFormat='Classes=&quot;{0}&quot;&#xA;&#x9;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="Mask" Value="{Binding Mask, Mode=OneWay}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute"
+															   IsEnabled="{Binding !IsEnabled}"
+															   Value="IsEnabled=&quot;False&quot; " />
+						<sampleBrowser:CodeExampleSubstitution Key="UseFloatingWatermarkAttribute"
+															   IsEnabled="{Binding UseFloatingWatermark}"
+															   Value="UseFloatingWatermark=&quot;True&quot; " />
+						<sampleBrowser:CodeExampleSubstitution Key="WatermarkAttribute"
+															   IsEnabled="{Binding Watermark, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding Watermark, StringFormat='Watermark=&quot;{0}&quot; '}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Themes"
+			Footer="The appearance can be changed from the default with the use of the 'theme-outline' or 'theme-soft' classes."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<TextBox Classes="theme-outline" Text="Outline" />
+					<TextBox Classes="theme-outline" Text="Read-only" IsReadOnly="True" />
+					<TextBox Classes="theme-outline" Text="Disabled" IsEnabled="False" />
+					<TextBox Classes="theme-outline" Watermark="Watermark" />
+					<TextBox Classes="theme-outline" Watermark="Watermark (disabled)" IsEnabled="False" />
+					<TextBox Height="100" Classes="theme-outline" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.IsScrollChainingEnabled="False"
+							 Text="This is longer text.&#x0a;It has more than one line and this second line is longer than the first one.&#x0a;There is more text on this third line." Watermark="Multi-line (word wrapped)" UseFloatingWatermark="True" />
+					<TextBox Height="100" Classes="theme-outline" AcceptsReturn="True" ScrollViewer.IsScrollChainingEnabled="False"
+							 Text="This is longer text.&#x0a;It has more than one line and this second line is longer than the first one.&#x0a;There is more text on this third line." Watermark="Multi-line" UseFloatingWatermark="True" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<TextBox Classes="theme-soft" Text="Soft" />
+					<TextBox Classes="theme-soft" Text="Read-only" IsReadOnly="True" />
+					<TextBox Classes="theme-soft" Text="Disabled" IsEnabled="False" />
+					<TextBox Classes="theme-soft" Watermark="Watermark" />
+					<TextBox Classes="theme-soft" Watermark="Watermark (disabled)" IsEnabled="False" />
+					<TextBox Height="100" Classes="theme-soft" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.IsScrollChainingEnabled="False"
+							 Text="This is longer text.&#x0a;It has more than one line and this second line is longer than the first one.&#x0a;There is more text on this third line." Watermark="Multi-line (word wrapped)" UseFloatingWatermark="True" />
+					<TextBox Height="100" Classes="theme-soft" AcceptsReturn="True" ScrollViewer.IsScrollChainingEnabled="False"
+							 Text="This is longer text.&#x0a;It has more than one line and this second line is longer than the first one.&#x0a;There is more text on this third line." Watermark="Multi-line" UseFloatingWatermark="True" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<TextBox Classes="theme-outline" Text="Outline" />
+
+<TextBox Classes="theme-soft" Text="Soft" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Accent variants"
+			Footer="Add the 'accent' class to a textbox and the theme accent color will be used to provide emphasis."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<TextBox Classes="theme-outline accent" Text="Outline" />
+					<TextBox Classes="theme-outline accent" Text="Read-only" IsReadOnly="True" />
+					<TextBox Classes="theme-outline accent" Text="Disabled" IsEnabled="False" />
+					<TextBox Classes="theme-outline accent" Watermark="Watermark" />
+					<TextBox Classes="theme-outline accent" Watermark="Watermark (disabled)" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<TextBox Classes="theme-soft accent" Text="Soft" />
+					<TextBox Classes="theme-soft accent" Text="Read-only" IsReadOnly="True" />
+					<TextBox Classes="theme-soft accent" Text="Disabled" IsEnabled="False" />
+					<TextBox Classes="theme-soft accent" Watermark="Watermark" />
+					<TextBox Classes="theme-soft accent" Watermark="Watermark (disabled)" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<TextBox Classes="theme-outline accent" Text="Outline" />
+
+<TextBox Classes="theme-soft accent" Text="Soft" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Success variants"
+			Footer="Add the 'success' class to a textbox and a color will be used to indicate success."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<TextBox Classes="theme-outline success" Text="Outline" />
+					<TextBox Classes="theme-outline success" Text="Read-only" IsReadOnly="True" />
+					<TextBox Classes="theme-outline success" Text="Disabled" IsEnabled="False" />
+					<TextBox Classes="theme-outline success" Watermark="Watermark" />
+					<TextBox Classes="theme-outline success" Watermark="Watermark (disabled)" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<TextBox Classes="theme-soft success" Text="Soft" />
+					<TextBox Classes="theme-soft success" Text="Read-only" IsReadOnly="True" />
+					<TextBox Classes="theme-soft success" Text="Disabled" IsEnabled="False" />
+					<TextBox Classes="theme-soft success" Watermark="Watermark" />
+					<TextBox Classes="theme-soft success" Watermark="Watermark (disabled)" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<TextBox Classes="theme-outline success" Text="Outline" />
+
+<TextBox Classes="theme-soft success" Text="Soft" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Warning variants"
+			Footer="Add the 'warning' class to a textbox and a color will be used to indicate caution."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<TextBox Classes="theme-outline warning" Text="Outline" />
+					<TextBox Classes="theme-outline warning" Text="Read-only" IsReadOnly="True" />
+					<TextBox Classes="theme-outline warning" Text="Disabled" IsEnabled="False" />
+					<TextBox Classes="theme-outline warning" Watermark="Watermark" />
+					<TextBox Classes="theme-outline warning" Watermark="Watermark (disabled)" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<TextBox Classes="theme-soft warning" Text="Soft" />
+					<TextBox Classes="theme-soft warning" Text="Read-only" IsReadOnly="True" />
+					<TextBox Classes="theme-soft warning" Text="Disabled" IsEnabled="False" />
+					<TextBox Classes="theme-soft warning" Watermark="Watermark" />
+					<TextBox Classes="theme-soft warning" Watermark="Watermark (disabled)" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<TextBox Classes="theme-outline warning" Text="Outline" />
+
+<TextBox Classes="theme-soft warning" Text="Soft" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Danger variants"
+			Footer="Add the 'danger' class to a textbox and a color will be used to indicate extreme caution."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<TextBox Classes="theme-outline danger" Text="Outline" />
+					<TextBox Classes="theme-outline danger" Text="Read-only" IsReadOnly="True" />
+					<TextBox Classes="theme-outline danger" Text="Disabled" IsEnabled="False" />
+					<TextBox Classes="theme-outline danger" Watermark="Watermark" />
+					<TextBox Classes="theme-outline danger" Watermark="Watermark (disabled)" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<TextBox Classes="theme-soft danger" Text="Soft" />
+					<TextBox Classes="theme-soft danger" Text="Read-only" IsReadOnly="True" />
+					<TextBox Classes="theme-soft danger" Text="Disabled" IsEnabled="False" />
+					<TextBox Classes="theme-soft danger" Watermark="Watermark" />
+					<TextBox Classes="theme-soft danger" Watermark="Watermark (disabled)" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<TextBox Classes="theme-outline danger" Text="Outline" />
+
+<TextBox Classes="theme-soft danger" Text="Soft" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Data validation errors"
+			>
+
+			<TextBox Text="TextBox with a validation error">
+				<DataValidationErrors.Error>
+					<system:Exception />
+				</DataValidationErrors.Error>
+			</TextBox>
+
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Inner content (left and right)"
+			Footer="This sample uses InnerLeftContent and InnerRightContent to influence the type of data that is input."
+			>
+
+			<TextBox Text="actiprosoftware">
+				<TextBox.InnerLeftContent>
+					<Border BorderThickness="0,0,1,0" BorderBrush="{Binding $parent.BorderBrush}" Background="{actipro:ThemeResource Container3BackgroundBrush}">
+						<TextBlock Margin="10,0" Text="https://" VerticalAlignment="Center" />
+					</Border>
+				</TextBox.InnerLeftContent>
+				<TextBox.InnerRightContent>
+					<Border BorderThickness="1,0,0,0" BorderBrush="{Binding $parent.BorderBrush}" Background="{actipro:ThemeResource Container3BackgroundBrush}">
+						<TextBlock Margin="10,0" Text=".com" VerticalAlignment="Center" />
+					</Border>
+				</TextBox.InnerRightContent>
+			</TextBox>
+
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<TextBox Text="actiprosoftware">
+	<TextBox.InnerLeftContent>
+		<Border BorderThickness="0,0,1,0" BorderBrush="{Binding $parent.BorderBrush}" Background="{actipro:ThemeResource Container3BackgroundBrush}">
+			<TextBlock Margin="10,0" Text="https://" VerticalAlignment="Center" />
+		</Border>
+	</TextBox.InnerLeftContent>
+	<TextBox.InnerRightContent>
+		<Border BorderThickness="1,0,0,0" BorderBrush="{Binding $parent.BorderBrush}" Background="{actipro:ThemeResource Container3BackgroundBrush}">
+			<TextBlock Margin="10,0" Text=".com" VerticalAlignment="Center" />
+		</Border>
+	</TextBox.InnerRightContent>
+</TextBox>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

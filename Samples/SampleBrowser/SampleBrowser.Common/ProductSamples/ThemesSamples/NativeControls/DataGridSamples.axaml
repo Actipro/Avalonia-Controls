@@ -1,0 +1,49 @@
+<UserControl
+	x:Class="ActiproSoftware.ProductSamples.ThemeSamples.NativeControls.DataGridSamples"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:commonSamples="using:ActiproSoftware.ProductSamples.ThemesSamples.Common"
+	>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Actipro's control themes create a modern appearance for DataGrid control.">
+
+
+		<sampleBrowser:ControlExample
+			Header="DataGrid usage"
+			DataContext="{Binding #sample}"
+			>
+
+			<DataGrid x:Name="sample" BorderThickness="1" Height="250"
+					  CanUserSortColumns="True" HeadersVisibility="All" 
+					  GridLinesVisibility="{Binding #sampleGridLines.SelectedItem}"
+					  >
+				<DataGrid.Columns>
+					<DataGridTextColumn x:DataType="commonSamples:FruitDataItemModel" Header="Name" Binding="{Binding Name}" />
+					<DataGridTextColumn x:DataType="commonSamples:FruitDataItemModel" Header="Color Category" Binding="{Binding ColorCategory}" IsVisible="{Binding !#groupByColorCheckBox.IsChecked}" />
+					<DataGridTextColumn x:DataType="commonSamples:FruitDataItemModel" Header="Leading Producer" Binding="{Binding LeadingProducer}" />
+					<DataGridTextColumn x:DataType="commonSamples:FruitDataItemModel" Header="Serving Calories" Binding="{Binding ServingCalories}" />
+					<DataGridCheckBoxColumn x:DataType="commonSamples:FruitDataItemModel" Header="Popular?" Binding="{Binding IsPopular}" />
+				</DataGrid.Columns>
+			</DataGrid>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<CheckBox x:Name="groupByColorCheckBox" IsChecked="False">Group by color</CheckBox>
+					<CheckBox IsChecked="{Binding IsReadOnly}">Read-only</CheckBox>
+					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
+					<CheckBox IsChecked="{Binding CanUserReorderColumns}">Can reorder columns</CheckBox>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Grid lines" />
+						<ComboBox x:Name="sampleGridLines" ItemsSource="{actipro:DelimitedArray Type={x:Type DataGridGridLinesVisibility}}" SelectedIndex="0" />
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

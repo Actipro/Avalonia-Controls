@@ -1,0 +1,222 @@
+<UserControl
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:system="using:System"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Pre-defined classes are available that can be applied to the native NumericUpDown to achieve a variety of styles.">
+
+
+		<sampleBrowser:ControlExample
+			Header="NumericUpDown usage"
+			Footer="Actipro provides multiple themes and variants to alter the appearance of a NumericUpDown."
+			DataContext="{Binding #sample}"
+			>
+
+			<NumericUpDown x:Name="sample" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
+						   Width="200" AllowSpin="True" ShowButtonSpinner="True"
+						   Watermark="Enter value from 0 to 10"
+						   Minimum="0" Maximum="10" Increment="1" ClipValueToMinMax="True"
+						   Classes.theme-outline="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Outline'}"
+						   Classes.theme-soft="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Soft'}"
+						   Classes.accent="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Accent'}"
+						   Classes.success="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Success'}"
+						   Classes.warning="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Warning'}"
+						   Classes.danger="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Danger'}"
+						   />
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Theme" />
+						<ComboBox x:Name="sampleTheme" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Outline, Soft'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Variant" />
+						<ComboBox x:Name="sampleVariant" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Spinner location" />
+						<ComboBox SelectedIndex="0" ItemsSource="{actipro:DelimitedArray Type={x:Type Location}}" SelectedItem="{Binding ButtonSpinnerLocation}" />
+					</StackPanel>
+					<CheckBox IsChecked="{Binding ShowButtonSpinner}">Show buttons</CheckBox>
+					<CheckBox IsChecked="{Binding AllowSpin}">Allow spin</CheckBox>
+					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
+					<CheckBox IsChecked="{Binding IsReadOnly}">Read-only</CheckBox>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<NumericUpDown$(ClassesAttribute)$(AllowSpinAttribute)$(ShowButtonSpinnerAttribute)$(ButtonSpinnerLocationAttribute)$(IsEnabledAttribute)$(IsReadOnlyAttribute) />
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
+															   IsEnabled="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), StringFormat=' Classes=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="AllowSpinAttribute"
+															   IsEnabled="{Binding !AllowSpin}"
+															   Value=" AllowSpin=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="ButtonSpinnerLocationAttribute"
+															   IsEnabled="{Binding ButtonSpinnerLocation, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Right'}"
+															   Value="{Binding ButtonSpinnerLocation, StringFormat=' ButtonSpinnerLocation=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute"
+															   IsEnabled="{Binding !IsEnabled}"
+															   Value=" IsEnabled=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsReadOnlyAttribute"
+															   IsEnabled="{Binding IsReadOnly}"
+															   Value=" IsReadOnly=&quot;True&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="ShowButtonSpinnerAttribute"
+															   IsEnabled="{Binding !ShowButtonSpinner}"
+															   Value=" ShowButtonSpinner=&quot;False&quot;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Themes"
+			Footer="The appearance can be changed from the default with the use of the 'theme-outline' or 'theme-soft' classes."
+			>
+			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,200,40,200,*">
+				<NumericUpDown Grid.Row="0" Grid.Column="1" Classes="theme-outline" Watermark="Outline" />
+				<NumericUpDown Grid.Row="2" Grid.Column="1" Classes="theme-outline" Watermark="Disabled" IsEnabled="False" />
+
+				<NumericUpDown Grid.Row="0" Grid.Column="3" Classes="theme-soft" Watermark="Soft" />
+				<NumericUpDown Grid.Row="2" Grid.Column="3" Classes="theme-soft" Watermark="Disabled" IsEnabled="False" />
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<NumericUpDown Classes="theme-outline" Watermark="Outline" />
+
+<NumericUpDown Classes="theme-soft" Watermark="Soft" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Accent variants"
+			Footer="Add the 'accent' class to a NumericUpDown and the theme accent color will be used to provide emphasis."
+			>
+			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,200,40,200,*">
+				<NumericUpDown Grid.Row="0" Grid.Column="1" Classes="theme-outline accent" Watermark="Outline" />
+				<NumericUpDown Grid.Row="2" Grid.Column="1" Classes="theme-outline accent" Watermark="Disabled" IsEnabled="False" />
+
+				<NumericUpDown Grid.Row="0" Grid.Column="3" Classes="theme-soft accent" Watermark="Soft" />
+				<NumericUpDown Grid.Row="2" Grid.Column="3" Classes="theme-soft accent" Watermark="Disabled" IsEnabled="False" />
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<NumericUpDown Classes="theme-outline accent" Watermark="Outline" />
+
+<NumericUpDown Classes="theme-soft accent" Watermark="Soft" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Success variants"
+			Footer="Add the 'success' class to a NumericUpDown and a color will be used to indicate success."
+			>
+			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,200,40,200,*">
+				<NumericUpDown Grid.Row="0" Grid.Column="1" Classes="theme-outline success" Watermark="Outline" />
+				<NumericUpDown Grid.Row="2" Grid.Column="1" Classes="theme-outline success" Watermark="Disabled" IsEnabled="False" />
+
+				<NumericUpDown Grid.Row="0" Grid.Column="3" Classes="theme-soft success" Watermark="Soft" />
+				<NumericUpDown Grid.Row="2" Grid.Column="3" Classes="theme-soft success" Watermark="Disabled" IsEnabled="False" />
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<NumericUpDown Classes="theme-outline success" Watermark="Outline" />
+
+<NumericUpDown Classes="theme-soft success" Watermark="Soft" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Warning variants"
+			Footer="Add the 'warning' class to a NumericUpDown and a color will be used to indicate caution."
+			>
+			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,200,40,200,*">
+				<NumericUpDown Grid.Row="0" Grid.Column="1" Classes="theme-outline warning" Watermark="Outline" />
+				<NumericUpDown Grid.Row="2" Grid.Column="1" Classes="theme-outline warning" Watermark="Disabled" IsEnabled="False" />
+
+				<NumericUpDown Grid.Row="0" Grid.Column="3" Classes="theme-soft warning" Watermark="Soft" />
+				<NumericUpDown Grid.Row="2" Grid.Column="3" Classes="theme-soft warning" Watermark="Disabled" IsEnabled="False" />
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<NumericUpDown Classes="theme-outline warning" Watermark="Outline" />
+
+<NumericUpDown Classes="theme-soft warning" Watermark="Soft" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Danger variants"
+			Footer="Add the 'danger' class to a NumericUpDown and a color will be used to indicate extreme caution."
+			>
+			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,200,40,200,*">
+				<NumericUpDown Grid.Row="0" Grid.Column="1" Classes="theme-outline danger" Watermark="Outline" />
+				<NumericUpDown Grid.Row="2" Grid.Column="1" Classes="theme-outline danger" Watermark="Disabled" IsEnabled="False" />
+
+				<NumericUpDown Grid.Row="0" Grid.Column="3" Classes="theme-soft danger" Watermark="Soft" />
+				<NumericUpDown Grid.Row="2" Grid.Column="3" Classes="theme-soft danger" Watermark="Disabled" IsEnabled="False" />
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<NumericUpDown Classes="theme-outline danger" Watermark="Outline" />
+
+<NumericUpDown Classes="theme-soft danger" Watermark="Soft" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Data validation errors"
+			>
+
+			<NumericUpDown Watermark="NumericUpDown with a validation error">
+				<DataValidationErrors.Error>
+					<system:Exception />
+				</DataValidationErrors.Error>
+			</NumericUpDown>
+
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

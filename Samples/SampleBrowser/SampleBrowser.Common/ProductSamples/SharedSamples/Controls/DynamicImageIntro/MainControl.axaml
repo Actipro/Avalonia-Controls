@@ -1,0 +1,694 @@
+<UserControl
+	x:Name="rootSampleControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:systemColl="using:System.Collections"
+	>
+
+	<UserControl.Resources>
+
+		<DrawingGroup x:Key="CheckVectorDrawing">
+			<GeometryDrawing Brush="#339933" Geometry="M 0,16 A 16,16 0 1 1 32,16 A 16,16 0 1 1 0,16 Z  M 5.75,17.25 L 8.75,14.25 L 13,19 L 23.5,8.25 L 26.25,11.25 L 13,24.5 Z" />
+			<GeometryDrawing Brush="#ffffff" Geometry="M 5.75,17.25 L 8.75,14.25 L 13,19 L 23.5,8.25 L 26.25,11.25 L 13,24.5 Z" />
+		</DrawingGroup>
+
+		<actipro:ImageProvider x:Key="DarkThemeImageProvider" ChromaticAdaptationMode="DarkThemes" />
+		<actipro:ImageProvider x:Key="AlwaysAdaptImageProvider" ChromaticAdaptationMode="Always" />
+
+	</UserControl.Resources>
+	<UserControl.Styles>
+
+		<Style Selector="actipro|DynamicImage">
+			<Setter Property="UseLayoutRounding" Value="True" />
+		</Style>
+
+	</UserControl.Styles>
+
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="The DynamicImage control inherits the native Image control, and is a drop-in replacement with features that allow it to render the source image as grayscale, monochrome, or chromatically adapt the image for use with a dark theme.">
+
+
+		<sampleBrowser:ControlExample
+			Header="Basic usage (vector image)"
+			Footer="Easily support adaptation of vector images for dark themes or monochrome. Individual images or parts of a geometry can opt-out of adaptation if appropriate, but the grayscale disabled state is always supported."
+			DataContext="{Binding #primaryVectorImage}"
+			>
+			<StackPanel Orientation="Horizontal" Spacing="50" HorizontalAlignment="Center">
+				<StackPanel.Resources>
+					<DrawingImage x:Key="BasicVectorImage" Drawing="{StaticResource CheckVectorDrawing}"
+								  actipro:ImageProvider.Provider="{StaticResource DarkThemeImageProvider}" />
+					<DrawingImage x:Key="BasicVectorImageNoAdapt" Drawing="{StaticResource CheckVectorDrawing}"
+								  actipro:ImageProvider.Provider="{StaticResource DarkThemeImageProvider}"
+								  actipro:ImageProvider.CanAdapt="False" />
+
+					<actipro:ComparisonConverter x:Key="CanAdaptImageSourceConverter" TrueResult="{StaticResource BasicVectorImage}" FalseResult="{StaticResource BasicVectorImageNoAdapt}" />
+				</StackPanel.Resources>
+
+				<StackPanel Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Light theme" HorizontalAlignment="Center" />
+					<ThemeVariantScope RequestedThemeVariant="Light">
+						<Border Padding="20" BorderThickness="1" CornerRadius="8"
+								Background="{actipro:ThemeResource Container1BackgroundBrush}"
+								BorderBrush="{actipro:ThemeResource Container1BorderBrush}">
+
+							<StackPanel Spacing="30">
+								<StackPanel Spacing="10">
+									<TextBlock Text="Native control" />
+									<Image Width="32" Height="32">
+										<DrawingImage Drawing="{StaticResource CheckVectorDrawing}" />
+									</Image>
+								</StackPanel>
+								<StackPanel Spacing="10">
+									<TextBlock Text="Dynamic image" />
+									<actipro:DynamicImage x:Name="primaryVectorImage" Width="32" Height="32"
+														  DisabledOpacity="0.5"
+														  Source="{Binding #primaryVectorImageCanAdaptCheckBox.IsChecked, Converter={StaticResource CanAdaptImageSourceConverter}}" />
+								</StackPanel>
+							</StackPanel>
+						</Border>
+					</ThemeVariantScope>
+				</StackPanel>
+
+				<StackPanel Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Dark theme" HorizontalAlignment="Center" />
+					<ThemeVariantScope RequestedThemeVariant="Dark">
+						<Border Padding="20" BorderThickness="1" CornerRadius="8"
+								Background="{actipro:ThemeResource Container1BackgroundBrush}"
+								BorderBrush="{actipro:ThemeResource Container1BorderBrush}">
+
+							<StackPanel Spacing="30">
+								<StackPanel Spacing="10">
+									<TextBlock Text="Native control" />
+									<Image Width="32" Height="32">
+										<DrawingImage Drawing="{StaticResource CheckVectorDrawing}" />
+									</Image>
+								</StackPanel>
+								<StackPanel Spacing="10">
+									<TextBlock Text="Dynamic image" />
+									<actipro:DynamicImage Width="32" Height="32"
+														  IsEnabled="{Binding IsEnabled}"
+														  DisabledOpacity="{Binding DisabledOpacity}"
+														  UseMonochrome="{Binding UseMonochrome}"
+														  Source="{Binding #primaryVectorImageCanAdaptCheckBox.IsChecked, Converter={StaticResource CanAdaptImageSourceConverter}}" />
+								</StackPanel>
+							</StackPanel>
+						</Border>
+					</ThemeVariantScope>
+				</StackPanel>
+
+
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Disabled opacity" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray '0.1, 0.25, 0.5, 0.75, 1.0', Type=x:Double}" SelectedItem="{Binding DisabledOpacity}" />
+					</StackPanel>
+					<CheckBox IsChecked="{Binding IsEnabled}" Content="Enabled" />
+					<CheckBox IsChecked="{Binding UseMonochrome}" Content="Use monochrome" />
+					<CheckBox x:Name="primaryVectorImageCanAdaptCheckBox" IsChecked="True" Content="Image can adapt" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample Language="XAML" xml:space="preserve">
+					<![CDATA[
+<actipro:DynamicImage DisabledOpacity="$(DisabledOpacity)"$(UseMonochromeAttribute)$(IsEnabledAttribute)>
+	<DrawingImage Drawing="{StaticResource InsertResourceKeyHere}"$(NoAdaptAttribute) />
+</actipro:DynamicImage>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="DisabledOpacity" Value="{Binding DisabledOpacity}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute"
+															   IsEnabled="{Binding !IsEnabled}"
+															   Value=" IsEnabled=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="UseMonochromeAttribute"
+															   IsEnabled="{Binding UseMonochrome}"
+															   Value=" UseMonochrome=&quot;True&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="NoAdaptAttribute"
+															   IsEnabled="{Binding !#primaryVectorImageCanAdaptCheckBox.IsChecked}"
+															   Value="&#xD;&#x9;&#x9;&#x9;actipro:ImageProvider.CanAdapt=&quot;False&quot;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+using ActiproSoftware.UI.Avalonia.Media;
+...
+// In app startup (before UI is initialized), configure the default
+// ImageProvider to support chromatic adaptation in dark themes
+ImageProvider.Default.ChromaticAdaptationMode = ImageChromaticAdaptationMode.DarkThemes;
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Basic usage (raster image)"
+			Footer="Easily support adaptation of raster images for dark themes or monochrome. Individual images can opt-out of adaptation if appropriate, but the grayscale disabled state is always supported."
+			DataContext="{Binding #primaryRasterImage}"
+			>
+			<StackPanel Orientation="Horizontal" Spacing="50" HorizontalAlignment="Center">
+				<StackPanel.Resources>
+					<DrawingImage x:Key="BasicRasterImage" actipro:ImageProvider.Provider="{StaticResource DarkThemeImageProvider}">
+						<ImageDrawing ImageSource="/Images/Icons/Save32.png" Rect="0,0,32,32" />
+					</DrawingImage>
+					<DrawingImage x:Key="BasicRasterImageNoAdapt" actipro:ImageProvider.Provider="{StaticResource DarkThemeImageProvider}" actipro:ImageProvider.CanAdapt="False">
+						<ImageDrawing ImageSource="/Images/Icons/Save32.png" Rect="0,0,32,32" />
+					</DrawingImage>
+					<actipro:ComparisonConverter x:Key="CanAdaptImageSourceConverter" TrueResult="{StaticResource BasicRasterImage}" FalseResult="{StaticResource BasicRasterImageNoAdapt}" />
+				</StackPanel.Resources>
+
+				<StackPanel Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Light theme" HorizontalAlignment="Center" />
+					<ThemeVariantScope RequestedThemeVariant="Light">
+						<Border Padding="20" BorderThickness="1" CornerRadius="8"
+								Background="{actipro:ThemeResource Container1BackgroundBrush}"
+								BorderBrush="{actipro:ThemeResource Container1BorderBrush}">
+
+							<StackPanel Spacing="30">
+								<StackPanel Spacing="10">
+									<TextBlock Text="Native control" />
+									<Image Width="32" Height="32" Source="{StaticResource BasicRasterImage}" />
+								</StackPanel>
+								<StackPanel Spacing="10">
+									<TextBlock Text="Dynamic image" />
+									<actipro:DynamicImage x:Name="primaryRasterImage" Width="32" Height="32"
+														  DisabledOpacity="0.5"
+														  Source="{Binding #primaryRasterImageCanAdaptCheckBox.IsChecked, Converter={StaticResource CanAdaptImageSourceConverter}}"/>
+								</StackPanel>
+							</StackPanel>
+						</Border>
+					</ThemeVariantScope>
+				</StackPanel>
+
+				<StackPanel Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Dark theme" HorizontalAlignment="Center" />
+					<ThemeVariantScope RequestedThemeVariant="Dark">
+						<Border Padding="20" BorderThickness="1" CornerRadius="8"
+								Background="{actipro:ThemeResource Container1BackgroundBrush}"
+								BorderBrush="{actipro:ThemeResource Container1BorderBrush}">
+
+							<StackPanel Spacing="30">
+								<StackPanel Spacing="10">
+									<TextBlock Text="Native control" />
+									<Image Width="32" Height="32" Source="{StaticResource BasicRasterImage}" />
+								</StackPanel>
+								<StackPanel Spacing="10">
+									<TextBlock Text="Dynamic image" />
+									<actipro:DynamicImage Width="32" Height="32"
+														  IsEnabled="{Binding IsEnabled}"
+														  DisabledOpacity="{Binding DisabledOpacity}"
+														  UseMonochrome="{Binding UseMonochrome}"
+														  Source="{Binding #primaryRasterImageCanAdaptCheckBox.IsChecked, Converter={StaticResource CanAdaptImageSourceConverter}}"/>
+								</StackPanel>
+							</StackPanel>
+						</Border>
+					</ThemeVariantScope>
+				</StackPanel>
+
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Text="Disabled opacity" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray '0.1, 0.25, 0.5, 0.75, 1.0', Type=x:Double}" SelectedItem="{Binding DisabledOpacity}" />
+					</StackPanel>
+					<CheckBox IsChecked="{Binding IsEnabled}" Content="Enabled" />
+					<CheckBox IsChecked="{Binding UseMonochrome}" Content="Use monochrome" />
+					<CheckBox x:Name="primaryRasterImageCanAdaptCheckBox" IsChecked="True" Content="Image can adapt" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample Language="XAML" xml:space="preserve">
+					<![CDATA[
+<actipro:DynamicImage DisabledOpacity="$(DisabledOpacity)"$(UseMonochromeAttribute)$(IsEnabledAttribute)$(SourceAttributeAdapted)$(SourceAttributeNotAdapted)
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="DisabledOpacity" Value="{Binding DisabledOpacity}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute"
+															   IsEnabled="{Binding !IsEnabled}"
+															   Value=" IsEnabled=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="UseMonochromeAttribute"
+															   IsEnabled="{Binding UseMonochrome}"
+															   Value=" UseMonochrome=&quot;True&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="SourceAttributeAdapted"
+															   IsEnabled="{Binding #primaryRasterImageCanAdaptCheckBox.IsChecked}"
+															   Value="&#xD;&#x9;Source=&quot;/Images/Icons/Save32.png&quot; /&gt;" />
+						<sampleBrowser:CodeExampleSubstitution Key="SourceAttributeNotAdapted"
+															   IsEnabled="{Binding !#primaryRasterImageCanAdaptCheckBox.IsChecked}"
+															   Value="&gt;&#xD;&#x9;&lt;DrawingImage actipro:ImageProvider.CanAdapt=&quot;False&quot;&gt;&#xD;&#x9;&#x9;&lt;ImageDrawing ImageSource=&quot;/Images/Icons/Save32.png&quot; Rect=&quot;0,0,32,32&quot; /&gt;&#xD;&#x9;&lt;/DrawingImage&gt;&#xD;&lt;/actipro:DynamicImage&gt;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+using ActiproSoftware.UI.Avalonia.Media;
+...
+// In app startup (before UI is initialized), configure the default
+// ImageProvider to support chromatic adaptation in dark themes
+ImageProvider.Default.ChromaticAdaptationMode = ImageChromaticAdaptationMode.DarkThemes;
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Image gallery with explicit ImageProvider"
+			Footer="An ImageProvider configures how an image will be adapted. A default ImageProvider instance is always available or a specific ImageProvider can be assigned to an image. This sample shows normal, disabled, monochrome, and disabled monochrome variations of the same vector and raster images with different locally-defined ImageProvider configurations."
+			>
+			<StackPanel Spacing="10">
+
+				<TextBlock Classes="theme-text-heading size-xs" Text="DynamicImage using ImageProvider with default settings (no adaptation)" HorizontalAlignment="Center" />
+				<StackPanel Orientation="Horizontal" Spacing="50" HorizontalAlignment="Center">
+
+					<ThemeVariantScope RequestedThemeVariant="Light">
+						<Border Padding="20" BorderThickness="1" CornerRadius="8"
+								Background="{actipro:ThemeResource Container1BackgroundBrush}"
+								BorderBrush="{actipro:ThemeResource Container1BorderBrush}">
+							<StackPanel Spacing="20">
+								<StackPanel Orientation="Horizontal" Spacing="20">
+									<actipro:DynamicImage x:Name="vectorNormal32Image" Width="32" Height="32">
+										<DrawingImage Drawing="{StaticResource CheckVectorDrawing}">
+											<actipro:ImageProvider.Provider>
+												<actipro:ImageProvider />
+											</actipro:ImageProvider.Provider>
+										</DrawingImage>
+									</actipro:DynamicImage>
+									<actipro:DynamicImage Width="32" Height="32" Source="{Binding #vectorNormal32Image.OriginalSource}" DisabledOpacity="0.4" IsEnabled="False" />
+									<actipro:DynamicImage Width="32" Height="32" Source="{Binding #vectorNormal32Image.OriginalSource}" UseMonochrome="True" />
+									<actipro:DynamicImage Width="32" Height="32" Source="{Binding #vectorNormal32Image.OriginalSource}" UseMonochrome="True" DisabledOpacity="0.4" IsEnabled="False" />
+								</StackPanel>
+								<StackPanel Orientation="Horizontal" Spacing="20">
+									<actipro:DynamicImage x:Name="rasterNormal32Image" Width="32" Height="32">
+										<DrawingImage>
+											<actipro:ImageProvider.Provider>
+												<actipro:ImageProvider />
+											</actipro:ImageProvider.Provider>
+											<ImageDrawing ImageSource="/Images/Icons/Save32.png" Rect="0,0,32,32" />
+										</DrawingImage>
+									</actipro:DynamicImage>
+									<actipro:DynamicImage Width="32" Height="32" Source="{Binding #rasterNormal32Image.OriginalSource}" DisabledOpacity="0.4" IsEnabled="False" />
+									<actipro:DynamicImage Width="32" Height="32" Source="{Binding #rasterNormal32Image.OriginalSource}" UseMonochrome="True" />
+									<actipro:DynamicImage Width="32" Height="32" Source="{Binding #rasterNormal32Image.OriginalSource}" UseMonochrome="True" DisabledOpacity="0.4" IsEnabled="False" />
+								</StackPanel>
+							</StackPanel>
+						</Border>
+					</ThemeVariantScope>
+
+					<ThemeVariantScope RequestedThemeVariant="Dark">
+						<Border Padding="20" BorderThickness="1" CornerRadius="8"
+								Background="{actipro:ThemeResource Container1BackgroundBrush}"
+								BorderBrush="{actipro:ThemeResource Container1BorderBrush}">
+							<StackPanel Spacing="20">
+								<StackPanel Orientation="Horizontal" Spacing="20">
+									<actipro:DynamicImage Width="32" Height="32" Source="{Binding #vectorNormal32Image.OriginalSource}"/>
+									<actipro:DynamicImage Width="32" Height="32" Source="{Binding #vectorNormal32Image.OriginalSource}" DisabledOpacity="0.4" IsEnabled="False" />
+									<actipro:DynamicImage Width="32" Height="32" Source="{Binding #vectorNormal32Image.OriginalSource}" UseMonochrome="True" />
+									<actipro:DynamicImage Width="32" Height="32" Source="{Binding #vectorNormal32Image.OriginalSource}" UseMonochrome="True" DisabledOpacity="0.4" IsEnabled="False" />
+								</StackPanel>
+								<StackPanel Orientation="Horizontal" Spacing="20">
+									<actipro:DynamicImage Width="32" Height="32" Source="{Binding #rasterNormal32Image.OriginalSource}" />
+									<actipro:DynamicImage Width="32" Height="32" Source="{Binding #rasterNormal32Image.OriginalSource}" DisabledOpacity="0.4" IsEnabled="False" />
+									<actipro:DynamicImage Width="32" Height="32" Source="{Binding #rasterNormal32Image.OriginalSource}" UseMonochrome="True" />
+									<actipro:DynamicImage Width="32" Height="32" Source="{Binding #rasterNormal32Image.OriginalSource}" UseMonochrome="True" DisabledOpacity="0.4" IsEnabled="False" />
+								</StackPanel>
+							</StackPanel>
+						</Border>
+					</ThemeVariantScope>
+				</StackPanel>
+				
+				<TextBlock Classes="theme-text-heading size-xs" Margin="0,30,0,0" Text="DynamicImage using ImageProvider with dark theme chromatic adaptation" HorizontalAlignment="Center" />
+				<StackPanel Orientation="Horizontal" Spacing="50" HorizontalAlignment="Center">
+
+					<ThemeVariantScope RequestedThemeVariant="Light">
+						<Border Padding="20" BorderThickness="1" CornerRadius="8"
+								Background="{actipro:ThemeResource Container1BackgroundBrush}"
+								BorderBrush="{actipro:ThemeResource Container1BorderBrush}">
+							<StackPanel Spacing="20">
+								<StackPanel Orientation="Horizontal" Spacing="20">
+									<actipro:DynamicImage x:Name="vectorDarkChromatic32Image" Width="32" Height="32">
+										<DrawingImage Drawing="{StaticResource CheckVectorDrawing}">
+											<actipro:ImageProvider.Provider>
+												<actipro:ImageProvider ChromaticAdaptationMode="DarkThemes" />
+											</actipro:ImageProvider.Provider>
+										</DrawingImage>
+									</actipro:DynamicImage>
+									<actipro:DynamicImage Width="32" Height="32" Source="{Binding #vectorDarkChromatic32Image.OriginalSource}" DisabledOpacity="0.4" IsEnabled="False" />
+									<actipro:DynamicImage Width="32" Height="32" Source="{Binding #vectorDarkChromatic32Image.OriginalSource}" UseMonochrome="True" />
+									<actipro:DynamicImage Width="32" Height="32" Source="{Binding #vectorDarkChromatic32Image.OriginalSource}" UseMonochrome="True" DisabledOpacity="0.4" IsEnabled="False" />
+								</StackPanel>
+								<StackPanel Orientation="Horizontal" Spacing="20">
+									<actipro:DynamicImage x:Name="rasterDarkChromatic32Image" Width="32" Height="32">
+										<DrawingImage>
+											<actipro:ImageProvider.Provider>
+												<actipro:ImageProvider ChromaticAdaptationMode="DarkThemes" />
+											</actipro:ImageProvider.Provider>
+											<ImageDrawing ImageSource="/Images/Icons/Save32.png" Rect="0,0,32,32" />
+										</DrawingImage>
+									</actipro:DynamicImage>
+									<actipro:DynamicImage Width="32" Height="32" Source="{Binding #rasterDarkChromatic32Image.OriginalSource}" DisabledOpacity="0.4" IsEnabled="False" />
+									<actipro:DynamicImage Width="32" Height="32" Source="{Binding #rasterDarkChromatic32Image.OriginalSource}" UseMonochrome="True" />
+									<actipro:DynamicImage Width="32" Height="32" Source="{Binding #rasterDarkChromatic32Image.OriginalSource}" UseMonochrome="True" DisabledOpacity="0.4" IsEnabled="False" />
+								</StackPanel>
+							</StackPanel>
+						</Border>
+					</ThemeVariantScope>
+
+					<ThemeVariantScope RequestedThemeVariant="Dark">
+						<Border Padding="20" BorderThickness="1" CornerRadius="8"
+								Background="{actipro:ThemeResource Container1BackgroundBrush}"
+								BorderBrush="{actipro:ThemeResource Container1BorderBrush}">
+							<StackPanel Spacing="20">
+								<StackPanel Orientation="Horizontal" Spacing="20">
+									<actipro:DynamicImage Width="32" Height="32" Source="{Binding #vectorDarkChromatic32Image.OriginalSource}"/>
+									<actipro:DynamicImage Width="32" Height="32" Source="{Binding #vectorDarkChromatic32Image.OriginalSource}" DisabledOpacity="0.4" IsEnabled="False" />
+									<actipro:DynamicImage Width="32" Height="32" Source="{Binding #vectorDarkChromatic32Image.OriginalSource}" UseMonochrome="True" />
+									<actipro:DynamicImage Width="32" Height="32" Source="{Binding #vectorDarkChromatic32Image.OriginalSource}" UseMonochrome="True" DisabledOpacity="0.4" IsEnabled="False" />
+								</StackPanel>
+								<StackPanel Orientation="Horizontal" Spacing="20">
+									<actipro:DynamicImage Width="32" Height="32" Source="{Binding #rasterDarkChromatic32Image.OriginalSource}" />
+									<actipro:DynamicImage Width="32" Height="32" Source="{Binding #rasterDarkChromatic32Image.OriginalSource}" DisabledOpacity="0.4" IsEnabled="False" />
+									<actipro:DynamicImage Width="32" Height="32" Source="{Binding #rasterDarkChromatic32Image.OriginalSource}" UseMonochrome="True" />
+									<actipro:DynamicImage Width="32" Height="32" Source="{Binding #rasterDarkChromatic32Image.OriginalSource}" UseMonochrome="True" DisabledOpacity="0.4" IsEnabled="False" />
+								</StackPanel>
+							</StackPanel>
+						</Border>
+					</ThemeVariantScope>
+				</StackPanel>
+
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample Language="XAML" xml:space="preserve">
+					<![CDATA[
+<!-- Vector image with locally-defined ImageProvider -->
+<actipro:DynamicImage Width="32" Height="32">
+	<DrawingImage Drawing="{StaticResource CheckVectorDrawing}">
+		<actipro:ImageProvider.Provider>
+			<actipro:ImageProvider ChromaticAdaptationMode="DarkThemes" />
+		</actipro:ImageProvider.Provider>
+	</DrawingImage>
+</actipro:DynamicImage>
+
+<!-- Raster image with locally-defined ImageProvider -->
+<actipro:DynamicImage Width="32" Height="32">
+	<DrawingImage>
+		<actipro:ImageProvider.Provider>
+			<actipro:ImageProvider ChromaticAdaptationMode="DarkThemes" />
+		</actipro:ImageProvider.Provider>
+		<ImageDrawing ImageSource="/Images/Icons/Save32.png" Rect="0,0,32,32" />
+	</DrawingImage>
+</actipro:DynamicImage>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Dynamic adaptation of monochrome image"
+			Footer="This sample uses a monochrome vector image that dynamically replaces a specifically-designed foreground color in the image the DynamicImage's current foreground color"
+			DataContext="{Binding #vectorMono32Image}"
+			>
+			<StackPanel Orientation="Horizontal" Spacing="50" HorizontalAlignment="Center">
+
+				<StackPanel Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Light theme" HorizontalAlignment="Center" />
+					<ThemeVariantScope RequestedThemeVariant="Light">
+						<Border Padding="20" BorderThickness="1" CornerRadius="8"
+								Background="{actipro:ThemeResource Container1BackgroundBrush}"
+								BorderBrush="{actipro:ThemeResource Container1BorderBrush}">
+
+							<StackPanel Spacing="30">
+								<StackPanel Spacing="10">
+									<TextBlock Text="Original vector" HorizontalAlignment="Center" />
+									<actipro:DynamicImage x:Name="vectorMono32Image" Width="32" Height="32" DisabledOpacity="0.4">
+										<DrawingImage>
+											<actipro:ImageProvider.Provider>
+												<actipro:ImageProvider DesignForegroundColor="#000000" />
+											</actipro:ImageProvider.Provider>
+											<DrawingImage.Drawing>
+												<DrawingGroup>
+													<GeometryDrawing Brush="#30000000" Geometry="M 0,16 A 16,16 0 1 1 32,16 A 16,16 0 1 1 0,16 Z" />
+													<GeometryDrawing Brush="#FF000000" Geometry="M 5.75,17.25 L 8.75,14.25 L 13,19 L 23.5,8.25 L 26.25,11.25 L 13,24.5 Z" />
+												</DrawingGroup>
+											</DrawingImage.Drawing>
+										</DrawingImage>
+									</actipro:DynamicImage>
+								</StackPanel>
+								<StackPanel Spacing="10">
+									<TextBlock Text="Adapted to button foreground" HorizontalAlignment="Center" />
+									<Button Classes="theme-solid accent" IsEnabled="{Binding IsEnabled}" HorizontalAlignment="Center">
+										<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+											<actipro:DynamicImage Width="32" Height="32" Source="{Binding #vectorMono32Image.OriginalSource}" VerticalAlignment="Center" />
+											<TextBlock Classes="theme-text-body size-xl" Margin="8,0,0,0" Text="Button" VerticalAlignment="Center" />
+										</StackPanel>
+									</Button>
+								</StackPanel>
+							</StackPanel>
+
+						</Border>
+					</ThemeVariantScope>
+				</StackPanel>
+
+				<StackPanel Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Dark theme" HorizontalAlignment="Center" />
+					<ThemeVariantScope RequestedThemeVariant="Dark">
+						<Border Padding="20" BorderThickness="1" CornerRadius="8"
+								Background="{actipro:ThemeResource Container1BackgroundBrush}"
+								BorderBrush="{actipro:ThemeResource Container1BorderBrush}">
+
+							<StackPanel Spacing="30">
+								<StackPanel Spacing="10">
+									<TextBlock Text="Original vector" HorizontalAlignment="Center" />
+									<actipro:DynamicImage Width="32" Height="32" Source="{Binding #vectorMono32Image.OriginalSource}" DisabledOpacity="0.4" />
+								</StackPanel>
+								<StackPanel Spacing="10">
+									<TextBlock Text="Adapted to button foreground" HorizontalAlignment="Center" />
+									<Button Classes="theme-solid accent" IsEnabled="{Binding IsEnabled}" HorizontalAlignment="Center">
+										<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+											<actipro:DynamicImage Width="32" Height="32" Source="{Binding #vectorMono32Image.OriginalSource}" VerticalAlignment="Center" />
+											<TextBlock Classes="theme-text-body size-xl" Margin="8,0,0,0" Text="Button" VerticalAlignment="Center" />
+										</StackPanel>
+									</Button>
+								</StackPanel>
+
+							</StackPanel>
+						</Border>
+					</ThemeVariantScope>
+				</StackPanel>
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<CheckBox IsChecked="{Binding IsEnabled}" Content="Enabled" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample Language="XAML" xml:space="preserve">
+					<![CDATA[
+<Button Classes="theme-solid accent">
+	<StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+	
+		<actipro:DynamicImage Width="32" Height="32" VerticalAlignment="Center" DisabledOpacity="0.4">
+			<DrawingImage>
+				<actipro:ImageProvider.Provider>
+					<!-- Define an ImageProvider with "Black" as the design's foreground color -->
+					<actipro:ImageProvider DesignForegroundColor="#000000" />
+				</actipro:ImageProvider.Provider>
+				<DrawingImage.Drawing>
+					<DrawingGroup>
+						<!-- These "Black" brushes will be replaced by the foreground color -->
+						<GeometryDrawing Brush="#30000000" Geometry="M 0,16 A 16,16 0 1 1 32,16 A 16,16 0 1 1 0,16 Z" />
+						<GeometryDrawing Brush="#FF000000" Geometry="M 5.75,17.25 L 8.75,14.25 L 13,19 L 23.5,8.25 L 26.25,11.25 L 13,24.5 Z" />
+					</DrawingGroup>
+				</DrawingImage.Drawing>
+			</DrawingImage>
+		</actipro:DynamicImage>
+
+		<TextBlock Classes="theme-text-body size-xl" Margin="8,0,0,0" Text="Button" VerticalAlignment="Center" />
+	</StackPanel>
+</Button>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+		<sampleBrowser:ControlExample
+			Header="Chromatic adaptation using BackgroundHint"
+			Footer="Each DynamicImage in this sample is configured with a BackgroundHint that matches the container. Note how each image is tinted toward the background even when changing light/dark themes."
+			>
+
+			<StackPanel Orientation="Horizontal" Spacing="50" HorizontalAlignment="Center">
+
+				<StackPanel Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Light theme" HorizontalAlignment="Center" />
+					<ThemeVariantScope RequestedThemeVariant="Light">
+						<Border x:Name="colorChromatic32CardLight" Padding="20" BorderThickness="1" CornerRadius="8"
+								Background="{actipro:ThemeResource ControlBackgroundBrushSoftAccent}"
+								BorderBrush="{actipro:ThemeResource Container1BorderBrush}">
+
+							<StackPanel Orientation="Horizontal" Spacing="15">
+								<StackPanel.Styles>
+									<Style Selector="actipro|DynamicImage">
+										<Setter Property="Width" Value="32" />
+										<Setter Property="Height" Value="32" />
+										<Setter Property="BackgroundHint" Value="{Binding #colorChromatic32CardLight.Background}" />
+									</Style>
+								</StackPanel.Styles>
+								<actipro:DynamicImage x:Name="colorChromatic32Image">
+									<DrawingImage actipro:ImageProvider.Provider="{StaticResource AlwaysAdaptImageProvider}">
+										<ImageDrawing ImageSource="/Images/Icons/Save32.png" Rect="0,0,32,32" />
+									</DrawingImage>
+								</actipro:DynamicImage>
+								<actipro:DynamicImage Source="{Binding #colorChromatic32Image.OriginalSource}" DisabledOpacity="0.4" IsEnabled="False" />
+								<actipro:DynamicImage Source="{Binding #colorChromatic32Image.OriginalSource}" UseMonochrome="True" />
+								<actipro:DynamicImage Source="{Binding #colorChromatic32Image.OriginalSource}" UseMonochrome="True" DisabledOpacity="0.4" IsEnabled="False" />
+							</StackPanel>
+						</Border>
+					</ThemeVariantScope>
+				</StackPanel>
+
+				<StackPanel Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Dark theme" HorizontalAlignment="Center" />
+					<ThemeVariantScope RequestedThemeVariant="Dark">
+							<Border x:Name="colorChromatic32CardDark" Padding="20" BorderThickness="1" CornerRadius="8"
+									Background="{actipro:ThemeResource ControlBackgroundBrushSoftAccent}"
+									BorderBrush="{actipro:ThemeResource Container1BorderBrush}">
+
+								<StackPanel Orientation="Horizontal" Spacing="15">
+									<StackPanel.Styles>
+										<Style Selector="actipro|DynamicImage">
+											<Setter Property="Width" Value="32" />
+											<Setter Property="Height" Value="32" />
+											<Setter Property="BackgroundHint" Value="{Binding #colorChromatic32CardDark.Background}" />
+										</Style>
+									</StackPanel.Styles>
+									<actipro:DynamicImage Source="{Binding #colorChromatic32Image.OriginalSource}" />
+									<actipro:DynamicImage Source="{Binding #colorChromatic32Image.OriginalSource}" DisabledOpacity="0.4" IsEnabled="False" />
+									<actipro:DynamicImage Source="{Binding #colorChromatic32Image.OriginalSource}" UseMonochrome="True" />
+									<actipro:DynamicImage Source="{Binding #colorChromatic32Image.OriginalSource}" UseMonochrome="True" DisabledOpacity="0.4" IsEnabled="False" />
+								</StackPanel>
+							</Border>
+					</ThemeVariantScope>
+				</StackPanel>
+			</StackPanel>
+
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample Language="XAML" xml:space="preserve">
+					<![CDATA[
+<Panel x:Name="containerPanel" Background="$(Background)">
+
+	<actipro:DynamicImage Width="32" Height="32" BackgroundHint="{Binding #containerPanel.Background}">
+		<DrawingImage>
+			<actipro:ImageProvider.Provider>
+				<!-- Must use 'Always' adaptation mode to also adapt on light theme -->
+				<actipro:ImageProvider ChromaticAdaptationMode="Always" />
+			</actipro:ImageProvider.Provider>
+			<ImageDrawing ImageSource="/Images/Icons/Save32.png" Rect="0,0,32,32" />
+		</DrawingImage>
+	</actipro:DynamicImage>
+	
+</Panel>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="Background" Value="{Binding #colorChromatic32CardLight.Background}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Monochrome adaptations with specific colors"
+			Footer="Use the DynamicImage.Foreground property to control the primary color of a monochrome adaptation."
+			>
+			<StackPanel Orientation="Horizontal" Spacing="50" HorizontalAlignment="Center">
+				<StackPanel.Styles>
+					<Style Selector="actipro|DynamicImage">
+						<Setter Property="Width" Value="32" />
+						<Setter Property="Height" Value="32" />
+						<Setter Property="UseMonochrome" Value="True" />
+						<Setter Property="IsEnabled" Value="{Binding #monoColorEnabledCheckBox.IsChecked}" />
+						<Setter Property="DisabledOpacity" Value="0.4" />
+					</Style>
+				</StackPanel.Styles>
+
+				<StackPanel Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Light theme" HorizontalAlignment="Center" />
+					<ThemeVariantScope RequestedThemeVariant="Light">
+						<Border Padding="20" BorderThickness="1" CornerRadius="8"
+								Background="{actipro:ThemeResource Container1BackgroundBrush}"
+								BorderBrush="{actipro:ThemeResource Container1BorderBrush}">
+
+							<StackPanel Orientation="Horizontal" Spacing="15">
+								<actipro:DynamicImage x:Name="monoAdaptationWithColorImage" Foreground="{actipro:ThemeResource ControlForegroundBrushSoftWarning}">
+									<DrawingImage actipro:ImageProvider.Provider="{StaticResource AlwaysAdaptImageProvider}">
+										<ImageDrawing ImageSource="/Images/Icons/Save32.png" Rect="0,0,32,32" />
+									</DrawingImage>
+								</actipro:DynamicImage>
+								<actipro:DynamicImage Source="{Binding #monoAdaptationWithColorImage.OriginalSource}" Foreground="{actipro:ThemeResource ControlForegroundBrushSoftSuccess}" />
+								<actipro:DynamicImage Source="{Binding #monoAdaptationWithColorImage.OriginalSource}" Foreground="{actipro:ThemeResource ControlForegroundBrushSoftAccent}" />
+								<actipro:DynamicImage Source="{Binding #monoAdaptationWithColorImage.OriginalSource}" Foreground="{actipro:ThemeResource ControlForegroundBrushSoftDanger}" />
+							</StackPanel>
+						</Border>
+					</ThemeVariantScope>
+				</StackPanel>
+
+				<StackPanel Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Dark theme" HorizontalAlignment="Center" />
+					<ThemeVariantScope RequestedThemeVariant="Dark">
+						<Border Padding="20" BorderThickness="1" CornerRadius="8"
+								Background="{actipro:ThemeResource Container1BackgroundBrush}"
+								BorderBrush="{actipro:ThemeResource Container1BorderBrush}">
+
+							<StackPanel Orientation="Horizontal" Spacing="15">
+								<actipro:DynamicImage Source="{Binding #monoAdaptationWithColorImage.OriginalSource}" Foreground="{actipro:ThemeResource ControlForegroundBrushSoftWarning}" />
+								<actipro:DynamicImage Source="{Binding #monoAdaptationWithColorImage.OriginalSource}" Foreground="{actipro:ThemeResource ControlForegroundBrushSoftSuccess}" />
+								<actipro:DynamicImage Source="{Binding #monoAdaptationWithColorImage.OriginalSource}" Foreground="{actipro:ThemeResource ControlForegroundBrushSoftAccent}" />
+								<actipro:DynamicImage Source="{Binding #monoAdaptationWithColorImage.OriginalSource}" Foreground="{actipro:ThemeResource ControlForegroundBrushSoftDanger}" />
+							</StackPanel>
+						</Border>
+					</ThemeVariantScope>
+				</StackPanel>
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<CheckBox x:Name="monoColorEnabledCheckBox" IsChecked="True" Content="Enabled" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample Language="XAML" xml:space="preserve">
+					<![CDATA[
+<actipro:DynamicImage Width="32" Height="32"$(IsEnabledAttribute)
+	Foreground="Orange" UseMonochrome="True" DisabledOpacity="0.4">
+		
+	<DrawingImage>
+		<actipro:ImageProvider.Provider>
+			<!-- ChromaticAdaptationMode cannot be set to 'Never' -->
+			<actipro:ImageProvider ChromaticAdaptationMode="Always" />
+		</actipro:ImageProvider.Provider>
+		<ImageDrawing ImageSource="/Images/Icons/Save32.png" Rect="0,0,32,32" />
+	</DrawingImage>
+
+</actipro:DynamicImage>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute"
+															   IsEnabled="{Binding !#monoColorEnabledCheckBox.IsChecked}"
+															   Value=" IsEnabled=&quot;False&quot;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

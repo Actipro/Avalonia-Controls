@@ -1,0 +1,77 @@
+<UserControl 
+	x:Class="ActiproSoftware.SampleBrowser.HomeControl"
+	x:DataType="sampleBrowser:ApplicationViewModel"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+	<ScrollViewer Classes="theme-scroll-overlay" HorizontalScrollBarVisibility="Disabled">
+		<StackPanel>
+
+			<!-- Banner and Featured Samples -->
+			<StackPanel Classes="sample-layout-panel">
+				<Panel Height="150">
+					<actipro:MeshGradientPresenter Classes="banner" />
+					
+					<Viewbox Stretch="Uniform">
+						<Viewbox.Effect>
+							<DropShadowEffect OffsetX="0" OffsetY="1" BlurRadius="5" Opacity="0.2" />
+						</Viewbox.Effect>
+
+						<StackPanel Margin="30,20">
+							<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+								<TextBlock Text="Actipro" FontSize="30" FontWeight="Bold" Foreground="#ffffff" VerticalAlignment="Center" />
+								<PathIcon Margin="7,4,5,0" Width="28" Height="28" VerticalAlignment="Center"
+										  Data="M22.061,4.859C20.805,3.602 19.141,2.915 17.365,2.915C15.59,2.915 13.921,3.607 12.664,4.864L12.008,5.52L11.341,4.854C10.084,3.597 8.41,2.9 6.635,2.9C4.864,2.9 3.195,3.592 1.944,4.844C0.687,6.101 -0.005,7.769 0,9.545C0,11.321 0.697,12.985 1.954,14.241L11.509,23.796C11.641,23.929 11.819,24 11.992,24C12.165,24 12.343,23.934 12.476,23.802L22.051,14.262C23.308,13.005 24,11.336 24,9.56C24.005,7.785 23.318,6.116 22.061,4.859Z">
+									<PathIcon.Foreground>
+										<RadialGradientBrush Center="50%,35%" GradientOrigin="50%,35%">
+											<GradientStop Offset="0" Color="#f8312f" />
+											<GradientStop Offset="1" Color="#da0e51" />
+										</RadialGradientBrush>
+									</PathIcon.Foreground>
+								</PathIcon>
+								<TextBlock Text="Avalonia" FontSize="30" FontWeight="Bold" Foreground="#ffffff" VerticalAlignment="Center" />
+							</StackPanel>
+							<TextBlock Text="The path to a beautiful user experience starts here" FontSize="20" FontWeight="Normal" Foreground="#e3edff" />
+						</StackPanel>
+					</Viewbox>
+				</Panel>
+
+				<sampleBrowser:FeaturedSampleItemsControl Margin="0,20,0,0" ItemsSource="{Binding ProductData.FeaturedSamples}" HorizontalAlignment="Center" />
+			</StackPanel>
+
+			<!-- All Products -->
+			<Border Background="{actipro:ThemeResource Container2BackgroundBrush}">
+				<StackPanel Classes="sample-layout-panel" Margin="50,30" HorizontalAlignment="Center">
+					<sampleBrowser:SectionHeading Text="Discover All Our Avalonia Offerings" />
+					<sampleBrowser:ProductFamilyItemsControl Margin="0,10,0,0" ItemsSource="{Binding ProductData.ProductFamilies}" />
+				</StackPanel>
+			</Border>
+
+			<!-- Links -->
+			<WrapPanel Classes="sample-layout-panel" Margin="50,30" Orientation="Horizontal" HorizontalAlignment="Center">
+				<WrapPanel.Styles>
+					<Style Selector="TextBlock.separator">
+						<Setter Property="Foreground" Value="{actipro:ThemeResource Container5BorderBrush}" />
+						<Setter Property="Margin" Value="7,0" />
+						<Setter Property="Text" Value="|" />
+					</Style>
+				</WrapPanel.Styles>
+				
+				<actipro:HyperlinkTextBlock Text="Actipro Web Site" Command="{Binding OpenUrlCommand}" CommandParameter="{Binding PlatformProductsUrl}" />
+				<TextBlock Classes="separator" />
+				<actipro:HyperlinkTextBlock Text="The Actipro Blog" Command="{Binding OpenUrlCommand}" CommandParameter="{Binding ActiproBlogUrl}" />
+				<TextBlock Classes="separator" />
+				<actipro:HyperlinkTextBlock Text="@Actipro" Command="{Binding OpenUrlCommand}" CommandParameter="{Binding ActiproTwitterUrl}" />
+				<TextBlock Classes="separator" />
+				<actipro:HyperlinkTextBlock Text="Contact Us" Command="{Binding OpenUrlCommand}" CommandParameter="{Binding ActiproContactUrl}" />
+				<TextBlock Classes="separator" />
+				<actipro:HyperlinkTextBlock Text="Notices" Command="{Binding OpenUrlCommand}" CommandParameter="{Binding ActiproThirdPartyNoticesUrl}" />
+			</WrapPanel>
+
+		</StackPanel>
+	</ScrollViewer>
+
+</UserControl>

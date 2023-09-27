@@ -1,0 +1,252 @@
+<UserControl 
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:system="using:System"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
+		
+		<actipro:DelimitedArray x:Key="StatesArray" DelimitedText="Alabama, Alaska, Arizona, Arkansas, California, Colorado, Connecticut, Delaware, Florida, Georgia, Hawaii, Idaho, Illinois, Indiana, Iowa, Kansas, Kentucky, Louisiana, Maine, Maryland, Massachusetts, Michigan, Minnesota, Mississippi, Missouri, Montana, Nebraska, Nevada, New Hampshire, New Jersey, New Mexico, New York, North Carolina, North Dakota, Ohio, Oklahoma, Oregon, Pennsylvania, Rhode Island, South Carolina, South Dakota, Tennessee, Texas, Utah, Vermont, Virginia, Washington, West Virginia, Wisconsin, Wyoming" />
+
+	</UserControl.Resources>
+	
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Pre-defined classes are available that can be applied to native AutoCompleteBox to achieve a variety of styles.">
+
+
+		<sampleBrowser:ControlExample
+			Header="AutoCompleteBox usage"
+			Footer="Actipro provides multiple themes and variants to alter the appearance of an AutoCompleteBox."
+			DataContext="{Binding #sampleAutoCompleteBox}"
+			>
+
+			<AutoCompleteBox
+				x:Name="sampleAutoCompleteBox"
+				ItemsSource="{StaticResource StatesArray}"
+				Watermark="Select a state"
+				sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
+				Classes.has-clear-button="{Binding #sampleHasClearButton.IsChecked}"
+				Classes.theme-outline="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Outline'}"
+				Classes.theme-soft="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Soft'}"
+				Classes.accent="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Accent'}"
+				Classes.success="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Success'}"
+				Classes.warning="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Warning'}"
+				Classes.danger="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Danger'}"
+				/>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Theme" />
+						<ComboBox x:Name="sampleTheme" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Outline, Soft'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Variant" />
+						<ComboBox x:Name="sampleVariant" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
+					</StackPanel>
+					<TextBox Text="{Binding Watermark}" Watermark="Watermark" UseFloatingWatermark="True" />
+					<CheckBox x:Name="sampleHasClearButton">Has clear button</CheckBox>
+					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<AutoCompleteBox $(ClassesAttribute)Text="Define text here"
+	$(WatermarkAttribute)$(IsEnabledAttribute)/>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
+															   IsEnabled="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), StringFormat='Classes=&quot;{0}&quot;&#xA;&#x9;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute"
+															   IsEnabled="{Binding !IsEnabled}"
+															   Value="IsEnabled=&quot;False&quot; " />
+						<sampleBrowser:CodeExampleSubstitution Key="WatermarkAttribute"
+															   IsEnabled="{Binding Watermark, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding Watermark, StringFormat='Watermark=&quot;{0}&quot; '}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Themes"
+			Footer="The appearance can be changed from the default with the use of the 'theme-outline' or 'theme-soft' classes."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline" Text="Outline" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline" Text="Disabled" IsEnabled="False" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline" Watermark="Watermark" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline" Watermark="Watermark (disabled)" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft" Text="Soft" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft" Text="Disabled" IsEnabled="False" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft" Watermark="Watermark" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft" Watermark="Watermark (disabled)" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<AutoCompleteBox Classes="theme-outline" Text="Outline" />
+
+<AutoCompleteBox Classes="theme-soft" Text="Soft" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Accent variants"
+			Footer="Add the 'accent' class to an AutoCompleteBox and the theme accent color will be used to provide emphasis."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline accent" Text="Outline" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline accent" Text="Disabled" IsEnabled="False" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline accent" Watermark="Watermark" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline accent" Watermark="Watermark (disabled)" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft accent" Text="Soft" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft accent" Text="Disabled" IsEnabled="False" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft accent" Watermark="Watermark" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft accent" Watermark="Watermark (disabled)" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<AutoCompleteBox Classes="theme-outline accent" Text="Outline" />
+
+<AutoCompleteBox Classes="theme-soft accent" Text="Soft" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Success variants"
+			Footer="Add the 'success' class to an AutoCompleteBox and a color will be used to indicate success."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline success" Text="Outline" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline success" Text="Disabled" IsEnabled="False" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline success" Watermark="Watermark" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline success" Watermark="Watermark (disabled)" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft success" Text="Soft" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft success" Text="Disabled" IsEnabled="False" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft success" Watermark="Watermark" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft success" Watermark="Watermark (disabled)" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<AutoCompleteBox Classes="theme-outline success" Text="Outline" />
+
+<AutoCompleteBox Classes="theme-soft success" Text="Soft" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Warning variants"
+			Footer="Add the 'warning' class to an AutoCompleteBox and a color will be used to indicate caution."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline warning" Text="Outline" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline warning" Text="Disabled" IsEnabled="False" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline warning" Watermark="Watermark" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline warning" Watermark="Watermark (disabled)" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft warning" Text="Soft" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft warning" Text="Disabled" IsEnabled="False" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft warning" Watermark="Watermark" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft warning" Watermark="Watermark (disabled)" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<AutoCompleteBox Classes="theme-outline warning" Text="Outline" />
+
+<AutoCompleteBox Classes="theme-soft warning" Text="Soft" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Danger variants"
+			Footer="Add the 'danger' class to an AutoCompleteBox and a color will be used to indicate extreme caution."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline danger" Text="Outline" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline danger" Text="Disabled" IsEnabled="False" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline danger" Watermark="Watermark" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline danger" Watermark="Watermark (disabled)" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft danger" Text="Soft" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft danger" Text="Disabled" IsEnabled="False" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft danger" Watermark="Watermark" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft danger" Watermark="Watermark (disabled)" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<AutoCompleteBox Classes="theme-outline danger" Text="Outline" />
+
+<AutoCompleteBox Classes="theme-soft danger" Text="Soft" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Data validation errors"
+			>
+
+			<AutoCompleteBox Text="AutoCompleteBox with a validation error">
+				<DataValidationErrors.Error>
+					<system:Exception />
+				</DataValidationErrors.Error>
+			</AutoCompleteBox>
+
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

@@ -1,0 +1,161 @@
+<UserControl
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:sampleData="using:ActiproSoftware.SampleBrowser.SampleData"
+	>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="The MultiColumnPanel control can render child elements in multiple columns, collapsing columns down as available space decreases.">
+
+
+		<sampleBrowser:ControlExample
+			Header="Items control usage"
+			Footer="This sample uses MultiColumnPanel as the ItemsControl.ItemsPanel and is configured with a maximum of 3 columns."
+			>
+
+			<ItemsControl ItemsSource="{x:Static sampleData:People.All}" IsTabStop="False" ClipToBounds="False">
+				<ItemsControl.ItemsPanel>
+					<ItemsPanelTemplate>
+						<actipro:MultiColumnPanel MaxColumnCount="3" MinColumnWidth="250" HorizontalSpacing="50" VerticalSpacing="20" CanRemoveEmptyColumns="True" />
+					</ItemsPanelTemplate>
+				</ItemsControl.ItemsPanel>
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						
+						<actipro:ShadowChrome x:Name="shadow">
+							<Border Background="{actipro:ThemeResource Container1BackgroundBrush}"
+									BorderBrush="{actipro:ThemeResource Container1BorderBrush}" BorderThickness="1" CornerRadius="10" Padding="10">
+								<Grid>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+
+									<Ellipse Grid.Column="0" Width="50" Height="50" Stroke="{actipro:ThemeResource Container3BorderBrush}" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
+									<Image Grid.Column="0" Width="48" Height="48" HorizontalAlignment="Center" VerticalAlignment="Center" Source="{Binding Photo}">
+										<Image.Clip>
+											<EllipseGeometry Center="24,24" RadiusX="24" RadiusY="24" />
+										</Image.Clip>
+									</Image>
+
+									<StackPanel Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Center">
+										<TextBlock Text="{Binding FullName}" FontSize="18" TextTrimming="CharacterEllipsis" />
+										<TextBlock Text="{Binding EmailAddress}" TextTrimming="CharacterEllipsis" />
+									</StackPanel>
+								</Grid>
+							</Border>
+						</actipro:ShadowChrome>
+						
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<ItemsControl ... >
+	<ItemsControl.ItemsPanel>
+		<ItemsPanelTemplate>
+			<actipro:MultiColumnPanel MaxColumnCount="3" MinColumnWidth="250" 
+				HorizontalSpacing="50" VerticalSpacing="20" CanRemoveEmptyColumns="True" />
+		</ItemsPanelTemplate>
+	</ItemsControl.ItemsPanel>
+	<ItemsControl.ItemTemplate>
+		<DataTemplate>
+			<!-- Define item template content here -->
+		</DataTemplate>
+	</ItemsControl.ItemTemplate>
+</ItemsControl>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Basic usage"
+			Footer="Empty columns can be retained to reserve space for a consistent layout or removed to fill the available space with the populated columns."
+			DataContext="{Binding #sample}"
+			>
+
+			<Border HorizontalAlignment="Center" Padding="20"
+					Background="{actipro:ThemeResource Container1BackgroundBrush}"
+					BorderBrush="{actipro:ThemeResource Container1BorderBrush}" BorderThickness="1" CornerRadius="5">
+				<ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Disabled">
+					<actipro:MultiColumnPanel x:Name="sample" MaxColumnCount="4" MinColumnWidth="100" HorizontalSpacing="10" VerticalSpacing="10">
+						<actipro:MultiColumnPanel.Styles>
+							<Style Selector="Border">
+								<Setter Property="CornerRadius" Value="10" />
+								<Setter Property="Height" Value="60" />
+							</Style>
+							<Style Selector="TextBlock">
+								<Setter Property="HorizontalAlignment" Value="Center" />
+								<Setter Property="VerticalAlignment" Value="Center" />
+								<Setter Property="FontSize" Value="22" />
+								<Setter Property="Foreground" Value="#ffffff" />
+								<Setter Property="Opacity" Value="0.8" />
+							</Style>
+						</actipro:MultiColumnPanel.Styles>
+
+						<Border Background="#29af7f"><TextBlock Text="1" /></Border>
+						<Border Background="#1f968b"><TextBlock Text="2" /></Border>
+						<Border Background="#277d8e"><TextBlock Text="3" /></Border>
+						<Border Background="#39558c"><TextBlock Text="4" /></Border>
+						<Border Background="#453781"><TextBlock Text="5" /></Border>
+						<Border Background="#482677"><TextBlock Text="6" /></Border>
+						<Border Background="#440d54"><TextBlock Text="7" /></Border>
+
+					</actipro:MultiColumnPanel>
+				</ScrollViewer>
+			</Border>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="{Binding MaxColumnCount, StringFormat='Max column count: {0:0}'}" />
+						<Slider Minimum="1" Maximum="10" Value="{Binding MaxColumnCount}" SmallChange="1" LargeChange="1" TickFrequency="1" IsSnapToTickEnabled="True"  />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="{Binding MinColumnWidth, StringFormat='Min column width: {0:0}'}" />
+						<Slider Minimum="100" Maximum="200" Value="{Binding MinColumnWidth}" SmallChange="1" LargeChange="10" TickFrequency="1" IsSnapToTickEnabled="True"  />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="{Binding HorizontalSpacing, StringFormat='Horizontal spacing: {0:0}'}" />
+						<Slider Minimum="0" Maximum="200" Value="{Binding HorizontalSpacing}" SmallChange="1" LargeChange="5" TickFrequency="1" IsSnapToTickEnabled="True"  />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="{Binding VerticalSpacing, StringFormat='Vertical spacing: {0:0}'}" />
+						<Slider Minimum="0" Maximum="200" Value="{Binding VerticalSpacing}" SmallChange="1" LargeChange="5" TickFrequency="1" IsSnapToTickEnabled="True"  />
+					</StackPanel>
+					<CheckBox IsChecked="{Binding CanRemoveEmptyColumns}" Content="Remove empty columns" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:MultiColumnPanel$(CanRemoveEmptyColumnsAttribute)
+	MaxColumnCount="$(MaxColumnCount)"
+	MinColumnWidth="$(MinColumnWidth)"
+	HorizontalSpacing="$(HorizontalSpacing)"
+	VerticalSpacing="$(VerticalSpacing)">
+
+	<!-- Define panel children here -->
+
+</actipro:MultiColumnPanel>
+	
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="MaxColumnCount" Value="{Binding MaxColumnCount}" />
+						<sampleBrowser:CodeExampleSubstitution Key="MinColumnWidth" Value="{Binding MinColumnWidth}" />
+						<sampleBrowser:CodeExampleSubstitution Key="HorizontalSpacing" Value="{Binding HorizontalSpacing}" />
+						<sampleBrowser:CodeExampleSubstitution Key="VerticalSpacing" Value="{Binding VerticalSpacing}" />
+						<sampleBrowser:CodeExampleSubstitution Key="CanRemoveEmptyColumnsAttribute" IsEnabled="{Binding CanRemoveEmptyColumns}" Value=" CanRemoveEmptyColumns=&quot;True&quot;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+	</sampleBrowser:ControlExampleItemsControl>
+</UserControl>

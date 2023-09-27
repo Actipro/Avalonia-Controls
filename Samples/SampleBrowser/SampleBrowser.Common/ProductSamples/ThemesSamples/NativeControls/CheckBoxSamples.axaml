@@ -1,0 +1,260 @@
+<UserControl
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
+
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Pre-defined classes are available that can be applied to native checkboxes to achieve a variety of styles.">
+
+
+		<sampleBrowser:ControlExample
+			Header="CheckBox usage"
+			Footer="Actipro provides multiple themes and variants to alter the appearance of a checkbox."
+			DataContext="{Binding #sample}"
+			>
+
+			<CheckBox x:Name="sample"
+					  sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
+					  Classes.theme-outline="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Outline'}"
+					  Classes.theme-solid="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Solid'}"
+					  Classes.accent="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Accent'}"
+					  Classes.success="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Success'}"
+					  Classes.warning="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Warning'}"
+					  Classes.danger="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Danger'}"
+					  Content="{Binding #sampleText.Text}" IsChecked="True"
+					  HorizontalAlignment="Center"
+					  />
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Theme" />
+						<ComboBox x:Name="sampleTheme" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Outline, Solid'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Variant" />
+						<ComboBox x:Name="sampleVariant" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
+					</StackPanel>
+					<TextBox x:Name="sampleText" Text="CheckBox Content" Watermark="Content" UseFloatingWatermark="True" />
+					<CheckBox IsThreeState="{Binding IsThreeState}" IsChecked="{Binding IsChecked}">Checked</CheckBox>
+					<CheckBox IsChecked="{Binding IsThreeState}">Three state</CheckBox>
+					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<CheckBox$(ClassesAttribute)$(IsThreeStateAttribute)$(IsChecked)$(IsCheckedNull)$(IsEnabledAttribute)>
+	$(Content)
+</CheckBox>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
+															   IsEnabled="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), StringFormat=' Classes=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="Content" Value="{Binding #sampleText.Text}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsThreeStateAttribute" IsEnabled="{Binding IsThreeState}" Value=" IsThreeState=&quot;True&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsChecked" IsEnabled="{Binding IsChecked, Converter={x:Static ObjectConverters.IsNotNull}}" Value="{Binding IsChecked, StringFormat=' IsChecked=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsCheckedNull" IsEnabled="{Binding IsChecked, Converter={x:Static ObjectConverters.IsNull}}" Value=" IsChecked=&quot;{x:Null}&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute" IsEnabled="{Binding !IsEnabled}" Value=" IsEnabled=&quot;False&quot;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+		
+		<sampleBrowser:ControlExample
+			Header="Themes"
+			Footer="The appearance can be changed from the default with the use of the 'theme-outline' or 'theme-solid' classes."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<CheckBox Classes="theme-outline" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Outline" />
+					<CheckBox Classes="theme-outline" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Disabled" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<CheckBox Classes="theme-solid" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Solid" />
+					<CheckBox Classes="theme-solid" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Disabled" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.Options>
+				<CheckBox x:Name="isToggledCheckBox" IsChecked="True" Content="Checked" />
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<CheckBox Classes="theme-outline" Content="Outline" />
+
+<CheckBox Classes="theme-solid" Content="Solid" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Accent variants"
+			Footer="Add the 'accent' class to a checkbox and the theme accent color will be used to provide emphasis."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<CheckBox Classes="theme-outline accent" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Outline" />
+					<CheckBox Classes="theme-outline accent" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Disabled" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<CheckBox Classes="theme-solid accent" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Solid" />
+					<CheckBox Classes="theme-solid accent" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Disabled" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.Options>
+				<CheckBox IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Checked" />
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<CheckBox Classes="theme-outline accent" Content="Outline" />
+
+<CheckBox Classes="theme-solid accent" Content="Solid" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Success variants"
+			Footer="Add the 'success' class to a checkbox and a color will be used to indicate success."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<CheckBox Classes="theme-outline success" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Outline" />
+					<CheckBox Classes="theme-outline success" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Disabled" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<CheckBox Classes="theme-solid success" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Solid" />
+					<CheckBox Classes="theme-solid success" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Disabled" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.Options>
+				<CheckBox IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Checked" />
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<CheckBox Classes="theme-outline success" Content="Outline" />
+
+<CheckBox Classes="theme-solid success" Content="Solid" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Warning variants"
+			Footer="Add the 'warning' class to a checkbox and a color will be used to indicate caution."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<CheckBox Classes="theme-outline warning" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Outline" />
+					<CheckBox Classes="theme-outline warning" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Disabled" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<CheckBox Classes="theme-solid warning" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Solid" />
+					<CheckBox Classes="theme-solid warning" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Disabled" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.Options>
+				<CheckBox IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Checked" />
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<CheckBox Classes="theme-outline warning" Content="Outline" />
+
+<CheckBox Classes="theme-solid warning" Content="Solid" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Danger variants"
+			Footer="Add the 'danger' class to a checkbox and a color will be used to indicate extreme caution."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<CheckBox Classes="theme-outline danger" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Outline" />
+					<CheckBox Classes="theme-outline danger" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Disabled" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<CheckBox Classes="theme-solid danger" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Solid" />
+					<CheckBox Classes="theme-solid danger" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Disabled" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.Options>
+				<CheckBox IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Checked" />
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<CheckBox Classes="theme-outline danger" Content="Outline" />
+
+<CheckBox Classes="theme-solid danger" Content="Solid" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Switch UI scale"
+			Footer="The size of the switch UI scales with the control's font size."
+			>
+			<StackPanel Spacing="10">
+				<CheckBox Classes="size-xl" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Extra large font size" />
+				<CheckBox Classes="size-lg" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Large font size" />
+				<CheckBox Classes="size-md" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Medium font size" />
+				<CheckBox Classes="size-sm" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Small font size" />
+				<CheckBox Classes="size-xs" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Extra small font size" />
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<CheckBox IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Checked" />
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<!-- Themes use 'size-md' by default -->
+<CheckBox Classes="size-xl" Content="Extra large font size" />
+<CheckBox Classes="size-lg" Content="Large font size" />
+<CheckBox Content="Medium font size" />
+<CheckBox Classes="size-sm" Content="Small font size" />
+<CheckBox Classes="size-xs" Content="Extra small font size" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>
