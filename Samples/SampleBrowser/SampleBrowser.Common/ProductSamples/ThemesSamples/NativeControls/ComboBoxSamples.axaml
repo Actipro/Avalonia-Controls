@@ -13,6 +13,13 @@
 			<x:String>First item</x:String>
 			<x:String>Second item</x:String>
 			<x:String>Third item</x:String>
+			<x:String>Fourth item</x:String>
+			<x:String>Fifth item</x:String>
+			<x:String>Sixth item</x:String>
+			<x:String>Seventh item</x:String>
+			<x:String>Eighth item</x:String>
+			<x:String>Ninth item</x:String>
+			<x:String>Tenth item</x:String>
 		</actipro:Array>
 
 		<actipro:Array x:Key="OutlineItemArray">
@@ -45,6 +52,7 @@
 			<ComboBox x:Name="sample" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
 					  ItemsSource="{StaticResource SimpleItemArray}"
 					  PlaceholderText="Actipro themes for combobox"
+					  Classes.theme-scroll-overlay="{Binding #sampleScrollTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Overlay'}"
 					  Classes.theme-outline="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Outline'}"
 					  Classes.theme-soft="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Soft'}"
 					  Classes.accent="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Accent'}"
@@ -64,6 +72,11 @@
 						<ComboBox x:Name="sampleVariant" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
 					</StackPanel>
 					<TextBox Text="{Binding PlaceholderText}" Watermark="Placeholder text" UseFloatingWatermark="True" />
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Scroll theme" />
+						<ComboBox x:Name="sampleScrollTheme" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Overlay'}" />
+					</StackPanel>
+					<CheckBox IsChecked="{Binding (actipro:ThemeProperties.ScrollBarHasLineButtons)}">Has scroll line buttons</CheckBox>
 					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
 				</StackPanel>
 			</sampleBrowser:ControlExample.Options>

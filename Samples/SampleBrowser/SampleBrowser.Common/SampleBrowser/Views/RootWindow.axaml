@@ -8,6 +8,7 @@
 	Icon="/Images/Icons/Actipro.ico"
 	Width="1200" Height="800"
 	MinWidth="800" MinHeight="480"
+	WindowStartupLocation="CenterScreen"
 	>
 
 	<sampleBrowser:RootView Margin="{Binding #rootWindow.OffScreenMargin}" />

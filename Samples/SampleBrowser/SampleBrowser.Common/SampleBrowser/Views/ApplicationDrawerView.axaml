@@ -41,22 +41,23 @@
 		</ScrollViewer>
 
 		<ListBox x:Name="itemListBox" Grid.Row="1" Background="Transparent" BorderThickness="0" IsVisible="{Binding !ViewUsesHomeDrawer}">
-			<ListBox.ItemTemplate>
-				<actipro:TypedDataTemplateSelector>
-					<!-- Category -->
-					<DataTemplate DataType="x:String">
-						<TextBlock Text="{Binding}" FontWeight="Bold" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" />
-					</DataTemplate>
+			<ListBox.DataTemplates>
+				
+				<!-- Category -->
+				<DataTemplate DataType="x:String">
+					<TextBlock Text="{Binding}" FontWeight="Bold" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" />
+				</DataTemplate>
 
-					<!-- Item -->
-					<DataTemplate DataType="sampleBrowser:ProductItemInfo">
-						<DockPanel>
-							<sampleBrowser:PrivateIndicator Margin="10,0,5,0" DockPanel.Dock="Right" VerticalAlignment="Center" IsVisible="{Binding IsPrivate, FallbackValue=False}" />
-							<TextBlock Classes.indent="{Binding IsGroupedByCategory}" Text="{Binding Title}" />
-						</DockPanel>
-					</DataTemplate>
-				</actipro:TypedDataTemplateSelector>
-			</ListBox.ItemTemplate>
+				<!-- Item -->
+				<DataTemplate DataType="sampleBrowser:ProductItemInfo">
+					<DockPanel>
+						<sampleBrowser:PrivateIndicator Margin="10,0,5,0" DockPanel.Dock="Right" VerticalAlignment="Center" IsVisible="{Binding IsPrivate, FallbackValue=False}" />
+						<TextBlock Classes.indent="{Binding IsGroupedByCategory}" Text="{Binding Title}" />
+					</DockPanel>
+				</DataTemplate>
+
+			</ListBox.DataTemplates>
+			
 			<ListBox.Styles>
 				<Style Selector="ScrollViewer">
 					<Setter Property="Theme" Value="{actipro:ControlTheme ScrollViewerOverlay}" />

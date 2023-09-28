@@ -4,6 +4,11 @@
 	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
 	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
+
+	</UserControl.Resources>
 
 	<sampleBrowser:ControlExampleItemsControl
 		Header="Actipro's control themes create a modern appearance for TreeView control.">
@@ -11,17 +16,20 @@
 
 		<sampleBrowser:ControlExample
 			Header="TreeView usage"
+			Footer="The default ScrollViewer will not show a track or line (small increment) scroll buttons.  Set ThemeProperties.ScrollBarHasLineButtons to true to support line buttons.  Optionally set the 'theme-scroll-overlay' style class for a modern look, but only if the scrollbars will not obscure important content."
 			DataContext="{Binding #sample}"
 			>
 
-			<TreeView x:Name="sample" BorderThickness="1" Height="400">
+			<TreeView x:Name="sample" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
+					  BorderThickness="1" Height="400"
+					  Classes.theme-scroll-overlay="{Binding #sampleScrollTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Overlay'}">
 				<TreeViewItem Header="First" IsExpanded="True">
 					<TreeViewItem Header="Child 1-1" IsSelected="True"/>
 					<TreeViewItem Header="Child 1-2"/>
 				</TreeViewItem>
-				<TreeViewItem Header="Second">
+				<TreeViewItem Header="Second" IsExpanded="True">
 					<TreeViewItem Header="Child 2-1"/>
-					<TreeViewItem Header="Child 2-2">
+					<TreeViewItem Header="Child 2-2" IsExpanded="True">
 						<TreeViewItem Header="Child 2-2-a"/>
 						<TreeViewItem Header="Child 2-2-b"/>
 						<TreeViewItem Header="Child 2-2-c"/>
@@ -37,9 +45,34 @@
 
 			<sampleBrowser:ControlExample.Options>
 				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Scroll theme" />
+						<ComboBox x:Name="sampleScrollTheme" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Overlay'}" />
+					</StackPanel>
+					<CheckBox IsChecked="{Binding (actipro:ThemeProperties.ScrollBarHasLineButtons)}">Has scroll line buttons</CheckBox>
 					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
 				</StackPanel>
 			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<TreeView$(ClassesAttribute)$(ScrollBarHasLineButtonsAttribute)$(IsEnabledAttribute)>
+	<!-- TreeViewItem Instances -->
+</TreeView>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
+															   IsEnabled="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), StringFormat=' Classes=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute"
+															   IsEnabled="{Binding !IsEnabled}"
+															   Value=" IsEnabled=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="ScrollBarHasLineButtonsAttribute"
+															   IsEnabled="{Binding (actipro:ThemeProperties.ScrollBarHasLineButtons)}"
+															   Value=" actipro:ThemeProperties.ScrollBarHasLineButtons=&quot;True&quot;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
 		</sampleBrowser:ControlExample>
 
 
