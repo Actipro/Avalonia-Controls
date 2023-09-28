@@ -71,6 +71,12 @@ Typography is extremely important in design and can dramatically affect the read
 
 See the [Typography](typography.md) topic to find how to configure font families, font sizes, and use various style classes to affect how text controls render.
 
+## Scrolling
+
+Several control themes enable modern appearances for scrollable controls that include the ability to toggle the visibility of line buttons and/or overlay scrollbars on top of the content.
+
+See the [Scrolling](scrolling.md) topic to see which controls are supported and how to enable the desired functionality.
+
 ## Image Provider
 
 ![Screenshot](../shared/images/dynamicimage-multi.png)

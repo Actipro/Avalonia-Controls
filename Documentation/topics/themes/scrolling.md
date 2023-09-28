@@ -5,11 +5,21 @@ order: 50
 ---
 # Scrolling
 
-Actipro's control themes create modern appearances for `ScrollViewer` and `ScrollBar` controls.
+Several control themes enable modern appearances for scrollable controls that include the ability to toggle the visibility of line buttons and/or overlay scrollbars on top of the content.
+
+The following controls are supported:
+- `AutoCompleteBox`
+- `ComboBox`
+- `DataGrid` (configure line buttons only, scrollbars always overlay)
+- `ItemsControl` (including derived types like `ListBox` and `TreeView`)
+- `ScrollBar`
+- `ScrollViewer`
+- `TextBox`
+
 
 ## Line Buttons
 
-The default `ScrollViewer` appearance will not show a track or line buttons (used for small increment).
+The default appearance will not show a track or line buttons (used for small increment).
 
 ![Screenshot](images/scroll-bar-themes.png)
 
@@ -46,13 +56,13 @@ See the [Theme Generator](theme-generator.md) topic for more details.
 
 ## Overlay Theme
 
-The default `ScrollViewer` theme will not overlay the content with scrollbars, which avoids potentially obscuring content near the right and bottom edges.  However, a `ScrollViewer` containing an image or spaced-out controls can appear more modern by overlaying the content.
+The default control themes will not overlay the content with scrollbars, which avoids potentially obscuring content near the right and bottom edges.  However, a scrollable control containing an image or spaced-out controls can appear more modern by overlaying the content.
 
 ![Screenshot](images/scroll-viewer-themes.png)
 
 *ScrollViewer controls in the default and overlay control themes*
 
-Add the `theme-scroll-overlay` style class to a `ScrollViewer` to use the overlay theme.
+Add the `theme-scroll-overlay` style class to supported controls to use the overlay theme.
 
 ```xaml
 <ScrollViewer Classes="theme-scroll-overlay">

@@ -82,12 +82,14 @@ See the [Theme Generator](theme-generator.md) topic for detail on how to create 
 It's perfectly fine to create a new instance of the [ThemeDefinition](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition) class and set its various properties before passing the theme definition to a [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme), as described in the [Getting Started](getting-started.md) topic.
 
 ```xaml
-<Application ... xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui">
+<Application ...
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:generation="using:ActiproSoftware.UI.Avalonia.Themes.Generation">
 	<Application.Styles>
 
 		<actipro:ModernTheme>
 			<actipro:ModernTheme.Definition>
-				<actipro:ThemeDefinition TabAppearanceKind="Subtle" />
+				<generation:ThemeDefinition TabAppearanceKind="Subtle" />
 			</actipro:ModernTheme.Definition>
 		</actipro:ModernTheme>
 

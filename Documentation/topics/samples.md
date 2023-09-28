@@ -34,6 +34,9 @@ The projects in that sample are preconfigured to reference our product [NuGet pa
 
 The `Samples/SampleBrowser/References/ActiproSoftware.References.props` file contains an `ActiproVersion` property that defines the version of the Actipro product NuGet packages to reference.  Update that value if you wish to use an alternate version.
 
+> [!NOTE]
+> The samples always are intended to work with the current Actipro product version, and may not compile if used with other versions.  However, adjustments to the Actipro product version can be useful when testing prerelease builds.
+
 ### Changing the Avalonia Version
 
 The `Samples/SampleBrowser/References/Avalonia.References.props` file contains an `AvaloniaVersion` property that defines the version of the Avalonia packages to reference.  Update that value if you wish to use an alternate version.

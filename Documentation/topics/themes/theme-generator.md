@@ -80,17 +80,19 @@ public class CustomThemeGenerator : ThemeGenerator {
 ```
 
 ```xaml
-<Application ... xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui">
+<Application ...
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:generation="using:ActiproSoftware.UI.Avalonia.Themes.Generation">
 	<Application.Styles>
 
 		<actipro:ModernTheme>
 			<actipro:ModernTheme.Definition>
-				<actipro:ThemeDefinition>
-					<actipro:ThemeDefinition.Generator>
+				<generation:ThemeDefinition>
+					<generation:ThemeDefinition.Generator>
 						<!-- Custom generator logic installed -->
 						<local:CustomThemeGenerator />
-					</actipro:ThemeDefinition.Generator>
-				</actipro:ThemeDefinition>
+					</generation:ThemeDefinition.Generator>
+				</generation:ThemeDefinition>
 			</actipro:ModernTheme.Definition>
 		</actipro:ModernTheme>
 

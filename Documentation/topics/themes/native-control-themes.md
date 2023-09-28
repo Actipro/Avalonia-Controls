@@ -20,7 +20,9 @@ This example of adding [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme) to 
 ```xaml
 <Application ... xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui">
 	<Application.Styles>
+
 		<actipro:ModernTheme />
+
 	</Application.Styles>
 </Application>
 ```
@@ -28,13 +30,17 @@ This example of adding [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme) to 
 Several [theme definition](theme-definitions.md) options allow for selection of which control theme to use by default.  The following example shows how to tell the theme to render tabs using a `Subtle` appearance instead of `Outline`.
 
 ```xaml
-<Application ... xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui">
+<Application ...
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:generation="using:ActiproSoftware.UI.Avalonia.Themes.Generation">
 	<Application.Styles>
+
 		<actipro:ModernTheme>
 			<actipro:ModernTheme.Definition>
-				<actipro:ThemeDefinition TabAppearanceKind="Subtle" />
+				<generator:ThemeDefinition TabAppearanceKind="Subtle" />
 			</actipro:ModernTheme.Definition>
 		</actipro:ModernTheme>
+
 	</Application.Styles>
 </Application>
 ```
@@ -283,8 +289,7 @@ The following additional control theme is used by the default control theme:
 #### ItemsControl Type
 
 - [ItemsControl](xref:@ActiproUIRoot.Themes.ControlThemeKind.ItemsControl) - Default control theme.
-- [ItemsControlScrollableInline](xref:@ActiproUIRoot.Themes.ControlThemeKind.ItemsControlScrollableInline) (`theme-scroll-inline`) - Uses an inline `ScrollViewer`.
-- [ItemsControlScrollableOverlay](xref:@ActiproUIRoot.Themes.ControlThemeKind.ItemsControlScrollableOverlay) (`theme-scroll-overlay`) - Uses an overlay `ScrollViewer`.
+- [ItemsControlScrollable](xref:@ActiproUIRoot.Themes.ControlThemeKind.ItemsControlScrollable) - Uses an inline (`theme-scroll-inline`) or overlay (`theme-scroll-overlay`) `ScrollViewer`.
 
 #### ListBox Type
 
@@ -607,7 +612,9 @@ Then as described in the [Getting Started](getting-started.md) topic, the [Moder
 ```xaml
 <Application ... xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui">
 	<Application.Styles>
+
 		<actipro:ModernTheme Includes="NativeColorPicker, NativeDataGrid" />
+
 	</Application.Styles>
 </Application>
 ```
@@ -659,7 +666,9 @@ Then as described in the [Getting Started](getting-started.md) topic, the [Moder
 ```xaml
 <Application ... xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui">
 	<Application.Styles>
+
 		<actipro:ModernTheme Includes="NativeColorPicker, NativeDataGrid" />
+
 	</Application.Styles>
 </Application>
 ```

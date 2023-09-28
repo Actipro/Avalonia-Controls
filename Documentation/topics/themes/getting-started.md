@@ -203,12 +203,14 @@ Setting the [ModernTheme.Definition](xref:@ActiproUIRoot.Themes.ModernTheme.Defi
 The following example shows how to tell the theme to use accent colors for toggled switches by default, instead of using neutral colors.
 
 ```xaml
-<Application ... xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui">
+<Application ...
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:generation="using:ActiproSoftware.UI.Avalonia.Themes.Generation">
 	<Application.Styles>
 
 		<actipro:ModernTheme>
 			<actipro:ModernTheme.Definition>
-				<actipro:ThemeDefinition UseAccentedSwitches="True" />
+				<generation:ThemeDefinition UseAccentedSwitches="True" />
 			</actipro:ModernTheme.Definition>
 		</actipro:ModernTheme>
 
@@ -221,12 +223,14 @@ The following example shows how to tell the theme to use accent colors for toggl
 The following example shows how to tell the theme to render tabs using a `Subtle` appearance instead of `Outline`.
 
 ```xaml
-<Application ... xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui">
+<Application ...
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:generation="using:ActiproSoftware.UI.Avalonia.Themes.Generation">
 	<Application.Styles>
 
 		<actipro:ModernTheme>
 			<actipro:ModernTheme.Definition>
-				<actipro:ThemeDefinition TabAppearanceKind="Subtle" />
+				<generation:ThemeDefinition TabAppearanceKind="Subtle" />
 			</actipro:ModernTheme.Definition>
 		</actipro:ModernTheme>
 
