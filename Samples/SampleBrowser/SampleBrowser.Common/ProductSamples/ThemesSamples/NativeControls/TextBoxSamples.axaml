@@ -12,12 +12,21 @@
 	</UserControl.Resources>
 
 	<sampleBrowser:ControlExampleItemsControl
-		Header="Pre-defined classes are available that can be applied to native textbox to achieve a variety of styles.">
+		Header="Pre-defined style classes are available that can be applied to native TextBox controls to achieve a variety of styles.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Edit control themes" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/native-control-themes#edit-controls" />
+			<sampleBrowser:ControlExampleLinkItem Title="Scrolling" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/scrolling" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+			<sampleBrowser:ControlExampleLinkItem Title="AutoCompleteBox" Url="/ProductSamples/ThemesSamples/NativeControls/AutoCompleteBoxSamples" />
+		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
 
 
 		<sampleBrowser:ControlExample
-			Header="Textbox usage"
-			Footer="Actipro provides multiple themes and variants to alter the appearance of a textbox."
+			Header="TextBox usage"
+			Footer="Actipro provides multiple themes and variants to alter the appearance of a TextBox."
 			DataContext="{Binding #sampleTextBox}"
 			>
 
@@ -142,7 +151,7 @@
 
 		<sampleBrowser:ControlExample
 			Header="Masked textbox usage"
-			Footer="Themes and variants can also be used with masked textbox."
+			Footer="Themes and variants can also be used with a masked textbox."
 			DataContext="{Binding #sampleMaskedTextBox}"
 			>
 
@@ -202,7 +211,7 @@
 
 		<sampleBrowser:ControlExample
 			Header="Themes"
-			Footer="The appearance can be changed from the default with the use of the 'theme-outline' or 'theme-soft' classes."
+			Footer="The appearance can be changed from the default with the use of the 'theme-outline' or 'theme-soft' style classes."
 			>
 			<Grid ColumnDefinitions="*,40,*">
 				<StackPanel Grid.Column="0" Spacing="10">
@@ -244,7 +253,7 @@
 
 		<sampleBrowser:ControlExample
 			Header="Accent variants"
-			Footer="Add the 'accent' class to a textbox and the theme accent color will be used to provide emphasis."
+			Footer="Add the 'accent' style class to a TextBox and the theme accent color will be used to provide emphasis."
 			>
 			<Grid ColumnDefinitions="*,40,*">
 				<StackPanel Grid.Column="0" Spacing="10">
@@ -278,7 +287,7 @@
 
 		<sampleBrowser:ControlExample
 			Header="Success variants"
-			Footer="Add the 'success' class to a textbox and a color will be used to indicate success."
+			Footer="Add the 'success' style class to a TextBox and a color will be used to indicate success."
 			>
 			<Grid ColumnDefinitions="*,40,*">
 				<StackPanel Grid.Column="0" Spacing="10">
@@ -312,7 +321,7 @@
 
 		<sampleBrowser:ControlExample
 			Header="Warning variants"
-			Footer="Add the 'warning' class to a textbox and a color will be used to indicate caution."
+			Footer="Add the 'warning' style class to a TextBox and a color will be used to indicate caution."
 			>
 			<Grid ColumnDefinitions="*,40,*">
 				<StackPanel Grid.Column="0" Spacing="10">
@@ -346,7 +355,7 @@
 
 		<sampleBrowser:ControlExample
 			Header="Danger variants"
-			Footer="Add the 'danger' class to a textbox and a color will be used to indicate extreme caution."
+			Footer="Add the 'danger' style class to a TextBox and a color will be used to indicate extreme caution."
 			>
 			<Grid ColumnDefinitions="*,40,*">
 				<StackPanel Grid.Column="0" Spacing="10">

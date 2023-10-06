@@ -12,7 +12,11 @@
 	</UserControl.Resources>
 
 	<sampleBrowser:ControlExampleItemsControl
-		Header="Actipro's control themes create a modern appearance for Expander control.">
+		Header="Actipro's control themes create a modern appearance for native Expander controls.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Control themes" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/native-control-themes#other-controls" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
 
 
 		<sampleBrowser:ControlExample

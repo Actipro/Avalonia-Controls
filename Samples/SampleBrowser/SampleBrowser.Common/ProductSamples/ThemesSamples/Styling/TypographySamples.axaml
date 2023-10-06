@@ -13,7 +13,12 @@
 	</UserControl.Resources>
 
 	<sampleBrowser:ControlExampleItemsControl
-		Header="Numerous classes are available that can render TextBlock, SelectableTextBlock, and Label controls in various ways.">
+		Header="Numerous style classes are available that can render TextBlock, SelectableTextBlock, and Label controls in various ways.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Typography" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/typography" />
+			<sampleBrowser:ControlExampleLinkItem Title="Typography control themes" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/native-control-themes#typography-controls" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
 
 
 		<sampleBrowser:ControlExample
@@ -86,7 +91,7 @@
 					Classes.warning="{Binding #formSampleLabelVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Warning'}"
 					Classes.danger="{Binding #formSampleLabelVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Danger'}"
 					/>
-				<TextBox PasswordChar="{actipro:ThemeResource EditPasswordChar}" Text="password" />
+				<TextBox PasswordChar="{actipro:ThemeResource EditPasswordChar}" Text="passw" />
 				<TextBlock x:Name="formSampleMessage" Classes="theme-form-control-message" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
 					Text="Passwords must be at least 6 characters."
 					Classes.accent="{Binding #formSampleMessageVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Accent'}"
@@ -113,7 +118,7 @@
 					<![CDATA[
 <StackPanel>
 	<TextBlock$(LabelClassesAttribute)/>
-	<TextBox PasswordChar="{actipro:ThemeResource EditPasswordChar}" Text="password" />
+	<TextBox PasswordChar="{actipro:ThemeResource EditPasswordChar}" Text="passw" />
 	<TextBlock$(MessageClassesAttribute)/>
 </StackPanel>
 					]]>
@@ -132,7 +137,7 @@
 
 		<sampleBrowser:ControlExample
 			Header="Heading ramp"
-			Footer="Use the TextBlock class 'theme-text-heading' to render a word-wrapped heading that defaults to a medium size.  Supplemental `size-*` classes can be specified to use larger or smaller font sizes."
+			Footer="Use the 'theme-text-heading' style class to render a word-wrapped heading that defaults to a medium size.  Supplemental 'size-*' style classes can be specified to use larger or smaller font sizes."
 			>
 			
 			<StackPanel>
@@ -192,7 +197,7 @@
 
 		<sampleBrowser:ControlExample
 			Header="Body text ramp"
-			Footer="Use the TextBlock class 'theme-text-body' to render word-wrapped document body text that defaults to a medium size.  Supplemental `size-*` classes can be specified to use larger or smaller font sizes."
+			Footer="Use the 'theme-text-body' style class to render word-wrapped document body text that defaults to a medium size.  Supplemental 'size-*' style classes can be specified to use larger or smaller font sizes."
 			>
 
 			<StackPanel>
@@ -252,7 +257,7 @@
 		
 		<sampleBrowser:ControlExample
 			Header="Code text ramp"
-			Footer="Use the TextBlock class 'theme-text-code' to render code text that defaults to a medium size.  Supplemental `size-*` classes can be specified to use larger or smaller font sizes."
+			Footer="Use the 'theme-text-code' style class to render code text that defaults to a medium size.  Supplemental 'size-*' style classes can be specified to use larger or smaller font sizes."
 			>
 
 			<StackPanel>
@@ -312,7 +317,7 @@
 
 		<sampleBrowser:ControlExample
 			Header="Semantic variants"
-			Footer="There are several built-in text semantic variant classes, which can draw attention to meaningful text.  The semantic variants can be applied to any TextBlock theme."
+			Footer="There are several built-in text semantic variant style classes, which can draw attention to meaningful text.  The semantic variants can be applied to any TextBlock theme."
 			>
 
 			<StackPanel>

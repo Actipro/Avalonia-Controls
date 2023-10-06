@@ -25,7 +25,7 @@
 					CornerRadius="{TemplateBinding CornerRadius}"
 					Padding="{TemplateBinding Padding}"
 					>
-					<TextBlock Classes="size-xs" Text="PRIVATE" TextAlignment="Center" />
+					<TextBlock Classes="size-xs" Text="DEV" TextAlignment="Center" />
 				</Border>
 
 			</ControlTemplate>

@@ -13,12 +13,16 @@
 	</UserControl.Resources>
 
 	<sampleBrowser:ControlExampleItemsControl
-		Header="Pre-defined classes are available that can be applied to native progress bar to achieve a variety of styles.">
+		Header="Pre-defined style classes are available that can be applied to native ProgressBar controls to achieve a variety of styles.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Control themes" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/native-control-themes#other-controls" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
 
 
 		<sampleBrowser:ControlExample
-			Header="Progress bar usage"
-			Footer="Actipro provides multiple variants to alter the appearance of a progress bar."
+			Header="ProgressBar usage"
+			Footer="Actipro provides multiple variants to alter the appearance of a ProgressBar."
 			DataContext="{Binding #sample}"
 			>
 
@@ -76,7 +80,7 @@
 
 		<sampleBrowser:ControlExample
 			Header="Variants"
-			Footer="Add the 'accent', 'success', 'warning', or 'danger' class to a progress bar for a color variation."
+			Footer="Add the 'accent', 'success', 'warning', or 'danger' style class to a ProgressBar for a color variation."
 			>
 
 			<StackPanel Grid.Column="0" Spacing="10">
@@ -122,7 +126,7 @@
 
 		<sampleBrowser:ControlExample
 			Header="Vertical orientation"
-			Footer="A progress bar can be displayed in a vertical orientation."
+			Footer="A ProgressBar can be displayed in a vertical orientation."
 			HorizontalContentAlignment="Center"
 			>
 

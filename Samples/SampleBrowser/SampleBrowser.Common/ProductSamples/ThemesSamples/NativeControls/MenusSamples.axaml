@@ -1,5 +1,5 @@
 <UserControl 
-	x:Class="ActiproSoftware.ProductSamples.ThemeSamples.NativeControls.MenuSamples"
+	x:Class="ActiproSoftware.ProductSamples.ThemeSamples.NativeControls.MenusSamples"
 	xmlns="https://github.com/avaloniaui"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
@@ -7,7 +7,11 @@
 	>
 
 	<sampleBrowser:ControlExampleItemsControl
-		Header="Actipro's control themes create modern appearances for Menu, ContextMenu, FlyoutMenu, and MenuItem controls with full support for headers, gesture text, icons, checkmarks, and radio buttons.">
+		Header="Actipro's control themes create modern appearances for native Menu, ContextMenu, FlyoutMenu, and MenuItem controls with full support for headers, gesture text, icons, checkmarks, and radio buttons.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Menu control themes" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/native-control-themes#menu-controls" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
 
 
 		<sampleBrowser:ControlExample
@@ -339,7 +343,7 @@
 
 		<sampleBrowser:ControlExample
 			Header="Headered menu items"
-			Footer="Apply the &quot;theme-menuitem-heading&quot; class to a menu item to render it like a header."
+			Footer="Apply the 'theme-menuitem-heading' style class to a MenuItem to render it like a header."
 			>
 
 			<Menu>
@@ -398,7 +402,7 @@
 
 		<sampleBrowser:ControlExample
 			Header="Menu with checkboxes and radio buttons"
-			Footer="This sample shows how a checkbox or radio button can be used as the 'icon' content instead of an image."
+			Footer="This sample shows how a CheckBox or RadioButton can be used as the 'icon' content instead of an image."
 			>
 
 			<Menu>
@@ -525,7 +529,7 @@ private void OnMenuItemClicked(object? sender, Avalonia.Interactivity.RoutedEven
 
 		<sampleBrowser:ControlExample
 			Header="Vertically scrolling menu"
-			Footer="When a menu has too many items to display at once, vertical scrolling is utilized. Expand the &quot;Demo&quot; menu for an example."
+			Footer="When a menu has too many items to display at once, vertical scrolling is utilized. Expand the 'Demo' menu for an example."
 			>
 
 			<Menu>
@@ -642,7 +646,7 @@ private void OnMenuItemClicked(object? sender, Avalonia.Interactivity.RoutedEven
 
 
 		<sampleBrowser:ControlExample
-			Header="Context menu usage"
+			Header="ContextMenu usage"
 			>
 
 			<StackPanel Spacing="10">
@@ -714,8 +718,8 @@ private void OnMenuItemClicked(object? sender, Avalonia.Interactivity.RoutedEven
 
 
 		<sampleBrowser:ControlExample
-			Header="Flyout menu usage"
-			Footer="A flyout menu works like a context menu but can be shared between controls. This sample automatically applies the same custom context menu to all textbox controls."
+			Header="MenuFlyout usage"
+			Footer="A flyout menu works like a context menu but can be shared between controls. This sample automatically applies the same custom context menu to all TextBox controls."
 			>
 
 			<StackPanel Spacing="10">

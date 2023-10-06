@@ -7,7 +7,15 @@
 	>
 
 	<sampleBrowser:ControlExampleItemsControl
-		Header="Actipro's control themes create a modern appearance for Calendar control.">
+		Header="Actipro's control themes create a modern appearance for native Calendar controls.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Calendar control themes" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/native-control-themes#calendar-controls" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+			<sampleBrowser:ControlExampleLinkItem Title="CalendarDatePicker" Url="/ProductSamples/ThemesSamples/NativeControls/CalendarDatePickerSamples" />
+		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
 
 
 		<sampleBrowser:ControlExample

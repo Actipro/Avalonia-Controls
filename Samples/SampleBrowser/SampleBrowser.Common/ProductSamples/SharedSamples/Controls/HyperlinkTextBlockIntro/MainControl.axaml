@@ -9,6 +9,10 @@
 	<sampleBrowser:ControlExampleItemsControl
 		Header="HyperlinkTextBlock is a TextBlock styled like a link and will raise a Click event and/or execute a command when clicked.">
 
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="HyperlinkTextBlock" Url="https://www.actiprosoftware.com/docs/controls/avalonia/shared/controls/hyperlink-textblock" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
 
 		<sampleBrowser:ControlExample
 			Header="Basic usage"

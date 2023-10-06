@@ -9,6 +9,10 @@
 	<sampleBrowser:ControlExampleItemsControl
 		Header="The StringConverters class defines several value converters to be used with bindings.">
 
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="StringConverters" Url="https://www.actiprosoftware.com/docs/controls/avalonia/shared/value-converters#stringconverters" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
 
 		<sampleBrowser:ControlExample
 			Header="ToPercent"

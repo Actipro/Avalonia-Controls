@@ -1,4 +1,7 @@
-﻿using ActiproSoftware.UI.Avalonia.Controls;
+﻿using ActiproSoftware.SampleBrowser;
+using ActiproSoftware.UI.Avalonia.Controls;
+using Avalonia;
+using Avalonia.Controls.ApplicationLifetimes;
 using System;
 using System.ComponentModel;
 using System.Text;
@@ -15,6 +18,7 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.MessageBox
 		private MessageBoxButtons _buttons = MessageBoxButtons.OK;
 		private string _caption = string.Empty;
 		private MessageBoxResult _defaultResult = MessageBoxResult.None;
+		private UserPromptDisplayMode _displayMode = UserPromptDisplayMode.DialogPreferred;
 		private MessageBoxImage _image = MessageBoxImage.Information;
 		private MessageBoxResult _result = MessageBoxResult.None;
 		private string _sampleCode = string.Empty;
@@ -45,18 +49,23 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.MessageBox
 				.AppendLine(indent + FormatAsString(Caption) + ",")
 				.Append(indent + nameof(MessageBoxButtons) + "." + Buttons);
 
-			if (hasImage || hasDefaultResult || hasHelpButton) {
+			var requiresBuilder = (hasHelpButton || (DisplayMode == UserPromptDisplayMode.Overlay));
+			if (hasImage || hasDefaultResult || requiresBuilder) {
 				sample.AppendLine(",")
 					.Append(indent + nameof(MessageBoxImage) + "." + Image);
-				if (hasDefaultResult || hasHelpButton) {
+				if (hasDefaultResult || requiresBuilder) {
 					sample.AppendLine(",")
 						.Append(indent + nameof(MessageBoxResult) + "." + DefaultResult);
-					if (hasHelpButton) {
+					if (requiresBuilder) {
 						sample.AppendLine(",")
-							.AppendLine(indent + "(builder) => builder")
-							.AppendLine(indent + indent + ".WithHelpCommand(() => {")
-							.AppendLine(indent + indent + indent + "// Define action to be invoked when Help is clicked")
-							.Append(indent + indent + "}");
+							.AppendLine(indent + "(builder) => builder");
+						if (DisplayMode == UserPromptDisplayMode.Overlay)
+							sample.AppendLine(indent + indent + $".WithDisplayMode({nameof(UserPromptDisplayMode)}.{nameof(UserPromptDisplayMode.Overlay)})");
+						if (hasHelpButton) {
+							sample.AppendLine(indent + indent + ".WithHelpCommand(() => {")
+								.AppendLine(indent + indent + indent + "// Define action to be invoked when Help is clicked")
+								.Append(indent + indent + "}");
+						}
 					}
 				}
 			}
@@ -116,6 +125,11 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.MessageBox
 			set => SetProperty(ref _defaultResult, value);
 		}
 
+		public UserPromptDisplayMode DisplayMode {
+			get => _displayMode;
+			set => SetProperty(ref _displayMode, value);
+		}
+
 		public bool HasCloseButton
 			=> (this.Buttons == MessageBoxButtons.OK
 				|| this.Buttons.HasFlag(MessageBoxButtons.Cancel)
@@ -125,6 +139,9 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.MessageBox
 			get => _image;
 			set => SetProperty(ref _image, value);
 		}
+
+		public bool IsDialogAllowed
+			=> (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime);
 
 		protected override void OnPropertyChanged(PropertyChangedEventArgs e) {
 			base.OnPropertyChanged(e);
@@ -143,14 +160,11 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.MessageBox
 		}
 
 		public async void ShowMessageBox() {
-			if (AddHelpButton) {
-				Result = await MessageBox.Show(Text, Caption, Buttons, Image, DefaultResult, (builder) => builder
-					.WithHelpCommand(() => MessageBox.Show("Here is where you would show contextual help.", "Help"))
-				);
-			}
-			else {
-				Result = await MessageBox.Show(Text, Caption, Buttons, Image, DefaultResult);
-			}
+			Result = await MessageBox.Show(Text, Caption, Buttons, Image, DefaultResult, (builder) => {
+				builder.WithDisplayMode(DisplayMode);
+				if (AddHelpButton)
+					builder.WithHelpCommand(() => MessageBox.Show("Here is where you would show contextual help.", "Help"));
+			});
 		}
 
 		public string SampleCode {

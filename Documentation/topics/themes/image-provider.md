@@ -18,6 +18,9 @@ While all the image adaptation logic is contained within the [ImageProvider](xre
 
 *A single raster image that is altered to show normal, disabled, monochrome, and monochrome disabled states in both light and dark themes*
 
+> [!IMPORTANT]
+> [ImageProvider](xref:@ActiproUIRoot.Media.ImageProvider) can only adapt image types for which it has logic to handle.  The supported image types are `DrawingImage` and `Bitmap`.  Other image types, like SVG images from the `Avalonia.Svg` NuGet package, are not currently supported.
+
 ## Usage Scenarios for ImageProvider
 
 Common scenarios for using an image provider (and generally [DynamicImage](../shared/controls/dynamic-image.md) controls) are:

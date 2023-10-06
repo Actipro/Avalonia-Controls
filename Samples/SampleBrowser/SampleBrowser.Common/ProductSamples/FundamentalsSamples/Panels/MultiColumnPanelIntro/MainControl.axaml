@@ -9,6 +9,10 @@
 	<sampleBrowser:ControlExampleItemsControl
 		Header="The MultiColumnPanel control can render child elements in multiple columns, collapsing columns down as available space decreases.">
 
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="MultiColumnPanel" Url="https://www.actiprosoftware.com/docs/controls/avalonia/fundamentals/panels/multi-column-panel" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
 
 		<sampleBrowser:ControlExample
 			Header="Items control usage"

@@ -21,6 +21,15 @@
 	<sampleBrowser:ControlExampleItemsControl
 		Header="MessageBox provides the ability to display standard prompts using an API that is consistent with WPF's native MessageBox.">
 
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="MessageBox" Url="https://www.actiprosoftware.com/docs/controls/avalonia/fundamentals/user-prompt/message-box" />
+			<sampleBrowser:ControlExampleLinkItem Title="Builder pattern" Url="https://www.actiprosoftware.com/docs/controls/avalonia/fundamentals/user-prompt/builder-pattern" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+			<sampleBrowser:ControlExampleLinkItem Title="User prompt" Url="/ProductSamples/FundamentalsSamples/Controls/UserPromptIntro/MainControl" />
+		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+
 
 		<sampleBrowser:ControlExample
 			Header="Basic usage"
@@ -79,6 +88,11 @@
 					<StackPanel>
 						<TextBlock Classes="theme-form-control-label" Text="Default result" />
 						<ComboBox ItemsSource="{actipro:DelimitedArray Type=actipro:MessageBoxResult}" SelectedValue="{Binding DefaultResult}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Display mode" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type=actipro:UserPromptDisplayMode}" SelectedValue="{Binding DisplayMode}" />
+						<TextBlock Classes="theme-form-control-message warning" Text="Dialog not availailable on this platform" IsVisible="{Binding !IsDialogAllowed}" />
 					</StackPanel>
 					<Button Classes="show-dialog theme-solid accent" Margin="0,10" Command="{Binding ShowMessageBox}" />
 					<TextBox IsEnabled="False" Text="{Binding Result}" Watermark="Result" UseFloatingWatermark="True" />

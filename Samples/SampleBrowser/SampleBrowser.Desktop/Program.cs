@@ -31,14 +31,9 @@ namespace ActiproSoftware.SampleBrowser {
 				// NOTE: See the 'Licensing' documentation topic for details on how to register an evaluation or paid license here:
 				// .RegisterActiproLicense(licensee, licenseKey)
 
+				.WithInterFont()
 				.UsePlatformDetect()
-				.UseManagedSystemDialogs() // Forces managed file picker dialogs to validate themes
 				.LogToTrace()
-				// TODO: Resolved in v11.0.5. Replace this AfterPlatformServicesSetup block with WithInterFont call after font family issue is resolved in core Avalonia
-				.AfterPlatformServicesSetup(x => {
-					if (OperatingSystem.IsLinux())
-						x.WithInterFont();
-				})
 				.AfterSetup(x => {
 					// ApplicationViewModel platform-specific configuration
 					ApplicationViewModel.Instance.PlatformHelper = new DesktopPlatformHelper();

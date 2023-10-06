@@ -66,7 +66,7 @@
 	<UserControl.Styles>
 		<Style Selector="Button.show-dialog">
 			<Setter Property="Padding" Value="20,10" />
-			<Setter Property="Content" Value="Show Sample as Dialog" />
+			<Setter Property="Content" Value="Show Hosted Sample" />
 			<Setter Property="HorizontalAlignment" Value="Stretch" />
 		</Style>
 		<Style Selector="actipro|UserPromptControl.inline-sample">
@@ -77,6 +77,14 @@
 
 	<sampleBrowser:ControlExampleItemsControl
 		Header="User Prompt allows you to build traditional MessageBox or Task Dialog functionality with full support for themes. UserPromptControl defines the core functionality with support for advanced content (e.g. header, footer, checkbox). This control is typically hosted in a modal UserPromptWindow, but can be hosted in anywhere.  UserPromptBuilder makes it easy to create dialogs directly in code.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="User prompt" Url="https://www.actiprosoftware.com/docs/controls/avalonia/fundamentals/user-prompt/index" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+			<sampleBrowser:ControlExampleLinkItem Title="MessageBox" Url="/ProductSamples/FundamentalsSamples/Controls/MessageBoxIntro/MainControl" />
+		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
 
 
 		<sampleBrowser:ControlExample
@@ -142,13 +150,51 @@ var result = await UserPromptBuilder.Configure()
 
 
 		<sampleBrowser:ControlExample
+			Header="Display mode"
+			Footer="A user prompt can be displayed as a dialog (on supported platforms) or an overlay on the current view."
+			DataContext="{Binding #userPromptDisplayMode}"
+			>
+			<actipro:UserPromptControl x:Name="userPromptDisplayMode" Classes="inline-sample"
+									   Header="Display mode"
+									   StandardStatusImage="Information"
+									   Content="The same prompt can be consistently shown on different platforms even when windows are not supported."
+									   Footer="If the platform doesn't support dialogs, overlays will always be used."
+									   StandardButtons="Yes,No,Cancel" />
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Display mode" />
+						<ComboBox x:Name="displayModeSelection" ItemsSource="{actipro:DelimitedArray Type=actipro:UserPromptDisplayMode}" SelectedIndex="0" />
+						<TextBlock x:Name="displayModeWarning" Classes="theme-form-control-message warning" Text="Dialog not availailable on this platform" />
+					</StackPanel>
+					<Button Classes="show-dialog theme-solid accent" Click="OnSampleShowDialogDisplayModeClick" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+var result = await UserPromptBuilder.Configure()
+	// Other common settings here
+	.WithDisplayMode($(DisplayMode))
+	.Show();
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="DisplayMode" Value="{Binding #displayModeSelection.SelectedItem}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
 			Header="Default button"
 			Footer="See the Button Native Control sample (Themes Product) for additional information on built-in button themes."
 			DataContext="{Binding #userPromptDefaultButton}"
 			>
 			<actipro:UserPromptControl x:Name="userPromptDefaultButton" Classes="inline-sample"
 									   Header="Default button"
-									   Content="Any button can be set as the default and optionally define custom classes for the button."
+									   Content="Any button can be set as the default and optionally define custom style classes for the button."
 									   Footer="When not explicitly defined, the first button will be the default."
 									   StandardButtons="Yes,No,Cancel"
 									   DefaultResult="Yes"
@@ -979,7 +1025,7 @@ IImage? GetImage(string relPath) {
 
 		<sampleBrowser:ControlExample
 			Header="Use any theme for buttons"
-			Footer="This sample applies a custom ControlTheme for buttons and uses the &quot;buttonresult-&lt;result&gt;&quot; classes within style selectors to target individual buttons based on their result."
+			Footer="This sample applies a custom ControlTheme for buttons and uses the 'buttonresult-&lt;result&gt;' style classes within style selectors to target individual buttons based on their result."
 			>
 			<actipro:UserPromptControl Classes="inline-sample"
 									   Header="Use any theme for buttons"
@@ -1117,13 +1163,13 @@ var result = await UserPromptBuilder.Configure()
 
 		<sampleBrowser:ControlExample
 			Header="Copy details to the clipboard"
-			Footer="When displayed as a dialog, the Copy command (CTRL+C) can be invoked to copy the details of the prompt to the clipboard."
+			Footer="When displayed as a dialog, the Copy command (CTRL+C on Windows) can be invoked to copy the details of the prompt to the clipboard."
 			>
 			<actipro:UserPromptControl Classes="inline-sample"
 									   Header="Copy details to the clipboard"
 									   Content="This sample demonstrates the clipboard functionality and how to customize the text that is placed on the clipboard for various UI elements."
 									   StandardButtons="YesNoCancel"
-									   Footer="Click 'Show Sample as Dialog' button and then press 'CTRL+C'"
+									   Footer="Click 'Show Sample as Dialog' button and then press copy shortcut"
 									   FooterClipboardText="The 'Content' property is auto-converted to clipboard text, but the footer is configured to use this custom text instead."
 									   FooterImage="{Binding Source={x:Static actipro:SharedImageKeys.Question}, Converter={StaticResource ImageKeyToImageConverter}}"
 									   ExpandedInformationCollapsedHeaderText="Show more"
@@ -1242,7 +1288,7 @@ var result = await UserPromptBuilder.Configure()
 			Header="Integrate classes for pre-styled buttons"
 			>
 			<actipro:UserPromptControl Classes="inline-sample"
-									   Header="Each button can have its own class."
+									   Header="Each button can have its own style class."
 									   Content="Modern applications often use a mix of button styles to guide a user to a particular response, de-emphasize a less desirable response, or raise awareness about potentially dangerous responses.">
 				<actipro:UserPromptControl.ButtonItems>
 					<actipro:Array>

@@ -14,6 +14,11 @@
 	<sampleBrowser:ControlExampleItemsControl
 		Header="Actipro's control themes create modern appearances for ScrollViewer and ScrollBar controls.">
 
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Scroll control themes" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/native-control-themes#scroll-controls" />
+			<sampleBrowser:ControlExampleLinkItem Title="Scrolling" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/scrolling" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
 
 		<sampleBrowser:ControlExample
 			Header="ScrollViewer usage"

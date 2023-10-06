@@ -9,6 +9,10 @@
 	<sampleBrowser:ControlExampleItemsControl
 		Header="The MathConverter class can perform basic mathematical calculations using the values that are passed into it.">
 
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="MathConverter" Url="https://www.actiprosoftware.com/docs/controls/avalonia/shared/value-converters#mathconverter" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
 
 		<sampleBrowser:ControlExample
 			Header="Basic usage"
@@ -291,7 +295,7 @@
 
 		<sampleBrowser:ControlExample
 			Header="Font-relative sizing"
-			Footer="The shape next to the text is sized based on the font size relative to 14pt and always rounded to whole numbers."
+			Footer="The shape next to the text uses a formula to calculate its size based on the font size relative to 14pt and always rounded to whole numbers."
 			>
 
 			<StackPanel Orientation="Horizontal" Spacing="10">

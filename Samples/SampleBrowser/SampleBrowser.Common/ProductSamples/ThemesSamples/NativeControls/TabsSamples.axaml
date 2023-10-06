@@ -12,7 +12,11 @@
 	</UserControl.Resources>
 
 	<sampleBrowser:ControlExampleItemsControl
-		Header="Pre-defined classes are available that can be applied to native tab control and tab strip to achieve a variety of styles.">
+		Header="Pre-defined style classes are available that can be applied to native TabControl and TabStrip controls to achieve a variety of styles.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Tab control themes" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/native-control-themes#tab-controls" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
 
 
 		<sampleBrowser:ControlExample
@@ -78,7 +82,7 @@
 
 		<sampleBrowser:ControlExample
 			Header="TabControl in a container"
-			Footer="The TabControl's border thickness and a couple theme resources can be altered to allow for usage within a container."
+			Footer="When using the 'Outline' theme, the TabControl's border thickness and other theme resources can be altered to allow for proper display within a container."
 			>
 
 			<Border Background="{actipro:ThemeResource Container3BackgroundBrush}" BorderBrush="{actipro:ThemeResource Container3BorderBrush}" BorderThickness="1">

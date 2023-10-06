@@ -12,7 +12,11 @@
 	</UserControl.Resources>
 
 	<sampleBrowser:ControlExampleItemsControl
-		Header="The ThicknessConverter class can be used to convert values to a thickness commonly used for margin or padding value.">
+		Header="The ThicknessConverter class can be used to convert values to a thickness commonly used for margin or padding values.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="ThicknessConverter" Url="https://www.actiprosoftware.com/docs/controls/avalonia/shared/value-converters#thicknessconverter" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
 
 
 		<sampleBrowser:ControlExample
@@ -24,7 +28,7 @@
 				<StackPanel>
 					<TextBlock Classes="theme-form-control-label" Text="Original value" />
 					<TextBox x:Name="basicSample" Text="5, 10" Watermark="Enter a thickness value" />
-					<TextBlock Classes="theme-form-control-message" Text='Examples: "5", "5, 10", or "5, 10, 5, 10' />
+					<TextBlock Classes="theme-form-control-message" Text='Examples: "5", "5, 10", or "5, 10, 5, 10"' />
 				</StackPanel>
 				<StackPanel>
 					<Grid ColumnDefinitions="Auto,Auto,Auto" RowDefinitions="Auto,Auto,Auto" HorizontalAlignment="Center">

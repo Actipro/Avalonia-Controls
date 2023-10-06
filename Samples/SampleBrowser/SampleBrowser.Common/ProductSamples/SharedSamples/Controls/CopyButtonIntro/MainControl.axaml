@@ -15,10 +15,15 @@
 	<sampleBrowser:ControlExampleItemsControl
 		Header="CopyButton is a convenient button that, when invoked, will copy any text to the clipboard.">
 
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="CopyButton" Url="https://www.actiprosoftware.com/docs/controls/avalonia/shared/controls/copy-button" />
+			<sampleBrowser:ControlExampleLinkItem Title="Button control themes" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/native-control-themes#button-controls" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
 
 		<sampleBrowser:ControlExample
 			Header="Basic usage"
-			Footer="This sample binds the clipboard text to the current text of a TextBox. Actipro native button themes and variants are fully supported."
+			Footer="This sample binds the clipboard text to the current text of a TextBox. Actipro native button themes and semantic color variants are fully supported."
 			DataContext="{Binding #sample}"
 			>
 

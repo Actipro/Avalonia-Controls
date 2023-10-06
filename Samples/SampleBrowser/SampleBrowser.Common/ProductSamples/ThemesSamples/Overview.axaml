@@ -12,7 +12,7 @@
 
 			<sampleBrowser:ProductOverviewHeader>
 				Actipro provides beautiful themes for native Avalonia controls that can help you create stunning applications.
-				The themes make use of hundreds of dynamically-built resources like brushes that the Actipro theme generator creates.
+				The themes make use of hundreds of dynamically built resources like brushes that the Actipro theme generator creates.
 				All of Actipro's custom controls utilize the same theme resources for a professional and consistent app-wide appearance.
 				A handful of native control examples using Actipro themes are presented below.
 			</sampleBrowser:ProductOverviewHeader>

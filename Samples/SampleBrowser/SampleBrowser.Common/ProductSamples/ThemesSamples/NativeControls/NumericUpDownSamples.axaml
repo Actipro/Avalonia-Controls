@@ -13,7 +13,15 @@
 	</UserControl.Resources>
 
 	<sampleBrowser:ControlExampleItemsControl
-		Header="Pre-defined classes are available that can be applied to the native NumericUpDown to achieve a variety of styles.">
+		Header="Pre-defined style classes are available that can be applied to native NumericUpDown controls to achieve a variety of styles.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Edit control themes" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/native-control-themes#edit-controls" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+			<sampleBrowser:ControlExampleLinkItem Title="ButtonSpinner" Url="/ProductSamples/ThemesSamples/NativeControls/ButtonSpinnerSamples" />
+		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
 
 
 		<sampleBrowser:ControlExample
@@ -86,7 +94,7 @@
 
 		<sampleBrowser:ControlExample
 			Header="Themes"
-			Footer="The appearance can be changed from the default with the use of the 'theme-outline' or 'theme-soft' classes."
+			Footer="The appearance can be changed from the default with the use of the 'theme-outline' or 'theme-soft' style classes."
 			>
 			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,200,40,200,*">
 				<NumericUpDown Grid.Row="0" Grid.Column="1" Classes="theme-outline" Watermark="Outline" />
@@ -110,7 +118,7 @@
 
 		<sampleBrowser:ControlExample
 			Header="Accent variants"
-			Footer="Add the 'accent' class to a NumericUpDown and the theme accent color will be used to provide emphasis."
+			Footer="Add the 'accent' style class to a NumericUpDown and the theme accent color will be used to provide emphasis."
 			>
 			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,200,40,200,*">
 				<NumericUpDown Grid.Row="0" Grid.Column="1" Classes="theme-outline accent" Watermark="Outline" />
@@ -134,7 +142,7 @@
 
 		<sampleBrowser:ControlExample
 			Header="Success variants"
-			Footer="Add the 'success' class to a NumericUpDown and a color will be used to indicate success."
+			Footer="Add the 'success' style class to a NumericUpDown and a color will be used to indicate success."
 			>
 			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,200,40,200,*">
 				<NumericUpDown Grid.Row="0" Grid.Column="1" Classes="theme-outline success" Watermark="Outline" />
@@ -158,7 +166,7 @@
 
 		<sampleBrowser:ControlExample
 			Header="Warning variants"
-			Footer="Add the 'warning' class to a NumericUpDown and a color will be used to indicate caution."
+			Footer="Add the 'warning' style class to a NumericUpDown and a color will be used to indicate caution."
 			>
 			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,200,40,200,*">
 				<NumericUpDown Grid.Row="0" Grid.Column="1" Classes="theme-outline warning" Watermark="Outline" />
@@ -182,7 +190,7 @@
 
 		<sampleBrowser:ControlExample
 			Header="Danger variants"
-			Footer="Add the 'danger' class to a NumericUpDown and a color will be used to indicate extreme caution."
+			Footer="Add the 'danger' style class to a NumericUpDown and a color will be used to indicate extreme caution."
 			>
 			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,200,40,200,*">
 				<NumericUpDown Grid.Row="0" Grid.Column="1" Classes="theme-outline danger" Watermark="Outline" />

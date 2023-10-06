@@ -19,3 +19,7 @@ Actipro Core is a class library that is completely UI framework agnostic.  It co
 ### Extension Methods
 
 - Various [extension methods](extension-methods.md) are provided for several common .NET types.
+
+## Getting Started
+
+The Core Library is automatically included in all NuGet packages, so no additional configuration is necessary.

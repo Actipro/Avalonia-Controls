@@ -11,12 +11,22 @@
 	</UserControl.Resources>
 
 	<sampleBrowser:ControlExampleItemsControl
-		Header="Pre-defined classes are available that can be applied to native checkboxes to achieve a variety of styles.">
+		Header="Pre-defined style classes are available that can be applied to native CheckBox controls to achieve a variety of styles.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Switch control themes" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/native-control-themes#switch-controls" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+			<sampleBrowser:ControlExampleLinkItem Title="RadioButton" Url="/ProductSamples/ThemesSamples/NativeControls/RadioButtonSamples" />
+			<sampleBrowser:ControlExampleLinkItem Title="ToggleButton" Url="/ProductSamples/ThemesSamples/NativeControls/ToggleButtonSamples" />
+			<sampleBrowser:ControlExampleLinkItem Title="ToggleSwitch" Url="/ProductSamples/ThemesSamples/NativeControls/ToggleSwitchSamples" />
+		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
 
 
 		<sampleBrowser:ControlExample
 			Header="CheckBox usage"
-			Footer="Actipro provides multiple themes and variants to alter the appearance of a checkbox."
+			Footer="Actipro provides multiple themes and variants to alter the appearance of a CheckBox."
 			DataContext="{Binding #sample}"
 			>
 
@@ -72,7 +82,7 @@
 		
 		<sampleBrowser:ControlExample
 			Header="Themes"
-			Footer="The appearance can be changed from the default with the use of the 'theme-outline' or 'theme-solid' classes."
+			Footer="The appearance can be changed from the default with the use of the 'theme-outline' or 'theme-solid' style classes."
 			>
 			<Grid ColumnDefinitions="*,40,*">
 				<StackPanel Grid.Column="0" Spacing="10">
@@ -103,7 +113,7 @@
 
 		<sampleBrowser:ControlExample
 			Header="Accent variants"
-			Footer="Add the 'accent' class to a checkbox and the theme accent color will be used to provide emphasis."
+			Footer="Add the 'accent' style class to a CheckBox and the theme accent color will be used to provide emphasis."
 			>
 			<Grid ColumnDefinitions="*,40,*">
 				<StackPanel Grid.Column="0" Spacing="10">
@@ -134,7 +144,7 @@
 
 		<sampleBrowser:ControlExample
 			Header="Success variants"
-			Footer="Add the 'success' class to a checkbox and a color will be used to indicate success."
+			Footer="Add the 'success' style class to a CheckBox and a color will be used to indicate success."
 			>
 			<Grid ColumnDefinitions="*,40,*">
 				<StackPanel Grid.Column="0" Spacing="10">
@@ -165,7 +175,7 @@
 
 		<sampleBrowser:ControlExample
 			Header="Warning variants"
-			Footer="Add the 'warning' class to a checkbox and a color will be used to indicate caution."
+			Footer="Add the 'warning' style class to a CheckBox and a color will be used to indicate caution."
 			>
 			<Grid ColumnDefinitions="*,40,*">
 				<StackPanel Grid.Column="0" Spacing="10">
@@ -196,7 +206,7 @@
 
 		<sampleBrowser:ControlExample
 			Header="Danger variants"
-			Footer="Add the 'danger' class to a checkbox and a color will be used to indicate extreme caution."
+			Footer="Add the 'danger' style class to a CheckBox and a color will be used to indicate extreme caution."
 			>
 			<Grid ColumnDefinitions="*,40,*">
 				<StackPanel Grid.Column="0" Spacing="10">

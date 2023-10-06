@@ -11,7 +11,17 @@
 	</UserControl.Resources>
 
 	<sampleBrowser:ControlExampleItemsControl
-		Header="Actipro's control themes create a modern appearance for TreeView control.">
+		Header="Actipro's control themes create a modern appearance for native TreeView controls.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="List control themes" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/native-control-themes#list-controls" />
+			<sampleBrowser:ControlExampleLinkItem Title="Scrolling" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/scrolling" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+			<sampleBrowser:ControlExampleLinkItem Title="DataGrid" Url="/ProductSamples/ThemesSamples/NativeControls/DataGridSamples" />
+			<sampleBrowser:ControlExampleLinkItem Title="ListBox" Url="/ProductSamples/ThemesSamples/NativeControls/ListBoxSamples" />
+		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
 
 
 		<sampleBrowser:ControlExample
@@ -50,17 +60,21 @@
 						<ComboBox x:Name="sampleScrollTheme" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Overlay'}" />
 					</StackPanel>
 					<CheckBox IsChecked="{Binding (actipro:ThemeProperties.ScrollBarHasLineButtons)}">Has scroll line buttons</CheckBox>
+					<CheckBox IsChecked="{Binding (ScrollViewer.AllowAutoHide)}">Allow scroll auto-hide</CheckBox>
 					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
 				</StackPanel>
 			</sampleBrowser:ControlExample.Options>
 			<sampleBrowser:ControlExample.CodeExamples>
 				<sampleBrowser:CodeExample xml:space="preserve">
 					<![CDATA[
-<TreeView$(ClassesAttribute)$(ScrollBarHasLineButtonsAttribute)$(IsEnabledAttribute)>
+<TreeView$(ClassesAttribute)$(ScrollBarHasLineButtonsAttribute)$(AllowAutoHideAttribute)$(IsEnabledAttribute)>
 	<!-- TreeViewItem Instances -->
 </TreeView>
 					]]>
 					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="AllowAutoHideAttribute"
+															   IsEnabled="{Binding !(ScrollViewer.AllowAutoHide)}"
+															   Value=" ScrollViewer.AllowAutoHide=&quot;False&quot;" />
 						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
 															   IsEnabled="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
 															   Value="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), StringFormat=' Classes=&quot;{0}&quot;'}" />

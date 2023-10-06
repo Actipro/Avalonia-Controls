@@ -5,13 +5,13 @@ using Avalonia.Controls.Notifications;
 
 namespace ActiproSoftware.ProductSamples.ThemeSamples.NativeControls {
 
-	public partial class MenuSamples : UserControl {
+	public partial class MenusSamples : UserControl {
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 		// OBJECT
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		public MenuSamples() {
+		public MenusSamples() {
 			InitializeComponent();
 		}
 

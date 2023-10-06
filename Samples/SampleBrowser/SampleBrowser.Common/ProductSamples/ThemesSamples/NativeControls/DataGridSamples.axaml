@@ -8,7 +8,17 @@
 	>
 
 	<sampleBrowser:ControlExampleItemsControl
-		Header="Actipro's control themes create a modern appearance for DataGrid control.">
+		Header="Actipro's control themes create a modern appearance for native DataGrid controls.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="DataGrid control themes" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/native-control-themes#datagrid-control" />
+			<sampleBrowser:ControlExampleLinkItem Title="Scrolling" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/scrolling" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+			<sampleBrowser:ControlExampleLinkItem Title="ListBox" Url="/ProductSamples/ThemesSamples/NativeControls/ListBoxSamples" />
+			<sampleBrowser:ControlExampleLinkItem Title="TreeView" Url="/ProductSamples/ThemesSamples/NativeControls/TreeViewSamples" />
+		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
 
 
 		<sampleBrowser:ControlExample
@@ -35,6 +45,7 @@
 					<CheckBox IsChecked="{Binding CanUserReorderColumns}">Can reorder columns</CheckBox>
 					<CheckBox IsChecked="{Binding CanUserSortColumns}">Can sort columns</CheckBox>
 					<CheckBox IsChecked="{Binding (actipro:ThemeProperties.ScrollBarHasLineButtons)}">Has scroll line buttons</CheckBox>
+					<CheckBox IsChecked="{Binding (ScrollViewer.AllowAutoHide)}">Allow scroll auto-hide</CheckBox>
 					<CheckBox IsChecked="{Binding IsReadOnly}">Read-only</CheckBox>
 					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
 					<StackPanel>
@@ -47,7 +58,7 @@
 				<sampleBrowser:CodeExample xml:space="preserve">
 					<![CDATA[
 <DataGrid
-	GridLinesVisibility="$(GridLinesVisibility)"$(IsReadOnlyAttribute)$(IsEnabledAttribute)
+	GridLinesVisibility="$(GridLinesVisibility)"$(AllowAutoHideAttribute)$(IsReadOnlyAttribute)$(IsEnabledAttribute)
 	CanUserSortColumns="$(CanUserSortColumns)" CanUserReorderColumns="$(CanUserReorderColumns)"$(ScrollBarHasLineButtonsAttribute)>
 
 	<DataGrid.Columns>
@@ -57,6 +68,9 @@
 </DataGrid>
 					]]>
 					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="AllowAutoHideAttribute"
+															   IsEnabled="{Binding !(ScrollViewer.AllowAutoHide)}"
+															   Value=" ScrollViewer.AllowAutoHide=&quot;False&quot;" />
 						<sampleBrowser:CodeExampleSubstitution Key="CanUserReorderColumns" Value="{Binding CanUserReorderColumns}" />
 						<sampleBrowser:CodeExampleSubstitution Key="CanUserSortColumns" Value="{Binding CanUserSortColumns}" />
 						<sampleBrowser:CodeExampleSubstitution Key="GridLinesVisibility" Value="{Binding GridLinesVisibility}" />

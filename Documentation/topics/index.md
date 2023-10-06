@@ -31,7 +31,7 @@ The [Actipro Core Library](core/index.md) is a class library that is completely 
 
 ## Actipro @@PlatformName Pro Products
 
-Elevate your application by [licensing](licensing.md) additional professionally designed commercial controls.
+Elevate your application by [licensing](licensing.md) additional professionally designed commercial controls and getting access to the XAML source for all of our default control styles and themes.
 
 ### Fundamentals
 
@@ -39,13 +39,22 @@ Elevate your application by [licensing](licensing.md) additional professionally 
 
 [Actipro Fundamentals](fundamentals/index.md) provides a collection of advanced controls that are useful for many different types of applications.
 
+### XAML Source
+
+Pro license customers can download the full XAML source for all our Free and Pro products.  The XAML source includes the default control styles and themes used by Actipro and native Avalonia controls in Actipro's themes.
+
+Having the XAML source provides these benefits:
+- **See Resource Usage** - See exactly which theme resources are used, and where throughout our products.
+- **Learn Techniques** - Discover how styles and themes are built, and best practices applied.
+- **Customize Control Themes** - Clone and adjust our default control themes as needed, either by replacing them or creating brand new control themes based on them.
+
 ## Getting Started
 
 Use these steps as guidelines for how to get started with the Actipro @@PlatformName controls.
 
 - **Download and Run Samples** - Follow the steps in the [Samples](samples.md) topic to download and run the open-source samples on your development machine.  Running the samples app is the best way to discover what the Actipro @@PlatformName controls have to offer.
 - **Review Product Documentation** - Read through the product documentation linked above, along with the full [API Reference](api/index.md) to learn more about product features and capabilities.
-- **Evaluate in Your Apps** - Reference the product [NuGet packages](nuget.md) to evaluate the products in your own apps.
+- **Evaluate in Your Apps** - Reference the product [NuGet packages](nuget.md) to evaluate the products in your own apps, then configure [Themes](themes/index.md) based on your needs.
 - **License Pro Controls** - You may use the free products in your own apps without any cost and can [license](licensing.md) the more advanced Actipro @@PlatformName Pro bundle if you wish to use it.
 - **Deploy** - The [Deployment](deployment.md) topic lists the assemblies that you may redistribute with your apps based on your license.
 

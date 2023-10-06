@@ -13,10 +13,19 @@
 	</UserControl.Resources>
 
 	<sampleBrowser:ControlExampleItemsControl
-		Header="Pre-defined classes are available that can be applied to native time picker to achieve a variety of styles.">
+		Header="Pre-defined style classes are available that can be applied to native TimePicker controls to achieve a variety of styles.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Edit control themes" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/native-control-themes#edit-controls" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+			<sampleBrowser:ControlExampleLinkItem Title="DatePicker" Url="/ProductSamples/ThemesSamples/NativeControls/DatePickerSamples" />
+		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+
 
 		<sampleBrowser:ControlExample
-			Header="Time picker usage"
+			Header="TimePicker usage"
 			DataContext="{Binding #sample}"
 			>
 
@@ -69,7 +78,7 @@
 
 		<sampleBrowser:ControlExample
 			Header="Themes"
-			Footer="The appearance can be changed from the default with the use of the 'theme-outline' or 'theme-soft' classes."
+			Footer="The appearance can be changed from the default with the use of the 'theme-outline' or 'theme-soft' style classes."
 			>
 			<Grid ColumnDefinitions="*,40,*">
 				<StackPanel Grid.Column="0" Spacing="10">
@@ -99,7 +108,7 @@
 
 		<sampleBrowser:ControlExample
 			Header="Accent variants"
-			Footer="Add the 'accent' class to a time picker and the theme accent color will be used to provide emphasis."
+			Footer="Add the 'accent' style class to a TimePicker and the theme accent color will be used to provide emphasis."
 			>
 			<Grid ColumnDefinitions="*,40,*">
 				<StackPanel Grid.Column="0" Spacing="10">
@@ -129,7 +138,7 @@
 
 		<sampleBrowser:ControlExample
 			Header="Success variants"
-			Footer="Add the 'success' class to a time picker and a color will be used to indicate success."
+			Footer="Add the 'success' style class to a TimePicker and a color will be used to indicate success."
 			>
 			<Grid ColumnDefinitions="*,40,*">
 				<StackPanel Grid.Column="0" Spacing="10">
@@ -159,7 +168,7 @@
 
 		<sampleBrowser:ControlExample
 			Header="Warning variants"
-			Footer="Add the 'warning' class to a time picker and a color will be used to indicate caution."
+			Footer="Add the 'warning' style class to a TimePicker and a color will be used to indicate caution."
 			>
 			<Grid ColumnDefinitions="*,40,*">
 				<StackPanel Grid.Column="0" Spacing="10">
@@ -189,7 +198,7 @@
 
 		<sampleBrowser:ControlExample
 			Header="Danger variants"
-			Footer="Add the 'danger' class to a time picker and a color will be used to indicate extreme caution."
+			Footer="Add the 'danger' style class to a TimePicker and a color will be used to indicate extreme caution."
 			>
 			<Grid ColumnDefinitions="*,40,*">
 				<StackPanel Grid.Column="0" Spacing="10">

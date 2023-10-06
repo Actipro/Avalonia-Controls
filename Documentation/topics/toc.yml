@@ -6,6 +6,8 @@ items:
   items:
   - name: "Overview"
     href: fundamentals/index.md
+  - name: "Getting Started"
+    href: fundamentals/getting-started.md
   - name: "User Prompt"
     href: fundamentals/user-prompt/index.md
     items:
@@ -62,6 +64,8 @@ items:
   items:
   - name: "Overview"
     href: shared/index.md
+  - name: "Getting Started"
+    href: shared/getting-started.md
   - name: "Controls"
     href: shared/controls/index.md
     items:
@@ -123,7 +127,7 @@ items:
     href: utilities/theme-resource-browser.md
   - name: "String Resource Browser"
     href: utilities/string-resource-browser.md
-- name: "Troubleshooting (General)"
+- name: "Troubleshooting"
   href: troubleshooting.md
 - name: "Supported Technologies"
   href: supported-technologies.md

@@ -7,6 +7,10 @@
 	<sampleBrowser:ControlExampleItemsControl
 		Header="ShadowChrome is a decorator that renders a beautiful modern drop shadow around its child control.">
 
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="ShadowChrome" Url="https://www.actiprosoftware.com/docs/controls/avalonia/shared/controls/shadow-chrome" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
 
 		<sampleBrowser:ControlExample
 			Header="Basic usage"

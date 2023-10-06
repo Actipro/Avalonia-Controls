@@ -10,6 +10,11 @@
 	<sampleBrowser:ControlExampleItemsControl
 		Header="Brush resources are included as part of Actipro's themes that can render containers, which are areas of a user interface that contain other controls.">
 
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Containers" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/containers" />
+			<sampleBrowser:ControlExampleLinkItem Title="Theme assets" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/theme-assets" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
 
 		<sampleBrowser:ControlExample
 			Header="Container usage"

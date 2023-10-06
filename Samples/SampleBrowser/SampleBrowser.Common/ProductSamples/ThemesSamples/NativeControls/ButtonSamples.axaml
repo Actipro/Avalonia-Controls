@@ -12,12 +12,23 @@
 	</UserControl.Resources>
 
 	<sampleBrowser:ControlExampleItemsControl
-		Header="Pre-defined classes are available that can be applied to native buttons to achieve a variety of styles.">
+		Header="Pre-defined style classes are available that can be applied to native Button controls to achieve a variety of styles.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Button control themes" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/native-control-themes#button-controls" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+			<sampleBrowser:ControlExampleLinkItem Title="DropDownButton" Url="/ProductSamples/ThemesSamples/NativeControls/DropDownButtonSamples" />
+			<sampleBrowser:ControlExampleLinkItem Title="SplitButton" Url="/ProductSamples/ThemesSamples/NativeControls/SplitButtonSamples" />
+			<sampleBrowser:ControlExampleLinkItem Title="ToggleButton" Url="/ProductSamples/ThemesSamples/NativeControls/ToggleButtonSamples" />
+			<sampleBrowser:ControlExampleLinkItem Title="ToggleSplitButton" Url="/ProductSamples/ThemesSamples/NativeControls/ToggleSplitButtonSamples" />
+		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
 
 
 		<sampleBrowser:ControlExample
 			Header="Button usage"
-			Footer="Actipro provides multiple themes and variants to alter the appearance of a button."
+			Footer="Actipro provides multiple themes and variants to alter the appearance of a Button."
 			DataContext="{Binding #sample}"
 			>
 
@@ -82,7 +93,7 @@
 
 		<sampleBrowser:ControlExample
 			Header="Themes"
-			Footer="The appearance can be changed from the default with the use of the 'theme-outline', 'theme-solid', 'theme-soft', 'theme-subtle', or 'theme-link' classes."
+			Footer="The appearance can be changed from the default with the use of the 'theme-outline', 'theme-solid', 'theme-soft', 'theme-subtle', or 'theme-link' style classes."
 			>
 			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,Auto,10,Auto,10,Auto,10,Auto,10,Auto,*">
 				<Button Grid.Row="0" Grid.Column="1" Classes="theme-outline" Content="Outline" />
@@ -127,7 +138,7 @@
 
 		<sampleBrowser:ControlExample
 			Header="Accent variants"
-			Footer="Add the 'accent' class to a button and the theme accent color will be used to provide emphasis."
+			Footer="Add the 'accent' style class to a Button and the theme accent color will be used to provide emphasis."
 			>
 			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,Auto,10,Auto,10,Auto,10,Auto,10,Auto,*">
 				<Button Grid.Row="0" Grid.Column="1" Classes="theme-outline accent" Content="Outline" />
@@ -172,7 +183,7 @@
 
 		<sampleBrowser:ControlExample
 			Header="Success variants"
-			Footer="Add the 'success' class to a button and a color will be used to indicate success."
+			Footer="Add the 'success' style class to a Button and a color will be used to indicate success."
 			>
 			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,Auto,10,Auto,10,Auto,10,Auto,10,Auto,*">
 				<Button Grid.Row="0" Grid.Column="1" Classes="theme-outline success" Content="Outline" />
@@ -217,7 +228,7 @@
 
 		<sampleBrowser:ControlExample
 			Header="Warning variants"
-			Footer="Add the 'warning' class to a button and a color will be used to indicate caution."
+			Footer="Add the 'warning' style class to a Button and a color will be used to indicate caution."
 			>
 			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,Auto,10,Auto,10,Auto,10,Auto,10,Auto,*">
 				<Button Grid.Row="0" Grid.Column="1" Classes="theme-outline warning" Content="Outline" />
@@ -262,7 +273,7 @@
 
 		<sampleBrowser:ControlExample
 			Header="Danger variants"
-			Footer="Add the 'danger' class to a button and a color will be used to indicate extreme caution."
+			Footer="Add the 'danger' style class to a Button and a color will be used to indicate extreme caution."
 			>
 			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,Auto,10,Auto,10,Auto,10,Auto,10,Auto,*">
 				<Button Grid.Row="0" Grid.Column="1" Classes="theme-outline danger" Content="Outline" />

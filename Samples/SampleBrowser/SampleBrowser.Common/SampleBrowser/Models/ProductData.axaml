@@ -81,14 +81,14 @@
 			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="DropDownButton" Path="/ProductSamples/ThemesSamples/NativeControls/DropDownButtonSamples"/>
 			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="Expander" Path="/ProductSamples/ThemesSamples/NativeControls/ExpanderSamples"/>
 			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="ListBox" Path="/ProductSamples/ThemesSamples/NativeControls/ListBoxSamples"/>
-			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="Menu" Path="/ProductSamples/ThemesSamples/NativeControls/MenuSamples"/>
+			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="Menus" Path="/ProductSamples/ThemesSamples/NativeControls/MenusSamples"/>
 			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="NumericUpDown" Path="/ProductSamples/ThemesSamples/NativeControls/NumericUpDownSamples"/>
 			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="ProgressBar" Path="/ProductSamples/ThemesSamples/NativeControls/ProgressBarSamples"/>
 			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="RadioButton" Path="/ProductSamples/ThemesSamples/NativeControls/RadioButtonSamples"/>
-			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="Scroll" Path="/ProductSamples/ThemesSamples/NativeControls/ScrollSamples"/>
+			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="Scrolling" Path="/ProductSamples/ThemesSamples/NativeControls/ScrollingSamples"/>
 			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="Slider" Path="/ProductSamples/ThemesSamples/NativeControls/SliderSamples"/>
 			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="SplitButton" Path="/ProductSamples/ThemesSamples/NativeControls/SplitButtonSamples"/>
-			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="Tab" Path="/ProductSamples/ThemesSamples/NativeControls/TabSamples"/>
+			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="Tabs" Path="/ProductSamples/ThemesSamples/NativeControls/TabsSamples"/>
 			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="TextBox" Path="/ProductSamples/ThemesSamples/NativeControls/TextBoxSamples"/>
 			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="TimePicker" Path="/ProductSamples/ThemesSamples/NativeControls/TimePickerSamples"/>
 			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="ToggleButton" Path="/ProductSamples/ThemesSamples/NativeControls/ToggleButtonSamples"/>
@@ -96,6 +96,7 @@
 			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="ToggleSwitch" Path="/ProductSamples/ThemesSamples/NativeControls/ToggleSwitchSamples"/>
 			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="TreeView" Path="/ProductSamples/ThemesSamples/NativeControls/TreeViewSamples"/>
 			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="Other Controls" Path="/ProductSamples/ThemesSamples/NativeControls/OtherControlsSamples"/>
+			
 			
 
 		</sampleBrowser:ProductFamilyInfo>

@@ -15,9 +15,13 @@
 	<sampleBrowser:ControlExampleItemsControl
 		Header="Actipro themes are applied to all controls so other themes do not have to be imported.">
 
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Control themes" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/native-control-themes#other-controls" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
 
 		<sampleBrowser:ControlExample
-			Header="Carousel usage"
+			Header="Carousel"
 			DataContext="{Binding #carouselSample}"
 			>
 
@@ -47,38 +51,6 @@
 					</StackPanel>
 				</StackPanel>
 			</sampleBrowser:ControlExample.Options>
-		</sampleBrowser:ControlExample>
-
-
-		<sampleBrowser:ControlExample
-			Header="Managed file pickers (Desktop)"
-			Footer="Managed file pickers are only available on desktop platforms where it's possible to open a custom window."
-			>
-
-			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-				<StackPanel.Styles>
-					<Style Selector="Button">
-						<Setter Property="Margin" Value="5" />
-						<Setter Property="Width" Value="140" />
-						<Setter Property="Height" Value="100" />
-					</Style>
-					<Style Selector="TextBlock">
-						<Setter Property="HorizontalAlignment" Value="Center" />
-						<Setter Property="TextWrapping" Value="Wrap" />
-						<Setter Property="TextAlignment" Value="Center" />
-					</Style>
-				</StackPanel.Styles>
-				<Button Classes="theme-soft accent" Click="OnSelectFolderButtonClicked">
-					<TextBlock>Select Folder</TextBlock>
-				</Button>
-				<Button Classes="theme-soft accent" Click="OnOpenFileButtonClicked">
-					<TextBlock>Open File</TextBlock>
-				</Button>
-				<Button Classes="theme-soft accent" Click="OnSaveFileButtonClicked">
-					<TextBlock>Save File</TextBlock>
-				</Button>
-			</StackPanel>
-
 		</sampleBrowser:ControlExample>
 
 

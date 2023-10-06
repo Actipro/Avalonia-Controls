@@ -1,7 +1,9 @@
-﻿using ActiproSoftware.UI.Avalonia.Controls;
+﻿using ActiproSoftware.SampleBrowser;
+using ActiproSoftware.UI.Avalonia.Controls;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using System;
 
 namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.MessageBoxIntro {
 
@@ -31,7 +33,6 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.MessageBox
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		private async void OnSampleShowDialogCustomizationButtonClick(object? sender, RoutedEventArgs e) {
-
 			bool stopShowing = false;
 			var result = await MessageBox.Show(
 				"This MessageBox has been customized to include a CheckBox.",

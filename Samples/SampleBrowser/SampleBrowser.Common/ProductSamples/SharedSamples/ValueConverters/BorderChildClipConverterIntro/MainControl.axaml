@@ -9,6 +9,10 @@
 	<sampleBrowser:ControlExampleItemsControl
 		Header="The BorderChildClipConverter class can be used to clip the child of a Border control that uses rounded corners.">
 
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="BorderChildClipConverter" Url="https://www.actiprosoftware.com/docs/controls/avalonia/shared/value-converters#borderchildclipconverter" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
 
 		<sampleBrowser:ControlExample
 			Header="Basic usage"

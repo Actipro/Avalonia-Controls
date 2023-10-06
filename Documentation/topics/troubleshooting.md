@@ -1,11 +1,32 @@
 ---
-title: "Troubleshooting (General)"
-page-title: "Troubleshooting (General)"
+title: "Troubleshooting"
+page-title: "Troubleshooting"
 order: 45
 ---
-# Troubleshooting (General)
+# Troubleshooting
 
 This topic provides several tips on common questions or issues that you may encounter while using Actipro Avalonia UI controls.
+
+## Actipro Controls are Blank, Transparent or Missing Content
+
+If a control does not appear the way it should (especially if it is blank), this can be caused by missing themes.  Actipro Avalonia UI controls require the [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme) to be loaded for control templates and resources to be available for the controls.
+
+If [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme) is loaded but controls from the `ActiproSoftware.Controls.Avalonia.Pro` NuGet package are still not rendering properly (like the [Fundamentals](fundamentals/index.md) product controls), make sure [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme).[Includes](xref:@ActiproUIRoot.Themes.ModernTheme.Includes) property includes the [Pro](xref:@ActiproUIRoot.Themes.ThemeStyleIncludes.Pro) controls.
+
+See the "Using Actipro Themes" section of the [Themes Getting Started](themes/getting-started.md) topic for more details on loading the theme, including sample code.
+
+## Native Avalonia Controls Missing Actipro Themes
+
+If native themes are missing for basic controls (like `TextBox`), make sure the [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme) is loaded since it defines the control templates and resources used for native controls.
+
+If the [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme) is loaded but native controls are still not properly themed, verify that the [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme) is loaded *after* any other themes since the last loaded theme will override the themes defined before it.  Also make sure that the [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme).[AreNativeControlThemesEnabled](xref:@ActiproUIRoot.Themes.ModernTheme.AreNativeControlThemesEnabled) property is *not* set to `false` as this would prevent the themes from being loaded.
+
+If basic native controls are themed and native `ColorPicker` or `DataGrid` are not, you may be missing a NuGet package and/or theme include setting.
+
+- Be sure to add a reference to the corresponding `ActiproSoftware.Controls.Avalonia.Themes.ColorPicker` and/or `ActiproSoftware.Controls.Avalonia.Themes.DataGrid` NuGet package to ensure control templates are available.
+- When loading [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme), make sure the [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme).[Includes](xref:@ActiproUIRoot.Themes.ModernTheme.Includes) property defines the [NativeColorPicker](xref:@ActiproUIRoot.Themes.ThemeStyleIncludes.NativeColorPicker) and/or [NativeDataGrid](xref:@ActiproUIRoot.Themes.ThemeStyleIncludes.NativeDataGrid) controls.
+
+See the "Using Actipro Themes" section of the [Themes Getting Started](themes/getting-started.md) topic for more details on loading the theme, including sample code.
 
 ## Some String Resource Customizations Don't Take Effect in UI
 

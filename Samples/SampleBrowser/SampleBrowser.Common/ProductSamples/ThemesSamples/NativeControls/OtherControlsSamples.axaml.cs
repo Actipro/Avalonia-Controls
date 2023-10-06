@@ -3,7 +3,6 @@ using Avalonia.Animation;
 using Avalonia.Controls;
 using Avalonia.Controls.Notifications;
 using Avalonia.Interactivity;
-using Avalonia.Platform.Storage;
 using System;
 
 namespace ActiproSoftware.ProductSamples.ThemeSamples.NativeControls {
@@ -26,11 +25,6 @@ namespace ActiproSoftware.ProductSamples.ThemeSamples.NativeControls {
 		// NON-PUBLIC PROCEDURES
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 
-		private IStorageProvider GetStorageProvider() {
-			// NOTE: AppBuilder must be configured with "UseManagedSystemDialogs" to force managed dialogs
-			return TopLevel.GetTopLevel(this)?.StorageProvider ?? throw new InvalidOperationException("Unable to resolve the storage provider.");
-		}
-
 		private void OnCarouselNextButtonClick(object? sender, RoutedEventArgs e) {
 			carouselSample.Next();
 		}
@@ -46,23 +40,6 @@ namespace ActiproSoftware.ProductSamples.ThemeSamples.NativeControls {
 				else
 					_notificationManager?.Show("This message is a simple text string.");
 			}
-		}
-
-		private async void OnOpenFileButtonClicked(object? sender, RoutedEventArgs e) {
-			await GetStorageProvider().OpenFilePickerAsync(new FilePickerOpenOptions());
-		}
-
-		private async void OnSaveFileButtonClicked(object? sender, RoutedEventArgs e) {
-			await GetStorageProvider().SaveFilePickerAsync(new FilePickerSaveOptions() {
-				FileTypeChoices = new[] {
-					FilePickerFileTypes.All,
-					FilePickerFileTypes.TextPlain
-				}
-			});
-		}
-
-		private async void OnSelectFolderButtonClicked(object? sender, RoutedEventArgs e) {
-			await GetStorageProvider().OpenFolderPickerAsync(new FolderPickerOpenOptions());
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////

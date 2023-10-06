@@ -5,6 +5,7 @@ using ActiproSoftware.UI.Avalonia.Input;
 using ActiproSoftware.UI.Avalonia.Media;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Controls.Documents;
 using Avalonia.Interactivity;
 using Avalonia.Layout;
@@ -39,6 +40,9 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 			InitializeComponent();
 
 			UpdateBasicFooterSampleImage();
+
+			// Indicate if dialogs are allowed on the platform
+			displayModeWarning.IsVisible = !(Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime);
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -46,7 +50,7 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		private void OnGenericHyperlinkClick(object? sender, RoutedEventArgs e) {
-			MessageBox.Show("Use this event handler to respond to the hyperlink.", "Hyperlink Clicked");
+			ApplicationViewModel.Instance.MessageService?.ShowMessage("Use this event handler to respond to the hyperlink.", "Hyperlink Clicked");
 		}
 
 		/// <summary>
@@ -64,7 +68,7 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 		}
 
 		private static void ShowContextualHelp(object? context) {
-			MessageBox.Show($"Here is where you would show help for context: {context}.", "Help");
+			ApplicationViewModel.Instance.MessageService?.ShowMessage($"Here is where you would show help for context: {context}.", "Help");
 		}
 
 		/// <summary>
@@ -79,10 +83,10 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 					if (builder.Title is null)
 						builder.WithTitle("Actipro Avalonia Controls");
 				})
-				.AfterShow(async (builder, result) => {
+				.AfterShow((builder, result) => {
 					if (displayResult) {
 						// Notify the user of the response
-						await MessageBox.Show($"The following result was selected:  {result}", "Result");
+						ApplicationViewModel.Instance.MessageService?.ShowMessage($"The following result was selected:  {result}", "Result");
 					}
 				});
 		}
@@ -161,13 +165,13 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 			// SAMPLE: Copy to clipboard
 			//
 
-			await ConfigureUserPrompt(displayResult: false)
+			await ConfigureUserPrompt()
 				.WithTitle("Copy to Clipboard")
 				.WithHeaderContent("Copy details to the clipboard")
-				.WithContent("When displayed as a dialog, the Copy command (CTRL+C) can be invoked to copy the details of the prompt to the clipboard. This sample demonstrates the clipboard functionality and how to customize the text that is placed on the clipboard for various UI elements.")
+				.WithContent("When displayed as a dialog, the Copy command (CTRL+C on Windows) can be invoked to copy the details of the prompt to the clipboard. This sample demonstrates the clipboard functionality and how to customize the text that is placed on the clipboard for various UI elements.")
 				.WithContentClipboardText("This content will be placed on the clipboard instead of the message.")
 				.WithCheckBox("This checked state is reflected on the clipboard", isChecked: true)
-				.WithFooterContent("Click 'Show Sample as Dialog' button and then press 'CTRL+C'")
+				.WithFooterContent("Click 'Show Sample as Dialog' button and then press copy shortcut")
 				.WithFooterClipboardText($"The '{nameof(UserPromptControl.Footer)}' property is auto-converted to clipboard text, but the footer of this instance is configured to use this custom text instead.")
 				.WithFooterImage(ImageProvider.Default.GetImageSource(SharedImageKeys.Question))
 				.WithExpandedInformationHeaderText("Show more", "Show less")
@@ -201,7 +205,7 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 			else
 				throw new NotImplementedException();
 
-			await ConfigureUserPrompt(displayResult: false)
+			await ConfigureUserPrompt()
 				.WithTitle("Custom Theme Prompt")
 				.WithHeaderContent($"Themed {image.ToString().ToLower()} message")
 				.WithContent($"The color scheme for this prompt has been adjusted to further emphasize the type of message based on the image used.")
@@ -221,8 +225,8 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 			// SAMPLE: Integrate classes for pre-styled buttons
 			//
 
-			await ConfigureUserPrompt(displayResult: false)
-				.WithHeaderContent("Each button can have its own class.")
+			await ConfigureUserPrompt()
+				.WithHeaderContent("Each button can have its own style class.")
 				.WithContent("Modern applications often use a mix of button styles to guide a user to a particular response, de-emphasize a less desirable response, or raise awareness about potentially dangerous responses.")
 				.WithButton(_ => _
 					.WithResult(MessageBoxResult.Cancel)
@@ -253,7 +257,7 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 			//		 way to make common configurations reusable.
 
 
-			await ConfigureUserPrompt(displayResult: false)
+			await ConfigureUserPrompt()
 				.WithHeaderContent("Full support for custom button content.")
 				.WithContent("Buttons can have any content, including images. This sample shows images used as content and demonstrates changing the horizontal alignment of all buttons from right (default) to center.")
 				.WithButton(_ => _
@@ -303,7 +307,7 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 			};
 			hyperlink.Click += OnGenericHyperlinkClick;
 
-			await ConfigureUserPrompt(displayResult: false)
+			await ConfigureUserPrompt()
 				.WithHeaderContent("Customize the footer content")
 				.WithContent("A footer can be used to provide additional context for a prompt. This sample demonstrates using a hyperlink to provide contextual help.")
 				.WithFooterContent(new TextBlock() {
@@ -323,7 +327,7 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 			// SAMPLE: Customize the header and content
 			//
 
-			await ConfigureUserPrompt(displayResult: false)
+			await ConfigureUserPrompt()
 				// Setting any header background will align the status icon and header content
 				.WithHeaderContent("Exporting Project (Sample Project)")
 				.WithHeaderForeground(Colors.White)
@@ -362,6 +366,20 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 				.Show();
 		}
 
+		private async void OnSampleShowDialogDisplayModeClick(object? sender, RoutedEventArgs e) {
+			//
+			// SAMPLE: Display mode
+			//
+
+			await ConfigureUserPrompt()
+				.WithHeaderContent("Display mode")
+				.WithStatusImage(MessageBoxImage.Information)
+				.WithContent("The same prompt can be consistently shown on different platforms even when windows are not supported.")
+				.WithStandardButtons(MessageBoxButtons.YesNoCancel)
+				.WithDisplayMode((UserPromptDisplayMode)displayModeSelection.SelectedValue!)
+				.Show();
+		}
+
 		private async void OnSampleShowDialogExpandedInformationErrorClick(object? sender, RoutedEventArgs e) {
 			//
 			// SAMPLE: Expanded information error
@@ -390,7 +408,7 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 			// SAMPLE: Use expanded information to toggle details directly within content
 			//
 
-			await ConfigureUserPrompt(displayResult: false)
+			await ConfigureUserPrompt()
 				.WithHeaderContent("Overwrite file?")
 				.WithStandardButtons(MessageBoxButtons.YesNoCancel)
 				.WithDefaultResult(MessageBoxResult.Cancel)

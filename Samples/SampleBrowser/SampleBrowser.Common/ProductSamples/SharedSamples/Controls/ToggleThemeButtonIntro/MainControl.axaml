@@ -11,12 +11,17 @@
 	</UserControl.Resources>
 
 	<sampleBrowser:ControlExampleItemsControl
-		Header="ToggleThemeButton is a convenient button that, when invoked, will toggle the requested theme between light and dark with a default glyph as content.">
+		Header="ToggleThemeButton is a convenient button that, when invoked, will toggle the requested theme between light and dark variants with a default glyph as content.">
 
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="ToggleThemeButton" Url="https://www.actiprosoftware.com/docs/controls/avalonia/shared/controls/toggle-theme-button" />
+			<sampleBrowser:ControlExampleLinkItem Title="Button control themes" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/native-control-themes#button-controls" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
 
+		
 		<sampleBrowser:ControlExample
 			Header="Basic usage"
-			Footer="Click the button to toggle the application light/dark theme. Actipro native button themes and variants are fully supported."
+			Footer="Click the button to toggle the application light/dark theme variant. Actipro native button themes and semantic color variants are fully supported."
 			DataContext="{Binding #sample}"
 			>
 
@@ -64,7 +69,7 @@
 
 		<sampleBrowser:ControlExample
 			Header="ThemeVariantScope usage"
-			Footer="Click the button to toggle the light/dark theme of the containing variant scope."
+			Footer="Click the button to toggle the light/dark theme variant of the containing variant scope."
 			>
 
 			<StackPanel Spacing="10">
@@ -99,7 +104,7 @@
 
 		<sampleBrowser:ControlExample
 			Header="Target usage"
-			Footer="Click the button to toggle the light/dark theme of the target variant scope."
+			Footer="Click the button to toggle the light/dark theme variant of the target variant scope."
 			>
 
 			<StackPanel Spacing="10">

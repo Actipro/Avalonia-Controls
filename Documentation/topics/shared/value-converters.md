@@ -110,8 +110,11 @@ The [MathConverter](xref:@ActiproUIRoot.Controls.Converters.MathConverter) repre
 | Converted result | The `String` returned by calling `ToLowerInvariant()` on the original value. |
 | Parameter | A `String` that defines the mathematical expression, e.g., `"x + 2"`.  See *Mathematical Expressions* details below. |
 | Target type | Used to define the converted result. `Double` parses the result as a `Double`. `Int64`, `Int32`, and `Int16` will round the `Double`-based result to the nearest whole number. `String` will convert the result using `Object.ToString()`. Other target types are not used and will return the result as a nullable `Object`. |
-| Culture | Not used. |
+| Culture | Ignored. `InvariantCulture` is always used. |
 | Can convert back | No. |
+
+> [!IMPORTANT]
+> All numeric values in an expression are parsed using `InvariantCulture` where comma (`,`) is the thousands separator, and decimal point (`.`) is the decimal separator.
 
 ### Mathematical Expressions
 
@@ -198,7 +201,7 @@ The [StringConverters.ToPercent](xref:@ActiproUIRoot.Controls.Converters.StringC
 | Converted result | The original numeric value multiplied by `100` with a percent indicator.  For example, the value `0.25` will convert to `"25%"`. |
 | Parameter | Not used. |
 | Target type | Not used. |
-| Culture | Not used. |
+| Culture | Ignored. `CurrentCulture` is always used. |
 | Can convert back | No. |
 
 ```xaml

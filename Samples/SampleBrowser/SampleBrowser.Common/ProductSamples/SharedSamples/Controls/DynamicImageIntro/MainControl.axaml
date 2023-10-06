@@ -30,6 +30,11 @@
 	<sampleBrowser:ControlExampleItemsControl
 		Header="The DynamicImage control inherits the native Image control, and is a drop-in replacement with features that allow it to render the source image as grayscale, monochrome, or chromatically adapt the image for use with a dark theme.">
 
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="DynamicImage" Url="https://www.actiprosoftware.com/docs/controls/avalonia/shared/controls/dynamic-image" />
+			<sampleBrowser:ControlExampleLinkItem Title="Image provider" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/image-provider" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
 
 		<sampleBrowser:ControlExample
 			Header="Basic usage (vector image)"
@@ -412,7 +417,7 @@ ImageProvider.Default.ChromaticAdaptationMode = ImageChromaticAdaptationMode.Dar
 
 		<sampleBrowser:ControlExample
 			Header="Dynamic adaptation of monochrome image"
-			Footer="This sample uses a monochrome vector image that dynamically replaces a specifically-designed foreground color in the image the DynamicImage's current foreground color"
+			Footer="This sample uses a monochrome vector image that dynamically replaces a specifically-designed foreground color in the image with the DynamicImage's current foreground color"
 			DataContext="{Binding #vectorMono32Image}"
 			>
 			<StackPanel Orientation="Horizontal" Spacing="50" HorizontalAlignment="Center">

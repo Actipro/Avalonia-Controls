@@ -13,10 +13,15 @@
 	</UserControl.Resources>
 
 	<sampleBrowser:ControlExampleItemsControl
-		Header="Pre-defined classes are available that can be applied to native color picker to achieve a variety of styles.">
+		Header="Pre-defined style classes are available that can be applied to native ColorPicker controls to achieve a variety of styles.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="ColorPicker control themes" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/native-control-themes#colorpicker-control" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
 
 		<sampleBrowser:ControlExample VerticalContentAlignment="Top"
-			Header="Color picker usage"
+			Header="ColorPicker usage"
 			DataContext="{Binding #sample}"
 			>
 
@@ -204,12 +209,12 @@
 
 		<sampleBrowser:ControlExample
 			Header="Themes"
-			Footer="Color picker has an outline theme by default or use classes 'theme-solid', 'theme-soft', 'theme-subtle', or 'theme-link' for an alternate look."
+			Footer="The appearance can be changed from the default with the use of the 'theme-outline', 'theme-solid', 'theme-soft', 'theme-subtle', or 'theme-link' style classes."
 			>
 			<Grid RowDefinitions="Auto,10,Auto,10,Auto" ColumnDefinitions="*,Auto,20,Auto,20,Auto,20,Auto,20,Auto,*">
 				<TextBlock Grid.Row="0" Grid.Column="1" Classes="theme-text-heading size-xs" Text="Outline" HorizontalAlignment="Center" />
-				<ColorPicker Grid.Row="2" Grid.Column="1" Color="{Binding #sample.Color}" />
-				<ColorPicker Grid.Row="4" Grid.Column="1" Color="{Binding #sample.Color}" IsEnabled="False" />
+				<ColorPicker Grid.Row="2" Grid.Column="1" Classes="theme-outline" Color="{Binding #sample.Color}" />
+				<ColorPicker Grid.Row="4" Grid.Column="1" Classes="theme-outline" Color="{Binding #sample.Color}" IsEnabled="False" />
 
 				<TextBlock Grid.Row="0" Grid.Column="3" Classes="theme-text-heading size-xs" Text="Solid" HorizontalAlignment="Center" />
 				<ColorPicker Grid.Row="2" Grid.Column="3" Classes="theme-solid" Color="{Binding #sample.Color}" />
@@ -231,7 +236,7 @@
 			<sampleBrowser:ControlExample.CodeExamples>
 				<sampleBrowser:CodeExample xml:space="preserve">
 					<![CDATA[
-<ColorPicker />
+<ColorPicker Classes="theme-outline" />
 
 <ColorPicker Classes="theme-solid" />
 
@@ -248,34 +253,34 @@
 		
 		<sampleBrowser:ControlExample
 			Header="Accent variants"
-			Footer="Add the 'accent' class to a color picker and the theme accent color will be used to provide emphasis."
+			Footer="Add the 'accent' style class to a ColorPicker and the theme accent color will be used to provide emphasis."
 			>
 			<Grid RowDefinitions="Auto,10,Auto,10,Auto" ColumnDefinitions="*,Auto,20,Auto,20,Auto,20,Auto,20,Auto,*">
 				<TextBlock Grid.Row="0" Grid.Column="1" Classes="theme-text-heading size-xs" Text="Outline" HorizontalAlignment="Center" />
-				<ColorPicker Grid.Row="2" Grid.Column="1" Classes="accent" Color="{Binding #sample.Color}" />
-				<ColorPicker Grid.Row="4" Grid.Column="1" Classes="accent" Color="{Binding #sample.Color}" IsEnabled="False" />
+				<ColorPicker Grid.Row="2" Grid.Column="1" Classes="theme-outline accent" Color="{Binding #sample.Color}" />
+				<ColorPicker Grid.Row="4" Grid.Column="1" Classes="theme-outline accent" Color="{Binding #sample.Color}" IsEnabled="False" />
 
 				<TextBlock Grid.Row="0" Grid.Column="3" Classes="theme-text-heading size-xs" Text="Solid" HorizontalAlignment="Center" />
-				<ColorPicker Grid.Row="2" Grid.Column="3" Classes="accent theme-solid" Color="{Binding #sample.Color}" />
-				<ColorPicker Grid.Row="4" Grid.Column="3" Classes="accent theme-solid" Color="{Binding #sample.Color}" IsEnabled="False" />
+				<ColorPicker Grid.Row="2" Grid.Column="3" Classes="theme-solid accent" Color="{Binding #sample.Color}" />
+				<ColorPicker Grid.Row="4" Grid.Column="3" Classes="theme-solid accent" Color="{Binding #sample.Color}" IsEnabled="False" />
 
 				<TextBlock Grid.Row="0" Grid.Column="5" Classes="theme-text-heading size-xs" Text="Soft" HorizontalAlignment="Center" />
-				<ColorPicker Grid.Row="2" Grid.Column="5" Classes="accent theme-soft" Color="{Binding #sample.Color}" />
-				<ColorPicker Grid.Row="4" Grid.Column="5" Classes="accent theme-soft" Color="{Binding #sample.Color}" IsEnabled="False" />
+				<ColorPicker Grid.Row="2" Grid.Column="5" Classes="theme-soft accent" Color="{Binding #sample.Color}" />
+				<ColorPicker Grid.Row="4" Grid.Column="5" Classes="theme-soft accent" Color="{Binding #sample.Color}" IsEnabled="False" />
 
 				<TextBlock Grid.Row="0" Grid.Column="7" Classes="theme-text-heading size-xs" Text="Subtle" HorizontalAlignment="Center" />
-				<ColorPicker Grid.Row="2" Grid.Column="7" Classes="accent theme-subtle" Color="{Binding #sample.Color}" />
-				<ColorPicker Grid.Row="4" Grid.Column="7" Classes="accent theme-subtle" Color="{Binding #sample.Color}" IsEnabled="False" />
+				<ColorPicker Grid.Row="2" Grid.Column="7" Classes="theme-subtle accent" Color="{Binding #sample.Color}" />
+				<ColorPicker Grid.Row="4" Grid.Column="7" Classes="theme-subtle accent" Color="{Binding #sample.Color}" IsEnabled="False" />
 
 				<TextBlock Grid.Row="0" Grid.Column="9" Classes="theme-text-heading size-xs" Text="Link" HorizontalAlignment="Center" />
-				<ColorPicker Grid.Row="2" Grid.Column="9" Classes="accent theme-link" Color="{Binding #sample.Color}" />
-				<ColorPicker Grid.Row="4" Grid.Column="9" Classes="accent theme-link" Color="{Binding #sample.Color}" IsEnabled="False" />
+				<ColorPicker Grid.Row="2" Grid.Column="9" Classes="theme-link accent" Color="{Binding #sample.Color}" />
+				<ColorPicker Grid.Row="4" Grid.Column="9" Classes="theme-link accent" Color="{Binding #sample.Color}" IsEnabled="False" />
 			</Grid>
 
 			<sampleBrowser:ControlExample.CodeExamples>
 				<sampleBrowser:CodeExample xml:space="preserve">
 					<![CDATA[
-<ColorPicker Classes="accent" />
+<ColorPicker Classes="theme-outline accent" />
 
 <ColorPicker Classes="theme-solid accent" />
 
@@ -292,34 +297,34 @@
 
 		<sampleBrowser:ControlExample
 			Header="Success variants"
-			Footer="Add the 'success' class to a color picker and a color will be used to indicate success."
+			Footer="Add the 'success' style class to a ColorPicker and a color will be used to indicate success."
 			>
 			<Grid RowDefinitions="Auto,10,Auto,10,Auto" ColumnDefinitions="*,Auto,20,Auto,20,Auto,20,Auto,20,Auto,*">
 				<TextBlock Grid.Row="0" Grid.Column="1" Classes="theme-text-heading size-xs" Text="Outline" HorizontalAlignment="Center" />
-				<ColorPicker Grid.Row="2" Grid.Column="1" Classes="success" Color="{Binding #sample.Color}" />
-				<ColorPicker Grid.Row="4" Grid.Column="1" Classes="success" Color="{Binding #sample.Color}" IsEnabled="False" />
+				<ColorPicker Grid.Row="2" Grid.Column="1" Classes="theme-outline success" Color="{Binding #sample.Color}" />
+				<ColorPicker Grid.Row="4" Grid.Column="1" Classes="theme-outline success" Color="{Binding #sample.Color}" IsEnabled="False" />
 
 				<TextBlock Grid.Row="0" Grid.Column="3" Classes="theme-text-heading size-xs" Text="Solid" HorizontalAlignment="Center" />
-				<ColorPicker Grid.Row="2" Grid.Column="3" Classes="success theme-solid" Color="{Binding #sample.Color}" />
-				<ColorPicker Grid.Row="4" Grid.Column="3" Classes="success theme-solid" Color="{Binding #sample.Color}" IsEnabled="False" />
+				<ColorPicker Grid.Row="2" Grid.Column="3" Classes="theme-solid success" Color="{Binding #sample.Color}" />
+				<ColorPicker Grid.Row="4" Grid.Column="3" Classes="theme-solid success" Color="{Binding #sample.Color}" IsEnabled="False" />
 
 				<TextBlock Grid.Row="0" Grid.Column="5" Classes="theme-text-heading size-xs" Text="Soft" HorizontalAlignment="Center" />
-				<ColorPicker Grid.Row="2" Grid.Column="5" Classes="success theme-soft" Color="{Binding #sample.Color}" />
-				<ColorPicker Grid.Row="4" Grid.Column="5" Classes="success theme-soft" Color="{Binding #sample.Color}" IsEnabled="False" />
+				<ColorPicker Grid.Row="2" Grid.Column="5" Classes="theme-soft success" Color="{Binding #sample.Color}" />
+				<ColorPicker Grid.Row="4" Grid.Column="5" Classes="theme-soft success" Color="{Binding #sample.Color}" IsEnabled="False" />
 
 				<TextBlock Grid.Row="0" Grid.Column="7" Classes="theme-text-heading size-xs" Text="Subtle" HorizontalAlignment="Center" />
-				<ColorPicker Grid.Row="2" Grid.Column="7" Classes="success theme-subtle" Color="{Binding #sample.Color}" />
-				<ColorPicker Grid.Row="4" Grid.Column="7" Classes="success theme-subtle" Color="{Binding #sample.Color}" IsEnabled="False" />
+				<ColorPicker Grid.Row="2" Grid.Column="7" Classes="theme-subtle success" Color="{Binding #sample.Color}" />
+				<ColorPicker Grid.Row="4" Grid.Column="7" Classes="theme-subtle success" Color="{Binding #sample.Color}" IsEnabled="False" />
 
 				<TextBlock Grid.Row="0" Grid.Column="9" Classes="theme-text-heading size-xs" Text="Link" HorizontalAlignment="Center" />
-				<ColorPicker Grid.Row="2" Grid.Column="9" Classes="success theme-link" Color="{Binding #sample.Color}" />
-				<ColorPicker Grid.Row="4" Grid.Column="9" Classes="success theme-link" Color="{Binding #sample.Color}" IsEnabled="False" />
+				<ColorPicker Grid.Row="2" Grid.Column="9" Classes="theme-link success" Color="{Binding #sample.Color}" />
+				<ColorPicker Grid.Row="4" Grid.Column="9" Classes="theme-link success" Color="{Binding #sample.Color}" IsEnabled="False" />
 			</Grid>
 
 			<sampleBrowser:ControlExample.CodeExamples>
 				<sampleBrowser:CodeExample xml:space="preserve">
 					<![CDATA[
-<ColorPicker Classes="success" />
+<ColorPicker Classes="theme-outline success" />
 
 <ColorPicker Classes="theme-solid success" />
 
@@ -336,34 +341,34 @@
 
 		<sampleBrowser:ControlExample
 			Header="Warning variants"
-			Footer="Add the 'warning' class to a color picker and a color will be used to indicate caution."
+			Footer="Add the 'warning' style class to a ColorPicker and a color will be used to indicate caution."
 			>
 			<Grid RowDefinitions="Auto,10,Auto,10,Auto" ColumnDefinitions="*,Auto,20,Auto,20,Auto,20,Auto,20,Auto,*">
 				<TextBlock Grid.Row="0" Grid.Column="1" Classes="theme-text-heading size-xs" Text="Outline" HorizontalAlignment="Center" />
-				<ColorPicker Grid.Row="2" Grid.Column="1" Classes="warning" Color="{Binding #sample.Color}" />
-				<ColorPicker Grid.Row="4" Grid.Column="1" Classes="warning" Color="{Binding #sample.Color}" IsEnabled="False" />
+				<ColorPicker Grid.Row="2" Grid.Column="1" Classes="theme-outline warning" Color="{Binding #sample.Color}" />
+				<ColorPicker Grid.Row="4" Grid.Column="1" Classes="theme-outline warning" Color="{Binding #sample.Color}" IsEnabled="False" />
 
 				<TextBlock Grid.Row="0" Grid.Column="3" Classes="theme-text-heading size-xs" Text="Solid" HorizontalAlignment="Center" />
-				<ColorPicker Grid.Row="2" Grid.Column="3" Classes="warning theme-solid" Color="{Binding #sample.Color}" />
-				<ColorPicker Grid.Row="4" Grid.Column="3" Classes="warning theme-solid" Color="{Binding #sample.Color}" IsEnabled="False" />
+				<ColorPicker Grid.Row="2" Grid.Column="3" Classes="theme-solid warning" Color="{Binding #sample.Color}" />
+				<ColorPicker Grid.Row="4" Grid.Column="3" Classes="theme-solid warning" Color="{Binding #sample.Color}" IsEnabled="False" />
 
 				<TextBlock Grid.Row="0" Grid.Column="5" Classes="theme-text-heading size-xs" Text="Soft" HorizontalAlignment="Center" />
-				<ColorPicker Grid.Row="2" Grid.Column="5" Classes="warning theme-soft" Color="{Binding #sample.Color}" />
-				<ColorPicker Grid.Row="4" Grid.Column="5" Classes="warning theme-soft" Color="{Binding #sample.Color}" IsEnabled="False" />
+				<ColorPicker Grid.Row="2" Grid.Column="5" Classes="theme-soft warning" Color="{Binding #sample.Color}" />
+				<ColorPicker Grid.Row="4" Grid.Column="5" Classes="theme-soft warning" Color="{Binding #sample.Color}" IsEnabled="False" />
 
 				<TextBlock Grid.Row="0" Grid.Column="7" Classes="theme-text-heading size-xs" Text="Subtle" HorizontalAlignment="Center" />
-				<ColorPicker Grid.Row="2" Grid.Column="7" Classes="warning theme-subtle" Color="{Binding #sample.Color}" />
-				<ColorPicker Grid.Row="4" Grid.Column="7" Classes="warning theme-subtle" Color="{Binding #sample.Color}" IsEnabled="False" />
+				<ColorPicker Grid.Row="2" Grid.Column="7" Classes="theme-subtle warning" Color="{Binding #sample.Color}" />
+				<ColorPicker Grid.Row="4" Grid.Column="7" Classes="theme-subtle warning" Color="{Binding #sample.Color}" IsEnabled="False" />
 
 				<TextBlock Grid.Row="0" Grid.Column="9" Classes="theme-text-heading size-xs" Text="Link" HorizontalAlignment="Center" />
-				<ColorPicker Grid.Row="2" Grid.Column="9" Classes="warning theme-link" Color="{Binding #sample.Color}" />
-				<ColorPicker Grid.Row="4" Grid.Column="9" Classes="warning theme-link" Color="{Binding #sample.Color}" IsEnabled="False" />
+				<ColorPicker Grid.Row="2" Grid.Column="9" Classes="theme-link warning" Color="{Binding #sample.Color}" />
+				<ColorPicker Grid.Row="4" Grid.Column="9" Classes="theme-link warning" Color="{Binding #sample.Color}" IsEnabled="False" />
 			</Grid>
 
 			<sampleBrowser:ControlExample.CodeExamples>
 				<sampleBrowser:CodeExample xml:space="preserve">
 					<![CDATA[
-<ColorPicker Classes="warning" />
+<ColorPicker Classes="theme-outline warning" />
 
 <ColorPicker Classes="theme-solid warning" />
 
@@ -380,34 +385,34 @@
 
 		<sampleBrowser:ControlExample
 			Header="Danger variants"
-			Footer="Add the 'danger' class to a color picker and a color will be used to indicate extreme caution."
+			Footer="Add the 'danger' style class to a ColorPicker and a color will be used to indicate extreme caution."
 			>
 			<Grid RowDefinitions="Auto,10,Auto,10,Auto" ColumnDefinitions="*,Auto,20,Auto,20,Auto,20,Auto,20,Auto,*">
 				<TextBlock Grid.Row="0" Grid.Column="1" Classes="theme-text-heading size-xs" Text="Outline" HorizontalAlignment="Center" />
-				<ColorPicker Grid.Row="2" Grid.Column="1" Classes="danger" Color="{Binding #sample.Color}" />
-				<ColorPicker Grid.Row="4" Grid.Column="1" Classes="danger" Color="{Binding #sample.Color}" IsEnabled="False" />
+				<ColorPicker Grid.Row="2" Grid.Column="1" Classes="theme-outline danger" Color="{Binding #sample.Color}" />
+				<ColorPicker Grid.Row="4" Grid.Column="1" Classes="theme-outline danger" Color="{Binding #sample.Color}" IsEnabled="False" />
 
 				<TextBlock Grid.Row="0" Grid.Column="3" Classes="theme-text-heading size-xs" Text="Solid" HorizontalAlignment="Center" />
-				<ColorPicker Grid.Row="2" Grid.Column="3" Classes="danger theme-solid" Color="{Binding #sample.Color}" />
-				<ColorPicker Grid.Row="4" Grid.Column="3" Classes="danger theme-solid" Color="{Binding #sample.Color}" IsEnabled="False" />
+				<ColorPicker Grid.Row="2" Grid.Column="3" Classes="theme-solid danger" Color="{Binding #sample.Color}" />
+				<ColorPicker Grid.Row="4" Grid.Column="3" Classes="theme-solid danger" Color="{Binding #sample.Color}" IsEnabled="False" />
 
 				<TextBlock Grid.Row="0" Grid.Column="5" Classes="theme-text-heading size-xs" Text="Soft" HorizontalAlignment="Center" />
-				<ColorPicker Grid.Row="2" Grid.Column="5" Classes="danger theme-soft" Color="{Binding #sample.Color}" />
-				<ColorPicker Grid.Row="4" Grid.Column="5" Classes="danger theme-soft" Color="{Binding #sample.Color}" IsEnabled="False" />
+				<ColorPicker Grid.Row="2" Grid.Column="5" Classes="theme-soft danger" Color="{Binding #sample.Color}" />
+				<ColorPicker Grid.Row="4" Grid.Column="5" Classes="theme-soft danger" Color="{Binding #sample.Color}" IsEnabled="False" />
 
 				<TextBlock Grid.Row="0" Grid.Column="7" Classes="theme-text-heading size-xs" Text="Subtle" HorizontalAlignment="Center" />
-				<ColorPicker Grid.Row="2" Grid.Column="7" Classes="danger theme-subtle" Color="{Binding #sample.Color}" />
-				<ColorPicker Grid.Row="4" Grid.Column="7" Classes="danger theme-subtle" Color="{Binding #sample.Color}" IsEnabled="False" />
+				<ColorPicker Grid.Row="2" Grid.Column="7" Classes="theme-subtle danger" Color="{Binding #sample.Color}" />
+				<ColorPicker Grid.Row="4" Grid.Column="7" Classes="theme-subtle danger" Color="{Binding #sample.Color}" IsEnabled="False" />
 
 				<TextBlock Grid.Row="0" Grid.Column="9" Classes="theme-text-heading size-xs" Text="Link" HorizontalAlignment="Center" />
-				<ColorPicker Grid.Row="2" Grid.Column="9" Classes="danger theme-link" Color="{Binding #sample.Color}" />
-				<ColorPicker Grid.Row="4" Grid.Column="9" Classes="danger theme-link" Color="{Binding #sample.Color}" IsEnabled="False" />
+				<ColorPicker Grid.Row="2" Grid.Column="9" Classes="theme-link danger" Color="{Binding #sample.Color}" />
+				<ColorPicker Grid.Row="4" Grid.Column="9" Classes="theme-link danger" Color="{Binding #sample.Color}" IsEnabled="False" />
 			</Grid>
 
 			<sampleBrowser:ControlExample.CodeExamples>
 				<sampleBrowser:CodeExample xml:space="preserve">
 					<![CDATA[
-<ColorPicker Classes="danger" />
+<ColorPicker Classes="theme-outline danger" />
 
 <ColorPicker Classes="theme-solid danger" />
 
