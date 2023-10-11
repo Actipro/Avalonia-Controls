@@ -89,7 +89,7 @@ It's perfectly fine to create a new instance of the [ThemeDefinition](xref:@Acti
 
 		<actipro:ModernTheme>
 			<actipro:ModernTheme.Definition>
-				<generation:ThemeDefinition TabAppearanceKind="Subtle" />
+				<generation:ThemeDefinition UseAccentedSwitches="True" AccentColorRampName="Indigo" />
 			</actipro:ModernTheme.Definition>
 		</actipro:ModernTheme>
 
@@ -105,7 +105,8 @@ Here is a custom `MyThemeDefinition` class that demonstrates this concept:
 public class MyThemeDefinition : ThemeDefinition {
 
 	public MyThemeDefinition() {
-		TabAppearanceKind = TabAppearanceKind.Subtle;
+		UseAccentedSwitch = true;
+		AccentColorRampName = Hue.Indigo.ToString();
 	}
 
 }

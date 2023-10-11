@@ -4,7 +4,7 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
-	xmlns:systemColl="using:System.Collections"
+	xmlns:system="clr-namespace:System;assembly=System.Runtime"
 	>
 
 	<UserControl.Resources>
@@ -111,7 +111,7 @@
 				<StackPanel Spacing="10">
 					<StackPanel>
 						<TextBlock Classes="theme-form-control-label" Text="Disabled opacity" />
-						<ComboBox ItemsSource="{actipro:DelimitedArray '0.1, 0.25, 0.5, 0.75, 1.0', Type=x:Double}" SelectedItem="{Binding DisabledOpacity}" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray '0.1, 0.25, 0.5, 0.75, 1.0', Type=system:Double}" SelectedItem="{Binding DisabledOpacity}" />
 					</StackPanel>
 					<CheckBox IsChecked="{Binding IsEnabled}" Content="Enabled" />
 					<CheckBox IsChecked="{Binding UseMonochrome}" Content="Use monochrome" />
@@ -221,7 +221,7 @@ ImageProvider.Default.ChromaticAdaptationMode = ImageChromaticAdaptationMode.Dar
 				<StackPanel Spacing="10">
 					<StackPanel>
 						<TextBlock Text="Disabled opacity" />
-						<ComboBox ItemsSource="{actipro:DelimitedArray '0.1, 0.25, 0.5, 0.75, 1.0', Type=x:Double}" SelectedItem="{Binding DisabledOpacity}" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray '0.1, 0.25, 0.5, 0.75, 1.0', Type=system:Double}" SelectedItem="{Binding DisabledOpacity}" />
 					</StackPanel>
 					<CheckBox IsChecked="{Binding IsEnabled}" Content="Enabled" />
 					<CheckBox IsChecked="{Binding UseMonochrome}" Content="Use monochrome" />

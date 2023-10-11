@@ -52,7 +52,7 @@ await UserPromptBuilder.Configure()
 	.Show();
 ```
 
-When a title is undefined or `null`, the [UserPromptWindow](xref:@ActiproUIRoot.Controls.UserPromptWindow).[DefaultTitle](xref:@ActiproUIRoot.Controls.UserPromptWindow.DefaultTitle) will be used. If [DefaultTitle](xref:@ActiproUIRoot.Controls.UserPromptWindow.DefaultTitle) is also `null` the [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl).[StandardStatusImage](xref:@ActiproUIRoot.Controls.UserPromptControl.StandardStatusImage) property is used to provide a contextually appropriate title. For example, the title is set to `"Warning"` when the status image is [MessageBoxImage](xref:@ActiproUIRoot.Controls.MessageBoxImage).[Warning](xref:@ActiproUIRoot.Controls.MessageBoxImage.Warning).
+When a title is undefined or `null`, the [UserPromptBuilder](xref:@ActiproUIRoot.Controls.UserPromptBuilder).[DefaultTitle](xref:@ActiproUIRoot.Controls.UserPromptBuilder.DefaultTitle) will be used. If [DefaultTitle](xref:@ActiproUIRoot.Controls.UserPromptBuilder.DefaultTitle) is also `null` the [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl).[StandardStatusImage](xref:@ActiproUIRoot.Controls.UserPromptControl.StandardStatusImage) property is used to provide a contextually appropriate title. For example, the title is set to `"Warning"` when the status image is [MessageBoxImage](xref:@ActiproUIRoot.Controls.MessageBoxImage).[Warning](xref:@ActiproUIRoot.Controls.MessageBoxImage.Warning).
 
 > [!TIP]
 > See the [Localization](localization.md) topic for details on how to customize the string resources used for default titles.

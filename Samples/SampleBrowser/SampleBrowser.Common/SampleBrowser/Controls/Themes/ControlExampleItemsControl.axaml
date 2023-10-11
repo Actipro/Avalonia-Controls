@@ -45,7 +45,7 @@
 								BorderBrush="{actipro:ThemeResource Container2BorderBrush}" BorderThickness="1,0,0,0">
 							<ScrollViewer HorizontalScrollBarVisibility="Disabled">
 								<StackPanel Margin="20,50" Spacing="30">
-									<StackPanel IsVisible="{Binding HasDocumentation, RelativeSource={RelativeSource TemplatedParent}}}">
+									<StackPanel IsVisible="{Binding HasDocumentation, RelativeSource={RelativeSource TemplatedParent}}">
 										<TextBlock Classes="theme-text-heading size-sm" Text="Documentation" />
 										<ItemsControl Margin="0,5,0,0" IsTabStop="False"
 													  ItemsSource="{Binding Documentation, RelativeSource={RelativeSource TemplatedParent}}">
@@ -60,7 +60,7 @@
 											</ItemsControl.ItemTemplate>
 										</ItemsControl>
 									</StackPanel>
-									<StackPanel IsVisible="{Binding HasRelatedSamples, RelativeSource={RelativeSource TemplatedParent}}}">
+									<StackPanel IsVisible="{Binding HasRelatedSamples, RelativeSource={RelativeSource TemplatedParent}}">
 										<TextBlock Classes="theme-text-heading size-sm" Text="Related Samples" />
 										<ItemsControl Margin="0,5,0,0" IsTabStop="False"
 													  ItemsSource="{Binding RelatedSamples, RelativeSource={RelativeSource TemplatedParent}}">

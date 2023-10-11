@@ -47,13 +47,14 @@
 					</StackPanel>
 					<TextBox x:Name="sampleHeader" Text="Toggle Expansion" Watermark="Header content" UseFloatingWatermark="True" />
 					<CheckBox IsChecked="{Binding IsExpanded}">Expanded</CheckBox>
+					<CheckBox IsChecked="{Binding (actipro:ThemeProperties.IsAnimationEnabled)}">Animated</CheckBox>
 					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
 				</StackPanel>
 			</sampleBrowser:ControlExample.Options>
 			<sampleBrowser:ControlExample.CodeExamples>
 				<sampleBrowser:CodeExample xml:space="preserve">
 					<![CDATA[
-<Expander$(ClassesAttribute) Header="$(Header)"$(ExpandDirectionAttribute)$(IsEnabledAttribute)>
+<Expander$(ClassesAttribute) Header="$(Header)"$(ExpandDirectionAttribute)$(IsEnabledAttribute)$(IsAnimatedAttribute)>
 	<!-- Content Here -->
 </Expander>
 					]]>
@@ -65,6 +66,9 @@
 															   IsEnabled="{Binding ExpandDirection, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Down'}"
 															   Value="{Binding ExpandDirection, StringFormat=' ExpandDirection=&quot;{0}&quot;'}" />
 						<sampleBrowser:CodeExampleSubstitution Key="Header" Value="{Binding #sampleHeader.Text}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsAnimatedAttribute"
+															   IsEnabled="{Binding !(actipro:ThemeProperties.IsAnimationEnabled)}"
+															   Value="&#xD;&#x9;actipro:ThemeProperties.IsAnimationEnabled=&quot;False&quot;" />
 						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute"
 															   IsEnabled="{Binding !IsEnabled}"
 															   Value=" IsEnabled=&quot;False&quot;" />

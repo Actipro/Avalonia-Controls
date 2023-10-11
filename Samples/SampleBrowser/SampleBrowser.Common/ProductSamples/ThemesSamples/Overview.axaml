@@ -5,6 +5,7 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:system="clr-namespace:System;assembly=System.Runtime"
 	>
 
 	<ScrollViewer Classes="theme-scroll-overlay" HorizontalScrollBarVisibility="Disabled">
@@ -46,8 +47,6 @@
 							<RadioButton Classes="accent" Content="Solid" />
 							<RadioButton Classes="accent" Content="Soft" />
 							<RadioButton Classes="accent" Content="Subtle" />
-							<RadioButton Classes="accent" Content="Link" />
-							<RadioButton Classes="accent" Content="Card" />
 						</StackPanel>
 					</StackPanel>
 
@@ -55,7 +54,7 @@
 						<ToggleSwitch Margin="0,0,0,30" Classes="theme-solid accent" Content="Do you love Avalonia?" OnContent="Yes" OffContent="No" IsChecked="True" />
 
 						<TextBlock Classes="theme-form-control-label" Text="Favorite color" />
-						<ColorPicker Color="#8E8CD8" />
+						<ColorPicker Classes="has-value-text" Color="#8E8CD8" />
 					</StackPanel>
 				</Grid>
 
@@ -142,7 +141,7 @@
 					
 					<StackPanel Grid.Column="2">
 						<TextBlock Classes="theme-form-control-label" Text="Birthday" />
-						<CalendarDatePicker SelectedDate="{x:Static x:DateTime.Today}" />
+						<CalendarDatePicker SelectedDate="{x:Static system:DateTime.Today}" />
 					</StackPanel>
 				</Grid>
 

@@ -72,7 +72,7 @@
 															   IsEnabled="{Binding !IsEnabled}"
 															   Value=" IsEnabled=&quot;False&quot;" />
 						<sampleBrowser:CodeExampleSubstitution Key="TabStripPlacementAttribute"
-															   IsEnabled="{Binding TabStripPlacement, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Top'}}"
+															   IsEnabled="{Binding TabStripPlacement, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Top'}"
 															   Value="{Binding TabStripPlacement, StringFormat=' TabStripPlacement=&quot;{0}&quot;'}" />
 					</sampleBrowser:CodeExample.Substitutions>
 				</sampleBrowser:CodeExample>

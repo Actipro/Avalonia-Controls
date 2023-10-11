@@ -28,10 +28,10 @@
 						</Grid.ColumnDefinitions>
 
 						<Border Background="Transparent" ToolTip.Tip="{Binding ToolTipText}">
-							<ContentPresenter Content="{Binding Value}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
-								<ContentPresenter.DataTemplates>
+							<ContentControl Content="{Binding Value}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+								<ContentControl.DataTemplates>
 									
-									<DataTemplate x:DataType="BoxShadow">
+									<DataTemplate x:DataType="BoxShadows">
 										<Border Width="40" Height="40" CornerRadius="5"
 												Background="{actipro:ThemeResource Container1BackgroundBrush}"
 												BorderBrush="{actipro:ThemeResource Container3BorderBrush}" BorderThickness="1"
@@ -81,8 +81,8 @@
 												BorderBrush="{actipro:ThemeResource Container3BorderBrush}" BorderThickness="{Binding}" />
 									</DataTemplate>
 									
-								</ContentPresenter.DataTemplates>
-							</ContentPresenter>
+								</ContentControl.DataTemplates>
+							</ContentControl>
 						</Border>
 
 						<StackPanel Grid.Column="1" Margin="30,0,0,0" VerticalAlignment="Center">

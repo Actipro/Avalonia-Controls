@@ -627,13 +627,13 @@ The [ColorPicker](xref:@ActiproUIRoot.Themes.ControlThemeKind.ColorPicker) contr
 
 ![Screenshot](images/semantic-colors-color-picker.png)
 
-*ColorPicker controls in the default theme with outline, solid, and soft class styles and sementic color variants*
+*ColorPicker controls in the default theme and optional value display with outline, solid, and soft class styles and sementic color variants*
 
 ![Screenshot](images/color-picker-themes.png)
 
-*ColorPicker controls in the default theme with outline, solid, soft, subtle, and link class styles and neutral colors*
+*ColorPicker controls in the default theme (top) and optional value display (bottom) with outline, solid, soft, subtle, and link class styles and neutral colors*
 
-- [ColorPicker](xref:@ActiproUIRoot.Themes.ControlThemeKind.ColorPicker) - Default control theme.  Use `theme-outline`, `theme-solid`, `theme-soft`, `theme-subtle`, and `theme-link` style class names for a different appearance.
+- [ColorPicker](xref:@ActiproUIRoot.Themes.ControlThemeKind.ColorPicker) - Default control theme.  Use `theme-outline`, `theme-solid`, `theme-soft`, `theme-subtle`, and `theme-link` style class names for a different appearance.  Use `has-value-text` style class name to display the current hex value.
 
 #### ColorView Type
 

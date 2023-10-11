@@ -52,7 +52,7 @@ The following table shows all of the resource types that are generated, along wi
 | Resource Type | Related Method |
 |-----|-----|
 | `Boolean` | [GetBooleanResource](xref:@ActiproUIRoot.Themes.Generation.ThemeGenerator.GetBooleanResource*) |
-| `BoxShadow` | [GetBoxShadowResource](xref:@ActiproUIRoot.Themes.Generation.ThemeGenerator.GetBoxShadowResource*) |
+| `BoxShadows` | [GetBoxShadowResource](xref:@ActiproUIRoot.Themes.Generation.ThemeGenerator.GetBoxShadowsResource*) |
 | `Brush` | [GetBrushResource](xref:@ActiproUIRoot.Themes.Generation.ThemeGenerator.GetBrushResource*) |
 | `Char` | [GetCharResource](xref:@ActiproUIRoot.Themes.Generation.ThemeGenerator.GetCharResource*) |
 | `Color` | [GetColorResource](xref:@ActiproUIRoot.Themes.Generation.ThemeGenerator.GetColorResource*) |

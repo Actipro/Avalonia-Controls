@@ -208,7 +208,7 @@ Setting the [ModernTheme.Definition](xref:@ActiproUIRoot.Themes.ModernTheme.Defi
 
 #### Accented Switches Example
 
-The following example shows how to tell the theme to use accent colors for toggled switches by default, instead of using neutral colors.
+The following example shows how to tell the theme to use accent colors for toggled switches by default, instead of using neutral colors. The accent color is also changed from the default blue hue to one based on the indigo hue.
 
 ```xaml
 <Application ...
@@ -218,7 +218,7 @@ The following example shows how to tell the theme to use accent colors for toggl
 
 		<actipro:ModernTheme>
 			<actipro:ModernTheme.Definition>
-				<generation:ThemeDefinition UseAccentedSwitches="True" />
+				<generation:ThemeDefinition UseAccentedSwitches="True" AccentColorRampName="Indigo" />
 			</actipro:ModernTheme.Definition>
 		</actipro:ModernTheme>
 
@@ -244,6 +244,46 @@ The following example shows how to tell the theme to render tabs using a `Subtle
 
 	</Application.Styles>
 </Application>
+```
+
+#### Code-behind Example
+
+A [theme definition](theme-definitions.md) can also be configured in code-behind instead of XAML.
+
+> [!IMPORTANT]
+> When loaded, [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme) initializes resources with a default theme, so configuring the definition in code-behind will result in resources being generated twice during startup.  See the [Theme Definitions](theme-definitions.md) topic for details on how to create a custom definition in code that encapsulates the desired property values and can be assigned in XAML to prevent refreshing resources.
+
+The [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme) should ideally still be initialized in XAML like shown in the examples above and repeated here:
+
+```xaml
+<Application ... xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui">
+	<Application.Styles>
+
+		<actipro:ModernTheme />
+
+	</Application.Styles>
+</Application>
+```
+
+Then in the `Application.Initialize()` method, lookup the [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme) instance, modify the appropriate properties, and refresh resources to apply the change.
+
+```csharp
+public partial class App : Application {
+	...
+
+	public override void Initialize() {
+		AvaloniaXamlLoader.Load(this);
+
+		// Customize the theme definition
+		if (ModernTheme.TryGetCurrent(out var modernTheme) && (modernTheme.Definition is not null)) {
+			modernTheme.Definition.UseAccentedSwitches = true;
+			modernTheme.Definition.AccentColorRampName = Hue.Orange.ToString();
+
+			// Must manually refresh resources after changing definition properties
+			modernTheme.RefreshResources();
+		}
+	}
+}
 ```
 
 > [!TIP]

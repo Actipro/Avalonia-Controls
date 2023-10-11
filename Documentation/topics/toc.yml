@@ -34,6 +34,8 @@ items:
   - name: "Panels"
     href: fundamentals/panels/index.md
     items:
+    - name: "Overview"
+      href: fundamentals/panels/index.md
     - name: "Multi-Column Panel"
       href: fundamentals/panels/multi-column-panel.md
 - name: "Actipro Themes"

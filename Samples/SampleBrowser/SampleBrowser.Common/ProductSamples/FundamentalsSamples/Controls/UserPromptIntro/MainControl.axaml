@@ -629,7 +629,7 @@ var result = await UserPromptBuilder.Configure()
 					]]>
 					<sampleBrowser:CodeExample.Substitutions>
 						<sampleBrowser:CodeExampleSubstitution Key="IsChecked" Value="{Binding IsChecked}" />
-						<sampleBrowser:CodeExampleSubstitution Key="CheckBoxContent" Value="{Binding CheckBoxContent}}" />
+						<sampleBrowser:CodeExampleSubstitution Key="CheckBoxContent" Value="{Binding CheckBoxContent}" />
 					</sampleBrowser:CodeExample.Substitutions>
 				</sampleBrowser:CodeExample>
 				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">

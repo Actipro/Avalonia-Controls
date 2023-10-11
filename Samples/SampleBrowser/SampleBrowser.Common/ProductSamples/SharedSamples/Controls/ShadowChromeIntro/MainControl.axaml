@@ -3,6 +3,7 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:system="clr-namespace:System;assembly=System.Runtime"
 	>
 	<sampleBrowser:ControlExampleItemsControl
 		Header="ShadowChrome is a decorator that renders a beautiful modern drop shadow around its child control.">
@@ -28,7 +29,7 @@
 				<StackPanel Spacing="10">
 					<StackPanel>
 						<TextBlock Classes="theme-form-control-label" Text="Elevation" />
-						<ComboBox ItemsSource="{actipro:DelimitedArray '0,4,8,16,24', Type=x:Int32}" SelectedItem="{Binding #shadow.Elevation}" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray '0,4,8,16,24', Type=system:Int32}" SelectedItem="{Binding #shadow.Elevation}" />
 					</StackPanel>
 					<StackPanel>
 						<TextBlock Classes="theme-form-control-label" Text="Shadow color" />
@@ -36,7 +37,7 @@
 					</StackPanel>
 					<StackPanel>
 						<TextBlock Classes="theme-form-control-label" Text="Shadow opacity" />
-						<ComboBox ItemsSource="{actipro:DelimitedArray '0.1, 0.3, 0.5, 0.75, 1.0', Type=x:Double}" SelectedItem="{Binding #shadow.ShadowOpacity}" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray '0.1, 0.3, 0.5, 0.75, 1.0', Type=system:Double}" SelectedItem="{Binding #shadow.ShadowOpacity}" />
 					</StackPanel>
 					<TextBox Text="{Binding #shadow.ShadowThickness, Mode=OneWay}" IsEnabled="False" Watermark="Shadow thickness" UseFloatingWatermark="True" />
 				</StackPanel>
@@ -63,7 +64,7 @@
 			Footer="This gallery showcases the differences between various common ShadowOpacity values, using an Elevation of 8.  Smaller values result in softer shadows."
 			Padding="40,40,0,0"
 			>
-			<ItemsControl IsTabStop="False" ClipToBounds="False" ItemsSource="{actipro:DelimitedArray '0.1, 0.3, 0.5, 0.75, 1.0', Type=x:Double}">
+			<ItemsControl IsTabStop="False" ClipToBounds="False" ItemsSource="{actipro:DelimitedArray '0.1, 0.3, 0.5, 0.75, 1.0', Type=system:Double}">
 				<ItemsControl.ItemsPanel>
 					<ItemsPanelTemplate>
 						<WrapPanel />
@@ -90,7 +91,7 @@
 			Footer="This gallery demonstrates all of the possible Elevation values."
 			Padding="40,40,0,0"
 			>
-			<ItemsControl IsTabStop="False" ClipToBounds="False" ItemsSource="{actipro:DelimitedArray '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24', Type=x:Int32}">
+			<ItemsControl IsTabStop="False" ClipToBounds="False" ItemsSource="{actipro:DelimitedArray '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24', Type=system:Int32}">
 				<ItemsControl.ItemsPanel>
 					<ItemsPanelTemplate>
 						<WrapPanel />

@@ -41,3 +41,7 @@ Sometimes there may be some data binding errors that show up in the Visual Studi
 It is very important to note that the data binding errors are NOT problems in our code.  If they were, the bindings would not work at all at run-time and you would see broken UI functionality.  This is not the case, everything works correctly at run-time after the visual tree has been fully constructed and the bindings have been re-evaluated.  The Avalonia team plans on refactoring the data binding system in the future to prevent these misleading error messages from being logged.
 
 So just to reiterate, the data binding error messages are not problems with our code, and are simple warnings due to data bindings trying to resolve themselves before the targets' visual trees are created.  You may safely ignore these error messages.
+
+## WebAssembly (WASM) Performance Issues
+
+Avalonia UI supports running in the browser with WebAssembly. As of v11.0, the Avalonia UI framework documention is clear to indicate the functionality is not ready for production.  During testing with Actipro Avalonia UI controls in a browser, you may notice less-than-desired performance compared to running natively. This is expected to improve with .NET 8.

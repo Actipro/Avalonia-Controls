@@ -104,12 +104,16 @@ xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 
 ### ControlThemeKey Markup Extension
 
-The [ControlThemeKeyExtension](xref:@ActiproUIRoot.Markup.Xaml.ControlThemeKeyExtension) markup extension can be used instead to obtain the resource key, and it can be referenced statically with a static resource.  This is effectively the same as using [ControlThemeExtension](xref:@ActiproUIRoot.Markup.Xaml.ControlThemeExtension) and is more verbose.
+The [ControlThemeKeyExtension](xref:@ActiproUIRoot.Markup.Xaml.ControlThemeKeyExtension) markup extension can be used instead to obtain the resource key, and it can be referenced statically with a static resource.  This is effectively the same as using [ControlThemeExtension](xref:@ActiproUIRoot.Markup.Xaml.ControlThemeExtension) and is more verbose. The following example demonstrates setting the control theme for a custom `MyButton` class that derives from `Button` and will be based on the "solid" button theme.
 
 ```xaml
 xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+mlxns:myControls="using:MyApplication.MyControls"
 ...
-<ControlTheme TargetType="CustomButton" BasedOn="{actipro:ControlTheme ButtonSolid}">...</ControlTheme>
+<ControlTheme TargetType="myControls:MyButton" BasedOn="{actipro:ControlTheme ButtonSolid}">
+	<Setter Property="Padding" Value="10" />
+	...
+</ControlTheme>
 ```
 
 ## Reusing Glyphs
