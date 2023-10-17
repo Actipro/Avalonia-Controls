@@ -1,0 +1,84 @@
+<UserControl
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
+
+	</UserControl.Resources>
+	
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Actipro's control themes create a modern appearance for native ListBox controls.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="List control themes" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/native-control-themes#list-controls" />
+			<sampleBrowser:ControlExampleLinkItem Title="Scrolling" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/scrolling" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+			<sampleBrowser:ControlExampleLinkItem Title="DataGrid" Url="/ProductSamples/ThemesSamples/NativeControls/DataGridSamples" />
+			<sampleBrowser:ControlExampleLinkItem Title="TreeView" Url="/ProductSamples/ThemesSamples/NativeControls/TreeViewSamples" />
+		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+
+
+		<sampleBrowser:ControlExample
+			Header="ListBox usage"
+			Footer="The default ScrollViewer will not show a track or line (small increment) scroll buttons.  Set ThemeProperties.ScrollBarHasLineButtons to true to support line buttons.  Optionally set the 'theme-scroll-overlay' style class for a modern look, but only if the scrollbars will not obscure important content."
+			DataContext="{Binding #sample}"
+			>
+
+			<ListBox x:Name="sample" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
+					 BorderThickness="1" Height="150"
+					 Classes.theme-scroll-overlay="{Binding #sampleScrollTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Overlay'}">
+				<ListBoxItem Content="Item 1" IsSelected="True" />
+				<ListBoxItem Content="Item 2" />
+				<ListBoxItem Content="Item 3 (Disabled)" IsEnabled="False" />
+				<ListBoxItem Content="Item 4" />
+				<ListBoxItem Content="Item 5" />
+				<ListBoxItem Content="Item 6" />
+				<ListBoxItem Content="Item 7" />
+			</ListBox>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Scroll theme" />
+						<ComboBox x:Name="sampleScrollTheme" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Overlay'}" />
+					</StackPanel>
+					<CheckBox IsChecked="{Binding (actipro:ThemeProperties.ScrollBarHasLineButtons)}">Has scroll line buttons</CheckBox>
+					<CheckBox IsChecked="{Binding (ScrollViewer.AllowAutoHide)}">Allow scroll auto-hide</CheckBox>
+					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<ListBox$(ClassesAttribute)$(ScrollBarHasLineButtonsAttribute)$(AllowAutoHideAttribute)$(IsEnabledAttribute)>
+	<!-- ListBoxItem Instances -->
+</ListBox>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="AllowAutoHideAttribute"
+															   IsEnabled="{Binding !(ScrollViewer.AllowAutoHide)}"
+															   Value=" ScrollViewer.AllowAutoHide=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
+															   IsEnabled="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), StringFormat=' Classes=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute"
+															   IsEnabled="{Binding !IsEnabled}"
+															   Value=" IsEnabled=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="ScrollBarHasLineButtonsAttribute"
+															   IsEnabled="{Binding (actipro:ThemeProperties.ScrollBarHasLineButtons)}"
+															   Value=" actipro:ThemeProperties.ScrollBarHasLineButtons=&quot;True&quot;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

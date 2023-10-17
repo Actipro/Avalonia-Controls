@@ -1,0 +1,340 @@
+<UserControl 
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Pre-defined style classes are available that can be applied to native ToggleButton controls to achieve a variety of styles.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Button control themes" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/native-control-themes#button-controls" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+			<sampleBrowser:ControlExampleLinkItem Title="Button" Url="/ProductSamples/ThemesSamples/NativeControls/ButtonSamples" />
+			<sampleBrowser:ControlExampleLinkItem Title="CheckBox" Url="/ProductSamples/ThemesSamples/NativeControls/CheckBoxSamples" />
+			<sampleBrowser:ControlExampleLinkItem Title="DropDownButton" Url="/ProductSamples/ThemesSamples/NativeControls/DropDownButtonSamples" />
+			<sampleBrowser:ControlExampleLinkItem Title="SplitButton" Url="/ProductSamples/ThemesSamples/NativeControls/SplitButtonSamples" />
+			<sampleBrowser:ControlExampleLinkItem Title="ToggleSplitButton" Url="/ProductSamples/ThemesSamples/NativeControls/ToggleSplitButtonSamples" />
+			<sampleBrowser:ControlExampleLinkItem Title="ToggleSwitch" Url="/ProductSamples/ThemesSamples/NativeControls/ToggleSwitchSamples" />
+		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+
+
+		<sampleBrowser:ControlExample
+			Header="ToggleButton usage"
+			Footer="Actipro provides multiple themes and variants to alter the appearance of a ToggleButton."
+			DataContext="{Binding #sample}"
+			>
+
+			<ToggleButton x:Name="sample" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
+						  HorizontalAlignment="Center"
+						  Classes.theme-outline="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Outline'}"
+						  Classes.theme-solid="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Solid'}"
+						  Classes.theme-soft="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Soft'}"
+						  Classes.theme-subtle="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Subtle'}"
+						  Classes.theme-link="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Link'}"
+						  Classes.accent="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Accent'}"
+						  Classes.success="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Success'}"
+						  Classes.warning="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Warning'}"
+						  Classes.danger="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Danger'}"
+						  >
+				<Panel>
+					<TextBlock Text="{Binding #sampleText.Text}" IsVisible="{Binding #sampleTheme.SelectedItem, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Link'}" />
+					<TextBlock Text="{Binding #sampleText.Text}" TextDecorations="Underline" IsVisible="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Link'}"/>
+				</Panel>
+			</ToggleButton>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Theme" />
+						<ComboBox x:Name="sampleTheme" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Outline, Solid, Soft, Subtle, Link'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Variant" />
+						<ComboBox x:Name="sampleVariant" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
+					</StackPanel>
+					<TextBox x:Name="sampleText" Text="Button Text" Watermark="Content" UseFloatingWatermark="True" />
+					<CheckBox IsChecked="{Binding IsChecked}">Checked</CheckBox>
+					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<ToggleButton$(ClassesAttribute) IsChecked="$(IsChecked)"$(IsEnabledAttribute)>
+	$(LinkPreContent)$(Content)$(LinkPostContent)
+</ToggleButton>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
+															   IsEnabled="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), StringFormat=' Classes=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="Content" Value="{Binding #sampleText.Text}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsChecked" Value="{Binding IsChecked}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute"
+															   IsEnabled="{Binding !IsEnabled}"
+															   Value=" IsEnabled=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="LinkPreContent"
+															   IsEnabled="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Link'}"
+															   Value="&lt;TextBlock Text=&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="LinkPostContent"
+															   IsEnabled="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Link'}"
+															   Value="&quot; TextDecorations=&quot;Underline&quot; /&gt;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Themes"
+			Footer="The appearance can be changed from the default with the use of the 'theme-outline', 'theme-solid', 'theme-soft', 'theme-subtle', or 'theme-link' style classes."
+			>
+			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,Auto,10,Auto,10,Auto,10,Auto,10,Auto,*">
+				<ToggleButton Grid.Row="0" Grid.Column="1" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-outline" Content="Outline" />
+				<ToggleButton Grid.Row="2" Grid.Column="1" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-outline" Content="Disabled" IsEnabled="False" />
+
+				<ToggleButton Grid.Row="0" Grid.Column="3" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-solid" Content="Solid" />
+				<ToggleButton Grid.Row="2" Grid.Column="3" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-solid" Content="Disabled" IsEnabled="False" />
+
+				<ToggleButton Grid.Row="0" Grid.Column="5" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-soft" Content="Soft" />
+				<ToggleButton Grid.Row="2" Grid.Column="5" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-soft" Content="Disabled" IsEnabled="False" />
+
+				<ToggleButton Grid.Row="0" Grid.Column="7" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-subtle" Content="Subtle" />
+				<ToggleButton Grid.Row="2" Grid.Column="7" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-subtle" Content="Disabled" IsEnabled="False" />
+
+				<ToggleButton Grid.Row="0" Grid.Column="9" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-link">
+					<TextBlock Text="Link" TextDecorations="Underline" />
+				</ToggleButton>
+				<ToggleButton Grid.Row="2" Grid.Column="9" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-link" IsEnabled="False">
+					<TextBlock Text="Disabled" TextDecorations="Underline" />
+				</ToggleButton>
+			</Grid>
+
+			<sampleBrowser:ControlExample.Options>
+				<CheckBox x:Name="isToggledCheckBox" IsChecked="True" Content="Checked" />
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<ToggleButton Classes="theme-outline" Content="Outline" />
+
+<ToggleButton Classes="theme-solid" Content="Solid" />
+
+<ToggleButton Classes="theme-soft" Content="Soft" />
+
+<ToggleButton Classes="theme-subtle" Content="Subtle" />
+
+<ToggleButton Classes="theme-link">
+	<TextBlock Text="Link" TextDecorations="Underline" />
+</ToggleButton>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Accent variants"
+			Footer="Add the 'accent' style class to a ToggleButton and the theme accent color will be used to provide emphasis."
+			>
+			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,Auto,10,Auto,10,Auto,10,Auto,10,Auto,*">
+				<ToggleButton Grid.Row="0" Grid.Column="1" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-outline accent" Content="Outline" />
+				<ToggleButton Grid.Row="2" Grid.Column="1" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-outline accent" Content="Disabled" IsEnabled="False" />
+
+				<ToggleButton Grid.Row="0" Grid.Column="3" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-solid accent" Content="Solid" />
+				<ToggleButton Grid.Row="2" Grid.Column="3" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-solid accent" Content="Disabled" IsEnabled="False" />
+
+				<ToggleButton Grid.Row="0" Grid.Column="5" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-soft accent" Content="Soft" />
+				<ToggleButton Grid.Row="2" Grid.Column="5" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-soft accent" Content="Disabled" IsEnabled="False" />
+
+				<ToggleButton Grid.Row="0" Grid.Column="7" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-subtle accent" Content="Subtle" />
+				<ToggleButton Grid.Row="2" Grid.Column="7" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-subtle accent" Content="Disabled" IsEnabled="False" />
+
+				<ToggleButton Grid.Row="0" Grid.Column="9" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-link accent">
+					<TextBlock Text="Link" TextDecorations="Underline" />
+				</ToggleButton>
+				<ToggleButton Grid.Row="2" Grid.Column="9" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-link accent" IsEnabled="False">
+					<TextBlock Text="Disabled" TextDecorations="Underline" />
+				</ToggleButton>
+			</Grid>
+
+			<sampleBrowser:ControlExample.Options>
+				<CheckBox IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Checked" />
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<ToggleButton Classes="theme-outline accent" Content="Outline" />
+
+<ToggleButton Classes="theme-solid accent" Content="Solid" />
+
+<ToggleButton Classes="theme-soft accent" Content="Soft" />
+
+<ToggleButton Classes="theme-subtle accent" Content="Subtle" />
+
+<ToggleButton Classes="theme-link accent">
+	<TextBlock Text="Link" TextDecorations="Underline" />
+</ToggleButton>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Success variants"
+			Footer="Add the 'success' style class to a ToggleButton and a color will be used to indicate success."
+			>
+			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,Auto,10,Auto,10,Auto,10,Auto,10,Auto,*">
+				<ToggleButton Grid.Row="0" Grid.Column="1" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-outline success" Content="Outline" />
+				<ToggleButton Grid.Row="2" Grid.Column="1" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-outline success" Content="Disabled" IsEnabled="False" />
+
+				<ToggleButton Grid.Row="0" Grid.Column="3" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-solid success" Content="Solid" />
+				<ToggleButton Grid.Row="2" Grid.Column="3" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-solid success" Content="Disabled" IsEnabled="False" />
+
+				<ToggleButton Grid.Row="0" Grid.Column="5" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-soft success" Content="Soft" />
+				<ToggleButton Grid.Row="2" Grid.Column="5" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-soft success" Content="Disabled" IsEnabled="False" />
+
+				<ToggleButton Grid.Row="0" Grid.Column="7" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-subtle success" Content="Subtle" />
+				<ToggleButton Grid.Row="2" Grid.Column="7" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-subtle success" Content="Disabled" IsEnabled="False" />
+
+				<ToggleButton Grid.Row="0" Grid.Column="9" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-link success">
+					<TextBlock Text="Link" TextDecorations="Underline" />
+				</ToggleButton>
+				<ToggleButton Grid.Row="2" Grid.Column="9" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-link success" IsEnabled="False">
+					<TextBlock Text="Disabled" TextDecorations="Underline" />
+				</ToggleButton>
+			</Grid>
+
+			<sampleBrowser:ControlExample.Options>
+				<CheckBox IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Checked" />
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<ToggleButton Classes="theme-outline success" Content="Outline" />
+
+<ToggleButton Classes="theme-solid success" Content="Solid" />
+
+<ToggleButton Classes="theme-soft success" Content="Soft" />
+
+<ToggleButton Classes="theme-subtle success" Content="Subtle" />
+
+<ToggleButton Classes="theme-link success">
+	<TextBlock Text="Link" TextDecorations="Underline" />
+</ToggleButton>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Warning variants"
+			Footer="Add the 'warning' style class to a ToggleButton and a color will be used to indicate caution."
+			>
+			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,Auto,10,Auto,10,Auto,10,Auto,10,Auto,*">
+				<ToggleButton Grid.Row="0" Grid.Column="1" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-outline warning" Content="Outline" />
+				<ToggleButton Grid.Row="2" Grid.Column="1" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-outline warning" Content="Disabled" IsEnabled="False" />
+
+				<ToggleButton Grid.Row="0" Grid.Column="3" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-solid warning" Content="Solid" />
+				<ToggleButton Grid.Row="2" Grid.Column="3" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-solid warning" Content="Disabled" IsEnabled="False" />
+
+				<ToggleButton Grid.Row="0" Grid.Column="5" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-soft warning" Content="Soft" />
+				<ToggleButton Grid.Row="2" Grid.Column="5" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-soft warning" Content="Disabled" IsEnabled="False" />
+
+				<ToggleButton Grid.Row="0" Grid.Column="7" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-subtle warning" Content="Subtle" />
+				<ToggleButton Grid.Row="2" Grid.Column="7" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-subtle warning" Content="Disabled" IsEnabled="False" />
+
+				<ToggleButton Grid.Row="0" Grid.Column="9" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-link warning">
+					<TextBlock Text="Link" TextDecorations="Underline" />
+				</ToggleButton>
+				<ToggleButton Grid.Row="2" Grid.Column="9" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-link warning" IsEnabled="False">
+					<TextBlock Text="Disabled" TextDecorations="Underline" />
+				</ToggleButton>
+			</Grid>
+
+			<sampleBrowser:ControlExample.Options>
+				<CheckBox IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Checked" />
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<ToggleButton Classes="theme-outline warning" Content="Outline" />
+
+<ToggleButton Classes="theme-solid warning" Content="Solid" />
+
+<ToggleButton Classes="theme-soft warning" Content="Soft" />
+
+<ToggleButton Classes="theme-subtle warning" Content="Subtle" />
+
+<ToggleButton Classes="theme-link warning">
+	<TextBlock Text="Link" TextDecorations="Underline" />
+</ToggleButton>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Danger variants"
+			Footer="Add the 'danger' style class to a ToggleButton and a color will be used to indicate extreme caution."
+			>
+			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,Auto,10,Auto,10,Auto,10,Auto,10,Auto,*">
+				<ToggleButton Grid.Row="0" Grid.Column="1" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-outline danger" Content="Outline" />
+				<ToggleButton Grid.Row="2" Grid.Column="1" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-outline danger" Content="Disabled" IsEnabled="False" />
+
+				<ToggleButton Grid.Row="0" Grid.Column="3" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-solid danger" Content="Solid" />
+				<ToggleButton Grid.Row="2" Grid.Column="3" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-solid danger" Content="Disabled" IsEnabled="False" />
+
+				<ToggleButton Grid.Row="0" Grid.Column="5" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-soft danger" Content="Soft" />
+				<ToggleButton Grid.Row="2" Grid.Column="5" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-soft danger" Content="Disabled" IsEnabled="False" />
+
+				<ToggleButton Grid.Row="0" Grid.Column="7" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-subtle danger" Content="Subtle" />
+				<ToggleButton Grid.Row="2" Grid.Column="7" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-subtle danger" Content="Disabled" IsEnabled="False" />
+
+				<ToggleButton Grid.Row="0" Grid.Column="9" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-link danger">
+					<TextBlock Text="Link" TextDecorations="Underline" />
+				</ToggleButton>
+				<ToggleButton Grid.Row="2" Grid.Column="9" IsChecked="{Binding #isToggledCheckBox.IsChecked}" Classes="theme-link danger" IsEnabled="False">
+					<TextBlock Text="Disabled" TextDecorations="Underline" />
+				</ToggleButton>
+			</Grid>
+
+			<sampleBrowser:ControlExample.Options>
+				<CheckBox IsChecked="{Binding #isToggledCheckBox.IsChecked}" Content="Checked" />
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<ToggleButton Classes="theme-outline danger" Content="Outline" />
+
+<ToggleButton Classes="theme-solid danger" Content="Solid" />
+
+<ToggleButton Classes="theme-soft danger" Content="Soft" />
+
+<ToggleButton Classes="theme-subtle danger" Content="Subtle" />
+
+<ToggleButton Classes="theme-link danger">
+	<TextBlock Text="Link" TextDecorations="Underline" />
+</ToggleButton>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

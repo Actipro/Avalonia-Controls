@@ -1,0 +1,99 @@
+<UserControl
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:systemColl="using:System.Collections"
+	>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="The StringConverters class defines several value converters to be used with bindings.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="StringConverters" Url="https://www.actiprosoftware.com/docs/controls/avalonia/shared/value-converters#stringconverters" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+
+		<sampleBrowser:ControlExample
+			Header="ToPercent"
+			Footer="Use StringConverters.ToPercent to easily format a numeric value as a percentage."
+			>
+
+			<StackPanel Spacing="30">
+				<StackPanel>
+					<TextBlock Classes="theme-form-control-label" Text="Original value" />
+					<TextBox x:Name="toPercentSample" Text="0.5" Watermark="Enter a numeric value" />
+				</StackPanel>
+				<StackPanel>
+					<TextBlock Classes="theme-form-control-label" Text="Converted value" />
+					<TextBox IsReadOnly="True" Watermark="Converted value will appear here" Text="{Binding #toPercentSample.Text, Converter={x:Static actipro:StringConverters.ToPercent}, Mode=OneWay}" />
+				</StackPanel>
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<!-- Must use OneWay binding for properties that default to TwoWay -->
+<TextBox Text="{Binding Path, Converter={x:Static actipro:StringConverters.ToPercent}, Mode=OneWay}" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="ToUpperInvariant"
+			Footer="Use StringConverters.ToUpperInvariant to convert all letters to invariant uppercase."
+			>
+
+			<StackPanel Spacing="30">
+				<StackPanel>
+					<TextBlock Classes="theme-form-control-label" Text="Original value" />
+					<TextBox x:Name="toUpperSample" Text="Actipro Software" Watermark="Enter text value" />
+				</StackPanel>
+				<StackPanel>
+					<TextBlock Classes="theme-form-control-label" Text="Converted value" />
+					<TextBox IsReadOnly="True" Watermark="Converted value will appear here" Text="{Binding #toUpperSample.Text, Converter={x:Static actipro:StringConverters.ToUpperInvariant}, Mode=OneWay}" />
+				</StackPanel>
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<!-- Must use OneWay binding for properties that default to TwoWay -->
+<TextBox Text="{Binding Path, Converter={x:Static actipro:StringConverters.ToUpperInvariant}, Mode=OneWay}" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="ToLowerInvariant"
+			Footer="Use StringConverters.ToLowerInvariant to convert all letters to invariant lowercase."
+			>
+
+			<StackPanel Spacing="30">
+				<StackPanel>
+					<TextBlock Classes="theme-form-control-label" Text="Original value" />
+					<TextBox x:Name="toLowerSample" Text="Actipro Software" Watermark="Enter text value" />
+				</StackPanel>
+				<StackPanel>
+					<TextBlock Classes="theme-form-control-label" Text="Converted value" />
+					<TextBox IsReadOnly="True" Watermark="Converted value will appear here" Text="{Binding #toLowerSample.Text, Converter={x:Static actipro:StringConverters.ToLowerInvariant}, Mode=OneWay}" />
+				</StackPanel>
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<!-- Must use OneWay binding for properties that default to TwoWay -->
+<TextBox Text="{Binding Path, Converter={x:Static actipro:StringConverters.ToLowerInvariant}, Mode=OneWay}" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+</UserControl>

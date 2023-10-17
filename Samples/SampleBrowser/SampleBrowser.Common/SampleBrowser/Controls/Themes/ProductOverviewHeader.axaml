@@ -1,0 +1,47 @@
+<ResourceDictionary 
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+	<ControlTheme x:Key="{x:Type sampleBrowser:ProductOverviewHeader}" TargetType="sampleBrowser:ProductOverviewHeader">
+		<Setter Property="Focusable" Value="False" />
+		<Setter Property="FontSize" Value="{actipro:ThemeResource DefaultFontSizeLarge}" />
+		<Setter Property="Template">
+			<ControlTemplate x:DataType="sampleBrowser:ApplicationViewModel">
+
+				<StackPanel Classes="sample-layout-panel" Margin="50,50,50,0">
+					<Panel Height="150">
+						<actipro:MeshGradientPresenter Classes="banner" />
+
+						<Viewbox Stretch="Uniform">
+							<Viewbox.Effect>
+								<DropShadowEffect OffsetX="0" OffsetY="1" BlurRadius="5" Opacity="0.2" />
+							</Viewbox.Effect>
+
+							<StackPanel Margin="30,20">
+								<TextBlock Text="{Binding ViewItemInfo.ProductFamily.Title}" FontSize="30" FontWeight="Bold" Foreground="#ffffff" TextAlignment="Center" VerticalAlignment="Center" />
+								<TextBlock Text="{Binding ViewItemInfo.ProductFamily.Summary}" FontSize="20" FontWeight="Normal" Foreground="#e3edff" />
+							</StackPanel>
+						</Viewbox>
+					</Panel>
+
+					<ContentPresenter
+						x:Name="PART_ContentPresenter"
+						Margin="30,50,30,0"
+						Content="{TemplateBinding Content}"
+						ContentTemplate="{TemplateBinding ContentTemplate}"
+						HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+						IsVisible="{TemplateBinding Content, Converter={x:Static ObjectConverters.IsNotNull}}"
+						Padding="{TemplateBinding Padding}"
+						TextWrapping="Wrap"
+						VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+						/>
+				</StackPanel>
+
+			</ControlTemplate>
+		</Setter>
+	</ControlTheme>
+	
+</ResourceDictionary>

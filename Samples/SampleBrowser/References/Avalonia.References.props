@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+
+	<PropertyGroup>
+		<AvaloniaVersion>11.0.5</AvaloniaVersion>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<PackageReference Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" Condition="'$(Configuration)' == 'Debug'" />
+	</ItemGroup>
+	
+	<ItemGroup Condition="$(MSBuildProjectName.Contains('.Common')) == 'true'">
+		<PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
+		<PackageReference Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)" />
+		<PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" Condition="$([System.Text.RegularExpressions.Regex]::IsMatch($(DefineConstants), '^(.*;)*FLUENT_THEME(;.*)*$'))" />
+		<PackageReference Include="Avalonia.Themes.Simple" Version="$(AvaloniaVersion)" Condition="$([System.Text.RegularExpressions.Regex]::IsMatch($(DefineConstants), '^(.*;)*SIMPLE_THEME(;.*)*$'))" />
+	</ItemGroup>
+
+	<ItemGroup Condition="$(MSBuildProjectName.Contains('.Web')) == 'true'">
+		<PackageReference Include="Avalonia.Browser" Version="$(AvaloniaVersion)" />
+	</ItemGroup>
+
+	<ItemGroup Condition="$(MSBuildProjectName.Contains('.Desktop')) == 'true'">
+		<PackageReference Include="Avalonia.Desktop" Version="$(AvaloniaVersion)" />
+	</ItemGroup>
+
+</Project>

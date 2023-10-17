@@ -1,0 +1,399 @@
+<UserControl
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Pre-defined style classes are available that can be applied to native Button controls to achieve a variety of styles.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Button control themes" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/native-control-themes#button-controls" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+			<sampleBrowser:ControlExampleLinkItem Title="DropDownButton" Url="/ProductSamples/ThemesSamples/NativeControls/DropDownButtonSamples" />
+			<sampleBrowser:ControlExampleLinkItem Title="SplitButton" Url="/ProductSamples/ThemesSamples/NativeControls/SplitButtonSamples" />
+			<sampleBrowser:ControlExampleLinkItem Title="ToggleButton" Url="/ProductSamples/ThemesSamples/NativeControls/ToggleButtonSamples" />
+			<sampleBrowser:ControlExampleLinkItem Title="ToggleSplitButton" Url="/ProductSamples/ThemesSamples/NativeControls/ToggleSplitButtonSamples" />
+		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+
+
+		<sampleBrowser:ControlExample
+			Header="Button usage"
+			Footer="Actipro provides multiple themes and variants to alter the appearance of a Button."
+			DataContext="{Binding #sample}"
+			>
+
+			<Button x:Name="sample" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
+					HorizontalAlignment="Center"
+					Classes.theme-outline="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Outline'}"
+					Classes.theme-solid="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Solid'}"
+					Classes.theme-soft="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Soft'}"
+					Classes.theme-subtle="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Subtle'}"
+					Classes.theme-link="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Link'}"
+					Classes.accent="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Accent'}"
+					Classes.success="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Success'}"
+					Classes.warning="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Warning'}"
+					Classes.danger="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Danger'}"
+					>
+				<Panel>
+					<TextBlock Text="{Binding #sampleText.Text}" IsVisible="{Binding #sampleTheme.SelectedItem, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Link'}" />
+					<TextBlock Text="{Binding #sampleText.Text}" TextDecorations="Underline" IsVisible="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Link'}"/>
+				</Panel>
+			</Button>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Theme" />
+						<ComboBox x:Name="sampleTheme" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Outline, Solid, Soft, Subtle, Link'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Variant" />
+						<ComboBox x:Name="sampleVariant" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
+					</StackPanel>
+					<TextBox x:Name="sampleText" Text="Button Text" Watermark="Content" UseFloatingWatermark="True" />
+					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<Button$(ClassesAttribute)$(IsEnabledAttribute)>
+	$(LinkPreContent)$(Content)$(LinkPostContent)
+</Button>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
+															   IsEnabled="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), StringFormat=' Classes=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="Content" Value="{Binding #sampleText.Text}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute"
+															   IsEnabled="{Binding !IsEnabled}"
+															   Value=" IsEnabled=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="LinkPreContent"
+															   IsEnabled="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Link'}"
+															   Value="&lt;TextBlock Text=&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="LinkPostContent"
+															   IsEnabled="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Link'}"
+															   Value="&quot; TextDecorations=&quot;Underline&quot; /&gt;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Themes"
+			Footer="The appearance can be changed from the default with the use of the 'theme-outline', 'theme-solid', 'theme-soft', 'theme-subtle', or 'theme-link' style classes."
+			>
+			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,Auto,10,Auto,10,Auto,10,Auto,10,Auto,*">
+				<Button Grid.Row="0" Grid.Column="1" Classes="theme-outline" Content="Outline" />
+				<Button Grid.Row="2" Grid.Column="1" Classes="theme-outline" Content="Disabled" IsEnabled="False" />
+
+				<Button Grid.Row="0" Grid.Column="3" Classes="theme-solid" Content="Solid" />
+				<Button Grid.Row="2" Grid.Column="3" Classes="theme-solid" Content="Disabled" IsEnabled="False" />
+
+				<Button Grid.Row="0" Grid.Column="5" Classes="theme-soft" Content="Soft" />
+				<Button Grid.Row="2" Grid.Column="5" Classes="theme-soft" Content="Disabled" IsEnabled="False" />
+
+				<Button Grid.Row="0" Grid.Column="7" Classes="theme-subtle" Content="Subtle" />
+				<Button Grid.Row="2" Grid.Column="7" Classes="theme-subtle" Content="Disabled" IsEnabled="False" />
+
+				<Button Grid.Row="0" Grid.Column="9" Classes="theme-link">
+					<TextBlock Text="Link" TextDecorations="Underline" />
+				</Button>
+				<Button Grid.Row="2" Grid.Column="9" Classes="theme-link" IsEnabled="False">
+					<TextBlock Text="Disabled" TextDecorations="Underline" />
+				</Button>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<Button Classes="theme-outline" Content="Outline" />
+
+<Button Classes="theme-solid" Content="Solid" />
+
+<Button Classes="theme-soft" Content="Soft" />
+
+<Button Classes="theme-subtle" Content="Subtle" />
+
+<Button Classes="theme-link">
+	<TextBlock Text="Link" TextDecorations="Underline" />
+</Button>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Accent variants"
+			Footer="Add the 'accent' style class to a Button and the theme accent color will be used to provide emphasis."
+			>
+			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,Auto,10,Auto,10,Auto,10,Auto,10,Auto,*">
+				<Button Grid.Row="0" Grid.Column="1" Classes="theme-outline accent" Content="Outline" />
+				<Button Grid.Row="2" Grid.Column="1" Classes="theme-outline accent" Content="Disabled" IsEnabled="False" />
+
+				<Button Grid.Row="0" Grid.Column="3" Classes="theme-solid accent" Content="Solid" />
+				<Button Grid.Row="2" Grid.Column="3" Classes="theme-solid accent" Content="Disabled" IsEnabled="False" />
+
+				<Button Grid.Row="0" Grid.Column="5" Classes="theme-soft accent" Content="Soft" />
+				<Button Grid.Row="2" Grid.Column="5" Classes="theme-soft accent" Content="Disabled" IsEnabled="False" />
+
+				<Button Grid.Row="0" Grid.Column="7" Classes="theme-subtle accent" Content="Subtle" />
+				<Button Grid.Row="2" Grid.Column="7" Classes="theme-subtle accent" Content="Disabled" IsEnabled="False" />
+
+				<Button Grid.Row="0" Grid.Column="9" Classes="theme-link accent">
+					<TextBlock Text="Link" TextDecorations="Underline" />
+				</Button>
+				<Button Grid.Row="2" Grid.Column="9" Classes="theme-link accent" IsEnabled="False">
+					<TextBlock Text="Disabled" TextDecorations="Underline" />
+				</Button>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<Button Classes="theme-outline accent" Content="Outline" />
+
+<Button Classes="theme-solid accent" Content="Solid" />
+
+<Button Classes="theme-soft accent" Content="Soft" />
+
+<Button Classes="theme-subtle accent" Content="Subtle" />
+
+<Button Classes="theme-link accent">
+	<TextBlock Text="Link" TextDecorations="Underline" />
+</Button>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Success variants"
+			Footer="Add the 'success' style class to a Button and a color will be used to indicate success."
+			>
+			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,Auto,10,Auto,10,Auto,10,Auto,10,Auto,*">
+				<Button Grid.Row="0" Grid.Column="1" Classes="theme-outline success" Content="Outline" />
+				<Button Grid.Row="2" Grid.Column="1" Classes="theme-outline success" Content="Disabled" IsEnabled="False" />
+
+				<Button Grid.Row="0" Grid.Column="3" Classes="theme-solid success" Content="Solid" />
+				<Button Grid.Row="2" Grid.Column="3" Classes="theme-solid success" Content="Disabled" IsEnabled="False" />
+
+				<Button Grid.Row="0" Grid.Column="5" Classes="theme-soft success" Content="Soft" />
+				<Button Grid.Row="2" Grid.Column="5" Classes="theme-soft success" Content="Disabled" IsEnabled="False" />
+
+				<Button Grid.Row="0" Grid.Column="7" Classes="theme-subtle success" Content="Subtle" />
+				<Button Grid.Row="2" Grid.Column="7" Classes="theme-subtle success" Content="Disabled" IsEnabled="False" />
+
+				<Button Grid.Row="0" Grid.Column="9" Classes="theme-link success">
+					<TextBlock Text="Link" TextDecorations="Underline" />
+				</Button>
+				<Button Grid.Row="2" Grid.Column="9" Classes="theme-link success" IsEnabled="False">
+					<TextBlock Text="Disabled" TextDecorations="Underline" />
+				</Button>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<Button Classes="theme-outline success" Content="Outline" />
+
+<Button Classes="theme-solid success" Content="Solid" />
+
+<Button Classes="theme-soft success" Content="Soft" />
+
+<Button Classes="theme-subtle success" Content="Subtle" />
+
+<Button Classes="theme-link success">
+	<TextBlock Text="Link" TextDecorations="Underline" />
+</Button>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Warning variants"
+			Footer="Add the 'warning' style class to a Button and a color will be used to indicate caution."
+			>
+			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,Auto,10,Auto,10,Auto,10,Auto,10,Auto,*">
+				<Button Grid.Row="0" Grid.Column="1" Classes="theme-outline warning" Content="Outline" />
+				<Button Grid.Row="2" Grid.Column="1" Classes="theme-outline warning" Content="Disabled" IsEnabled="False" />
+
+				<Button Grid.Row="0" Grid.Column="3" Classes="theme-solid warning" Content="Solid" />
+				<Button Grid.Row="2" Grid.Column="3" Classes="theme-solid warning" Content="Disabled" IsEnabled="False" />
+
+				<Button Grid.Row="0" Grid.Column="5" Classes="theme-soft warning" Content="Soft" />
+				<Button Grid.Row="2" Grid.Column="5" Classes="theme-soft warning" Content="Disabled" IsEnabled="False" />
+
+				<Button Grid.Row="0" Grid.Column="7" Classes="theme-subtle warning" Content="Subtle" />
+				<Button Grid.Row="2" Grid.Column="7" Classes="theme-subtle warning" Content="Disabled" IsEnabled="False" />
+
+				<Button Grid.Row="0" Grid.Column="9" Classes="theme-link warning">
+					<TextBlock Text="Link" TextDecorations="Underline" />
+				</Button>
+				<Button Grid.Row="2" Grid.Column="9" Classes="theme-link warning" IsEnabled="False">
+					<TextBlock Text="Disabled" TextDecorations="Underline" />
+				</Button>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<Button Classes="theme-outline warning" Content="Outline" />
+
+<Button Classes="theme-solid warning" Content="Solid" />
+
+<Button Classes="theme-soft warning" Content="Soft" />
+
+<Button Classes="theme-subtle warning" Content="Subtle" />
+
+<Button Classes="theme-link warning">
+	<TextBlock Text="Link" TextDecorations="Underline" />
+</Button>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Danger variants"
+			Footer="Add the 'danger' style class to a Button and a color will be used to indicate extreme caution."
+			>
+			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,Auto,10,Auto,10,Auto,10,Auto,10,Auto,*">
+				<Button Grid.Row="0" Grid.Column="1" Classes="theme-outline danger" Content="Outline" />
+				<Button Grid.Row="2" Grid.Column="1" Classes="theme-outline danger" Content="Disabled" IsEnabled="False" />
+
+				<Button Grid.Row="0" Grid.Column="3" Classes="theme-solid danger" Content="Solid" />
+				<Button Grid.Row="2" Grid.Column="3" Classes="theme-solid danger" Content="Disabled" IsEnabled="False" />
+
+				<Button Grid.Row="0" Grid.Column="5" Classes="theme-soft danger" Content="Soft" />
+				<Button Grid.Row="2" Grid.Column="5" Classes="theme-soft danger" Content="Disabled" IsEnabled="False" />
+
+				<Button Grid.Row="0" Grid.Column="7" Classes="theme-subtle danger" Content="Subtle" />
+				<Button Grid.Row="2" Grid.Column="7" Classes="theme-subtle danger" Content="Disabled" IsEnabled="False" />
+
+				<Button Grid.Row="0" Grid.Column="9" Classes="theme-link danger">
+					<TextBlock Text="Link" TextDecorations="Underline" />
+				</Button>
+				<Button Grid.Row="2" Grid.Column="9" Classes="theme-link danger" IsEnabled="False">
+					<TextBlock Text="Disabled" TextDecorations="Underline" />
+				</Button>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<Button Classes="theme-outline danger" Content="Outline" />
+
+<Button Classes="theme-solid danger" Content="Solid" />
+
+<Button Classes="theme-soft danger" Content="Soft" />
+
+<Button Classes="theme-subtle danger" Content="Subtle" />
+
+<Button Classes="theme-link danger">
+	<TextBlock Text="Link" TextDecorations="Underline" />
+</Button>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="RepeatButton usage"
+			Footer="RepeatButton has the same theme and variant support as the base Button control."
+			>
+
+			<Grid RowDefinitions="Auto,10,Auto,10,Auto,10,Auto,10,Auto" ColumnDefinitions="*,Auto,10,Auto,10,Auto,10,Auto,10,Auto,*">
+				<Grid.Styles>
+					<Style Selector="RepeatButton">
+						<Setter Property="MinWidth" Value="100" />
+					</Style>
+				</Grid.Styles>
+
+				<RepeatButton Grid.Row="0" Grid.Column="1" IsEnabled="{Binding #repeatButtonIsEnabled.IsChecked}" Classes="theme-outline" Content="Outline" />
+				<RepeatButton Grid.Row="2" Grid.Column="1" IsEnabled="{Binding #repeatButtonIsEnabled.IsChecked}" Classes="theme-outline accent" Content="Outline" />
+				<RepeatButton Grid.Row="4" Grid.Column="1" IsEnabled="{Binding #repeatButtonIsEnabled.IsChecked}" Classes="theme-outline success" Content="Outline" />
+				<RepeatButton Grid.Row="6" Grid.Column="1" IsEnabled="{Binding #repeatButtonIsEnabled.IsChecked}" Classes="theme-outline warning" Content="Outline" />
+				<RepeatButton Grid.Row="8" Grid.Column="1" IsEnabled="{Binding #repeatButtonIsEnabled.IsChecked}" Classes="theme-outline danger" Content="Outline" />
+
+				<RepeatButton Grid.Row="0" Grid.Column="3" IsEnabled="{Binding #repeatButtonIsEnabled.IsChecked}" Classes="theme-solid" Content="Solid" />
+				<RepeatButton Grid.Row="2" Grid.Column="3" IsEnabled="{Binding #repeatButtonIsEnabled.IsChecked}" Classes="theme-solid accent" Content="Solid" />
+				<RepeatButton Grid.Row="4" Grid.Column="3" IsEnabled="{Binding #repeatButtonIsEnabled.IsChecked}" Classes="theme-solid success" Content="Solid" />
+				<RepeatButton Grid.Row="6" Grid.Column="3" IsEnabled="{Binding #repeatButtonIsEnabled.IsChecked}" Classes="theme-solid warning" Content="Solid" />
+				<RepeatButton Grid.Row="8" Grid.Column="3" IsEnabled="{Binding #repeatButtonIsEnabled.IsChecked}" Classes="theme-solid danger" Content="Solid" />
+
+				<RepeatButton Grid.Row="0" Grid.Column="5" IsEnabled="{Binding #repeatButtonIsEnabled.IsChecked}" Classes="theme-soft" Content="Soft" />
+				<RepeatButton Grid.Row="2" Grid.Column="5" IsEnabled="{Binding #repeatButtonIsEnabled.IsChecked}" Classes="theme-soft accent" Content="Soft" />
+				<RepeatButton Grid.Row="4" Grid.Column="5" IsEnabled="{Binding #repeatButtonIsEnabled.IsChecked}" Classes="theme-soft success" Content="Soft" />
+				<RepeatButton Grid.Row="6" Grid.Column="5" IsEnabled="{Binding #repeatButtonIsEnabled.IsChecked}" Classes="theme-soft warning" Content="Soft" />
+				<RepeatButton Grid.Row="8" Grid.Column="5" IsEnabled="{Binding #repeatButtonIsEnabled.IsChecked}" Classes="theme-soft danger" Content="Soft" />
+
+				<RepeatButton Grid.Row="0" Grid.Column="7" IsEnabled="{Binding #repeatButtonIsEnabled.IsChecked}" Classes="theme-subtle" Content="Subtle" />
+				<RepeatButton Grid.Row="2" Grid.Column="7" IsEnabled="{Binding #repeatButtonIsEnabled.IsChecked}" Classes="theme-subtle accent" Content="Subtle" />
+				<RepeatButton Grid.Row="4" Grid.Column="7" IsEnabled="{Binding #repeatButtonIsEnabled.IsChecked}" Classes="theme-subtle success" Content="Subtle" />
+				<RepeatButton Grid.Row="6" Grid.Column="7" IsEnabled="{Binding #repeatButtonIsEnabled.IsChecked}" Classes="theme-subtle warning" Content="Subtle" />
+				<RepeatButton Grid.Row="8" Grid.Column="7" IsEnabled="{Binding #repeatButtonIsEnabled.IsChecked}" Classes="theme-subtle danger" Content="Subtle" />
+
+				<RepeatButton Grid.Row="0" Grid.Column="9" IsEnabled="{Binding #repeatButtonIsEnabled.IsChecked}" Classes="theme-link">
+					<TextBlock Text="Link" TextDecorations="Underline" />
+				</RepeatButton>
+				<RepeatButton Grid.Row="2" Grid.Column="9" IsEnabled="{Binding #repeatButtonIsEnabled.IsChecked}" Classes="theme-link accent">
+					<TextBlock Text="Link" TextDecorations="Underline" />
+				</RepeatButton>
+				<RepeatButton Grid.Row="4" Grid.Column="9" IsEnabled="{Binding #repeatButtonIsEnabled.IsChecked}" Classes="theme-link success">
+					<TextBlock Text="Link" TextDecorations="Underline" />
+				</RepeatButton>
+				<RepeatButton Grid.Row="6" Grid.Column="9" IsEnabled="{Binding #repeatButtonIsEnabled.IsChecked}" Classes="theme-link warning">
+					<TextBlock Text="Link" TextDecorations="Underline" />
+				</RepeatButton>
+				<RepeatButton Grid.Row="8" Grid.Column="9" IsEnabled="{Binding #repeatButtonIsEnabled.IsChecked}" Classes="theme-link danger">
+					<TextBlock Text="Link" TextDecorations="Underline" />
+				</RepeatButton>
+			</Grid>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<CheckBox x:Name="repeatButtonIsEnabled" IsChecked="True">Enabled</CheckBox>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<RepeatButton Classes="theme-outline accent" Content="Outline" />
+
+<RepeatButton Classes="theme-solid accent" Content="Solid" />
+
+<RepeatButton Classes="theme-soft accent" Content="Soft" />
+
+<RepeatButton Classes="theme-subtle accent" Content="Subtle" />
+
+<RepeatButton Classes="theme-link accent">
+	<TextBlock Text="Link" TextDecorations="Underline" />
+</RepeatButton>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

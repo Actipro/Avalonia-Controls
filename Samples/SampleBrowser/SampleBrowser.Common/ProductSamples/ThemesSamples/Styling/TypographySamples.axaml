@@ -1,0 +1,536 @@
+<UserControl
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	Classes="sample-presenter"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Numerous style classes are available that can render TextBlock, SelectableTextBlock, and Label controls in various ways.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Typography" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/typography" />
+			<sampleBrowser:ControlExampleLinkItem Title="Typography control themes" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/native-control-themes#typography-controls" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+
+		<sampleBrowser:ControlExample
+			Header="Basic usage"
+			Footer="Actipro provides multiple themes and variants to alter the appearance of a TextBlock."
+			DataContext="{Binding #sample}"
+			>
+
+			<TextBlock x:Name="sample" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
+				Text="{Binding #sampleText.Text}"
+				HorizontalAlignment="Center"
+				Classes.theme-text-heading="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Heading'}"
+				Classes.theme-text-body="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Body'}"
+				Classes.theme-text-code="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Code'}"
+				Classes.size-xs="{Binding #sampleSize.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Extra Small'}"
+				Classes.size-sm="{Binding #sampleSize.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Small'}"
+				Classes.size-lg="{Binding #sampleSize.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Large'}"
+				Classes.size-xl="{Binding #sampleSize.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Extra Large'}"
+				Classes.accent="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Accent'}"
+				Classes.success="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Success'}"
+				Classes.warning="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Warning'}"
+				Classes.danger="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Danger'}"
+				/>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10" MinWidth="200">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Theme" />
+						<ComboBox x:Name="sampleTheme" SelectedIndex="1" ItemsSource="{actipro:DelimitedArray 'Default, Heading, Body, Code'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Variant" />
+						<ComboBox x:Name="sampleVariant" SelectedIndex="1" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Size" />
+						<ComboBox x:Name="sampleSize" SelectedIndex="2" ItemsSource="{actipro:DelimitedArray 'Extra Large, Large, Default (Medium), Small, Extra Small'}" />
+					</StackPanel>
+					<TextBox x:Name="sampleText" Text="Actipro typography sample text" Watermark="Content" UseFloatingWatermark="True" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<TextBlock$(ClassesAttribute)>
+	$(Content)
+</TextBlock>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
+															   IsEnabled="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), StringFormat=' Classes=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="Content" Value="{Binding #sampleText.Text}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Form usage"
+			Footer="Additional 'label' and 'message' themes are available which are designed for typical use on data input forms."
+			>
+
+			<StackPanel HorizontalAlignment="Center">
+				<TextBlock x:Name="formSampleLabel" Classes="theme-form-control-label" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
+					Text="Enter password"
+					Classes.accent="{Binding #formSampleLabelVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Accent'}"
+					Classes.success="{Binding #formSampleLabelVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Success'}"
+					Classes.warning="{Binding #formSampleLabelVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Warning'}"
+					Classes.danger="{Binding #formSampleLabelVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Danger'}"
+					/>
+				<TextBox PasswordChar="{actipro:ThemeResource EditPasswordChar}" Text="passw" />
+				<TextBlock x:Name="formSampleMessage" Classes="theme-form-control-message" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
+					Text="Passwords must be at least 6 characters."
+					Classes.accent="{Binding #formSampleMessageVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Accent'}"
+					Classes.success="{Binding #formSampleMessageVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Success'}"
+					Classes.warning="{Binding #formSampleMessageVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Warning'}"
+					Classes.danger="{Binding #formSampleMessageVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Danger'}"
+					/>
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10" MinWidth="200">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Label variant" />
+						<ComboBox x:Name="formSampleLabelVariant" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Message variant" />
+						<ComboBox x:Name="formSampleMessageVariant" SelectedIndex="3" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<StackPanel>
+	<TextBlock$(LabelClassesAttribute)/>
+	<TextBox PasswordChar="{actipro:ThemeResource EditPasswordChar}" Text="passw" />
+	<TextBlock$(MessageClassesAttribute)/>
+</StackPanel>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="LabelClassesAttribute"
+															   IsEnabled="{Binding #formSampleLabel.(sampleBrowser:ObservableStyledClassesProperties.ClassesString), Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding #formSampleLabel.(sampleBrowser:ObservableStyledClassesProperties.ClassesString), StringFormat=' Classes=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="MessageClassesAttribute"
+															   IsEnabled="{Binding #formSampleMessage.(sampleBrowser:ObservableStyledClassesProperties.ClassesString), Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding #formSampleMessage.(sampleBrowser:ObservableStyledClassesProperties.ClassesString), StringFormat=' Classes=&quot;{0}&quot;'}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Heading ramp"
+			Footer="Use the 'theme-text-heading' style class to render a word-wrapped heading that defaults to a medium size.  Supplemental 'size-*' style classes can be specified to use larger or smaller font sizes."
+			>
+			
+			<StackPanel>
+				<DockPanel Margin="0,0,0,10">
+					<TextBlock DockPanel.Dock="Right" Text="{Binding #xlHeading.FontSize, Mode=OneWay, StringFormat={}Font size: {0}}" 
+							   FontStyle="Italic" VerticalAlignment="Center" IsVisible="{Binding #showFontSizesCheckBox.IsChecked}" />
+					<TextBlock x:Name="xlHeading" Classes="theme-text-heading size-xl" Text="Extra Large Heading" />
+				</DockPanel>
+				<TextBlock Classes="theme-text-body" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id neque aliquam vestibulum morbi blandit cursus risus. Id aliquet lectus proin nibh nisl. Justo nec ultrices dui sapien eget mi proin sed." />
+
+				<DockPanel Margin="0,20,0,10">
+					<TextBlock DockPanel.Dock="Right" Text="{Binding #lgHeading.FontSize, Mode=OneWay, StringFormat={}Font size: {0}}"
+							   FontStyle="Italic" VerticalAlignment="Center" IsVisible="{Binding #showFontSizesCheckBox.IsChecked}" />
+					<TextBlock x:Name="lgHeading" Classes="theme-text-heading size-lg" Text="Large Heading" />
+				</DockPanel>
+				<TextBlock Classes="theme-text-body" Text="Libero enim sed faucibus turpis in. Feugiat sed lectus vestibulum mattis. Enim praesent elementum facilisis leo vel fringilla est ullamcorper eget. Arcu non sodales neque sodales ut etiam sit. Pellentesque massa placerat duis ultricies lacus sed turpis tincidunt. Ultricies mi eget mauris pharetra et ultrices." />
+
+				<DockPanel Margin="0,20,0,10">
+					<TextBlock DockPanel.Dock="Right" Text="{Binding #mdHeading.FontSize, Mode=OneWay, StringFormat={}Font size: {0}}"
+							   FontStyle="Italic" VerticalAlignment="Center" IsVisible="{Binding #showFontSizesCheckBox.IsChecked}" />
+					<TextBlock x:Name="mdHeading" Classes="theme-text-heading size-md" Text="Medium Heading" />
+				</DockPanel>
+				<TextBlock Classes="theme-text-body" Text="Nunc sed id semper risus in hendrerit. Aliquam sem fringilla ut morbi tincidunt. Lectus sit amet est placerat in egestas erat imperdiet sed. Id donec ultrices tincidunt arcu non sodales neque. Proin sed libero enim sed faucibus turpis in eu." />
+
+				<DockPanel Margin="0,20,0,10">
+					<TextBlock DockPanel.Dock="Right" Text="{Binding #smHeading.FontSize, Mode=OneWay, StringFormat={}Font size: {0}}"
+							   FontStyle="Italic" VerticalAlignment="Center" IsVisible="{Binding #showFontSizesCheckBox.IsChecked}" />
+					<TextBlock x:Name="smHeading" Classes="theme-text-heading size-sm" Text="Small Heading" />
+				</DockPanel>
+				<TextBlock Classes="theme-text-body" Text="Nibh venenatis cras sed felis eget velit aliquet. Consectetur libero id faucibus nisl. Commodo sed egestas egestas fringilla phasellus faucibus scelerisque. In hac habitasse platea dictumst vestibulum rhoncus est. Nulla aliquet porttitor lacus luctus accumsan tortor." />
+
+				<DockPanel Margin="0,20,0,10">
+					<TextBlock DockPanel.Dock="Right" Text="{Binding #xsHeading.FontSize, Mode=OneWay, StringFormat={}Font size: {0}}"
+							   FontStyle="Italic" VerticalAlignment="Center" IsVisible="{Binding #showFontSizesCheckBox.IsChecked}" />
+					<TextBlock x:Name="xsHeading" Classes="theme-text-heading size-xs" Text="Extra Small Heading" />
+				</DockPanel>
+				<TextBlock Classes="theme-text-body" Text="Diam volutpat commodo sed egestas egestas. Nulla facilisi etiam dignissim diam quis enim lobortis scelerisque fermentum. Consequat nisl vel pretium lectus. Commodo odio aenean sed adipiscing diam donec adipiscing tristique risus." />
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<CheckBox x:Name="showFontSizesCheckBox" Content="Show font sizes" />
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<!-- 'theme-text-heading' uses 'size-md' by default -->
+<TextBlock Classes="theme-text-heading size-xl" Text="Extra Large Heading" />
+<TextBlock Classes="theme-text-heading size-lg" Text="Large Heading" />
+<TextBlock Classes="theme-text-heading" Text="Medium Heading" />
+<TextBlock Classes="theme-text-heading size-sm" Text="Small Heading" />
+<TextBlock Classes="theme-text-heading size-xs" Text="Extra Small Heading" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Body text ramp"
+			Footer="Use the 'theme-text-body' style class to render word-wrapped document body text that defaults to a medium size.  Supplemental 'size-*' style classes can be specified to use larger or smaller font sizes."
+			>
+
+			<StackPanel>
+				<DockPanel Margin="0,0,0,10">
+					<TextBlock DockPanel.Dock="Right" Text="{Binding #xlBody.FontSize, Mode=OneWay, StringFormat={}Font size: {0}}"
+							   FontStyle="Italic" VerticalAlignment="Center" IsVisible="{Binding #showFontSizesCheckBox.IsChecked}" />
+					<TextBlock Classes="theme-text-heading" Text="Extra Large Body Text" />
+				</DockPanel>
+				<TextBlock x:Name="xlBody" Classes="theme-text-body size-xl" Text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id neque aliquam vestibulum morbi blandit cursus risus. Id aliquet lectus proin nibh nisl. Justo nec ultrices dui sapien eget mi proin sed." />
+
+				<DockPanel Margin="0,20,0,10">
+					<TextBlock DockPanel.Dock="Right" Text="{Binding #lgBody.FontSize, Mode=OneWay, StringFormat={}Font size: {0}}"
+							   FontStyle="Italic" VerticalAlignment="Center" IsVisible="{Binding #showFontSizesCheckBox.IsChecked}" />
+					<TextBlock Classes="theme-text-heading" Text="Large Body Text" />
+				</DockPanel>
+				<TextBlock x:Name="lgBody" Classes="theme-text-body size-lg" Text="Libero enim sed faucibus turpis in. Feugiat sed lectus vestibulum mattis. Enim praesent elementum facilisis leo vel fringilla est ullamcorper eget. Arcu non sodales neque sodales ut etiam sit. Pellentesque massa placerat duis ultricies lacus sed turpis tincidunt. Ultricies mi eget mauris pharetra et ultrices." />
+
+				<DockPanel Margin="0,20,0,10">
+					<TextBlock DockPanel.Dock="Right" Text="{Binding #mdBody.FontSize, Mode=OneWay, StringFormat={}Font size: {0}}"
+							   FontStyle="Italic" VerticalAlignment="Center" IsVisible="{Binding #showFontSizesCheckBox.IsChecked}" />
+					<TextBlock Classes="theme-text-heading" Text="Medium Body Text" />
+				</DockPanel>
+				<TextBlock x:Name="mdBody" Classes="theme-text-body size-md" Text="Nunc sed id semper risus in hendrerit. Aliquam sem fringilla ut morbi tincidunt. Lectus sit amet est placerat in egestas erat imperdiet sed. Id donec ultrices tincidunt arcu non sodales neque. Proin sed libero enim sed faucibus turpis in eu." />
+
+				<DockPanel Margin="0,20,0,10">
+					<TextBlock DockPanel.Dock="Right" Text="{Binding #smBody.FontSize, Mode=OneWay, StringFormat={}Font size: {0}}"
+							   FontStyle="Italic" VerticalAlignment="Center" IsVisible="{Binding #showFontSizesCheckBox.IsChecked}" />
+					<TextBlock Classes="theme-text-heading" Text="Small Body Text" />
+				</DockPanel>
+				<TextBlock x:Name="smBody" Classes="theme-text-body size-sm" Text="Nibh venenatis cras sed felis eget velit aliquet. Consectetur libero id faucibus nisl. Commodo sed egestas egestas fringilla phasellus faucibus scelerisque. In hac habitasse platea dictumst vestibulum rhoncus est. Nulla aliquet porttitor lacus luctus accumsan tortor." />
+
+				<DockPanel Margin="0,20,0,10">
+					<TextBlock DockPanel.Dock="Right" Text="{Binding #xsBody.FontSize, Mode=OneWay, StringFormat={}Font size: {0}}"
+							   FontStyle="Italic" VerticalAlignment="Center" IsVisible="{Binding #showFontSizesCheckBox.IsChecked}" />
+					<TextBlock Classes="theme-text-heading" Text="Extra Small Body Text" />
+				</DockPanel>
+				<TextBlock x:Name="xsBody" Classes="theme-text-body size-xs" Text="Diam volutpat commodo sed egestas egestas. Nulla facilisi etiam dignissim diam quis enim lobortis scelerisque fermentum. Consequat nisl vel pretium lectus. Commodo odio aenean sed adipiscing diam donec adipiscing tristique risus." />
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<CheckBox Content="Show font sizes" IsChecked="{Binding #showFontSizesCheckBox.IsChecked}" />
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<!-- 'theme-text-body' uses 'size-md' by default -->
+<TextBlock Classes="theme-text-body size-xl" Text="Extra large body text" />
+<TextBlock Classes="theme-text-body size-lg" Text="Large body text" />
+<TextBlock Classes="theme-text-body" Text="Medium body text" />
+<TextBlock Classes="theme-text-body size-sm" Text="Small body text" />
+<TextBlock Classes="theme-text-body size-xs" Text="Extra small body text" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+		
+		<sampleBrowser:ControlExample
+			Header="Code text ramp"
+			Footer="Use the 'theme-text-code' style class to render code text that defaults to a medium size.  Supplemental 'size-*' style classes can be specified to use larger or smaller font sizes."
+			>
+
+			<StackPanel>
+				<DockPanel Margin="0,0,0,10">
+					<TextBlock DockPanel.Dock="Right" Text="{Binding #xlCode.FontSize, Mode=OneWay, StringFormat={}Font size: {0}}"
+							   FontStyle="Italic" VerticalAlignment="Center" IsVisible="{Binding #showFontSizesCheckBox.IsChecked}" />
+					<TextBlock Classes="theme-text-heading" Text="Extra Large Code Text" />
+				</DockPanel>
+				<SelectableTextBlock x:Name="xlCode" Classes="theme-text-code size-xl" Text="double angle = 270.0;  // Down" sampleBrowser:CodeTextBlockProperties.CodeLanguage="C#" />
+
+				<DockPanel Margin="0,20,0,10">
+					<TextBlock DockPanel.Dock="Right" Text="{Binding #lgCode.FontSize, Mode=OneWay, StringFormat={}Font size: {0}}"
+							   FontStyle="Italic" VerticalAlignment="Center" IsVisible="{Binding #showFontSizesCheckBox.IsChecked}" />
+					<TextBlock Classes="theme-text-heading" Text="Large Code Text" />
+				</DockPanel>
+				<SelectableTextBlock x:Name="lgCode" Classes="theme-text-code size-lg" Text="double angle = 270.0;  // Down" sampleBrowser:CodeTextBlockProperties.CodeLanguage="C#" />
+
+				<DockPanel Margin="0,20,0,10">
+					<TextBlock DockPanel.Dock="Right" Text="{Binding #mdCode.FontSize, Mode=OneWay, StringFormat={}Font size: {0}}"
+							   FontStyle="Italic" VerticalAlignment="Center" IsVisible="{Binding #showFontSizesCheckBox.IsChecked}" />
+					<TextBlock Classes="theme-text-heading" Text="Medium Code Text" />
+				</DockPanel>
+				<SelectableTextBlock x:Name="mdCode" Classes="theme-text-code size-md" Text="double angle = 270.0;  // Down" sampleBrowser:CodeTextBlockProperties.CodeLanguage="C#" />
+
+				<DockPanel Margin="0,20,0,10">
+					<TextBlock DockPanel.Dock="Right" Text="{Binding #smCode.FontSize, Mode=OneWay, StringFormat={}Font size: {0}}"
+							   FontStyle="Italic" VerticalAlignment="Center" IsVisible="{Binding #showFontSizesCheckBox.IsChecked}" />
+					<TextBlock Classes="theme-text-heading" Text="Small Code Text" />
+				</DockPanel>
+				<SelectableTextBlock x:Name="smCode" Classes="theme-text-code size-sm" Text="double angle = 270.0;  // Down" sampleBrowser:CodeTextBlockProperties.CodeLanguage="C#" />
+
+				<DockPanel Margin="0,20,0,10">
+					<TextBlock DockPanel.Dock="Right" Text="{Binding #xsCode.FontSize, Mode=OneWay, StringFormat={}Font size: {0}}"
+							   FontStyle="Italic" VerticalAlignment="Center" IsVisible="{Binding #showFontSizesCheckBox.IsChecked}" />
+					<TextBlock Classes="theme-text-heading" Text="Extra Small Code Text" />
+				</DockPanel>
+				<SelectableTextBlock x:Name="xsCode" Classes="theme-text-code size-xs" Text="double angle = 270.0;  // Down" sampleBrowser:CodeTextBlockProperties.CodeLanguage="C#" />
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<CheckBox Content="Show font sizes" IsChecked="{Binding #showFontSizesCheckBox.IsChecked}" />
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<!-- 'theme-text-code' uses 'size-md' by default -->
+<TextBlock Classes="theme-text-code size-xl" Text="Extra large code text" />
+<TextBlock Classes="theme-text-code size-lg" Text="Large code text" />
+<TextBlock Classes="theme-text-code" Text="Medium code text" />
+<TextBlock Classes="theme-text-code size-sm" Text="Small code text" />
+<TextBlock Classes="theme-text-code size-xs" Text="Extra small code text" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Semantic variants"
+			Footer="There are several built-in text semantic variant style classes, which can draw attention to meaningful text.  The semantic variants can be applied to any TextBlock theme."
+			>
+
+			<StackPanel>
+				<TextBlock Margin="0,0,0,10" Classes="theme-text-heading accent" Text="Accent" />
+				<TextBlock Classes="theme-text-body" Text="The accent semantic variant uses the theme's accent color and is generally appropriate for something action-oriented." />
+				<TextBlock Margin="0,20,0,10" Classes="theme-text-heading success" Text="Success" />
+				<TextBlock Classes="theme-text-body" Text="The success semantic variant indicates a positive result." />
+				<TextBlock Margin="0,20,0,10" Classes="theme-text-heading warning" Text="Warning" />
+				<TextBlock Classes="theme-text-body" Text="The warning semantic variant tells an end user to be careful." />
+				<TextBlock Margin="0,20,0,10" Classes="theme-text-heading danger" Text="Danger" />
+				<TextBlock Classes="theme-text-body" Text="The danger semantic variant indicates a negative result or warns the end user to be very careful." />
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<TextBlock Classes="theme-text-heading accent" Text="Accent" />
+<TextBlock Classes="theme-text-heading success" Text="Success" />
+<TextBlock Classes="theme-text-heading warning" Text="Warning" />
+<TextBlock Classes="theme-text-heading danger" Text="Danger" />
+
+<TextBlock Classes="theme-text-body accent" Text="Accent text" />
+<TextBlock Classes="theme-text-body success" Text="Success text" />
+<TextBlock Classes="theme-text-body warning" Text="Warning text" />
+<TextBlock Classes="theme-text-body danger" Text="Danger text" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Foreground brushes"
+			Footer="There are several built-in text foreground brushes that can be used for different levels of emphasis."
+			>
+
+			<StackPanel>
+				<TextBlock Classes="theme-text-body" Text="This text uses a maximum-contrast foreground, which allows for some emphasis compared to normal text."
+						   Foreground="{actipro:ThemeResource DefaultForegroundBrushMax}" />
+				<TextBlock Classes="theme-text-body" Text="The foreground used for this text is the default."
+						   Foreground="{actipro:ThemeResource DefaultForegroundBrush}" />
+				<TextBlock Classes="theme-text-body" Text="This text uses a muted secondary foreground, which is slightly dimmer than the default."
+						   Foreground="{actipro:ThemeResource DefaultForegroundBrushSecondary}" />
+				<TextBlock Classes="theme-text-body" Text="And this text has a subtle tertiary foreground, which is even dimmer than secondary."
+						   Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" />
+				<TextBlock Classes="theme-text-body" Text="Disabled text renders with the dimmest foreground of all."
+						   Foreground="{actipro:ThemeResource DefaultForegroundBrushDisabled}" />
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<TextBlock Text="Max" Foreground="{actipro:ThemeResource DefaultForegroundBrushMax}" />
+<!-- DefaultForegroundBrush is used by default -->
+<TextBlock Text="Normal" />
+<TextBlock Text="Secondary" Foreground="{actipro:ThemeResource DefaultForegroundBrushSecondary}" />
+<TextBlock Text="Tertiary" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" />
+<TextBlock Text="Disabled" Foreground="{actipro:ThemeResource DefaultForegroundBrushDisabled}" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Label usage"
+			Footer="Label uses the same themes and variants as TextBlock."
+			>
+			
+			<Grid RowDefinitions="Auto,20,Auto,20,Auto,20,Auto,20,Auto" ColumnDefinitions="*,Auto,40,Auto,40,Auto,40,Auto,40,Auto,*">
+				<Label Grid.Row="0" Grid.Column="1" Classes="theme-text-heading" Content="_Heading" />
+				<Label Grid.Row="0" Grid.Column="3" Classes="theme-text-heading accent" Content="_Accent" />
+				<Label Grid.Row="0" Grid.Column="5" Classes="theme-text-heading success" Content="_Success" />
+				<Label Grid.Row="0" Grid.Column="7" Classes="theme-text-heading warning" Content="_Warning" />
+				<Label Grid.Row="0" Grid.Column="9" Classes="theme-text-heading danger" Content="_Danger" />
+
+				<Label Grid.Row="2" Grid.Column="1" Classes="theme-text-body" Content="_Body" />
+				<Label Grid.Row="2" Grid.Column="3" Classes="theme-text-body accent" Content="_Accent" />
+				<Label Grid.Row="2" Grid.Column="5" Classes="theme-text-body success" Content="_Success" />
+				<Label Grid.Row="2" Grid.Column="7" Classes="theme-text-body warning" Content="_Warning" />
+				<Label Grid.Row="2" Grid.Column="9" Classes="theme-text-body danger" Content="_Danger" />
+
+				<Label Grid.Row="4" Grid.Column="1" Classes="theme-text-body size-lg" Content="_Body (LG size)" />
+				<Label Grid.Row="4" Grid.Column="3" Classes="theme-text-body size-lg accent" Content="_Accent" />
+				<Label Grid.Row="4" Grid.Column="5" Classes="theme-text-body size-lg success" Content="_Success" />
+				<Label Grid.Row="4" Grid.Column="7" Classes="theme-text-body size-lg warning" Content="_Warning" />
+				<Label Grid.Row="4" Grid.Column="9" Classes="theme-text-body size-lg danger" Content="_Danger" />
+
+				<Label Grid.Row="6" Grid.Column="1" Classes="theme-text-body size-xl" Content="_Body (XL size)" />
+				<Label Grid.Row="6" Grid.Column="3" Classes="theme-text-body size-xl accent" Content="_Accent" />
+				<Label Grid.Row="6" Grid.Column="5" Classes="theme-text-body size-xl success" Content="_Success" />
+				<Label Grid.Row="6" Grid.Column="7" Classes="theme-text-body size-xl warning" Content="_Warning" />
+				<Label Grid.Row="6" Grid.Column="9" Classes="theme-text-body size-xl danger" Content="_Danger" />
+
+				<Label Grid.Row="8" Grid.Column="1" Classes="theme-text-code" Content="_Code" />
+				<Label Grid.Row="8" Grid.Column="3" Classes="theme-text-code accent" Content="_Accent" />
+				<Label Grid.Row="8" Grid.Column="5" Classes="theme-text-code success" Content="_Success" />
+				<Label Grid.Row="8" Grid.Column="7" Classes="theme-text-code warning" Content="_Warning" />
+				<Label Grid.Row="8" Grid.Column="9" Classes="theme-text-code danger" Content="_Danger" />
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<Label Classes="theme-text-heading" Content="_Heading" />
+<Label Classes="theme-text-heading accent" Content="_Accent" />
+<Label Classes="theme-text-heading success" Content="_Success" />
+<Label Classes="theme-text-heading warning" Content="_Warning" />
+<Label Classes="theme-text-heading danger" Content="_Danger" />
+
+<Label Classes="theme-text-body" Content="_Body" />
+<Label Classes="theme-text-body accent" Content="_Accent" />
+<Label Classes="theme-text-body success" Content="_Success" />
+<Label Classes="theme-text-body warning" Content="_Warning" />
+<Label Classes="theme-text-body danger" Content="_Danger" />
+
+<Label Classes="theme-text-body size-lg" Content="_Body (LG size)" />
+<Label Classes="theme-text-body size-lg accent" Content="_Accent" />
+<Label Classes="theme-text-body size-lg success" Content="_Success" />
+<Label Classes="theme-text-body size-lg warning" Content="_Warning" />
+<Label Classes="theme-text-body size-lg danger" Content="_Danger" />
+
+<Label Classes="theme-text-body size-xl" Content="_Body (XL size)" />
+<Label Classes="theme-text-body size-xl accent" Content="_Accent" />
+<Label Classes="theme-text-body size-xl success" Content="_Success" />
+<Label Classes="theme-text-body size-xl warning" Content="_Warning" />
+<Label Classes="theme-text-body size-xl danger" Content="_Danger" />
+
+<Label Classes="theme-text-code" Content="_Code" />
+<Label Classes="theme-text-code accent" Content="_Accent" />
+<Label Classes="theme-text-code success" Content="_Success" />
+<Label Classes="theme-text-code warning" Content="_Warning" />
+<Label Classes="theme-text-code danger" Content="_Danger" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="SelectableTextBlock usage"
+			Footer="SelectableTextBlock uses the same themes and variants as TextBlock."
+			>
+
+			<Grid RowDefinitions="Auto,20,Auto,20,Auto,20,Auto,20,Auto" ColumnDefinitions="*,Auto,40,Auto,40,Auto,40,Auto,40,Auto,*">
+				<SelectableTextBlock Grid.Row="0" Grid.Column="1" Classes="theme-text-heading" Text="Heading" />
+				<SelectableTextBlock Grid.Row="0" Grid.Column="3" Classes="theme-text-heading accent" Text="Accent" />
+				<SelectableTextBlock Grid.Row="0" Grid.Column="5" Classes="theme-text-heading success" Text="Success" />
+				<SelectableTextBlock Grid.Row="0" Grid.Column="7" Classes="theme-text-heading warning" Text="Warning" />
+				<SelectableTextBlock Grid.Row="0" Grid.Column="9" Classes="theme-text-heading danger" Text="Danger" />
+
+				<SelectableTextBlock Grid.Row="2" Grid.Column="1" Classes="theme-text-body" Text="Body" />
+				<SelectableTextBlock Grid.Row="2" Grid.Column="3" Classes="theme-text-body accent" Text="Accent" />
+				<SelectableTextBlock Grid.Row="2" Grid.Column="5" Classes="theme-text-body success" Text="Success" />
+				<SelectableTextBlock Grid.Row="2" Grid.Column="7" Classes="theme-text-body warning" Text="Warning" />
+				<SelectableTextBlock Grid.Row="2" Grid.Column="9" Classes="theme-text-body danger" Text="Danger" />
+
+				<SelectableTextBlock Grid.Row="4" Grid.Column="1" Classes="theme-text-body size-lg" Text="Body (LG size)" />
+				<SelectableTextBlock Grid.Row="4" Grid.Column="3" Classes="theme-text-body size-lg accent" Text="Accent" />
+				<SelectableTextBlock Grid.Row="4" Grid.Column="5" Classes="theme-text-body size-lg success" Text="Success" />
+				<SelectableTextBlock Grid.Row="4" Grid.Column="7" Classes="theme-text-body size-lg warning" Text="Warning" />
+				<SelectableTextBlock Grid.Row="4" Grid.Column="9" Classes="theme-text-body size-lg danger" Text="Danger" />
+
+				<SelectableTextBlock Grid.Row="6" Grid.Column="1" Classes="theme-text-body size-xl" Text="Body (XL size)" />
+				<SelectableTextBlock Grid.Row="6" Grid.Column="3" Classes="theme-text-body size-xl accent" Text="Accent" />
+				<SelectableTextBlock Grid.Row="6" Grid.Column="5" Classes="theme-text-body size-xl success" Text="Success" />
+				<SelectableTextBlock Grid.Row="6" Grid.Column="7" Classes="theme-text-body size-xl warning" Text="Warning" />
+				<SelectableTextBlock Grid.Row="6" Grid.Column="9" Classes="theme-text-body size-xl danger" Text="Danger" />
+
+				<SelectableTextBlock Grid.Row="8" Grid.Column="1" Classes="theme-text-code" Text="Code" />
+				<SelectableTextBlock Grid.Row="8" Grid.Column="3" Classes="theme-text-code accent" Text="Accent" />
+				<SelectableTextBlock Grid.Row="8" Grid.Column="5" Classes="theme-text-code success" Text="Success" />
+				<SelectableTextBlock Grid.Row="8" Grid.Column="7" Classes="theme-text-code warning" Text="Warning" />
+				<SelectableTextBlock Grid.Row="8" Grid.Column="9" Classes="theme-text-code danger" Text="Danger" />
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<SelectableTextBlock Classes="theme-text-heading" Text="Heading" />
+<SelectableTextBlock Classes="theme-text-heading accent" Text="Accent" />
+<SelectableTextBlock Classes="theme-text-heading success" Text="Success" />
+<SelectableTextBlock Classes="theme-text-heading warning" Text="Warning" />
+<SelectableTextBlock Classes="theme-text-heading danger" Text="Danger" />
+
+<SelectableTextBlock Classes="theme-text-body" Text="Body" />
+<SelectableTextBlock Classes="theme-text-body accent" Text="Accent" />
+<SelectableTextBlock Classes="theme-text-body success" Text="Success" />
+<SelectableTextBlock Classes="theme-text-body warning" Text="Warning" />
+<SelectableTextBlock Classes="theme-text-body danger" Text="Danger" />
+
+<SelectableTextBlock Classes="theme-text-body size-lg" Text="Body (LG size)" />
+<SelectableTextBlock Classes="theme-text-body size-lg accent" Text="Accent" />
+<SelectableTextBlock Classes="theme-text-body size-lg success" Text="Success" />
+<SelectableTextBlock Classes="theme-text-body size-lg warning" Text="Warning" />
+<SelectableTextBlock Classes="theme-text-body size-lg danger" Text="Danger" />
+
+<SelectableTextBlock Classes="theme-text-body size-xl" Text="Body (XL size)" />
+<SelectableTextBlock Classes="theme-text-body size-xl accent" Text="Accent" />
+<SelectableTextBlock Classes="theme-text-body size-xl success" Text="Success" />
+<SelectableTextBlock Classes="theme-text-body size-xl warning" Text="Warning" />
+<SelectableTextBlock Classes="theme-text-body size-xl danger" Text="Danger" />
+
+<SelectableTextBlock Classes="theme-text-code" Text="Code" />
+<SelectableTextBlock Classes="theme-text-code accent" Text="Accent" />
+<SelectableTextBlock Classes="theme-text-code success" Text="Success" />
+<SelectableTextBlock Classes="theme-text-code warning" Text="Warning" />
+<SelectableTextBlock Classes="theme-text-code danger" Text="Danger" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+</UserControl>

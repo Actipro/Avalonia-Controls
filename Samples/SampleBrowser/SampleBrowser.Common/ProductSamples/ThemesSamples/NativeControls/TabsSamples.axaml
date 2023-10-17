@@ -1,0 +1,167 @@
+<UserControl
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Pre-defined style classes are available that can be applied to native TabControl and TabStrip controls to achieve a variety of styles.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Tab control themes" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/native-control-themes#tab-controls" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+
+		<sampleBrowser:ControlExample
+			Header="TabControl usage"
+			DataContext="{Binding #tabControlSample}"
+			VerticalContentAlignment="Stretch"
+			>
+
+			<TabControl x:Name="tabControlSample" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
+						TabStripPlacement="Top"
+						Classes.theme-outline="{Binding #tabControlSampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Outline'}"
+						Classes.theme-subtle="{Binding #tabControlSampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Subtle'}"
+						>
+				<TabItem Header="First">
+					<TextBlock>This is the first page in the TabControl.</TextBlock>
+				</TabItem>
+				<TabItem Header="Second">
+					<TextBlock>This is the second page in the TabControl.</TextBlock>
+				</TabItem>
+				<TabItem Header="Third (Disabled)" IsEnabled="False">
+					<TextBlock>This page is disabled and cannot be selected by the user.</TextBlock>
+				</TabItem>
+				<TabItem Header="Fourth">
+					<TextBlock>This is the fourth page in the TabControl.</TextBlock>
+				</TabItem>
+			</TabControl>
+			
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Theme" />
+						<ComboBox x:Name="tabControlSampleTheme" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Outline, Subtle'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Tab placement" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type={x:Type Dock}}" SelectedValue="{Binding TabStripPlacement}" />
+					</StackPanel>
+					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<TabControl$(ClassesAttribute)$(TabStripPlacementAttribute)$(IsEnabledAttribute)>
+	<!-- TabItem Definitions Here -->
+</TabControl>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
+															   IsEnabled="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), StringFormat=' Classes=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute"
+															   IsEnabled="{Binding !IsEnabled}"
+															   Value=" IsEnabled=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="TabStripPlacementAttribute"
+															   IsEnabled="{Binding TabStripPlacement, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Top'}"
+															   Value="{Binding TabStripPlacement, StringFormat=' TabStripPlacement=&quot;{0}&quot;'}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="TabControl in a container"
+			Footer="When using the 'Outline' theme, the TabControl's border thickness and other theme resources can be altered to allow for proper display within a container."
+			>
+
+			<Border Background="{actipro:ThemeResource Container3BackgroundBrush}" BorderBrush="{actipro:ThemeResource Container3BorderBrush}" BorderThickness="1">
+				<TabControl Classes="theme-outline" Height="150" TabStripPlacement="Bottom" BorderThickness="0,0,0,1">
+					<TabControl.Resources>
+						<SolidColorBrush x:Key="{actipro:ThemeResourceKey TabItemBorderBrushOutline}" Color="Transparent" />
+						<Thickness x:Key="{actipro:ThemeResourceKey TabControlHeaderPaddingOutline}">3,0,3,3</Thickness>
+					</TabControl.Resources>
+					
+					<TabItem Header="Primary">
+						<TextBlock>This is the first page in a TabControl embedded within a container.</TextBlock>
+					</TabItem>
+					<TabItem Header="Secondary">
+						<TextBlock>This is the second page in a TabControl embedded within a container.</TextBlock>
+					</TabItem>
+				</TabControl>
+			</Border>
+			
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<TabControl Classes="theme-outline" TabStripPlacement="Bottom" BorderThickness="0,0,0,1">
+	<TabControl.Resources>
+		<SolidColorBrush x:Key="{actipro:ThemeResourceKey TabItemBorderBrushOutline}" Color="Transparent" />
+		<Thickness x:Key="{actipro:ThemeResourceKey TabControlHeaderPaddingOutline}">3,0,3,3</Thickness>
+	</TabControl.Resources>
+
+	<!-- TabItem Definitions Here -->
+</TabControl>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="TabStrip usage"
+			DataContext="{Binding #tabStripSample}"
+			>
+
+			<TabStrip x:Name="tabStripSample" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True" AutoScrollToSelectedItem="False"
+					  Classes.theme-outline="{Binding #tabStripSampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Outline'}"
+					  Classes.theme-subtle="{Binding #tabStripSampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Subtle'}"
+					  >
+				<TabStripItem>First</TabStripItem>
+				<TabStripItem>Second</TabStripItem>
+				<TabStripItem IsEnabled="False">Third (Disabled)</TabStripItem>
+				<TabStripItem>Fourth</TabStripItem>
+			</TabStrip>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Theme" />
+						<ComboBox x:Name="tabStripSampleTheme" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Outline, Subtle'}" />
+					</StackPanel>
+					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<TabStrip$(ClassesAttribute)$(IsEnabledAttribute)>
+	<!-- TabStripItem Definitions Here -->
+</TabControl>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
+															   IsEnabled="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), StringFormat=' Classes=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute"
+															   IsEnabled="{Binding !IsEnabled}"
+															   Value=" IsEnabled=&quot;False&quot;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

@@ -1,0 +1,303 @@
+<UserControl
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
+
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Pre-defined style classes are available that can be applied to native RadioButton controls to achieve a variety of styles.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Switch control themes" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/native-control-themes#switch-controls" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+			<sampleBrowser:ControlExampleLinkItem Title="CheckBox" Url="/ProductSamples/ThemesSamples/NativeControls/CheckBoxSamples" />
+		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+
+
+		<sampleBrowser:ControlExample
+			Header="RadioButton usage"
+			Footer="Actipro provides multiple themes and variants to alter the appearance of RadioButton."
+			DataContext="{Binding #sample}"
+			>
+
+			<StackPanel Spacing="10" HorizontalAlignment="Center">
+				<RadioButton 
+					x:Name="sample"
+					sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
+					Classes.theme-outline="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Outline'}"
+					Classes.theme-solid="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Solid'}"
+					Classes.accent="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Accent'}"
+					Classes.success="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Success'}"
+					Classes.warning="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Warning'}"
+					Classes.danger="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Danger'}"
+					Content="First option" IsChecked="{ReflectionBinding #sampleValue.SelectedItem}"
+					/>
+				<RadioButton
+					Classes.theme-outline="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Outline'}"
+					Classes.theme-solid="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Solid'}"
+					Classes.accent="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Accent'}"
+					Classes.success="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Success'}"
+					Classes.warning="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Warning'}"
+					Classes.danger="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Danger'}"
+					Content="Second option"
+					IsEnabled="{Binding #sample.IsEnabled}"
+					/>
+				<RadioButton
+					Classes.theme-outline="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Outline'}"
+					Classes.theme-solid="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Solid'}"
+					Classes.accent="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Accent'}"
+					Classes.success="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Success'}"
+					Classes.warning="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Warning'}"
+					Classes.danger="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Danger'}"
+					Content="Third option"
+					IsEnabled="{Binding #sample.IsEnabled}"
+					/>
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Theme" />
+						<ComboBox x:Name="sampleTheme" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Outline, Solid'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Variant" />
+						<ComboBox x:Name="sampleVariant" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="First option's value" />
+						<ComboBox x:Name="sampleValue" SelectedIndex="0">
+							<ComboBox.ItemsSource>
+								<actipro:Array Type="x:Object">
+									<x:Boolean>true</x:Boolean>
+									<x:Null />
+									<x:Boolean>false</x:Boolean>
+								</actipro:Array>
+							</ComboBox.ItemsSource>
+							<ComboBox.ItemTemplate>
+								<actipro:TypedDataTemplateSelector>
+									<actipro:TypedDataTemplateSelector.DefaultTemplate>
+										<DataTemplate>
+											<TextBlock Text="(null)" />
+										</DataTemplate>
+									</actipro:TypedDataTemplateSelector.DefaultTemplate>
+									
+									<DataTemplate x:DataType="x:Boolean">
+										<TextBlock Text="{Binding}" />
+									</DataTemplate>
+								</actipro:TypedDataTemplateSelector>
+							</ComboBox.ItemTemplate>
+						</ComboBox>
+					</StackPanel>
+					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<RadioButton$(ClassesAttribute)$(IsCheckedAttribute)$(IsCheckedNullAttribute)$(IsEnabledAttribute)
+	Content="First Option" />
+
+<!-- Other Options Here -->
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
+															   IsEnabled="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), StringFormat=' Classes=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsCheckedAttribute" IsEnabled="{Binding IsChecked, Converter={x:Static ObjectConverters.IsNotNull}}" Value="{Binding IsChecked, StringFormat=' IsChecked=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsCheckedNullAttribute" IsEnabled="{Binding IsChecked, Converter={x:Static ObjectConverters.IsNull}}" Value=" IsChecked=&quot;{x:Null}&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute" IsEnabled="{Binding !IsEnabled}" Value=" IsEnabled=&quot;False&quot;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+		
+		<sampleBrowser:ControlExample
+			Header="Themes"
+			Footer="The appearance can be changed from the default with the use of the 'theme-outline' or 'theme-solid' style classes."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<RadioButton Classes="theme-outline" Content="Outline" IsChecked="True" />
+					<RadioButton Classes="theme-outline" Content="Another option" />
+					<RadioButton Classes="theme-outline" Content="Disabled" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<RadioButton Classes="theme-solid" Content="Solid" IsChecked="True" />
+					<RadioButton Classes="theme-solid" Content="Another option" />
+					<RadioButton Classes="theme-solid" Content="Disabled" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<RadioButton Classes="theme-outline" Content="Outline" />
+
+<RadioButton Classes="theme-solid" Content="Solid" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Accent variants"
+			Footer="Add the 'accent' style class to a RadioButton and the theme accent color will be used to provide emphasis."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<RadioButton Classes="theme-outline accent" Content="Outline" IsChecked="True" />
+					<RadioButton Classes="theme-outline accent" Content="Another option" />
+					<RadioButton Classes="theme-outline accent" Content="Disabled" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<RadioButton Classes="theme-solid accent" Content="Solid" IsChecked="True" />
+					<RadioButton Classes="theme-solid accent" Content="Another option" />
+					<RadioButton Classes="theme-solid accent" Content="Disabled" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<RadioButton Classes="theme-outline accent" Content="Outline" />
+
+<RadioButton Classes="theme-solid accent" Content="Solid" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Success variants"
+			Footer="Add the 'success' style class to a RadioButton and a color will be used to indicate success."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<RadioButton Classes="theme-outline success" Content="Outline" IsChecked="True" />
+					<RadioButton Classes="theme-outline success" Content="Another option" />
+					<RadioButton Classes="theme-outline success" Content="Disabled" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<RadioButton Classes="theme-solid success" Content="Solid" IsChecked="True" />
+					<RadioButton Classes="theme-solid success" Content="Another option" />
+					<RadioButton Classes="theme-solid success" Content="Disabled" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<RadioButton Classes="theme-outline success" Content="Outline" />
+
+<RadioButton Classes="theme-solid success" Content="Solid" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Warning variants"
+			Footer="Add the 'warning' style class to a RadioButton and a color will be used to indicate caution."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<RadioButton Classes="theme-outline warning" Content="Outline" IsChecked="True" />
+					<RadioButton Classes="theme-outline warning" Content="Another option" />
+					<RadioButton Classes="theme-outline warning" Content="Disabled" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<RadioButton Classes="theme-solid warning" Content="Solid" IsChecked="True" />
+					<RadioButton Classes="theme-solid warning" Content="Another option" />
+					<RadioButton Classes="theme-solid warning" Content="Disabled" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<RadioButton Classes="theme-outline warning" Content="Outline" />
+
+<RadioButton Classes="theme-solid warning" Content="Solid" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Danger variants"
+			Footer="Add the 'danger' style class to a RadioButton and a color will be used to indicate extreme caution."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<RadioButton Classes="theme-outline danger" Content="Outline" IsChecked="True" />
+					<RadioButton Classes="theme-outline danger" Content="Another option" />
+					<RadioButton Classes="theme-outline danger" Content="Disabled" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<RadioButton Classes="theme-solid danger" Content="Solid" IsChecked="True" />
+					<RadioButton Classes="theme-solid danger" Content="Another option" />
+					<RadioButton Classes="theme-solid danger" Content="Disabled" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<RadioButton Classes="theme-outline danger" Content="Outline" />
+
+<RadioButton Classes="theme-solid danger" Content="Solid" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Switch UI scale"
+			Footer="The size of the switch UI scales with the control's font size."
+			>
+			<StackPanel Spacing="10">
+				<RadioButton Classes="size-xl" Content="Extra large font size" IsChecked="True" />
+				<RadioButton Classes="size-lg" Content="Large font size" />
+				<RadioButton Classes="size-md" Content="Medium font size" />
+				<RadioButton Classes="size-sm" Content="Small font size" />
+				<RadioButton Classes="size-xs" Content="Extra small font size" />
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<!-- Themes use 'size-md' by default -->
+<RadioButton Classes="size-xl" Content="Extra large font size" />
+<RadioButton Classes="size-lg" Content="Large font size" />
+<RadioButton Content="Medium font size" />
+<RadioButton Classes="size-sm" Content="Small font size" />
+<RadioButton Classes="size-xs" Content="Extra small font size" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

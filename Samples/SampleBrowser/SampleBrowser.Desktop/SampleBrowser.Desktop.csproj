@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+
+		<AssemblyName>SampleBrowser.Desktop</AssemblyName>
+	</PropertyGroup>
+
+	<Import Project="..\References\ActiproSoftware.References.props" />
+	<Import Project="..\References\Avalonia.References.props" />
+	<ItemGroup>
+	  <ProjectReference Include="..\SampleBrowser.Common\SampleBrowser.Common.csproj" />
+	</ItemGroup>
+
+</Project>

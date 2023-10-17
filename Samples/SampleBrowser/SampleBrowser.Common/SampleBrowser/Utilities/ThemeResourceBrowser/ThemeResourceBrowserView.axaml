@@ -1,0 +1,133 @@
+<UserControl
+	x:Class="ActiproSoftware.SampleBrowser.Utilities.ThemeResourceBrowser.ThemeResourceBrowserView"
+	x:DataType="resourceBrowser:ThemeResourceBrowserViewModel"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:actiproPrimitives="using:ActiproSoftware.UI.Avalonia.Controls.Primitives"
+	xmlns:resourceBrowser="using:ActiproSoftware.SampleBrowser.Utilities.ThemeResourceBrowser"
+	Classes="sample-presenter"
+	>
+	<UserControl.Resources>
+		<resourceBrowser:ThemeResourceReferenceTextKindDescriptionConverter x:Key="ThemeResourceReferenceTextKindDescriptionConverter" />
+	</UserControl.Resources>
+	
+	<Grid RowDefinitions="Auto,*">
+
+		<Border Padding="50,12" BorderBrush="{actipro:ThemeResource Container2BorderBrush}" BorderThickness="0,0,0,1">
+			<DockPanel>
+				<StackPanel DockPanel.Dock="Right">
+					<TextBlock Classes="theme-form-control-label" Text="Reference Text" />
+					<ComboBox ItemsSource="{actipro:DelimitedArray Type={x:Type resourceBrowser:ThemeResourceReferenceTextKind}}" SelectedItem="{Binding ResourceReferenceTextKind}">
+						<ComboBox.ItemTemplate>
+							<DataTemplate x:DataType="{x:Type resourceBrowser:ThemeResourceReferenceTextKind}">
+								<TextBlock Text="{Binding, Converter={StaticResource ThemeResourceReferenceTextKindDescriptionConverter}}" />
+							</DataTemplate>
+						</ComboBox.ItemTemplate>
+					</ComboBox>
+				</StackPanel>
+				
+				<StackPanel Margin="0,0,12,0" HorizontalAlignment="Stretch">
+					<TextBlock Classes="theme-form-control-label" Text="Filter" />
+					<TextBox Classes="has-clear-button" Text="{Binding FilterText}"
+							 Watermark="example: &quot;edit background, button border&quot;" />
+				</StackPanel>
+
+			</DockPanel>
+		</Border>
+
+		<ItemsControl Grid.Row="1" Classes="theme-scroll-inline" ItemsSource="{Binding FilteredResources}" Grid.IsSharedSizeScope="True" Padding="50,20">
+			<ItemsControl.ItemTemplate>
+				<DataTemplate>
+
+					<Grid MaxWidth="{StaticResource SampleNormalMaxWidth}" MinHeight="40">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto" SharedSizeGroup="ValueColumn" />
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="Auto" SharedSizeGroup="ButtonColumn" />
+						</Grid.ColumnDefinitions>
+
+						<Border Background="Transparent" ToolTip.Tip="{Binding ToolTipText}">
+							<ContentControl Content="{Binding Value}" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+								<ContentControl.DataTemplates>
+									
+									<DataTemplate x:DataType="BoxShadows">
+										<Border Width="40" Height="40" CornerRadius="5"
+												Background="{actipro:ThemeResource Container1BackgroundBrush}"
+												BorderBrush="{actipro:ThemeResource Container3BorderBrush}" BorderThickness="1"
+												BoxShadow="{Binding}">
+										</Border>
+									</DataTemplate>
+									
+									<DataTemplate x:DataType="Brush">
+										<Border Width="60" Height="40" CornerRadius="5"
+												Background="{actipro:ThemeResource Container1BackgroundBrush}"
+												BorderBrush="{actipro:ThemeResource Container3BorderBrush}" BorderThickness="1">
+											<Panel>
+												<actiproPrimitives:Checkerboard CornerRadius="4" />
+												<Border Background="{Binding}" CornerRadius="4" />
+											</Panel>
+										</Border>
+									</DataTemplate>
+									
+									<DataTemplate x:DataType="Color">
+										<Border Width="60" Height="40" CornerRadius="5"
+												Background="{actipro:ThemeResource Container1BackgroundBrush}"
+												BorderBrush="{actipro:ThemeResource Container3BorderBrush}" BorderThickness="1">
+											<Panel>
+												<actiproPrimitives:Checkerboard CornerRadius="4" />
+												<Border CornerRadius="4">
+													<Border.Background>
+														<SolidColorBrush Color="{Binding}" />
+													</Border.Background>
+												</Border>
+											</Panel>
+										</Border>
+									</DataTemplate>
+									
+									<DataTemplate x:DataType="CornerRadius">
+										<Border Width="40" Height="40" CornerRadius="{Binding}"
+												Background="{actipro:ThemeResource Container1BackgroundBrush}"
+												BorderBrush="{actipro:ThemeResource Container3BorderBrush}" BorderThickness="1" />
+									</DataTemplate>
+									
+									<DataTemplate x:DataType="FontFamily">
+										<TextBlock Text="AaBbCc" FontFamily="{Binding}" FontSize="18" />
+									</DataTemplate>
+									
+									<DataTemplate x:DataType="Thickness">
+										<Border Width="40" Height="40"
+												Background="{actipro:ThemeResource Container1BackgroundBrush}"
+												BorderBrush="{actipro:ThemeResource Container3BorderBrush}" BorderThickness="{Binding}" />
+									</DataTemplate>
+									
+								</ContentControl.DataTemplates>
+							</ContentControl>
+						</Border>
+
+						<StackPanel Grid.Column="1" Margin="30,0,0,0" VerticalAlignment="Center">
+							<TextBlock TextTrimming="CharacterEllipsis">
+								<Run Text="{Binding Name}" FontWeight="SemiBold" />
+								<Run Text="{Binding Kind, StringFormat={}({0})}" FontStyle="Italic" />
+							</TextBlock>
+							<TextBlock Margin="20,0,0,0" Classes="theme-text-body size-xs" Text="{Binding ResourceReferenceText}"
+									   Foreground="{actipro:ThemeResource DefaultForegroundBrushSecondary}"
+									   TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" />
+						</StackPanel>
+
+						<actipro:CopyButton Classes="theme-subtle" Grid.Column="2" ToolTip.Tip="{Binding Name, StringFormat={}Copy {0} reference}"
+											CopyText="{Binding ResourceReferenceText}" />
+					</Grid>
+
+				</DataTemplate>
+			</ItemsControl.ItemTemplate>
+			<ItemsControl.Styles>
+				<Style Selector="ItemsControl > ContentPresenter">
+					<Setter Property="Padding" Value="0,4" />
+				</Style>
+			</ItemsControl.Styles>
+		</ItemsControl>
+			
+	</Grid>
+	
+</UserControl>

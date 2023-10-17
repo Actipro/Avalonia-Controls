@@ -1,0 +1,205 @@
+<UserControl
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Actipro's control themes create modern appearances for ScrollViewer and ScrollBar controls.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Scroll control themes" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/native-control-themes#scroll-controls" />
+			<sampleBrowser:ControlExampleLinkItem Title="Scrolling" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/scrolling" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+
+		<sampleBrowser:ControlExample
+			Header="ScrollViewer usage"
+			Footer="The default ScrollViewer appearance will not show a track or line (small increment) scroll buttons.  Set ThemeProperties.ScrollBarHasLineButtons to true to support line buttons.  When line buttons are supported, they and the track will auto-hide by default when not in use, which can be prevented by setting ScrollViewer.AllowAutoHide to false."
+			DataContext="{Binding #usageSample}"
+			>
+
+			<actipro:ShadowChrome Elevation="8">
+				<ScrollViewer x:Name="usageSample" MaxHeight="200" IsScrollChainingEnabled="False"
+								Background="{actipro:ThemeResource Container1BackgroundBrush}"
+								BorderBrush="{actipro:ThemeResource Container3BorderBrush}" BorderThickness="1" CornerRadius="8">
+					<ItemsControl IsTabStop="False" ItemsSource="{actipro:DelimitedArray '#ffb900, #e74856, #0078d7, #0099bc, #7a7574, #767676, #ff8d00, #e81123, #0063b1, #2d7d9a, #5d5a58, #4c4a48, #f7630c, #ea005e, #8e8cd8, #00b7c3, #68768a, #69797e, #ca5010, #c30052, #6b69d6, #038387, #515c6b, #4a5459, #da3b01, #e3008c, #8764b8, #00b294, #567c73, #647c64, #ef6950, #bf0077, #744da9, #018574, #486860, #525e54, #d13438, #c239b3, #b146c2, #00cc6a, #498205, #847545, #ff4343, #9a0089, #881798, #10893e, #107c10, #7e735f', Type=SolidColorBrush}">
+						<ItemsControl.ItemsPanel>
+							<ItemsPanelTemplate>
+								<WrapPanel Margin="20,20,0,0" />
+							</ItemsPanelTemplate>
+						</ItemsControl.ItemsPanel>
+						<ItemsControl.ItemTemplate>
+							<DataTemplate DataType="SolidColorBrush">
+								<Border Margin="0,0,20,20" Width="100" Height="60" CornerRadius="5"
+										Background="{Binding}"
+										BorderBrush="{actipro:ThemeResource Container3BorderBrush}" BorderThickness="1" />
+							</DataTemplate>
+						</ItemsControl.ItemTemplate>
+					</ItemsControl>
+				</ScrollViewer>
+			</actipro:ShadowChrome>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<CheckBox IsChecked="{Binding AllowAutoHide}">Allow auto-hide</CheckBox>
+					<CheckBox IsChecked="{Binding (actipro:ThemeProperties.ScrollBarHasLineButtons)}">Has line buttons</CheckBox>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Horizontal scrollbar visibility" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type=ScrollBarVisibility}" SelectedItem="{Binding HorizontalScrollBarVisibility}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Vertical scrollbar visibility" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type=ScrollBarVisibility}" SelectedItem="{Binding VerticalScrollBarVisibility}" />
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<ScrollViewer$(AllowAutoHideAttribute)$(HorizontalScrollBarVisibilityAttribute)$(VerticalScrollBarVisibilityAttribute)$(ScrollBarHasLineButtonsAttribute)>
+	<!-- Content -->
+</ScrollViewer>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="AllowAutoHideAttribute"
+															   IsEnabled="{Binding !AllowAutoHide}"
+															   Value=" AllowAutoHide=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="ScrollBarHasLineButtonsAttribute"
+															   IsEnabled="{Binding (actipro:ThemeProperties.ScrollBarHasLineButtons)}"
+															   Value="&#xA;&#x9;actipro:ThemeProperties.ScrollBarHasLineButtons=&quot;True&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="HorizontalScrollBarVisibilityAttribute"
+															   IsEnabled="{Binding HorizontalScrollBarVisibility, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter=Disabled}"
+															   Value="{Binding HorizontalScrollBarVisibility, StringFormat=' HorizontalScrollBarVisibility=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="VerticalScrollBarVisibilityAttribute"
+															   IsEnabled="{Binding VerticalScrollBarVisibility, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter=Auto}"
+															   Value="{Binding VerticalScrollBarVisibility, StringFormat=' VerticalScrollBarVisibility=&quot;{0}&quot;'}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="ScrollBar overlay"
+			Footer="The default ScrollViewer theme will not overlay the content with the ScrollBars, which avoids potentially hiding important content near the right and bottom edges.  However a ScrollViewer containing an image or spaced-out controls can appear more modern by overlaying the content."
+			DataContext="{Binding #overlaySample}"
+			>
+
+			<actipro:ShadowChrome Elevation="8">
+				<Border Background="{actipro:ThemeResource Container1BackgroundBrush}"
+						BorderBrush="{actipro:ThemeResource Container3BorderBrush}" BorderThickness="1" CornerRadius="8">
+					<ScrollViewer x:Name="overlaySample" MaxHeight="400" HorizontalScrollBarVisibility="Auto"
+								  IsScrollChainingEnabled="False" Offset="400,500"
+								  actipro:BorderChildClipConverter.ClipToContainingBorder="True"
+								  sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
+								  Classes.theme-scroll-overlay="{Binding #overlaySampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Overlay'}"
+								  >
+						<Image Source="avares://SampleBrowser/Images/Photos/Beach.jpg" Stretch="None" />
+					</ScrollViewer>
+				</Border>
+			</actipro:ShadowChrome>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Theme" />
+						<ComboBox x:Name="overlaySampleTheme" SelectedIndex="1" ItemsSource="{actipro:DelimitedArray 'Default,Overlay'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="X offset" />
+						<TextBox Text="{Binding Offset.X, Mode=OneWay, StringFormat={}{0:N0}}" IsEnabled="False" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Y offset" />
+						<TextBox Text="{Binding Offset.Y, Mode=OneWay, StringFormat={}{0:N0}}" IsEnabled="False" />
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<ScrollViewer$(ClassesAttribute)$(HorizontalScrollBarVisibilityAttribute)$(VerticalScrollBarVisibilityAttribute)>
+	<!-- Content -->
+</ScrollViewer>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
+															   IsEnabled="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), StringFormat=' Classes=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="HorizontalScrollBarVisibilityAttribute"
+															   IsEnabled="{Binding HorizontalScrollBarVisibility, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter=Disabled}"
+															   Value="{Binding HorizontalScrollBarVisibility, StringFormat=' HorizontalScrollBarVisibility=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="VerticalScrollBarVisibilityAttribute"
+															   IsEnabled="{Binding VerticalScrollBarVisibility, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter=Auto}"
+															   Value="{Binding VerticalScrollBarVisibility, StringFormat=' VerticalScrollBarVisibility=&quot;{0}&quot;'}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="TextBox ScrollViewer"
+			Footer="Themes are also applied to the embedded ScrollViewer within a TextBox."
+			DataContext="{Binding #textBoxSample}"
+			>
+
+			<TextBox x:Name="textBoxSample"
+					 MaxLines="10" Height="200" TextWrapping="Wrap" AcceptsReturn="True"
+					 xml:space="preserve"><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Nec tincidunt praesent semper feugiat nibh sed. Id nibh tortor id aliquet lectus proin nibh nisl. Donec pretium vulputate sapien nec sagittis aliquam malesuada. Erat velit scelerisque in dictum non consectetur a erat. Orci nulla pellentesque dignissim enim sit amet. Sed egestas egestas fringilla phasellus faucibus. Nascetur ridiculus mus mauris vitae ultricies leo.
+
+Enim praesent elementum facilisis leo vel. Elementum nibh tellus molestie nunc non. Tellus id interdum velit laoreet id donec ultrices. Dolor morbi non arcu risus. Aliquet sagittis id consectetur purus ut faucibus pulvinar. Quam id leo in vitae turpis massa sed elementum. Luctus accumsan tortor posuere ac ut consequat semper viverra. Cursus risus at ultrices mi tempus. Mauris pharetra et ultrices neque ornare aenean euismod. Leo a diam sollicitudin tempor id.
+
+Ut sem viverra aliquet eget sit amet tellus. Quam lacus suspendisse faucibus interdum. Massa sapien faucibus et molestie. Gravida rutrum quisque non tellus orci ac auctor augue. Ac placerat vestibulum lectus mauris ultrices. Turpis egestas maecenas pharetra convallis posuere morbi. Consectetur purus ut faucibus pulvinar elementum. Turpis egestas pretium aenean pharetra. Placerat duis ultricies lacus sed. Laoreet non curabitur gravida arcu ac tortor dignissim.]]></TextBox>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<CheckBox IsChecked="{Binding (ScrollViewer.AllowAutoHide)}">Allow auto-hide</CheckBox>
+					<CheckBox IsChecked="{Binding (actipro:ThemeProperties.ScrollBarHasLineButtons)}">Has line buttons</CheckBox>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Horizontal scrollbar visibility" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type=ScrollBarVisibility}" SelectedItem="{Binding (ScrollViewer.HorizontalScrollBarVisibility)}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Vertical scrollbar visibility" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type=ScrollBarVisibility}" SelectedItem="{Binding (ScrollViewer.VerticalScrollBarVisibility)}" />
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<TextBox TextWrapping="Wrap" AcceptsReturn="True"$(AllowAutoHideAttribute)$(HorizontalScrollBarVisibilityAttribute)$(VerticalScrollBarVisibilityAttribute)$(ScrollBarHasLineButtonsAttribute)>
+	<!-- Content -->
+</TextBox>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="AllowAutoHideAttribute"
+															   IsEnabled="{Binding !(ScrollViewer.AllowAutoHide)}"
+															   Value=" AllowAutoHide=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="ScrollBarHasLineButtonsAttribute"
+															   IsEnabled="{Binding (actipro:ThemeProperties.ScrollBarHasLineButtons)}"
+															   Value="&#xA;&#x9;actipro:ThemeProperties.ScrollBarHasLineButtons=&quot;True&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="HorizontalScrollBarVisibilityAttribute"
+															   IsEnabled="{Binding (ScrollViewer.HorizontalScrollBarVisibility), Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter=Disabled}"
+															   Value="{Binding (ScrollViewer.HorizontalScrollBarVisibility), StringFormat='&#xA;&#x9;HorizontalScrollBarVisibility=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="VerticalScrollBarVisibilityAttribute"
+															   IsEnabled="{Binding (ScrollViewer.VerticalScrollBarVisibility), Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter=Auto}"
+															   Value="{Binding (ScrollViewer.VerticalScrollBarVisibility), StringFormat='&#xA;&#x9;VerticalScrollBarVisibility=&quot;{0}&quot;'}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

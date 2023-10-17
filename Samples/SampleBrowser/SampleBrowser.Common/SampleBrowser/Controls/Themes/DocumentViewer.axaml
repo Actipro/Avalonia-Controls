@@ -1,0 +1,23 @@
+<ResourceDictionary 
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+	<ControlTheme x:Key="{x:Type sampleBrowser:DocumentViewer}" TargetType="sampleBrowser:DocumentViewer">
+		<Setter Property="IsTabStop" Value="False" />
+		
+		<Setter Property="Template">
+			<ControlTemplate>
+
+				<ScrollViewer Classes="theme-scroll-overlay">
+					<Panel Margin="{TemplateBinding DocumentMargin}" MaxWidth="{TemplateBinding MaxDocumentWidth}">
+						<ContentPresenter Content="{TemplateBinding Content}" />
+					</Panel>
+				</ScrollViewer>
+				
+			</ControlTemplate>
+		</Setter>
+	</ControlTheme>
+	
+</ResourceDictionary>

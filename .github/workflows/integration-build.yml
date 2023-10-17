@@ -1,0 +1,35 @@
+name: Integration Build
+
+on:
+  push:
+    paths-ignore:
+    - '.editorconfig'
+    - '**.md'
+    - '.github/**'
+    - 'Documentation/**'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+
+  build:
+    name: Build/Run Nuke
+    runs-on: windows-latest
+
+    env:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+    steps:
+    - name: Cancel duplicate runs
+      uses: fkirc/skip-duplicate-actions@v5
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Run build project
+      run: dotnet run --project ./Build/Build.csproj -- --target IntegrationBuild"
+    - name: Notify Slack
+      if: always()
+      uses: act10ns/slack@v2
+      with:
+        status: ${{ job.status }}

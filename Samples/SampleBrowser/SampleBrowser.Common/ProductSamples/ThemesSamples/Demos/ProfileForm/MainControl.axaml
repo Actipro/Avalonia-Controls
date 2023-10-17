@@ -1,0 +1,188 @@
+<UserControl
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	Classes="sample-presenter"
+	>
+	<UserControl.Styles>
+
+		<Style Selector="TextBlock.h1">
+			<Setter Property="Margin" Value="0,0,0,10" />
+			<!-- theme-text-heading-->
+			<Setter Property="Theme" Value="{actipro:ControlTheme TextBlockHeading}" />
+			<!-- size-xl -->
+			<Setter Property="FontSize" Value="{actipro:ThemeResource HeadingFontSizeExtraLarge}" />
+			<Setter Property="FontWeight" Value="{actipro:ThemeResource HeadingFontWeightExtraLarge}" />
+			<Setter Property="Foreground" Value="{actipro:ThemeResource HeadingForegroundBrushExtraLarge}" />
+		</Style>
+		
+		<Style Selector="TextBlock.h2">
+			<Setter Property="Margin" Value="0,50,0,10" />
+			<!-- theme-text-heading-->
+			<Setter Property="Theme" Value="{actipro:ControlTheme TextBlockHeading}" />
+			<!-- size-md -->
+			<Setter Property="FontSize" Value="{actipro:ThemeResource HeadingFontSizeMedium}" />
+			<Setter Property="FontWeight" Value="{actipro:ThemeResource HeadingFontWeightMedium}" />
+			<Setter Property="Foreground" Value="{actipro:ThemeResource HeadingForegroundBrushMedium}" />
+		</Style>
+		
+		<Style Selector="StackPanel.form-input-group">
+			<Setter Property="Margin" Value="0,20,0,0" />
+			<Setter Property="Spacing" Value="20" />
+		</Style>
+
+		<Style Selector="StackPanel.form-input">
+			<Style Selector="^ CheckBox">
+				<Setter Property="Margin" Value="0,5,0,0" />
+			</Style>
+			<Style Selector="^ RadioButton">
+				<Setter Property="Margin" Value="0,3,20,0" />
+			</Style>
+		</Style>
+
+		<Style Selector="StackPanel.switch-input-group">
+			<Setter Property="Margin" Value="0,20,0,0" />
+			<Setter Property="Spacing" Value="10" />
+			
+			<Style Selector="^ ToggleSwitch">
+				<Setter Property="OnContent" Value="" />
+				<Setter Property="OffContent" Value="" />
+			</Style>
+		</Style>
+
+		<Style Selector="UniformGrid.form-buttons">
+			<Setter Property="HorizontalAlignment" Value="Left" />
+
+			<Style Selector="^ Button">
+				<Setter Property="Margin" Value="0,50,10,0" />
+			</Style>
+		</Style>
+
+	</UserControl.Styles>
+	
+	<ScrollViewer>
+		<StackPanel>
+
+			<TextBlock Classes="h1" Text="Profile Form" />
+			<TextBlock Classes="theme-text-body" Text="This sample demonstrates how Actipro's control themes can create professional-looking forms, such as for collecting user profile data." />
+
+			<TextBlock Classes="h2" Text="Public Profile" />
+			<TextBlock Classes="theme-text-body" Text="This profile information is shared publicly with all users." />
+			
+			<StackPanel Classes="form-input-group">
+
+				<StackPanel Classes="form-input">
+					<TextBlock Classes="theme-form-control-label" Text="Username" />
+					<TextBox />
+				</StackPanel>
+
+				<StackPanel Classes="form-input">
+					<TextBlock Classes="theme-form-control-label" Text="Bio" />
+					<TextBox TextWrapping="Wrap" MaxLines="5" AcceptsReturn="True" />
+					<TextBlock Classes="theme-form-control-message" Text="Any details such as age, occupation, interests." />
+				</StackPanel>
+				
+			</StackPanel>
+
+			<TextBlock Classes="h2" Text="Private Information" />
+			<TextBlock Classes="theme-text-body" Text="The information entered here is not visible to other users." />
+			
+			<StackPanel Classes="form-input-group">
+
+				<Grid ColumnDefinitions="*,30,*">
+					<StackPanel Grid.Column="0" Classes="form-input">
+						<TextBlock Classes="theme-form-control-label" Text="First name" />
+						<TextBox />
+					</StackPanel>
+
+					<StackPanel Grid.Column="2" Classes="form-input">
+						<TextBlock Classes="theme-form-control-label" Text="Last name" />
+						<TextBox />
+					</StackPanel>
+				</Grid>
+
+				<Grid ColumnDefinitions="*,30,*,30,*">
+					<StackPanel Classes="form-input">
+						<TextBlock Classes="theme-form-control-label" Text="Phone number" />
+						<TextBox />
+						<CheckBox Content="Allow text messages" />
+					</StackPanel>
+
+					<StackPanel Grid.Column="2" Grid.ColumnSpan="4" Classes="form-input">
+						<TextBlock Classes="theme-form-control-label" Text="E-mail address" />
+						<TextBox />
+					</StackPanel>
+				</Grid>
+
+				<StackPanel Classes="form-input">
+					<TextBlock Classes="theme-form-control-label" Text="Preferred contact method" />
+					<StackPanel Orientation="Horizontal">
+						<RadioButton Content="E-mail" IsChecked="True" />
+						<RadioButton Content="Voice" />
+						<RadioButton Content="Text" />
+					</StackPanel>
+				</StackPanel>
+
+				<Grid ColumnDefinitions="*,30,*">
+					<StackPanel Classes="form-input">
+						<TextBlock Classes="theme-form-control-label" Text="Country" />
+						<ComboBox SelectedIndex="2">
+							<x:String>Canada</x:String>
+							<x:String>Mexico</x:String>
+							<x:String>United States</x:String>
+						</ComboBox>
+					</StackPanel>
+
+					<StackPanel Grid.Column="2" Classes="form-input">
+						<TextBlock Classes="theme-form-control-label" Text="Street address" />
+						<TextBox />
+					</StackPanel>
+				</Grid>
+
+				<Grid ColumnDefinitions="*,30,*,30,*">
+					<StackPanel Grid.Column="0" Classes="form-input">
+						<TextBlock Classes="theme-form-control-label" Text="City" />
+						<TextBox />
+					</StackPanel>
+
+					<StackPanel Grid.Column="2" Classes="form-input">
+						<TextBlock Classes="theme-form-control-label" Text="State / Province" />
+						<TextBox />
+					</StackPanel>
+
+					<StackPanel Grid.Column="4" Classes="form-input">
+						<TextBlock Classes="theme-form-control-label" Text="ZIP / Postal Code" />
+						<TextBox />
+					</StackPanel>
+				</Grid>
+
+			</StackPanel>
+
+			<TextBlock Classes="h2" Text="Notifications" />
+			<TextBlock Classes="theme-text-body" Text="Choose how you would like to receive notifications." />
+
+			<StackPanel Classes="switch-input-group">
+				<DockPanel Classes="form-input">
+					<ToggleSwitch Classes="theme-solid accent" IsChecked="True" />
+					<TextBlock Classes="theme-form-control-label" Text="E-mail message" />
+				</DockPanel>
+				<DockPanel Classes="form-input">
+					<ToggleSwitch Classes="theme-solid accent" />
+					<TextBlock Classes="theme-form-control-label" Text="Text message" />
+				</DockPanel>
+				<DockPanel Classes="form-input">
+					<ToggleSwitch Classes="theme-solid accent" />
+					<TextBlock Classes="theme-form-control-label" Text="Device notification" />
+				</DockPanel>
+			</StackPanel>
+
+			<UniformGrid Classes="form-buttons" Columns="2">
+				<Button Classes="theme-solid accent" Content="Save" />
+				<Button Classes="theme-subtle" Content="Cancel" />
+			</UniformGrid>
+
+		</StackPanel>
+	</ScrollViewer>
+	
+</UserControl>

@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net7.0</TargetFramework>
+		<RuntimeIdentifier>browser-wasm</RuntimeIdentifier>
+		<WasmMainJSPath>AppBundle\main.js</WasmMainJSPath>
+		<OutputType>Exe</OutputType>
+
+		<!-- Required for JSImport -->
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		
+	</PropertyGroup>
+
+	<ItemGroup>
+		<WasmExtraFilesToDeploy Include="AppBundle\**" />
+	</ItemGroup>
+
+	<Import Project="..\References\Avalonia.References.props" />
+
+	<ItemGroup>
+		<ProjectReference Include="..\SampleBrowser.Common\SampleBrowser.Common.csproj" />
+	</ItemGroup>
+</Project>

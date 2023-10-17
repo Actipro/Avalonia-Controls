@@ -1,0 +1,33 @@
+﻿<UserControl
+	x:DataType="sampleBrowser:ApplicationViewModel"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+	<ScrollViewer Classes="theme-scroll-overlay" HorizontalScrollBarVisibility="Disabled">
+		<StackPanel>
+
+			<sampleBrowser:ProductOverviewHeader>
+				Fundamentals contains advanced controls and components that are useful in a variety of scenarios.
+				The library will be grown over time, with new controls coming soon.
+			</sampleBrowser:ProductOverviewHeader>
+
+			<actipro:UserPromptControl Margin="50,0" MaxWidth="400" StandardStatusImage="Information" StandardButtons="OKCancel"
+									   Header="User Prompt" Content="The user prompt control can easily display any kind of dialog message to the end user, and can even be configured to render as a complex task dialog with multiple sections."/>
+
+			<TextBlock Classes="theme-text-body" Margin="50" Text="Dive into our individual samples linked below for many more detailed examples."
+					   FontStyle="Italic" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" TextAlignment="Center" />
+
+			<Border Background="{actipro:ThemeResource Container2BackgroundBrush}">
+				<StackPanel Classes="sample-layout-panel" Margin="50,0">
+					<sampleBrowser:CategorizedSampleItemsControl ItemsSource="{Binding ViewItemInfo.ProductFamily.GroupedItems}" />
+				</StackPanel>
+			</Border>
+			
+		</StackPanel>
+	</ScrollViewer>
+
+</UserControl>

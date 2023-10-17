@@ -1,0 +1,327 @@
+<UserControl
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+
+		<Flyout x:Key="CommonFlyout" Placement="Bottom">
+			<Panel MinWidth="100" MinHeight="100">
+				<TextBlock Margin="10" Text="Flyout content" HorizontalAlignment="Center" VerticalAlignment="Center" />
+			</Panel>
+		</Flyout>
+
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Pre-defined style classes are available that can be applied to native SplitButton controls to achieve a variety of styles.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Button control themes" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/native-control-themes#button-controls" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+			<sampleBrowser:ControlExampleLinkItem Title="Button" Url="/ProductSamples/ThemesSamples/NativeControls/ButtonSamples" />
+			<sampleBrowser:ControlExampleLinkItem Title="DropDownButton" Url="/ProductSamples/ThemesSamples/NativeControls/DropDownButtonSamples" />
+			<sampleBrowser:ControlExampleLinkItem Title="ToggleButton" Url="/ProductSamples/ThemesSamples/NativeControls/ToggleButtonSamples" />
+			<sampleBrowser:ControlExampleLinkItem Title="ToggleSplitButton" Url="/ProductSamples/ThemesSamples/NativeControls/ToggleSplitButtonSamples" />
+		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+
+
+		<sampleBrowser:ControlExample
+			Header="SplitButton usage"
+			Footer="Actipro provides multiple themes and variants to alter the appearance of a SplitButton."
+			DataContext="{Binding #sample}"
+			>
+
+			<SplitButton x:Name="sample" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
+						 HorizontalAlignment="Center" Flyout="{StaticResource CommonFlyout}"
+						 Classes.theme-outline="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Outline'}"
+						 Classes.theme-solid="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Solid'}"
+						 Classes.theme-soft="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Soft'}"
+						 Classes.theme-subtle="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Subtle'}"
+						 Classes.theme-link="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Link'}"
+						 Classes.accent="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Accent'}"
+						 Classes.success="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Success'}"
+						 Classes.warning="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Warning'}"
+						 Classes.danger="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Danger'}"
+						 >
+				<Panel>
+					<TextBlock Text="{Binding #sampleText.Text}" IsVisible="{Binding #sampleTheme.SelectedItem, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Link'}" />
+					<TextBlock Text="{Binding #sampleText.Text}" TextDecorations="Underline" IsVisible="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Link'}"/>
+				</Panel>
+			</SplitButton>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Theme" />
+						<ComboBox x:Name="sampleTheme" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Outline, Solid, Soft, Subtle, Link'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Variant" />
+						<ComboBox x:Name="sampleVariant" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
+					</StackPanel>
+					<TextBox x:Name="sampleText" Text="Button Text" Watermark="Content" UseFloatingWatermark="True" />
+					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<SplitButton$(ClassesAttribute)$(IsEnabledAttribute)>
+	$(LinkPreContent)$(Content)$(LinkPostContent)
+</SplitButton>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
+															   IsEnabled="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), StringFormat=' Classes=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="Content" Value="{Binding #sampleText.Text}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute"
+															   IsEnabled="{Binding !IsEnabled}"
+															   Value=" IsEnabled=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="LinkPreContent"
+															   IsEnabled="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Link'}"
+															   Value="&lt;TextBlock Text=&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="LinkPostContent"
+															   IsEnabled="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Link'}"
+															   Value="&quot; TextDecorations=&quot;Underline&quot; /&gt;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Themes"
+			Footer="The appearance can be changed from the default with the use of the 'theme-outline', 'theme-solid', 'theme-soft', 'theme-subtle', or 'theme-link' style classes."
+			>
+			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,Auto,10,Auto,10,Auto,10,Auto,10,Auto,*">
+				<SplitButton Grid.Row="0" Grid.Column="1" Flyout="{StaticResource CommonFlyout}" Classes="theme-outline" Content="Outline" />
+				<SplitButton Grid.Row="2" Grid.Column="1" Flyout="{StaticResource CommonFlyout}" Classes="theme-outline" Content="Disabled" IsEnabled="False" />
+
+				<SplitButton Grid.Row="0" Grid.Column="3" Flyout="{StaticResource CommonFlyout}" Classes="theme-solid" Content="Solid" />
+				<SplitButton Grid.Row="2" Grid.Column="3" Flyout="{StaticResource CommonFlyout}" Classes="theme-solid" Content="Disabled" IsEnabled="False" />
+
+				<SplitButton Grid.Row="0" Grid.Column="5" Flyout="{StaticResource CommonFlyout}" Classes="theme-soft" Content="Soft" />
+				<SplitButton Grid.Row="2" Grid.Column="5" Flyout="{StaticResource CommonFlyout}" Classes="theme-soft" Content="Disabled" IsEnabled="False" />
+
+				<SplitButton Grid.Row="0" Grid.Column="7" Flyout="{StaticResource CommonFlyout}" Classes="theme-subtle" Content="Subtle" />
+				<SplitButton Grid.Row="2" Grid.Column="7" Flyout="{StaticResource CommonFlyout}" Classes="theme-subtle" Content="Disabled" IsEnabled="False" />
+
+				<SplitButton Grid.Row="0" Grid.Column="9" Flyout="{StaticResource CommonFlyout}" Classes="theme-link">
+					<TextBlock Text="Link" TextDecorations="Underline" />
+				</SplitButton>
+				<SplitButton Grid.Row="2" Grid.Column="9" Flyout="{StaticResource CommonFlyout}" Classes="theme-link" IsEnabled="False">
+					<TextBlock Text="Disabled" TextDecorations="Underline" />
+				</SplitButton>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<SplitButton Classes="theme-outline" Content="Outline" />
+
+<SplitButton Classes="theme-solid" Content="Solid" />
+
+<SplitButton Classes="theme-soft" Content="Soft" />
+
+<SplitButton Classes="theme-subtle" Content="Subtle" />
+
+<SplitButton Classes="theme-link">
+	<TextBlock Text="Link" TextDecorations="Underline" />
+</SplitButton>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Accent variants"
+			Footer="Add the 'accent' style class to a SplitButton and the theme accent color will be used to provide emphasis."
+			>
+			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,Auto,10,Auto,10,Auto,10,Auto,10,Auto,*">
+				<SplitButton Grid.Row="0" Grid.Column="1" Flyout="{StaticResource CommonFlyout}" Classes="theme-outline accent" Content="Outline" />
+				<SplitButton Grid.Row="2" Grid.Column="1" Flyout="{StaticResource CommonFlyout}" Classes="theme-outline accent" Content="Disabled" IsEnabled="False" />
+
+				<SplitButton Grid.Row="0" Grid.Column="3" Flyout="{StaticResource CommonFlyout}" Classes="theme-solid accent" Content="Solid" />
+				<SplitButton Grid.Row="2" Grid.Column="3" Flyout="{StaticResource CommonFlyout}" Classes="theme-solid accent" Content="Disabled" IsEnabled="False" />
+
+				<SplitButton Grid.Row="0" Grid.Column="5" Flyout="{StaticResource CommonFlyout}" Classes="theme-soft accent" Content="Soft" />
+				<SplitButton Grid.Row="2" Grid.Column="5" Flyout="{StaticResource CommonFlyout}" Classes="theme-soft accent" Content="Disabled" IsEnabled="False" />
+
+				<SplitButton Grid.Row="0" Grid.Column="7" Flyout="{StaticResource CommonFlyout}" Classes="theme-subtle accent" Content="Subtle" />
+				<SplitButton Grid.Row="2" Grid.Column="7" Flyout="{StaticResource CommonFlyout}" Classes="theme-subtle accent" Content="Disabled" IsEnabled="False" />
+
+				<SplitButton Grid.Row="0" Grid.Column="9" Flyout="{StaticResource CommonFlyout}" Classes="theme-link accent">
+					<TextBlock Text="Link" TextDecorations="Underline" />
+				</SplitButton>
+				<SplitButton Grid.Row="2" Grid.Column="9" Flyout="{StaticResource CommonFlyout}" Classes="theme-link accent" IsEnabled="False">
+					<TextBlock Text="Disabled" TextDecorations="Underline" />
+				</SplitButton>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<SplitButton Classes="theme-outline accent" Content="Outline" />
+
+<SplitButton Classes="theme-solid accent" Content="Solid" />
+
+<SplitButton Classes="theme-soft accent" Content="Soft" />
+
+<SplitButton Classes="theme-subtle accent" Content="Subtle" />
+
+<SplitButton Classes="theme-link accent">
+	<TextBlock Text="Link" TextDecorations="Underline" />
+</SplitButton>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Success variants"
+			Footer="Add the 'success' style class to a SplitButton and a color will be used to indicate success."
+			>
+			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,Auto,10,Auto,10,Auto,10,Auto,10,Auto,*">
+				<SplitButton Grid.Row="0" Grid.Column="1" Flyout="{StaticResource CommonFlyout}" Classes="theme-outline success" Content="Outline" />
+				<SplitButton Grid.Row="2" Grid.Column="1" Flyout="{StaticResource CommonFlyout}" Classes="theme-outline success" Content="Disabled" IsEnabled="False" />
+
+				<SplitButton Grid.Row="0" Grid.Column="3" Flyout="{StaticResource CommonFlyout}" Classes="theme-solid success" Content="Solid" />
+				<SplitButton Grid.Row="2" Grid.Column="3" Flyout="{StaticResource CommonFlyout}" Classes="theme-solid success" Content="Disabled" IsEnabled="False" />
+
+				<SplitButton Grid.Row="0" Grid.Column="5" Flyout="{StaticResource CommonFlyout}" Classes="theme-soft success" Content="Soft" />
+				<SplitButton Grid.Row="2" Grid.Column="5" Flyout="{StaticResource CommonFlyout}" Classes="theme-soft success" Content="Disabled" IsEnabled="False" />
+
+				<SplitButton Grid.Row="0" Grid.Column="7" Flyout="{StaticResource CommonFlyout}" Classes="theme-subtle success" Content="Subtle" />
+				<SplitButton Grid.Row="2" Grid.Column="7" Flyout="{StaticResource CommonFlyout}" Classes="theme-subtle success" Content="Disabled" IsEnabled="False" />
+
+				<SplitButton Grid.Row="0" Grid.Column="9" Flyout="{StaticResource CommonFlyout}" Classes="theme-link success">
+					<TextBlock Text="Link" TextDecorations="Underline" />
+				</SplitButton>
+				<SplitButton Grid.Row="2" Grid.Column="9" Flyout="{StaticResource CommonFlyout}" Classes="theme-link success" IsEnabled="False">
+					<TextBlock Text="Disabled" TextDecorations="Underline" />
+				</SplitButton>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<SplitButton Classes="theme-outline success" Content="Outline" />
+
+<SplitButton Classes="theme-solid success" Content="Solid" />
+
+<SplitButton Classes="theme-soft success" Content="Soft" />
+
+<SplitButton Classes="theme-subtle success" Content="Subtle" />
+
+<SplitButton Classes="theme-link success">
+	<TextBlock Text="Link" TextDecorations="Underline" />
+</SplitButton>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Warning variants"
+			Footer="Add the 'warning' style class to a SplitButton and a color will be used to indicate caution."
+			>
+			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,Auto,10,Auto,10,Auto,10,Auto,10,Auto,*">
+				<SplitButton Grid.Row="0" Grid.Column="1" Flyout="{StaticResource CommonFlyout}" Classes="theme-outline warning" Content="Outline" />
+				<SplitButton Grid.Row="2" Grid.Column="1" Flyout="{StaticResource CommonFlyout}" Classes="theme-outline warning" Content="Disabled" IsEnabled="False" />
+
+				<SplitButton Grid.Row="0" Grid.Column="3" Flyout="{StaticResource CommonFlyout}" Classes="theme-solid warning" Content="Solid" />
+				<SplitButton Grid.Row="2" Grid.Column="3" Flyout="{StaticResource CommonFlyout}" Classes="theme-solid warning" Content="Disabled" IsEnabled="False" />
+
+				<SplitButton Grid.Row="0" Grid.Column="5" Flyout="{StaticResource CommonFlyout}" Classes="theme-soft warning" Content="Soft" />
+				<SplitButton Grid.Row="2" Grid.Column="5" Flyout="{StaticResource CommonFlyout}" Classes="theme-soft warning" Content="Disabled" IsEnabled="False" />
+
+				<SplitButton Grid.Row="0" Grid.Column="7" Flyout="{StaticResource CommonFlyout}" Classes="theme-subtle warning" Content="Subtle" />
+				<SplitButton Grid.Row="2" Grid.Column="7" Flyout="{StaticResource CommonFlyout}" Classes="theme-subtle warning" Content="Disabled" IsEnabled="False" />
+
+				<SplitButton Grid.Row="0" Grid.Column="9" Flyout="{StaticResource CommonFlyout}" Classes="theme-link warning">
+					<TextBlock Text="Link" TextDecorations="Underline" />
+				</SplitButton>
+				<SplitButton Grid.Row="2" Grid.Column="9" Flyout="{StaticResource CommonFlyout}" Classes="theme-link warning" IsEnabled="False">
+					<TextBlock Text="Disabled" TextDecorations="Underline" />
+				</SplitButton>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<SplitButton Classes="theme-outline warning" Content="Outline" />
+
+<SplitButton Classes="theme-solid warning" Content="Solid" />
+
+<SplitButton Classes="theme-soft warning" Content="Soft" />
+
+<SplitButton Classes="theme-subtle warning" Content="Subtle" />
+
+<SplitButton Classes="theme-link warning">
+	<TextBlock Text="Link" TextDecorations="Underline" />
+</SplitButton>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Danger variants"
+			Footer="Add the 'danger' style class to a SplitButton and a color will be used to indicate extreme caution."
+			>
+			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,Auto,10,Auto,10,Auto,10,Auto,10,Auto,*">
+				<SplitButton Grid.Row="0" Grid.Column="1" Flyout="{StaticResource CommonFlyout}" Classes="theme-outline danger" Content="Outline" />
+				<SplitButton Grid.Row="2" Grid.Column="1" Flyout="{StaticResource CommonFlyout}" Classes="theme-outline danger" Content="Disabled" IsEnabled="False" />
+
+				<SplitButton Grid.Row="0" Grid.Column="3" Flyout="{StaticResource CommonFlyout}" Classes="theme-solid danger" Content="Solid" />
+				<SplitButton Grid.Row="2" Grid.Column="3" Flyout="{StaticResource CommonFlyout}" Classes="theme-solid danger" Content="Disabled" IsEnabled="False" />
+
+				<SplitButton Grid.Row="0" Grid.Column="5" Flyout="{StaticResource CommonFlyout}" Classes="theme-soft danger" Content="Soft" />
+				<SplitButton Grid.Row="2" Grid.Column="5" Flyout="{StaticResource CommonFlyout}" Classes="theme-soft danger" Content="Disabled" IsEnabled="False" />
+
+				<SplitButton Grid.Row="0" Grid.Column="7" Flyout="{StaticResource CommonFlyout}" Classes="theme-subtle danger" Content="Subtle" />
+				<SplitButton Grid.Row="2" Grid.Column="7" Flyout="{StaticResource CommonFlyout}" Classes="theme-subtle danger" Content="Disabled" IsEnabled="False" />
+
+				<SplitButton Grid.Row="0" Grid.Column="9" Flyout="{StaticResource CommonFlyout}" Classes="theme-link danger">
+					<TextBlock Text="Link" TextDecorations="Underline" />
+				</SplitButton>
+				<SplitButton Grid.Row="2" Grid.Column="9" Flyout="{StaticResource CommonFlyout}" Classes="theme-link danger" IsEnabled="False">
+					<TextBlock Text="Disabled" TextDecorations="Underline" />
+				</SplitButton>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<SplitButton Classes="theme-outline danger" Content="Outline" />
+
+<SplitButton Classes="theme-solid danger" Content="Solid" />
+
+<SplitButton Classes="theme-soft danger" Content="Soft" />
+
+<SplitButton Classes="theme-subtle danger" Content="Subtle" />
+
+<SplitButton Classes="theme-link danger">
+	<TextBlock Text="Link" TextDecorations="Underline" />
+</SplitButton>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

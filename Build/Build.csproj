@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net6.0-windows</TargetFramework>
+		<RootNamespace>ActiproSoftware.Tools.Builds</RootNamespace>
+		<StartupObject>ActiproSoftware.Tools.Builds.Build</StartupObject>
+
+		<AssemblyName>Avalonia-Build</AssemblyName>
+		<Product>Avalonia Controls Open-Source Build</Product>
+		<Title>Actipro Avalonia Controls Open-Source Build</Title>
+		<Description>Actipro Avalonia Controls Open-Source Build</Description>
+
+		<Version>23.1.0.0</Version>
+
+		<RootNamespace>ActiproSoftware.Tools.Builds</RootNamespace>
+		<Company>Actipro Software LLC</Company>
+		<Authors>Actipro Software LLC</Authors>
+		<Copyright>Copyright (c) 2021-2023 Actipro Software LLC.  All rights reserved.</Copyright>
+
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+
+		<NoWarn>CS0649;CS0169</NoWarn>
+		<NukeRootDirectory></NukeRootDirectory>
+		<NukeScriptDirectory></NukeScriptDirectory>
+		<NukeTelemetryVersion>1</NukeTelemetryVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Nuke.Common" Version="6.0.1" />
+	</ItemGroup>
+
+</Project>

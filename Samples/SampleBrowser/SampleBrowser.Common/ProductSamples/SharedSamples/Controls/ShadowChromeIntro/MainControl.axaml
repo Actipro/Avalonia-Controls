@@ -1,0 +1,145 @@
+<UserControl
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:system="clr-namespace:System;assembly=System.Runtime"
+	>
+	<sampleBrowser:ControlExampleItemsControl
+		Header="ShadowChrome is a decorator that renders a beautiful modern drop shadow around its child control.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="ShadowChrome" Url="https://www.actiprosoftware.com/docs/controls/avalonia/shared/controls/shadow-chrome" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+
+		<sampleBrowser:ControlExample
+			Header="Basic usage"
+			Footer="Use the Elevation property to set the shadow depth to a value between 0 and 24, and the ShadowOpacity property to determine the intensity of the shadow.  Changes in elevation and opacity are animated."
+			>
+			<actipro:ShadowChrome x:Name="shadow" Width="200" Height="200" Elevation="8">
+				<Border Background="{actipro:ThemeResource Container1BackgroundBrush}" CornerRadius="8">
+					<Border Margin="5" CornerRadius="3">
+						<Image Source="avares://SampleBrowser/Images/Photos/Beach.jpg" Stretch="Fill" actipro:BorderChildClipConverter.ClipToContainingBorder="True" />
+					</Border>
+				</Border>
+			</actipro:ShadowChrome>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Elevation" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray '0,4,8,16,24', Type=system:Int32}" SelectedItem="{Binding #shadow.Elevation}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Shadow color" />
+						<ColorPicker Color="{Binding #shadow.ShadowColor}" IsAlphaVisible="False" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Shadow opacity" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray '0.1, 0.3, 0.5, 0.75, 1.0', Type=system:Double}" SelectedItem="{Binding #shadow.ShadowOpacity}" />
+					</StackPanel>
+					<TextBox Text="{Binding #shadow.ShadowThickness, Mode=OneWay}" IsEnabled="False" Watermark="Shadow thickness" UseFloatingWatermark="True" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:ShadowChrome Elevation="$(Elevation)" ShadowColor="$(ShadowColor)" ShadowOpacity="$(ShadowOpacity)">
+	<!-- Content here -->
+</actipro:ShadowChrome>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="Elevation" Value="{Binding #shadow.Elevation}" />
+						<sampleBrowser:CodeExampleSubstitution Key="ShadowColor" Value="{Binding #shadow.ShadowColor}" />
+						<sampleBrowser:CodeExampleSubstitution Key="ShadowOpacity" Value="{Binding #shadow.ShadowOpacity}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Shadow opacity gallery"
+			Footer="This gallery showcases the differences between various common ShadowOpacity values, using an Elevation of 8.  Smaller values result in softer shadows."
+			Padding="40,40,0,0"
+			>
+			<ItemsControl IsTabStop="False" ClipToBounds="False" ItemsSource="{actipro:DelimitedArray '0.1, 0.3, 0.5, 0.75, 1.0', Type=system:Double}">
+				<ItemsControl.ItemsPanel>
+					<ItemsPanelTemplate>
+						<WrapPanel />
+					</ItemsPanelTemplate>
+				</ItemsControl.ItemsPanel>
+				<ItemsControl.ItemTemplate>
+					<DataTemplate x:DataType="x:Double">
+						<actipro:ShadowChrome Margin="0,0,40,40" Width="100" Height="100" Elevation="8" ShadowOpacity="{Binding}">
+							<Border Background="{actipro:ThemeResource Container1BackgroundBrush}" CornerRadius="8">
+								<TextBlock Text="{Binding $parent[actipro:ShadowChrome].ShadowOpacity, Converter={x:Static actipro:StringConverters.ToPercent}}"
+											FontSize="{actipro:ThemeResource HeadingFontSizeMedium}"
+											Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}"
+											HorizontalAlignment="Center" VerticalAlignment="Center" />
+							</Border>
+						</actipro:ShadowChrome>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Elevation gallery"
+			Footer="This gallery demonstrates all of the possible Elevation values."
+			Padding="40,40,0,0"
+			>
+			<ItemsControl IsTabStop="False" ClipToBounds="False" ItemsSource="{actipro:DelimitedArray '1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24', Type=system:Int32}">
+				<ItemsControl.ItemsPanel>
+					<ItemsPanelTemplate>
+						<WrapPanel />
+					</ItemsPanelTemplate>
+				</ItemsControl.ItemsPanel>
+				<ItemsControl.ItemTemplate>
+					<DataTemplate x:DataType="x:Int32">
+						<actipro:ShadowChrome Margin="0,0,40,40" Width="100" Height="100" Elevation="{Binding}">
+							<Border Background="{actipro:ThemeResource Container1BackgroundBrush}" CornerRadius="8">
+								<TextBlock Text="{Binding $parent[actipro:ShadowChrome].Elevation}"
+											FontSize="{actipro:ThemeResource HeadingFontSizeMedium}"
+											Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}"
+											HorizontalAlignment="Center" VerticalAlignment="Center" />
+							</Border>
+						</actipro:ShadowChrome>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Disabling shadows"
+			Footer="A shadow can be immediately turned off with the IsShadowEnabled property."
+			>
+			<actipro:ShadowChrome x:Name="enabledStateShadow" Width="300" Height="100" Elevation="8">
+				<Border Background="{actipro:ThemeResource Container1BackgroundBrush}" CornerRadius="8">
+					<TextBlock Margin="30" Text="ShadowChrome Content" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center" />
+				</Border>
+			</actipro:ShadowChrome>
+
+			<sampleBrowser:ControlExample.Options>
+				<CheckBox Content="Shadow enabled" IsChecked="{Binding #enabledStateShadow.IsShadowEnabled}" />
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:ShadowChrome Elevation="8" IsShadowEnabled="$(IsShadowEnabled)">
+	<!-- Content here -->
+</actipro:ShadowChrome>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="IsShadowEnabled" Value="{Binding #enabledStateShadow.IsShadowEnabled}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+</UserControl>

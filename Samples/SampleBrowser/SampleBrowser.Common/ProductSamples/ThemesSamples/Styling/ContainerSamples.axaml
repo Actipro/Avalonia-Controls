@@ -1,0 +1,243 @@
+<UserControl
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:actiproImages="using:ActiproSoftware.UI.Avalonia.Images"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	Classes="sample-presenter"
+	>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Brush resources are included as part of Actipro's themes that can render containers, which are areas of a user interface that contain other controls.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Containers" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/containers" />
+			<sampleBrowser:ControlExampleLinkItem Title="Theme assets" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/theme-assets" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+
+		<sampleBrowser:ControlExample
+			Header="Container usage"
+			>
+			<ThemeVariantScope Grid.Row="1" RequestedThemeVariant="Dark">
+				<actipro:ShadowChrome Elevation="8">
+					<Border Background="{actipro:ThemeResource Container1BackgroundBrush}" BorderBrush="{actipro:ThemeResource Container1BorderBrush}" BorderThickness="1" CornerRadius="5">
+						<Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto,Auto,*" actipro:BorderChildClipConverter.ClipToContainingBorder="True">
+							<Border Grid.ColumnSpan="3">
+								<TextBlock Margin="15,10" Classes="size-lg" Text="Application Title" />
+							</Border>
+
+							<Border Grid.Row="1" Background="{actipro:ThemeResource Container2BackgroundBrush}" BorderBrush="{actipro:ThemeResource Container1BorderBrush}" BorderThickness="0,1,1,0">
+								<StackPanel Margin="10,20" Spacing="20">
+									<Border BorderBrush="{actipro:ThemeResource DefaultForegroundBrushSecondary}" BorderThickness="3" CornerRadius="5">
+										<Image Margin="3" Width="32" Height="32">
+											<actiproImages:SharedLogo48 />
+										</Image>
+									</Border>
+									<Border BorderBrush="Transparent" BorderThickness="3" CornerRadius="5">
+										<Image Margin="3" Width="32" Height="32">
+											<actiproImages:ThemesLogo48 />
+										</Image>
+									</Border>
+									<Border BorderBrush="Transparent" BorderThickness="3" CornerRadius="5">
+										<Image Margin="3" Width="32" Height="32">
+											<actiproImages:FundamentalsLogo48 />
+										</Image>
+									</Border>
+								</StackPanel>
+							</Border>
+
+							<Border Grid.Row="1" Grid.Column="1" Width="200">
+								<ListBox Background="{actipro:ThemeResource Container3BackgroundBrush}" BorderBrush="{actipro:ThemeResource Container1BorderBrush}" BorderThickness="0,1,1,0" SelectedIndex="1">
+									<ListBox.ItemContainerTheme>
+										<ControlTheme TargetType="ListBoxItem" BasedOn="{actipro:ControlTheme ListBoxItem}">
+											<Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+												<Setter Property="Background" Value="{actipro:ThemeResource ControlBackgroundBrushSoftAccent}" />
+											</Style>
+										</ControlTheme>
+									</ListBox.ItemContainerTheme>
+									
+									<ListBoxItem>Recent</ListBoxItem>
+									<ListBoxItem>Favorites</ListBoxItem>
+									<ListBoxItem>Inbox</ListBoxItem>
+									<ListBoxItem>Sent Items</ListBoxItem>
+								</ListBox>
+							</Border>
+
+							<ThemeVariantScope Grid.Row="1" Grid.Column="2" RequestedThemeVariant="Light">
+								<Border Background="{actipro:ThemeResource Container1BackgroundBrush}">
+									<StackPanel Margin="40">
+										<TextBlock Classes="theme-text-heading" Text="Containers In Action" />
+										<TextBlock Margin="0,10,0,0" Classes="theme-text-body" 
+												   Text="This example shows how multiple container brushes can be used to provide a themed chrome when hosting other controls.  And it even works when using multiple theme variants at the same time." />
+									</StackPanel>
+								</Border>
+							</ThemeVariantScope>
+						</Grid>
+					</Border>
+				</actipro:ShadowChrome>
+			</ThemeVariantScope>
+		</sampleBrowser:ControlExample>
+
+		
+		<sampleBrowser:ControlExample
+			Header="Container levels"
+			Footer="There are five container levels based on the neutral color ramp.  Each container level has a background and border brush.  Various default foreground brushes render well on all container levels."
+			>
+
+			<WrapPanel>
+				<WrapPanel.Resources>
+
+					<DataTemplate x:Key="ForegroundColorsTemplate">
+						<StackPanel>
+							<DockPanel>
+								<Border DockPanel.Dock="Left" Margin="10,0,0,0" Width="16" Height="16" BorderThickness="1" BorderBrush="{actipro:ThemeResource DefaultForegroundBrush}" Background="{actipro:ThemeResource DefaultForegroundBrushMax}" />
+								<actipro:CopyButton DockPanel.Dock="Right" Margin="10,0,0,0" Classes="theme-subtle accent" ToolTip.Tip="Copy DefaultForegroundBrushMax reference"
+													CopyText="{}{actipro:ThemeResource DefaultForegroundBrushMax}" />
+								<TextBlock Margin="10,0,0,0" Classes="theme-text-body" Text="Max contrast foreground" Foreground="{actipro:ThemeResource DefaultForegroundBrushMax}" VerticalAlignment="Center" />
+							</DockPanel>
+							<DockPanel>
+								<Border DockPanel.Dock="Left" Margin="10,0,0,0" Width="16" Height="16" BorderThickness="1" BorderBrush="{actipro:ThemeResource DefaultForegroundBrush}" Background="{actipro:ThemeResource DefaultForegroundBrush}" />
+								<actipro:CopyButton DockPanel.Dock="Right" Margin="10,0,0,0" Classes="theme-subtle accent" ToolTip.Tip="Copy DefaultForegroundBrush reference"
+													CopyText="{}{actipro:ThemeResource DefaultForegroundBrush}" />
+								<TextBlock Margin="10,0,0,0" Classes="theme-text-body" Text="Normal foreground" Foreground="{actipro:ThemeResource DefaultForegroundBrush}" VerticalAlignment="Center" />
+							</DockPanel>
+							<DockPanel>
+								<Border DockPanel.Dock="Left" Margin="10,0,0,0" Width="16" Height="16" BorderThickness="1" BorderBrush="{actipro:ThemeResource DefaultForegroundBrush}" Background="{actipro:ThemeResource DefaultForegroundBrushSecondary}" />
+								<actipro:CopyButton DockPanel.Dock="Right" Margin="10,0,0,0" Classes="theme-subtle accent" ToolTip.Tip="Copy DefaultForegroundBrushSecondary reference"
+													CopyText="{}{actipro:ThemeResource DefaultForegroundBrushSecondary}" />
+								<TextBlock Margin="10,0,0,0" Classes="theme-text-body" Text="Secondary foreground" Foreground="{actipro:ThemeResource DefaultForegroundBrushSecondary}" VerticalAlignment="Center" />
+							</DockPanel>
+							<DockPanel>
+								<Border DockPanel.Dock="Left" Margin="10,0,0,0" Width="16" Height="16" BorderThickness="1" BorderBrush="{actipro:ThemeResource DefaultForegroundBrush}" Background="{actipro:ThemeResource DefaultForegroundBrushTertiary}" />
+								<actipro:CopyButton DockPanel.Dock="Right" Margin="10,0,0,0" Classes="theme-subtle accent" ToolTip.Tip="Copy DefaultForegroundBrushTertiary reference"
+													CopyText="{}{actipro:ThemeResource DefaultForegroundBrushTertiary}" />
+								<TextBlock Margin="10,0,0,0" Classes="theme-text-body" Text="Tertiary foreground" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" VerticalAlignment="Center" />
+							</DockPanel>
+							<DockPanel>
+								<Border DockPanel.Dock="Left" Margin="10,0,0,0" Width="16" Height="16" BorderThickness="1" BorderBrush="{actipro:ThemeResource DefaultForegroundBrush}" Background="{actipro:ThemeResource DefaultForegroundBrushDisabled}" />
+								<actipro:CopyButton DockPanel.Dock="Right" Margin="10,0,0,0" Classes="theme-subtle accent" ToolTip.Tip="Copy DefaultForegroundBrushDisabled reference"
+													CopyText="{}{actipro:ThemeResource DefaultForegroundBrushDisabled}" />
+								<TextBlock Margin="10,0,0,0" Classes="theme-text-body" Text="Disabled foreground" Foreground="{actipro:ThemeResource DefaultForegroundBrushDisabled}" VerticalAlignment="Center" />
+							</DockPanel>
+						</StackPanel>
+					</DataTemplate>
+
+				</WrapPanel.Resources>
+
+				<Border Margin="0,0,20,20" Background="{actipro:ThemeResource Container1BackgroundBrush}" BorderBrush="{actipro:ThemeResource Container1BorderBrush}"
+						BorderThickness="1" CornerRadius="10" Padding="20">
+					<StackPanel>
+						<TextBlock Classes="theme-text-heading" Text="Container 1" />
+
+						<DockPanel Margin="0,10,0,0">
+							<Border DockPanel.Dock="Left" Margin="10,0,0,0" Width="16" Height="16" BorderThickness="1" BorderBrush="{actipro:ThemeResource DefaultForegroundBrush}" Background="{actipro:ThemeResource Container1BackgroundBrush}" />
+							<actipro:CopyButton DockPanel.Dock="Right" Margin="10,0,0,0" Classes="theme-subtle accent" ToolTip.Tip="Copy Container1BackgroundBrush reference"
+												CopyText="{}{actipro:ThemeResource Container1BackgroundBrush}" />
+							<TextBlock Margin="10,0,0,0" Classes="theme-text-body" Text="Container 1 background" Foreground="{actipro:ThemeResource DefaultForegroundBrush}" VerticalAlignment="Center" />
+						</DockPanel>
+						<DockPanel>
+							<Border DockPanel.Dock="Left" Margin="10,0,0,0" Width="16" Height="16" BorderThickness="1" BorderBrush="{actipro:ThemeResource DefaultForegroundBrush}" Background="{actipro:ThemeResource Container1BorderBrush}" />
+							<actipro:CopyButton DockPanel.Dock="Right" Margin="10,0,0,0" Classes="theme-subtle accent" ToolTip.Tip="Copy Container1BorderBrush reference"
+												CopyText="{}{actipro:ThemeResource Container1BorderBrush}" />
+							<TextBlock Margin="10,0,0,0" Classes="theme-text-body" Text="Container 1 border" Foreground="{actipro:ThemeResource DefaultForegroundBrush}" VerticalAlignment="Center" />
+						</DockPanel>
+
+						<ContentPresenter ContentTemplate="{StaticResource ForegroundColorsTemplate}" />
+					</StackPanel>
+				</Border>
+
+				<Border Margin="0,0,20,20" Background="{actipro:ThemeResource Container2BackgroundBrush}" BorderBrush="{actipro:ThemeResource Container2BorderBrush}"
+						BorderThickness="1" CornerRadius="10" Padding="20">
+					<StackPanel>
+						<TextBlock Classes="theme-text-heading" Text="Container 2" />
+
+						<DockPanel Margin="0,10,0,0">
+							<Border DockPanel.Dock="Left" Margin="10,0,0,0" Width="16" Height="16" BorderThickness="1" BorderBrush="{actipro:ThemeResource DefaultForegroundBrush}" Background="{actipro:ThemeResource Container2BackgroundBrush}" />
+							<actipro:CopyButton DockPanel.Dock="Right" Margin="10,0,0,0" Classes="theme-subtle accent" ToolTip.Tip="Copy Container2BackgroundBrush reference"
+												CopyText="{}{actipro:ThemeResource Container2BackgroundBrush}" />
+							<TextBlock Margin="10,0,0,0" Classes="theme-text-body" Text="Container 2 background" Foreground="{actipro:ThemeResource DefaultForegroundBrush}" VerticalAlignment="Center" />
+						</DockPanel>
+						<DockPanel>
+							<Border DockPanel.Dock="Left" Margin="10,0,0,0" Width="16" Height="16" BorderThickness="1" BorderBrush="{actipro:ThemeResource DefaultForegroundBrush}" Background="{actipro:ThemeResource Container2BorderBrush}" />
+							<actipro:CopyButton DockPanel.Dock="Right" Margin="10,0,0,0" Classes="theme-subtle accent" ToolTip.Tip="Copy Container2BorderBrush reference"
+												CopyText="{}{actipro:ThemeResource Container2BorderBrush}" />
+							<TextBlock Margin="10,0,0,0" Classes="theme-text-body" Text="Container 2 border" Foreground="{actipro:ThemeResource DefaultForegroundBrush}" VerticalAlignment="Center" />
+						</DockPanel>
+
+						<ContentPresenter ContentTemplate="{StaticResource ForegroundColorsTemplate}" />
+					</StackPanel>
+				</Border>
+
+				<Border Margin="0,0,20,20" Background="{actipro:ThemeResource Container3BackgroundBrush}" BorderBrush="{actipro:ThemeResource Container3BorderBrush}"
+						BorderThickness="1" CornerRadius="10" Padding="20">
+					<StackPanel>
+						<TextBlock Classes="theme-text-heading" Text="Container 3" />
+
+						<DockPanel Margin="0,10,0,0">
+							<Border DockPanel.Dock="Left" Margin="10,0,0,0" Width="16" Height="16" BorderThickness="1" BorderBrush="{actipro:ThemeResource DefaultForegroundBrush}" Background="{actipro:ThemeResource Container3BackgroundBrush}" />
+							<actipro:CopyButton DockPanel.Dock="Right" Margin="10,0,0,0" Classes="theme-subtle accent" ToolTip.Tip="Copy Container3BackgroundBrush reference"
+												CopyText="{}{actipro:ThemeResource Container3BackgroundBrush}" />
+							<TextBlock Margin="10,0,0,0" Classes="theme-text-body" Text="Container 3 background" Foreground="{actipro:ThemeResource DefaultForegroundBrush}" VerticalAlignment="Center" />
+						</DockPanel>
+						<DockPanel>
+							<Border DockPanel.Dock="Left" Margin="10,0,0,0" Width="16" Height="16" BorderThickness="1" BorderBrush="{actipro:ThemeResource DefaultForegroundBrush}" Background="{actipro:ThemeResource Container3BorderBrush}" />
+							<actipro:CopyButton DockPanel.Dock="Right" Margin="10,0,0,0" Classes="theme-subtle accent" ToolTip.Tip="Copy Container3BorderBrush reference"
+												CopyText="{}{actipro:ThemeResource Container3BorderBrush}" />
+							<TextBlock Margin="10,0,0,0" Classes="theme-text-body" Text="Container 3 border" Foreground="{actipro:ThemeResource DefaultForegroundBrush}" VerticalAlignment="Center" />
+						</DockPanel>
+
+						<ContentPresenter ContentTemplate="{StaticResource ForegroundColorsTemplate}" />
+					</StackPanel>
+				</Border>
+
+				<Border Margin="0,0,20,20" Background="{actipro:ThemeResource Container4BackgroundBrush}" BorderBrush="{actipro:ThemeResource Container4BorderBrush}"
+						BorderThickness="1" CornerRadius="10" Padding="20">
+					<StackPanel>
+						<TextBlock Classes="theme-text-heading" Text="Container 4" />
+
+						<DockPanel Margin="0,10,0,0">
+							<Border DockPanel.Dock="Left" Margin="10,0,0,0" Width="16" Height="16" BorderThickness="1" BorderBrush="{actipro:ThemeResource DefaultForegroundBrush}" Background="{actipro:ThemeResource Container4BackgroundBrush}" />
+							<actipro:CopyButton DockPanel.Dock="Right" Margin="10,0,0,0" Classes="theme-subtle accent" ToolTip.Tip="Copy Container4BackgroundBrush reference"
+												CopyText="{}{actipro:ThemeResource Container4BackgroundBrush}" />
+							<TextBlock Margin="10,0,0,0" Classes="theme-text-body" Text="Container 4 background" Foreground="{actipro:ThemeResource DefaultForegroundBrush}" VerticalAlignment="Center" />
+						</DockPanel>
+						<DockPanel>
+							<Border DockPanel.Dock="Left" Margin="10,0,0,0" Width="16" Height="16" BorderThickness="1" BorderBrush="{actipro:ThemeResource DefaultForegroundBrush}" Background="{actipro:ThemeResource Container4BorderBrush}" />
+							<actipro:CopyButton DockPanel.Dock="Right" Margin="10,0,0,0" Classes="theme-subtle accent" ToolTip.Tip="Copy Container4BorderBrush reference"
+												CopyText="{}{actipro:ThemeResource Container4BorderBrush}" />
+							<TextBlock Margin="10,0,0,0" Classes="theme-text-body" Text="Container 4 border" Foreground="{actipro:ThemeResource DefaultForegroundBrush}" VerticalAlignment="Center" />
+						</DockPanel>
+
+						<ContentPresenter ContentTemplate="{StaticResource ForegroundColorsTemplate}" />
+					</StackPanel>
+				</Border>
+
+				<Border Margin="0,0,20,20" Background="{actipro:ThemeResource Container5BackgroundBrush}" BorderBrush="{actipro:ThemeResource Container5BorderBrush}"
+						BorderThickness="1" CornerRadius="10" Padding="20">
+					<StackPanel>
+						<TextBlock Classes="theme-text-heading" Text="Container 5" />
+
+						<DockPanel Margin="0,10,0,0">
+							<Border DockPanel.Dock="Left" Margin="10,0,0,0" Width="16" Height="16" BorderThickness="1" BorderBrush="{actipro:ThemeResource DefaultForegroundBrush}" Background="{actipro:ThemeResource Container5BackgroundBrush}" />
+							<actipro:CopyButton DockPanel.Dock="Right" Margin="10,0,0,0" Classes="theme-subtle accent" ToolTip.Tip="Copy Container5BackgroundBrush reference"
+												CopyText="{}{actipro:ThemeResource Container5BackgroundBrush}" />
+							<TextBlock Margin="10,0,0,0" Classes="theme-text-body" Text="Container 5 background" Foreground="{actipro:ThemeResource DefaultForegroundBrush}" VerticalAlignment="Center" />
+						</DockPanel>
+						<DockPanel>
+							<Border DockPanel.Dock="Left" Margin="10,0,0,0" Width="16" Height="16" BorderThickness="1" BorderBrush="{actipro:ThemeResource DefaultForegroundBrush}" Background="{actipro:ThemeResource Container5BorderBrush}" />
+							<actipro:CopyButton DockPanel.Dock="Right" Margin="10,0,0,0" Classes="theme-subtle accent" ToolTip.Tip="Copy Container5BorderBrush reference"
+												CopyText="{}{actipro:ThemeResource Container5BorderBrush}" />
+							<TextBlock Margin="10,0,0,0" Classes="theme-text-body" Text="Container 5 border" Foreground="{actipro:ThemeResource DefaultForegroundBrush}" VerticalAlignment="Center" />
+						</DockPanel>
+
+						<ContentPresenter ContentTemplate="{StaticResource ForegroundColorsTemplate}" />
+					</StackPanel>
+				</Border>
+			</WrapPanel>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

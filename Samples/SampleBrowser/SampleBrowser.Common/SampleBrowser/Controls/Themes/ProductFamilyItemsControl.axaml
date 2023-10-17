@@ -1,0 +1,85 @@
+<ResourceDictionary 
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+	<ControlTheme x:Key="{x:Type sampleBrowser:ProductFamilyItemsControl}" TargetType="sampleBrowser:ProductFamilyItemsControl" BasedOn="{actipro:ControlTheme ItemsControl}">
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="ClipToBounds" Value="False" />
+		<Setter Property="IsTabStop" Value="False" />
+		<Setter Property="ItemsPanel">
+			<ItemsPanelTemplate>
+				<WrapPanel />
+			</ItemsPanelTemplate>
+		</Setter>
+		<Setter Property="Padding" Value="0,0,-20,-20" />
+		<Setter Property="ItemTemplate">
+			<DataTemplate x:DataType="sampleBrowser:ProductFamilyInfo">
+
+				<Button Margin="0,0,20,20" Width="276" Theme="{actipro:ControlTheme ButtonCard}" Command="{Binding NavigateViewToItemInfoCommand}" CommandParameter="{Binding OverviewItem}"
+						Content="{Binding}" CornerRadius="10" Padding="15" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+						ToolTip.Tip="{Binding Title, StringFormat='Open the {0} product category overview'}" ToolTip.ShowDelay="1000">						
+					<Button.ContentTemplate>
+						<DataTemplate x:DataType="sampleBrowser:ProductFamilyInfo">
+
+							<Grid RowDefinitions="Auto,*,Auto" ColumnDefinitions="Auto,*">
+								<DockPanel>
+									<Image x:Name="image" DockPanel.Dock="Left" Width="32" Height="32" Source="{Binding LogoImageSource}" VerticalAlignment="Center">
+										<Image.Effect>
+											<DropShadowEffect OffsetX="0" OffsetY="2" BlurRadius="3" Opacity="{DynamicResource {actipro:ThemeResourceKey ShadowOpacity}}" />
+										</Image.Effect>
+									</Image>
+
+									<TextBlock Margin="10,0,0,0" Text="{Binding Title, Mode=OneWay}" FontSize="{actipro:ThemeResource HeadingFontSizeSmall}"
+												FontWeight="SemiBold" TextWrapping="Wrap" VerticalAlignment="Center" />
+								</DockPanel>
+
+								<StackPanel Margin="0,7,0,0" Grid.Row="1" Grid.ColumnSpan="2">
+									<TextBlock Text="{Binding Summary, Mode=OneWay}" TextWrapping="Wrap" />
+
+									<ItemsControl Margin="0,3,0,0" ItemsSource="{Binding TeaserBulletItems}" IsTabStop="False">
+										<ItemsControl.ItemTemplate>
+											<DataTemplate>
+												<DockPanel Margin="0,3,0,0">
+													<Rectangle DockPanel.Dock="Left" Margin="9,6,9,0" Width="6" Height="6" Fill="{actipro:ThemeResource ActiproBrandBrush}" VerticalAlignment="Top" />
+													<TextBlock Text="{Binding}" FontSize="{actipro:ThemeResource DefaultFontSizeSmall}" 
+																Foreground="{actipro:ThemeResource DefaultForegroundBrushSecondary}" TextWrapping="Wrap" />
+												</DockPanel>
+											</DataTemplate>
+										</ItemsControl.ItemTemplate>
+									</ItemsControl>
+								</StackPanel>
+
+								<TextBlock Grid.Row="2" Grid.ColumnSpan="2" Margin="0,3,0,-3" 
+											Text="{Binding Items.Count, StringFormat='{}{0} samples'}" FontSize="{actipro:ThemeResource DefaultFontSizeSmall}" 
+											Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" TextAlignment="Right" TextWrapping="Wrap" />
+
+								<StackPanel Grid.ColumnSpan="2" Margin="0,8,-16,0" Height="18" HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal" IsVisible="{Binding HasBlurbText}">
+									<StackPanel.Effect>
+										<DropShadowEffect OffsetX="0" OffsetY="1" BlurRadius="5" Opacity="0.2" />
+									</StackPanel.Effect>
+
+									<Path Data="M 10,0 L 0,0 L 5,5 L 0,10 L 10,10 Z" Fill="{actipro:ThemeResource ControlBackgroundBrushSolidDanger}" Stretch="Fill" />
+									<Border BorderThickness="0,0,1,0" BorderBrush="{actipro:ThemeResource ControlForegroundBrushOutlineDanger}"
+											Background="{actipro:ThemeResource ControlBackgroundBrushSolidDanger}" Padding="0,0,5,0">
+										<TextBlock
+											Text="{Binding BlurbText, Converter={x:Static actipro:StringConverters.ToUpperInvariant}}"
+											Foreground="{actipro:ThemeResource ControlForegroundBrushSolidDanger}"
+											FontSize="{actipro:ThemeResource DefaultFontSizeExtraSmall}"
+											VerticalAlignment="Center"
+											/>
+									</Border>
+								</StackPanel>
+							</Grid>
+							
+						</DataTemplate>
+					</Button.ContentTemplate>
+				</Button>
+
+			</DataTemplate>
+		</Setter>
+	</ControlTheme>
+	
+</ResourceDictionary>

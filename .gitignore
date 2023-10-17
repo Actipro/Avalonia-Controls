@@ -1,0 +1,21 @@
+.vs/
+
+[Bb]in/
+[Oo]bj/
+
+*.lnk
+*.log
+*.pfx
+*.suo
+*.tmp
+*.user
+*.wxs
+*tmp.csproj
+project.lock.json
+
+# Documentation (DocFx)
+Documentation/wwwroot/
+~[Pp]review.html
+
+# Build project
+!/Build*

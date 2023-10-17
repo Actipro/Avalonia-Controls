@@ -1,0 +1,45 @@
+<UserControl
+	x:Class="ActiproSoftware.ProductSamples.ThemeSamples.NativeControls.CalendarSamples"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Actipro's control themes create a modern appearance for native Calendar controls.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Calendar control themes" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/native-control-themes#calendar-controls" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+			<sampleBrowser:ControlExampleLinkItem Title="CalendarDatePicker" Url="/ProductSamples/ThemesSamples/NativeControls/CalendarDatePickerSamples" />
+		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+
+
+		<sampleBrowser:ControlExample
+			Header="Calendar usage"
+			DataContext="{Binding #sample}"
+			HorizontalContentAlignment="Center"
+			>
+
+			<Calendar x:Name="sample" />
+			
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Selection mode" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type={x:Type CalendarSelectionMode}}" SelectedValue="{Binding SelectionMode}" />
+					</StackPanel>
+					<CheckBox IsChecked="{Binding IsTodayHighlighted}">Highlight today</CheckBox>
+					<CheckBox x:Name="sampleBlackoutSeveralDays">Blackout several days</CheckBox>
+					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

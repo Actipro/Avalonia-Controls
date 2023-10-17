@@ -1,0 +1,1439 @@
+<UserControl 
+	x:Name="sampleRootControl"
+	x:Class="ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPromptIntro.MainControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:controlsPrims="using:Avalonia.Controls.Primitives"
+	xmlns:local="using:ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPromptIntro"
+	xmlns:layout="using:Avalonia.Layout"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+		<actipro:ImageKeyToImageConverter x:Key="ImageKeyToImageConverter" />
+
+		<local:ConfirmationCommand x:Key="ConfirmationCommand" />
+		
+		<x:String x:Key="StackTraceSampleText" xml:space="preserve"><![CDATA[System.InvalidOperationException: Something bad happened
+   at ActiproSamples.SomeObject.OtherMethod() in C:\Samples\SomeObject.cs:line 24
+   at ActiproSamples.SomeObject..ctor() in C:\Samples\SomeObject.cs:line 14
+   --- End of inner exception stack trace ---
+   at ActiproSamples.SomeObject..ctor() in C:\Samples\SomeObject.cs:line 18
+   at ActiproSamples.Program.DoSomething() in C:\Samples\Program.cs:line 23
+   at ActiproSamples.Program.Main(String[] args) in C:\Samples\Program.cs:line 13]]></x:String>
+
+		<ControlTheme x:Key="CustomUserPromptButtonTheme" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+			<Setter Property="Width" Value="80" />
+			<Setter Property="Height" Value="30" />
+			<Setter Property="Margin" Value="5" />
+			<Setter Property="TextElement.Foreground" Value="{actipro:ThemeResource ButtonForegroundBrush}" />
+			<Setter Property="BorderThickness" Value="2" />
+			<Setter Property="Template">
+				<ControlTemplate TargetType="Button">
+					<Border x:Name="border" CornerRadius="15"
+							Width="{TemplateBinding Width}"
+							Height="{TemplateBinding Height}"
+							Background="{TemplateBinding Background}"
+							BorderBrush="{TemplateBinding BorderBrush}"
+							BorderThickness="{TemplateBinding BorderThickness}">
+						<ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"
+											HorizontalAlignment="Center" VerticalAlignment="Center" />
+					</Border>
+				</ControlTemplate>
+			</Setter>
+			<Style Selector="^:pointerover">
+				<Setter Property="TextElement.FontWeight" Value="Bold" />
+			</Style>
+			<!-- The "buttonresult-<result>" class is applied to each button based on the result of that button where <result> is the lowercase result name -->
+			<Style Selector="^.buttonresult-yes">
+				<Setter Property="Content" Value="Always" />
+				<Setter Property="Background" Value="{actipro:ThemeResource ControlBackgroundBrushSoftSuccess}" />
+				<Setter Property="BorderBrush" Value="{actipro:ThemeResource ControlForegroundBrushOutlineSuccess}" />
+			</Style>
+			<Style Selector="^.buttonresult-no">
+				<Setter Property="Content" Value="Never" />
+				<Setter Property="Background" Value="{actipro:ThemeResource ControlBackgroundBrushSoftDanger}" />
+				<Setter Property="BorderBrush" Value="{actipro:ThemeResource ControlForegroundBrushOutlineDanger}" />
+			</Style>
+		</ControlTheme>
+		
+	</UserControl.Resources>
+	
+	<UserControl.Styles>
+		<Style Selector="Button.show-dialog">
+			<Setter Property="Padding" Value="20,10" />
+			<Setter Property="Content" Value="Show Hosted Sample" />
+			<Setter Property="HorizontalAlignment" Value="Stretch" />
+		</Style>
+		<Style Selector="actipro|UserPromptControl.inline-sample">
+			<Setter Property="MaxWidth" Value="500" />
+		</Style>
+	</UserControl.Styles>
+
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="User Prompt allows you to build traditional MessageBox or Task Dialog functionality with full support for themes. UserPromptControl defines the core functionality with support for advanced content (e.g. header, footer, checkbox). This control is typically hosted in a modal UserPromptWindow, but can be hosted in anywhere.  UserPromptBuilder makes it easy to create dialogs directly in code.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="User prompt" Url="https://www.actiprosoftware.com/docs/controls/avalonia/fundamentals/user-prompt/index" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+			<sampleBrowser:ControlExampleLinkItem Title="MessageBox" Url="/ProductSamples/FundamentalsSamples/Controls/MessageBoxIntro/MainControl" />
+		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+
+
+		<sampleBrowser:ControlExample
+			Header="Basic usage"
+			DataContext="{Binding #userPrompSampleBasicUsage}"
+			>
+			<actipro:UserPromptControl x:Name="userPrompSampleBasicUsage" Classes="inline-sample"
+									   Header="User prompt header"
+									   StandardButtons="OKCancel"
+									   StandardStatusImage="Information"
+									   Content="The user prompt control can easily display any kind of dialog message to the end user."/>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<TextBox Text="{Binding Header}" Watermark="Header" UseFloatingWatermark="True" />
+					<TextBox Text="{Binding Content}" Watermark="Content" UseFloatingWatermark="True" />
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Status image" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type=actipro:MessageBoxImage}" SelectedItem="{Binding StandardStatusImage}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Standard buttons" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray 'OK, OKCancel, YesNo, YesNoCancel, RetryCancel, AbortRetryIgnore', Type=actipro:MessageBoxButtons}" SelectedItem="{Binding StandardButtons}" />
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:UserPromptControl
+	Header="$(Header)"
+	Content="$(Content)"
+	StandardButtons="$(StandardButtons)"$(StandardStatusImageAttribute) />
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="Header" Value="{Binding Header}" />
+						<sampleBrowser:CodeExampleSubstitution Key="Content" Value="{Binding Content}" />
+						<sampleBrowser:CodeExampleSubstitution Key="StandardButtons" Value="{Binding StandardButtons}" />
+						<sampleBrowser:CodeExampleSubstitution Key="StandardStatusImageAttribute"
+															   IsEnabled="{Binding StandardStatusImage, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='None'}"
+															   Value="{Binding StandardStatusImage, StringFormat='&#xD;&#x9;StandardStatusImage=&quot;{0}&quot;'}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+var result = await UserPromptBuilder.Configure()
+	.WithHeaderContent("$(Header)")
+	.WithContent("$(Content)")
+	.WithStandardButtons(MessageBoxButtons.$(StandardButtons))
+	$(WithStatusImage).Show();
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="Header" Value="{Binding Header}" />
+						<sampleBrowser:CodeExampleSubstitution Key="Content" Value="{Binding Content}" />
+						<sampleBrowser:CodeExampleSubstitution Key="StandardButtons" Value="{Binding StandardButtons}" />
+						<sampleBrowser:CodeExampleSubstitution Key="WithStatusImage"
+															   IsEnabled="{Binding StandardStatusImage, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='None'}"
+															   Value="{Binding StandardStatusImage, StringFormat='.WithStatusImage(MessageBoxImage.{0})&#xD;&#x9;'}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Display mode"
+			Footer="A user prompt can be displayed as a dialog (on supported platforms) or an overlay on the current view."
+			DataContext="{Binding #userPromptDisplayMode}"
+			>
+			<actipro:UserPromptControl x:Name="userPromptDisplayMode" Classes="inline-sample"
+									   Header="Display mode"
+									   StandardStatusImage="Information"
+									   Content="The same prompt can be consistently shown on different platforms even when windows are not supported."
+									   Footer="If the platform doesn't support dialogs, overlays will always be used."
+									   StandardButtons="Yes,No,Cancel" />
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Display mode" />
+						<ComboBox x:Name="displayModeSelection" ItemsSource="{actipro:DelimitedArray Type=actipro:UserPromptDisplayMode}" SelectedIndex="0" />
+						<TextBlock x:Name="displayModeWarning" Classes="theme-form-control-message warning" Text="Dialog not availailable on this platform" />
+					</StackPanel>
+					<Button Classes="show-dialog theme-solid accent" Click="OnSampleShowDialogDisplayModeClick" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+var result = await UserPromptBuilder.Configure()
+	// Other common settings here
+	.WithDisplayMode($(DisplayMode))
+	.Show();
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="DisplayMode" Value="{Binding #displayModeSelection.SelectedItem}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Default button"
+			Footer="See the Button Native Control sample (Themes Product) for additional information on built-in button themes."
+			DataContext="{Binding #userPromptDefaultButton}"
+			>
+			<actipro:UserPromptControl x:Name="userPromptDefaultButton" Classes="inline-sample"
+									   Header="Default button"
+									   Content="Any button can be set as the default and optionally define custom style classes for the button."
+									   Footer="When not explicitly defined, the first button will be the default."
+									   StandardButtons="Yes,No,Cancel"
+									   DefaultResult="Yes"
+									   DefaultButtonClasses="theme-solid accent" />
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<TextBox Text="{Binding DefaultButtonClasses}" Watermark="Default button classes" UseFloatingWatermark="True" />
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Default result" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray 'None, Yes, No, Cancel', Type={x:Type actipro:MessageBoxResult}}" SelectedItem="{Binding DefaultResult}" />
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:UserPromptControl ...
+	DefaultResult="$(DefaultResult)" DefaultButtonClasses="$(DefaultButtonClasses)" />
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="DefaultResult" Value="{Binding DefaultResult}" />
+						<sampleBrowser:CodeExampleSubstitution Key="DefaultButtonClasses" Value="{Binding DefaultButtonClasses}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+var result = await UserPromptBuilder.Configure()
+	// Other common settings here
+	.WithDefaultResult(MessageBoxResult.$(DefaultResult))
+	.WithDefaultButtonClasses("$(DefaultButtonClasses)")
+	.Show();
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="DefaultResult" Value="{Binding DefaultResult}" />
+						<sampleBrowser:CodeExampleSubstitution Key="DefaultButtonClasses" Value="{Binding DefaultButtonClasses}" />
+						<sampleBrowser:CodeExampleSubstitution Key="StandardButtons" Value="{Binding StandardButtons}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Elevation and shadow"
+			DataContext="{Binding #userPromptShadow}"
+			>
+			<actipro:UserPromptControl x:Name="userPromptShadow" Classes="inline-sample"
+									   Header="Elevation and shadow"
+									   Content="The UserPromptControl is elevated like a popup with a shadow." />
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<CheckBox IsChecked="{Binding IsShadowEnabled}" Content="Enable shadow" />
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Elevation" />
+						<Slider Minimum="0" Maximum="24" TickFrequency="1" IsSnapToTickEnabled="True" Value="{Binding Elevation}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Shadow opacity" />
+						<Slider Minimum="0" Maximum="1.0" TickFrequency="0.1" IsSnapToTickEnabled="True" Value="{Binding ShadowOpacity}" />
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:UserPromptControl$(IsShadowEnabledAttribute)$(ElevationAttribute)$(ShadowOpacityAttribute) />
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="IsShadowEnabledAttribute"
+															   IsEnabled="{Binding !IsShadowEnabled}"
+															   Value=" IsShadowEnabled=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="ElevationAttribute"
+															   IsEnabled="{Binding IsShadowEnabled}"
+															   Value="{Binding Elevation, StringFormat=' Elevation=&quot;{0}&quot;'}"/>
+						<sampleBrowser:CodeExampleSubstitution Key="ShadowOpacityAttribute"
+															   IsEnabled="{Binding IsShadowEnabled}"
+															   Value="{Binding ShadowOpacity, StringFormat=' ShadowOpacity=&quot;{0:0.0}&quot;'}"/>
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Expanded information"
+			DataContext="{Binding #userPromptSampleExpandedInformation}"
+			>
+			<actipro:UserPromptControl x:Name="userPromptSampleExpandedInformation" Classes="inline-sample"
+									   Header="Expanded information"
+									   Content="Expanded information is hidden until the user wants to see it."
+									   ExpandedInformationContent="Any content can be hosted here"
+									   ExpandedInformationCollapsedHeaderText="Show more"
+									   ExpandedInformationExpandedHeaderText="Show less"/>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<TextBox Text="{Binding ExpandedInformationContent}" Watermark="Expanded content" UseFloatingWatermark="True" />
+					<TextBox Text="{Binding ExpandedInformationCollapsedHeaderText}" Watermark="Toggle header (collapsed)" UseFloatingWatermark="True" />
+					<TextBox Text="{Binding ExpandedInformationExpandedHeaderText}" Watermark="Toggle header (expanded)" UseFloatingWatermark="True" />
+					<CheckBox IsChecked="{Binding IsExpanded}" Content="Expanded" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:UserPromptControl ...$(IsExpandedAttribute)
+	ExpandedInformationContent="$(ExpandedInformationContent)"
+	ExpandedInformationCollapsedHeaderText="$(ExpandedInformationCollapsedHeaderText)"
+	ExpandedInformationExpandedHeaderText="$(ExpandedInformationExpandedHeaderText)" />
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ExpandedInformationContent" Value="{Binding ExpandedInformationContent}" />
+						<sampleBrowser:CodeExampleSubstitution Key="ExpandedInformationCollapsedHeaderText" Value="{Binding ExpandedInformationCollapsedHeaderText}" />
+						<sampleBrowser:CodeExampleSubstitution Key="ExpandedInformationExpandedHeaderText" Value="{Binding ExpandedInformationExpandedHeaderText}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsExpandedAttribute" IsEnabled="{Binding IsExpanded}" Value=" IsExpanded=&quot;True&quot;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+var result = await UserPromptBuilder.Configure()
+	// Other common settings here	
+	.WithExpandedInformationContent("$(ExpandedInformationContent)")
+	.WithExpandedInformationHeaderText("$(ExpandedInformationCollapsedHeaderText)", "$(ExpandedInformationExpandedHeaderText)")
+	$(WithIsExpanded).Show();
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ExpandedInformationContent" Value="{Binding ExpandedInformationContent}" />
+						<sampleBrowser:CodeExampleSubstitution Key="ExpandedInformationCollapsedHeaderText" Value="{Binding ExpandedInformationCollapsedHeaderText}" />
+						<sampleBrowser:CodeExampleSubstitution Key="ExpandedInformationExpandedHeaderText" Value="{Binding ExpandedInformationExpandedHeaderText}" />
+						<sampleBrowser:CodeExampleSubstitution Key="WithIsExpanded" IsEnabled="{Binding IsExpanded}" Value=".WithIsExpanded(true)&#xD;&#x9;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Footer"
+			DataContext="{Binding #userPromptSampleBasicFooter}"
+			>
+
+			<actipro:UserPromptControl x:Name="userPromptSampleBasicFooter" Classes="inline-sample"
+									   Header="Footer usage"
+									   Content="Optionally define a footer for additional content with or without an associated image."
+									   Footer="Any content can be hosted here"
+									   FooterImage="{Binding #sampleRootControl.BasicFooterSampleImage}"/>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<TextBox Text="{Binding Footer}" Watermark="Footer content" UseFloatingWatermark="True" MaxLines="4" AcceptsReturn="True" ScrollViewer.HorizontalScrollBarVisibility="Disabled" />
+					<CheckBox IsChecked="{Binding #sampleRootControl.ShowBasicFooterSampleImage}" Content="Include image" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:UserPromptControl $(FooterImageAttribute)
+	Footer="$(Footer)" />
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="Footer" Value="{Binding Footer}" />
+						<sampleBrowser:CodeExampleSubstitution Key="FooterImageAttribute" IsEnabled="{Binding #sampleRootControl.ShowBasicFooterSampleImage}" Value="FooterImage=&quot;/Images/Icons/Help16.png&quot;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+var result = await UserPromptBuilder.Configure()
+	// Other common settings here
+	.WithFooterContent("$(Footer)")
+	$(WithFooterImage).Show();$(GetImageDeclaration)
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="Footer" Value="{Binding Footer}" />
+						<sampleBrowser:CodeExampleSubstitution Key="WithFooterImage" IsEnabled="{Binding #sampleRootControl.ShowBasicFooterSampleImage}" Value=".WithFooterImage(GetImage(&quot;/Images/Icons/Help16.png&quot;))&#xD;&#x9;" />
+						<sampleBrowser:CodeExampleSubstitution Key="GetImageDeclaration" IsEnabled="{Binding #sampleRootControl.ShowBasicFooterSampleImage}" Value="&#xD;&#xD;IImage? GetImage(string relPath) {&#xD;&#x9;// Load any IImage here&#xD;}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Button alignment"
+			DataContext="{Binding #userPromptSampleButtonAlignment}"
+			>
+
+			<actipro:UserPromptControl x:Name="userPromptSampleButtonAlignment" Classes="inline-sample"
+									   Header="Button alignment"
+									   Content="Buttons can be horizontally aligned to the left, center, or right (default)."
+									   StandardButtons="YesNoCancel" />
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Alignment" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray 'Right, Center, Left', Type=layout:HorizontalAlignment}" SelectedItem="{Binding ButtonItemsHorizontalAlignment}" />
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:UserPromptControl ... ButtonItemsHorizontalAlignment="$(ButtonItemsHorizontalAlignment)" />
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ButtonItemsHorizontalAlignment" Value="{Binding ButtonItemsHorizontalAlignment}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+var result = await UserPromptBuilder.Configure()
+	// Other common settings here
+	.WithButtonItemsHorizontalAlignment(HorizontalAlignment.$(ButtonItemsHorizontalAlignment))
+	.Show();
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ButtonItemsHorizontalAlignment" Value="{Binding ButtonItemsHorizontalAlignment}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample 
+			Header="Customize the header and content"
+			Footer="This sample uses a custom header background causing the status image to be aligned within the header area."
+			>
+			<actipro:UserPromptControl Classes="inline-sample"
+									   Header="Exporting Project (Sample Project)"
+									   HeaderForeground="White"
+									   StatusImage="/Images/Icons/Save32.png"
+									   StandardButtons="Cancel">
+				<actipro:UserPromptControl.HeaderBackground>
+					<LinearGradientBrush>
+						<LinearGradientBrush.GradientStops>
+							<GradientStop Offset="0" Color="#094C75" />
+							<GradientStop Offset="1" Color="#066F5C" />
+						</LinearGradientBrush.GradientStops>
+					</LinearGradientBrush>
+				</actipro:UserPromptControl.HeaderBackground>
+				<actipro:UserPromptControl.Content>
+					<StackPanel>
+						<TextBlock>to <Bold>Project Templates</Bold> (C:\Templates\ProjectTemplates)</TextBlock>
+						<TextBlock Margin="0,2">Estimated time remaining: 1 minute</TextBlock>
+						<ProgressBar Classes="success" Margin="0,5,0,0" Height="20"
+									 Minimum="0" Maximum="100" Value="25" />
+					</StackPanel>
+				</actipro:UserPromptControl.Content>
+			</actipro:UserPromptControl>
+			
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<Button Classes="show-dialog" Click="OnSampleShowDialogCustomHeaderAndContentClick" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:UserPromptControl Header="Exporting Project (Sample Project)"
+	HeaderForeground="White"
+	StatusImage="/Images/Icons/Save32.png"
+	StandardButtons="Cancel"
+	>
+	<actipro:UserPromptControl.HeaderBackground>
+		<LinearGradientBrush>
+			<LinearGradientBrush.GradientStops>
+				<GradientStop Offset="0" Color="#094C75" />
+				<GradientStop Offset="1" Color="#066F5C" />
+			</LinearGradientBrush.GradientStops>
+		</LinearGradientBrush>
+	</actipro:UserPromptControl.HeaderBackground>
+	<actipro:UserPromptControl.Content>
+		<StackPanel>
+			<TextBlock>to <Bold>Project Templates</Bold> (C:\Templates\ProjectTemplates)</TextBlock>
+			<TextBlock Margin="0,2">Estimated time remaining: 1 minute</TextBlock>
+			<ProgressBar Margin="0,5,0,0" Height="20"
+				Minimum="0" Maximum="100" Value="25"
+				Background="#e3e4e6" Foreground="#299552"
+				BorderBrush="#c2c4c7" BorderThickness="1" />
+		</StackPanel>
+	</actipro:UserPromptControl.Content>
+</actipro:UserPromptControl>
+					]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+var result = await UserPromptBuilder.Configure()
+	.WithHeaderContent("Exporting Project (Sample Project)")
+	.WithHeaderForeground(Colors.White)
+	.WithHeaderBackground(new LinearGradientBrush() {
+		GradientStops = {
+			new GradientStop(UIColor.Parse("#094c75"), 0),
+			new GradientStop(UIColor.Parse("#066f5c"), 1),
+		}
+	})
+	.WithStatusImage(GetImage("/Images/Icons/Save32.png"))
+	.WithStandardButtons(MessageBoxButtons.Cancel)
+	.WithContent(new StackPanel() {
+		Children = {
+			new TextBlock() {
+				Inlines = new InlineCollection() {
+					new Run("to "),
+					new Run("Project Templates") { FontWeight = FontWeight.Bold },
+					new Run(@" (C:\Templates\ProjectTemplates)"),
+				}
+			},
+			new TextBlock() {
+				Text = "Estimated time remaining: 1 minute",
+				Margin = new Thickness(0, 2, 0, 2)
+			},
+			new ProgressBar() {
+				Margin = new Thickness(0, 5, 0, 0),
+				Minimum = 0,
+				Maximum = 100,
+				Value = 25,
+				Height = 20,
+				Classes = { "success" }
+			}
+		}
+	})
+	.WithWindowStartupLocation(WindowStartupLocation.CenterOwner)
+	.Show();
+	
+IImage? GetImage(string relPath) {
+	// Load any IImage here
+}
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Customize the footer content"
+			>
+			<actipro:UserPromptControl Classes="inline-sample"
+									   Header="Customize the footer content"
+									   FooterImage="{Binding Source={x:Static actipro:SharedImageKeys.Question}, Converter={StaticResource ImageKeyToImageConverter}}"
+									   Content="A footer can be used to provide additional context for a prompt. This sample demonstrates using a hyperlink to provide contextual help.">
+				<actipro:UserPromptControl.Footer>
+					<TextBlock VerticalAlignment="Top">
+						<Run>Click </Run>
+						<InlineUIContainer>
+							<actipro:HyperlinkTextBlock Click="OnGenericHyperlinkClick">here</actipro:HyperlinkTextBlock>
+						</InlineUIContainer>
+						<Run> for more information</Run>
+					</TextBlock>
+				</actipro:UserPromptControl.Footer>
+			</actipro:UserPromptControl>
+			
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<Button Classes="show-dialog" Click="OnSampleShowDialogCustomFooterContentClick" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:UserPromptControl Header="Customize the footer content"
+	FooterImage="{Binding Source={x:Static actipro:SharedImageKeys.Question}, Converter={StaticResource ImageKeyToImageConverter}}"
+	Content="A footer can be used to provide additional context for a prompt. This sample demonstrates using a hyperlink to provide contextual help."
+	>
+	<actipro:UserPromptControl.Footer>
+		<TextBlock VerticalAlignment="Top">
+			<Run>Click </Run>
+			<InlineUIContainer>
+				<actipro:HyperlinkTextBlock Click="OnGenericHyperlinkClick">here</actipro:HyperlinkTextBlock>
+			</InlineUIContainer>
+			<Run> for more information</Run>
+		</TextBlock>
+	</actipro:UserPromptControl.Footer>
+</actipro:UserPromptControl>
+					]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+// Build the footer hyperlink
+var hyperlink = new HyperlinkTextBlock() {
+	Text = "here"
+};
+hyperlink.Click += (s, e) => {
+	MessageBox.Show("Use this event handler to respond to the hyperlink.", "Hyperlink Clicked");
+};
+
+var result = await UserPromptBuilder.Configure()
+	.WithHeaderContent("Customize the footer content")
+	.WithContent("A footer can be used to provide additional context for a prompt. This sample demonstrates using a hyperlink to provide contextual help.")
+	.WithFooterContent(new TextBlock() {
+		Inlines = new InlineCollection() {
+			new Run("Click "),
+			hyperlink,
+			new Run(" for more information")
+		}
+	})
+	.WithFooterImage(ImageProvider.Default.GetImageSource(SharedImageKeys.Question))
+	.WithButton(MessageBoxResult.OK)
+	.Show();
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Use the checkbox to allow user feedback"
+			Footer="The dialog for this sample alters behavior based on the state of the checkbox when it was last shown."
+			DataContext="{Binding #userPromptSampleCheckBox}"
+			>
+			<actipro:UserPromptControl x:Name="userPromptSampleCheckBox" Classes="inline-sample"
+									   Header="Use the checkbox to allow user feedback"
+									   Content="A common scenario is to allow the user to opt out of future prompts."
+									   CheckBoxContent="_Stop showing messages like this"
+									   IsChecked="False" />
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<TextBox Text="{Binding CheckBoxContent}" Watermark="Checkbox content" UseFloatingWatermark="True" />
+					<CheckBox IsChecked="{Binding IsChecked}" Content="Is checked" />
+					
+					<Button Classes="show-dialog" Margin="0,20,0,0" Click="OnSampleShowDialogStandardCheckBoxClick" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:UserPromptControl Header="Use the checkbox to allow user feedback"
+	Content="A common scenario is to allow the user to opt out of future prompts."
+	CheckBoxContent="$(CheckBoxContent)"
+	IsChecked="$(IsChecked)" />
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="IsChecked" Value="{Binding IsChecked}" />
+						<sampleBrowser:CodeExampleSubstitution Key="CheckBoxContent" Value="{Binding CheckBoxContent}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+// External variable to synchronize with checked state
+bool stopShowing = false;
+
+var result = await UserPromptBuilder.Configure()
+	.WithHeaderContent("Use the checkbox to allow user feedback.")
+	.WithContent("A common scenario is to allow the user to opt out of future prompts.")
+	.WithCheckBoxContent("_Stop showing messages like this")
+	.WithIsChecked(
+		getter: () => shopShowing,
+		setter: (value) => shopShowing = value
+	)
+	.WithStandardButtons(MessageBoxButtons.OK)
+	.AfterShow(async (builder, result) => {
+		if (shopShowing)
+			await MessageBox.Show($"You selected '{result}' and elected not to show this message again.", "Result");
+		else
+			await MessageBox.Show($"You selected '{result}' and will continue to see this message.", "Result");
+	})
+	.Show();
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Exception prompt"
+			Footer="Use expanded information to show details like the error message in this sample."
+			>
+			<actipro:UserPromptControl Classes="inline-sample"
+									   Header="Error processing request"
+									   StandardStatusImage="Error"
+									   ExpandedInformationCollapsedHeaderText="Show details"
+									   ExpandedInformationExpandedHeaderText="Hide details"
+									   Content="Here is where you might normally show an error message. Use the 'Show details' button to toggle a stack trace.">
+				<actipro:UserPromptControl.ExpandedInformationContent>
+					<StackPanel>
+						<TextBlock Text="Stack Trace:" FontWeight="SemiBold" Margin="0,0,0,3" />
+						<TextBox IsReadOnly="True" MaxLines="5"
+								 Background="{Binding $parent[actipro:UserPromptControl].TrayBackground}"
+								 ScrollViewer.HorizontalScrollBarVisibility="Auto"
+								 ScrollViewer.VerticalScrollBarVisibility="Auto"
+								 Text="{StaticResource StackTraceSampleText}" />
+					</StackPanel>
+				</actipro:UserPromptControl.ExpandedInformationContent>
+			</actipro:UserPromptControl>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<Button Classes="show-dialog" Click="OnSampleShowDialogExpandedInformationErrorClick" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:UserPromptControl Header="Error processing request"
+	StandardStatusImage="Error"
+	ExpandedInformationCollapsedHeaderText="Show details"
+	ExpandedInformationExpandedHeaderText="Hide details"
+	Content="Insert error message here."
+	>
+	<actipro:UserPromptControl.ExpandedInformationContent>
+		<StackPanel>
+			<TextBlock Text="Stack Trace:" FontWeight="SemiBold" Margin="0,0,0,3" />
+			<TextBox IsReadOnly="True" MaxLines="5"
+				Background="{Binding $parent[actipro:UserPromptControl].TrayBackground}"
+				ScrollViewer.HorizontalScrollBarVisibility="Auto"
+				ScrollViewer.VerticalScrollBarVisibility="Auto"
+				Text="Provide more details or stack trace here." />
+		</StackPanel>
+	</actipro:UserPromptControl.ExpandedInformationContent>
+</actipro:UserPromptControl>
+					]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+try {
+
+	// Do something
+	
+} catch (Exception ex) {
+
+	// Use the built-in 'ForException' extension method
+	// on UserPromptBuilder to show exception details
+	await UserPromptBuilder.Configure()
+		.ForException(ex, "Error doing something.")
+		.Show();
+
+}
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Expanded information in content"
+			Footer="This sample uses the expansion state to toggle details directly within the content."
+			>
+			<actipro:UserPromptControl Classes="inline-sample"
+									   Header="Overwrite file?"
+									   StandardButtons="YesNoCancel"
+									   DefaultResult="Cancel"
+									   StandardStatusImage="Question"
+									   ExpandedInformationCollapsedHeaderText="Show details"
+									   ExpandedInformationExpandedHeaderText="Hide details">
+				<actipro:UserPromptControl.Content>
+					<StackPanel>
+						<TextBlock TextWrapping="Wrap">
+							A file named <Italic>DeLorean.txt</Italic> already exists in this location. Do you want to overwrite the file?
+						</TextBlock>
+						<actipro:AnimatedExpanderDecorator IsExpanded="{Binding $parent[actipro:UserPromptControl].IsExpanded}"
+														   IsAnimationEnabled="{Binding $parent[actipro:UserPromptControl].IsAnimationEnabled}">
+							<StackPanel>
+								<TextBlock FontWeight="SemiBold" Text="Original File:" Margin="0,10,0,5" />
+								<StackPanel Margin="10,0,0,0">
+									<TextBlock Text="File size: 88 MB" />
+									<TextBlock Text="Last modified: October 26, 1985" />
+								</StackPanel>
+								<TextBlock FontWeight="SemiBold" Text="Replace With:" Margin="0,10,0,5" />
+								<StackPanel Margin="10,0,0,0">
+									<TextBlock Text="File size: 1.21 GB" />
+									<TextBlock Text="Last modified: October 21, 2015" />
+								</StackPanel>
+							</StackPanel>
+						</actipro:AnimatedExpanderDecorator>
+					</StackPanel>
+				</actipro:UserPromptControl.Content>
+			</actipro:UserPromptControl>
+			
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<Button Classes="show-dialog" Click="OnSampleShowDialogExpandedInformationInContentClick" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:UserPromptControl Header="Overwrite file?"
+	StandardButtons="YesNoCancel" DefaultResult="Cancel"
+	StandardStatusImage="Question"
+	ExpandedInformationCollapsedHeaderText="Show details"
+	ExpandedInformationExpandedHeaderText="Hide details"
+	>
+	<actipro:UserPromptControl.Content>
+		<StackPanel>
+			<TextBlock TextWrapping="Wrap">
+				A file named <Italic>DeLorean.txt</Italic> already exists in this location. Do you want to overwrite the file?
+			</TextBlock>
+			<actipro:AnimatedExpanderDecorator
+				IsExpanded="{Binding $parent[actipro:UserPromptControl].IsExpanded}"
+				IsAnimationEnabled="{Binding $parent[actipro:UserPromptControl].IsAnimationEnabled}"
+				>
+				<StackPanel>
+					<TextBlock FontWeight="SemiBold" Text="Original File:" Margin="0,10,0,5" />
+					<StackPanel Margin="10,0,0,0">
+						<TextBlock Text="File size: 88 MB" />
+						<TextBlock Text="Last modified: October 26, 1985" />
+					</StackPanel>
+					<TextBlock FontWeight="SemiBold" Text="Replace With:" Margin="0,10,0,5" />
+					<StackPanel Margin="10,0,0,0">
+						<TextBlock Text="File size: 1.21 GB" />
+						<TextBlock Text="Last modified: October 21, 2015" />
+					</StackPanel>
+				</StackPanel>
+			</actipro:AnimatedExpanderDecorator>
+		</StackPanel>
+	</actipro:UserPromptControl.Content>
+</actipro:UserPromptControl>
+					]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+var result = await UserPromptBuilder.Configure()
+	.WithHeaderContent("Overwrite file?")
+	.WithStandardButtons(MessageBoxButtons.YesNoCancel)
+	.WithDefaultResult(MessageBoxResult.Cancel)
+	.WithStatusImage(MessageBoxImage.Question)
+	.WithExpandedInformation("Show details", "Hide details", expandedContent: null)
+	.WithAutoSize(true)
+	.WithContent(instance => {
+		// The 'WithContent' method has an overload that allows the UserPromptControl
+		// being built to be passed into this delegate. This is necessary here
+		// since some properties of the content have bindings to the UserPromptControl.
+
+		// Build the content
+		return new StackPanel() {
+			Children = {
+				new TextBlock() {
+					TextWrapping = TextWrapping.Wrap,
+					Inlines = new InlineCollection() {
+						new Run("A file named "),
+						new Run("DeLorean.txt") { FontStyle = FontStyle.Italic},
+						new Run(" already exists in this location. Do you want to overwrite the file?"),
+					}
+				},
+
+				// These details only visible when expanded
+				new AnimatedExpanderDecorator() {
+					Child = new StackPanel() {
+						Children = {
+							new TextBlock() {
+								Text = "Original File:",
+								FontWeight = FontWeight.SemiBold,
+								Margin = new Thickness(0, 10, 0, 5),
+							},
+							new StackPanel() {
+								Margin = new Thickness(10, 0, 0, 0),
+								Children = {
+									new TextBlock() { Text = "File size: 88 MB" },
+									new TextBlock() { Text = "Last modified: October 26, 1985" },
+								}
+							},
+							new TextBlock() {
+								Text = "Replace With:",
+								FontWeight = FontWeight.SemiBold,
+								Margin = new Thickness(0, 10, 0, 5),
+							},
+							new StackPanel() {
+								Margin = new Thickness(10, 0, 0, 0),
+								Children = {
+									new TextBlock() { Text = "File size: 1.21 GB" },
+									new TextBlock() { Text = "Last modified: October 21, 2015" },
+								}
+							},
+						}
+					},
+					[!!AnimatedExpanderDecorator.IsExpandedProperty] = instance[!!UserPromptControl.IsExpandedProperty],
+					[!AnimatedExpanderDecorator.IsAnimationEnabledProperty] = instance[!UserPromptControl.IsAnimationEnabledProperty],
+				}
+			}
+		};
+	})
+	.Show();
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Built-in support for a 'Help' button"
+			>
+			<actipro:UserPromptControl Classes="inline-sample"
+									   Header="Built-in support for a 'Help' button"
+									   StandardButtons="OK,Help"
+									   HelpCommand="{Binding #sampleRootControl.ContextualHelpCommand}"
+									   HelpCommandParameter="SampleIntegratedHelp">
+					A built-in 'Help' button can be displayed prominently in the button tray that, when invoked, can handle displaying contextual help without closing the dialog.
+			</actipro:UserPromptControl>
+			
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<Button Classes="show-dialog" Click="OnSampleShowDialogHelpButtonClick" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:UserPromptControl ...
+	StandardButtons="OK,Help"
+	HelpCommand="{Binding ShowHelpCommand}"
+	HelpCommandParameter="OptionalParameter" />
+					]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+var result = await UserPromptBuilder.Configure()
+	// Other common settings here
+	.WithStandardButtons(MessageBoxButtons.OK)
+	.WithHelpCommand(this.ShowHelpCommand, "OptionalParameter")
+	.Show();
+
+// The 'Help' button is automatically added when 'WithHelpCommand' defines a command
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Use any content for buttons"
+			>
+			<actipro:UserPromptControl Classes="inline-sample"
+									   Header="Full support for custom button content"
+									   Content="Buttons can have any content, including images. This sample shows images used as content and demonstrates changing the horizontal alignment of all buttons from right (default) to center."
+									   ButtonItemsHorizontalAlignment="Center">
+				<actipro:UserPromptControl.ButtonItems>
+					<actipro:Array>
+						<Button actipro:UserPromptControl.ButtonResult="{x:Static actipro:MessageBoxResult.CustomButton}">
+							<StackPanel Orientation="Horizontal" Spacing="4">
+								<actipro:DynamicImage Source="/Images/Icons/Save16.png" Height="16" Width="16" VerticalAlignment="Center" />
+								<AccessText VerticalAlignment="Center">_Left Image</AccessText>
+							</StackPanel>
+						</Button>
+						<Button actipro:UserPromptControl.ButtonResult="{x:Static actipro:MessageBoxResult.CustomButton}" IsDefault="True">
+							<StackPanel Orientation="Horizontal" Spacing="4">
+								<AccessText VerticalAlignment="Center">_Right Image</AccessText>
+								<actipro:DynamicImage Source="/Images/Icons/Save16.png" Height="16" Width="16" VerticalAlignment="Center" />
+							</StackPanel>
+						</Button>
+						<Button actipro:UserPromptControl.ButtonResult="{x:Static actipro:MessageBoxResult.CustomButton}">
+							<StackPanel Orientation="Vertical" Spacing="4">
+								<actipro:DynamicImage Source="/Images/Icons/Save16.png" Height="16" Width="16" HorizontalAlignment="Center" />
+								<AccessText HorizontalAlignment="Center">_Center Image</AccessText>
+							</StackPanel>
+						</Button>
+					</actipro:Array>
+				</actipro:UserPromptControl.ButtonItems>
+			</actipro:UserPromptControl>
+			
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<Button Classes="show-dialog" Click="OnSampleShowDialogCustomButtonContentClick" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:UserPromptControl ...
+	ButtonItemsHorizontalAlignment="Center">
+
+	<!-- Message Content Here -->
+
+	<actipro:UserPromptControl.ButtonItems>
+		<actipro:Array>
+			<Button actipro:UserPromptControl.ButtonResult="{x:Static actipro:MessageBoxResult.CustomButton}">
+				<StackPanel Orientation="Horizontal" Spacing="4">
+					<actipro:DynamicImage Source="/Images/Icons/Save16.png" Height="16" Width="16" VerticalAlignment="Center" />
+					<AccessText VerticalAlignment="Center">_Left Image</AccessText>
+				</StackPanel>
+			</Button>
+			<Button actipro:UserPromptControl.ButtonResult="{x:Static actipro:MessageBoxResult.CustomButton}" IsDefault="True">
+				<StackPanel Orientation="Horizontal" Spacing="4">
+					<AccessText VerticalAlignment="Center">_Right Image</AccessText>
+					<actipro:DynamicImage Source="/Images/Icons/Save16.png" Height="16" Width="16" VerticalAlignment="Center" />
+				</StackPanel>
+			</Button>
+			<Button actipro:UserPromptControl.ButtonResult="{x:Static actipro:MessageBoxResult.CustomButton}">
+				<StackPanel Orientation="Vertical" Spacing="4">
+					<actipro:DynamicImage Source="/Images/Icons/Save16.png" Height="16" Width="16" HorizontalAlignment="Center" />
+					<AccessText HorizontalAlignment="Center">_Center Image</AccessText>
+				</StackPanel>
+			</Button>
+		</actipro:Array>
+	</actipro:UserPromptControl.ButtonItems>
+
+</actipro:UserPromptControl>
+					]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+// This sample utilizes a 'WithIcon' extension method on UserPromptBuilder.ButtonBuilder
+// to easily define an icon for use with a button.  Extension methods are a great way
+// to make common configurations reusable.
+
+var imageSource = GetImage("/Images/Icons/Save16.png");
+
+var result = await UserPromptBuilder.Configure()
+	.WithHeaderContent("Full support for custom button content.")
+	.WithContent("Buttons can have any content, including images. This sample shows images used as content and demonstrates changing the horizontal alignment of all buttons from right (default) to center.")
+	.WithButton(_ => _
+		.WithResult(MessageBoxResult.CustomButton + 1)
+		.WithContent("_Left Image")
+		.WithIcon(imageSource, HorizontalAlignment.Left)
+	)
+	.WithButton(_ => _
+		.WithResult(MessageBoxResult.CustomButton + 2)
+		.WithContent("_Right Image")
+		.WithIcon(imageSource, HorizontalAlignment.Right)
+		.UseAsDefaultResult()
+	)
+	.WithButton(_ => _
+		.WithResult(MessageBoxResult.CustomButton + 3)
+		.WithContent("_Center Image")
+		.WithIcon(imageSource, HorizontalAlignment.Center)
+	)
+	.WithButtonItemsHorizontalAlignment(HorizontalAlignment.Center)
+	.Show();
+
+IImage? GetImage(string relPath) {
+	// Load any IImage here
+}
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Use any theme for buttons"
+			Footer="This sample applies a custom ControlTheme for buttons and uses the 'buttonresult-&lt;result&gt;' style classes within style selectors to target individual buttons based on their result."
+			>
+			<actipro:UserPromptControl Classes="inline-sample"
+									   Header="Use any theme for buttons"
+									   Content="This sample has applied a custom theme to buttons that changes the overall shape and gives the Yes and No buttons a distinctive color scheme with non-default labels."
+									   ButtonTheme="{StaticResource CustomUserPromptButtonTheme}"
+									   StandardButtons="YesNo" />
+			
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<Button Classes="show-dialog" Click="OnSampleShowDialogButtonThemeClick" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<UserControl.Resources>
+	<ControlTheme x:Key="CustomUserPromptButtonTheme" TargetType="{x:Type Button}" BasedOn="{StaticResource {x:Type Button}}">
+		<Setter Property="Width" Value="80" />
+		<Setter Property="Height" Value="30" />
+		<Setter Property="Margin" Value="5" />
+		<Setter Property="TextElement.Foreground" Value="{actipro:ThemeResource ButtonForegroundBrush}" />
+		<Setter Property="BorderThickness" Value="2" />
+		<Setter Property="Template">
+			<ControlTemplate TargetType="Button">
+				<Border x:Name="border" CornerRadius="15"
+					Width="{TemplateBinding Width}"
+					Height="{TemplateBinding Height}"
+					Background="{TemplateBinding Background}"
+					BorderBrush="{TemplateBinding BorderBrush}"
+					BorderThickness="{TemplateBinding BorderThickness}">
+					
+					<ContentPresenter Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}"
+						HorizontalAlignment="Center" VerticalAlignment="Center" />
+				</Border>
+			</ControlTemplate>
+		</Setter>
+		<Style Selector="^:pointerover">
+			<Setter Property="TextElement.FontWeight" Value="Bold" />
+		</Style>
+		<!-- The "buttonresult-<result>" class is applied to each button based on the result of that button where <result> is the lowercase result name -->
+		<Style Selector="^.buttonresult-yes">
+			<Setter Property="Content" Value="Always" />
+			<Setter Property="Background" Value="{actipro:ThemeResource ControlBackgroundBrushSoftSuccess}" />
+			<Setter Property="BorderBrush" Value="{actipro:ThemeResource ControlForegroundBrushOutlineSuccess}" />
+		</Style>
+		<Style Selector="^.buttonresult-no">
+			<Setter Property="Content" Value="Never" />
+			<Setter Property="Background" Value="{actipro:ThemeResource ControlBackgroundBrushSoftDanger}" />
+			<Setter Property="BorderBrush" Value="{actipro:ThemeResource ControlForegroundBrushOutlineDanger}" />
+		</Style>
+	</ControlTheme>
+</UserControl.Resources>
+
+...
+
+<actipro:UserPromptControl ...
+	StandardButtons="YesNo"
+	ButtonTheme="{StaticResource CustomUserPromptButtonTheme}" />
+					]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+// This sample reuses the same "CustomUserPromptButtonTheme" resource shown in the XAML sample
+
+var result = await UserPromptBuilder.Configure()
+	// Other common settings here
+	.WithStandardButtons(MessageBoxButtons.YesNo)
+	.WithButtonTheme(this.FindResource("CustomUserPromptButtonTheme") as ControlTheme)
+	.Show();
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+		<sampleBrowser:ControlExample
+			Header="Each button can have its own command"
+			Footer="This sample explicitly defines the buttons to be displayed and fully defines the command pattern for each."
+			>
+			<actipro:UserPromptControl Classes="inline-sample"
+									   Header="Each button can have its own command"
+									   Content="The default command for a button will notify the UserPromptControl of the response for that button, but you can define your own command instead. This sample demonstrates how to define custom commands by associating each button with a command that will confirm the response before submitting it.">
+				<actipro:UserPromptControl.ButtonItems>
+					<actipro:Array x:DataType="Button">
+						<Button Command="{StaticResource ConfirmationCommand}"
+								CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+								Content="_Yes"
+								actipro:UserPromptControl.ButtonResult="Yes"/>
+						<Button Command="{StaticResource ConfirmationCommand}"
+								CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+								Content="_No"
+								actipro:UserPromptControl.ButtonResult="No"/>
+					</actipro:Array>
+				</actipro:UserPromptControl.ButtonItems>
+			</actipro:UserPromptControl>
+			
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<Button Classes="show-dialog" Click="OnSampleShowDialogCustomButtonCommandsClick" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:UserPromptControl ... >
+	
+	<!-- Message Content Here -->
+
+	<!-- This sample assumes a ViewModel with associated commands is the DataContext -->
+	<actipro:UserPromptControl.ButtonItems>
+		<actipro:Array x:DataType="Button">
+			<Button Command="{Binding YesCommand}" Content="_Yes"
+					actipro:UserPromptControl.ButtonResult="Yes"/>
+			<Button Command="{Binding NoCommand}" Content="_No"
+					actipro:UserPromptControl.ButtonResult="No"/>
+		</actipro:Array>
+	</actipro:UserPromptControl.ButtonItems>
+	
+</actipro:UserPromptControl>
+					]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+var result = await UserPromptBuilder.Configure()
+	// Other common settings here
+	.WithButton(MessageBoxResult.Yes, this.YesCommand)
+	.WithButton(MessageBoxResult.No, this.NoCommand)
+	.Show();
+	
+// This sample assumes properties for 'YesCommand' and 'NoCommand' define an 'ICommand' instance
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Copy details to the clipboard"
+			Footer="When displayed as a dialog, the Copy command (CTRL+C on Windows) can be invoked to copy the details of the prompt to the clipboard."
+			>
+			<actipro:UserPromptControl Classes="inline-sample"
+									   Header="Copy details to the clipboard"
+									   Content="This sample demonstrates the clipboard functionality and how to customize the text that is placed on the clipboard for various UI elements."
+									   StandardButtons="YesNoCancel"
+									   Footer="Click 'Show Sample as Dialog' button and then press copy shortcut"
+									   FooterClipboardText="The 'Content' property is auto-converted to clipboard text, but the footer is configured to use this custom text instead."
+									   FooterImage="{Binding Source={x:Static actipro:SharedImageKeys.Question}, Converter={StaticResource ImageKeyToImageConverter}}"
+									   ExpandedInformationCollapsedHeaderText="Show more"
+									   ExpandedInformationExpandedHeaderText="Show less"
+									   ExpandedInformationContent="Clipboard text can be customized for 'Header', 'Content', 'Footer', 'ButtonItems', 'ExpandedInformationContent', and 'CheckBoxContent'."
+									   ExpandedInformationContentClipboardText="Use the 'HeaderClipboardText', 'ContentClipboardText', 'FooterClipboardText', 'ButtonItemsClipboardText', 'ExpandedInformationContentClipboardText', and 'CheckBoxContentClipboardText' properties to explicitly set clipboard text."
+									   IsExpanded="True"
+									   CheckBoxContent="This checked state is reflected on the clipboard"
+									   IsChecked="True" />
+			
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<Button Classes="show-dialog" Click="OnSampleShowDialogCopyDetailsToClipboardClick" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<!-- Use explicit ClipboardText properties when content cannot be automatically converted -->
+<actipro:UserPromptControl ... 
+	HeaderClipboardText="Optional alternate header text"
+	ContentClipboardText="Optional alternate content text"
+	FooterClipboardText="Optional alternate footer text"
+	CheckBoxContentClipboardText="Optional alternate checkbox content text"
+	ExpandedInformationContentClipboardText="Optional alternate expanded information content text"
+	ButtonItemsClipboardText="Optional alternate button items text"
+	/>
+					]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+// Use explicit '...ClipboardText' properties when content cannot be automatically converted to a string
+var result = await UserPromptBuilder.Configure()
+	// Other common settings here
+	.WithHeaderClipboardText("Optional alternate header text")
+	.WithContentClipboardText("Optional alternate content text")
+	.WithFooterClipboardText("Optional alternate footer text")
+	.WithCheckBoxContentClipboardText("Optional alternate checkbox content text")
+	.WithExpandedInformationContentClipboardText("Optional alternate expanded information content text")
+	.WithButton(_ => _
+		.WithResult(MessageBoxResult.Cancel)
+		.WithContentClipboardText("Optional alternate button content text")
+	)
+	.Show();
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Programmatically cancel the response"
+			Footer="This sample uses the 'Responding' event to optionally cancel the user's selection."
+			>
+			<actipro:UserPromptControl Classes="inline-sample"
+									   Header="Programmatically cancel the response"
+									   Content="An event is raised when a response is triggered for a prompt. The result can be changed or set to NULL to cancel the response."
+									   StandardButtons="YesNo"
+									   IsChecked="True"
+									   CheckBoxContent="Check to cancel the response"
+									   Responding="OnUserPromptControlRespondingCancelWhenVerified"/>
+			
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<Button Classes="show-dialog" Click="OnSampleShowDialogCancelResponseClick" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample Language="XAML" xml:space="preserve">
+					<![CDATA[
+<!-- IMPORTANT: See C# code-behind example for event handler -->
+
+<actipro:UserPromptControl Responding="OnUserPromptControlResponding" ... />
+					]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+// IMPORTANT: This example is the code-behind for the XAML example
+
+private void OnUserPromptControlResponding(object? sender, UserPromptResponseEventArgs e) {
+	// This event handler must be executed synchronously so
+	// the sender will be blocked waiting for the response
+	if (sender is UserPromptControl userPromptControl)) {
+	
+		// This example cancels when the prompt is checked
+		if (userPromptControl.IsChecked)
+			e.Cancel = true;
+	}
+}
+					]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+// IMPORTANT: This example only uses UserPromptBuilder from code (no XAML)
+
+var result = await UserPromptBuilder.Configure()
+	// Other common settings here
+	.OnResponding((builder, args) => {
+		// This event handler must be executed synchronously so
+		// the sender will be blocked waiting for the response
+		if (builder?.Instance is UserPromptControl userPromptControl) {
+	
+			// This example cancels when the prompt is checked
+			if (userPromptControl.IsChecked)
+				e.Cancel = true;
+		}
+	})
+	.Show();
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Integrate classes for pre-styled buttons"
+			>
+			<actipro:UserPromptControl Classes="inline-sample"
+									   Header="Each button can have its own style class."
+									   Content="Modern applications often use a mix of button styles to guide a user to a particular response, de-emphasize a less desirable response, or raise awareness about potentially dangerous responses.">
+				<actipro:UserPromptControl.ButtonItems>
+					<actipro:Array>
+						<Button Classes="theme-link"
+								actipro:UserPromptControl.ButtonResult="Cancel"
+								Content="Skip this step"
+								IsCancel="True" />
+						<Button Classes="theme-solid accent"
+								actipro:UserPromptControl.ButtonResult="Yes"
+								Content="_Yes"
+								IsDefault="True" />
+						<Button Classes="theme-outline warning"
+								actipro:UserPromptControl.ButtonResult="No"
+								Content="_No" />
+					</actipro:Array>
+				</actipro:UserPromptControl.ButtonItems>
+			</actipro:UserPromptControl>
+			
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<Button Classes="show-dialog" Click="OnSampleShowDialogCustomButtonClassesClick" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:UserPromptControl ... >
+	
+	<!-- Message Content Here -->
+
+	<actipro:UserPromptControl.ButtonItems>
+		<actipro:Array x:DataType="Button">
+			<Button Classes="theme-link"
+					actipro:UserPromptControl.ButtonResult="Cancel"
+					Content="Skip this step"
+					IsCancel="True" />
+			<Button Classes="theme-solid accent"
+					actipro:UserPromptControl.ButtonResult="Yes"
+					Content="_Yes"
+					IsDefault="True" />
+			<Button Classes="theme-outline warning"
+					actipro:UserPromptControl.ButtonResult="No"
+					Content="_No" />
+		</actipro:Array>
+	</actipro:UserPromptControl.ButtonItems>
+	
+</actipro:UserPromptControl>
+					]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+var result = await UserPromptBuilder.Configure()
+	// Other common settings here
+	.WithButton(_ => _
+		.WithResult(MessageBoxResult.Cancel)
+		.WithContent("_Skip this step")
+		.WithClasses("theme-link")
+	)
+	.WithButton(_ => _
+		.WithResult(MessageBoxResult.Yes)
+		.WithClasses("theme-solid accent")
+		.UseAsDefaultResult()
+	)
+	.WithButton(_ => _
+		.WithResult(MessageBoxResult.No)
+		.WithClasses("theme-outline warning")
+	)
+	.Show();
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Use colors to convey status"
+			Footer="This sample customizes the appearance of a prompt based on the type of message displayed."
+			>
+			<StackPanel Orientation="Horizontal">
+				<StackPanel.Styles>
+					<Style Selector="Button">
+						<Setter Property="Margin" Value="5" />
+						<Setter Property="Width" Value="140" />
+						<Setter Property="Height" Value="100" />
+					</Style>
+					<Style Selector="TextBlock">
+						<Setter Property="HorizontalAlignment" Value="Center" />
+						<Setter Property="TextWrapping" Value="Wrap" />
+						<Setter Property="TextAlignment" Value="Center" />
+					</Style>
+					<Style Selector="actipro|DynamicImage">
+						<Setter Property="Margin" Value="5" />
+						<Setter Property="Width" Value="32" />
+						<Setter Property="Height" Value="32" />
+						<Setter Property="HorizontalAlignment" Value="Center" />
+					</Style>
+				</StackPanel.Styles>
+				<Button x:Name="customizedAppearanceInformationButton" Click="OnSampleShowDialogCustomAppearanceClick">
+					<StackPanel>
+						<actipro:DynamicImage Source="{Binding Source={x:Static actipro:SharedImageKeys.Information}, Converter={StaticResource ImageKeyToImageConverter}}" />
+						<TextBlock>Show Information Themed Dialog</TextBlock>
+					</StackPanel>
+				</Button>
+				<Button x:Name="customizedAppearanceQuestionButton" Click="OnSampleShowDialogCustomAppearanceClick">
+					<StackPanel>
+						<actipro:DynamicImage Source="{Binding Source={x:Static actipro:SharedImageKeys.Question}, Converter={StaticResource ImageKeyToImageConverter}}" />
+						<TextBlock>Show Question Themed Dialog</TextBlock>
+					</StackPanel>
+				</Button>
+				<Button x:Name="customizedAppearanceWarningButton" Click="OnSampleShowDialogCustomAppearanceClick">
+					<StackPanel>
+						<actipro:DynamicImage Source="{Binding Source={x:Static actipro:SharedImageKeys.Warning}, Converter={StaticResource ImageKeyToImageConverter}}" />
+						<TextBlock>Show Warning Themed Dialog</TextBlock>
+					</StackPanel>
+				</Button>
+				<Button x:Name="customizedAppearanceErrorButton" Click="OnSampleShowDialogCustomAppearanceClick">
+					<StackPanel>
+						<actipro:DynamicImage Source="{Binding Source={x:Static actipro:SharedImageKeys.Error}, Converter={StaticResource ImageKeyToImageConverter}}" />
+						<TextBlock>Show Error Themed Dialog</TextBlock>
+					</StackPanel>
+				</Button>
+			</StackPanel>
+			
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+// This sample uses a 'WithStatusImageTheme' custom extension method that adjusts the
+// color hue of the prompt based on the status icon (e.g., error messages are red).
+// Extension methods on the UserPromptBuilder class are a great way to make common
+// configurations reusable.
+//
+// See "/ProductSamples/FundamentalsSamples/Common/UserPromptBuilderExtensions.cs" for details
+
+var result = await UserPromptBuilder.Configure()
+	.WithTitle("Custom Theme Prompt")
+	.WithHeaderContent($"Themed error message")
+	.WithContent($"The color scheme for this prompt has been adjusted to further emphasize the type of message based on the image used.")
+	.WithStatusImage(MessageBoxImage.Error)
+	.WithStandardButtons(MessageBoxButtons.OKCancel)
+	.WithStatusImageTheme()
+	.Show();
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+	</sampleBrowser:ControlExampleItemsControl>
+</UserControl>

@@ -1,0 +1,149 @@
+<UserControl
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
+
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="ToggleThemeButton is a convenient button that, when invoked, will toggle the requested theme between light and dark variants with a default glyph as content.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="ToggleThemeButton" Url="https://www.actiprosoftware.com/docs/controls/avalonia/shared/controls/toggle-theme-button" />
+			<sampleBrowser:ControlExampleLinkItem Title="Button control themes" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/native-control-themes#button-controls" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		
+		<sampleBrowser:ControlExample
+			Header="Basic usage"
+			Footer="Click the button to toggle the application light/dark theme variant. Actipro native button themes and semantic color variants are fully supported."
+			DataContext="{Binding #sample}"
+			>
+
+			<actipro:ToggleThemeButton x:Name="sample" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
+									   HorizontalAlignment="Center"
+									   Classes.theme-outline="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Outline'}"
+									   Classes.theme-solid="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Solid'}"
+									   Classes.theme-soft="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Soft'}"
+									   Classes.theme-subtle="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Subtle'}"
+									   Classes.theme-link="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Link'}"
+									   Classes.accent="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Accent'}"
+									   Classes.success="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Success'}"
+									   Classes.warning="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Warning'}"
+									   Classes.danger="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Danger'}"
+									   />
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Theme" />
+						<ComboBox x:Name="sampleTheme" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Outline, Solid, Soft, Subtle, Link'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Variant" />
+						<ComboBox x:Name="sampleVariant" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
+					</StackPanel>
+					<CheckBox IsChecked="{Binding IsEnabled}" Content="Enabled" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:ToggleThemeButton$(ClassesAttribute)$(IsEnabledAttribute) />
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
+															   IsEnabled="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), StringFormat=' Classes=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute" IsEnabled="{Binding !IsEnabled}" Value=" IsEnabled=&quot;False&quot;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="ThemeVariantScope usage"
+			Footer="Click the button to toggle the light/dark theme variant of the containing variant scope."
+			>
+
+			<StackPanel Spacing="10">
+				<TextBlock Classes="theme-text-heading size-xs" Text="Same scope" HorizontalAlignment="Center" />
+
+				<ThemeVariantScope RequestedThemeVariant="Dark">
+					<Border HorizontalAlignment="Center" Padding="20"
+							BorderThickness="1"
+							BorderBrush="{actipro:ThemeResource Container1BorderBrush}"
+							Background="{actipro:ThemeResource Container1BackgroundBrush}"
+							CornerRadius="8">
+
+						<StackPanel Spacing="10">
+							<TextBlock Text="ThemeVariantScope" TextWrapping="Wrap" />
+							<actipro:ToggleThemeButton HorizontalAlignment="Center" />
+						</StackPanel>
+					</Border>
+				</ThemeVariantScope>
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<ThemeVariantScope>
+	<actipro:ToggleThemeButton />
+</ThemeVariantScope>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Target usage"
+			Footer="Click the button to toggle the light/dark theme variant of the target variant scope."
+			>
+
+			<StackPanel Spacing="10">
+				<TextBlock Classes="theme-text-heading size-xs" Text="Different scopes" HorizontalAlignment="Center" />
+				<StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Center">
+					<ThemeVariantScope x:Name="targetScope" RequestedThemeVariant="Dark">
+						<Border HorizontalAlignment="Center" Padding="20"
+								BorderThickness="1"
+								BorderBrush="{actipro:ThemeResource Container1BorderBrush}"
+								Background="{actipro:ThemeResource Container1BackgroundBrush}"
+								CornerRadius="8">
+
+							<TextBlock Text="ThemeVariantScope" TextWrapping="Wrap" VerticalAlignment="Center" />
+						</Border>
+					</ThemeVariantScope>
+					<Border HorizontalAlignment="Center" Padding="20"
+							BorderThickness="1"
+							BorderBrush="{actipro:ThemeResource Container1BorderBrush}"
+							Background="{actipro:ThemeResource Container1BackgroundBrush}"
+							CornerRadius="8">
+
+						<actipro:ToggleThemeButton HorizontalAlignment="Center" Target="{Binding #targetScope}" />
+					</Border>
+				</StackPanel>
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<ThemeVariantScope x:Name="targetScope">
+	<!-- Theme-scoped content here -->
+</ThemeVariantScope>
+
+<actipro:ToggleThemeButton Target="{Binding #targetScope}" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+</UserControl>

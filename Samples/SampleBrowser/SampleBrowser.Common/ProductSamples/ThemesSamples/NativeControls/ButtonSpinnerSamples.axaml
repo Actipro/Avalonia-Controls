@@ -1,0 +1,228 @@
+<UserControl
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:system="using:System"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Pre-defined style classes are available that can be applied to native ButtonSpinner controls to achieve a variety of styles.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Edit control themes" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/native-control-themes#edit-controls" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+			<sampleBrowser:ControlExampleLinkItem Title="NumericUpDown" Url="/ProductSamples/ThemesSamples/NativeControls/NumericUpDownSamples" />
+		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+
+
+		<sampleBrowser:ControlExample
+			Header="ButtonSpinner usage"
+			Footer="Actipro provides multiple themes and variants to alter the appearance of a ButtonSpinner."
+			DataContext="{Binding #sample}"
+			>
+
+			<ButtonSpinner x:Name="sample" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
+						   Width="200" Content="Content goes here" HorizontalAlignment="Center"
+						   HorizontalContentAlignment="Center" VerticalContentAlignment="Center"
+						   AllowSpin="True" ShowButtonSpinner="True"
+						   Classes.theme-outline="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Outline'}"
+						   Classes.theme-soft="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Soft'}"
+						   Classes.accent="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Accent'}"
+						   Classes.success="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Success'}"
+						   Classes.warning="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Warning'}"
+						   Classes.danger="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Danger'}"
+						   />
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Theme" />
+						<ComboBox x:Name="sampleTheme" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Outline, Soft'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Variant" />
+						<ComboBox x:Name="sampleVariant" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Spinner location" />
+						<ComboBox SelectedIndex="0" ItemsSource="{actipro:DelimitedArray Type={x:Type Location}}" SelectedItem="{Binding ButtonSpinnerLocation}" />
+					</StackPanel>
+					<CheckBox IsChecked="{Binding ShowButtonSpinner}">Show buttons</CheckBox>
+					<CheckBox IsChecked="{Binding AllowSpin}">Allow spin</CheckBox>
+					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<ButtonSpinner$(ClassesAttribute)$(AllowSpinAttribute)$(ShowButtonSpinnerAttribute)$(ButtonSpinnerLocationAttribute)$(IsEnabledAttribute)>
+	<!-- Content Here -->
+</ButtonSpinner>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
+															   IsEnabled="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), StringFormat=' Classes=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="AllowSpinAttribute"
+															   IsEnabled="{Binding !AllowSpin}"
+															   Value=" AllowSpin=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="ButtonSpinnerLocationAttribute"
+															   IsEnabled="{Binding ButtonSpinnerLocation, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Right'}"
+															   Value="{Binding ButtonSpinnerLocation, StringFormat=' ButtonSpinnerLocation=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute"
+															   IsEnabled="{Binding !IsEnabled}"
+															   Value=" IsEnabled=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="ShowButtonSpinnerAttribute"
+															   IsEnabled="{Binding !ShowButtonSpinner}"
+															   Value=" ShowButtonSpinner=&quot;False&quot;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Themes"
+			Footer="The appearance can be changed from the default with the use of the 'theme-outline' or 'theme-soft' style classes."
+			>
+			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,200,40,200,*">
+				<ButtonSpinner Grid.Row="0" Grid.Column="1" Classes="theme-outline" Content="Outline" />
+				<ButtonSpinner Grid.Row="2" Grid.Column="1" Classes="theme-outline" Content="Disabled" IsEnabled="False" />
+
+				<ButtonSpinner Grid.Row="0" Grid.Column="3" Classes="theme-soft" Content="Soft" />
+				<ButtonSpinner Grid.Row="2" Grid.Column="3" Classes="theme-soft" Content="Disabled" IsEnabled="False" />
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<ButtonSpinner Classes="theme-outline" Content="Outline" />
+
+<ButtonSpinner Classes="theme-soft" Content="Soft" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Accent variants"
+			Footer="Add the 'accent' style class to a ButtonSpinner and the theme accent color will be used to provide emphasis."
+			>
+			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,200,40,200,*">
+				<ButtonSpinner Grid.Row="0" Grid.Column="1" Classes="theme-outline accent" Content="Outline" />
+				<ButtonSpinner Grid.Row="2" Grid.Column="1" Classes="theme-outline accent" Content="Disabled" IsEnabled="False" />
+
+				<ButtonSpinner Grid.Row="0" Grid.Column="3" Classes="theme-soft accent" Content="Soft" />
+				<ButtonSpinner Grid.Row="2" Grid.Column="3" Classes="theme-soft accent" Content="Disabled" IsEnabled="False" />
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<ButtonSpinner Classes="theme-outline accent" Content="Outline" />
+
+<ButtonSpinner Classes="theme-soft accent" Content="Soft" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Success variants"
+			Footer="Add the 'success' style class to a ButtonSpinner and a color will be used to indicate success."
+			>
+			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,200,40,200,*">
+				<ButtonSpinner Grid.Row="0" Grid.Column="1" Classes="theme-outline success" Content="Outline" />
+				<ButtonSpinner Grid.Row="2" Grid.Column="1" Classes="theme-outline success" Content="Disabled" IsEnabled="False" />
+
+				<ButtonSpinner Grid.Row="0" Grid.Column="3" Classes="theme-soft success" Content="Soft" />
+				<ButtonSpinner Grid.Row="2" Grid.Column="3" Classes="theme-soft success" Content="Disabled" IsEnabled="False" />
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<ButtonSpinner Classes="theme-outline success" Content="Outline" />
+
+<ButtonSpinner Classes="theme-soft success" Content="Soft" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Warning variants"
+			Footer="Add the 'warning' style class to a ButtonSpinner and a color will be used to indicate caution."
+			>
+			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,200,40,200,*">
+				<ButtonSpinner Grid.Row="0" Grid.Column="1" Classes="theme-outline warning" Content="Outline" />
+				<ButtonSpinner Grid.Row="2" Grid.Column="1" Classes="theme-outline warning" Content="Disabled" IsEnabled="False" />
+
+				<ButtonSpinner Grid.Row="0" Grid.Column="3" Classes="theme-soft warning" Content="Soft" />
+				<ButtonSpinner Grid.Row="2" Grid.Column="3" Classes="theme-soft warning" Content="Disabled" IsEnabled="False" />
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<ButtonSpinner Classes="theme-outline warning" Content="Outline" />
+
+<ButtonSpinner Classes="theme-soft warning" Content="Soft" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Danger variants"
+			Footer="Add the 'danger' style class to a ButtonSpinner and a color will be used to indicate extreme caution."
+			>
+			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,200,40,200,*">
+				<ButtonSpinner Grid.Row="0" Grid.Column="1" Classes="theme-outline danger" Content="Outline" />
+				<ButtonSpinner Grid.Row="2" Grid.Column="1" Classes="theme-outline danger" Content="Disabled" IsEnabled="False" />
+
+				<ButtonSpinner Grid.Row="0" Grid.Column="3" Classes="theme-soft danger" Content="Soft" />
+				<ButtonSpinner Grid.Row="2" Grid.Column="3" Classes="theme-soft danger" Content="Disabled" IsEnabled="False" />
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<ButtonSpinner Classes="theme-outline danger" Content="Outline" />
+
+<ButtonSpinner Classes="theme-soft danger" Content="Soft" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Data validation errors"
+			>
+
+			<ButtonSpinner Content="ButtonSpinner with a validation error">
+				<DataValidationErrors.Error>
+					<system:Exception />
+				</DataValidationErrors.Error>
+			</ButtonSpinner>
+
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

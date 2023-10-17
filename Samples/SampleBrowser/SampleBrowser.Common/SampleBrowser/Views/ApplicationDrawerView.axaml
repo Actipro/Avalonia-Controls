@@ -1,0 +1,75 @@
+<UserControl 
+	x:Name="drawer"
+	x:Class="ActiproSoftware.SampleBrowser.ApplicationDrawerView"
+	x:DataType="sampleBrowser:ApplicationViewModel"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	Background="{actipro:ThemeResource Container2BackgroundBrush}"
+	BorderBrush="{actipro:ThemeResource Container2BorderBrush}"
+	BorderThickness="0,0,1,0"
+	>
+
+	<Grid RowDefinitions="Auto,*">
+		<Border Padding="12" BorderBrush="{Binding #drawer.BorderBrush}" BorderThickness="0,0,0,1">
+			<ComboBox x:Name="drawerSectionComboBox">
+				<ComboBox.Styles>
+					<!-- NOTE: Necessary until ComboBox supports an alternate template: https://github.com/AvaloniaUI/Avalonia/pull/9689 -->
+					<Style Selector="#content Image#logoImage">
+						<Setter Property="IsVisible" Value="False" />
+					</Style>
+				</ComboBox.Styles>
+					
+				<ComboBox.ItemTemplate>
+					<DataTemplate DataType="sampleBrowser:AppDrawerSectionInfo">
+						<DockPanel Margin="3,0">
+							<Image x:Name="logoImage" DockPanel.Dock="Left" Margin="0,-4,10,-4" Width="24" Height="24" Source="{Binding ImageSource}" />
+							<sampleBrowser:ProIndicator x:Name="pro" Margin="10,0,0,0" DockPanel.Dock="Right" VerticalAlignment="Center" IsVisible="{Binding ProductFamily.IsPro, FallbackValue=False}" />
+							<TextBlock Text="{Binding Title}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
+						</DockPanel>
+					</DataTemplate>
+				</ComboBox.ItemTemplate>
+			</ComboBox>
+		</Border>
+
+		<ScrollViewer x:Name="homeContentScrollViewer" Grid.Row="1" Classes="theme-scroll-overlay" IsVisible="{Binding ViewUsesHomeDrawer}" HorizontalScrollBarVisibility="Disabled">
+			<StackPanel>
+				<sampleBrowser:SectionHeading Margin="20,20,20,0" Text="What's New" />
+				<sampleBrowser:WhatsNewItemsControl Margin="20,10" ItemsSource="{Binding ProductData.ProductFamiliesWithNews}" />
+			</StackPanel>
+		</ScrollViewer>
+
+		<ListBox x:Name="itemListBox" Grid.Row="1" Background="Transparent" BorderThickness="0" IsVisible="{Binding !ViewUsesHomeDrawer}">
+			<ListBox.DataTemplates>
+				
+				<!-- Category -->
+				<DataTemplate DataType="x:String">
+					<TextBlock Text="{Binding}" FontWeight="Bold" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" />
+				</DataTemplate>
+
+				<!-- Item -->
+				<DataTemplate DataType="sampleBrowser:ProductItemInfo">
+					<DockPanel>
+						<sampleBrowser:PrivateIndicator Margin="10,0,5,0" DockPanel.Dock="Right" VerticalAlignment="Center" IsVisible="{Binding IsPrivate, FallbackValue=False}" />
+						<TextBlock Classes.indent="{Binding IsGroupedByCategory}" Text="{Binding Title}" />
+					</DockPanel>
+				</DataTemplate>
+
+			</ListBox.DataTemplates>
+			
+			<ListBox.Styles>
+				<Style Selector="ScrollViewer">
+					<Setter Property="Theme" Value="{actipro:ControlTheme ScrollViewerOverlay}" />
+				</Style>
+				<Style Selector="TextBlock">
+					<Setter Property="TextWrapping" Value="Wrap" />
+				</Style>
+				<Style Selector="TextBlock.indent">
+					<Setter Property="Margin" Value="10,0" />
+				</Style>
+			</ListBox.Styles>
+		</ListBox>
+	</Grid>
+
+</UserControl>

@@ -1,0 +1,23 @@
+<ResourceDictionary 
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+	<ControlTheme x:Key="{x:Type sampleBrowser:SectionHeading}" TargetType="sampleBrowser:SectionHeading">
+		<Setter Property="Foreground" Value="{actipro:ThemeResource DefaultForegroundBrushTertiary}" />
+		<Setter Property="IsTabStop" Value="False" />
+		<Setter Property="Template">
+			<ControlTemplate>
+
+				<TextBlock 
+					Text="{TemplateBinding Text, Converter={x:Static actipro:StringConverters.ToUpperInvariant}}"
+					TextWrapping="Wrap"
+					/>
+
+			</ControlTemplate>
+		</Setter>
+	</ControlTheme>
+	
+</ResourceDictionary>

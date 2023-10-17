@@ -1,0 +1,48 @@
+<Application
+	x:Class="ActiproSoftware.SampleBrowser.App"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:generation="using:ActiproSoftware.UI.Avalonia.Themes.Generation"
+	>
+	
+	<Application.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+
+				<ResourceInclude Source="/SampleBrowser/Models/ProductData.axaml"/>
+
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</Application.Resources>
+	
+	<Application.Styles>
+
+		<!-- 
+			Avalonia's Fluent or Simple themes can be enabled using the FLUENT_THEME or SIMPLE_THEME defined constants.
+		-->
+
+		<!-- 
+			ModernTheme needs to be included once for Actipro's control styles to be loaded.
+			It automatically includes styles for controls in Actipro's free Shared Library and for native Avalonia controls.
+			Set its Includes flags enum property appropriately if additional Actipro assemblies are used.
+			
+			If only using Actipro's free Shared Library and native Avalonia controls:
+			<actipro:ModernTheme />
+			
+			If using Actipro's optional themes for the native ColorPicker and DataGrid controls:
+			<actipro:ModernTheme Includes="NativeColorPicker, NativeDataGrid" />
+			
+			If using Actipro's Pro controls:
+			<actipro:ModernTheme Includes="Pro" />
+		-->
+		<actipro:ModernTheme Includes="All" />
+
+		
+		<!-- Application-specific styles -->
+		<StyleInclude Source="/SampleBrowser/Controls/Themes/All.axaml" />
+		<StyleInclude Source="/SampleBrowser/Views/ApplicationStyles.axaml" />
+
+	</Application.Styles>
+
+</Application>

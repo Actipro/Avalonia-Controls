@@ -1,0 +1,483 @@
+<UserControl
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:system="using:System"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Pre-defined style classes are available that can be applied to native ColorPicker controls to achieve a variety of styles.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="ColorPicker control themes" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/native-control-themes#colorpicker-control" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+
+		<sampleBrowser:ControlExample VerticalContentAlignment="Top"
+			Header="ColorPicker usage"
+			DataContext="{Binding #sample}"
+			>
+
+			<StackPanel Spacing="10">
+				<ColorPicker x:Name="sample" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
+							 MaxWidth="200"
+							 Color="LightBlue"
+							 Classes.theme-solid="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Solid'}"
+							 Classes.theme-soft="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Soft'}"
+							 Classes.theme-subtle="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Subtle'}"
+							 Classes.theme-link="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Link'}"
+							 Classes.accent="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Accent'}"
+							 Classes.success="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Success'}"
+							 Classes.warning="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Warning'}"
+							 Classes.danger="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Danger'}"
+							 Classes.has-value-text="{Binding #hasValueTextCheckBox.IsChecked}"
+							 />
+
+				<StackPanel HorizontalAlignment="Center" Margin="0,30,0,0" Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Flyout preview" HorizontalAlignment="Center" />
+					<Border BorderThickness="1" BorderBrush="{actipro:ThemeResource Container1BorderBrush}" CornerRadius="8"
+							Background="{actipro:ThemeResource Container1BackgroundBrush}">
+						<ColorView HorizontalAlignment="Center" Color="{Binding Color}"
+							   IsColorSpectrumVisible="{Binding IsColorSpectrumVisible}"
+							   IsColorSpectrumSliderVisible="{Binding IsColorSpectrumSliderVisible}"
+							   ColorSpectrumShape="{Binding ColorSpectrumShape}"
+							   ColorSpectrumComponents="{Binding ColorSpectrumComponents}"
+							   IsColorPaletteVisible="{Binding IsColorPaletteVisible}"
+							   IsColorComponentsVisible="{Binding IsColorComponentsVisible}"
+							   IsComponentSliderVisible="{Binding IsComponentSliderVisible}"
+							   IsComponentTextInputVisible="{Binding IsComponentTextInputVisible}"
+							   IsColorModelVisible="{Binding IsColorModelVisible}"
+							   IsHexInputVisible="{Binding IsHexInputVisible}"
+							   ColorModel="{Binding ColorModel}"
+							   HexInputAlphaPosition="{Binding HexInputAlphaPosition}"
+							   IsColorPreviewVisible="{Binding IsColorPreviewVisible}"
+							   IsAccentColorsVisible="{Binding IsAccentColorsVisible}"
+							   IsAlphaVisible="{Binding IsAlphaVisible}"
+							   IsAlphaEnabled="{Binding IsAlphaEnabled}"
+							   />
+					</Border>
+				</StackPanel>
+
+			</StackPanel>
+			
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Theme" />
+						<ComboBox x:Name="sampleTheme" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Outline, Solid, Soft, Subtle, Link'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Variant" />
+						<ComboBox x:Name="sampleVariant" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
+					</StackPanel>
+					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
+					<CheckBox x:Name="hasValueTextCheckBox" IsChecked="True">Has value text</CheckBox>
+
+					<!--Spectrum -->
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Color spectrum" Margin="0,10,0,5" />
+						<Grid Margin="10,0,0,0" RowDefinitions="Auto,5,Auto,5,Auto,5,Auto" ColumnDefinitions="Auto,5,*">
+							<CheckBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" IsChecked="{Binding IsColorSpectrumVisible}">Visible</CheckBox>
+							<CheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" IsChecked="{Binding IsColorSpectrumSliderVisible}">Show slider</CheckBox>
+
+							<TextBlock Grid.Row="4" Grid.Column="0" Classes="theme-form-control-label" Text="Shape:" />
+							<ComboBox Grid.Row="4" Grid.Column="2" ItemsSource="{actipro:DelimitedArray Type={x:Type ColorSpectrumShape}}" SelectedItem="{Binding ColorSpectrumShape}" />
+
+							<TextBlock Grid.Row="6" Grid.Column="0" Classes="theme-form-control-label" Text="Components:" />
+							<ComboBox Grid.Row="6" Grid.Column="2" ItemsSource="{actipro:DelimitedArray Type={x:Type ColorSpectrumComponents}}" SelectedItem="{Binding ColorSpectrumComponents}" />
+						</Grid>
+					</StackPanel>
+
+					<!-- Palette -->
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Color palette" Margin="0,10,0,5" />
+						<StackPanel Spacing="5" Margin="10,0,0,0">
+							<CheckBox IsChecked="{Binding IsColorPaletteVisible}">Visible</CheckBox>
+						</StackPanel>
+					</StackPanel>
+
+					<!-- Components -->
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Color components" Margin="0,10,0,5" />
+						<Grid Margin="10,0,0,0" RowDefinitions="Auto,5,Auto,5,Auto,5,Auto,5,Auto,5,Auto,5,Auto,5" ColumnDefinitions="Auto,5,*">
+							<CheckBox Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" IsChecked="{Binding IsColorComponentsVisible}">Visible</CheckBox>
+							<CheckBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" IsChecked="{Binding IsComponentSliderVisible}">Show sliders</CheckBox>
+							<CheckBox Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" IsChecked="{Binding IsComponentTextInputVisible}">Show text input</CheckBox>
+
+							<CheckBox Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" IsChecked="{Binding IsColorModelVisible}">Show color model</CheckBox>
+							<CheckBox Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" IsChecked="{Binding IsHexInputVisible}">Show hex input</CheckBox>
+
+							<TextBlock Grid.Row="10" Grid.Column="0" Classes="theme-form-control-label" Text="Color model:" />
+							<ComboBox Grid.Row="10" Grid.Column="2" ItemsSource="{actipro:DelimitedArray Type={x:Type ColorModel}}" SelectedItem="{Binding ColorModel}" />
+
+							<TextBlock Grid.Row="12" Grid.Column="0" Classes="theme-form-control-label" Text="Hex alpha position:" />
+							<ComboBox Grid.Row="12" Grid.Column="2" ItemsSource="{actipro:DelimitedArray Type={x:Type AlphaComponentPosition}}" SelectedItem="{Binding HexInputAlphaPosition}" />
+						</Grid>
+					</StackPanel>
+
+					<!-- Preview -->
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Color preview" Margin="0,10,0,5" />
+						<StackPanel Spacing="5" Margin="10,0,0,0">
+							<CheckBox IsChecked="{Binding IsColorPreviewVisible}">Visible</CheckBox>
+							<CheckBox IsChecked="{Binding IsAccentColorsVisible}">Show accent colors</CheckBox>
+						</StackPanel>
+					</StackPanel>
+
+					<!-- Alpha -->
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Alpha component" Margin="0,10,0,5" />
+						<StackPanel Spacing="5" Margin="10,0,0,0">
+							<CheckBox IsChecked="{Binding IsAlphaVisible}">Visible</CheckBox>
+							<CheckBox IsChecked="{Binding IsAlphaEnabled}">Enabled</CheckBox>
+						</StackPanel>
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<ColorPicker$(ClassesAttribute)$(IsEnabledAttribute)$(IsColorSpectrumVisibleAttribute)$(IsColorSpectrumSliderVisibleAttribute)$(ColorSpectrumShapeAttribute)$(ColorSpectrumComponentsAttribute)$(IsColorPaletteVisibleAttribute)$(IsColorComponentsVisibleAttribute)$(IsComponentSliderVisibleAttribute)$(IsComponentTextInputVisibleAttribute)$(IsColorModelVisibleAttribute)$(ColorModelAttribute)$(IsHexInputVisibleAttribute)$(HexInputAlphaPositionAttribute)$(IsColorPreviewVisibleAttribute)$(IsAccentColorsVisibleAttribute)$(IsAlphaVisibleAttribute)$(IsAlphaEnabledAttribute) />
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
+															   IsEnabled="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), StringFormat=' Classes=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="ColorModelAttribute"
+															   IsEnabled="{Binding ColorModel, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Rgba'}"
+															   Value="{Binding ColorModel, StringFormat='&#xA;&#x9;ColorModel=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="ColorSpectrumComponentsAttribute"
+															   IsEnabled="{Binding ColorSpectrumComponents, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='HueSaturation'}"
+															   Value="{Binding ColorSpectrumComponents, StringFormat='&#xA;&#x9;ColorSpectrumComponents=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="ColorSpectrumShapeAttribute"
+															   IsEnabled="{Binding ColorSpectrumShape, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Box'}"
+															   Value="{Binding ColorSpectrumShape, StringFormat='&#xA;&#x9;ColorSpectrumShape=&quot;{0}&quot;'}" />
+						<!-- NOTE: ColorView.HexInputAlphaPosition defaults to 'Leading' but Avalonia Simple/Fluent themes both set the default to 'Trailing' instead -->
+						<sampleBrowser:CodeExampleSubstitution Key="HexInputAlphaPositionAttribute"
+															   IsEnabled="{Binding HexInputAlphaPosition, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Trailing'}"
+															   Value="{Binding HexInputAlphaPosition, StringFormat='&#xA;&#x9;HexInputAlphaPosition=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsAccentColorsVisibleAttribute"
+															   IsEnabled="{Binding !IsAccentColorsVisible}"
+															   Value="&#xA;&#x9;IsAccentColorsVisible=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsAlphaEnabledAttribute"
+															   IsEnabled="{Binding !IsAlphaEnabled}"
+															   Value="&#xA;&#x9;IsAlphaEnabled=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsAlphaVisibleAttribute"
+															   IsEnabled="{Binding !IsAlphaVisible}"
+															   Value="&#xA;&#x9;IsAlphaVisible=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsColorComponentsVisibleAttribute"
+															   IsEnabled="{Binding !IsColorComponentsVisible}"
+															   Value="&#xA;&#x9;IsColorComponentsVisible=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsColorModelVisibleAttribute"
+															   IsEnabled="{Binding !IsColorModelVisible}"
+															   Value="&#xA;&#x9;IsColorModelVisible=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsColorPaletteVisibleAttribute"
+															   IsEnabled="{Binding !IsColorPaletteVisible}"
+															   Value="&#xA;&#x9;IsColorPaletteVisible=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsColorPreviewVisibleAttribute"
+															   IsEnabled="{Binding !IsColorPreviewVisible}"
+															   Value="&#xA;&#x9;IsColorPreviewVisible=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsColorSpectrumSliderVisibleAttribute"
+															   IsEnabled="{Binding !IsColorSpectrumSliderVisible}"
+															   Value="&#xA;&#x9;IsColorSpectrumSliderVisible=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsColorSpectrumVisibleAttribute"
+															   IsEnabled="{Binding !IsColorSpectrumVisible}"
+															   Value="&#xA;&#x9;IsColorSpectrumVisible=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsComponentSliderVisibleAttribute"
+															   IsEnabled="{Binding !IsComponentSliderVisible}"
+															   Value="&#xA;&#x9;IsComponentSliderVisible=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsComponentTextInputVisibleAttribute"
+															   IsEnabled="{Binding !IsComponentTextInputVisible}"
+															   Value="&#xA;&#x9;IsComponentTextInputVisible=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsHexInputVisibleAttribute"
+															   IsEnabled="{Binding !IsHexInputVisible}"
+															   Value="&#xA;&#x9;IsHexInputVisible=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute"
+															   IsEnabled="{Binding !IsEnabled}"
+															   Value=" IsEnabled=&quot;False&quot;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Themes"
+			Footer="The appearance can be changed from the default with the use of the 'theme-outline', 'theme-solid', 'theme-soft', 'theme-subtle', or 'theme-link' style classes."
+			>
+			<Grid RowDefinitions="Auto,10,Auto,10,Auto" ColumnDefinitions="*,Auto,10,Auto,10,Auto,10,Auto,10,Auto,*">
+				<Grid.Styles>
+					<Style Selector="ColorPicker">
+						<Setter Property="IsAlphaVisible" Value="False" />
+						<Setter Property="Color" Value="{Binding #sample.Color}" />
+					</Style>
+				</Grid.Styles>
+
+				<TextBlock Grid.Row="0" Grid.Column="1" Classes="theme-text-heading size-xs" Text="Outline" HorizontalAlignment="Center" />
+				<ColorPicker Grid.Row="2" Grid.Column="1" Classes="theme-outline has-value-text" />
+				<ColorPicker Grid.Row="4" Grid.Column="1" Classes="theme-outline has-value-text" IsEnabled="False" />
+
+				<TextBlock Grid.Row="0" Grid.Column="3" Classes="theme-text-heading size-xs" Text="Solid" HorizontalAlignment="Center" />
+				<ColorPicker Grid.Row="2" Grid.Column="3" Classes="theme-solid has-value-text" />
+				<ColorPicker Grid.Row="4" Grid.Column="3" Classes="theme-solid has-value-text" IsEnabled="False" />
+
+				<TextBlock Grid.Row="0" Grid.Column="5" Classes="theme-text-heading size-xs" Text="Soft" HorizontalAlignment="Center" />
+				<ColorPicker Grid.Row="2" Grid.Column="5" Classes="theme-soft has-value-text" />
+				<ColorPicker Grid.Row="4" Grid.Column="5" Classes="theme-soft has-value-text" IsEnabled="False" />
+
+				<TextBlock Grid.Row="0" Grid.Column="7" Classes="theme-text-heading size-xs" Text="Subtle" HorizontalAlignment="Center" />
+				<ColorPicker Grid.Row="2" Grid.Column="7" Classes="theme-subtle has-value-text" />
+				<ColorPicker Grid.Row="4" Grid.Column="7" Classes="theme-subtle has-value-text" IsEnabled="False" />
+
+				<TextBlock Grid.Row="0" Grid.Column="9" Classes="theme-text-heading size-xs" Text="Link" HorizontalAlignment="Center" />
+				<ColorPicker Grid.Row="2" Grid.Column="9" Classes="theme-link has-value-text" />
+				<ColorPicker Grid.Row="4" Grid.Column="9" Classes="theme-link has-value-text" IsEnabled="False" />
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<ColorPicker Classes="theme-outline has-value-text" />
+
+<ColorPicker Classes="theme-solid has-value-text" />
+
+<ColorPicker Classes="theme-soft has-value-text" />
+
+<ColorPicker Classes="theme-subtle has-value-text" />
+
+<ColorPicker Classes="theme-link has-value-text" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+		
+		<sampleBrowser:ControlExample
+			Header="Accent variants"
+			Footer="Add the 'accent' style class to a ColorPicker and the theme accent color will be used to provide emphasis."
+			>
+			<Grid RowDefinitions="Auto,10,Auto,10,Auto" ColumnDefinitions="*,Auto,10,Auto,10,Auto,10,Auto,10,Auto,*">
+				<Grid.Styles>
+					<Style Selector="ColorPicker">
+						<Setter Property="IsAlphaVisible" Value="False" />
+						<Setter Property="Color" Value="{Binding #sample.Color}" />
+					</Style>
+				</Grid.Styles>
+
+				<TextBlock Grid.Row="0" Grid.Column="1" Classes="theme-text-heading size-xs" Text="Outline" HorizontalAlignment="Center" />
+				<ColorPicker Grid.Row="2" Grid.Column="1" Classes="theme-outline has-value-text accent" />
+				<ColorPicker Grid.Row="4" Grid.Column="1" Classes="theme-outline has-value-text accent" IsEnabled="False" />
+
+				<TextBlock Grid.Row="0" Grid.Column="3" Classes="theme-text-heading size-xs" Text="Solid" HorizontalAlignment="Center" />
+				<ColorPicker Grid.Row="2" Grid.Column="3" Classes="theme-solid has-value-text accent" />
+				<ColorPicker Grid.Row="4" Grid.Column="3" Classes="theme-solid has-value-text accent" IsEnabled="False" />
+
+				<TextBlock Grid.Row="0" Grid.Column="5" Classes="theme-text-heading size-xs" Text="Soft" HorizontalAlignment="Center" />
+				<ColorPicker Grid.Row="2" Grid.Column="5" Classes="theme-soft has-value-text accent" />
+				<ColorPicker Grid.Row="4" Grid.Column="5" Classes="theme-soft has-value-text accent" IsEnabled="False" />
+
+				<TextBlock Grid.Row="0" Grid.Column="7" Classes="theme-text-heading size-xs" Text="Subtle" HorizontalAlignment="Center" />
+				<ColorPicker Grid.Row="2" Grid.Column="7" Classes="theme-subtle has-value-text accent" />
+				<ColorPicker Grid.Row="4" Grid.Column="7" Classes="theme-subtle has-value-text accent" IsEnabled="False" />
+
+				<TextBlock Grid.Row="0" Grid.Column="9" Classes="theme-text-heading size-xs" Text="Link" HorizontalAlignment="Center" />
+				<ColorPicker Grid.Row="2" Grid.Column="9" Classes="theme-link has-value-text accent" />
+				<ColorPicker Grid.Row="4" Grid.Column="9" Classes="theme-link has-value-text accent" IsEnabled="False" />
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<ColorPicker Classes="theme-outline has-value-text accent" />
+
+<ColorPicker Classes="theme-solid has-value-text accent" />
+
+<ColorPicker Classes="theme-soft has-value-text accent" />
+
+<ColorPicker Classes="theme-subtle has-value-text accent" />
+
+<ColorPicker Classes="theme-link has-value-text accent" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Success variants"
+			Footer="Add the 'success' style class to a ColorPicker and a color will be used to indicate success."
+			>
+			<Grid RowDefinitions="Auto,10,Auto,10,Auto" ColumnDefinitions="*,Auto,10,Auto,10,Auto,10,Auto,10,Auto,*">
+				<Grid.Styles>
+					<Style Selector="ColorPicker">
+						<Setter Property="IsAlphaVisible" Value="False" />
+						<Setter Property="Color" Value="{Binding #sample.Color}" />
+					</Style>
+				</Grid.Styles>
+
+				<TextBlock Grid.Row="0" Grid.Column="1" Classes="theme-text-heading size-xs" Text="Outline" HorizontalAlignment="Center" />
+				<ColorPicker Grid.Row="2" Grid.Column="1" Classes="theme-outline has-value-text success" />
+				<ColorPicker Grid.Row="4" Grid.Column="1" Classes="theme-outline has-value-text success" IsEnabled="False" />
+
+				<TextBlock Grid.Row="0" Grid.Column="3" Classes="theme-text-heading size-xs" Text="Solid" HorizontalAlignment="Center" />
+				<ColorPicker Grid.Row="2" Grid.Column="3" Classes="theme-solid has-value-text success" />
+				<ColorPicker Grid.Row="4" Grid.Column="3" Classes="theme-solid has-value-text success" IsEnabled="False" />
+
+				<TextBlock Grid.Row="0" Grid.Column="5" Classes="theme-text-heading size-xs" Text="Soft" HorizontalAlignment="Center" />
+				<ColorPicker Grid.Row="2" Grid.Column="5" Classes="theme-soft has-value-text success" />
+				<ColorPicker Grid.Row="4" Grid.Column="5" Classes="theme-soft has-value-text success" IsEnabled="False" />
+
+				<TextBlock Grid.Row="0" Grid.Column="7" Classes="theme-text-heading size-xs" Text="Subtle" HorizontalAlignment="Center" />
+				<ColorPicker Grid.Row="2" Grid.Column="7" Classes="theme-subtle has-value-text success" />
+				<ColorPicker Grid.Row="4" Grid.Column="7" Classes="theme-subtle has-value-text success" IsEnabled="False" />
+
+				<TextBlock Grid.Row="0" Grid.Column="9" Classes="theme-text-heading size-xs" Text="Link" HorizontalAlignment="Center" />
+				<ColorPicker Grid.Row="2" Grid.Column="9" Classes="theme-link has-value-text success" />
+				<ColorPicker Grid.Row="4" Grid.Column="9" Classes="theme-link has-value-text success" IsEnabled="False" />
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<ColorPicker Classes="theme-outline has-value-text success" />
+
+<ColorPicker Classes="theme-solid has-value-text success" />
+
+<ColorPicker Classes="theme-soft has-value-text success" />
+
+<ColorPicker Classes="theme-subtle has-value-text success" />
+
+<ColorPicker Classes="theme-link has-value-text success" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Warning variants"
+			Footer="Add the 'warning' style class to a ColorPicker and a color will be used to indicate caution."
+			>
+			<Grid RowDefinitions="Auto,10,Auto,10,Auto" ColumnDefinitions="*,Auto,10,Auto,10,Auto,10,Auto,10,Auto,*">
+				<Grid.Styles>
+					<Style Selector="ColorPicker">
+						<Setter Property="IsAlphaVisible" Value="False" />
+						<Setter Property="Color" Value="{Binding #sample.Color}" />
+					</Style>
+				</Grid.Styles>
+
+				<TextBlock Grid.Row="0" Grid.Column="1" Classes="theme-text-heading size-xs" Text="Outline" HorizontalAlignment="Center" />
+				<ColorPicker Grid.Row="2" Grid.Column="1" Classes="theme-outline has-value-text warning" />
+				<ColorPicker Grid.Row="4" Grid.Column="1" Classes="theme-outline has-value-text warning" IsEnabled="False" />
+
+				<TextBlock Grid.Row="0" Grid.Column="3" Classes="theme-text-heading size-xs" Text="Solid" HorizontalAlignment="Center" />
+				<ColorPicker Grid.Row="2" Grid.Column="3" Classes="theme-solid has-value-text warning" />
+				<ColorPicker Grid.Row="4" Grid.Column="3" Classes="theme-solid has-value-text warning" IsEnabled="False" />
+
+				<TextBlock Grid.Row="0" Grid.Column="5" Classes="theme-text-heading size-xs" Text="Soft" HorizontalAlignment="Center" />
+				<ColorPicker Grid.Row="2" Grid.Column="5" Classes="theme-soft has-value-text warning" />
+				<ColorPicker Grid.Row="4" Grid.Column="5" Classes="theme-soft has-value-text warning" IsEnabled="False" />
+
+				<TextBlock Grid.Row="0" Grid.Column="7" Classes="theme-text-heading size-xs" Text="Subtle" HorizontalAlignment="Center" />
+				<ColorPicker Grid.Row="2" Grid.Column="7" Classes="theme-subtle has-value-text warning" />
+				<ColorPicker Grid.Row="4" Grid.Column="7" Classes="theme-subtle has-value-text warning" IsEnabled="False" />
+
+				<TextBlock Grid.Row="0" Grid.Column="9" Classes="theme-text-heading size-xs" Text="Link" HorizontalAlignment="Center" />
+				<ColorPicker Grid.Row="2" Grid.Column="9" Classes="theme-link has-value-text warning" />
+				<ColorPicker Grid.Row="4" Grid.Column="9" Classes="theme-link has-value-text warning" IsEnabled="False" />
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<ColorPicker Classes="theme-outline has-value-text warning" />
+
+<ColorPicker Classes="theme-solid has-value-text warning" />
+
+<ColorPicker Classes="theme-soft has-value-text warning" />
+
+<ColorPicker Classes="theme-subtle has-value-text warning" />
+
+<ColorPicker Classes="theme-link has-value-text warning" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Danger variants"
+			Footer="Add the 'danger' style class to a ColorPicker and a color will be used to indicate extreme caution."
+			>
+			<Grid RowDefinitions="Auto,10,Auto,10,Auto" ColumnDefinitions="*,Auto,10,Auto,10,Auto,10,Auto,10,Auto,*">
+				<Grid.Styles>
+					<Style Selector="ColorPicker">
+						<Setter Property="IsAlphaVisible" Value="False" />
+						<Setter Property="Color" Value="{Binding #sample.Color}" />
+					</Style>
+				</Grid.Styles>
+
+				<TextBlock Grid.Row="0" Grid.Column="1" Classes="theme-text-heading size-xs" Text="Outline" HorizontalAlignment="Center" />
+				<ColorPicker Grid.Row="2" Grid.Column="1" Classes="theme-outline has-value-text danger" />
+				<ColorPicker Grid.Row="4" Grid.Column="1" Classes="theme-outline has-value-text danger" IsEnabled="False" />
+
+				<TextBlock Grid.Row="0" Grid.Column="3" Classes="theme-text-heading size-xs" Text="Solid" HorizontalAlignment="Center" />
+				<ColorPicker Grid.Row="2" Grid.Column="3" Classes="theme-solid has-value-text danger" />
+				<ColorPicker Grid.Row="4" Grid.Column="3" Classes="theme-solid has-value-text danger" IsEnabled="False" />
+
+				<TextBlock Grid.Row="0" Grid.Column="5" Classes="theme-text-heading size-xs" Text="Soft" HorizontalAlignment="Center" />
+				<ColorPicker Grid.Row="2" Grid.Column="5" Classes="theme-soft has-value-text danger" />
+				<ColorPicker Grid.Row="4" Grid.Column="5" Classes="theme-soft has-value-text danger" IsEnabled="False" />
+
+				<TextBlock Grid.Row="0" Grid.Column="7" Classes="theme-text-heading size-xs" Text="Subtle" HorizontalAlignment="Center" />
+				<ColorPicker Grid.Row="2" Grid.Column="7" Classes="theme-subtle has-value-text danger" />
+				<ColorPicker Grid.Row="4" Grid.Column="7" Classes="theme-subtle has-value-text danger" IsEnabled="False" />
+
+				<TextBlock Grid.Row="0" Grid.Column="9" Classes="theme-text-heading size-xs" Text="Link" HorizontalAlignment="Center" />
+				<ColorPicker Grid.Row="2" Grid.Column="9" Classes="theme-link has-value-text danger" />
+				<ColorPicker Grid.Row="4" Grid.Column="9" Classes="theme-link has-value-text danger" IsEnabled="False" />
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<ColorPicker Classes="theme-outline has-value-text danger" />
+
+<ColorPicker Classes="theme-solid has-value-text danger" />
+
+<ColorPicker Classes="theme-soft has-value-text danger" />
+
+<ColorPicker Classes="theme-subtle has-value-text danger" />
+
+<ColorPicker Classes="theme-link has-value-text danger" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Data validation errors"
+			Footer="ColorPicker with a validation error."
+			>
+
+			<ColorPicker Classes="has-value-text" Color="{Binding #sample.Color}">
+				<DataValidationErrors.Error>
+					<system:Exception />
+				</DataValidationErrors.Error>
+			</ColorPicker>
+
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

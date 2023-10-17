@@ -1,0 +1,243 @@
+<UserControl
+	x:Class="ActiproSoftware.ProductSamples.ThemeSamples.NativeControls.CalendarDatePickerSamples"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:system="using:System"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
+
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Pre-defined style classes are available that can be applied to native CalendarDatePicker controls to achieve a variety of styles.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Edit control themes" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/native-control-themes#edit-controls" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+			<sampleBrowser:ControlExampleLinkItem Title="Calendar" Url="/ProductSamples/ThemesSamples/NativeControls/CalendarSamples" />
+			<sampleBrowser:ControlExampleLinkItem Title="DatePicker" Url="/ProductSamples/ThemesSamples/NativeControls/DatePickerSamples" />
+		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+
+
+		<sampleBrowser:ControlExample
+			Header="CalendarDatePicker usage"
+			DataContext="{Binding #sample}"
+			>
+
+			<CalendarDatePicker x:Name="sample" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
+								Watermark="Actipro themes for date picker" UseFloatingWatermark="True"
+								Classes.has-clear-button="{Binding #sampleHasClearButton.IsChecked}"
+								Classes.theme-outline="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Outline'}"
+								Classes.theme-soft="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Soft'}"
+								Classes.accent="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Accent'}"
+								Classes.success="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Success'}"
+								Classes.warning="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Warning'}"
+								Classes.danger="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Danger'}"
+								/>
+			
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Theme" />
+						<ComboBox x:Name="sampleTheme" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Outline, Soft'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Variant" />
+						<ComboBox x:Name="sampleVariant" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
+					</StackPanel>
+					<TextBox Text="{Binding Watermark}" Watermark="Watermark" UseFloatingWatermark="True" />
+					<CheckBox IsChecked="{Binding UseFloatingWatermark}">Use floating watermark</CheckBox>
+					<CheckBox IsChecked="True" x:Name="sampleHasClearButton">Has clear button</CheckBox>
+					<CheckBox IsChecked="{Binding IsTodayHighlighted}">Highlight today</CheckBox>
+					<CheckBox x:Name="sampleBlackoutTomorrow">Blackout tomorrow</CheckBox>
+					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<CalendarDatePicker $(ClassesAttribute)IsTodayHighlighted="$(IsTodayHighlighted)"$(IsEnabledAttribute)
+	$(WatermarkAttribute)$(UseFloatingWatermarkAttribute)/>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
+															   IsEnabled="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), StringFormat='Classes=&quot;{0}&quot;&#xA;&#x9;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute"
+															   IsEnabled="{Binding !IsEnabled}"
+															   Value=" IsEnabled=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsTodayHighlighted" Value="{Binding IsTodayHighlighted}" />
+						<sampleBrowser:CodeExampleSubstitution Key="UseFloatingWatermarkAttribute"
+															   IsEnabled="{Binding UseFloatingWatermark}"
+															   Value="UseFloatingWatermark=&quot;True&quot; " />
+						<sampleBrowser:CodeExampleSubstitution Key="WatermarkAttribute"
+															   IsEnabled="{Binding Watermark, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding Watermark, StringFormat='Watermark=&quot;{0}&quot; '}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Themes"
+			Footer="The appearance can be changed from the default with the use of the 'theme-outline' or 'theme-soft' style classes."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<CalendarDatePicker Classes="theme-outline" Watermark="Outline" />
+					<CalendarDatePicker Classes="theme-outline" Watermark="Disabled" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<CalendarDatePicker Classes="theme-soft" Watermark="Soft" />
+					<CalendarDatePicker Classes="theme-soft" Watermark="Disabled" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<CalendarDatePicker Classes="theme-outline" Watermark="Outline" />
+
+<CalendarDatePicker Classes="theme-soft" Watermark="Soft" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Accent variants"
+			Footer="Add the 'accent' style class to a CalendarDatePicker and the theme accent color will be used to provide emphasis."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<CalendarDatePicker Classes="theme-outline accent" Watermark="Outline" />
+					<CalendarDatePicker Classes="theme-outline accent" Watermark="Disabled" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<CalendarDatePicker Classes="theme-soft accent" Watermark="Soft" />
+					<CalendarDatePicker Classes="theme-soft accent" Watermark="Disabled" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<CalendarDatePicker Classes="theme-outline accent" Watermark="Outline" />
+
+<CalendarDatePicker Classes="theme-soft accent" Watermark="Soft" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Success variants"
+			Footer="Add the 'success' style class to a CalendarDatePicker and a color will be used to indicate success."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<CalendarDatePicker Classes="theme-outline success" Watermark="Outline" />
+					<CalendarDatePicker Classes="theme-outline success" Watermark="Disabled" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<CalendarDatePicker Classes="theme-soft success" Watermark="Soft" />
+					<CalendarDatePicker Classes="theme-soft success" Watermark="Disabled" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<CalendarDatePicker Classes="theme-outline success" Watermark="Outline" />
+
+<CalendarDatePicker Classes="theme-soft success" Watermark="Soft" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Warning variants"
+			Footer="Add the 'warning' style class to a CalendarDatePicker and a color will be used to indicate caution."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<CalendarDatePicker Classes="theme-outline warning" Watermark="Outline" />
+					<CalendarDatePicker Classes="theme-outline warning" Watermark="Disabled" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<CalendarDatePicker Classes="theme-soft warning" Watermark="Soft" />
+					<CalendarDatePicker Classes="theme-soft warning" Watermark="Disabled" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<CalendarDatePicker Classes="theme-outline warning" Watermark="Outline" />
+
+<CalendarDatePicker Classes="theme-soft warning" Watermark="Soft" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Danger variants"
+			Footer="Add the 'danger' style class to a CalendarDatePicker and a color will be used to indicate extreme caution."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<CalendarDatePicker Classes="theme-outline danger" Watermark="Outline" />
+					<CalendarDatePicker Classes="theme-outline danger" Watermark="Disabled" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<CalendarDatePicker Classes="theme-soft danger" Watermark="Soft" />
+					<CalendarDatePicker Classes="theme-soft danger" Watermark="Disabled" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<CalendarDatePicker Classes="theme-outline danger" Watermark="Outline" />
+
+<CalendarDatePicker Classes="theme-soft danger" Watermark="Soft" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Data validation errors"
+			>
+
+			<CalendarDatePicker Watermark="CalendarDatePicker with a validation error">
+				<DataValidationErrors.Error>
+					<system:Exception />
+				</DataValidationErrors.Error>
+			</CalendarDatePicker>
+
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

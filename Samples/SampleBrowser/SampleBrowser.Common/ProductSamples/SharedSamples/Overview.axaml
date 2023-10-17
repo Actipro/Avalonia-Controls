@@ -1,0 +1,102 @@
+﻿<UserControl
+	x:DataType="sampleBrowser:ApplicationViewModel"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Resources>
+
+		<DrawingGroup x:Key="CheckVectorDrawing">
+			<GeometryDrawing Brush="#339933" Geometry="M 0,16 A 16,16 0 1 1 32,16 A 16,16 0 1 1 0,16 Z  M 5.75,17.25 L 8.75,14.25 L 13,19 L 23.5,8.25 L 26.25,11.25 L 13,24.5 Z" />
+			<GeometryDrawing Brush="#ffffff" Geometry="M 5.75,17.25 L 8.75,14.25 L 13,19 L 23.5,8.25 L 26.25,11.25 L 13,24.5 Z" />
+		</DrawingGroup>
+
+	</UserControl.Resources>
+
+	<ScrollViewer Classes="theme-scroll-overlay" HorizontalScrollBarVisibility="Disabled">
+		<StackPanel>
+
+			<sampleBrowser:ProductOverviewHeader>
+				Actipro provides numerous controls and useful components that can enhance an application.
+				Several helpful value converters for use in bindings are also included.
+			</sampleBrowser:ProductOverviewHeader>
+
+			<actipro:MultiColumnPanel Classes="sample-layout-panel" Margin="50,0" MinColumnWidth="390" HorizontalSpacing="30" VerticalSpacing="30">
+				<WrapPanel Orientation="Horizontal">
+					<actipro:CopyButton Margin="0,0,30,0" CopyText="Text copied from a CopyButton" VerticalAlignment="Center" />
+					<actipro:CopyButton Margin="0,0,30,0" Classes="theme-soft" CopyText="Text copied from a CopyButton" CornerRadius="99" Padding="10" VerticalAlignment="Center" />
+					<actipro:ToggleThemeButton Margin="0,0,30,0" VerticalAlignment="Center" />
+					<actipro:ToggleThemeButton Classes="theme-soft" CornerRadius="99" Padding="10" VerticalAlignment="Center" />
+				</WrapPanel>
+
+				<StackPanel>
+					<TextBlock Classes="theme-form-control-label" Text="Hyperlink Text Block" />
+					<actipro:HyperlinkTextBlock Text="{Binding ActiproWebSiteUrl}" Command="{Binding OpenUrlCommand}" CommandParameter="{Binding $self.Text}" />
+				</StackPanel>
+
+				<StackPanel>
+					<TextBlock Classes="theme-form-control-label" Text="Mesh Gradient Presenter" />
+					<actipro:MeshGradientPresenter Height="80" Background="#ed8fea" CornerRadius="10">
+						<actipro:MeshGradientNode Center="1%,95%" Color="#b781fd" />
+						<actipro:MeshGradientNode Center="29%,0%" Color="#b781fd" />
+						<actipro:MeshGradientNode Center="99%,37%" Color="#eec6ad" />
+						<actipro:MeshGradientNode Center="83%,95%" Color="#eec6ad" />
+					</actipro:MeshGradientPresenter>
+				</StackPanel>
+
+				<StackPanel>
+					<TextBlock Classes="theme-form-control-label" Text="Dynamic Image" />
+					<Grid ColumnDefinitions="*,10,*">
+						<ThemeVariantScope RequestedThemeVariant="Light">
+							<Border Padding="20" BorderThickness="1" CornerRadius="8"
+									Background="{actipro:ThemeResource Container1BackgroundBrush}"
+									BorderBrush="{actipro:ThemeResource Container1BorderBrush}">
+								<StackPanel>
+									<actipro:DynamicImage Width="32" Height="32">
+										<DrawingImage Drawing="{StaticResource CheckVectorDrawing}" />
+									</actipro:DynamicImage>
+									<TextBlock Margin="0,5,0,0" FontSize="{actipro:ThemeResource DefaultFontSizeSmall}" Text="Image designed for light theme" 
+											   FontStyle="Italic" Foreground="{actipro:ThemeResource DefaultForegroundBrushSecondary}" TextWrapping="Wrap" TextAlignment="Center" />
+								</StackPanel>
+							</Border>
+						</ThemeVariantScope>
+						<ThemeVariantScope Grid.Column="2" RequestedThemeVariant="Dark">
+							<Border Padding="20" BorderThickness="1" CornerRadius="8"
+									Background="{actipro:ThemeResource Container1BackgroundBrush}"
+									BorderBrush="{actipro:ThemeResource Container1BorderBrush}">
+								<StackPanel>
+									<actipro:DynamicImage Width="32" Height="32">
+										<DrawingImage Drawing="{StaticResource CheckVectorDrawing}" />
+									</actipro:DynamicImage>
+									<TextBlock Margin="0,5,0,0" FontSize="{actipro:ThemeResource DefaultFontSizeSmall}" Text="Image auto-adapted for dark theme"
+											   FontStyle="Italic" Foreground="{actipro:ThemeResource DefaultForegroundBrushSecondary}" TextWrapping="Wrap" TextAlignment="Center" />
+								</StackPanel>
+							</Border>
+						</ThemeVariantScope>
+					</Grid>
+				</StackPanel>
+
+				<actipro:ShadowChrome Elevation="8">
+					<Border Background="{actipro:ThemeResource Container1BackgroundBrush}" CornerRadius="8" Padding="30,20">
+						<TextBlock Text="Shadow Chrome" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}"
+								   HorizontalAlignment="Center" VerticalAlignment="Center" />
+					</Border>
+				</actipro:ShadowChrome>
+
+			</actipro:MultiColumnPanel>
+
+			<TextBlock Classes="theme-text-body" Margin="50" Text="Dive into our individual samples linked below for many more detailed examples."
+					   FontStyle="Italic" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" TextAlignment="Center" />
+
+			<Border Background="{actipro:ThemeResource Container2BackgroundBrush}">
+				<StackPanel Classes="sample-layout-panel" Margin="50,0">
+					<sampleBrowser:CategorizedSampleItemsControl ItemsSource="{Binding ViewItemInfo.ProductFamily.GroupedItems}" />
+				</StackPanel>
+			</Border>
+
+		</StackPanel>
+	</ScrollViewer>
+
+</UserControl>

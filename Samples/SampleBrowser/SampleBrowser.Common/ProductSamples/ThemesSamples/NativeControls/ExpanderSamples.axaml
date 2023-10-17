@@ -1,0 +1,83 @@
+<UserControl
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Actipro's control themes create a modern appearance for native Expander controls.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Control themes" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/native-control-themes#other-controls" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+
+		<sampleBrowser:ControlExample
+			Header="Expander usage"
+			DataContext="{Binding #sample}"
+			VerticalContentAlignment="Stretch"
+			>
+
+			<Panel MinHeight="310">
+				<Expander x:Name="sample" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
+						  Header="{Binding #sampleHeader.Text}"
+						  >
+					<StackPanel VerticalAlignment="Center">
+						<Image Source="avares://SampleBrowser/Images/Photos/Beach.jpg" Width="200" Height="200" />
+
+						<TextBlock Margin="0,10,0,0" TextAlignment="Center" TextWrapping="Wrap">
+							Any content can be displayed within the expander when the control is expanded.
+						</TextBlock>
+					</StackPanel>
+				</Expander>
+			</Panel>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Expand direction" />
+						<ComboBox x:Name="sampleExpandDirection" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray Type={x:Type ExpandDirection}}" SelectedValue="{Binding ExpandDirection}" />
+					</StackPanel>
+					<TextBox x:Name="sampleHeader" Text="Toggle Expansion" Watermark="Header content" UseFloatingWatermark="True" />
+					<CheckBox IsChecked="{Binding IsExpanded}">Expanded</CheckBox>
+					<CheckBox IsChecked="{Binding (actipro:ThemeProperties.IsAnimationEnabled)}">Animated</CheckBox>
+					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<Expander$(ClassesAttribute) Header="$(Header)"$(ExpandDirectionAttribute)$(IsEnabledAttribute)$(IsAnimatedAttribute)>
+	<!-- Content Here -->
+</Expander>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
+															   IsEnabled="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), StringFormat=' Classes=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="ExpandDirectionAttribute"
+															   IsEnabled="{Binding ExpandDirection, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Down'}"
+															   Value="{Binding ExpandDirection, StringFormat=' ExpandDirection=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="Header" Value="{Binding #sampleHeader.Text}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsAnimatedAttribute"
+															   IsEnabled="{Binding !(actipro:ThemeProperties.IsAnimationEnabled)}"
+															   Value="&#xD;&#x9;actipro:ThemeProperties.IsAnimationEnabled=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute"
+															   IsEnabled="{Binding !IsEnabled}"
+															   Value=" IsEnabled=&quot;False&quot;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

@@ -1,0 +1,109 @@
+<UserControl
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:avConverters="using:Avalonia.Markup.Xaml.Converters"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Resources>
+
+		<avConverters:ColorToBrushConverter x:Key="ColorToBrushConverter" />
+		
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="The MeshGradientPresenter control renders a gradient background that consists of multiple stacked radial gradients positioned at various locations.  This kind of background is commonly used in banners.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="MeshGradientPresenter" Url="https://www.actiprosoftware.com/docs/controls/avalonia/shared/controls/mesh-gradient-presenter" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+
+		<sampleBrowser:ControlExample
+			Header="Basic usage"
+			Footer="The mesh gradient can host any number of nodes.  Each radial gradient node specifies its center location and color used.  This example mesh gradient has four nodes that use a pair of colors."
+			>
+
+			<actipro:MeshGradientPresenter Height="100" Background="{Binding #baseColorPicker.Color, Converter={StaticResource ColorToBrushConverter}}" CornerRadius="10">
+				<actipro:MeshGradientNode Center="{Binding #node1CenterComboBox.SelectedItem}" Color="{Binding #node1ColorPicker.Color}" />
+				<actipro:MeshGradientNode Center="{Binding #node2CenterComboBox.SelectedItem}" Color="{Binding #node2ColorPicker.Color}" />
+				<actipro:MeshGradientNode Center="{Binding #node3CenterComboBox.SelectedItem}" Color="{Binding #node3ColorPicker.Color}" />
+				<actipro:MeshGradientNode Center="{Binding #node4CenterComboBox.SelectedItem}" Color="{Binding #node4ColorPicker.Color}" />
+			</actipro:MeshGradientPresenter>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Base background color" />
+						<ColorPicker x:Name="baseColorPicker" Color="#ed8fea" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Node 1 center and color" />
+						<Grid ColumnDefinitions="*,10,Auto">
+							<ComboBox x:Name="node1CenterComboBox" SelectedIndex="0">
+								<RelativePoint>1%,95%</RelativePoint>
+								<RelativePoint>78%,15%</RelativePoint>
+							</ComboBox>
+							<ColorPicker x:Name="node1ColorPicker" Grid.Column="2" Color="#b781fd" />
+						</Grid>
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Node 2 center and color" />
+						<Grid ColumnDefinitions="*,10,Auto">
+							<ComboBox x:Name="node2CenterComboBox" SelectedIndex="0">
+								<RelativePoint>30%,0%</RelativePoint>
+								<RelativePoint>83%,85%</RelativePoint>
+							</ComboBox>
+							<ColorPicker x:Name="node2ColorPicker" Grid.Column="2" Color="#b781fd" />
+						</Grid>
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Node 3 center and color" />
+						<Grid ColumnDefinitions="*,10,Auto">
+							<ComboBox x:Name="node3CenterComboBox" SelectedIndex="0">
+								<RelativePoint>99%,37%</RelativePoint>
+								<RelativePoint>23%,5%</RelativePoint>
+							</ComboBox>
+							<ColorPicker x:Name="node3ColorPicker" Grid.Column="2" Color="#eec6ad" />
+						</Grid>
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Node 4 center and color" />
+						<Grid ColumnDefinitions="*,10,Auto">
+							<ComboBox x:Name="node4CenterComboBox" SelectedIndex="0">
+								<RelativePoint>83%,95%</RelativePoint>
+								<RelativePoint>37%,75%</RelativePoint>
+							</ComboBox>
+							<ColorPicker x:Name="node4ColorPicker" Grid.Column="2" Color="#eec6ad" />
+						</Grid>
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:MeshGradientPresenter Height="80" Background="$(BackgroundColorAttribute)" CornerRadius="10">
+	<actipro:MeshGradientNode Center="$(Node1CenterAttribute)" Color="$(Node1ColorAttribute)" />
+	<actipro:MeshGradientNode Center="$(Node2CenterAttribute)" Color="$(Node2ColorAttribute)" />
+	<actipro:MeshGradientNode Center="$(Node3CenterAttribute)" Color="$(Node3ColorAttribute)" />
+	<actipro:MeshGradientNode Center="$(Node4CenterAttribute)" Color="$(Node4ColorAttribute)" />
+</actipro:MeshGradientPresenter>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="BackgroundColorAttribute" Value="{Binding #baseColorPicker.Color}" />
+						<sampleBrowser:CodeExampleSubstitution Key="Node1CenterAttribute" Value="{Binding #node1CenterComboBox.SelectedItem}" />
+						<sampleBrowser:CodeExampleSubstitution Key="Node1ColorAttribute" Value="{Binding #node1ColorPicker.Color}" />
+						<sampleBrowser:CodeExampleSubstitution Key="Node2CenterAttribute" Value="{Binding #node2CenterComboBox.SelectedItem}" />
+						<sampleBrowser:CodeExampleSubstitution Key="Node2ColorAttribute" Value="{Binding #node2ColorPicker.Color}" />
+						<sampleBrowser:CodeExampleSubstitution Key="Node3CenterAttribute" Value="{Binding #node3CenterComboBox.SelectedItem}" />
+						<sampleBrowser:CodeExampleSubstitution Key="Node3ColorAttribute" Value="{Binding #node3ColorPicker.Color}" />
+						<sampleBrowser:CodeExampleSubstitution Key="Node4CenterAttribute" Value="{Binding #node4CenterComboBox.SelectedItem}" />
+						<sampleBrowser:CodeExampleSubstitution Key="Node4ColorAttribute" Value="{Binding #node4ColorPicker.Color}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+</UserControl>
