@@ -7,9 +7,28 @@ order: 6
 
 Once the [User Prompt Content](user-prompt-content.md) and [User Prompt Buttons](user-prompt-buttons.md) have been defined, it is time to show the prompt and collect feedback from the user.
 
+## Display Mode
+
+When using the [builder pattern](builder-pattern.md), the following options are available for displaying a user prompt (as defined by [UserPromptDisplayMode](xref:@ActiproUIRoot.Controls.UserPromptDisplayMode)):
+
+| Value | Description |
+| ----- | ----- |
+| [Dialog](xref:@ActiproUIRoot.Controls.UserPromptDisplayMode.Dialog) | On supported platforms, the prompt is hosted in a `Window` and shown as a dialog. Using this mode on unsupported platforms will throw `PlatformNotSupportedException`. |
+| [Overlay](xref:@ActiproUIRoot.Controls.UserPromptDisplayMode.Overlay) | The prompt is hosted on an overlay that is displayed over the owning `TopLevel` (e.g., `Window` or browser view). |
+| [DialogPreferred](xref:@ActiproUIRoot.Controls.UserPromptDisplayMode.DialogPreferred) | [Dialog](xref:@ActiproUIRoot.Controls.UserPromptDisplayMode.Dialog) will be used on supported platforms; otherwise, [Overlay](xref:@ActiproUIRoot.Controls.UserPromptDisplayMode.Overlay) will be used where dialogs are not supported. (Default) |
+
+The [DialogPreferred](xref:@ActiproUIRoot.Controls.UserPromptDisplayMode.DialogPreferred) mode is the default, but the static [UserPromptBuilder](xref:@ActiproUIRoot.Controls.UserPromptBuilder).[DefaultDisplayMode](xref:@ActiproUIRoot.Controls.UserPromptBuilder.DefaultDisplayMode) property can be used to change the default to a different value.
+
+The [UserPromptBuilder](xref:@ActiproUIRoot.Controls.UserPromptBuilder).[WithDisplayMode](xref:@ActiproUIRoot.Controls.UserPromptBuilder.WithDisplayMode*) method can be used to configure the [RequestedDisplayMode](xref:@ActiproUIRoot.Controls.UserPromptBuilder.RequestedDisplayMode) of an individual builder instance to a non-default value.
+
+> [!WARNING]
+> Requesting [Dialog](xref:@ActiproUIRoot.Controls.UserPromptDisplayMode.Dialog) mode on unsupported platforms will throw `PlatformNotSupportedException`. Generally, [DialogPreferred](xref:@ActiproUIRoot.Controls.UserPromptDisplayMode.DialogPreferred) should be requested instead.
+
+The actual display mode used may differ from the display mode requested! For example, if an existing user prompt is currently displayed as an overlay, additional user prompts will also display as an overlay even if dialogs are supported and requested.  Before the prompt is shown, the [ActualDisplayMode](xref:@ActiproUIRoot.Controls.UserPromptBuilder.ActualDisplayMode) property will be set to either [Dialog](xref:@ActiproUIRoot.Controls.UserPromptDisplayMode.Dialog) or [Overlay](xref:@ActiproUIRoot.Controls.UserPromptDisplayMode.Overlay) based on the display mode being used.
+
 ## Showing a User Prompt Dialog
 
-On supported platforms, a user prompt is typically displayed as a modal dialog.  The [UserPromptWindow](xref:@ActiproUIRoot.Controls.UserPromptWindow).[ShowDialog](xref:@ActiproUIRoot.Controls.UserPromptWindow.ShowDialog*) method can be used to display any [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl) in a modal dialog that will automatically close and return a [MessageBoxResult](xref:@ActiproUIRoot.Controls.MessageBoxResult) when the user responds.
+The [builder pattern](builder-pattern.md) is recommended for showing user prompts, but is not required.  On supported platforms, a user prompt is typically displayed as a modal dialog.  The [UserPromptWindow](xref:@ActiproUIRoot.Controls.UserPromptWindow).[ShowDialog](xref:@ActiproUIRoot.Controls.UserPromptWindow.ShowDialog*) method can be used to display any [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl) in a modal dialog that will automatically close and return a [MessageBoxResult](xref:@ActiproUIRoot.Controls.MessageBoxResult) when the user responds.
 
 The following code demonstrates showing a [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl) as a modal dialog using [UserPromptWindow](xref:@ActiproUIRoot.Controls.UserPromptWindow) and evaluating the result:
 
@@ -41,21 +60,41 @@ if (result == MessageBoxResult.Yes) {
 
 ### Title
 
-The [UserPromptWindow](xref:@ActiproUIRoot.Controls.UserPromptWindow).[ShowDialog](xref:@ActiproUIRoot.Controls.UserPromptWindow.ShowDialog*) method optionally accepts an argument that will be used as the title of the [UserPromptWindow](xref:@ActiproUIRoot.Controls.UserPromptWindow) when displayed.
+All `Window` instances should have a title, so the [UserPromptWindow](xref:@ActiproUIRoot.Controls.UserPromptWindow).[ShowDialog](xref:@ActiproUIRoot.Controls.UserPromptWindow.ShowDialog*) method optionally accepts an argument that will be used as the title of the [UserPromptWindow](xref:@ActiproUIRoot.Controls.UserPromptWindow) when displayed.
 
-When using the [builder pattern](builder-pattern.md), the [WithTitle](xref:@ActiproUIRoot.Controls.UserPromptBuilder.WithTitle*) method is used to set the title of the [UserPromptWindow](xref:@ActiproUIRoot.Controls.UserPromptWindow):
+When using the [builder pattern](builder-pattern.md), the [WithTitle](xref:@ActiproUIRoot.Controls.UserPromptBuilder.WithTitle*) method is used to set the title associated with the user prompt:
 
 ```csharp
 await UserPromptBuilder.Configure()
 	// ... other configuration options here
-	.WithTitle("Actipro Avalonia Controls")
+	.WithTitle("Actipro Avalonia UI Controls")
 	.Show();
 ```
 
-When a title is undefined or `null`, the [UserPromptBuilder](xref:@ActiproUIRoot.Controls.UserPromptBuilder).[DefaultTitle](xref:@ActiproUIRoot.Controls.UserPromptBuilder.DefaultTitle) will be used. If [DefaultTitle](xref:@ActiproUIRoot.Controls.UserPromptBuilder.DefaultTitle) is also `null` the [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl).[StandardStatusImage](xref:@ActiproUIRoot.Controls.UserPromptControl.StandardStatusImage) property is used to provide a contextually appropriate title. For example, the title is set to `"Warning"` when the status image is [MessageBoxImage](xref:@ActiproUIRoot.Controls.MessageBoxImage).[Warning](xref:@ActiproUIRoot.Controls.MessageBoxImage.Warning).
+#### Overlay Title Mode
+
+When using the [builder pattern](builder-pattern.md) and displaying a prompt as an [Overlay](xref:@ActiproUIRoot.Controls.UserPromptDisplayMode.Overlay), the following modes are available for displaying titles (as defined by [UserPromptOverlayTitleMode](xref:@ActiproUIRoot.Controls.UserPromptOverlayTitleMode)):
+
+| Value | Description |
+| ----- | ----- |
+| [AlwaysHide](xref:@ActiproUIRoot.Controls.UserPromptOverlayTitleMode.AlwaysHide) | The overlay title is always hidden, even when [UserPromptBuilder](xref:@ActiproUIRoot.Controls.UserPromptBuilder).[Title](xref:@ActiproUIRoot.Controls.UserPromptBuilder.Title) is configured. |
+| [AlwaysShow](xref:@ActiproUIRoot.Controls.UserPromptOverlayTitleMode.AlwaysShow) | The overlay title is always shown. |
+| [ShowWhenNoHeader](xref:@ActiproUIRoot.Controls.UserPromptOverlayTitleMode.ShowWhenNoHeader) | An overlay title is only shown when [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl).`Header` is not defined since a header and title are typically redundant. (Default) |
+
+The [ShowWhenNoHeader](xref:@ActiproUIRoot.Controls.UserPromptOverlayTitleMode.ShowWhenNoHeader) mode is the default, but the static [UserPromptBuilder](xref:@ActiproUIRoot.Controls.UserPromptBuilder).[DefaultOverlayTitleMode](xref:@ActiproUIRoot.Controls.UserPromptBuilder.DefaultOverlayTitleMode) property can be used to change the default to a different value.
+
+The [UserPromptBuilder](xref:@ActiproUIRoot.Controls.UserPromptBuilder).[WithOverlayTitleMode](xref:@ActiproUIRoot.Controls.UserPromptBuilder.WithOverlayTitleMode*) method can be used to configure the [OverlayTitleMode](xref:@ActiproUIRoot.Controls.UserPromptBuilder.OverlayTitleMode) of an individual builder instance to a non-default value.
+
+#### Inferred and Fallback Titles
+
+When a title is undefined or `null`, the [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl).[StandardStatusImage](xref:@ActiproUIRoot.Controls.UserPromptControl.StandardStatusImage) property is used to infer a contextually appropriate title. For example, the title is set to `"Warning"` when the status image is [MessageBoxImage](xref:@ActiproUIRoot.Controls.MessageBoxImage).[Warning](xref:@ActiproUIRoot.Controls.MessageBoxImage.Warning).
+
+If a title cannot be inferred, the static [UserPromptBuilder](xref:@ActiproUIRoot.Controls.UserPromptBuilder).[FallbackTitle](xref:@ActiproUIRoot.Controls.UserPromptBuilder.FallbackTitle) value will be used.
+
+If a title is still undefined, the `TitleAttribute` metadata of the entry assembly will be used.
 
 > [!TIP]
-> See the [Localization](localization.md) topic for details on how to customize the string resources used for default titles.
+> See the [Localization](localization.md) topic for details on how to customize the string resources used for inferred titles.
 
 ### Close Caption Button
 
@@ -132,11 +171,11 @@ await UserPromptBuilder.Configure()
 > [!WARNING]
 > The [Responding](xref:@ActiproUIRoot.Controls.UserPromptControl.Responding) event handler or [OnResponding](xref:@ActiproUIRoot.Controls.UserPromptBuilder.OnResponding*) callback must be executed synchronously so the thread will be blocked waiting for the response. Otherwise, the prompt will close before the event/callback has completed executing.
 
-## Owner Window
+## Owner
 
-The user prompt is shown as a modal dialog and must have an owner `Window`. Some of the [UserPromptWindow](xref:@ActiproUIRoot.Controls.UserPromptWindow).[ShowDialog](xref:@ActiproUIRoot.Controls.UserPromptWindow.ShowDialog*) overloads allows an owner to be specified.  If one is not specified, a default owner `Window` will be determined by the currently active `Window`.
+When the user prompt is shown as a modal dialog, it must have an owner `Window`. Some of the [UserPromptWindow](xref:@ActiproUIRoot.Controls.UserPromptWindow).[ShowDialog](xref:@ActiproUIRoot.Controls.UserPromptWindow.ShowDialog*) overloads allow an owner to be specified.  If one is not specified, a default owner `Window` will be determined by the currently active `Window`.
 
-When using the [builder pattern](builder-pattern.md), the [WithOwner](xref:@ActiproUIRoot.Controls.UserPromptBuilder.WithOwner*) method is used to assign a non-default owner `Window`.
+When using the [builder pattern](builder-pattern.md), the [WithOwner](xref:@ActiproUIRoot.Controls.UserPromptBuilder.WithOwner*) method is used to assign a non-default owner. Since the builder pattern supports displaying dialogs or overlays, the owner is specified as a `TopLevel` (which, on desktop applications, is typically a `Window`).
 
 ## Startup Location
 
@@ -181,7 +220,7 @@ Auto-sizing involves a series of calculations that attempt to generate the ideal
 
 The minimum width, accessible by [AutoSizeMinimumWidth](xref:@ActiproUIRoot.Controls.UserPromptBuilder.AutoSizeMinimumWidth), is assigned using one of the available arguments passed to the [WithAutoSize](xref:@ActiproUIRoot.Controls.UserPromptBuilder.WithAutoSize*) method.
 
-When [UserPromptBuilder](xref:@ActiproUIRoot.Controls.UserPromptBuilder).[WindowStartupLocation](xref:@ActiproUIRoot.Controls.UserPromptBuilder.WindowStartupLocation) is `null` (the default), the auto-size logic will first attempt to size the prompt to a width and height that do not exceed the bounds of the owner `Window`. This is important to allow `WindowStartupLocation.CenterOwner` to be used without some parts of the prompt potentially displayed off screen.  Otherwise, the prompt will be sized within the working area of the screen so that `WindowStartupLocation.CenterScreen` can be used to fully display the prompt.
+When [UserPromptBuilder](xref:@ActiproUIRoot.Controls.UserPromptBuilder).[WindowStartupLocation](xref:@ActiproUIRoot.Controls.UserPromptBuilder.WindowStartupLocation) is `null` (the default), the auto-size logic will first attempt to size the prompt to a width and height that do not exceed the bounds of the owner. This is important to allow `WindowStartupLocation.CenterOwner` to be used without some parts of the prompt potentially displayed off screen.  Otherwise, if it is not displayed as an overlay, the prompt will be sized within the working area of the screen so that `WindowStartupLocation.CenterScreen` can be used to fully display the prompt.
 
 > [!TIP]
 > Auto-size logic is also applied to [MessageBox](message-box.md) since it uses the [builder pattern](builder-pattern.md) to create prompts. This mean that, by default, [MessageBox](xref:@ActiproUIRoot.Controls.MessageBox).[Show](xref:@ActiproUIRoot.Controls.MessageBox.Show*) will always attempt to center messages over the owner, but will fall back to center screen if the message is too big.

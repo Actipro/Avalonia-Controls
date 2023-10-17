@@ -15,6 +15,25 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Common {
 	public static class UserPromptBuilderExtensions {
 
 		/// <summary>
+		/// Configures the builder to display an prompt when a dialog-based user prompt is requested on an unsupported platform.
+		/// </summary>
+		/// <param name="builder">The builder to configure.</param>
+		/// <returns>The builder, for use with method-chaining.</returns>
+		/// <exception cref="ArgumentNullException" />
+		public static UserPromptBuilder ForDialogDisplayModeNotSupportedNotice(this UserPromptBuilder builder) {
+			if (builder is null)
+				throw new ArgumentNullException(nameof(builder));
+
+			return builder
+				.WithHeaderContent("Unsupported platform")
+				.WithContent($"Dialogs are not supported on this platform, and attempting to display as a '{nameof(UserPromptDisplayMode.Dialog)}' would normally throw a PlatformNotSupportedException.")
+				.WithFooterContent($"Use '{nameof(UserPromptDisplayMode.DialogPreferred)}' to fallback to overlays on unsupported platforms.")
+				.WithStatusImage(MessageBoxImage.Error)
+				.WithStatusImageTheme(MessageBoxImage.Error)
+				.WithDisplayMode(UserPromptDisplayMode.Overlay);
+		}
+
+		/// <summary>
 		/// Configures the builder to customize resources on the <see cref="UserPromptControl"/> with a <see cref="Hue"/>
 		/// that corresponds to the intent of the given status image (e.g., red hue for error messages).
 		/// </summary>

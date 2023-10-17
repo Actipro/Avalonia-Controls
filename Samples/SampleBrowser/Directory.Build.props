@@ -8,11 +8,12 @@
 		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
 
 		<Version>23.1.0.0</Version>
-		<InformationalVersion>23.1.1.0 - 20231011</InformationalVersion>
+		<InformationalVersion>23.1.0.0 - 20231017</InformationalVersion>
 
-		<Product>Avalonia Controls Sample Browser</Product>
-		<Title>Avalonia Controls Sample Browser</Title>
-		<Description>Sample application to demo features of the Actipro Avalonia controls.</Description>
+		<Product>Actipro Avalonia UI Controls Sample Browser</Product>
+		<Title>$(Product)</Title>
+		<AssemblyTitle>$(Product)</AssemblyTitle>
+		<Description>Sample application to demo features of Actipro Avalonia UI controls.</Description>
 
 		<RootNamespace>ActiproSoftware</RootNamespace>
 		<Authors>Actipro Software LLC</Authors>

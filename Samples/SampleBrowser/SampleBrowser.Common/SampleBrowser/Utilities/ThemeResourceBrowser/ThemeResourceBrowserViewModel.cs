@@ -20,6 +20,7 @@ namespace ActiproSoftware.SampleBrowser.Utilities.ThemeResourceBrowser {
 		private CancellationTokenSource? _cancellationTokenSource;
 		private readonly List<ThemeResourceViewModel> _currentThemeResources = new();
 		private string _filterText = string.Empty;
+		private ThemeResourceReferenceTextKind _referenceTextKind = ThemeResourceReferenceTextKind.XamlDynamicResource;
 		private ThemeVariant _theme;
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -83,7 +84,7 @@ namespace ActiproSoftware.SampleBrowser.Utilities.ThemeResourceBrowser {
 				yield return new KeyValuePair<string, string>(resourceKind.ToString(), resourceKind.ToResourceKey());
 		}
 
-		private static IEnumerable<ThemeResourceViewModel> GetThemeResourceViewModels(ThemeVariant themeVariant) {
+		private IEnumerable<ThemeResourceViewModel> GetThemeResourceViewModels(ThemeVariant themeVariant) {
 			foreach (var kvp in GetResourceNames().OrderBy(x => x.Key)) {
 				if (TryCreateResourceViewModel(themeVariant, kvp.Key, kvp.Value, out var viewModel))
 					yield return viewModel;
@@ -123,9 +124,21 @@ namespace ActiproSoftware.SampleBrowser.Utilities.ThemeResourceBrowser {
 
 		}
 
-		private static bool TryCreateResourceViewModel(ThemeVariant themeVariant, string resourceName, string resourceKey, [NotNullWhen(returnValue: true)] out ThemeResourceViewModel? viewModel) {
+		public ThemeResourceReferenceTextKind ResourceReferenceTextKind {
+			get => _referenceTextKind;
+			set {
+				if (SetProperty(ref _referenceTextKind, value)) {
+					// Push to all the resource view models
+					_currentThemeResources.ForEach(x => x.ResourceReferenceTextKind = value);
+				}
+			}
+		}
+
+		private bool TryCreateResourceViewModel(ThemeVariant themeVariant, string resourceName, string resourceKey, [NotNullWhen(returnValue: true)] out ThemeResourceViewModel? viewModel) {
 			if (TryGetResource(resourceKey, themeVariant, out var resourceValue)) {
-				viewModel = new ThemeResourceViewModel(resourceName, resourceValue);
+				viewModel = new ThemeResourceViewModel(resourceName, resourceValue) {
+					ResourceReferenceTextKind = this.ResourceReferenceTextKind
+				};
 				return true;
 			}
 			else {

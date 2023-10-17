@@ -161,3 +161,28 @@ The following example shows how to override the default button foreground brush 
 	</Application.Resources>
 </Application>
 ```
+
+## Resource Keys in Code
+
+All of Actipro's theme assets are stored as standard resources, so they can be accessed just like any other resource as long as you use the proper key.
+
+[ThemeResourceKind](xref:@ActiproUIRoot.Themes.ThemeResourceKind), [ControlThemeKind](xref:@ActiproUIRoot.Themes.ControlThemeKind), and [GlyphTemplateKind](xref:@ActiproUIRoot.Themes.GlyphTemplateKind) all have a `ToResourceKey` extension method (e.g., `ThemeResourceKind`.[ToResourceKey](xref:@ActiproUIRoot.Themes.ResourceKeyExtensions.ToResourceKey*)) that will return the proper key to be used for that asset's resource.
+
+The following demonstrates one way to lookup a theme resource at the application level for the current theme:
+
+```csharp
+Application.Current?.TryGetResource(
+	ThemeResourceKind.ControlBackgroundBrushEmphasizedAccent.ToResourceKey(),
+	Application.Current?.ActualThemeVariant ?? ThemeVariant.Light,
+	out var resource);
+```
+
+Since applications can change themes, however, it is more common, especially with theme resources, to bind an asset as a dynamic resource so a change in theme will also update the binding. The following example shows a `Border` control configured in code to bind its `Background` property to an Actipro theme resource:
+
+```csharp
+var border = new Border();
+border.Bind(Border.BackgroundProperty, border.GetResourceObservable(ThemeResourceKind.Container1BackgroundBrush.ToResourceKey()));
+```
+
+> [!NOTE]
+> The `ActiproSoftware.UI.Avalonia.Themes` namespace must be imported to use the `ToResourceKey` extension methods.

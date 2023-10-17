@@ -1,7 +1,5 @@
 using ActiproSoftware.SampleBrowser;
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls.Notifications;
 
 namespace ActiproSoftware.ProductSamples.ThemeSamples.NativeControls {
 

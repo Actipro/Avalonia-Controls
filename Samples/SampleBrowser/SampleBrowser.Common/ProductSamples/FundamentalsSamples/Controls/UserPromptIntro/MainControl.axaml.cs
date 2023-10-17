@@ -20,6 +20,7 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 
 		private IImage? _basicFooterSampleImage;
 		private ICommand? _contextualHelpCommand;
+		private readonly bool _isDialogAllowed;
 		private bool _standardCheckBoxSampleIsChecked = false;
 
 		#region Property Definitions
@@ -42,7 +43,8 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 			UpdateBasicFooterSampleImage();
 
 			// Indicate if dialogs are allowed on the platform
-			displayModeWarning.IsVisible = !(Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime);
+			_isDialogAllowed = (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime);
+			displayModeWarning.IsVisible = !_isDialogAllowed;
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -78,11 +80,6 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 		/// <returns>A <see cref="UserPromptBuilder"/>.</returns>
 		private static UserPromptBuilder ConfigureUserPrompt(bool displayResult = true) {
 			return UserPromptBuilder.Configure()
-				.AfterInitialize(builder => {
-					// Set a default caption if one is not already configured
-					if (builder.Title is null)
-						builder.WithTitle("Actipro Avalonia Controls");
-				})
 				.AfterShow((builder, result) => {
 					if (displayResult) {
 						// Notify the user of the response
@@ -211,11 +208,6 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 				.WithContent($"The color scheme for this prompt has been adjusted to further emphasize the type of message based on the image used.")
 				.WithStatusImage(image)
 				.WithStandardButtons(MessageBoxButtons.OKCancel)
-				.WithButton(MessageBoxResult.Retry)
-				.WithButton(buttonBuilder => buttonBuilder
-					.WithResult(MessageBoxResult.Ignore)
-					.UseAsCloseResult()
-				)
 				.WithStatusImageTheme() // <-- Custom extension method to tint resources based on the status icon (e.g., error messages are red)
 				.Show();
 		}
@@ -252,7 +244,7 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 
 			var imageSource = ImageLoader.GetIcon("Save16.png");
 
-			// NOTE: This sample utilizes an extension method on UserPromptBuilder.ButtonBuilder to
+			// NOTE: This sample utilizes an extension method on UserPromptButtonBuilder to
 			//		 easily define an icon for use with a button.  Extension methods are a great
 			//		 way to make common configurations reusable.
 
@@ -370,6 +362,12 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 			//
 			// SAMPLE: Display mode
 			//
+
+			// Prevent exception when requested Dialog mode on unsupported platforms
+			if (((UserPromptDisplayMode)displayModeSelection.SelectedValue! == UserPromptDisplayMode.Dialog) && !_isDialogAllowed) {
+				await UserPromptBuilder.Configure().ForDialogDisplayModeNotSupportedNotice().Show();
+				return;
+			}
 
 			await ConfigureUserPrompt()
 				.WithHeaderContent("Display mode")

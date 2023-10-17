@@ -9,6 +9,8 @@ namespace ActiproSoftware.SampleBrowser.Utilities.ThemeResourceBrowser {
 	/// </summary>
 	public class ThemeResourceViewModel : ObservableObjectBase {
 
+		private ThemeResourceReferenceTextKind _referenceTextKind = ThemeResourceReferenceTextKind.XamlDynamicResource;
+
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 		// OBJECT
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -27,7 +29,25 @@ namespace ActiproSoftware.SampleBrowser.Utilities.ThemeResourceBrowser {
 
 		public string Name { get; }
 
-		public string ResourceReferenceText => $"{{actipro:ThemeResource {Name}}}";
+		public string ResourceReferenceText {
+			get {
+				return ResourceReferenceTextKind switch {
+					ThemeResourceReferenceTextKind.XamlDynamicResource => $"{{actipro:ThemeResource {Name}}}",
+					ThemeResourceReferenceTextKind.XamlStaticResource => $"{{StaticResource {{actipro:ThemeResourceKey {Name}}}}}",
+					ThemeResourceReferenceTextKind.CSharpToResourceKey => $"ThemeResourceKind.{Name}.ToResourceKey()",
+					_ => string.Empty
+				};
+			}
+		}
+
+		public ThemeResourceReferenceTextKind ResourceReferenceTextKind {
+			get => _referenceTextKind;
+			set {
+				if (SetProperty(ref _referenceTextKind, value)) {
+					OnPropertyChanged(nameof(ResourceReferenceText));
+				}
+			}
+		}
 
 		public string? ToolTipText {
 			get {

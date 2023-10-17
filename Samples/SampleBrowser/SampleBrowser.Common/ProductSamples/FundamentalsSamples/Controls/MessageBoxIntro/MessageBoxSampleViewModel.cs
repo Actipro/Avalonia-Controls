@@ -1,4 +1,5 @@
-﻿using ActiproSoftware.SampleBrowser;
+﻿using ActiproSoftware.ProductSamples.FundamentalsSamples.Common;
+using ActiproSoftware.SampleBrowser;
 using ActiproSoftware.UI.Avalonia.Controls;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -37,6 +38,12 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.MessageBox
 		// NON-PUBLIC PROCEDURES
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 
+		private string? ResolveCaption() {
+			return string.IsNullOrEmpty(this.Caption)
+				? null
+				: this.Caption;
+		}
+
 		private void UpdateSampleCode() {
 			bool hasImage = Image != MessageBoxImage.None;
 			bool hasDefaultResult = DefaultResult != MessageBoxResult.None;
@@ -46,7 +53,7 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.MessageBox
 			var sample = new StringBuilder()
 				.AppendLine($"var result = await {nameof(MessageBox)}.{nameof(MessageBox.Show)}(")
 				.AppendLine(indent + FormatAsString(Text) + ",")
-				.AppendLine(indent + FormatAsString(Caption) + ",")
+				.AppendLine(indent + FormatAsString(ResolveCaption()) + ",")
 				.Append(indent + nameof(MessageBoxButtons) + "." + Buttons);
 
 			var requiresBuilder = (hasHelpButton || (DisplayMode == UserPromptDisplayMode.Overlay));
@@ -74,7 +81,7 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.MessageBox
 
 			this.SampleCode = sample.ToString();
 
-			static string FormatAsString(string input) {
+			static string FormatAsString(string? input) {
 				if (input is null)
 					return "null";
 				return "\"" + input.Replace("\"", "\\\"")
@@ -140,7 +147,7 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.MessageBox
 			set => SetProperty(ref _image, value);
 		}
 
-		public bool IsDialogAllowed
+		public static bool IsDialogAllowed
 			=> (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime);
 
 		protected override void OnPropertyChanged(PropertyChangedEventArgs e) {
@@ -160,7 +167,13 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.MessageBox
 		}
 
 		public async void ShowMessageBox() {
-			Result = await MessageBox.Show(Text, Caption, Buttons, Image, DefaultResult, (builder) => {
+			// Prevent exception when requested Dialog mode on unsupported platforms
+			if (DisplayMode == UserPromptDisplayMode.Dialog && !IsDialogAllowed) {
+				await UserPromptBuilder.Configure().ForDialogDisplayModeNotSupportedNotice().Show();
+				return;
+			}
+
+			Result = await MessageBox.Show(Text, ResolveCaption(), Buttons, Image, DefaultResult, (builder) => {
 				builder.WithDisplayMode(DisplayMode);
 				if (AddHelpButton)
 					builder.WithHelpCommand(() => MessageBox.Show("Here is where you would show contextual help.", "Help"));

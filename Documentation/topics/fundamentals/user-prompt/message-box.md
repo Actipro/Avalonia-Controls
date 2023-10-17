@@ -25,7 +25,7 @@ The [MessageBox](xref:@ActiproUIRoot.Controls.MessageBox).[Show](xref:@ActiproUI
 await MessageBox.Show("Operation complete.");
 ```
 
-There are two overloads of the [Show](xref:@ActiproUIRoot.Controls.MessageBox.Show*) method where one allows an owner `Window` to be passed, and the other doesn't. All other arguments are identical.  The following basic arguments are available:
+There are two overloads of the [Show](xref:@ActiproUIRoot.Controls.MessageBox.Show*) method where one allows an owner  `TopLevel` (typically a `Window`) to be passed, and the other doesn't. All other arguments are identical.  The following basic arguments are available:
 
 | Argument | Description |
 |-----|-----|
@@ -46,9 +46,9 @@ var result = await MessageBox.Show(
 	MessageBoxResult.No);
 ```
 
-## Owner Window
+## Owner
 
-The user prompt is shown as a modal dialog and must have an owner `Window`. One of the [MessageBox](xref:@ActiproUIRoot.Controls.MessageBox).[Show](xref:@ActiproUIRoot.Controls.MessageBox.Show*) overloads allows an owner to be specified.  If one is not specified, a default owner `Window` will be determined by the currently active `Window`.
+The user prompt must have an owner `TopLevel` (typically a `Window`). One of the [MessageBox](xref:@ActiproUIRoot.Controls.MessageBox).[Show](xref:@ActiproUIRoot.Controls.MessageBox.Show*) overloads allows an owner to be specified.  If one is not specified, a default owner will be determined.  With desktop applications, the default is the currently active `Window`. On single-view applications, the default is the `TopLevel` of the current view.
 
 ## Advanced Configuration
 
@@ -58,7 +58,7 @@ For more advanced configurations, it is typically best to use the [UserPromptBui
 
 If you still want to use [MessageBox](xref:@ActiproUIRoot.Controls.MessageBox) for advanced configurations, there is an optional `configure` argument to the [Show](xref:@ActiproUIRoot.Controls.MessageBox.Show*) method that allows you to define a callback that will receive the [UserPromptBuilder](builder-pattern.md) used for the [MessageBox](xref:@ActiproUIRoot.Controls.MessageBox) before it is shown.
 
-See the [Builder Pattern](builder-pattern.md) topic for more details on configuration options.
+See the [Builder Pattern](builder-pattern.md) topic for more details on configuration options, including a global configuration callback is always applied to a message box.
 
 The following demonstrates defining a `configure` callback to add a header message:
 

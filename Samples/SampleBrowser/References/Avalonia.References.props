@@ -2,7 +2,7 @@
 <Project>
 
 	<PropertyGroup>
-		<AvaloniaVersion>11.0.5-rc1</AvaloniaVersion>
+		<AvaloniaVersion>11.0.5</AvaloniaVersion>
 	</PropertyGroup>
 	
 	<ItemGroup>
