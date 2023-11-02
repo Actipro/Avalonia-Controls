@@ -1,0 +1,103 @@
+<UserControl
+	x:Class="ActiproSoftware.ProductSamples.ThemeSamples.Styling.UserInterfaceDensitySamples"
+	x:Name="root"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	Classes="sample-presenter"
+	>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="User interface density describes how tightly controls are packed together. A simple setting on a theme definition sets the application-wide user interface density, which can adjust appearance features such as Margin, Padding, CornerRadius, Width, Height, and Spacing.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="User Interface Density" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/user-interface-density" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+
+		<sampleBrowser:ControlExample
+			Header="User interface density scaling"
+			Footer="This sample uses scaling to adjust the padding and corner radii of the inner/outer Border elements, the spacing of the StackPanel presenting the input elements, and the Margin between buttons. The thickness of a border typically should not scale and is fixed in this sample."
+			>
+
+			<Border Background="{actipro:ThemeResource Container1BackgroundBrush}" BorderBrush="{actipro:ThemeResource Container1BorderBrush}"
+					BorderThickness="1"
+					CornerRadius="{actipro:ScaledCornerRadius 4}"
+					Padding="{actipro:ScaledThickness '4 + 20'}">
+
+				<Border Background="{actipro:ThemeResource Container2BackgroundBrush}" BorderBrush="{actipro:ThemeResource Container2BorderBrush}"
+						BorderThickness="1"
+						CornerRadius="{actipro:ScaledCornerRadius 1.5}"
+						Padding="{actipro:ScaledThickness 5}">
+					<StackPanel Spacing="{actipro:ScaledDouble 1.5}">
+
+						<TextBox Classes="has-clear-button" Text="sales@actiprosoftware.com" UseFloatingWatermark="True" Watermark="E-mail Address" />
+
+						<StackPanel>
+							<TextBox Classes="has-reveal-password-button danger" UseFloatingWatermark="True" Watermark="Password" PasswordChar="{actipro:ThemeResource EditPasswordChar}" />
+							<TextBlock Classes="theme-form-control-message danger" Text="Password is required." />
+						</StackPanel>
+
+						<CheckBox Classes="theme-solid accent" Content="Remember me" IsChecked="True" />
+
+						<UniformGrid Margin="{actipro:ScaledThickness '0, 1.5, 0, 0'}" Columns="2" HorizontalAlignment="Left">
+							<Button Classes="theme-solid accent" Content="Log In" />
+							<Button Margin="{actipro:ScaledThickness '1.5, 0, 0, 0'}" Classes="theme-soft" Content="Cancel" />
+						</UniformGrid>
+					</StackPanel>
+				</Border>
+			</Border>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel>
+					<TextBlock Classes="theme-form-control-label" Text="User interface density:" />
+					<UniformGrid Columns="3" HorizontalAlignment="Left">
+						<ToggleButton BorderThickness="1,1,0,1" x:Name="compactDensityButton1" CornerRadius="{actipro:ScaledCornerRadius '1, 0, 0, 1'}" Content="Compact" Command="{ReflectionBinding #root.DataContext.SetUserInterfaceDensityCommand}" CommandParameter="{x:Static actipro:UserInterfaceDensity.Compact}" />
+						<ToggleButton BorderThickness="1" x:Name="normalDensityButton1" CornerRadius="0" Content="Normal" Command="{ReflectionBinding #root.DataContext.SetUserInterfaceDensityCommand}" CommandParameter="{x:Static actipro:UserInterfaceDensity.Normal}" />
+						<ToggleButton BorderThickness="0,1,1,1" x:Name="spaciousDensityButton1" CornerRadius="{actipro:ScaledCornerRadius '0, 1, 1, 0'}" Content="Spacious" Command="{ReflectionBinding #root.DataContext.SetUserInterfaceDensityCommand}" CommandParameter="{x:Static actipro:UserInterfaceDensity.Spacious}" />
+					</UniformGrid>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<Border ...
+	BorderThickness="1"
+	CornerRadius="{actipro:ScaledCornerRadius 4}"
+	Padding="{actipro:ScaledThickness '4 + 20'}">
+	
+	<Border ...
+			BorderThickness="1"
+			CornerRadius="{actipro:ScaledCornerRadius 1.5}"
+			Padding="{actipro:ScaledThickness 5}">
+			
+		<StackPanel Spacing="{actipro:ScaledDouble 1.5}">
+
+			<TextBox ... Watermark="E-mail Address" />
+
+			<StackPanel>
+				<TextBox ... Watermark="Password" />
+				<TextBlock ... Text="Password is required." />
+			</StackPanel>
+
+			<CheckBox ... Content="Remember me" />
+
+			<UniformGrid ... Margin="{actipro:ScaledThickness '0, 1.5, 0, 0'}">
+				<Button ... Content="Log In" />
+				<Button ... Content="Cancel" Margin="{actipro:ScaledThickness '1.5, 0, 0, 0'}" />
+			</UniformGrid>
+
+		</StackPanel>
+	</Border>
+
+</Border>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

@@ -23,11 +23,11 @@
 				Several helpful value converters for use in bindings are also included.
 			</sampleBrowser:ProductOverviewHeader>
 
-			<actipro:MultiColumnPanel Classes="sample-layout-panel" Margin="50,0" MinColumnWidth="390" HorizontalSpacing="30" VerticalSpacing="30">
+			<actipro:MultiColumnPanel Classes="sample-layout-panel" Margin="{actipro:ScaledThickness '6,0'}" MinColumnWidth="390" HorizontalSpacing="{actipro:ScaledDouble 4}" VerticalSpacing="{actipro:ScaledDouble 4}">
 				<WrapPanel Orientation="Horizontal">
-					<actipro:CopyButton Margin="0,0,30,0" CopyText="Text copied from a CopyButton" VerticalAlignment="Center" />
-					<actipro:CopyButton Margin="0,0,30,0" Classes="theme-soft" CopyText="Text copied from a CopyButton" CornerRadius="99" Padding="10" VerticalAlignment="Center" />
-					<actipro:ToggleThemeButton Margin="0,0,30,0" VerticalAlignment="Center" />
+					<actipro:CopyButton Margin="{actipro:ScaledThickness '0,0,4,0'}" CopyText="Text copied from a CopyButton" VerticalAlignment="Center" />
+					<actipro:CopyButton Margin="{actipro:ScaledThickness '0,0,4,0'}" Classes="theme-soft" CopyText="Text copied from a CopyButton" CornerRadius="99" Padding="10" VerticalAlignment="Center" />
+					<actipro:ToggleThemeButton Margin="{actipro:ScaledThickness '0,0,4,0'}" VerticalAlignment="Center" />
 					<actipro:ToggleThemeButton Classes="theme-soft" CornerRadius="99" Padding="10" VerticalAlignment="Center" />
 				</WrapPanel>
 
@@ -38,7 +38,7 @@
 
 				<StackPanel>
 					<TextBlock Classes="theme-form-control-label" Text="Mesh Gradient Presenter" />
-					<actipro:MeshGradientPresenter Height="80" Background="#ed8fea" CornerRadius="10">
+					<actipro:MeshGradientPresenter Height="{actipro:ScaledDouble 5+40}" Background="#ed8fea" CornerRadius="{actipro:ScaledCornerRadius 1}">
 						<actipro:MeshGradientNode Center="1%,95%" Color="#b781fd" />
 						<actipro:MeshGradientNode Center="29%,0%" Color="#b781fd" />
 						<actipro:MeshGradientNode Center="99%,37%" Color="#eec6ad" />
@@ -50,7 +50,7 @@
 					<TextBlock Classes="theme-form-control-label" Text="Dynamic Image" />
 					<Grid ColumnDefinitions="*,10,*">
 						<ThemeVariantScope RequestedThemeVariant="Light">
-							<Border Padding="20" BorderThickness="1" CornerRadius="8"
+							<Border Padding="{actipro:ScaledThickness 2.5}" BorderThickness="1" CornerRadius="{actipro:ScaledCornerRadius 1}"
 									Background="{actipro:ThemeResource Container1BackgroundBrush}"
 									BorderBrush="{actipro:ThemeResource Container1BorderBrush}">
 								<StackPanel>
@@ -63,7 +63,7 @@
 							</Border>
 						</ThemeVariantScope>
 						<ThemeVariantScope Grid.Column="2" RequestedThemeVariant="Dark">
-							<Border Padding="20" BorderThickness="1" CornerRadius="8"
+							<Border Padding="{actipro:ScaledThickness 2.5}" BorderThickness="1" CornerRadius="{actipro:ScaledCornerRadius 1}"
 									Background="{actipro:ThemeResource Container1BackgroundBrush}"
 									BorderBrush="{actipro:ThemeResource Container1BorderBrush}">
 								<StackPanel>
@@ -79,7 +79,7 @@
 				</StackPanel>
 
 				<actipro:ShadowChrome Elevation="8">
-					<Border Background="{actipro:ThemeResource Container1BackgroundBrush}" CornerRadius="8" Padding="30,20">
+					<Border Background="{actipro:ThemeResource Container1BackgroundBrush}" CornerRadius="{actipro:ScaledCornerRadius 1}" Padding="{actipro:ScaledThickness '4,2.5'}">
 						<TextBlock Text="Shadow Chrome" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}"
 								   HorizontalAlignment="Center" VerticalAlignment="Center" />
 					</Border>
@@ -87,11 +87,11 @@
 
 			</actipro:MultiColumnPanel>
 
-			<TextBlock Classes="theme-text-body" Margin="50" Text="Dive into our individual samples linked below for many more detailed examples."
+			<TextBlock Classes="theme-text-body" Margin="{actipro:ScaledThickness 6}" Text="Dive into our individual samples linked below for many more detailed examples."
 					   FontStyle="Italic" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" TextAlignment="Center" />
 
 			<Border Background="{actipro:ThemeResource Container2BackgroundBrush}">
-				<StackPanel Classes="sample-layout-panel" Margin="50,0">
+				<StackPanel Classes="sample-layout-panel" Margin="{actipro:ScaledThickness '6,0'}">
 					<sampleBrowser:CategorizedSampleItemsControl ItemsSource="{Binding ViewItemInfo.ProductFamily.GroupedItems}" />
 				</StackPanel>
 			</Border>

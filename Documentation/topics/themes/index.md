@@ -12,6 +12,7 @@ Actipro Themes is a complete framework for managing the themes of Actipro and na
 - Themes contain resources for both `Light` and `Dark` theme variants, allowing for instant toggling between the two.
 - Theme definitions with many options for determining how dynamically created theme resources are generated.
 - Ability to swap to alternate theme definitions at run-time.
+- Facilities for controlling user interface density (spacing) throughout an application.
 - Theme assets, such as control themes, brushes, thicknesses, glyphs, and more that can be reused anywhere in an application.
 - Extensibility points to customize and/or override theme assets, or even append custom assets.
 
@@ -58,6 +59,12 @@ Assets are theme resources (brushes, thicknesses, etc.), control themes, and gly
 While the Actipro control themes rely heavily on these theme assets, assets can also be reused in your own applications.  For instance, reusing theme resources like brushes in custom control themes and throughout the application chrome is necessary to maintain theme consistency across your application's user interface.  Several XAML markup extensions aid in reusing assets with minimal code.
 
 See the [Theme Assets](theme-assets.md) topic for details on browsing theme resources, reusing various kinds of assets, and externally overriding assets.
+
+## User Interface Density
+
+User interface density describes how tightly controls are packed together.  A simple setting on a theme definition sets the application-wide user interface density, which can adjust appearance features such as margins, paddings, corner radii, lengths, and more.
+
+See the [User Interface Density](user-interface-density.md) topic to discover how to set an application-wide user interface density and adjust elements based on the current density setting.
 
 ## Containers
 

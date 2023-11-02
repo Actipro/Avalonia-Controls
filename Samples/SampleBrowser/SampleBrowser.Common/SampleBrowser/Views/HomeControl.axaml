@@ -12,7 +12,7 @@
 
 			<!-- Banner and Featured Samples -->
 			<StackPanel Classes="sample-layout-panel">
-				<Panel Height="150">
+				<Panel Height="{actipro:ScaledDouble 10+70}">
 					<actipro:MeshGradientPresenter Classes="banner" />
 					
 					<Viewbox Stretch="Uniform">
@@ -39,19 +39,19 @@
 					</Viewbox>
 				</Panel>
 
-				<sampleBrowser:FeaturedSampleItemsControl Margin="0,20,0,0" ItemsSource="{Binding ProductData.FeaturedSamples}" HorizontalAlignment="Center" />
+				<sampleBrowser:FeaturedSampleItemsControl Margin="{actipro:ScaledThickness '0,2.5,0,0'}" ItemsSource="{Binding ProductData.FeaturedSamples}" HorizontalAlignment="Center" />
 			</StackPanel>
 
 			<!-- All Products -->
 			<Border Background="{actipro:ThemeResource Container2BackgroundBrush}">
-				<StackPanel Classes="sample-layout-panel" Margin="50,30" HorizontalAlignment="Center">
+				<StackPanel Classes="sample-layout-panel" Margin="{actipro:ScaledThickness '6,4'}" HorizontalAlignment="Center">
 					<sampleBrowser:SectionHeading Text="Discover All Our Avalonia Offerings" />
 					<sampleBrowser:ProductFamilyItemsControl Margin="0,10,0,0" ItemsSource="{Binding ProductData.ProductFamilies}" />
 				</StackPanel>
 			</Border>
 
 			<!-- Links -->
-			<WrapPanel Classes="sample-layout-panel" Margin="50,30" Orientation="Horizontal" HorizontalAlignment="Center">
+			<WrapPanel Classes="sample-layout-panel" Margin="{actipro:ScaledThickness '6,4'}" Orientation="Horizontal" HorizontalAlignment="Center">
 				<WrapPanel.Styles>
 					<Style Selector="TextBlock.separator">
 						<Setter Property="Foreground" Value="{actipro:ThemeResource Container5BorderBrush}" />

@@ -65,7 +65,6 @@
 	
 	<UserControl.Styles>
 		<Style Selector="Button.show-dialog">
-			<Setter Property="Padding" Value="20,10" />
 			<Setter Property="Content" Value="Show Hosted Sample" />
 			<Setter Property="HorizontalAlignment" Value="Stretch" />
 		</Style>

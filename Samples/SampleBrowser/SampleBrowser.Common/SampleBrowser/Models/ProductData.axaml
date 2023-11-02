@@ -67,6 +67,7 @@
 
 			<sampleBrowser:ProductItemInfo Category="Styling" Title="Containers" Path="/ProductSamples/ThemesSamples/Styling/ContainerSamples"/>
 			<sampleBrowser:ProductItemInfo Category="Styling" Title="Typography" Path="/ProductSamples/ThemesSamples/Styling/TypographySamples"/>
+			<sampleBrowser:ProductItemInfo Category="Styling" Title="User Interface Density" Path="/ProductSamples/ThemesSamples/Styling/UserInterfaceDensitySamples"/>
 
 			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="AutoCompleteBox" Path="/ProductSamples/ThemesSamples/NativeControls/AutoCompleteBoxSamples"/>
 			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="Button" Path="/ProductSamples/ThemesSamples/NativeControls/ButtonSamples"/>

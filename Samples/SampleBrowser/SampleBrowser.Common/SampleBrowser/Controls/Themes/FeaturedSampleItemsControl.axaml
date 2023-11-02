@@ -15,11 +15,11 @@
 				<WrapPanel />
 			</ItemsPanelTemplate>
 		</Setter>
-		<Setter Property="Padding" Value="0,0,-20,-20" />
+		<Setter Property="Padding" Value="{actipro:ScaledThickness '0,0,-2.5,-2.5'}" />
 		<Setter Property="ItemTemplate">
 			<DataTemplate x:DataType="sampleBrowser:ListItemInfo">
 
-				<StackPanel Margin="0,0,20,20">
+				<StackPanel Margin="{actipro:ScaledThickness '0,0,2.5,2.5'}">
 					<Button Theme="{actipro:ControlTheme ButtonCard}" Command="{Binding NavigateViewToItemInfoCommand}" CommandParameter="{Binding TargetUri}" 
 							Content="{Binding}" CornerRadius="10" Padding="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
 							ToolTip.Tip="{Binding Title, StringFormat='Open the {0} featured sample'}" ToolTip.ShowDelay="1000">

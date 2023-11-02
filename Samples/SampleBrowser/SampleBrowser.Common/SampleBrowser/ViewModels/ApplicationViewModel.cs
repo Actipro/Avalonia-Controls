@@ -1,7 +1,7 @@
 using ActiproSoftware.UI.Avalonia.Input;
+using ActiproSoftware.UI.Avalonia.Themes;
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Layout;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
@@ -36,6 +36,7 @@ namespace ActiproSoftware.SampleBrowser {
 		private DelegateCommand<object?>? _navigateViewToNextItemInfoCommand;
 		private DelegateCommand<object?>? _navigateViewToPreviousItemInfoCommand;
 		private DelegateCommand<object>? _openUrlCommand;
+		private DelegateCommand<UserInterfaceDensity?>? _setUserInterfaceDensityCommand;
 		private DelegateCommand<object?>? _toggleDrawerOpenCommand;
 		private DelegateCommand<object?>? _toggleShowPrivateItemsCommand;
 
@@ -462,6 +463,26 @@ namespace ActiproSoftware.SampleBrowser {
 				}
 			}
 		}
+
+		/// <summary>
+		/// The <see cref="ICommand"/> to set the user interface density.
+		/// </summary>
+		public ICommand SetUserInterfaceDensityCommand
+			=> _setUserInterfaceDensityCommand ??= new DelegateCommand<UserInterfaceDensity?>(density => {
+				if (density.HasValue && ModernTheme.TryGetCurrent(out var theme)) {
+					var definition = theme.Definition;
+					if (definition is not null) {
+						definition.BaseFontSize = density switch {
+							UserInterfaceDensity.Compact => 13.0,
+							_ => 14.0,  // Normal, Spacious
+						};
+						
+						definition.UserInterfaceDensity = density.Value;
+
+						theme.RefreshResources();
+					}
+				}
+			});
 
 		/// <summary>
 		/// Indicates if private items should be visible.

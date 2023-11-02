@@ -65,7 +65,7 @@
 					<Button Theme="{actipro:ControlTheme TitleBarButton}"
 							ToolTip.Tip="View">
 						<Button.Flyout>
-							<MenuFlyout Placement="Bottom">
+							<MenuFlyout Placement="Bottom" Opening="OnViewMenuOpening">
 								<MenuItem Classes="theme-menuitem-heading" Header="Avalonia Controls" />
 								<MenuItem Header="Release History" Command="{Binding NavigateViewToItemInfoCommand}" CommandParameter="{Binding ProductData.ReleaseHistory.FirstItem}" />
 								<MenuItem Header="Product Documentation" Command="{Binding OpenUrlCommand}" CommandParameter="{Binding PlatformDocumentationUrl}" />
@@ -83,6 +83,25 @@
 								<MenuItem Header="@Actipro" Command="{Binding OpenUrlCommand}" CommandParameter="{Binding ActiproTwitterUrl}" />
 								<Separator />
 								<MenuItem Header="Contact Us" Command="{Binding OpenUrlCommand}" CommandParameter="{Binding ActiproContactUrl}" />
+								<Separator />
+								<MenuItem Classes="theme-menuitem-heading" Header="Theme Configuration" />
+								<MenuItem Header="User Interface Density">
+									<MenuItem x:Name="compactDensityMenuItem" Header="Compact" Command="{Binding SetUserInterfaceDensityCommand}">
+										<MenuItem.CommandParameter>
+											<actipro:UserInterfaceDensity>Compact</actipro:UserInterfaceDensity>
+										</MenuItem.CommandParameter>
+									</MenuItem>
+									<MenuItem x:Name="normalDensityMenuItem" Header="Normal" Command="{Binding SetUserInterfaceDensityCommand}">
+										<MenuItem.CommandParameter>
+											<actipro:UserInterfaceDensity>Normal</actipro:UserInterfaceDensity>
+										</MenuItem.CommandParameter>
+									</MenuItem>
+									<MenuItem x:Name="spaciousDensityMenuItem" Header="Spacious" Command="{Binding SetUserInterfaceDensityCommand}">
+										<MenuItem.CommandParameter>
+											<actipro:UserInterfaceDensity>Spacious</actipro:UserInterfaceDensity>
+										</MenuItem.CommandParameter>
+									</MenuItem>
+								</MenuItem>
 								
 							</MenuFlyout>
 						</Button.Flyout>
@@ -101,15 +120,15 @@
 				BorderBrush="{actipro:ThemeResource StatusBarBorderBrush}" BorderThickness="{actipro:ThemeResource StatusBarBorderThickness}"
 				TextElement.Foreground="{actipro:ThemeResource StatusBarForegroundBrush}">
 			<Grid Margin="0,0,0,1" ColumnDefinitions="*,Auto,Auto" IsVisible="{Binding !ViewHasCustomStatusBar}">
-				<TextBlock Margin="20,4" Text="{Binding StatusMessage}" />
-				<TextBlock Grid.Column="1" Margin="0,4" Text="{Binding ProductData.ProductVersionAndDateSummaryText}" />
+				<TextBlock Margin="{actipro:ScaledThickness '2.5,0.5'}" Text="{Binding StatusMessage}" />
+				<TextBlock Grid.Column="1" Margin="{actipro:ScaledThickness '0,0.5'}" Text="{Binding ProductData.ProductVersionAndDateSummaryText}" />
 				<actipro:WindowResizeGrip Grid.Column="2" />
 			</Grid>
 		</Border>
 
 		<!-- Client Area -->
 		<Border Background="Transparent" BorderBrush="{actipro:ThemeResource Container2BorderBrush}" BorderThickness="0,1,0,0">
-			<SplitView x:Name="splitView" DisplayMode="Inline" IsPaneOpen="{Binding IsDrawerOpen}" OpenPaneLength="232" PanePlacement="Left">
+			<SplitView x:Name="splitView" DisplayMode="Inline" IsPaneOpen="{Binding IsDrawerOpen}" OpenPaneLength="236" PanePlacement="Left">
 				<SplitView.Pane>
 					<sampleBrowser:ApplicationDrawerView Width="{Binding #splitView.OpenPaneLength}" />
 				</SplitView.Pane>

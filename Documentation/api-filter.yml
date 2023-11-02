@@ -1,5 +1,13 @@
 apiRules:
 
+# Include EditorBrowsableState.Never in Actipro namespaces (excluded by default)
+- include:
+    uidRegex: ^ActiproSoftware\.
+    hasAttribute:
+      uid: System.ComponentModel.EditorBrowsableAttribute
+      ctorArguments:
+      - System.ComponentModel.EditorBrowsableState.Never
+
 # Exclude compatibility and core product code
 - exclude:
     uidRegex: ^ActiproSoftware\.Compatibility$

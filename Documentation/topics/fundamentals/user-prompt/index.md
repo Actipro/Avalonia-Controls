@@ -7,7 +7,12 @@ order: 1
 
 **User Prompt** provides a modern replacement for traditional **MessageBox** or **Task Dialog** functionality.
 
+@if (avalonia) {
 ![Screenshot](../images/user-prompt.png)
+}
+@if (wpf) {
+![Screenshot](../../images/user-prompt.png)
+}
 
 *UserPromptControl with optional content areas labeled, OK/Cancel buttons, Information status image, and optional footer image*
 
@@ -25,7 +30,7 @@ Key features of User Prompt include:
 - A simple and familiar [MessageBox](message-box.md) API for common prompts.
 - A convenient [UserPromptBuilder](builder-pattern.md) that uses a fluent API to easily configure and show complex prompts.
 - Use [extension methods](extension-methods.md) to easily configure prompts like showing an `Exception` message with a stack trace.
-- Full support for [Actipro Themes](../../themes/index.md).
+- Full support for @if (avalonia) { [Actipro Themes](../../themes/index.md) } @if (wpf) { [Actipro Themes](../../../themes/index.md) }.
 
 ## Controls
 
@@ -43,6 +48,7 @@ The [MessageBox](message-box.md) class is intentionally designed to be consisten
 
 The following code demonstrates using [MessageBox](message-box.md) to prompt the user with a question:
 
+@if (avalonia) {
 ```csharp
 var result = await MessageBox.Show(
 	"The specified file already exists. Do you want to overwrite the file?",
@@ -50,6 +56,16 @@ var result = await MessageBox.Show(
 	MessageBoxButtons.YesNo,
 	MessageBoxImage.Question);
 ```
+}
+@if (wpf) {
+```csharp
+var result = ThemedMessageBox.Show(
+	"The specified file already exists. Do you want to overwrite the file?",
+	"Overwrite existing file?",
+	MessageBoxButton.YesNo,
+	MessageBoxImage.Question);
+```
+}
 
 See the [MessageBox](message-box.md) topic for more information.
 
@@ -61,6 +77,7 @@ The [builder pattern](builder-pattern.md) can be used to easily configure and sh
 
 The following code demonstrates creating a [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl) with a header, message, **Yes** and **No** buttons, a **Question** status image, and a checkbox:
 
+@if (avalonia) {
 ```csharp
 var result = await UserPromptBuilder.Configure()
 	.WithHeaderContent("Overwrite existing file?")
@@ -70,5 +87,17 @@ var result = await UserPromptBuilder.Configure()
 	.WithCheckBoxContent("_Always overwrite files")
 	.Show();
 ```
+}
+@if (wpf) {
+```csharp
+var result = UserPromptBuilder.Configure()
+	.WithHeaderContent("Overwrite existing file?")
+	.WithContent("The specified file already exists. Do you want to overwrite the file?")
+	.WithStandardButtons(UserPromptStandardButtons.YesNo)
+	.WithStatusImage(UserPromptStandardImage.Question)
+	.WithCheckBoxContent("_Always overwrite files")
+	.Show();
+```
+}
 
 See the [Builder Pattern](builder-pattern.md) topic for more information.

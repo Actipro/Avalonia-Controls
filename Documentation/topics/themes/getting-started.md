@@ -265,7 +265,7 @@ The [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme) should ideally still b
 </Application>
 ```
 
-Then in the `Application.Initialize()` method, lookup the [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme) instance, modify the appropriate properties, and refresh resources to apply the change.
+Then in the `Application.Initialize()` method, look up the [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme) instance, modify the appropriate properties, and refresh resources to apply the change.
 
 ```csharp
 public partial class App : Application {

@@ -8,7 +8,7 @@
 	<UserControl.Styles>
 
 		<Style Selector="TextBlock.h1">
-			<Setter Property="Margin" Value="0,0,0,10" />
+			<Setter Property="Margin" Value="{actipro:ScaledThickness '0, 0, 0, 2'}" />
 			<!-- theme-text-heading-->
 			<Setter Property="Theme" Value="{actipro:ControlTheme TextBlockHeading}" />
 			<!-- size-xl -->
@@ -18,7 +18,7 @@
 		</Style>
 		
 		<Style Selector="TextBlock.h2">
-			<Setter Property="Margin" Value="0,50,0,10" />
+			<Setter Property="Margin" Value="{actipro:ScaledThickness '0, 6, 0, 2'}" />
 			<!-- theme-text-heading-->
 			<Setter Property="Theme" Value="{actipro:ControlTheme TextBlockHeading}" />
 			<!-- size-md -->
@@ -28,22 +28,22 @@
 		</Style>
 		
 		<Style Selector="StackPanel.form-input-group">
-			<Setter Property="Margin" Value="0,20,0,0" />
-			<Setter Property="Spacing" Value="20" />
+			<Setter Property="Margin" Value="{actipro:ScaledThickness '0, 4, 0, 0'}" />
+			<Setter Property="Spacing" Value="{actipro:ScaledDouble 4}" />
 		</Style>
 
 		<Style Selector="StackPanel.form-input">
 			<Style Selector="^ CheckBox">
-				<Setter Property="Margin" Value="0,5,0,0" />
+				<Setter Property="Margin" Value="{actipro:ScaledThickness '0, 1, 0, 0'}" />
 			</Style>
 			<Style Selector="^ RadioButton">
-				<Setter Property="Margin" Value="0,3,20,0" />
+				<Setter Property="Margin" Value="{actipro:ScaledThickness '0, 0.5, 4, 0'}" />
 			</Style>
 		</Style>
 
 		<Style Selector="StackPanel.switch-input-group">
-			<Setter Property="Margin" Value="0,20,0,0" />
-			<Setter Property="Spacing" Value="10" />
+			<Setter Property="Margin" Value="{actipro:ScaledThickness '0, 4, 0, 0'}" />
+			<Setter Property="Spacing" Value="{actipro:ScaledDouble 2}" />
 			
 			<Style Selector="^ ToggleSwitch">
 				<Setter Property="OnContent" Value="" />
@@ -55,7 +55,7 @@
 			<Setter Property="HorizontalAlignment" Value="Left" />
 
 			<Style Selector="^ Button">
-				<Setter Property="Margin" Value="0,50,10,0" />
+				<Setter Property="Margin" Value="{actipro:ScaledThickness '0, 6, 2, 0'}" />
 			</Style>
 		</Style>
 
@@ -65,7 +65,7 @@
 		<StackPanel>
 
 			<TextBlock Classes="h1" Text="Profile Form" />
-			<TextBlock Classes="theme-text-body" Text="This sample demonstrates how Actipro's control themes can create professional-looking forms, such as for collecting user profile data." />
+			<TextBlock Classes="theme-text-body" Text="This sample demonstrates how Actipro's control themes can create professional-looking forms, such as for collecting user profile data.  This demo also dyanmically adjusts to different user interface densities." />
 
 			<TextBlock Classes="h2" Text="Public Profile" />
 			<TextBlock Classes="theme-text-body" Text="This profile information is shared publicly with all users." />
@@ -90,7 +90,13 @@
 			
 			<StackPanel Classes="form-input-group">
 
-				<Grid ColumnDefinitions="*,30,*">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="{actipro:ScaledGridLength 5}" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+
 					<StackPanel Grid.Column="0" Classes="form-input">
 						<TextBlock Classes="theme-form-control-label" Text="First name" />
 						<TextBox />
@@ -102,7 +108,15 @@
 					</StackPanel>
 				</Grid>
 
-				<Grid ColumnDefinitions="*,30,*,30,*">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="{actipro:ScaledGridLength 5}" />
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="{actipro:ScaledGridLength 5}" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+
 					<StackPanel Classes="form-input">
 						<TextBlock Classes="theme-form-control-label" Text="Phone number" />
 						<TextBox />
@@ -124,7 +138,13 @@
 					</StackPanel>
 				</StackPanel>
 
-				<Grid ColumnDefinitions="*,30,*">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="{actipro:ScaledGridLength 5}" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+					
 					<StackPanel Classes="form-input">
 						<TextBlock Classes="theme-form-control-label" Text="Country" />
 						<ComboBox SelectedIndex="2">
@@ -140,7 +160,15 @@
 					</StackPanel>
 				</Grid>
 
-				<Grid ColumnDefinitions="*,30,*,30,*">
+				<Grid>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="{actipro:ScaledGridLength 5}" />
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="{actipro:ScaledGridLength 5}" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+					
 					<StackPanel Grid.Column="0" Classes="form-input">
 						<TextBlock Classes="theme-form-control-label" Text="City" />
 						<TextBox />

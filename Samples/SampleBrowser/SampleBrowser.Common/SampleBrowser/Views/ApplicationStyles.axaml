@@ -22,7 +22,7 @@
 
 			<!-- This should really select Panel but needs to somehow ignore the Grid within the ScrollViewer template -->
 			<Style Selector="^ > :is(StackPanel)">
-				<Setter Property="Margin" Value="50"/>
+				<Setter Property="Margin" Value="{actipro:ScaledThickness 6}"/>
 				<Setter Property="MaxWidth" Value="{StaticResource SampleWideMaxWidth}"/>
 			</Style>
 		</Style>
@@ -30,14 +30,14 @@
 
 	<!-- Panel.sample-layout-panel-->
 	<Style Selector=":is(Panel).sample-layout-panel">
-		<Setter Property="Margin" Value="50"/>
+		<Setter Property="Margin" Value="{actipro:ScaledThickness 6}"/>
 		<Setter Property="MaxWidth" Value="{StaticResource SampleWideMaxWidth}"/>
 	</Style>
 
 	<!-- actipro:MeshGradientPresenter.banner -->
 	<Style Selector="actipro|MeshGradientPresenter.banner">
 		<Setter Property="Background" Value="#6898ed" />
-		<Setter Property="CornerRadius" Value="10" />
+		<Setter Property="CornerRadius" Value="{actipro:ScaledCornerRadius 1.5}" />
 		<Setter Property="Nodes">
 			<actipro:MeshGradientNodes>
 				<actipro:MeshGradientNode Center="51%,64%" Color="#5cbadd" />

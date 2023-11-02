@@ -48,6 +48,7 @@ UserPromptBuilder.RegisterGlobalConfigureCallback(_ => _
 );
 ```
 
+@if (avalonia) {
 ##### MessageBox Only
 
 The [MessageBox](xref:@ActiproUIRoot.Controls.MessageBox).[RegisterGlobalBuilderConfigureCallback](xref:@ActiproUIRoot.Controls.MessageBox.RegisterGlobalBuilderConfigureCallback*) method is used to register a callback specifically for the builder used by [MessageBox](xref:@ActiproUIRoot.Controls.MessageBox), and this callback is invoked after the previously mentioned global callback for all user prompts.  Use this method to specifically define application-wide configurations for the prompts displayed by [MessageBox](xref:@ActiproUIRoot.Controls.MessageBox).
@@ -65,6 +66,26 @@ MessageBox.RegisterGlobalBuilderConfigureCallback(_ => _
 	})
 );
 ```
+}
+@if (wpf) {
+##### ThemedMessageBox Only
+
+The [ThemedMessageBox](xref:@ActiproUIRoot.Controls.ThemedMessageBox).[RegisterGlobalBuilderConfigureCallback](xref:@ActiproUIRoot.Controls.ThemedMessageBox.RegisterGlobalBuilderConfigureCallback*) method is used to register a callback specifically for the builder used by [ThemedMessageBox](xref:@ActiproUIRoot.Controls.ThemedMessageBox), and this callback is invoked after the previously mentioned global callback for all user prompts.  Use this method to specifically define application-wide configurations for the prompts displayed by [ThemedMessageBox](xref:@ActiproUIRoot.Controls.ThemedMessageBox).
+
+The following example demonstrates how a global callback can be registered that alters the default behavior by displaying a message box title in the header of the prompt:
+
+```csharp
+ThemedMessageBox.RegisterGlobalBuilderConfigureCallback(_ => _
+	.AfterBuild(builder => {
+		// Configure UserPromptControl.Header with the Title
+		builder.Instance!.Header = builder.Title;
+
+		// Clear the Title configuration to avoid it appearing elsewhere
+		builder.WithTitle(null);
+	})
+);
+```
+}
 
 ### Show Prompt
 
@@ -74,6 +95,7 @@ Finally, call the [Show](xref:@ActiproUIRoot.Controls.UserPromptBuilder.Show*) m
 
 The following code sample demonstrates how [UserPromptBuilder](xref:@ActiproUIRoot.Controls.UserPromptBuilder) could be used to display a prompt to the user with response buttons of **Yes** or **No**.
 
+@if (avalonia) {
 ```csharp
 var result = await UserPromptBuilder.Configure()
 	.WithHeaderContent("Overwrite existing file?")
@@ -82,7 +104,17 @@ var result = await UserPromptBuilder.Configure()
 	.WithStatusImage(MessageBoxImage.Question)
 	.Show();
 ```
-
+}
+@if (wpf) {
+```csharp
+var result = UserPromptBuilder.Configure()
+	.WithHeaderContent("Overwrite existing file?")
+	.WithContent("The specified file already exists. Do you want to overwrite the file?")
+	.WithStandardButtons(UserPromptStandardButtons.YesNo)
+	.WithStatusImage(UserPromptStandardImage.Question)
+	.Show();
+```
+}
 The fluent API allows the entire configuration to be defined as a single statement.
 
 See the [User Prompt Content](user-prompt-content.md) and [User Prompt Buttons](user-prompt-buttons.md) topics for more details and examples.
@@ -91,6 +123,7 @@ See the [User Prompt Content](user-prompt-content.md) and [User Prompt Buttons](
 
 Nothing happens with [UserPromptBuilder](xref:@ActiproUIRoot.Controls.UserPromptBuilder) until the [Show](xref:@ActiproUIRoot.Controls.UserPromptBuilder.Show*) method is called.  At that point, the following sequence of events will occur:
 
+@if (avalonia) {
 - Create a [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl) and assign to the [Instance](xref:@ActiproUIRoot.Controls.UserPromptBuilder.Instance) property.
 - Invoke all [AfterInitialize](xref:@ActiproUIRoot.Controls.UserPromptBuilder.AfterInitialize*) callbacks.
 - Assign properties on [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl). After this point, the [Instance](xref:@ActiproUIRoot.Controls.UserPromptBuilder.Instance) property is fully initialized any changes to builder properties that affect the configuration of the [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl) *will not* be applied.
@@ -107,6 +140,20 @@ Nothing happens with [UserPromptBuilder](xref:@ActiproUIRoot.Controls.UserPrompt
 - Invoke all [OnResponding](xref:@ActiproUIRoot.Controls.UserPromptBuilder.OnResponding*) callbacks when a response is indicated.
 - Invoke all [AfterShow](xref:@ActiproUIRoot.Controls.UserPromptBuilder.AfterShow*) callbacks with the indicated result.
 - Return the result.
+}
+@if (wpf) {
+- Create a [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl) and assign to the [Instance](xref:@ActiproUIRoot.Controls.UserPromptBuilder.Instance) property.
+- Invoke all [AfterInitialize](xref:@ActiproUIRoot.Controls.UserPromptBuilder.AfterInitialize*) callbacks.
+- Assign properties on [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl). After this point, the [Instance](xref:@ActiproUIRoot.Controls.UserPromptBuilder.Instance) property is fully initialized any changes to builder properties that affect the configuration of the [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl) *will not* be applied.
+- Invoke all [AfterBuild](xref:@ActiproUIRoot.Controls.UserPromptBuilder.AfterBuild*) callbacks.
+- Invoke all [BeforeShow](xref:@ActiproUIRoot.Controls.UserPromptBuilder.BeforeShow*) callbacks.
+- Configure [UserPromptWindow](xref:@ActiproUIRoot.Controls.UserPromptWindow) to host the [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl).
+- Invoke all [AfterInitializeWindow](xref:@ActiproUIRoot.Controls.UserPromptBuilder.AfterInitializeWindow*) callbacks.
+- Show the [UserPromptWindow](xref:@ActiproUIRoot.Controls.UserPromptWindow) as a dialog and await a response.
+- Invoke all [OnResponding](xref:@ActiproUIRoot.Controls.UserPromptBuilder.OnResponding*) callbacks when a response is indicated.
+- Invoke all [AfterShow](xref:@ActiproUIRoot.Controls.UserPromptBuilder.AfterShow*) callbacks with the indicated result.
+- Return the result.
+}
 
 Callbacks are available at different stages of the build process to support extensibility.
 
@@ -124,6 +171,7 @@ The [UserPromptBuilder](xref:@ActiproUIRoot.Controls.UserPromptBuilder).[Instanc
 
 This callback is invoked immediately after an instance of [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl) is created and can be used to initialize the control or further customize the builder before the builder configuration settings are applied.
 
+@if (avalonia) {
 ```csharp
 var result = await UserPromptBuilder.Configure()
 	// ... other configuration options here
@@ -132,11 +180,23 @@ var result = await UserPromptBuilder.Configure()
 	})
 	.Show();
 ```
+}
+@if (wpf) {
+```csharp
+var result = UserPromptBuilder.Configure()
+	// ... other configuration options here
+	.AfterInitialize(builder => {
+		// Define logic here
+	})
+	.Show();
+```
+}
 
 ### AfterBuild Callback
 
 This callback is invoked after all builder configuration settings have been applied and can be used to finalize the [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl) before it is shown.
 
+@if (avalonia) {
 ```csharp
 var result = await UserPromptBuilder.Configure()
 	// ... other configuration options here
@@ -145,14 +205,31 @@ var result = await UserPromptBuilder.Configure()
 	})
 	.Show();
 ```
+}
+@if (wpf) {
+```csharp
+var result = UserPromptBuilder.Configure()
+	// ... other configuration options here
+	.AfterBuild(builder => {
+		// Define logic here
+	})
+	.Show();
+```
+}
 
 > [!IMPORTANT]
 > At this stage in the lifecycle, the [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl) defined by [UserPromptBuilder](xref:@ActiproUIRoot.Controls.UserPromptBuilder).[Instance](xref:@ActiproUIRoot.Controls.UserPromptBuilder.Instance) is fully configured by the builder. Any changes made to the builder configuration at this point *will not* be applied to the control.
 
 ### BeforeShow Callback
 
-This callback is invoked before attempting to show the prompt. At this point, the [RequestedDisplayMode](xref:@ActiproUIRoot.Controls.UserPromptBuilder.RequestedDisplayMode) has been evaluated and the [ActualDisplayMode](xref:@ActiproUIRoot.Controls.UserPromptBuilder.ActualDisplayMode) is assigned.  This callback could be used to further customize the [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl) based on how it will be displayed.
+@if (avalonia) {
+This callback is invoked before attempting to show the prompt. At this point, the [RequestedDisplayMode](xref:@ActiproUIRoot.Controls.UserPromptBuilder.RequestedDisplayMode) has been evaluated and the [ActualDisplayMode](xref:@ActiproUIRoot.Controls.UserPromptBuilder.ActualDisplayMode) is assigned. This callback could be used to further customize the [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl) based on how it will be displayed.
+}
+@if (wpf) {
+This callback is invoked before attempting to show the prompt. This callback could be used to further customize the [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl) before it is displayed.
+}
 
+@if (avalonia) {
 ### AfterInitializeWindow Callback (Dialogs Only)
 
 When displayed as a [Dialog](xref:@ActiproUIRoot.Controls.UserPromptDisplayMode.Dialog), this callback is invoked to finalize the [UserPromptWindow](xref:@ActiproUIRoot.Controls.UserPromptWindow) that will host the [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl) as a modal dialog.  The callback is invoked after the window is initially configured.
@@ -165,11 +242,27 @@ var result = await UserPromptBuilder.Configure()
 	})
 	.Show();
 ```
+}
+@if (wpf) {
+### AfterInitializeWindow Callback
+
+This callback is invoked to finalize the [UserPromptWindow](xref:@ActiproUIRoot.Controls.UserPromptWindow) that will host the [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl) as a modal dialog.  The callback is invoked after the window is initially configured.
+
+```csharp
+var result = UserPromptBuilder.Configure()
+	// ... other configuration options here
+	.AfterInitializeWindow(window => {
+		// Define logic here
+	})
+	.Show();
+```
+}
 
 ### OnResponding Callback
 
 This callback is invoked when the user indicates a response and can be used to confirm and/or cancel the response using the [UserPromptResponseEventArgs](xref:@ActiproUIRoot.Controls.UserPromptResponseEventArgs) that are passed.
 
+@if (avalonia) {
 ```csharp
 var result = await UserPromptBuilder.Configure()
 	// ... other configuration options here
@@ -178,9 +271,21 @@ var result = await UserPromptBuilder.Configure()
 	})
 	.Show();
 ```
+}
+@if (wpf) {
+```csharp
+var result = UserPromptBuilder.Configure()
+	// ... other configuration options here
+	.OnResponding((builder, args) => {
+		// Define logic here
+	})
+	.Show();
+```
+}
 
 ### AfterShow Callback
 
+@if (avalonia) {
 This callback is invoked after the prompt is closed and passes the [MessageBoxResult](xref:@ActiproUIRoot.Controls.MessageBoxResult).
 
 ```csharp
@@ -191,3 +296,16 @@ var result = await UserPromptBuilder.Configure()
 	})
 	.Show();
 ```
+}
+@if (wpf) {
+This callback is invoked after the prompt is closed and passes the [UserPromptStandardResult](xref:@ActiproUIRoot.Controls.UserPromptStandardResult).
+
+```csharp
+var result = UserPromptBuilder.Configure()
+	// ... other configuration options here
+	.AfterShow((builder, result) => {
+		// Define logic here
+	})
+	.Show();
+```
+}
