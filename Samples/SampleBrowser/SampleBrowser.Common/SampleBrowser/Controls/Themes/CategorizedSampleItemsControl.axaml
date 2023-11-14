@@ -18,11 +18,11 @@
 		
 		<Setter Property="Grid.IsSharedSizeScope" Value="True" />
 		<Setter Property="IsTabStop" Value="False" />
-		<Setter Property="Margin" Value="0,50,0,30" />
+		<Setter Property="Margin" Value="{actipro:ScaledThickness '0,6,0,4'}" />
 		<Setter Property="ItemTemplate">
 			<DataTemplate>
 
-				<Grid Margin="0,0,0,20">
+				<Grid Margin="{actipro:ScaledThickness '0,0,0,2'}">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="Auto" SharedSizeGroup="GroupedSampleTitle" />
 						<ColumnDefinition Width="30" />

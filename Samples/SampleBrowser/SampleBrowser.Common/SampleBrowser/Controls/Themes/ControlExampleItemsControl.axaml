@@ -16,7 +16,7 @@
 
 		<Setter Property="ItemsPanel">
 			<ItemsPanelTemplate>
-				<StackPanel Spacing="50" />
+				<StackPanel Spacing="{actipro:ScaledDouble 6}" />
 			</ItemsPanelTemplate>
 		</Setter>
 
@@ -31,7 +31,7 @@
 
 							<ItemsPresenter
 								x:Name="PART_ItemsPresenter"
-								Margin="0,50,0,0"
+								Margin="{actipro:ScaledThickness '0,6,0,0'}"
 								ItemsPanel="{TemplateBinding ItemsPanel}"
 								KeyboardNavigation.TabNavigation="{TemplateBinding KeyboardNavigation.TabNavigation}"
 								/>
@@ -44,7 +44,7 @@
 								Background="{actipro:ThemeResource Container2BackgroundBrush}"
 								BorderBrush="{actipro:ThemeResource Container2BorderBrush}" BorderThickness="1,0,0,0">
 							<ScrollViewer HorizontalScrollBarVisibility="Disabled">
-								<StackPanel Margin="20,50" Spacing="30">
+								<StackPanel Margin="{actipro:ScaledThickness '2.5,6'}" Spacing="{actipro:ScaledDouble 4}">
 									<StackPanel IsVisible="{Binding HasDocumentation, RelativeSource={RelativeSource TemplatedParent}}">
 										<TextBlock Classes="theme-text-heading size-sm" Text="Documentation" />
 										<ItemsControl Margin="0,5,0,0" IsTabStop="False"

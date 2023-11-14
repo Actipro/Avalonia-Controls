@@ -1,10 +1,12 @@
 <ResourceDictionary 
 	xmlns="https://github.com/avaloniaui"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
 	>
 
 	<ControlTheme x:Key="{x:Type sampleBrowser:DocumentViewer}" TargetType="sampleBrowser:DocumentViewer">
+		<Setter Property="DocumentMargin" Value="{actipro:ScaledThickness '6,6,6,4'}" />
 		<Setter Property="IsTabStop" Value="False" />
 		
 		<Setter Property="Template">

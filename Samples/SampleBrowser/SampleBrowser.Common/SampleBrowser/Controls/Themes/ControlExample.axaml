@@ -8,10 +8,10 @@
 	<ControlTheme x:Key="{x:Type sampleBrowser:ControlExample}" TargetType="sampleBrowser:ControlExample">
 		<Setter Property="Background" Value="{actipro:ThemeResource Container2BackgroundBrush}" />
 		<Setter Property="ClipToBounds" Value="False" />
-		<Setter Property="CornerRadius" Value="10" />
+		<Setter Property="CornerRadius" Value="{actipro:ScaledCornerRadius 1.5}" />
 		<Setter Property="HorizontalContentAlignment" Value="Stretch" />
 		<Setter Property="IsTabStop" Value="False" />
-		<Setter Property="Padding" Value="60,40" />
+		<Setter Property="Padding" Value="{actipro:ScaledThickness '7.5,5'}" />
 		<Setter Property="VerticalContentAlignment" Value="Center" />
 
 		<Setter Property="FooterTemplate">
@@ -29,9 +29,9 @@
 		<Setter Property="Template">
 			<ControlTemplate>
 				<StackPanel>
-					<ContentPresenter Margin="10,0" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" />
+					<ContentPresenter Margin="{actipro:ScaledThickness '1.5,0'}" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" />
 
-					<actipro:ShadowChrome Margin="0,10,0,0">
+					<actipro:ShadowChrome Margin="{actipro:ScaledThickness '0,1.5,0,0'}">
 						<Border x:Name="outerBorder" Background="{TemplateBinding Background}"
 								BorderBrush="{actipro:ThemeResource Container2BorderBrush}"
 								BorderThickness="1" CornerRadius="{TemplateBinding CornerRadius}">
@@ -41,7 +41,7 @@
 												  ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}"
 												  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
 
-								<ToggleButton Grid.Row="1" Grid.Column="1" Margin="30,0,10,10"
+								<ToggleButton Grid.Row="1" Grid.Column="1" Margin="{actipro:ScaledThickness '4,0,1,1'}"
 											  HorizontalAlignment="Right" VerticalAlignment="Bottom"
 											  ToolTip.Tip="View Sample Code"
 											  ContentTemplate="{actipro:GlyphTemplate Code16}"
@@ -54,10 +54,10 @@
 									</ToggleButton.IsVisible>
 								</ToggleButton>
 
-								<Border x:Name="optionsBorder" Grid.Row="2" Grid.ColumnSpan="2" Margin="10,0,10,10" MinWidth="150" Padding="20"
+								<Border x:Name="optionsBorder" Grid.Row="2" Grid.ColumnSpan="2" Margin="{actipro:ScaledThickness '1,0,1,1'}" MinWidth="150" Padding="{actipro:ScaledThickness 2.5}"
 										Background="{actipro:ThemeResource Container3BackgroundBrush}"
 										BorderBrush="{actipro:ThemeResource Container1BorderBrush}"
-										BorderThickness="1" CornerRadius="8"
+										BorderThickness="1" CornerRadius="{actipro:ScaledCornerRadius 1}"
 										IsVisible="{TemplateBinding Options, Converter={x:Static ObjectConverters.IsNotNull}}">
 									<ContentPresenter ContentTemplate="{TemplateBinding OptionsTemplate}" Content="{TemplateBinding Options}"
 													  VerticalAlignment="Top">
@@ -77,10 +77,10 @@
 										BorderThickness="0,1,0,0" 
 										IsVisible="{TemplateBinding Footer, Converter={x:Static ObjectConverters.IsNotNull}}">
 									<Grid ColumnDefinitions="*,Auto">
-										<ContentPresenter Margin="20,10,10,10" VerticalAlignment="Center"
+										<ContentPresenter Margin="{actipro:ScaledThickness '2.5,1,1,1'}" VerticalAlignment="Center"
 														  ContentTemplate="{TemplateBinding FooterTemplate}" Content="{TemplateBinding Footer}" />
 
-										<ToggleButton Grid.Column="1" Margin="30,10,10,10" 
+										<ToggleButton Grid.Column="1" Margin="{actipro:ScaledThickness '4,1,1,1'}" 
 													  HorizontalAlignment="Right" VerticalAlignment="Center"
 													  ToolTip.Tip="View Sample Code"
 													  ContentTemplate="{actipro:GlyphTemplate Code16}"
@@ -99,8 +99,8 @@
 															BorderThickness="0,1,0,0">
 														<Grid RowDefinitions="Auto,Auto">
 															
-															<StackPanel Margin="0,10,0,0" Orientation="Horizontal">
-																<TextBlock Margin="20,0,10,0" Text="{Binding Language}" FontWeight="SemiBold" VerticalAlignment="Center" />
+															<StackPanel Margin="{actipro:ScaledThickness '0,1,0,0'}" Orientation="Horizontal">
+																<TextBlock Margin="{actipro:ScaledThickness '2.5,0,1,0'}" Text="{Binding Language}" FontWeight="SemiBold" VerticalAlignment="Center" />
 																<StackPanel Orientation="Horizontal" VerticalAlignment="Center"
 																			IsVisible="{Binding TextUsesActiproXamlNamespace}">
 																	<TextBlock Text="(" VerticalAlignment="Center" />
@@ -117,13 +117,13 @@
 																	<TextBlock Text=")" VerticalAlignment="Center" />
 																</StackPanel>
 															</StackPanel>
-															<ScrollViewer Grid.Row="1" Margin="20,10" HorizontalScrollBarVisibility="Auto">
+															<ScrollViewer Grid.Row="1" Margin="{actipro:ScaledThickness '2.5,1'}" HorizontalScrollBarVisibility="Auto">
 																<SelectableTextBlock Classes="theme-text-code" 
 																					 sampleBrowser:CodeTextBlockProperties.CodeLanguage="{Binding Language}"
 																					 Text="{Binding Text, Mode=OneWay}"
 																					 TextWrapping="Wrap" />
 															</ScrollViewer>
-															<actipro:CopyButton Grid.RowSpan="2" Margin="10" CopyText="{Binding Text}"
+															<actipro:CopyButton Grid.RowSpan="2" Margin="{actipro:ScaledThickness 1}" CopyText="{Binding Text}"
 																				ToolTip.Tip="Copy Sample Code" HorizontalAlignment="Right" VerticalAlignment="Top" />
 														</Grid>
 													</Border>
@@ -145,7 +145,7 @@
 		<Style Selector="^:wide /template/ Border#optionsBorder">
 			<Setter Property="Grid.Row" Value="0" />
 			<Setter Property="Grid.Column" Value="1" />
-			<Setter Property="Margin" Value="0,10,10,10" />
+			<Setter Property="Margin" Value="{actipro:ScaledThickness '0,1,1,1'}" />
 			<Setter Property="MaxWidth" Value="300" />
 		</Style>
 	</ControlTheme>

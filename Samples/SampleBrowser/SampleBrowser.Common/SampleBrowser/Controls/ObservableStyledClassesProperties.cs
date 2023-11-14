@@ -1,6 +1,7 @@
 ﻿using Avalonia;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace ActiproSoftware.SampleBrowser {
@@ -11,7 +12,11 @@ namespace ActiproSoftware.SampleBrowser {
 	/// </summary>
 	public static class ObservableStyledClassesProperties {
 
-		private static readonly Dictionary<StyledElement, StyledElementClassesCollectionWatcher> _watchedElements = new();
+		private static readonly HashSet<StyledElementClassesCollectionWatcher> _watchers = new();
+		private static readonly object _sync = new();
+		private static DateTime _lastPurge = DateTime.Now;
+
+		private static readonly TimeSpan PurgeDelay = TimeSpan.FromSeconds(30);
 
 		#region Property Definitions
 
@@ -26,7 +31,6 @@ namespace ActiproSoftware.SampleBrowser {
 
 		#endregion Property Definitions
 
-
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 		// NESTED TYPES
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -36,17 +40,31 @@ namespace ActiproSoftware.SampleBrowser {
 			public event EventHandler? ClassesChanged;
 
 			public StyledElementClassesCollectionWatcher(StyledElement styledElement) {
-				this.StyledElement = styledElement ?? throw new ArgumentNullException(nameof(styledElement));
-				this.StyledElement.Classes.CollectionChanged += OnClassesCollectionChanged;
+				if (styledElement is null)
+					throw new ArgumentNullException(nameof(styledElement));
+				StyledElementReference = new WeakReference<StyledElement>(styledElement);
+				styledElement.Classes.CollectionChanged += OnClassesCollectionChanged;
+			}
+
+			public void Dispose() {
+				if (StyledElementReference.TryGetTarget(out var styledElement))
+					styledElement.Classes.CollectionChanged -= OnClassesCollectionChanged;
 			}
 
 			private void OnClassesCollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
 				=> ClassesChanged?.Invoke(this, EventArgs.Empty);
 
-			public StyledElement StyledElement { get; }
+			private WeakReference<StyledElement> StyledElementReference { get; }
 
-			public void Dispose()
-				=> this.StyledElement.Classes.CollectionChanged -= OnClassesCollectionChanged;
+			public bool IsWatching(StyledElement styledElement) {
+				if (StyledElementReference.TryGetTarget(out var target))
+					return ReferenceEquals(target, styledElement);
+				return false;
+			}
+
+			public bool TryGetStyledElement([NotNullWhen(returnValue: true)] out StyledElement? styledElement) {
+				return StyledElementReference.TryGetTarget(out styledElement);
+			}
 
 		}
 
@@ -73,8 +91,8 @@ namespace ActiproSoftware.SampleBrowser {
 		}
 
 		private static void OnWatchedElementClassesChanged(object? sender, EventArgs e) {
-			if (sender is StyledElementClassesCollectionWatcher watcher) {
-				var styledElement = watcher.StyledElement;
+			if (sender is StyledElementClassesCollectionWatcher watcher
+				&& watcher.TryGetStyledElement(out var styledElement)) {
 
 				// Get classes other than pseudo classes
 				var classes = styledElement.Classes
@@ -111,17 +129,39 @@ namespace ActiproSoftware.SampleBrowser {
 			}
 		}
 
+		private static void RequestPurgeDeadReferencesNoLock() {
+			// Ignore request if enough time has not elapsed since the last purge
+			if (DateTime.Now.Subtract(_lastPurge) < PurgeDelay)
+				return;
+
+			_lastPurge = DateTime.Now;
+			_watchers.RemoveWhere(x => !x.TryGetStyledElement(out _));
+		}
+
 		private static void UnwatchElement(StyledElement styledElement) {
-			if (_watchedElements.Remove(styledElement, out var watcher)) {
-				watcher.ClassesChanged -= OnWatchedElementClassesChanged;
-				watcher.Dispose();
+			lock (_sync) {
+				RequestPurgeDeadReferencesNoLock();
+
+				foreach (var watcher in _watchers.Where(x => x.IsWatching(styledElement)).ToArray()) {
+					watcher.ClassesChanged -= OnWatchedElementClassesChanged;
+					watcher.Dispose();
+					_watchers.Remove(watcher);
+				}
 			}
 		}
 
 		private static void WatchElement(StyledElement styledElement) {
-			var watcher = new StyledElementClassesCollectionWatcher(styledElement);
-			_watchedElements[styledElement] = watcher;
-			watcher.ClassesChanged += OnWatchedElementClassesChanged;
+			lock (_sync) {
+				RequestPurgeDeadReferencesNoLock();
+
+				// Ignore if already watching
+				if (_watchers.Any(x => x.IsWatching(styledElement)))
+					return;
+
+				var watcher = new StyledElementClassesCollectionWatcher(styledElement);
+				watcher.ClassesChanged += OnWatchedElementClassesChanged;
+				_watchers.Add(watcher);
+			}
 		}
 
 

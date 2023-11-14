@@ -27,7 +27,7 @@ jobs:
       with:
         fetch-depth: 0
     - name: Run build project
-      run: dotnet run --project ./Build/Build.csproj -- --target IntegrationBuild"
+      run: dotnet run --project ./Build/Build.csproj -- --target IntegrationBuild
     - name: Notify Slack
       if: always()
       uses: act10ns/slack@v2

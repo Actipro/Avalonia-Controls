@@ -14,11 +14,11 @@
 				<WrapPanel />
 			</ItemsPanelTemplate>
 		</Setter>
-		<Setter Property="Padding" Value="0,0,-20,-20" />
+		<Setter Property="Padding" Value="{actipro:ScaledThickness '0,0,-2.5,-2.5'}" />
 		<Setter Property="ItemTemplate">
 			<DataTemplate x:DataType="sampleBrowser:ProductFamilyInfo">
 
-				<Button Margin="0,0,20,20" Width="276" Theme="{actipro:ControlTheme ButtonCard}" Command="{Binding NavigateViewToItemInfoCommand}" CommandParameter="{Binding OverviewItem}"
+				<Button Margin="{actipro:ScaledThickness '0,0,2.5,2.5'}" Width="276" Theme="{actipro:ControlTheme ButtonCard}" Command="{Binding NavigateViewToItemInfoCommand}" CommandParameter="{Binding OverviewItem}"
 						Content="{Binding}" CornerRadius="10" Padding="15" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
 						ToolTip.Tip="{Binding Title, StringFormat='Open the {0} product category overview'}" ToolTip.ShowDelay="1000">						
 					<Button.ContentTemplate>

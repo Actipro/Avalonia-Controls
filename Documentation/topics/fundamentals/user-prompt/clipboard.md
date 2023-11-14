@@ -5,7 +5,7 @@ order: 25
 ---
 # Clipboard Support
 
-[UserPromptWindow](xref:@ActiproUIRoot.Controls.UserPromptWindow) supports copying text to the clipboard when the default clipboard keyboard shortcut (e.g., <kbd>Ctrl</kbd>+<kbd>C</kbd> on Windows) is invoked. Since [UserPromptWindow](xref:@ActiproUIRoot.Controls.UserPromptWindow) also supports rich content of potentially complex control structures, it may not be possible to accurately translate the various properties to textual clipboard content.
+[UserPromptWindow](xref:@ActiproUIRoot.Controls.UserPromptWindow) supports copying text to the clipboard when @if (avalonia) { the default clipboard keyboard shortcut (e.g., <kbd>Ctrl</kbd>+<kbd>C</kbd> on Windows) is invoked.}@if (wpf) { <kbd>Ctrl</kbd>+<kbd>C</kbd> is pressed}. Since [UserPromptWindow](xref:@ActiproUIRoot.Controls.UserPromptWindow) also supports rich content of potentially complex control structures, it may not be possible to accurately translate the various properties to textual clipboard content.
 
 The properties in the following table have a corresponding string-based property that can be used to explicitly define the text to be placed on the system clipboard for that object when the copy command is invoked.
 
@@ -26,6 +26,7 @@ When [ButtonItemsClipboardText](xref:@ActiproUIRoot.Controls.UserPromptControl.B
 
 When using the [builder pattern](builder-pattern.md), the attached property can be set using the [WithContentClipboardText](xref:@ActiproUIRoot.Controls.UserPromptButtonBuilder.WithContentClipboardText*) method of the button's builder as shown in the following example:
 
+@if (avalonia) {
 ```csharp
 await UserPromptBuilder.Configure()
 	// ... other configuration options here
@@ -35,3 +36,15 @@ await UserPromptBuilder.Configure()
 	)
 	.Show();
 ```
+}
+@if (wpf) {
+```csharp
+UserPromptBuilder.Configure()
+	// ... other configuration options here
+	.WithButton(_ => _
+		.WithResult(UserPromptStandardResult.Ignore)
+		.WithContentClipboardText("Continue")
+	)
+	.Show();
+```
+}

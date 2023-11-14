@@ -21,10 +21,13 @@ namespace ActiproSoftware.Tools.Builds {
 
 		#region Solutions
 
-		[Solution("Samples/SampleBrowser/SampleBrowser.sln")]
-		readonly Solution SampleBrowserSolution;
+		[Solution("Samples/SampleBrowser/SampleBrowser.Desktop.sln")]
+		readonly Solution SampleBrowserDesktopSolution;
+		
+		[Solution("Samples/SampleBrowser/SampleBrowser.Web.sln")]
+		readonly Solution SampleBrowserWebSolution;
 
-		Solution[] SampleSolutions => new Solution[] { SampleBrowserSolution };  // MSBuild
+		Solution[] SampleSolutions => new Solution[] { SampleBrowserDesktopSolution, SampleBrowserWebSolution };  // MSBuild
 
 		#endregion
 

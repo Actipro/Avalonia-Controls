@@ -19,6 +19,12 @@ A theme definition contains many options that guide a theme generator on how to 
 
 Theme definitions are represented by the [ThemeDefinition](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition) class, which has a wide variety of properties for directing theme generator output.
 
+### General Options
+
+| Property | Description |
+|-----|-----|
+| [UserInterfaceDensity](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.UserInterfaceDensity) | The density of the user interface, which generally describes the amount of spacing to apply.  See the [User Interface Density](user-interface-density.md) topic for extensive detail on how user interface density works. |
+
 ### Font Options
 
 | Property | Description |
@@ -46,7 +52,6 @@ Color ramp name properties should be set to [Hue](xref:@ActiproUIRoot.Themes.Gen
 | Property | Description |
 |-----|-----|
 | [MenuItemIconColumnWidth](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.MenuItemIconColumnWidth) | The width for menu item icon columns. |
-| [MenuItemPadding](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.MenuItemPadding) | The padding around menu item text. |
 | [MenuItemPopupColumnWidth](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.MenuItemPopupColumnWidth) | The width for menu item popup columns. |
 
 ### Switch Control Options
@@ -62,13 +67,24 @@ Color ramp name properties should be set to [Hue](xref:@ActiproUIRoot.Themes.Gen
 | [SwitchScale](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.SwitchScale) | The scale factor for checkbox and radio button controls. |
 | [ToggleSwitchAppearanceKind](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.ToggleSwitchAppearanceKind) | The [SwitchAppearanceKind](xref:@ActiproUIRoot.Themes.Generation.SwitchAppearanceKind) that indicates the default appearance for `ToggleSwitch` controls. |
 
+### ScrollBar Options
+
+| Property | Description |
+|-----|-----|
+| [ScrollBarThumbMarginAscent](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.ScrollBarThumbMarginAscent) | The ascent for scroll bar thumb margins, which is the margin space around the short end of the thumb. |
+| [ScrollBarThumbMarginExtent](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.ScrollBarThumbMarginExtent) | The extent for scroll bar thumb margins, which is the margin space around the long end of the thumb. |
+| [ScrollBarThumbMaxAscent](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.ScrollBarThumbMaxAscent) | The maximum ascent for scroll bar thumbs, which is the maximum thickness of the thumb given the current thumb margin settings. |
+| [ScrollBarThumbMinAscent](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.ScrollBarThumbMinAscent) | The minimum ascent for scroll bar thumbs, which is the minimum thickness of the thumb given the current thumb margin settings. |
+
+> [!TIP]
+> Set the [ScrollBarThumbMinAscent](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.ScrollBarThumbMinAscent) and [ScrollBarThumbMaxAscent](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.ScrollBarThumbMaxAscent) properties to the same value, such as `4.0`, to have a fixed thumb thickness.  Or increase the [ScrollBarThumbMaxAscent](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.ScrollBarThumbMaxAscent) property to something larger and use the [ScrollBarThumbMarginAscent](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.ScrollBarThumbMarginAscent) property to indicate how much to indent the thumb from the track's current size.
+
 ### Other Control Options
 
 | Property | Description |
 |-----|-----|
 | [ButtonAppearanceKind](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.ButtonAppearanceKind) | The [ButtonAppearanceKind](xref:@ActiproUIRoot.Themes.Generation.ButtonAppearanceKind) that indicates the default appearance for various button controls (e.g., `Button`, `SplitButton`). |
 | [EditAppearanceKind](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.EditAppearanceKind) | The [EditAppearanceKind](xref:@ActiproUIRoot.Themes.Generation.EditAppearanceKind) that indicates the default appearance for various edit controls (e.g., `ComboBox`, `TextBox`). |
-| [ScrollBarThumbMargin](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.ScrollBarThumbMargin) | The margin for scroll bar thumbs. |
 | [TabAppearanceKind](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.TabAppearanceKind) | The [TabAppearanceKind](xref:@ActiproUIRoot.Themes.Generation.TabAppearanceKind) that indicates the default appearance for various tab controls (e.g., `TabControl`). |
 
 ## Custom Theme Generators

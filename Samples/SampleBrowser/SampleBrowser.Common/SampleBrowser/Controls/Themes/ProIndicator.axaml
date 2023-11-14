@@ -7,7 +7,7 @@
 
 	<ControlTheme x:Key="{x:Type sampleBrowser:ProIndicator}" TargetType="sampleBrowser:ProIndicator">
 		<Setter Property="Background" Value="{actipro:ThemeResource AvaloniaBrandBrush}" />
-		<Setter Property="CornerRadius" Value="999" />
+		<Setter Property="CornerRadius" Value="{actipro:ThemeResource FullRoundCornerRadius}" />
 		<Setter Property="Focusable" Value="False" />
 		<Setter Property="FontFamily" Value="{actipro:ThemeResource HeadingFontFamily}" />
 		<Setter Property="FontSize" Value="{actipro:ThemeResource HeadingFontSizeExtraSmall}" />

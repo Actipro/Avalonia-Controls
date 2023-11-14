@@ -12,7 +12,7 @@
 	>
 
 	<Grid RowDefinitions="Auto,*">
-		<Border Padding="12" BorderBrush="{Binding #drawer.BorderBrush}" BorderThickness="0,0,0,1">
+		<Border Padding="{actipro:ScaledThickness 1.5}" BorderBrush="{Binding #drawer.BorderBrush}" BorderThickness="0,0,0,1">
 			<ComboBox x:Name="drawerSectionComboBox">
 				<ComboBox.Styles>
 					<!-- NOTE: Necessary until ComboBox supports an alternate template: https://github.com/AvaloniaUI/Avalonia/pull/9689 -->
@@ -35,12 +35,18 @@
 
 		<ScrollViewer x:Name="homeContentScrollViewer" Grid.Row="1" Classes="theme-scroll-overlay" IsVisible="{Binding ViewUsesHomeDrawer}" HorizontalScrollBarVisibility="Disabled">
 			<StackPanel>
-				<sampleBrowser:SectionHeading Margin="20,20,20,0" Text="What's New" />
-				<sampleBrowser:WhatsNewItemsControl Margin="20,10" ItemsSource="{Binding ProductData.ProductFamiliesWithNews}" />
+				<sampleBrowser:SectionHeading Margin="{actipro:ScaledThickness '2.5,2.5,2.5,0'}" Text="What's New" />
+				<sampleBrowser:WhatsNewItemsControl Margin="{actipro:ScaledThickness '2.5,1'}" ItemsSource="{Binding ProductData.ProductFamiliesWithNews}" />
 			</StackPanel>
 		</ScrollViewer>
 
 		<ListBox x:Name="itemListBox" Grid.Row="1" Background="Transparent" BorderThickness="0" IsVisible="{Binding !ViewUsesHomeDrawer}">
+			<ListBox.ItemContainerTheme>
+				<ControlTheme TargetType="ListBoxItem" BasedOn="{actipro:ControlTheme ListBoxItem}">
+					<Setter Property="Padding" Value="{actipro:ScaledThickness '0.5+8,1-1'}" />
+				</ControlTheme>
+			</ListBox.ItemContainerTheme>
+			
 			<ListBox.DataTemplates>
 				
 				<!-- Category -->
@@ -66,7 +72,7 @@
 					<Setter Property="TextWrapping" Value="Wrap" />
 				</Style>
 				<Style Selector="TextBlock.indent">
-					<Setter Property="Margin" Value="10,0" />
+					<Setter Property="Margin" Value="{actipro:ScaledThickness '0.5+8,0'}" />
 				</Style>
 			</ListBox.Styles>
 		</ListBox>

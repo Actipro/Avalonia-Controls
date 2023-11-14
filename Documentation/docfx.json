@@ -3,7 +3,7 @@
 		{
 			"src": [
 				{
-					"src": "../../Source/bin/Release/net6.0",
+					"src": "../../Deploy/Build/AssembliesDocFX",
 					"files": [
 						// Actipro assemblies
 						"ActiproSoftware.*.dll"

@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleBrowser.Desktop", "SampleBrowser.Desktop\SampleBrowser.Desktop.csproj", "{AF58DDDE-4F98-442A-935D-39C7671E7BEA}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleBrowser.Web", "SampleBrowser.Web\SampleBrowser.Web.csproj", "{A99E2C2F-93B3-4FF1-B0B1-2E86813C500B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleBrowser.Common", "SampleBrowser.Common\SampleBrowser.Common.csproj", "{DE7A96E8-FBA2-448D-B3FF-13C7AEC73174}"
@@ -21,10 +19,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{AF58DDDE-4F98-442A-935D-39C7671E7BEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AF58DDDE-4F98-442A-935D-39C7671E7BEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AF58DDDE-4F98-442A-935D-39C7671E7BEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AF58DDDE-4F98-442A-935D-39C7671E7BEA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A99E2C2F-93B3-4FF1-B0B1-2E86813C500B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A99E2C2F-93B3-4FF1-B0B1-2E86813C500B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A99E2C2F-93B3-4FF1-B0B1-2E86813C500B}.Release|Any CPU.ActiveCfg = Release|Any CPU

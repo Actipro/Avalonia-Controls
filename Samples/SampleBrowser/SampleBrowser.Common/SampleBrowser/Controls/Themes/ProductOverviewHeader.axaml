@@ -11,8 +11,8 @@
 		<Setter Property="Template">
 			<ControlTemplate x:DataType="sampleBrowser:ApplicationViewModel">
 
-				<StackPanel Classes="sample-layout-panel" Margin="50,50,50,0">
-					<Panel Height="150">
+				<StackPanel Classes="sample-layout-panel">
+					<Panel Height="{actipro:ScaledDouble 10+70}">
 						<actipro:MeshGradientPresenter Classes="banner" />
 
 						<Viewbox Stretch="Uniform">
@@ -29,7 +29,7 @@
 
 					<ContentPresenter
 						x:Name="PART_ContentPresenter"
-						Margin="30,50,30,0"
+						Margin="{actipro:ScaledThickness '4,6,4,0'}"
 						Content="{TemplateBinding Content}"
 						ContentTemplate="{TemplateBinding ContentTemplate}"
 						HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"

@@ -21,6 +21,7 @@ Samples, documentation, and other related open-source projects for [Actipro Aval
   - [Review Product Documentation](#review-product-documentation)
   - [Evaluate in Your Apps](#evaluate-in-your-apps)
 - [Supported Technologies](#supported-technologies)
+- [Branches](#branches)
 - [Contributing](#contributing)
 - [Support](#support)
 - [Licensing](#licensing)
@@ -95,6 +96,15 @@ These two NuGet packages can be referenced if you wish to use Actipro's themes f
 - **IDEs:** All IDEs supported by Avalonia UI
 
 \* *Some features or functionality may be limited or unavailable on non-desktop platforms.*
+
+## Branches
+
+This repository has two primary branches:
+
+- [main](https://github.com/Actipro/Avalonia-Controls/tree/main) - The codebase for official production-ready releases.
+- [develop](https://github.com/Actipro/Avalonia-Controls/tree/develop) - Contains work-in-progress code, which may include pre-release logic that is not ready for production usage.
+
+When cloning this repository for samples of our official releases, it's best to use the [main](https://github.com/Actipro/Avalonia-Controls/tree/main) branch.
 
 ## Contributing
 

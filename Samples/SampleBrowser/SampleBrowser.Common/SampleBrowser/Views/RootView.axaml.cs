@@ -1,8 +1,10 @@
+using ActiproSoftware.UI.Avalonia.Themes;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Notifications;
 using Avalonia.Input;
 using Avalonia.Interactivity;
+using System;
 using System.ComponentModel;
 
 namespace ActiproSoftware.SampleBrowser {
@@ -33,6 +35,17 @@ namespace ActiproSoftware.SampleBrowser {
 					transition.UseForwardDirection = ViewModel?.ViewTransitionForward ?? true;
 			}
 		}
+		
+        private void OnViewMenuOpening(object? sender, EventArgs e) {
+			if (ModernTheme.TryGetCurrent(out var theme)) {
+				var definition = theme.Definition;
+				if (definition is not null) {
+					compactDensityMenuItem.Icon = (definition.UserInterfaceDensity == UserInterfaceDensity.Compact ? new CheckBox() { IsChecked = true } : null);
+					normalDensityMenuItem.Icon = (definition.UserInterfaceDensity == UserInterfaceDensity.Normal ? new CheckBox() { IsChecked = true } : null);
+					spaciousDensityMenuItem.Icon = (definition.UserInterfaceDensity == UserInterfaceDensity.Spacious ? new CheckBox() { IsChecked = true } : null);
+				}
+			}
+        }
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 		// PUBLIC PROCEDURES
@@ -74,6 +87,6 @@ namespace ActiproSoftware.SampleBrowser {
 			set => DataContext = value;
 		}
 
-	}
+    }
 
 }
