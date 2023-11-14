@@ -53,6 +53,8 @@ items:
     href: themes/theme-generator.md
   - name: "Theme Assets"
     href: themes/theme-assets.md
+  - name: "User Interface Density"
+    href: themes/user-interface-density.md
   - name: "Containers"
     href: themes/containers.md
   - name: "Typography"
@@ -129,6 +131,13 @@ items:
     href: utilities/theme-resource-browser.md
   - name: "String Resource Browser"
     href: utilities/string-resource-browser.md
+- name: "Conversion Notes"
+  href: conversion/index.md
+  items:
+  - name: "Overview"
+    href: conversion/index.md
+  - name: "Converting to v23.1"
+    href: conversion/converting-to-v23-1.md
 - name: "Troubleshooting"
   href: troubleshooting.md
 - name: "Supported Technologies"

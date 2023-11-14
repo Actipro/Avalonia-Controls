@@ -11,6 +11,8 @@ This topic discusses which products require licensing, the various product licen
 
 The [Actipro Themes](themes/index.md), [Actipro Shared Library](shared/index.md), and [Actipro Core Library](core/index.md) products are free! Use and distribute the related assemblies in any application, including for commercial use, without any license fees or royalties.
 
+For simplicity, no license registration calls need to be made in applications that only use free Actipro products.
+
 > [!TIP]
 > Even customers who only use the free products can still pay for Actipro Avalonia UI Pro to gain access to the XAML source of all control styles/templates in those products and priority support.
 
@@ -90,6 +92,50 @@ public static AppBuilder BuildAvaloniaApp() {
 
 > [!WARNING]
 > It is important to protect your licensee and license key combination from decompilers.  We highly recommend using some form of string encryption on the `licensee` and `licenseKey` values passed into the `AppBuilder.RegisterActiproLicense` extension method.  Many obfuscators include string encryption as an option, or you can use other custom logic to scramble/descramble the strings.
+
+## Open-Source Project Licensing Considerations
+
+Product licenses may be purchased for developers working with Actipro Avalonia UI Pro in open-source projects.  However, this introduces some issues that must be handled with care.  Namely, ensuring that "Licensee" and "License Key" values are not committed in any way to an open-source code repository, and that the proper number of developer licenses are purchased.
+
+### Developers of Open-Source Projects
+
+#### Excluding Licensee and License Key from Commits
+
+> [!WARNING]
+> License information is considered secret and cannot be committed to an open-source code repository in any form, encrypted or not.
+
+This makes things tricky in terms of how to register a license at app startup in code, since the "Licensee" and "License Key" values cannot be stored in the committed source code the same way they can in closed source projects.
+
+There are ways to handle this open-source project usage scenario though.  One way would be to include an embedded resource file in a project that, if present, would contain the license information to be loaded into the `licensee` and `licenseKey` variables for an `AppBuilder.RegisterActiproLicense` call.  This embedded resource file must be ignored via a `.gitignore` file entry so that it doesn't ever commit to the open source repository.
+
+The following sample code demonstrates some general logic that could be used:
+
+```csharp
+using Avalonia;
+...
+public static AppBuilder BuildAvaloniaApp() {
+	var builder = AppBuilder.Configure<App>();
+
+	string licensee, licenseKey;
+	// NOTE: Load licensee and licenseKey variable values here from some mechanism
+	//       that is properly excluded via .gitignore
+
+	if (!string.IsNullOrEmpty(licensee) && !string.IsNullOrEmpty(licenseKey))
+		builder = builder.RegisterActiproLicense(licensee, licenseKey);
+
+	return builder;
+}
+```
+
+#### Purchasing Developer Licenses
+
+Confidential license information such as "Licensee" and "License Key" cannot be shared with anyone who is not properly licensed.  If you purchase four developer licenses for your team that works on an open-source project, you are only permitted to share the confidential license information with those four developers.  A fifth developer starting on the project would require an additional developer license to be purchased.
+
+### End Users of Open-Source Applications
+
+As with closed-source applications, when an open-source application is distributed purely in binary form, no additional licenses need to be purchased by end users.
+
+However if an end user is compiling and executing the source code for an open-source application to run it, they are considered to be a developer in terms of licensing and must purchase a developer license.
 
 ## Licensing Questions?
 

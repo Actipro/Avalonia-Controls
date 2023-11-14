@@ -8,7 +8,7 @@
 		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
 
 		<Version>23.1.1.0</Version>
-		<InformationalVersion>23.1.0.0 - 20231102</InformationalVersion>
+		<InformationalVersion>23.1.0.0 - 20231114</InformationalVersion>
 
 		<Product>Actipro Avalonia UI Controls Sample Browser</Product>
 		<Title>$(Product)</Title>
