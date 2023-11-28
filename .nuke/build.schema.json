@@ -65,13 +65,9 @@
           "type": "string",
           "description": "Root directory during build execution"
         },
-        "SampleBrowserDesktopSolution": {
+        "SampleBrowserSolution": {
           "type": "string",
-          "description": "Path to a solution file that is automatically loaded. Default is Samples/SampleBrowser/SampleBrowser.Desktop.sln"
-        },
-        "SampleBrowserWebSolution": {
-          "type": "string",
-          "description": "Path to a solution file that is automatically loaded. Default is Samples/SampleBrowser/SampleBrowser.Web.sln"
+          "description": "Path to a solution file that is automatically loaded. Default is Samples/SampleBrowser/SampleBrowser.sln"
         },
         "Skip": {
           "type": "array",

@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using AP = ActiproSoftware.Properties;
 
 namespace ActiproSoftware.SampleBrowser.Utilities.StringResourceBrowser {
@@ -9,9 +11,19 @@ namespace ActiproSoftware.SampleBrowser.Utilities.StringResourceBrowser {
 	public class StringResourceBrowserViewModel : ObservableObjectBase {
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// OBJECT
+		/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		[DynamicDependency(DynamicallyAccessedMemberTypes.All, typeof(AP.Shared.SR))] // Required to ensure SR.GetString method is available
+		public StringResourceBrowserViewModel() {
+			// Explicitly reference the string resource enum so reflection metadata is not trimmed
+			_ = Enum.GetValues<AP.Shared.SRName>();
+		}
+
+		/////////////////////////////////////////////////////////////////////////////////////////////////////
 		// PUBLIC PROCEDURES
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
-		
+
 		/// <summary>
 		/// The collection of all assemblies with string resources.
 		/// </summary>

@@ -53,9 +53,7 @@
 													<ControlTheme TargetType="actipro:CopyButton">
 														<Setter Property="Width" Value="60" />
 														<Setter Property="Height" Value="80" />
-														<Setter Property="Background">
-															<SolidColorBrush Color="{Binding Color}" />
-														</Setter>
+														<Setter Property="Background" Value="{Binding Brush}" />
 														<Setter Property="BorderBrush" Value="Transparent" />
 														<Setter Property="BorderThickness" Value="0" />
 														<Setter Property="ClipToBounds" Value="False" />

@@ -9,7 +9,7 @@
 	<Import Project="..\References\ActiproSoftware.References.props" />
 	<Import Project="..\References\Avalonia.References.props" />
 	<ItemGroup>
-	  <ProjectReference Include="..\SampleBrowser.Common\SampleBrowser.Common.csproj" />
+		<ProjectReference Include="..\SampleBrowser.Common\SampleBrowser.Common.csproj" />
 	</ItemGroup>
 
 </Project>

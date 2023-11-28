@@ -38,7 +38,7 @@
 		-->
 		<actipro:ModernTheme Includes="All" />
 
-		
+
 		<!-- Application-specific styles -->
 		<StyleInclude Source="/SampleBrowser/Controls/Themes/All.axaml" />
 		<StyleInclude Source="/SampleBrowser/Views/ApplicationStyles.axaml" />

@@ -174,6 +174,9 @@ When using all controls:
 </Application>
 ```
 
+> [!WARNING]
+> The `ModernTheme.Includes` property dynamically includes `Styles` instances that apply control themes for various product assemblies.  While this simplifies the Application XAML, it can lead to a runtime exception when executing an application that uses the `PublishAot` project setting for Native AOT (Ahead-of-Time) support and hasn't been published with `dotnet publish` or an IDE's equivalent publish feature.  See the [Troubleshooting](../troubleshooting.md) topic for details on how to statically include appropriate `Styles` instances, avoiding AOT errors.
+
 ### Native Control Themes Setting
 
 Native Avalonia controls must have themes applied or else an application window will render without most or all content being visible.  Avalonia ships with the *Simple* and *Fluent* themes as built-in options.  Actipro's theme also defines control themes for all native Avalonia controls and can be used in place of the *Simple*, *Fluent*, or other themes.
