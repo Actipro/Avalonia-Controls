@@ -183,6 +183,8 @@ These style class names trigger special behaviors:
 - [ButtonSpinnerOutline](xref:@ActiproUIRoot.Themes.ControlThemeKind.ButtonSpinnerOutline) (`theme-outline`) - Has an outline appearance.
 - [ButtonSpinnerSoft](xref:@ActiproUIRoot.Themes.ControlThemeKind.ButtonSpinnerSoft) (`theme-soft`) - Has a soft fill appearance.
 
+Set the [ThemeProperties](xref:@ActiproUIRoot.Themes.ThemeProperties).[SpinnerHasHorizontalOrientation](xref:@ActiproUIRoot.Themes.ThemeProperties.SpinnerHasHorizontalOrientationProperty) attached property on a `ButtonSpinner` to `true` to arrange spinner buttons horizontally instead of vertically.  Horizontal arrangement is better for touch-friendly user interfaces since each button gets twice the amount of surface area.  [Theme Definitions](theme-definitions.md) also provide a global default value for this attached property that can be altered.
+
 The following additional control theme is available for the `Button` used by the default control theme:
 
 - [SpinnerButton](xref:@ActiproUIRoot.Themes.ControlThemeKind.SpinnerButton)
@@ -242,6 +244,8 @@ The following additional control theme is used by the default control theme:
 - [NumericUpDownBase](xref:@ActiproUIRoot.Themes.ControlThemeKind.NumericUpDownBase) - Base control theme used by several others.
 - [NumericUpDownOutline](xref:@ActiproUIRoot.Themes.ControlThemeKind.NumericUpDownOutline) (`theme-outline`) - Has an outline appearance.
 - [NumericUpDownSoft](xref:@ActiproUIRoot.Themes.ControlThemeKind.NumericUpDownSoft) (`theme-soft`) - Has a soft fill appearance.
+
+Set the [ThemeProperties](xref:@ActiproUIRoot.Themes.ThemeProperties).[SpinnerHasHorizontalOrientation](xref:@ActiproUIRoot.Themes.ThemeProperties.SpinnerHasHorizontalOrientationProperty) attached property on a `NumericUpDown` to `true` to arrange spinner buttons horizontally instead of vertically.  Horizontal arrangement is better for touch-friendly user interfaces since each button gets twice the amount of surface area.  [Theme Definitions](theme-definitions.md) also provide a global default value for this attached property that can be altered.
 
 #### TextBox Type
 

@@ -5,7 +5,7 @@ order: 9
 ---
 # Media
 
-The [ActiproSoftware.UI.Avalonia.Media](xref:@ActiproUIRoot.Media) namespace defines a [UIColor](xref:@ActiproUIRoot.Media.UIColor) structure for working with colors.
+The [ActiproSoftware.UI.Avalonia.Media](xref:@ActiproUIRoot.Media) namespace defines a [UIColor](xref:@ActiproUIRoot.Media.UIColor) structure for working with colors and an extension method to easily convert `Avalonia.Media.Color` to a [UIColor](xref:@ActiproUIRoot.Media.UIColor).
 
 ## UIColor Structure
 
@@ -34,6 +34,8 @@ These instance members are found in the structure:
 | [RbgBlue](xref:@ActiproUIRoot.Media.UIColor.RgbBlue) Property | The RGB blue component of the color, which is a byte value in the range `0` to `255`. |
 | [RbgGreen](xref:@ActiproUIRoot.Media.UIColor.RgbGreen) Property | The RGB green component of the color, which is a byte value in the range `0` to `255`. |
 | [RbgRed](xref:@ActiproUIRoot.Media.UIColor.RgbRed) Property | The RGB red component of the color, which is a byte value in the range `0` to `255`. |
+| [ToChromaticAdaptation](xref:@ActiproUIRoot.Media.UIColor.ToChromaticAdaptation*) Method | Uses chromatic adaptation to create a new [UIColor](xref:@ActiproUIRoot.Media.UIColor) that renders clearly on the specified background color.  Chromatic adaptation is commonly used to adapt a color that was intended for use with light backgrounds to render properly on dark backgrounds.  |
+| [ToGrayscale](xref:@ActiproUIRoot.Media.UIColor.ToGrayscale*) Method | Creates a new [UIColor](xref:@ActiproUIRoot.Media.UIColor) that is a grayscale transformation of the specified color. |
 | [ToHexString](xref:@ActiproUIRoot.Media.UIColor.ToHexString*) Method | Converts the color value to an RGB hexadecimal string (e.g., `"#ff00ff"`, `"#80ff00ff"`). |
 | [ToHsl](xref:@ActiproUIRoot.Media.UIColor.ToHsl*) Method | Converts the color value to an `HslColor` instance that represents the color in the HSL (hue, saturation, and lightness) color model. |
 | [ToHsv](xref:@ActiproUIRoot.Media.UIColor.ToHsv*) Method | Converts the color value to an `HsvColor` instance that represents the color in the HSV (hue, saturation, and value) color model. |
@@ -54,3 +56,17 @@ These static members are found in the structure:
 | [FromRgb](xref:@ActiproUIRoot.Media.UIColor.FromRgb*) Method | Creates a `UIColor` instance from the specified RGB (red, green, and blue) and optional alpha components, or `Color` instance. |
 | [Parse](xref:@ActiproUIRoot.Media.UIColor.Parse*) Method | Creates a `UIColor` instance from the specified color name, RGB hexadecimal string, or any other color string supported by `Color.Parse`. |
 | [TryParse](xref:@ActiproUIRoot.Media.UIColor.Parse*) Method | Tries to creates a `UIColor` instance from the specified color name, RGB hexadecimal string, or any other color string supported by `Color.Parse`. |
+
+> [!TIP]
+> [UIColor](xref:@ActiproUIRoot.Media.UIColor) defines several implicit cast overloads to easily convert to/from [UIColor](xref:@ActiproUIRoot.Media.UIColor) and the Avalonia types for `Color`, `HslColor`, and `HsvColor`.
+
+## Color Extensions
+
+The following extension methods to `Avalonia.Media.Color` are defined on [ColorExtensions](xref:@ActiproUIRoot.Media.ColorExtensions):
+
+| Member | Description |
+|-----|-----|
+| [ToUIColor](xref:@ActiproUIRoot.Media.ColorExtensions.ToUIColor*) Method | Creates a new [UIColor](xref:@ActiproUIRoot.Media.UIColor) initialized from the `Color` for easily accessing the additional capabilities of [UIColor](xref:@ActiproUIRoot.Media.UIColor).  |
+
+> [!IMPORTANT]
+> The [ActiproSoftware.UI.Avalonia.Media](xref:@ActiproUIRoot.Media) namespace must be imported with a `using` statement to access the extensions.

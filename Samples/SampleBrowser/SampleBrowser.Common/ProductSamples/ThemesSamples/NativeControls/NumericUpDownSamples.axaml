@@ -31,9 +31,9 @@
 			>
 
 			<NumericUpDown x:Name="sample" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
-						   Width="200" AllowSpin="True" ShowButtonSpinner="True"
-						   Watermark="Enter value from 0 to 10"
-						   Minimum="0" Maximum="10" Increment="1" ClipValueToMinMax="True"
+						   Width="150" AllowSpin="True" ShowButtonSpinner="True"
+						   Watermark="0-100"
+						   Minimum="0" Maximum="100" Increment="1" ClipValueToMinMax="True"
 						   Classes.theme-outline="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Outline'}"
 						   Classes.theme-soft="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Soft'}"
 						   Classes.accent="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Accent'}"
@@ -57,6 +57,7 @@
 						<ComboBox SelectedIndex="0" ItemsSource="{actipro:DelimitedArray Type={x:Type Location}}" SelectedItem="{Binding ButtonSpinnerLocation}" />
 					</StackPanel>
 					<CheckBox IsChecked="{Binding ShowButtonSpinner}">Show buttons</CheckBox>
+					<CheckBox IsChecked="{Binding (actipro:ThemeProperties.SpinnerHasHorizontalOrientation)}">Horizontal buttons</CheckBox>
 					<CheckBox IsChecked="{Binding AllowSpin}">Allow spin</CheckBox>
 					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
 					<CheckBox IsChecked="{Binding IsReadOnly}">Read-only</CheckBox>
@@ -65,7 +66,7 @@
 			<sampleBrowser:ControlExample.CodeExamples>
 				<sampleBrowser:CodeExample xml:space="preserve">
 					<![CDATA[
-<NumericUpDown$(ClassesAttribute)$(AllowSpinAttribute)$(ShowButtonSpinnerAttribute)$(ButtonSpinnerLocationAttribute)$(IsEnabledAttribute)$(IsReadOnlyAttribute) />
+<NumericUpDown$(ClassesAttribute)$(AllowSpinAttribute)$(ShowButtonSpinnerAttribute)$(ButtonSpinnerLocationAttribute)$(IsEnabledAttribute)$(IsReadOnlyAttribute)$(SpinnerHasHorizontalOrientationAttribute) />
 					]]>
 					<sampleBrowser:CodeExample.Substitutions>
 						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
@@ -86,6 +87,9 @@
 						<sampleBrowser:CodeExampleSubstitution Key="ShowButtonSpinnerAttribute"
 															   IsEnabled="{Binding !ShowButtonSpinner}"
 															   Value=" ShowButtonSpinner=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="SpinnerHasHorizontalOrientationAttribute"
+															   IsEnabled="{Binding (actipro:ThemeProperties.SpinnerHasHorizontalOrientation)}"
+															   Value="&#xA;&#x9;actipro:ThemeProperties.SpinnerHasHorizontalOrientation=&quot;True&quot;" />
 					</sampleBrowser:CodeExample.Substitutions>
 				</sampleBrowser:CodeExample>
 			</sampleBrowser:ControlExample.CodeExamples>

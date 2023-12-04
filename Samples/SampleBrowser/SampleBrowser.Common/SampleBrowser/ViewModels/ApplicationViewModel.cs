@@ -475,13 +475,19 @@ namespace ActiproSoftware.SampleBrowser {
 				if (density.HasValue && ModernTheme.TryGetCurrent(out var theme)) {
 					var definition = theme.Definition;
 					if (definition is not null) {
+						// Optionally update the base font size based on the density
 						definition.BaseFontSize = density switch {
 							UserInterfaceDensity.Compact => 13.0,
 							_ => 14.0,  // Normal, Spacious
 						};
+
+						// Arrange spinner buttons horizontally in Spacious density
+						definition.SpinnerHasHorizontalOrientation = (density == UserInterfaceDensity.Spacious);
 						
+						// Set the new UI density
 						definition.UserInterfaceDensity = density.Value;
 
+						// Must manually refresh resources after changing definition properties
 						theme.RefreshResources();
 					}
 				}
