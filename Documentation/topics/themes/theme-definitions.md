@@ -85,6 +85,7 @@ Color ramp name properties should be set to [Hue](xref:@ActiproUIRoot.Themes.Gen
 |-----|-----|
 | [ButtonAppearanceKind](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.ButtonAppearanceKind) | The [ButtonAppearanceKind](xref:@ActiproUIRoot.Themes.Generation.ButtonAppearanceKind) that indicates the default appearance for various button controls (e.g., `Button`, `SplitButton`). |
 | [EditAppearanceKind](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.EditAppearanceKind) | The [EditAppearanceKind](xref:@ActiproUIRoot.Themes.Generation.EditAppearanceKind) that indicates the default appearance for various edit controls (e.g., `ComboBox`, `TextBox`). |
+| [SpinnerHasHorizontalOrientation](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.SpinnerHasHorizontalOrientation) | Whether to arrange `ButtonSpinner` buttons horizontally.
 | [TabAppearanceKind](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.TabAppearanceKind) | The [TabAppearanceKind](xref:@ActiproUIRoot.Themes.Generation.TabAppearanceKind) that indicates the default appearance for various tab controls (e.g., `TabControl`). |
 
 ## Custom Theme Generators

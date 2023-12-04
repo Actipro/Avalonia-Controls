@@ -7,8 +7,8 @@
 		<Nullable>enable</Nullable>
 		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
 
-		<Version>23.1.1.0</Version>
-		<InformationalVersion>23.1.0.0 - 20231114</InformationalVersion>
+		<Version>23.1.2.0</Version>
+		<InformationalVersion>23.1.0.0 - 20231204</InformationalVersion>
 
 		<Product>Actipro Avalonia UI Controls Sample Browser</Product>
 		<Title>$(Product)</Title>
@@ -25,5 +25,10 @@
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 
 	</PropertyGroup>
-	
+
+	<ItemGroup>
+		<!-- Do not trim the common application assembly since it makes heavy use of reflection -->
+		<TrimmerRootAssembly Include="SampleBrowser" />
+	</ItemGroup>
+
 </Project>

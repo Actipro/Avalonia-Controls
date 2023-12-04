@@ -76,7 +76,7 @@
 						<TextBlock Classes="theme-form-control-label" Text="First option's value" />
 						<ComboBox x:Name="sampleValue" SelectedIndex="0">
 							<ComboBox.ItemsSource>
-								<actipro:Array Type="x:Object">
+								<actipro:Array>
 									<x:Boolean>true</x:Boolean>
 									<x:Null />
 									<x:Boolean>false</x:Boolean>

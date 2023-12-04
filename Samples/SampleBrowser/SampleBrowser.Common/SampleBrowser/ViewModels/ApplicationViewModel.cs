@@ -6,6 +6,7 @@ using Avalonia.Layout;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Windows.Input;
 
@@ -75,6 +76,8 @@ namespace ActiproSoftware.SampleBrowser {
 		/// </summary>
 		/// <param name="path">The element's XAML path.</param>
 		/// <returns>The <see cref="Control"/> for the specified element's XAML path.</returns>
+		[UnconditionalSuppressMessage("Aot", "IL2026:Requires unreferenced code", Justification = "Only local resources are loaded with AvaloniaXamlLoader and this assembly, by design, should not be trimmed.")]
+		[UnconditionalSuppressMessage("Aot", "IL2057:Type availability", Justification = "Only local types are created by Activator and this assembly, by design, should not be trimmed.")]
 		private static Control? CreateElement(string? path) {
 			if (!string.IsNullOrEmpty(path)) {
 				// Markdown files display in a DocumentViewer
@@ -472,13 +475,19 @@ namespace ActiproSoftware.SampleBrowser {
 				if (density.HasValue && ModernTheme.TryGetCurrent(out var theme)) {
 					var definition = theme.Definition;
 					if (definition is not null) {
+						// Optionally update the base font size based on the density
 						definition.BaseFontSize = density switch {
 							UserInterfaceDensity.Compact => 13.0,
 							_ => 14.0,  // Normal, Spacious
 						};
+
+						// Arrange spinner buttons horizontally in Spacious density
+						definition.SpinnerHasHorizontalOrientation = (density == UserInterfaceDensity.Spacious);
 						
+						// Set the new UI density
 						definition.UserInterfaceDensity = density.Value;
 
+						// Must manually refresh resources after changing definition properties
 						theme.RefreshResources();
 					}
 				}

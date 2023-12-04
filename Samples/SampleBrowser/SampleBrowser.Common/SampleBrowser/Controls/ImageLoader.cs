@@ -3,6 +3,7 @@ using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 namespace ActiproSoftware.SampleBrowser {
@@ -21,6 +22,7 @@ namespace ActiproSoftware.SampleBrowser {
 		/// </summary>
 		/// <param name="relPath">The path of the resource file relative to the <c>Images</c> folder.</param>
 		/// <returns>An <see cref="IImage"/>.</returns>
+		[UnconditionalSuppressMessage("Aot", "IL2026:Requires unreferenced code", Justification = "Only local resources are loaded with AvaloniaXamlLoader and this assembly, by design, should not be trimmed.")]
 		private static IImage? LoadImageResource(string relPath) {
 			if (relPath is null)
 				throw new ArgumentNullException(nameof(relPath));

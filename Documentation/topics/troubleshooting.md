@@ -42,6 +42,46 @@ It is very important to note that the data binding errors are NOT problems in ou
 
 So just to reiterate, the data binding error messages are not problems with our code, and are simple warnings due to data bindings trying to resolve themselves before the targets' visual trees are created.  You may safely ignore these error messages.
 
+## Native AOT (Ahead-of-Time) Generates "No precompiled XAML found for avares:..." Error in Debugger
+
+Applications that want to take advantage of Native AOT add the `<PublishAot>true</PublishAot>` setting to their project's properties.  Adding this setting can lead to a runtime exception when executing the application if it hasn't been published with `dotnet publish` or an IDE's equivalent publish feature.  This setting also enables trimming, which will attempt to remove unused code from the compiled application.  Proper trimming requires the compiler to know which code is actually in use, and then can cause problems with dynamic code that cannot be statically analyzed.
+
+The [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme) class used to enable [Actipro Themes](themes/getting-started.md) dynamically loads additional theme assets from other assemblies based on the value of the [Includes](xref:@ActiproUIRoot.Themes.ModernTheme.Includes) property.  While the class has been properly attributed to indicate its dependency on other assemblies and can be successfully published, compiled applications with `PublishAot` set to `true` that didn't also get published appear to have issues with the dynamic dependencies and will trim the theme resources anyway. This can result in an error message like the following when the `ModernTheme` is loaded within `Application.Styles`:
+
+```
+No precompiled XAML found for avares://ActiproSoftware.Avalonia.Fundamentals/Themes/Common.axaml (baseUri: ), make sure to specify x:Class and include your XAML file as AvaloniaResource
+```
+
+To resolve the issue, the application will need to explicitly reference the necessary styles to prevent them from being trimmed.  The following shows how to redefine `ModernTheme` to explicitly include all the possible style resources:
+
+```xml
+<Application ...
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	>
+	<Application.Styles>
+		...
+
+		<actipro:ModernTheme>
+
+			<!-- When using Native ColorPicker -->
+			<StyleInclude Source="avares://ActiproSoftware.Avalonia.Themes.Native.ColorPicker/Themes/Common.axaml"/>
+
+			<!-- When using Native DataGrid -->
+			<StyleInclude Source="avares://ActiproSoftware.Avalonia.Themes.Native.DataGrid/Themes/Common.axaml"/>
+
+			<!-- When using Pro components -->
+			<StyleInclude Source="avares://ActiproSoftware.Avalonia.Fundamentals/Themes/Common.axaml"/>
+
+		</actipro:ModernTheme>
+
+	</Application.Styles>
+</Application>
+```
+
+Basically, whichever resource was mentioned by the error message will need to be explicitly listed like shown above.
+
+The [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme).[Includes](xref:@ActiproUIRoot.Themes.ModernTheme.Includes) property does not have to be defined when explicitly including the styles, and you should only include styles for the assemblies used by your application.
+
 ## WebAssembly (WASM) Performance Issues
 
 Avalonia UI supports running in the browser with WebAssembly. As of v11.0, the Avalonia UI framework documention is clear to indicate the functionality is not ready for production.  During testing with Actipro Avalonia UI controls in a browser, you may notice less-than-desired performance compared to running natively. This is expected to improve with .NET 8.

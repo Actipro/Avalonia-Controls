@@ -74,6 +74,9 @@ if (ModernTheme.TryGetCurrent(out var modernTheme) && (modernTheme.Definition is
 		_ => 14.0,  // Normal, Spacious
 	};
 
+	// Arrange spinner buttons horizontally in Spacious density
+	definition.SpinnerHasHorizontalOrientation = (density == UserInterfaceDensity.Spacious);
+
 	// Set the new UI density
 	modernTheme.Definition.UserInterfaceDensity = newDensity;
 

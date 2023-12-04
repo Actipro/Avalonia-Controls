@@ -57,6 +57,7 @@
 						<ComboBox SelectedIndex="0" ItemsSource="{actipro:DelimitedArray Type={x:Type Location}}" SelectedItem="{Binding ButtonSpinnerLocation}" />
 					</StackPanel>
 					<CheckBox IsChecked="{Binding ShowButtonSpinner}">Show buttons</CheckBox>
+					<CheckBox IsChecked="{Binding (actipro:ThemeProperties.SpinnerHasHorizontalOrientation)}">Horizontal buttons</CheckBox>
 					<CheckBox IsChecked="{Binding AllowSpin}">Allow spin</CheckBox>
 					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
 				</StackPanel>
@@ -64,7 +65,7 @@
 			<sampleBrowser:ControlExample.CodeExamples>
 				<sampleBrowser:CodeExample xml:space="preserve">
 					<![CDATA[
-<ButtonSpinner$(ClassesAttribute)$(AllowSpinAttribute)$(ShowButtonSpinnerAttribute)$(ButtonSpinnerLocationAttribute)$(IsEnabledAttribute)>
+<ButtonSpinner$(ClassesAttribute)$(AllowSpinAttribute)$(ShowButtonSpinnerAttribute)$(ButtonSpinnerLocationAttribute)$(IsEnabledAttribute)$(SpinnerHasHorizontalOrientationAttribute)>
 	<!-- Content Here -->
 </ButtonSpinner>
 					]]>
@@ -84,6 +85,9 @@
 						<sampleBrowser:CodeExampleSubstitution Key="ShowButtonSpinnerAttribute"
 															   IsEnabled="{Binding !ShowButtonSpinner}"
 															   Value=" ShowButtonSpinner=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="SpinnerHasHorizontalOrientationAttribute"
+															   IsEnabled="{Binding (actipro:ThemeProperties.SpinnerHasHorizontalOrientation)}"
+															   Value="&#xA;&#x9;actipro:ThemeProperties.SpinnerHasHorizontalOrientation=&quot;True&quot;" />
 					</sampleBrowser:CodeExample.Substitutions>
 				</sampleBrowser:CodeExample>
 			</sampleBrowser:ControlExample.CodeExamples>
