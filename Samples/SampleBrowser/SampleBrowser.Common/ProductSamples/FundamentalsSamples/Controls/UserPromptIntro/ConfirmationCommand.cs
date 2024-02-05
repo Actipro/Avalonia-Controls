@@ -11,7 +11,7 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 	/// <summary>
 	/// Defines a sample command which displays a prompt to confirm user selection before submitting it.
 	/// </summary>
-	internal class ConfirmationCommand : ICommand {
+	public class ConfirmationCommand : ICommand {
 		
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 		// EVENTS

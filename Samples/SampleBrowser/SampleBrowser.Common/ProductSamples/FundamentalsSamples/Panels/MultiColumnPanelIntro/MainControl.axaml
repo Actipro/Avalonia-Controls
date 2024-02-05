@@ -37,12 +37,8 @@
 										<ColumnDefinition Width="*" />
 									</Grid.ColumnDefinitions>
 
-									<Ellipse Grid.Column="0" Width="50" Height="50" Stroke="{actipro:ThemeResource Container3BorderBrush}" StrokeThickness="1" HorizontalAlignment="Center" VerticalAlignment="Center" />
-									<Image Grid.Column="0" Width="48" Height="48" HorizontalAlignment="Center" VerticalAlignment="Center" Source="{Binding Photo}">
-										<Image.Clip>
-											<EllipseGeometry Center="24,24" RadiusX="24" RadiusY="24" />
-										</Image.Clip>
-									</Image>
+									<actipro:Avatar Grid.Column="0" Width="50" Height="50" BorderBrush="{actipro:ThemeResource Container3BorderBrush}" BorderThickness="1" 
+													Content="{Binding Photo}" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
 									<StackPanel Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Center">
 										<TextBlock Text="{Binding FullName}" FontSize="18" TextTrimming="CharacterEllipsis" />

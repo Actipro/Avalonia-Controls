@@ -31,6 +31,19 @@ items:
       href: fundamentals/user-prompt/clipboard.md
     - name: "Localization"
       href: fundamentals/user-prompt/localization.md
+  - name: "Controls"
+    href: fundamentals/controls/index.md
+    items:
+    - name: "Overview"
+      href: fundamentals/controls/index.md
+    - name: "Avatar"
+      href: fundamentals/controls/avatar.md
+    - name: "Avatar Group"
+      href: fundamentals/controls/avatar-group.md
+    - name: "Badge"
+      href: fundamentals/controls/badge.md
+    - name: "Progress Spinners"
+      href: fundamentals/controls/progress-spinners.md
   - name: "Panels"
     href: fundamentals/panels/index.md
     items:
@@ -95,6 +108,13 @@ items:
       href: shared/controls/toggle-theme-button.md
     - name: "WindowResizeGrip"
       href: shared/controls/window-resize-grip.md
+  - name: "Shapes"
+    href: shared/shapes/index.md
+    items:
+    - name: "Overview"
+      href: shared/shapes/index.md
+    - name: "Ring Slice"
+      href: shared/shapes/ring-slice.md
   - name: "Media"
     href: shared/media.md
   - name: "Extension Methods"

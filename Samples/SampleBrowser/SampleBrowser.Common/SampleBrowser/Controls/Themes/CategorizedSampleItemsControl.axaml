@@ -6,16 +6,6 @@
 	>
 
 	<ControlTheme x:Key="{x:Type sampleBrowser:CategorizedSampleItemsControl}" TargetType="sampleBrowser:CategorizedSampleItemsControl" BasedOn="{actipro:ControlTheme ItemsControl}">
-		<ControlTheme.Resources>
-
-			<actipro:ComparisonConverter x:Key="BlurbTextFontSizeConverter" TrueResult="{StaticResource {actipro:ThemeResourceKey DefaultFontSizeMedium}}">
-				<actipro:ComparisonConverter.FalseResult>
-					<x:Double>0.5</x:Double>
-				</actipro:ComparisonConverter.FalseResult>
-			</actipro:ComparisonConverter>
-			
-		</ControlTheme.Resources>
-		
 		<Setter Property="Grid.IsSharedSizeScope" Value="True" />
 		<Setter Property="IsTabStop" Value="False" />
 		<Setter Property="Margin" Value="{actipro:ScaledThickness '0,6,0,4'}" />
@@ -40,11 +30,18 @@
 							<DataTemplate x:DataType="sampleBrowser:ProductItemInfo">
 								<DockPanel>
 									<Rectangle DockPanel.Dock="Left" Margin="20,8,9,0" Width="6" Height="6" Fill="{actipro:ThemeResource ActiproBrandBrush}" VerticalAlignment="Top" />
+									<actipro:Badge x:Name="badge" DockPanel.Dock="Left" Margin="0,0,3,0" Classes="theme-soft accent" Content="{Binding BlurbText}"
+												   VerticalAlignment="Center" IsVisible="{Binding HasBlurbText, FallbackValue=False}" RenderTransform="translateY(1px)">
+										<actipro:Badge.ContentTemplate>
+											<actipro:TypedDataTemplateSelector>
+												<DataTemplate x:DataType="x:String">
+													<TextBlock Margin="{actipro:ScaledThickness '0.667,0'}" Text="{Binding}" />
+												</DataTemplate>
+											</actipro:TypedDataTemplateSelector>
+										</actipro:Badge.ContentTemplate>
+									</actipro:Badge>
 
-									<actipro:HyperlinkTextBlock Command="{Binding NavigateViewToItemInfoCommand}" CommandParameter="{Binding}">
-										<Run Text="{Binding BlurbText, StringFormat='{}{0} '}" FontSize="{Binding HasBlurbText, Converter={StaticResource BlurbTextFontSizeConverter}}"
-											 Foreground="{actipro:ThemeResource ControlBackgroundBrushSolidDanger}" /><Run Text="{Binding Title}" />
-									</actipro:HyperlinkTextBlock>
+									<actipro:HyperlinkTextBlock Command="{Binding NavigateViewToItemInfoCommand}" CommandParameter="{Binding}" Text="{Binding Title}" />
 								</DockPanel>
 							</DataTemplate>
 						</ItemsControl.ItemTemplate>

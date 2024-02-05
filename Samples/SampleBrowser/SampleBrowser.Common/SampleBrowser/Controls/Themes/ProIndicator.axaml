@@ -7,26 +7,16 @@
 
 	<ControlTheme x:Key="{x:Type sampleBrowser:ProIndicator}" TargetType="sampleBrowser:ProIndicator">
 		<Setter Property="Background" Value="{actipro:ThemeResource AvaloniaBrandBrush}" />
-		<Setter Property="CornerRadius" Value="{actipro:ThemeResource FullRoundCornerRadius}" />
-		<Setter Property="Focusable" Value="False" />
-		<Setter Property="FontFamily" Value="{actipro:ThemeResource HeadingFontFamily}" />
-		<Setter Property="FontSize" Value="{actipro:ThemeResource HeadingFontSizeExtraSmall}" />
-		<Setter Property="Foreground" Value="#ffffff" />
 		<Setter Property="HorizontalAlignment" Value="Center" />
-		<Setter Property="Padding" Value="5,1" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="Padding" Value="2,0" />
 		<Setter Property="ToolTip.Tip" Value="Included in a paid Pro bundle of components and UI controls." />
 		<Setter Property="Template">
 			<ControlTemplate>
 
-				<Border
-					Background="{TemplateBinding Background}"
-					BorderBrush="{TemplateBinding BorderBrush}"
-					BorderThickness="{TemplateBinding BorderThickness}"
-					CornerRadius="{TemplateBinding CornerRadius}"
-					Padding="{TemplateBinding Padding}"
-					>
-					<TextBlock Classes="size-xs" Text="PRO" TextAlignment="Center" />
-				</Border>
+				<actipro:Badge Classes="theme-solid" Content="PRO" BorderThickness="0"
+							   Padding="{TemplateBinding Padding}"
+							   Background="{TemplateBinding Background}" />
 
 			</ControlTemplate>
 		</Setter>

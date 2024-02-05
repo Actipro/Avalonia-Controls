@@ -1,0 +1,484 @@
+<UserControl 
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:local="using:ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.BadgeIntro"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+
+	</UserControl.Resources>
+	<UserControl.Styles>
+
+		<Style Selector="Border.block">
+			<Setter Property="Background" Value="{actipro:ThemeResource Container5BackgroundBrush}" />
+			<Setter Property="Width" Value="48" />
+			<Setter Property="Height" Value="48" />
+			<Setter Property="CornerRadius" Value="8" />
+
+
+			<Style Selector="^.small">
+				<Setter Property="CornerRadius" Value="2" />
+				<Setter Property="Width" Value="16" />
+				<Setter Property="Height" Value="16" />
+			</Style>
+			
+			<Style Selector="^.large">
+				<Setter Property="Width" Value="150" />
+				<Setter Property="Height" Value="150" />
+			</Style>
+		</Style>
+		
+	</UserControl.Styles>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Badge and NumericBadge can be used to add contextual information.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Badge" Url="https://www.actiprosoftware.com/docs/controls/avalonia/fundamentals/controls/badge" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+
+		<sampleBrowser:ControlExample
+			Header="Basic usage"
+			Footer="A badge can be added as an adornment to any visual."
+			DataContext="{Binding #basicUsage}"
+			>
+
+			<StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
+				
+				<Border Classes="block">
+					<actipro:BadgeService.Badge>
+						<actipro:Badge x:Name="basicUsage" Content="{Binding #basicUsageContent.Text}" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
+							Classes.theme-outline="{Binding #basicUsageTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Outline'}"
+							Classes.theme-solid="{Binding #basicUsageTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Solid'}"
+							Classes.theme-soft="{Binding #basicUsageTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Soft'}"
+							Classes.accent="{Binding #basicUsageVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Accent'}"
+							Classes.success="{Binding #basicUsageVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Success'}"
+							Classes.warning="{Binding #basicUsageVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Warning'}"
+							Classes.danger="{Binding #basicUsageVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Danger'}"
+							>
+						</actipro:Badge>
+					</actipro:BadgeService.Badge>
+				</Border>
+				
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Theme" />
+						<ComboBox x:Name="basicUsageTheme" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Outline, Solid, Soft'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Variant" />
+						<ComboBox x:Name="basicUsageVariant" SelectedIndex="1" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
+					</StackPanel>
+					<TextBox x:Name="basicUsageContent" Text="Badge" Watermark="Content" UseFloatingWatermark="True" />
+					<CheckBox Content="Is active" IsChecked="{Binding IsActive}" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<AnyVisual ... >
+
+	<!-- Use the BadgeService.Badge attached property to assign a Badge to any visual -->
+	<actipro:BadgeService.Badge>
+
+		<!-- Define the Badge -->
+		<actipro:Badge$(ClassesAttribute)$(IsActiveAttribute)>$(Content)</actipro:Badge>
+
+	</actipro:BadgeService.Badge>
+
+</AnyVisual>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
+															   IsEnabled="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), StringFormat=' Classes=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="Content"
+															   Value="{Binding #basicUsageContent.Text}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsActiveAttribute"
+															   IsEnabled="{Binding !IsActive}"
+															   Value=" IsActive=&quot;False&quot;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Numeric usage"
+			Footer="The NumericBadge provides built-in support for numeric counts with options to hide when zero or overflow large numbers."
+			DataContext="{Binding #numericUsageSample}"
+			>
+
+			<Border Classes="block">
+				<actipro:BadgeService.Badge>
+					<actipro:NumericBadge x:Name="numericUsageSample" Count="1" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
+						Classes.theme-outline="{Binding #numericUsageTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Outline'}"
+						Classes.theme-solid="{Binding #numericUsageTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Solid'}"
+						Classes.theme-soft="{Binding #numericUsageTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Soft'}"
+						Classes.accent="{Binding #numericUsageVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Accent'}"
+						Classes.success="{Binding #numericUsageVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Success'}"
+						Classes.warning="{Binding #numericUsageVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Warning'}"
+						Classes.danger="{Binding #numericUsageVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Danger'}"
+						/>
+				</actipro:BadgeService.Badge>
+			</Border>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Theme" />
+						<ComboBox x:Name="numericUsageTheme" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Outline, Solid, Soft'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Variant" />
+						<ComboBox x:Name="numericUsageVariant" SelectedIndex="2" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="{Binding Count, StringFormat='Count: {0}'}" />
+						<Slider Minimum="-1" Maximum="100" Value="{Binding Count}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="{Binding OverflowCount, StringFormat='Overflow count: {0}'}" />
+						<Slider Minimum="0" Maximum="100" Value="{Binding OverflowCount}" />
+					</StackPanel>
+					<TextBox Text="{Binding OverflowStringFormat}" Watermark="Overflow format:" UseFloatingWatermark="True" />
+					<CheckBox Content="Is active when zero" IsChecked="{Binding IsActiveWhenZero}" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<AnyVisual ... >
+
+	<!-- Use the BadgeService.Badge attached property to assign a Badge to any visual -->
+	<actipro:BadgeService.Badge>
+
+		<!-- Define the NumericBadge -->
+		<actipro:NumericBadge Count="$(Count)" OverflowCount="$(OverflowCount)"$(ClassesAttribute)$(IsActiveWhenZeroAttribute)$(OverflowStringFormatAttribute)/>
+
+	</actipro:BadgeService.Badge>
+
+</AnyVisual>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
+															   IsEnabled="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), StringFormat=' Classes=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="Count" Value="{Binding Count}" />
+						<sampleBrowser:CodeExampleSubstitution Key="OverflowCount" Value="{Binding OverflowCount}" />
+						<sampleBrowser:CodeExampleSubstitution Key="OverflowStringFormatAttribute"
+															   IsEnabled="{Binding OverflowStringFormat, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='{}{0}+'}"
+															   Value="{Binding OverflowStringFormat, StringFormat=' OverflowStringFormat=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsActiveWhenZeroAttribute"
+															   IsEnabled="{Binding IsActiveWhenZero}"
+															   Value=" IsActiveWhenZero=&quot;True&quot;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Dot usage"
+			Footer="For smaller visuals, use the 'dot' kind for a small badge without content that typically uses color to convey context."
+			DataContext="{Binding #dotUsage}"
+			>
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="30">
+				<Border Classes="block small">
+					<actipro:BadgeService.Badge>
+						<actipro:Badge x:Name="dotUsage" Kind="Dot" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
+							Classes.theme-outline="{Binding #dotUsageTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Outline'}"
+							Classes.theme-solid="{Binding #dotUsageTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Solid'}"
+							Classes.theme-soft="{Binding #dotUsageTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Soft'}"
+							Classes.accent="{Binding #dotUsageVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Accent'}"
+							Classes.success="{Binding #dotUsageVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Success'}"
+							Classes.warning="{Binding #dotUsageVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Warning'}"
+							Classes.danger="{Binding #dotUsageVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Danger'}"
+							/>
+					</actipro:BadgeService.Badge>
+				</Border>
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Theme" />
+						<ComboBox x:Name="dotUsageTheme" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Outline, Solid, Soft'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Variant" />
+						<ComboBox x:Name="dotUsageVariant" SelectedIndex="4" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="{Binding DotLength, StringFormat='Length: {0}'}" />
+						<Slider Minimum="4" Maximum="16" IsSnapToTickEnabled="True" TickFrequency="1" Value="{Binding DotLength}" />
+					</StackPanel>
+					<CheckBox Content="Is active" IsChecked="{Binding IsActive}" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<AnyVisual ... >
+
+	<!-- Use the BadgeService.Badge attached property to assign a Badge to any visual -->
+	<actipro:BadgeService.Badge>
+
+		<!-- Define the Badge -->
+		<actipro:Badge Kind="Dot" DotLength="$(DotLength)"$(ClassesAttribute)$(IsActiveAttribute)/>
+
+	</actipro:BadgeService.Badge>
+
+</AnyVisual>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
+															   IsEnabled="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), StringFormat=' Classes=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="DotLength" Value="{Binding DotLength}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsActiveAttribute"
+															   IsEnabled="{Binding !IsActive}"
+															   Value=" IsActive=&quot;False&quot;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Glyph usage"
+			Footer="The content of each badge is this example is set to a glyph."
+			>
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="30">
+				<StackPanel Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Outline" HorizontalAlignment="Center"/>
+					<Border Classes="block">
+						<actipro:BadgeService.Badge>
+							<actipro:Badge Classes="theme-outline danger" IsActive="{Binding #glyphUsageIsActive.IsChecked}" ContentTemplate="{actipro:GlyphTemplate SmallIndeterminateCheck16}" />
+						</actipro:BadgeService.Badge>
+					</Border>
+					<Border Classes="block">
+						<actipro:BadgeService.Badge>
+							<actipro:Badge Classes="theme-outline success" IsActive="{Binding #glyphUsageIsActive.IsChecked}" ContentTemplate="{actipro:GlyphTemplate SmallCheck16}" />
+						</actipro:BadgeService.Badge>
+					</Border>
+				</StackPanel>
+				<StackPanel Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Solid" HorizontalAlignment="Center" />
+					<Border Classes="block">
+						<actipro:BadgeService.Badge>
+							<actipro:Badge Classes="theme-solid danger" IsActive="{Binding #glyphUsageIsActive.IsChecked}" ContentTemplate="{actipro:GlyphTemplate SmallIndeterminateCheck16}" />
+						</actipro:BadgeService.Badge>
+					</Border>
+					<Border Classes="block">
+						<actipro:BadgeService.Badge>
+							<actipro:Badge Classes="theme-solid success" IsActive="{Binding #glyphUsageIsActive.IsChecked}" ContentTemplate="{actipro:GlyphTemplate SmallCheck16}" />
+						</actipro:BadgeService.Badge>
+					</Border>
+				</StackPanel>
+				<StackPanel Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Soft" HorizontalAlignment="Center" />
+					<Border Classes="block">
+						<actipro:BadgeService.Badge>
+							<actipro:Badge Classes="theme-soft danger" IsActive="{Binding #glyphUsageIsActive.IsChecked}" ContentTemplate="{actipro:GlyphTemplate SmallIndeterminateCheck16}" />
+						</actipro:BadgeService.Badge>
+					</Border>
+					<Border Classes="block">
+						<actipro:BadgeService.Badge>
+							<actipro:Badge Classes="theme-soft success" IsActive="{Binding #glyphUsageIsActive.IsChecked}" ContentTemplate="{actipro:GlyphTemplate SmallCheck16}" />
+						</actipro:BadgeService.Badge>
+					</Border>
+				</StackPanel>
+
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<CheckBox x:Name="glyphUsageIsActive" Content="Is active" IsChecked="True" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<AnyVisual ... >
+
+	<!-- Use the BadgeService.Badge attached property to assign a Badge to any visual -->
+	<actipro:BadgeService.Badge>
+
+		<!-- Define the Badge with glyph content -->
+		<actipro:Badge Classes="theme-solid success"
+			ContentTemplate="{actipro:GlyphTemplate SmallCheck16}"/>
+
+	</actipro:BadgeService.Badge>
+
+</AnyVisual>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Adorner location"
+			Footer="Several options are available for horizontal and vertical alignment with additional offsets for more precise positioning."
+			DataContext="{Binding #locationSample}"
+			>
+
+			<Border x:Name="locationSample" Classes="block large"
+					actipro:BadgeService.HorizontalAlignment="CenterOnTarget"
+					actipro:BadgeService.VerticalAlignment="CenterOnTarget"
+					actipro:BadgeService.HorizontalOffset="0"
+					actipro:BadgeService.VerticalOffset="0"
+					>
+				<actipro:BadgeService.Badge>
+					<actipro:Badge Classes="warning" Content="Actipro" />
+				</actipro:BadgeService.Badge>
+			</Border>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Horizontal alignment:" />
+						<ComboBox MinWidth="225" ItemsSource="{actipro:DelimitedArray Type=actipro:AdornmentHorizontalAlignment}" SelectedValue="{Binding (actipro:BadgeService.HorizontalAlignment)}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Vertical alignment:" />
+						<ComboBox MinWidth="225" ItemsSource="{actipro:DelimitedArray Type=actipro:AdornmentVerticalAlignment}" SelectedValue="{Binding (actipro:BadgeService.VerticalAlignment)}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="{Binding (actipro:BadgeService.HorizontalOffset), StringFormat='Horizontal offset: {0}'}" />
+						<Slider Minimum="-20" Maximum="20" IsSnapToTickEnabled="True" TickFrequency="1" Value="{Binding (actipro:BadgeService.HorizontalOffset)}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="{Binding (actipro:BadgeService.VerticalOffset), StringFormat='Vertical offset: {0}'}" />
+						<Slider Minimum="-20" Maximum="20" IsSnapToTickEnabled="True" TickFrequency="1" Value="{Binding (actipro:BadgeService.VerticalOffset)}" />
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<!-- Use the BadgeService attached properties to control alignment of the adorned Badge -->
+<AnyVisual
+	actipro:BadgeService.HorizontalAlignment="$(HorizontalAlignment)"
+	actipro:BadgeService.VerticalAlignment="$(VerticalAlignment)"
+	actipro:BadgeService.HorizontalOffset="$(HorizontalOffset)"
+	actipro:BadgeService.VerticalOffset="$(VerticalOffset)"
+	... >
+
+	<actipro:BadgeService.Badge>
+		<actipro:Badge Classes="warning" Content="Actipro" />
+	</actipro:BadgeService.Badge>
+
+</AnyVisual>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="HorizontalAlignment" Value="{Binding (actipro:BadgeService.HorizontalAlignment)}" />
+						<sampleBrowser:CodeExampleSubstitution Key="VerticalAlignment" Value="{Binding (actipro:BadgeService.VerticalAlignment)}" />
+						<sampleBrowser:CodeExampleSubstitution Key="HorizontalOffset" Value="{Binding (actipro:BadgeService.HorizontalOffset)}" />
+						<sampleBrowser:CodeExampleSubstitution Key="VerticalOffset" Value="{Binding (actipro:BadgeService.VerticalOffset)}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Stand-alone usage"
+			Footer="A Badge or NumericBadge can be used stand-alone without adorning another element."
+			>
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="10">
+
+				<actipro:Badge Classes="theme-outline success" Content="NEW" />
+				<actipro:NumericBadge Count="100" />
+				<actipro:Badge Classes="theme-soft danger" ContentTemplate="{actipro:GlyphTemplate SmallIndeterminateCheck16}" />
+				<actipro:Badge Classes="theme-solid accent" />
+				<actipro:Badge Classes="theme-solid" Background="{actipro:ThemeResource AvaloniaBrandBrush}" Content="Avalonia" CornerRadius="2" BorderThickness="0" />
+
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:Badge Classes="theme-outline success" Content="NEW" />
+<actipro:NumericBadge Count="100" />
+<actipro:Badge Classes="theme-soft danger" ContentTemplate="{actipro:GlyphTemplate SmallIndeterminateCheck16}"/>
+<actipro:Badge Classes="theme-solid accent" Kind="Dot" />
+<actipro:Badge Classes="theme-solid" Background="{actipro:ThemeResource AvaloniaBrandBrush}" Content="Avalonia" CornerRadius="2" BorderThickness="0" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Animation"
+			Footer="Badge and NumericBadge animate in and out, but only due to changes in the IsActive property, not changes in general visibility."
+			>
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="20">
+
+				<Border Classes="block" IsVisible="{Binding #animationUsageIsAdornedVisible.IsChecked}">
+					<actipro:BadgeService.Badge>
+						<actipro:Badge x:Name="animationUsagePrimarySample" Classes="theme-solid warning"
+									   Content="!"
+									   IsActive="{Binding #animationUsageIsActive.IsChecked}"
+									   IsAnimationEnabled="{Binding #animationUsageIsAnimationEnabled.IsChecked}" />
+					</actipro:BadgeService.Badge>
+				</Border>
+				
+				<Border Classes="block" IsVisible="{Binding #animationUsageIsAdornedVisible.IsChecked}">
+					<actipro:BadgeService.Badge>
+						<actipro:Badge Classes="theme-outline success"
+									   ContentTemplate="{actipro:GlyphTemplate SmallCheck16}" 
+									   IsActive="{Binding #animationUsageIsActive.IsChecked}"
+									   IsAnimationEnabled="{Binding #animationUsageIsAnimationEnabled.IsChecked}" />
+					</actipro:BadgeService.Badge>
+				</Border>
+
+				<Border Classes="block" IsVisible="{Binding #animationUsageIsAdornedVisible.IsChecked}">
+					<actipro:BadgeService.Badge>
+						<actipro:Badge Classes="theme-solid danger" Kind="Dot"
+									   IsActive="{Binding #animationUsageIsActive.IsChecked}"
+									   IsAnimationEnabled="{Binding #animationUsageIsAnimationEnabled.IsChecked}" />
+					</actipro:BadgeService.Badge>
+				</Border>
+
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<CheckBox x:Name="animationUsageIsActive" Content="Is active" IsChecked="True" />
+					<CheckBox x:Name="animationUsageIsAdornedVisible" Content="Adorned visible" IsChecked="True" />
+					<CheckBox Content="Badge visible" IsChecked="{Binding #animationUsagePrimarySample.IsVisible, Mode=OneWay}" IsEnabled="False" />
+					<CheckBox x:Name="animationUsageIsAnimationEnabled" Content="Animation enabled" IsChecked="True" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<!-- Animation can be enabled/disabled -->
+<actipro:Badge ... IsAnimationEnabled="$(IsAnimationEnabled)" />
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="IsAnimationEnabled" Value="{Binding #animationUsageIsAnimationEnabled.IsChecked}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+</UserControl>

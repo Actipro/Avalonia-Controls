@@ -21,17 +21,17 @@ namespace ActiproSoftware.SampleBrowser.SampleData {
 		public static IList<Person> All {
 			get {
 				_all ??= new List<Person>() {
-					new Person(3, "Barnes", "Harold", "harold.barnes@corpticaenterprises.com", "Vice President", new DateTime(1999, 1, 11), new Uri("avares://SampleBrowser/Images/ProfilePhotos/Man03.png", UriKind.Absolute)),
-					new Person(35, "Cazalla", "Miguel", "miguel.cazalla@corpticaenterprises.com", "Operator", new DateTime(2018, 12, 2), new Uri("avares://SampleBrowser/Images/ProfilePhotos/Man01.png", UriKind.RelativeOrAbsolute)),
-					new Person(21, "Dawson", "Barbara", "barb.dawson@corpticaenterprises.com", "Executive Assistant", new DateTime(2015, 8, 20), new Uri("avares://SampleBrowser/Images/ProfilePhotos/Woman01.png", UriKind.RelativeOrAbsolute)),
-					new Person(8, "Ellington", "Cliff", "cliff.ellington@corpticaenterprises.com", "Manager", new DateTime(2003, 6, 17), new Uri("avares://SampleBrowser/Images/ProfilePhotos/Man02.png", UriKind.RelativeOrAbsolute)),
-					new Person(31, "Fleming", "Michael", "michael.fleming@corpticaenterprises.com", "Operator", new DateTime(2017, 4, 4), new Uri("avares://SampleBrowser/Images/ProfilePhotos/Man04.png", UriKind.RelativeOrAbsolute)),
-					new Person(27, "Gi", "Jang", "jang.gi@corpticaenterprises.com", "Analyst", new DateTime(2016, 5, 25), new Uri("avares://SampleBrowser/Images/ProfilePhotos/Woman03.png", UriKind.RelativeOrAbsolute)),
-					new Person(4, "Harrison", "Ashley", "ashley.harrison@corpticaenterprises.com", "Sales Director", new DateTime(1999, 5, 9), new Uri("avares://SampleBrowser/Images/ProfilePhotos/Woman06.png", UriKind.RelativeOrAbsolute)),
-					new Person(26, "Lai", "Erik", "erik.lai@corpticaenterprises.com", "Operator", new DateTime(2016, 4, 24), new Uri("avares://SampleBrowser/Images/ProfilePhotos/Man05.png", UriKind.RelativeOrAbsolute)),
-					new Person(13, "Mitchell", "Tammy", "tammy.mitchell@corpticaenterprises.com", "Accountant", new DateTime(2011, 11, 20), new Uri("avares://SampleBrowser/Images/ProfilePhotos/Woman02.png", UriKind.RelativeOrAbsolute)),
-					new Person(17, "O'Connell", "Scarlette", "scarlette.oconnell@corpticaenterprises.com", "Assistant Manager", new DateTime(2013, 10, 5), new Uri("avares://SampleBrowser/Images/ProfilePhotos/Woman05.png", UriKind.RelativeOrAbsolute)),
-					new Person(1, "Taylor", "Tamara", "tamara.taylor@corpticaenterprises.com", "President", new DateTime(1996, 2, 19), new Uri("avares://SampleBrowser/Images/ProfilePhotos/Woman04.png", UriKind.RelativeOrAbsolute)),
+					new(3, "Barnes", "Harold", "harold.barnes@corpticaenterprises.com", "Vice President", new DateTime(1999, 1, 11), new Uri("avares://SampleBrowser/Images/ProfilePhotos/Man03.jpg", UriKind.Absolute)),
+					new(35, "Cazalla", "Miguel", "miguel.cazalla@corpticaenterprises.com", "Operator", new DateTime(2018, 12, 2), new Uri("avares://SampleBrowser/Images/ProfilePhotos/Man01.jpg", UriKind.RelativeOrAbsolute)),
+					new(21, "Dawson", "Barbara", "barb.dawson@corpticaenterprises.com", "Executive Assistant", new DateTime(2015, 8, 20), new Uri("avares://SampleBrowser/Images/ProfilePhotos/Woman01.jpg", UriKind.RelativeOrAbsolute)),
+					new(8, "Ellington", "Cliff", "cliff.ellington@corpticaenterprises.com", "Manager", new DateTime(2003, 6, 17), new Uri("avares://SampleBrowser/Images/ProfilePhotos/Man02.jpg", UriKind.RelativeOrAbsolute)),
+					new(31, "Fleming", "Michael", "michael.fleming@corpticaenterprises.com", "Operator", new DateTime(2017, 4, 4), new Uri("avares://SampleBrowser/Images/ProfilePhotos/Man04.jpg", UriKind.RelativeOrAbsolute)),
+					new(27, "Gi", "Jang", "jang.gi@corpticaenterprises.com", "Analyst", new DateTime(2016, 5, 25), new Uri("avares://SampleBrowser/Images/ProfilePhotos/Woman03.jpg", UriKind.RelativeOrAbsolute)),
+					new(4, "Harrison", "Ashley", "ashley.harrison@corpticaenterprises.com", "Sales Director", new DateTime(1999, 5, 9), new Uri("avares://SampleBrowser/Images/ProfilePhotos/Woman06.jpg", UriKind.RelativeOrAbsolute)),
+					new(26, "Lai", "Erik", "erik.lai@corpticaenterprises.com", "Operator", new DateTime(2016, 4, 24), new Uri("avares://SampleBrowser/Images/ProfilePhotos/Man05.jpg", UriKind.RelativeOrAbsolute)),
+					new(13, "Mitchell", "Tammy", "tammy.mitchell@corpticaenterprises.com", "Accountant", new DateTime(2011, 11, 20), new Uri("avares://SampleBrowser/Images/ProfilePhotos/Woman02.jpg", UriKind.RelativeOrAbsolute)),
+					new(17, "O'Connell", "Scarlette", "scarlette.oconnell@corpticaenterprises.com", "Assistant Manager", new DateTime(2013, 10, 5), new Uri("avares://SampleBrowser/Images/ProfilePhotos/Woman05.jpg", UriKind.RelativeOrAbsolute)),
+					new(1, "Taylor", "Tamara", "tamara.taylor@corpticaenterprises.com", "President", new DateTime(1996, 2, 19), new Uri("avares://SampleBrowser/Images/ProfilePhotos/Woman04.jpg", UriKind.RelativeOrAbsolute)),
 				};
 
 				return _all.AsReadOnly();

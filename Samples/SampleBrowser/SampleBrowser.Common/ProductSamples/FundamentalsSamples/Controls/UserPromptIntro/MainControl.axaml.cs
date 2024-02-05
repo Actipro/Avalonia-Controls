@@ -12,6 +12,7 @@ using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Styling;
 using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPromptIntro {
@@ -67,6 +68,20 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 				MessageBox.Show($"Cancelling response of '{e.Response}'", "Result Canceled");
 				e.Cancel = true;
 			}
+			else {
+				// Notify the user of the response
+				ApplicationViewModel.Instance.MessageService?.ShowMessage($"The following result was selected:  {e.Response}", "Result");
+			}
+		}
+
+		/// <summary>
+		/// Occurs when a response is provided for a user prompt control.
+		/// </summary>
+		/// <param name="sender">The sender of the event.</param>
+		/// <param name="e">The <see cref="UserPromptResponseEventArgs"/> that contains the event data.</param>
+		private void OnUserPromptControlRespondingShowFeedback(object? sender, UserPromptResponseEventArgs e) {
+			// Notify the user of the response
+			ApplicationViewModel.Instance.MessageService?.ShowMessage($"The following result was selected:  {e.Response}", "Result");
 		}
 
 		private static void ShowContextualHelp(object? context) {

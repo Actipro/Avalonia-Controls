@@ -1,4 +1,6 @@
-﻿using Avalonia.Media;
+﻿using ActiproSoftware.UI.Avalonia.Media;
+using Avalonia;
+using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using System;
@@ -10,7 +12,7 @@ namespace ActiproSoftware.SampleBrowser.SampleData {
 	/// </summary>
 	public class Person {
 
-		private IImage? _photo;
+		private DrawingImage? _photo;
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 		// OBJECT
@@ -74,8 +76,24 @@ namespace ActiproSoftware.SampleBrowser.SampleData {
 		/// <summary>
 		/// The photo loaded from the <see cref="PhotoUri"/>.
 		/// </summary>
-		public IImage Photo
-			=> _photo ??= new Bitmap(AssetLoader.Open(PhotoUri));
+		public IImage Photo {
+			get {
+				if (_photo is null) {
+					// Bitmap is not an AvaloniaObject and doesn't support attached properties, so wrap it in a DrawingImage that does
+					_photo = new DrawingImage {
+						Drawing = new ImageDrawing {
+							ImageSource = new Bitmap(AssetLoader.Open(PhotoUri)),
+							Rect = new Rect(0, 0, 192, 192)
+						}
+					};
+
+					// Prevent the photo from being adapted for dark themes
+					ImageProvider.SetCanAdapt(_photo, false);
+				}
+
+				return _photo;
+			}
+		}
 
 		/// <summary>
 		/// The photo URI.

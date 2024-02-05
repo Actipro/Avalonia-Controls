@@ -1,7 +1,7 @@
 ---
 title: "Multi-Column Panel"
 page-title: "Multi-Column Panel - Fundamentals Panels"
-order: 1
+order: 10
 ---
 # Multi-Column Panel
 

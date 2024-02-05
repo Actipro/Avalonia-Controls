@@ -94,7 +94,8 @@
 									   Header="User prompt header"
 									   StandardButtons="OKCancel"
 									   StandardStatusImage="Information"
-									   Content="The user prompt control can easily display any kind of dialog message to the end user."/>
+									   Content="The user prompt control can easily display any kind of dialog message to the end user."
+									   Responding="OnUserPromptControlRespondingShowFeedback" />
 
 			<sampleBrowser:ControlExample.Options>
 				<StackPanel Spacing="10">
@@ -158,7 +159,8 @@ var result = await UserPromptBuilder.Configure()
 									   StandardStatusImage="Information"
 									   Content="The same prompt can be consistently shown on different platforms even when windows are not supported."
 									   Footer="If the platform doesn't support dialogs, overlays will always be used."
-									   StandardButtons="Yes,No,Cancel" />
+									   StandardButtons="Yes,No,Cancel"
+									   Responding="OnUserPromptControlRespondingShowFeedback" />
 
 			<sampleBrowser:ControlExample.Options>
 				<StackPanel Spacing="10">
@@ -197,7 +199,8 @@ var result = await UserPromptBuilder.Configure()
 									   Footer="When not explicitly defined, the first button will be the default."
 									   StandardButtons="Yes,No,Cancel"
 									   DefaultResult="Yes"
-									   DefaultButtonClasses="theme-solid accent" />
+									   DefaultButtonClasses="theme-solid accent"
+									   Responding="OnUserPromptControlRespondingShowFeedback" />
 
 			<sampleBrowser:ControlExample.Options>
 				<StackPanel Spacing="10">
@@ -243,7 +246,8 @@ var result = await UserPromptBuilder.Configure()
 			>
 			<actipro:UserPromptControl x:Name="userPromptShadow" Classes="inline-sample"
 									   Header="Elevation and shadow"
-									   Content="The UserPromptControl is elevated like a popup with a shadow." />
+									   Content="The UserPromptControl is elevated like a popup with a shadow."
+									   Responding="OnUserPromptControlRespondingShowFeedback" />
 
 			<sampleBrowser:ControlExample.Options>
 				<StackPanel Spacing="10">
@@ -288,7 +292,8 @@ var result = await UserPromptBuilder.Configure()
 									   Content="Expanded information is hidden until the user wants to see it."
 									   ExpandedInformationContent="Any content can be hosted here"
 									   ExpandedInformationCollapsedHeaderText="Show more"
-									   ExpandedInformationExpandedHeaderText="Show less"/>
+									   ExpandedInformationExpandedHeaderText="Show less"
+									   Responding="OnUserPromptControlRespondingShowFeedback" />
 
 			<sampleBrowser:ControlExample.Options>
 				<StackPanel Spacing="10">
@@ -341,7 +346,8 @@ var result = await UserPromptBuilder.Configure()
 									   Header="Footer usage"
 									   Content="Optionally define a footer for additional content with or without an associated image."
 									   Footer="Any content can be hosted here"
-									   FooterImage="{Binding #sampleRootControl.BasicFooterSampleImage}"/>
+									   FooterImage="{Binding #sampleRootControl.BasicFooterSampleImage}"
+									   Responding="OnUserPromptControlRespondingShowFeedback" />
 
 			<sampleBrowser:ControlExample.Options>
 				<StackPanel Spacing="10">
@@ -385,7 +391,8 @@ var result = await UserPromptBuilder.Configure()
 			<actipro:UserPromptControl x:Name="userPromptSampleButtonAlignment" Classes="inline-sample"
 									   Header="Button alignment"
 									   Content="Buttons can be horizontally aligned to the left, center, or right (default)."
-									   StandardButtons="YesNoCancel" />
+									   StandardButtons="YesNoCancel"
+									   Responding="OnUserPromptControlRespondingShowFeedback" />
 
 			<sampleBrowser:ControlExample.Options>
 				<StackPanel Spacing="10">
@@ -427,7 +434,8 @@ var result = await UserPromptBuilder.Configure()
 									   Header="Exporting Project (Sample Project)"
 									   HeaderForeground="White"
 									   StatusImage="/Images/Icons/Save32.png"
-									   StandardButtons="Cancel">
+									   StandardButtons="Cancel"
+									   Responding="OnUserPromptControlRespondingShowFeedback" >
 				<actipro:UserPromptControl.HeaderBackground>
 					<LinearGradientBrush>
 						<LinearGradientBrush.GradientStops>
@@ -534,7 +542,8 @@ IImage? GetImage(string relPath) {
 			<actipro:UserPromptControl Classes="inline-sample"
 									   Header="Customize the footer content"
 									   FooterImage="{Binding Source={x:Static actipro:SharedImageKeys.Question}, Converter={StaticResource ImageKeyToImageConverter}}"
-									   Content="A footer can be used to provide additional context for a prompt. This sample demonstrates using a hyperlink to provide contextual help.">
+									   Content="A footer can be used to provide additional context for a prompt. This sample demonstrates using a hyperlink to provide contextual help."
+									   Responding="OnUserPromptControlRespondingShowFeedback" >
 				<actipro:UserPromptControl.Footer>
 					<TextBlock VerticalAlignment="Top">
 						<Run>Click </Run>
@@ -608,7 +617,8 @@ var result = await UserPromptBuilder.Configure()
 									   Header="Use the checkbox to allow user feedback"
 									   Content="A common scenario is to allow the user to opt out of future prompts."
 									   CheckBoxContent="_Stop showing messages like this"
-									   IsChecked="False" />
+									   IsChecked="False"
+									   Responding="OnUserPromptControlRespondingShowFeedback" />
 
 			<sampleBrowser:ControlExample.Options>
 				<StackPanel Spacing="10">
@@ -667,7 +677,8 @@ var result = await UserPromptBuilder.Configure()
 									   StandardStatusImage="Error"
 									   ExpandedInformationCollapsedHeaderText="Show details"
 									   ExpandedInformationExpandedHeaderText="Hide details"
-									   Content="Here is where you might normally show an error message. Use the 'Show details' button to toggle a stack trace.">
+									   Content="Here is where you might normally show an error message. Use the 'Show details' button to toggle a stack trace."
+									   Responding="OnUserPromptControlRespondingShowFeedback" >
 				<actipro:UserPromptControl.ExpandedInformationContent>
 					<StackPanel>
 						<TextBlock Text="Stack Trace:" FontWeight="SemiBold" Margin="0,0,0,3" />
@@ -738,7 +749,8 @@ try {
 									   DefaultResult="Cancel"
 									   StandardStatusImage="Question"
 									   ExpandedInformationCollapsedHeaderText="Show details"
-									   ExpandedInformationExpandedHeaderText="Hide details">
+									   ExpandedInformationExpandedHeaderText="Hide details"
+									   Responding="OnUserPromptControlRespondingShowFeedback" >
 				<actipro:UserPromptControl.Content>
 					<StackPanel>
 						<TextBlock TextWrapping="Wrap">
@@ -880,7 +892,8 @@ var result = await UserPromptBuilder.Configure()
 									   Header="Built-in support for a 'Help' button"
 									   StandardButtons="OK,Help"
 									   HelpCommand="{Binding #sampleRootControl.ContextualHelpCommand}"
-									   HelpCommandParameter="SampleIntegratedHelp">
+									   HelpCommandParameter="SampleIntegratedHelp"
+									   Responding="OnUserPromptControlRespondingShowFeedback" >
 					A built-in 'Help' button can be displayed prominently in the button tray that, when invoked, can handle displaying contextual help without closing the dialog.
 			</actipro:UserPromptControl>
 			
@@ -919,7 +932,8 @@ var result = await UserPromptBuilder.Configure()
 			<actipro:UserPromptControl Classes="inline-sample"
 									   Header="Full support for custom button content"
 									   Content="Buttons can have any content, including images. This sample shows images used as content and demonstrates changing the horizontal alignment of all buttons from right (default) to center."
-									   ButtonItemsHorizontalAlignment="Center">
+									   ButtonItemsHorizontalAlignment="Center"
+									   Responding="OnUserPromptControlRespondingShowFeedback" >
 				<actipro:UserPromptControl.ButtonItems>
 					<actipro:Array>
 						<Button actipro:UserPromptControl.ButtonResult="{x:Static actipro:MessageBoxResult.CustomButton}">
@@ -1030,7 +1044,8 @@ IImage? GetImage(string relPath) {
 									   Header="Use any theme for buttons"
 									   Content="This sample has applied a custom theme to buttons that changes the overall shape and gives the Yes and No buttons a distinctive color scheme with non-default labels."
 									   ButtonTheme="{StaticResource CustomUserPromptButtonTheme}"
-									   StandardButtons="YesNo" />
+									   StandardButtons="YesNo"
+									   Responding="OnUserPromptControlRespondingShowFeedback" />
 			
 			<sampleBrowser:ControlExample.Options>
 				<StackPanel Spacing="10">
@@ -1105,15 +1120,16 @@ var result = await UserPromptBuilder.Configure()
 			>
 			<actipro:UserPromptControl Classes="inline-sample"
 									   Header="Each button can have its own command"
-									   Content="The default command for a button will notify the UserPromptControl of the response for that button, but you can define your own command instead. This sample demonstrates how to define custom commands by associating each button with a command that will confirm the response before submitting it.">
+									   Content="The default command for a button will notify the UserPromptControl of the response for that button, but you can define your own command instead. This sample demonstrates how to define custom commands by associating each button with a command that will confirm the response before submitting it."
+									   Responding="OnUserPromptControlRespondingShowFeedback" >
 				<actipro:UserPromptControl.ButtonItems>
 					<actipro:Array x:DataType="Button">
 						<Button Command="{StaticResource ConfirmationCommand}"
-								CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+								CommandParameter="{ReflectionBinding RelativeSource={RelativeSource Self}}"
 								Content="_Yes"
 								actipro:UserPromptControl.ButtonResult="Yes"/>
 						<Button Command="{StaticResource ConfirmationCommand}"
-								CommandParameter="{Binding RelativeSource={RelativeSource Self}}"
+								CommandParameter="{ReflectionBinding RelativeSource={RelativeSource Self}}"
 								Content="_No"
 								actipro:UserPromptControl.ButtonResult="No"/>
 					</actipro:Array>
@@ -1177,7 +1193,8 @@ var result = await UserPromptBuilder.Configure()
 									   ExpandedInformationContentClipboardText="Use the 'HeaderClipboardText', 'ContentClipboardText', 'FooterClipboardText', 'ButtonItemsClipboardText', 'ExpandedInformationContentClipboardText', and 'CheckBoxContentClipboardText' properties to explicitly set clipboard text."
 									   IsExpanded="True"
 									   CheckBoxContent="This checked state is reflected on the clipboard"
-									   IsChecked="True" />
+									   IsChecked="True"
+									   Responding="OnUserPromptControlRespondingShowFeedback" />
 			
 			<sampleBrowser:ControlExample.Options>
 				<StackPanel Spacing="10">
@@ -1288,7 +1305,8 @@ var result = await UserPromptBuilder.Configure()
 			>
 			<actipro:UserPromptControl Classes="inline-sample"
 									   Header="Each button can have its own style class."
-									   Content="Modern applications often use a mix of button styles to guide a user to a particular response, de-emphasize a less desirable response, or raise awareness about potentially dangerous responses.">
+									   Content="Modern applications often use a mix of button styles to guide a user to a particular response, de-emphasize a less desirable response, or raise awareness about potentially dangerous responses."
+									   Responding="OnUserPromptControlRespondingShowFeedback" >
 				<actipro:UserPromptControl.ButtonItems>
 					<actipro:Array>
 						<Button Classes="theme-link"

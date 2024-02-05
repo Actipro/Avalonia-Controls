@@ -85,3 +85,7 @@ The [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme).[Includes](xref:@Actip
 ## WebAssembly (WASM) Performance Issues
 
 Avalonia UI supports running in the browser with WebAssembly. As of v11.0, the Avalonia UI framework documention is clear to indicate the functionality is not ready for production.  During testing with Actipro Avalonia UI controls in a browser, you may notice less-than-desired performance compared to running natively. This is expected to improve with .NET 8.
+
+## Badge Adornments Aren't Clipped Properly
+
+The Avalonia adorner system (last tested on v11.0.7) doesn't properly clip adornments based on the clip regions of ancestors of the adorned element.  This can lead to possible scenarios where an adorned element might be scrolled out of view, but the badge adornment is still visible.  The [Badge](fundamentals/controls/badge.md) topic has additional detail on this issue and offers a workaround if the problem is encountered.

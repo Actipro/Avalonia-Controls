@@ -29,6 +29,10 @@ The Actipro Shared Library is a common control library referenced by all of our 
 - A [ToggleThemeButton](controls/toggle-theme-button.md) that, when invoked, toggles a `RequestedThemeVariant` property value between `ThemeVariant.Light` and `ThemeVariant.Dark`.
 - A [WindowResizeGrip](controls/window-resize-grip.md) that can be placed in the lower-right corner of a `Window` or its status bar, providing a larger area to drag-resize the `Window` both horizontally and vertically.
 
+### Shapes
+
+- A [RingSlice](shapes/ring-slice.md) shape that renders a portion (or the entire circle) of a ring shape.
+
 ### Media
 
 - The [UIColor](xref:@ActiproUIRoot.Media.UIColor) structure provides an enhanced representation of a color that supports the RGB, HSL, and HSV color models, conversion between models, and numerous other helper methods.  Static methods on the structure are used to create instances of the structure based on the supported models.

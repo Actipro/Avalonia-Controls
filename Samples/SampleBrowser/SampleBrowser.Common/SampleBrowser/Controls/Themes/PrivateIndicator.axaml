@@ -6,27 +6,16 @@
 	>
 
 	<ControlTheme x:Key="{x:Type sampleBrowser:PrivateIndicator}" TargetType="sampleBrowser:PrivateIndicator">
-		<Setter Property="Background" Value="{actipro:ThemeResource ControlBackgroundBrushSolidDanger}" />
-		<Setter Property="CornerRadius" Value="{actipro:ThemeResource FullRoundCornerRadius}" />
-		<Setter Property="Focusable" Value="False" />
-		<Setter Property="FontFamily" Value="{actipro:ThemeResource HeadingFontFamily}" />
-		<Setter Property="FontSize" Value="{actipro:ThemeResource HeadingFontSizeExtraSmall}" />
-		<Setter Property="Foreground" Value="{actipro:ThemeResource ControlForegroundBrushSolidDanger}" />
 		<Setter Property="HorizontalAlignment" Value="Center" />
-		<Setter Property="Padding" Value="5,1" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="Padding" Value="2,0" />
 		<Setter Property="ToolTip.Tip" Value="Private content not included in the public project." />
+
 		<Setter Property="Template">
 			<ControlTemplate>
 
-				<Border
-					Background="{TemplateBinding Background}"
-					BorderBrush="{TemplateBinding BorderBrush}"
-					BorderThickness="{TemplateBinding BorderThickness}"
-					CornerRadius="{TemplateBinding CornerRadius}"
-					Padding="{TemplateBinding Padding}"
-					>
-					<TextBlock Classes="size-xs" Text="DEV" TextAlignment="Center" />
-				</Border>
+				<actipro:Badge Classes="theme-solid danger" Content="DEV" BorderThickness="0"
+							   Padding="{TemplateBinding Padding}" />
 
 			</ControlTemplate>
 		</Setter>
