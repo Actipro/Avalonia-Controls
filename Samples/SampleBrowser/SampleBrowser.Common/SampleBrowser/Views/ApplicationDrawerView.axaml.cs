@@ -35,9 +35,6 @@ namespace ActiproSoftware.SampleBrowser {
 		// NON-PUBLIC PROCEDURES
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 		
-		private static bool IsItemInfoVisible(ProductItemInfo itemInfo)
-			=> !itemInfo.IsPrivate || ApplicationViewModel.Instance.ShowPrivateItems;
-
 		private void OnDrawerSectionComboBoxSelectionChanged(object? sender, SelectionChangedEventArgs e) {
 			// Update the product items list to match the selection
 			RebuildItemsSource();
@@ -66,18 +63,18 @@ namespace ActiproSoftware.SampleBrowser {
 			var selectedDrawerSection = SelectedDrawerSection;
 			if (selectedDrawerSection is not null) {
 				// OverviewItem is not part of the grouped collection
-				if ((selectedDrawerSection.ProductFamily?.OverviewItem is ProductItemInfo overviewItem) && IsItemInfoVisible(overviewItem))
+				if (selectedDrawerSection.ProductFamily?.OverviewItem is ProductItemInfo overviewItem)
 					itemsSource.Add(overviewItem);
 
 				// Add categorized items
-				if (selectedDrawerSection.ProductFamily?.GroupedItems is IEnumerable<IGrouping<string, ProductItemInfo>> groupedItems) {
+				if (selectedDrawerSection.ProductFamily?.GetGroupedItems(ApplicationViewModel.Instance.ShowPrivateItems) is IEnumerable<IGrouping<string, ProductItemInfo>> groupedItems) {
 					foreach (var grouping in groupedItems) {
 						// Add the category
 						if (!string.IsNullOrEmpty(grouping.Key))
 							itemsSource.Add(grouping.Key);
 
 						// Add each item in the category
-						foreach (var itemInfo in grouping.Where(x => IsItemInfoVisible(x)))
+						foreach (var itemInfo in grouping)
 							itemsSource.Add(itemInfo);
 					}
 				}

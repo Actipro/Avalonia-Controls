@@ -1,0 +1,605 @@
+<UserControl
+	x:Name="sampleRootControl"
+	x:Class="ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.AvatarIntro.MainControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:sampleData="using:ActiproSoftware.SampleBrowser.SampleData"
+	>
+	<UserControl.Resources>
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Avatar controls are used to represent people or objects.  They can render a full-size image, a centered glyph, a person's initials, or text.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Avatar" Url="https://www.actiprosoftware.com/docs/controls/avalonia/fundamentals/controls/avatar" />
+			<sampleBrowser:ControlExampleLinkItem Title="AvatarGroup" Url="https://www.actiprosoftware.com/docs/controls/avalonia/fundamentals/controls/avatar-group" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+
+		<sampleBrowser:ControlExample
+			Header="Avatar items control"
+			Footer="Use an AvatarGroup to render multiple Avatar controls.  Click any Avatar in the group to display a message."
+			DataContext="{Binding #avatarGroupSample}"
+			>
+
+			<actipro:AvatarGroup x:Name="avatarGroupSample"
+				HorizontalAlignment="Center" 
+				ItemLength="64"
+				ItemsSource="{x:Static sampleData:People.All}"
+				MaxInlineCount="9"
+				>
+				<actipro:AvatarGroup.ItemContainerTheme>
+					<ControlTheme TargetType="actipro:Avatar" BasedOn="{StaticResource {x:Type actipro:Avatar}}" x:DataType="sampleData:Person">
+						<Setter Property="BorderBrush" Value="{actipro:ThemeResource Container2BackgroundBrush}" />
+						<Setter Property="BorderThickness" Value="2" />
+						<Setter Property="Command" Value="{Binding #sampleRootControl.AvatarClickedCommand}" />
+						<Setter Property="CommandParameter" Value="{Binding FullName}" />
+						<Setter Property="Content" Value="{Binding Photo}" />
+						<Setter Property="Cursor" Value="Hand" />
+						<Setter Property="Description" Value="{Binding FullName}" />
+						<Setter Property="Focusable" Value="True" />
+						<Setter Property="AutomationProperties.Name" Value="{Binding FullName}" />
+					</ControlTheme>
+				</actipro:AvatarGroup.ItemContainerTheme>
+			</actipro:AvatarGroup>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Overlap %" />
+						<NumericUpDown Value="{Binding OverlapPercentage}" Minimum="-0.8" Maximum="0.8" Increment="0.05" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Overflow kind" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type=actipro:AvatarGroupOverflowKind}" SelectedItem="{Binding OverflowKind}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Max inline count" />
+						<NumericUpDown Value="{Binding MaxInlineCount}" Minimum="1" Maximum="11" FormatString="0" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="{Binding ItemLength, StringFormat='Item length: {0}'}" />
+						<Slider Value="{Binding ItemLength}" Minimum="16" Maximum="100" IsSnapToTickEnabled="True" TickFrequency="2" />
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:AvatarGroup ItemsSource="{Binding SomeSource}" ...
+	OverflowKind="$(OverflowKind)"
+	ItemLength="$(ItemLength)"
+	MaxInlineCount="$(MaxInlineCount)"
+	OverlapPercentage="$(OverlapPercentage)"
+	>
+	
+	<!-- Use a ControlTheme to configure Avatar controls -->
+	<actipro:AvatarGroup.ItemContainerTheme>
+		<ControlTheme TargetType="actipro:Avatar" BasedOn="{StaticResource {x:Type actipro:Avatar}}" x:DataType="sampleData:Person">
+			<Setter Property="BorderBrush" Value="{actipro:ThemeResource Container2BackgroundBrush}" />
+			<Setter Property="BorderThickness" Value="2" />
+			<Setter Property="Content" Value="{Binding Photo}" />
+			<Setter Property="Description" Value="{Binding FullName}" />
+			
+			<!-- Make the individual Avatar controls actionable -->
+			<Setter Property="Command" Value="{Binding SomeCommand}" />
+			<Setter Property="CommandParameter" Value="{Binding FullName}" />
+			<Setter Property="Cursor" Value="Hand" />
+		</ControlTheme>
+	</actipro:AvatarGroup.ItemContainerTheme>
+	
+</actipro:AvatarGroup>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="OverflowKind" Value="{Binding OverflowKind}" />
+						<sampleBrowser:CodeExampleSubstitution Key="ItemLength" Value="{Binding ItemLength}" />
+						<sampleBrowser:CodeExampleSubstitution Key="MaxInlineCount" Value="{Binding MaxInlineCount}" />
+						<sampleBrowser:CodeExampleSubstitution Key="OverlapPercentage" Value="{Binding OverlapPercentage}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Derived initials"
+			Footer="When the Description property is set to the full name of a person, an unset Content property will be coerced using built-in logic to up to two initials based on the full name.  The Description will be used as the tooltip."
+			DataContext="{Binding #derivedInitialsSample}"
+			>
+
+			<actipro:Avatar x:Name="derivedInitialsSample" Height="{actipro:ScaledDouble '3+22'}"
+							Description="John Doe"
+							/>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Description" />
+						<TextBox Text="{Binding Description}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Text" />
+						<TextBox Text="{Binding Content, Mode=OneWay}" IsReadOnly="True" IsEnabled="False" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Text appearance" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type=actipro:AvatarTextAppearanceKind}" SelectedItem="{Binding TextAppearanceKind}" />
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:Avatar Description="$(Description)"$(TextAppearanceKindAttribute) />
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="Description" Value="{Binding Description}" />
+						<sampleBrowser:CodeExampleSubstitution Key="TextAppearanceKindAttribute"
+															   IsEnabled="{Binding TextAppearanceKind, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='AutomaticSolid'}"
+															   Value="{Binding TextAppearanceKind, StringFormat=' TextAppearanceKind=&quot;{0}&quot;'}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Combine with badge"
+			Footer="Use an avatar with a badge control to indicate status, such as in a user list."
+			>
+
+			<StackPanel Spacing="10" HorizontalAlignment="Center">
+				<StackPanel.Resources>
+
+					<ControlTheme x:Key="AvatarListItemTheme" BasedOn="{StaticResource {x:Type actipro:Avatar}}" TargetType="actipro:Avatar">
+						<Setter Property="CornerRadius" Value="5" />
+						<Setter Property="Height" Value="24" />
+						<Setter Property="Width" Value="24" />
+						<Setter Property="actipro:BadgeService.HorizontalOffset" Value="4" />
+						<Setter Property="actipro:BadgeService.VerticalOffset" Value="4" />
+						<Setter Property="actipro:BadgeService.HorizontalAlignment" Value="InsideOfTargetRightEdge" />
+						<Setter Property="actipro:BadgeService.VerticalAlignment" Value="InsideOfTargetBottomEdge" />
+					</ControlTheme>
+
+					<ControlTheme x:Key="BadgeIndicatorTheme" BasedOn="{actipro:ControlTheme BadgeSolid}" TargetType="actipro:Badge">
+						<Setter Property="BorderBrush" Value="{actipro:ThemeResource Container2BackgroundBrush}" />
+						<Setter Property="BorderThickness" Value="2" />
+						<Setter Property="DotLength" Value="12" />
+						<Setter Property="Kind" Value="Dot" />
+					</ControlTheme>
+
+				</StackPanel.Resources>
+				
+				<StackPanel Orientation="Horizontal" Spacing="10">
+					<actipro:Avatar Theme="{StaticResource AvatarListItemTheme}"
+						Description="Michael Thomas"
+						ToolTip.Tip="Status: Online"
+						>
+						<actipro:BadgeService.Badge>
+							<actipro:Badge Theme="{StaticResource BadgeIndicatorTheme}" Background="{actipro:ThemeResource ControlBackgroundBrushSolidSuccess}" />
+						</actipro:BadgeService.Badge>
+
+						<Image Source="/Images/ProfilePhotos/Man04.jpg" />
+					</actipro:Avatar>
+					
+					<TextBlock Text="Michael Thomas" VerticalAlignment="Center" />
+				</StackPanel>
+
+				<StackPanel Orientation="Horizontal" Spacing="10">
+					<actipro:Avatar Theme="{StaticResource AvatarListItemTheme}"
+						Description="Philip Hortman"
+						ToolTip.Tip="Status: Online"
+						>
+						<actipro:BadgeService.Badge>
+							<actipro:Badge Theme="{StaticResource BadgeIndicatorTheme}" Background="{actipro:ThemeResource ControlBackgroundBrushSolidSuccess}" />
+						</actipro:BadgeService.Badge>
+					</actipro:Avatar>
+
+					<TextBlock Text="Philip Hortman" VerticalAlignment="Center" />
+				</StackPanel>
+
+				<StackPanel Orientation="Horizontal" Spacing="10">
+					<actipro:Avatar Theme="{StaticResource AvatarListItemTheme}"
+						Description="Sally Jenkins"
+						ToolTip.Tip="Status: Offline"
+						>
+						<actipro:BadgeService.Badge>
+							<actipro:Badge Theme="{StaticResource BadgeIndicatorTheme}" Background="{actipro:ThemeResource ControlBackgroundBrushSolidDanger}" />
+						</actipro:BadgeService.Badge>
+					
+						<Image Source="/Images/ProfilePhotos/Woman04.jpg" />
+					</actipro:Avatar>
+
+					<TextBlock Text="Sally Jenkins" VerticalAlignment="Center" />
+				</StackPanel>
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<StackPanel Orientation="Horizontal" Spacing="10">
+	<actipro:Avatar Width="24" Height="24" CornerRadius="5" 
+		Description="User Name" ToolTip.Tip="Status: Online"
+		actipro:BadgeService.HorizontalOffset="4"
+		actipro:BadgeService.VerticalOffset="4"
+		actipro:BadgeService.HorizontalAlignment="InsideOfTargetRightEdge"
+		actipro:BadgeService.VerticalAlignment="InsideOfTargetBottomEdge"
+		>
+		<actipro:BadgeService.Badge>
+			<actipro:Badge Kind="Dot" DotLength="12" 
+				BorderThickness="2" Background="{actipro:ThemeResource Container2BackgroundBrush}"
+				Background="{actipro:ThemeResource ControlBackgroundBrushSolidDanger}" />
+		</actipro:BadgeService.Badge>
+	</actipro:Avatar>
+	
+	<TextBlock Text="User Name" VerticalAlignment="Center" />
+</StackPanel>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Corner radius and border"
+			Footer="Adjust the corner radius to achieve different looks: full-round, somewhat rounded, or square.  A border can create separation from surrounding content."
+			>
+			<sampleBrowser:ControlExample.Resources>
+				<actipro:ThicknessConverter x:Key="ThicknessConverter" />
+			</sampleBrowser:ControlExample.Resources>
+
+			<StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Center">
+				<actipro:Avatar Width="64" Height="64" Description="Full-round"
+					BorderThickness="{Binding #borderThicknessBox.Value, Converter={StaticResource ThicknessConverter}}">
+					<Image Source="/Images/ProfilePhotos/Woman01.jpg" />
+				</actipro:Avatar>
+				<actipro:Avatar Width="64" Height="64" Description="Somewhat rounded" CornerRadius="10"
+					BorderThickness="{Binding #borderThicknessBox.Value, Converter={StaticResource ThicknessConverter}}">
+					<Image Source="/Images/ProfilePhotos/Woman01.jpg" />
+				</actipro:Avatar>
+				<actipro:Avatar Width="64" Height="64" Description="Square" CornerRadius="0"
+					BorderThickness="{Binding #borderThicknessBox.Value, Converter={StaticResource ThicknessConverter}}">
+					<Image Source="/Images/ProfilePhotos/Woman01.jpg" />
+				</actipro:Avatar>
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Border thickness" />
+						<NumericUpDown x:Name="borderThicknessBox" Value="1" Minimum="0" Maximum="4" FormatString="0" />
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<!-- Full-round (default) -->
+<actipro:Avatar Width="64" Height="64" BorderThickness="$(BorderThickness)" />
+
+<!-- Somewhat rounded -->
+<actipro:Avatar Width="64" Height="64" BorderThickness="$(BorderThickness)" CornerRadius="10" />
+
+<!-- Square -->
+<actipro:Avatar Width="64" Height="64" BorderThickness="$(BorderThickness)" CornerRadius="0" />
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="BorderThickness" Value="{Binding #borderThicknessBox.Value, StringFormat='{}{0:0}'}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Size gallery"
+			Footer="Avatars can be displayed at any size."
+			>
+
+			<StackPanel Spacing="10" HorizontalAlignment="Center">
+				<StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Center">
+					<actipro:Avatar Width="96" Height="96" Description="Samantha Johnson">
+						<Image Source="/Images/ProfilePhotos/Woman06.jpg" />
+					</actipro:Avatar>
+					<actipro:Avatar Width="64" Height="64" Description="Nick Harrison">
+						<Image Source="/Images/ProfilePhotos/Man02.jpg" />
+					</actipro:Avatar>
+					<actipro:Avatar Width="48" Height="48" Description="Jane Holden">
+						<Image Source="/Images/ProfilePhotos/Woman02.jpg" />
+					</actipro:Avatar>
+					<actipro:Avatar Width="32" Height="32" Description="Hector Lopez">
+						<Image Source="/Images/ProfilePhotos/Man01.jpg" />
+					</actipro:Avatar>
+					<actipro:Avatar Width="24" Height="24" Description="Connie Lu">
+						<Image Source="/Images/ProfilePhotos/Woman03.jpg" />
+					</actipro:Avatar>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Center">
+					<actipro:Avatar Width="96" Height="96" />
+					<actipro:Avatar Width="64" Height="64" />
+					<actipro:Avatar Width="48" Height="48" />
+					<actipro:Avatar Width="32" Height="32" />
+					<actipro:Avatar Width="24" Height="24" />
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Center">
+					<actipro:Avatar Width="96" Height="96" Description="Han Solo" />
+					<actipro:Avatar Width="64" Height="64" Description="Leia Organa" />
+					<actipro:Avatar Width="48" Height="48" Description="Obi-Wan Kenobi" />
+					<actipro:Avatar Width="32" Height="32" Description="Luke Skywalker" />
+					<actipro:Avatar Width="24" Height="24" Description="Jabba the Hutt" />
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" Spacing="10" HorizontalAlignment="Center">
+					<actipro:Avatar Width="96" Height="96" TextAppearanceKind="AutomaticSoft" Description="Han Solo" />
+					<actipro:Avatar Width="64" Height="64" TextAppearanceKind="AutomaticSoft" Description="Leia Organa" />
+					<actipro:Avatar Width="48" Height="48" TextAppearanceKind="AutomaticSoft" Description="Obi-Wan Kenobi" />
+					<actipro:Avatar Width="32" Height="32" TextAppearanceKind="AutomaticSoft" Description="Luke Skywalker" />
+					<actipro:Avatar Width="24" Height="24" TextAppearanceKind="AutomaticSoft" Description="Jabba the Hutt" />
+				</StackPanel>
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:Avatar Width="96" Height="96" ... />
+<actipro:Avatar Width="64" Height="64" ... />
+<actipro:Avatar Width="48" Height="48" ... />
+<actipro:Avatar Width="32" Height="32" ... />
+<actipro:Avatar Width="24" Height="24" ... />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Text content"
+			Footer="When a string is set to the Content property, the avatar adjusts its background and foreground based on the text value.  When no text is defined, a placeholder person glyph is rendered."
+			DataContext="{Binding #textContentSample}"
+			>
+
+			<actipro:Avatar x:Name="textContentSample" Height="{actipro:ScaledDouble '3+22'}"
+							Content="{Binding #textTextBox.Text}"
+							/>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Text" />
+						<TextBox x:Name="textTextBox" Text="Text" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Text appearance" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type=actipro:AvatarTextAppearanceKind}" SelectedItem="{Binding TextAppearanceKind}" />
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:Avatar Content="$(Content)"$(TextAppearanceKindAttribute) />
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="Content" Value="{Binding #textTextBox.Text}" />
+						<sampleBrowser:CodeExampleSubstitution Key="TextAppearanceKindAttribute"
+															   IsEnabled="{Binding TextAppearanceKind, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='AutomaticSolid'}"
+															   Value="{Binding TextAppearanceKind, StringFormat=' TextAppearanceKind=&quot;{0}&quot;'}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Glyph content"
+			Footer="Centered glyph content can be displayed in the avatar."
+			>
+
+			<actipro:Avatar Height="{actipro:ScaledDouble '3+22'}">
+				<Viewbox>
+					<ContentPresenter Margin="6" ContentTemplate="{actipro:GlyphTemplate Help16}" />
+				</Viewbox>
+			</actipro:Avatar>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:Avatar Height="{actipro:ScaledDouble '3+22'}">
+	<Viewbox>
+		<ContentPresenter Margin="6" ContentTemplate="{actipro:GlyphTemplate Help16}" />
+	</Viewbox>
+</actipro:Avatar>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Profile page usage"
+			Footer="Use a large avatar with bold headings underneath for a pleasing profile page design."
+			>
+
+			<StackPanel HorizontalAlignment="Center">
+				<actipro:Avatar Height="{actipro:ScaledDouble '6+144'}">
+					<Image Source="/Images/ProfilePhotos/Woman05.jpg" />
+				</actipro:Avatar>
+
+				<TextBlock Margin="{actipro:ScaledThickness '0,1,0,0'}" FontSize="{actipro:ThemeResource DefaultFontSizeExtraLarge}" FontWeight="SemiBold" Text="Marina Carpenter" TextAlignment="Center" />
+				<TextBlock FontSize="{actipro:ThemeResource DefaultFontSizeLarge}" Foreground="{actipro:ThemeResource DefaultForegroundBrushSecondary}" Text="Account Manager" TextAlignment="Center" />
+
+				<TextBlock Margin="{actipro:ScaledThickness '0,3,0,0'}" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" Text="12 mutual contacts" TextAlignment="Center" />
+				
+				<Button Margin="{actipro:ScaledThickness '0,3,0,0'}" Classes="theme-solid accent" Content="Follow" FontSize="{actipro:ThemeResource DefaultFontSizeLarge}" />
+			</StackPanel>
+
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Actionable avatar"
+			Footer="Avatar controls inherit button, but are not focusable by default.  Click on the avatar above to display a message."
+			>
+
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+				<actipro:Avatar Height="{actipro:ScaledDouble '6+48'}" Cursor="Hand" Focusable="True"
+								Command="{Binding #sampleRootControl.AvatarClickedCommand}" CommandParameter="{Binding #actionableAvatarNameTextBlock.Text}">
+					<Image Source="/Images/ProfilePhotos/Man02.jpg" />
+				</actipro:Avatar>
+
+				<StackPanel Margin="{actipro:ScaledThickness '1+8,0,0,0'}" VerticalAlignment="Center">
+					<TextBlock x:Name="actionableAvatarNameTextBlock" FontSize="{actipro:ThemeResource DefaultFontSizeExtraLarge}" FontWeight="SemiBold" Text="Sam Hartwell" />
+					<TextBlock FontSize="{actipro:ThemeResource DefaultFontSizeLarge}" Foreground="{actipro:ThemeResource DefaultForegroundBrushSecondary}" Text="Senior Analyst" />
+				</StackPanel>
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:Avatar Cursor="Hand" Focusable="True"
+	Command="{Binding SomeCommand}"
+	CommandParameter="Optional Parameter">
+
+	<Image Source="/Images/ProfilePhotos/Man02.jpg" />
+
+</actipro:Avatar>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Actionable avatar group"
+			Footer="Wrap an avatar group in a chromeless button to support clicks on an entire group.  In this scenario and since avatars are buttons themselves, it's best to turn off hit testing on the individual avatars."
+			>
+
+			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+				<Button Classes="theme-invisible" HorizontalAlignment="Center" Command="{Binding #sampleRootControl.AvatarGroupClickedCommand}">
+					<actipro:AvatarGroup
+						ItemLength="40"
+						ItemsSource="{x:Static sampleData:People.All}"
+						OverflowKind="None"
+						Cursor="Hand"
+						Focusable="True"
+						MaxInlineCount="3"
+						>
+						<actipro:AvatarGroup.ItemContainerTheme>
+							<ControlTheme TargetType="actipro:Avatar" BasedOn="{StaticResource {x:Type actipro:Avatar}}" x:DataType="sampleData:Person">
+								<Setter Property="BorderBrush" Value="{actipro:ThemeResource Container2BackgroundBrush}" />
+								<Setter Property="BorderThickness" Value="2" />
+								<Setter Property="Content" Value="{Binding Photo}" />
+								<Setter Property="IsHitTestVisible" Value="False" />
+							</ControlTheme>
+						</actipro:AvatarGroup.ItemContainerTheme>
+					</actipro:AvatarGroup>
+				</Button>
+
+				<actipro:HyperlinkTextBlock Margin="{actipro:ScaledThickness '2,0,0,0'}" Text="+ 58 contributors" 
+											Command="{Binding #sampleRootControl.AvatarGroupClickedCommand}" VerticalAlignment="Center" />
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<StackPanel ... >
+	<Button Classes="theme-invisible" Command="{Binding SomeCommand}" ... >
+		<actipro:AvatarGroup ...
+			ItemLength="40"
+			OverflowKind="None"
+			Cursor="Hand"
+			Focusable="True"
+			MaxInlineCount="3"
+			>
+			<actipro:AvatarGroup.ItemContainerTheme>
+				<ControlTheme TargetType="actipro:Avatar" BasedOn="{StaticResource {x:Type actipro:Avatar}}" x:DataType="sampleData:Person">
+					<Setter Property="BorderBrush" Value="{actipro:ThemeResource Container2BackgroundBrush}" />
+					<Setter Property="BorderThickness" Value="2" />
+					<Setter Property="Content" Value="{Binding Photo}" />
+					<Setter Property="IsHitTestVisible" Value="False" />
+				</ControlTheme>
+			</actipro:AvatarGroup.ItemContainerTheme>
+		</actipro:AvatarGroup>
+	</Button>
+
+	<actipro:HyperlinkTextBlock Text="+ 58 contributors" Command="{SomeCommand}" ... />
+</StackPanel>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Expand on pointer hover"
+			Footer="The overlap percentage can be changed on pointer over to fully-reveal all overlapped avatars."
+			>
+
+			<StackPanel HorizontalAlignment="Center">
+				<actipro:AvatarGroup
+					ItemLength="32"
+					ItemsSource="{x:Static sampleData:People.All}"
+					OverflowKind="None"
+					>
+					<actipro:AvatarGroup.Transitions>
+						<Transitions>
+							<DoubleTransition Property="OverlapPercentage" Duration="{actipro:AnimationSetting StandardMoveDuration}" Easing="{actipro:AnimationSetting StandardMoveEasing}" />
+						</Transitions>
+					</actipro:AvatarGroup.Transitions>
+					<actipro:AvatarGroup.Theme>
+						<ControlTheme TargetType="actipro:AvatarGroup" BasedOn="{StaticResource {x:Type actipro:AvatarGroup}}">
+							<Setter Property="OverlapPercentage" Value="0.5" />
+
+							<Style Selector="^:pointerover">
+								<Setter Property="OverlapPercentage" Value="0" />
+							</Style>
+						</ControlTheme>
+					</actipro:AvatarGroup.Theme>
+					<actipro:AvatarGroup.ItemContainerTheme>
+						<ControlTheme TargetType="actipro:Avatar" BasedOn="{StaticResource {x:Type actipro:Avatar}}" x:DataType="sampleData:Person">
+							<Setter Property="BorderBrush" Value="{actipro:ThemeResource Container2BackgroundBrush}" />
+							<Setter Property="BorderThickness" Value="2" />
+							<Setter Property="Content" Value="{Binding Photo}" />
+						</ControlTheme>
+					</actipro:AvatarGroup.ItemContainerTheme>
+				</actipro:AvatarGroup>
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:AvatarGroup ...
+	ItemLength="32"
+	OverflowKind="None"
+	>
+	<actipro:AvatarGroup.Transitions>
+		<Transitions>
+			<DoubleTransition Property="OverlapPercentage" 
+				Duration="{actipro:AnimationSetting StandardMoveDuration}" 
+				Easing="{actipro:AnimationSetting StandardMoveEasing}" />
+		</Transitions>
+	</actipro:AvatarGroup.Transitions>
+	<actipro:AvatarGroup.Theme>
+		<ControlTheme TargetType="actipro:AvatarGroup" BasedOn="{StaticResource {x:Type actipro:AvatarGroup}}">
+			<Setter Property="OverlapPercentage" Value="0.5" />
+
+			<Style Selector="^:pointerover">
+				<Setter Property="OverlapPercentage" Value="0" />
+			</Style>
+		</ControlTheme>
+	</actipro:AvatarGroup.Theme>
+	<actipro:AvatarGroup.ItemContainerTheme>
+		...
+	</actipro:AvatarGroup.ItemContainerTheme>
+</actipro:AvatarGroup>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+		
+	</sampleBrowser:ControlExampleItemsControl>
+</UserControl>

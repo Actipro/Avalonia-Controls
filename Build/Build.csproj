@@ -16,7 +16,7 @@
 		<RootNamespace>ActiproSoftware.Tools.Builds</RootNamespace>
 		<Company>Actipro Software LLC</Company>
 		<Authors>Actipro Software LLC</Authors>
-		<Copyright>Copyright (c) 2021-2023 Actipro Software LLC.  All rights reserved.</Copyright>
+		<Copyright>Copyright (c) 2021-2024 Actipro Software LLC.  All rights reserved.</Copyright>
 
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 

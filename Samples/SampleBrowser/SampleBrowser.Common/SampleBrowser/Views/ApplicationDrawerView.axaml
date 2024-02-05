@@ -25,7 +25,7 @@
 					<DataTemplate DataType="sampleBrowser:AppDrawerSectionInfo">
 						<DockPanel Margin="3,0">
 							<Image x:Name="logoImage" DockPanel.Dock="Left" Margin="0,-4,10,-4" Width="24" Height="24" Source="{Binding ImageSource}" />
-							<sampleBrowser:ProIndicator x:Name="pro" Margin="10,0,0,0" DockPanel.Dock="Right" VerticalAlignment="Center" IsVisible="{Binding ProductFamily.IsPro, FallbackValue=False}" />
+							<sampleBrowser:ProIndicator x:Name="pro" Margin="10,0,0,0" DockPanel.Dock="Right" VerticalAlignment="Center" IsVisible="{Binding IsPro, FallbackValue=False}" />
 							<TextBlock Text="{Binding Title}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
 						</DockPanel>
 					</DataTemplate>
@@ -46,24 +46,28 @@
 					<Setter Property="Padding" Value="{actipro:ScaledThickness '0.5+8,1-1'}" />
 				</ControlTheme>
 			</ListBox.ItemContainerTheme>
-			
-			<ListBox.DataTemplates>
-				
-				<!-- Category -->
-				<DataTemplate DataType="x:String">
-					<TextBlock Text="{Binding}" FontWeight="Bold" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" />
-				</DataTemplate>
 
-				<!-- Item -->
-				<DataTemplate DataType="sampleBrowser:ProductItemInfo">
-					<DockPanel>
-						<sampleBrowser:PrivateIndicator Margin="10,0,5,0" DockPanel.Dock="Right" VerticalAlignment="Center" IsVisible="{Binding IsPrivate, FallbackValue=False}" />
-						<TextBlock Classes.indent="{Binding IsGroupedByCategory}" Text="{Binding Title}" />
-					</DockPanel>
-				</DataTemplate>
+			<ListBox.ItemTemplate>
+				<actipro:TypedDataTemplateSelector>
+					<!-- Category -->
+					<DataTemplate x:DataType="x:String">
+						<TextBlock Text="{Binding}" FontWeight="Bold" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" />
+					</DataTemplate>
 
-			</ListBox.DataTemplates>
-			
+					<!-- Item -->
+					<DataTemplate x:DataType="sampleBrowser:ProductItemInfo">
+						<DockPanel>
+							<sampleBrowser:PrivateIndicator Margin="10,0,5,0" DockPanel.Dock="Right" VerticalAlignment="Center" IsVisible="{Binding IsPrivate, FallbackValue=False}" />
+							<actipro:Badge Margin="10,0,5,0" DockPanel.Dock="Right" Kind="Dot" DotLength="8"
+										   Background="{actipro:ThemeResource ControlBackgroundBrushEmphasizedAccent}" BorderThickness="0"
+										   VerticalAlignment="Center" IsVisible="{Binding HasBlurbText, FallbackValue=False}"
+										   ToolTip.Tip="{Binding BlurbText}" />
+							<TextBlock Classes.indent="{Binding IsGroupedByCategory}" Text="{Binding Title}" />
+						</DockPanel>
+					</DataTemplate>
+				</actipro:TypedDataTemplateSelector>
+			</ListBox.ItemTemplate>
+
 			<ListBox.Styles>
 				<Style Selector="ScrollViewer">
 					<Setter Property="Theme" Value="{actipro:ControlTheme ScrollViewerOverlay}" />

@@ -50,12 +50,12 @@
 			</Border>
 
 			<sampleBrowser:ControlExample.Options>
-				<StackPanel>
+				<StackPanel x:DataType="sampleBrowser:ApplicationViewModel">
 					<TextBlock Classes="theme-form-control-label" Text="User interface density:" />
 					<UniformGrid Columns="3" HorizontalAlignment="Left">
-						<ToggleButton BorderThickness="1,1,0,1" x:Name="compactDensityButton1" CornerRadius="{actipro:ScaledCornerRadius '1, 0, 0, 1'}" Content="Compact" Command="{ReflectionBinding #root.DataContext.SetUserInterfaceDensityCommand}" CommandParameter="{x:Static actipro:UserInterfaceDensity.Compact}" />
-						<ToggleButton BorderThickness="1" x:Name="normalDensityButton1" CornerRadius="0" Content="Normal" Command="{ReflectionBinding #root.DataContext.SetUserInterfaceDensityCommand}" CommandParameter="{x:Static actipro:UserInterfaceDensity.Normal}" />
-						<ToggleButton BorderThickness="0,1,1,1" x:Name="spaciousDensityButton1" CornerRadius="{actipro:ScaledCornerRadius '0, 1, 1, 0'}" Content="Spacious" Command="{ReflectionBinding #root.DataContext.SetUserInterfaceDensityCommand}" CommandParameter="{x:Static actipro:UserInterfaceDensity.Spacious}" />
+						<ToggleButton BorderThickness="1,1,0,1" x:Name="compactDensityButton1" CornerRadius="{actipro:ScaledCornerRadius '1, 0, 0, 1'}" Content="Compact" Command="{Binding SetUserInterfaceDensityCommand}" CommandParameter="{x:Static actipro:UserInterfaceDensity.Compact}" />
+						<ToggleButton BorderThickness="1" x:Name="normalDensityButton1" CornerRadius="0" Content="Normal" Command="{Binding SetUserInterfaceDensityCommand}" CommandParameter="{x:Static actipro:UserInterfaceDensity.Normal}" />
+						<ToggleButton BorderThickness="0,1,1,1" x:Name="spaciousDensityButton1" CornerRadius="{actipro:ScaledCornerRadius '0, 1, 1, 0'}" Content="Spacious" Command="{Binding SetUserInterfaceDensityCommand}" CommandParameter="{x:Static actipro:UserInterfaceDensity.Spacious}" />
 					</UniformGrid>
 				</StackPanel>
 			</sampleBrowser:ControlExample.Options>

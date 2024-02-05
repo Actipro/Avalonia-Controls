@@ -1,0 +1,154 @@
+<UserControl
+	x:Name="sampleRootControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
+
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="The RingSpinner control renders an animated ring slice that can be used as a busy indicator.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Progress Spinners" Url="https://www.actiprosoftware.com/docs/controls/avalonia/fundamentals/controls/progress-spinners" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+
+		<sampleBrowser:ControlExample
+			Header="Basic usage"
+			DataContext="{Binding #spinner}"
+			>
+
+			<actipro:RingSpinner 
+				x:Name="spinner" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
+				Width="100" Height="100" 
+				LineThickness="10"
+				IsSpinning="True"
+				Classes.accent="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Accent'}"
+				Classes.success="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Success'}"
+				Classes.warning="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Warning'}"
+				Classes.danger="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Danger'}"
+				/>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Variant" />
+						<ComboBox x:Name="sampleVariant" SelectedIndex="4" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
+					</StackPanel>
+					<CheckBox Content="Is spinning" IsChecked="{Binding IsSpinning}" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:RingSpinner x:Name="spinner" Width="100" Height="100" 
+	LineThickness="10"$(ClassesAttribute)$(IsSpinningAttribute) />
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
+															   IsEnabled="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), StringFormat=' Classes=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsSpinningAttribute"
+															   IsEnabled="{Binding IsSpinning}"
+															   Value=" IsSpinning=&quot;True&quot;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Default appearance"
+			>
+
+			<actipro:RingSpinner Width="16" Height="16" IsSpinning="True" />
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:RingSpinner Width="16" Height="16" IsSpinning="True" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Thin"
+			>
+
+			<actipro:RingSpinner Width="16" Height="16" Foreground="{actipro:ThemeResource DefaultForegroundBrushDisabled}" LineThickness="1" IsSpinning="True" />
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:RingSpinner Width="16" Height="16" 
+	Foreground="{actipro:ThemeResource DefaultForegroundBrushDisabled}" LineThickness="1" IsSpinning="True" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="24x24 size, thick purple"
+			>
+
+			<actipro:RingSpinner Width="24" Height="24" Foreground="#9e5aac" LineThickness="4" IsSpinning="True" />
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:RingSpinner Width="24" Height="24" 
+	Foreground="#9e5aac" LineThickness="4" IsSpinning="True" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Track behind"
+			>
+
+			<actipro:RingSpinner Width="24" Height="24" Classes="accent" 
+								 Background="{actipro:ThemeResource Container5BackgroundBrush}" 
+								 LineThickness="3" LineCap="Flat" IsSpinning="True" />
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:RingSpinner Width="24" Height="24" Classes="accent" 
+	Background="{actipro:ThemeResource Container5BackgroundBrush}" 
+	LineThickness="3" LineCap="Flat" IsSpinning="True" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Pie mode"
+			>
+
+			<actipro:RingSpinner Width="24" Height="24" Foreground="#5aabac" LineThickness="12" LineCap="Flat" IsSpinning="True" />
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:RingSpinner Width="24" Height="24" 
+	Foreground="#5aabac" LineThickness="12" LineCap="Flat" IsSpinning="True" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+</UserControl>

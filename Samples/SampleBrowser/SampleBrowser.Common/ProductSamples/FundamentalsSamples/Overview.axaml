@@ -5,6 +5,7 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:sampleData="using:ActiproSoftware.SampleBrowser.SampleData"
 	>
 
 	<ScrollViewer Classes="theme-scroll-overlay" HorizontalScrollBarVisibility="Disabled">
@@ -15,8 +16,60 @@
 				The library will be grown over time, with new controls coming soon.
 			</sampleBrowser:ProductOverviewHeader>
 
-			<actipro:UserPromptControl Margin="{actipro:ScaledThickness '6,0'}" MaxWidth="400" StandardStatusImage="Information" StandardButtons="OKCancel"
+			<actipro:MultiColumnPanel Classes="sample-layout-panel" Margin="{actipro:ScaledThickness '6,0'}" MinColumnWidth="390" HorizontalSpacing="{actipro:ScaledDouble 4}" VerticalSpacing="{actipro:ScaledDouble 4}">
+
+				<StackPanel Margin="{actipro:ScaledThickness '0,1,0,0'}" Spacing="{actipro:ScaledDouble 4}">
+					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="{actipro:ScaledDouble 4}">
+
+						<actipro:Avatar Width="64" CornerRadius="20" ToolTip.Tip="Generic Avatar Glyph with Badge"
+										actipro:BadgeService.HorizontalAlignment="CenterOnTarget"
+										actipro:BadgeService.VerticalAlignment="CenterOnTargetTopEdge"
+										>
+							<actipro:BadgeService.Badge>
+								<actipro:Badge Classes="accent" Content="Badge" />
+							</actipro:BadgeService.Badge>
+						</actipro:Avatar>
+
+						<actipro:Avatar Width="64" Description="Actipro Software" TextAppearanceKind="Manual" Background="{actipro:ThemeResource ActiproBrandBrush}" />
+
+						<actipro:Avatar Width="64" CornerRadius="10" Description="Avatar Image with Badge as Status Indicator"
+										actipro:BadgeService.HorizontalOffset="5"
+										actipro:BadgeService.VerticalOffset="5"
+										actipro:BadgeService.HorizontalAlignment="InsideOfTargetRightEdge"
+										actipro:BadgeService.VerticalAlignment="InsideOfTargetBottomEdge"
+										>
+							<actipro:BadgeService.Badge>
+								<actipro:Badge Classes="success" Kind="Dot" DotLength="20"
+											   BorderThickness="2" BorderBrush="{actipro:ThemeResource Container2BackgroundBrush}"
+											   ToolTip.Tip="Status: Online" />
+							</actipro:BadgeService.Badge>
+							<Image Source="/Images/ProfilePhotos/Woman05.jpg" />
+						</actipro:Avatar>
+
+					</StackPanel>
+					
+					<actipro:AvatarGroup ItemLength="48" MaxInlineCount="5" OverflowKind="Popup" ItemsSource="{x:Static sampleData:People.All}">
+						<actipro:AvatarGroup.ItemContainerTheme>
+							<ControlTheme TargetType="actipro:Avatar" BasedOn="{StaticResource {x:Type actipro:Avatar}}" x:DataType="sampleData:Person">
+								<Setter Property="BorderBrush" Value="{actipro:ThemeResource Container2BackgroundBrush}" />
+								<Setter Property="BorderThickness" Value="2" />
+								<Setter Property="Description" Value="{Binding FullName}" />
+								<Setter Property="Content" Value="{Binding Photo}" />
+							</ControlTheme>
+						</actipro:AvatarGroup.ItemContainerTheme>
+					</actipro:AvatarGroup>
+
+					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="{actipro:ScaledDouble 4}">
+						<actipro:RingSpinner Width="24" Height="24" Classes="accent" 
+											 Background="{actipro:ThemeResource Container5BackgroundBrush}"
+											 LineThickness="3" LineCap="Flat" IsSpinning="True" />
+					</StackPanel>
+				</StackPanel>
+
+				<actipro:UserPromptControl Margin="{actipro:ScaledThickness '6,0'}" MaxWidth="400" StandardStatusImage="Information" StandardButtons="OKCancel"
 									   Header="User Prompt" Content="The user prompt control can easily display any kind of dialog message to the end user, and can even be configured to render as a complex task dialog with multiple sections."/>
+				
+			</actipro:MultiColumnPanel>
 
 			<TextBlock Classes="theme-text-body" Margin="{actipro:ScaledThickness 6}" Text="Dive into our individual samples linked below for many more detailed examples."
 					   FontStyle="Italic" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" TextAlignment="Center" />

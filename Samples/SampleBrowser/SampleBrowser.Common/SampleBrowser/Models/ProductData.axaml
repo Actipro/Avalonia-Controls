@@ -12,7 +12,7 @@
 			<sampleBrowser:ListItemInfo Title="Shadow Chrome" ImageUri="avares://SampleBrowser/Images/Screenshots/Shared-ShadowChrome-200x150.png" TargetUri="https://ActiproSoftware/ProductSamples/SharedSamples/Controls/ShadowChromeIntro/MainControl" />
 			<sampleBrowser:ListItemInfo Title="User Prompt" ImageUri="avares://SampleBrowser/Images/Screenshots/Fundamentals-UserPrompt-200x150.png" TargetUri="https://ActiproSoftware/ProductSamples/FundamentalsSamples/Controls/UserPromptIntro/MainControl" />
 			<sampleBrowser:ListItemInfo Title="Button Themes" ImageUri="avares://SampleBrowser/Images/Screenshots/Themes-Button-200x150.png" TargetUri="https://ActiproSoftware/ProductSamples/ThemesSamples/NativeControls/ButtonSamples" />
-			<sampleBrowser:ListItemInfo Title="Typography" ImageUri="avares://SampleBrowser/Images/Screenshots/Themes-Typography-200x150.png" TargetUri="https://ActiproSoftware/ProductSamples/ThemesSamples/Styling/TypographySamples" />
+			<sampleBrowser:ListItemInfo BlurbText="NEW!" Title="Avatar" ImageUri="avares://SampleBrowser/Images/Screenshots/Fundamentals-Avatar-200x150.png" TargetUri="https://ActiproSoftware/ProductSamples/FundamentalsSamples/Controls/AvatarIntro/MainControl" />
 		</sampleBrowser:ProductData.FeaturedSamples>
 
 		<sampleBrowser:ProductData.ReleaseHistory>
@@ -113,11 +113,13 @@
 
 			<sampleBrowser:ProductFamilyInfo.News>
 				<sampleBrowser:ListItemInfo Title="A number of helpful controls that work in tandem with native Avalonia controls" />
+				<sampleBrowser:ListItemInfo Title="A ring slice shape often used in progress indicators" />
 			</sampleBrowser:ProductFamilyInfo.News>
 
 			<sampleBrowser:ProductFamilyInfo.TeaserBulletItems>
 				<x:String>Dynamic image</x:String>
 				<x:String>Shadow chrome</x:String>
+				<x:String>Copy and toggle theme buttons</x:String>
 				<x:String>An assortment of other controls</x:String>
 				<x:String>Value converters</x:String>
 			</sampleBrowser:ProductFamilyInfo.TeaserBulletItems>
@@ -133,6 +135,8 @@
 			<sampleBrowser:ProductItemInfo Category="Controls" Title="Shadow Chrome" Path="/ProductSamples/SharedSamples/Controls/ShadowChromeIntro/MainControl"/>
 			<sampleBrowser:ProductItemInfo Category="Controls" Title="Toggle Theme Button" Path="/ProductSamples/SharedSamples/Controls/ToggleThemeButtonIntro/MainControl"/>
 			<sampleBrowser:ProductItemInfo Category="Controls" Title="Window Resize Grip" Path="/ProductSamples/SharedSamples/Controls/WindowResizeGripIntro/MainControl"/>
+			
+			<sampleBrowser:ProductItemInfo BlurbText="New!" Category="Shapes" Title="Ring Slice" Path="/ProductSamples/SharedSamples/Shapes/RingSliceIntro/MainControl"/>
 
 			<sampleBrowser:ProductItemInfo Category="Value Converters" Title="Border Child Clip" Path="/ProductSamples/SharedSamples/ValueConverters/BorderChildClipConverterIntro/MainControl"/>
 			<sampleBrowser:ProductItemInfo Category="Value Converters" Title="Math" Path="/ProductSamples/SharedSamples/ValueConverters/MathConverterIntro/MainControl"/>
@@ -151,11 +155,16 @@
 
 			<sampleBrowser:ProductFamilyInfo.News>
 				<sampleBrowser:ListItemInfo Title="A user prompt control that provides traditional MessageBox and task dialog functionality" />
+				<sampleBrowser:ListItemInfo Title="Avatar that renders an image, glyph, initials, or text to represent a person" />
+				<sampleBrowser:ListItemInfo Title="Avatar group for displaying many avatars, with overflow support" />
+				<sampleBrowser:ListItemInfo Title="Badge and numeric badge that add contextual information to other controls" />
+				<sampleBrowser:ListItemInfo Title="Progress spinners" />
 			</sampleBrowser:ProductFamilyInfo.News>
 
 			<sampleBrowser:ProductFamilyInfo.TeaserBulletItems>
 				<x:String>User prompt for displaying messages and task dialogs</x:String>
-				<x:String>Multi-column panel that supports responsive layouts</x:String>
+				<x:String>Responsive multi-column panel</x:String>
+				<x:String>Avatar, badge, and spinner controls</x:String>
 				<x:String>More coming soon</x:String>
 			</sampleBrowser:ProductFamilyInfo.TeaserBulletItems>
 
@@ -163,9 +172,13 @@
 				<sampleBrowser:ProductItemInfo Title="Overview" Path="/ProductSamples/FundamentalsSamples/OVerview" />
 			</sampleBrowser:ProductFamilyInfo.OverviewItem>
 
+			<sampleBrowser:ProductItemInfo BlurbText="New!" Category="Controls" Title="Avatar" Path="/ProductSamples/FundamentalsSamples/Controls/AvatarIntro/MainControl"/>
+			<sampleBrowser:ProductItemInfo BlurbText="New!" Category="Controls" Title="Badge" Path="/ProductSamples/FundamentalsSamples/Controls/BadgeIntro/MainControl"/>
 			<sampleBrowser:ProductItemInfo Category="Controls" Title="MessageBox" Path="/ProductSamples/FundamentalsSamples/Controls/MessageBoxIntro/MainControl"/>
+			<sampleBrowser:ProductItemInfo BlurbText="New!" Category="Controls" Title="Progress Spinners" Path="/ProductSamples/FundamentalsSamples/Controls/ProgressSpinners/MainControl"/>
 			<sampleBrowser:ProductItemInfo Category="Controls" Title="User Prompt" Path="/ProductSamples/FundamentalsSamples/Controls/UserPromptIntro/MainControl"/>
 			
+
 			<sampleBrowser:ProductItemInfo Category="Panels" Title="Multi-Column Panel" Path="/ProductSamples/FundamentalsSamples/Panels/MultiColumnPanelIntro/MainControl"/>
 
 		</sampleBrowser:ProductFamilyInfo>

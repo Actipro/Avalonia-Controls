@@ -72,19 +72,21 @@ namespace ActiproSoftware.SampleBrowser {
 			=> this.OverviewItem ?? Items.FirstOrDefault();
 
 		/// <summary>
-		/// The collection of <see cref="ProductItemInfo"/> objects for all items.
+		/// Returns a collection of <see cref="ProductItemInfo"/> objects for all items, grouped by category name.
 		/// </summary>
-		public IEnumerable<IGrouping<string, ProductItemInfo>> GroupedItems {
-			get {
-				if (_groupedItems is null) {
-					_groupedItems = from i in Items
-									where i != this.OverviewItem
-									group i by i.Category;
-				}
-
-				return _groupedItems;
-			}
+		/// <param name="includePrivateItems">Whether to include private items.</param>
+		/// <returns>The collection of grouped items.</returns>
+		public IEnumerable<IGrouping<string, ProductItemInfo>> GetGroupedItems(bool includePrivateItems) {
+			return from i in Items
+				   where i != this.OverviewItem && (includePrivateItems || !i.IsPrivate)
+				   group i by i.Category;
 		}
+
+		/// <summary>
+		/// The collection of <see cref="ProductItemInfo"/> objects for all items that are not private, grouped by category name.
+		/// </summary>
+		public IEnumerable<IGrouping<string, ProductItemInfo>> GroupedItems
+			=> _groupedItems ??= GetGroupedItems(includePrivateItems: false);
 
 		/// <summary>
 		/// Whether there is any blurb text.

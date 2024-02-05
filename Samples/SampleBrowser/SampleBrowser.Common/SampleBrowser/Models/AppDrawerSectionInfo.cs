@@ -10,6 +10,12 @@ namespace ActiproSoftware.SampleBrowser {
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		/// <summary>
+		/// Whether the product family is a Pro (paid) product.
+		/// </summary>
+		public bool IsPro
+			=> ProductFamily?.IsPro ?? false;
+
+		/// <summary>
 		/// The <see cref="ProductFamilyInfo"/> related to this item.
 		/// </summary>
 		public ProductFamilyInfo? ProductFamily { get; set; }

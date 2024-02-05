@@ -77,7 +77,7 @@ All button control themes support the `accent`, `success`, `warning`, and `dange
 
 ![Screenshot](images/semantic-colors-button.png)
 
-*Button, DropDownButton, and SplitButton controls in the outline, solid, and soft themes showing sementic color variants*
+*Button, DropDownButton, and SplitButton controls in the outline, solid, and soft themes showing semantic color variants*
 
 #### Button Type
 
@@ -158,7 +158,7 @@ All primary edit control themes support the `accent`, `success`, `warning`, and 
 
 ![Screenshot](images/semantic-colors-edit.png)
 
-*TextBox, ComboBox, ButtonSpinner, and CalendarDatePicker controls in the outline and soft themes showing sementic color variants*
+*TextBox, ComboBox, ButtonSpinner, and CalendarDatePicker controls in the outline and soft themes showing semantic color variants*
 
 #### AutoCompleteBox Type
 
@@ -182,6 +182,10 @@ These style class names trigger special behaviors:
 - [ButtonSpinnerBase](xref:@ActiproUIRoot.Themes.ControlThemeKind.ButtonSpinnerBase) - Base control theme used by several others.
 - [ButtonSpinnerOutline](xref:@ActiproUIRoot.Themes.ControlThemeKind.ButtonSpinnerOutline) (`theme-outline`) - Has an outline appearance.
 - [ButtonSpinnerSoft](xref:@ActiproUIRoot.Themes.ControlThemeKind.ButtonSpinnerSoft) (`theme-soft`) - Has a soft fill appearance.
+
+![Screenshot](images/button-spinner-orientations.png)
+
+*ButtonSpinner controls with vertical and horizontal button orientations*
 
 Set the [ThemeProperties](xref:@ActiproUIRoot.Themes.ThemeProperties).[SpinnerHasHorizontalOrientation](xref:@ActiproUIRoot.Themes.ThemeProperties.SpinnerHasHorizontalOrientationProperty) attached property on a `ButtonSpinner` to `true` to arrange spinner buttons horizontally instead of vertically.  Horizontal arrangement is better for touch-friendly user interfaces since each button gets twice the amount of surface area.  [Theme Definitions](theme-definitions.md) also provide a global default value for this attached property that can be altered.
 
@@ -244,6 +248,10 @@ The following additional control theme is used by the default control theme:
 - [NumericUpDownBase](xref:@ActiproUIRoot.Themes.ControlThemeKind.NumericUpDownBase) - Base control theme used by several others.
 - [NumericUpDownOutline](xref:@ActiproUIRoot.Themes.ControlThemeKind.NumericUpDownOutline) (`theme-outline`) - Has an outline appearance.
 - [NumericUpDownSoft](xref:@ActiproUIRoot.Themes.ControlThemeKind.NumericUpDownSoft) (`theme-soft`) - Has a soft fill appearance.
+
+![Screenshot](images/numeric-up-down-orientations.png)
+
+*NumericUpDown controls with vertical and horizontal button orientations*
 
 Set the [ThemeProperties](xref:@ActiproUIRoot.Themes.ThemeProperties).[SpinnerHasHorizontalOrientation](xref:@ActiproUIRoot.Themes.ThemeProperties.SpinnerHasHorizontalOrientationProperty) attached property on a `NumericUpDown` to `true` to arrange spinner buttons horizontally instead of vertically.  Horizontal arrangement is better for touch-friendly user interfaces since each button gets twice the amount of surface area.  [Theme Definitions](theme-definitions.md) also provide a global default value for this attached property that can be altered.
 
@@ -397,7 +405,7 @@ All switch control themes support the `accent`, `success`, `warning`, and `dange
 
 ![Screenshot](images/semantic-colors-switch.png)
 
-*CheckBox, RadioButton, ToggleSwitch, and Slider controls in the outline and solid themes showing sementic color variants*
+*CheckBox, RadioButton, ToggleSwitch, and Slider controls in the outline and solid themes showing semantic color variants*
 
 The `CheckBox`, `RadioButton`, and `ToggleSwitch` control type themes automatically adjust their size to match the control's font size.  For example, a `CheckBox` at a 24pt font size will render a larger check UI element than one with a 12pt font size.  The relative size of those controls can be explicitly set using one of following style class names:
 
@@ -490,7 +498,7 @@ All typography control themes support the `accent`, `success`, `warning`, and `d
 
 ![Screenshot](images/semantic-colors-typography.png)
 
-*TextBlock controls in the default, heading, body, and code themes showing sementic color variants*
+*TextBlock controls in the default, heading, body, and code themes showing semantic color variants*
 
 Each typography control type defines "body", "code", and "heading" control themes. The relative font size of these control themes can be explicitly set using one of following style class names:
 
@@ -574,7 +582,7 @@ The default control theme supports the `accent`, `success`, `warning`, and `dang
 
 ![Screenshot](images/semantic-colors-progress-bar.png)
 
-*ProgressBar controls in the default theme with neutral and sementic color variants*
+*ProgressBar controls in the default theme with neutral and semantic color variants*
 
 - [ProgressBar](xref:@ActiproUIRoot.Themes.ControlThemeKind.ProgressBar) - Default control theme.
 
@@ -631,7 +639,7 @@ The [ColorPicker](xref:@ActiproUIRoot.Themes.ControlThemeKind.ColorPicker) contr
 
 ![Screenshot](images/semantic-colors-color-picker.png)
 
-*ColorPicker controls in the default theme and optional value display with outline, solid, and soft class styles and sementic color variants*
+*ColorPicker controls in the default theme and optional value display with outline, solid, and soft class styles and semantic color variants*
 
 ![Screenshot](images/color-picker-themes.png)
 

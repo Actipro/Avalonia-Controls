@@ -9,6 +9,7 @@ The [MessageBox](xref:@ActiproUIRoot.Controls.MessageBox) class is intentionally
 
 @if (avalonia) {
 ![Screenshot](../images/messagebox.png)
+
 *MessageBox dialog with optional status image*
 }
 @if (wpf) {

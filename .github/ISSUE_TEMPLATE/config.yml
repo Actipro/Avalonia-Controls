@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Actipro's Public Discussion Forums
+    url: https://www.actiprosoftware.com/community/forums
+    about: Our official product support forums where Actipro developers and other customers can reply.
+  - name: Actipro's Private Support Tickets
+    url: https://support.actiprosoftware.com/Main/frmTickets.aspx
+    about: Our ticket system where you can communicate privately with Actipro support.
