@@ -1,0 +1,945 @@
+<UserControl
+	x:Name="sampleRootControl"
+	x:Class="ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.SettingsIntro.MainControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:sampleData="using:ActiproSoftware.SampleBrowser.SampleData"
+	>
+	<UserControl.Resources>
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+
+		<!--
+			Icons from: https://icon-sets.iconify.design/fluent-mdl2/ 
+			- These icons do not have any margin so the icon sizes have been reduced to 20x20
+			- Alternatively, 24x24 icons (the default size) could be used with 2px margin around the glyph content
+		-->
+		<x:Double x:Key="{actipro:ThemeResourceKey SettingsCardHeaderIconLength}">20</x:Double>
+		<StreamGeometry x:Key="icon-fluent-mdl2-book-answers">M384 0h1408v2048H384q-53 0-99-20t-82-55t-55-81t-20-100V256q0-53 20-99t55-82t81-55T384 0m1280 1920v-256H384q-27 0-50 10t-40 27t-28 41t-10 50q0 27 10 50t27 40t41 28t50 10zm0-384V128H384q-27 0-50 10t-40 27t-28 41t-10 50v1314q60-34 128-34zm-768-256V640h128v640zm0-768V384h128v128z</StreamGeometry>
+		<StreamGeometry x:Key="icon-fluent-mdl2-color">M1024 0q141 0 272 36t245 103t207 160t160 208t103 245t37 272q0 141-36 272t-103 245t-160 207t-208 160t-245 103t-272 37q-53 0-99-20t-81-55t-55-81t-21-100q0-49 9-85t24-67t31-56t31-52t23-56t10-68q0-52-20-99t-55-81t-82-55t-99-21q-38 0-67 9t-56 24t-53 31t-56 31t-67 23t-85 10q-53 0-99-20t-81-55t-55-81t-21-100q0-141 36-272t103-245t160-207t208-160T751 37t273-37m0 1920q123 0 237-32t214-90t182-141t140-181t91-214t32-238q0-123-32-237t-90-214t-141-182t-181-140t-214-91t-238-32q-123 0-237 32t-214 90t-182 141t-140 181t-91 214t-32 238q0 27 10 50t27 40t41 28t50 10q38 0 67-9t56-24t52-31t55-31t67-23t87-10q80 0 150 30t122 82t82 122t30 150q0 49-9 86t-24 67t-31 55t-31 52t-23 56t-10 68q0 27 10 50t27 40t41 28t50 10M512 640q27 0 50 10t40 27t28 41t10 50q0 27-10 50t-27 40t-41 28t-50 10q-27 0-50-10t-40-27t-28-41t-10-50q0-27 10-50t27-40t41-28t50-10m384-256q27 0 50 10t40 27t28 41t10 50q0 27-10 50t-27 40t-41 28t-50 10q-27 0-50-10t-40-27t-28-41t-10-50q0-27 10-50t27-40t41-28t50-10m512 384q-27 0-50-10t-40-27t-28-41t-10-50q0-27 10-50t27-40t41-28t50-10q27 0 50 10t40 27t28 41t10 50q0 27-10 50t-27 40t-41 28t-50 10m128 256q27 0 50 10t40 27t28 41t10 50q0 27-10 50t-27 40t-41 28t-50 10q-27 0-50-10t-40-27t-28-41t-10-50q0-27 10-50t27-40t41-28t50-10m-256 384q27 0 50 10t40 27t28 41t10 50q0 27-10 50t-27 40t-41 28t-50 10q-27 0-50-10t-40-27t-28-41t-10-50q0-27 10-50t27-40t41-28t50-10</StreamGeometry>
+		<StreamGeometry x:Key="icon-fluent-mdl2-font">M765 1024H387l-85 256H167L509 256h134l268 802l-81 162zm-43-128L576 458L430 896zm982 679q17 41 31 73t35 54t50 34t78 12v44h-449v-44h37q20 0 39-3t30-17t12-37q0-14-6-39t-16-54t-21-59t-22-58t-19-46t-11-27h-448q-3 8-12 27t-20 46t-24 57t-23 58t-17 54t-7 40q0 24 12 35t31 16t38 5t37 2v44H662v-44q49-9 76-21t44-32t30-52t33-79l392-924h82zm-291-295l-177-381l-169 381z</StreamGeometry>
+		<StreamGeometry x:Key="icon-fluent-mdl2-line-spacing">m448 102l365 365l-90 90l-211-210v549H384V347L173 557l-90-90zm275 1389l90 90l-365 365l-365-365l90-90l211 210v-549h128v549zM2048 384v128H1024V384zM1024 768h1024v128H1024zm0 384h1024v128H1024zm0 384h1024v128H1024z</StreamGeometry>
+		<StreamGeometry x:Key="icon-fluent-mdl2-mic-off">M704 1536q-40 0-75-15t-61-41t-41-61t-15-75V192q0-40 15-75t41-61t61-41t75-15h512q40 0 75 15t61 41t41 61t15 75v834q-34 11-66 25t-62 34V192q0-26-19-45t-45-19H704q-26 0-45 19t-19 45v1152q0 26 19 45t45 19h322q-2 2-2 20t-1 41t0 42t1 25zm896-384q93 0 174 35t143 96t96 142t35 175q0 93-35 174t-96 143t-142 96t-175 35q-93 0-174-35t-143-96t-96-142t-35-175q0-93 35-174t96-143t142-96t175-35m-320 448q0 66 25 124t68 102t102 69t125 25q47 0 92-13t84-40l-443-443q-26 39-39 84t-14 92m587 176q26-39 39-84t14-92q0-66-25-124t-69-101t-102-69t-124-26q-47 0-92 13t-84 40zm-782 144q45 71 107 128H640v-128h256v-128H662q-84 0-158-32t-129-87t-87-129t-32-158v-362h128v362q0 57 22 108t59 88t89 60t108 22h362v256z</StreamGeometry>
+		<StreamGeometry x:Key="icon-fluent-mdl2-microphone">M704 1536q-40 0-75-15t-61-41t-41-61t-15-75V192q0-40 15-75t41-61t61-41t75-15h512q40 0 75 15t61 41t41 61t15 75v1152q0 40-15 75t-41 61t-61 41t-75 15zm-64-192q0 26 19 45t45 19h512q26 0 45-19t19-45V192q0-26-19-45t-45-19H704q-26 0-45 19t-19 45zm1024-320v362q0 84-32 158t-87 129t-129 87t-158 32h-234v128h256v128H640v-128h256v-128H662q-84 0-158-32t-129-87t-87-129t-32-158v-362h128v362q0 57 22 108t59 88t89 60t108 22h596q57 0 108-22t88-59t60-89t22-108v-362z</StreamGeometry>
+		<StreamGeometry x:Key="icon-fluent-mdl2-settings">M1783 988v18q0 9 1 18v18q0 9-1 18l259 161l-159 383l-297-68q-24 26-50 50l68 297l-383 159l-161-259h-18q-9 0-18 1h-18q-9 0-18-1l-161 259l-383-159l68-297q-26-24-50-50l-297 68L6 1221l259-161v-18q0-9-1-18v-18q0-9 1-18L6 827l159-383l297 68q24-26 50-50l-68-297L827 6l161 259h18q9 0 18-1h18q9 0 18 1L1221 6l383 159l-68 297q26 24 50 50l297-68l159 383zm-117 130q2-24 4-47t2-48q0-23-2-47t-4-47l236-147l-86-208l-271 63q-31-38-63-70t-71-64l63-271l-208-86l-148 236q-23-2-47-4t-47-2q-24 0-47 2t-48 4L782 146l-208 86l63 271q-38 31-70 63t-64 71l-271-63l-86 208l236 148q-2 24-4 47t-2 48q0 23 2 47t4 47l-236 147l86 208l271-63q31 38 63 70t71 64l-63 271l208 86l148-236q23 2 47 4t47 2q24 0 47-2t48-4l147 236l208-86l-63-271q38-31 70-63t64-71l271 63l86-208zm-642-470q78 0 146 29t120 81t80 119t30 147q0 78-29 146t-81 120t-119 80t-147 30q-78 0-146-29t-120-81t-80-119t-30-147q0-78 29-146t81-120t119-80t147-30m0 640q55 0 103-20t84-57t56-84t21-103q0-55-20-103t-57-84t-84-56t-103-21q-55 0-103 20t-84 57t-56 84t-21 103q0 55 20 103t57 84t84 56t103 21</StreamGeometry>
+		<StreamGeometry x:Key="icon-fluent-mdl2-toolbox">M1408 512h640v1152H0V512h640V256h768zM768 384v128h512V384zm1152 256H128v256h384V768h128v128h768V768h128v128h384zM128 1536h1792v-512h-384v128h-128v-128H640v128H512v-128H128z</StreamGeometry>
+		<StreamGeometry x:Key="icon-fluent-mdl2-update-restore">M1024 0q141 0 272 36t245 103t207 160t160 208t103 245t37 272q0 141-36 272t-103 245t-160 207t-208 160t-245 103t-272 37q-172 0-330-55t-289-154t-226-238t-141-304l123-34q40 145 123 265t198 208t253 135t289 49q123 0 237-32t214-90t182-141t140-181t91-214t32-238q0-123-32-237t-90-214t-141-182t-181-140t-214-91t-238-32q-129 0-251 36T546 267T355 428T215 640h297v128H0V256h128v274q67-123 163-221t212-166T752 37t272-37</StreamGeometry>
+		<StreamGeometry x:Key="icon-fluent-mdl2-volume-3">M1673 119q90 90 160 195t117 220t73 239t25 251q0 128-25 251t-72 239t-118 220t-160 195l-91-91q81-81 144-175t106-198t65-215t22-226t-22-226t-65-214t-106-198t-144-176zm-9 905q0 180-68 343t-194 291l-91-91q109-109 167-249t58-294t-58-294t-167-249l91-91q126 128 194 291t68 343m-534-362q73 73 111 166t39 196q0 103-38 196t-112 166l-90-90q54-54 83-124t29-148q0-77-29-147t-83-125zM677 256h91v1536h-90l-385-384H0V640h293zm-37 219L347 768H128v512h219l293 293z</StreamGeometry>
+		<StreamGeometry x:Key="icon-fluent-mdl2-volume-disabled">M1472 896q119 0 224 45t183 124t123 183t46 224q0 119-45 224t-124 183t-183 123t-224 46q-119 0-224-45t-183-124t-123-183t-46-224q0-119 45-224t124-183t183-123t224-46m0 1024q93 0 174-35t142-96t96-142t36-175q0-93-35-174t-96-142t-142-96t-175-36q-93 0-174 35t-142 96t-96 142t-36 175q0 93 35 174t96 142t142 96t175 36M640 768v512h122q-8 32-14 64t-9 64H512V640h293l384-384h91v506q-67 18-128 48V475L858 768zm1069 557l-147 147l147 147l-90 90l-147-146l-147 146l-90-90l146-147l-146-147l90-90l147 147l147-147z</StreamGeometry>
+		
+	</UserControl.Resources>
+	<UserControl.Styles>
+		<!-- ToggleSwitch looks better with far affinity when used in a SettingsCard -->
+		<Style Selector="actipro|SettingsCard:not(:wrapped) > ToggleSwitch">
+			<Setter Property="actipro:ThemeProperties.ToggleSwitchHasFarAffinity" Value="True" />
+		</Style>
+		<Style Selector="actipro|SettingsCard > Slider">
+			<Setter Property="MinWidth" Value="150" />
+		</Style>
+		<Style Selector="actipro|SettingsCard > TextBox">
+			<Setter Property="MinWidth" Value="150" />
+		</Style>
+		<Style Selector="actipro|InfoBar[Severity=Information]">
+			<Setter Property="CornerRadius" Value="{actipro:ThemeResource SettingsCardCornerRadius}" />
+			<Style Selector="^[Severity=Information]">
+				<Setter Property="Background" Value="{actipro:ThemeResource ControlBackgroundBrushSoftAccent}" />
+			</Style>
+		</Style>
+	</UserControl.Styles>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Use SettingsCard, SettingsExpander, and SettingsGroup to organize and present configurable settings">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Settings Card" Url="https://www.actiprosoftware.com/docs/controls/avalonia/fundamentals/controls/settings-card" />
+			<sampleBrowser:ControlExampleLinkItem Title="Settings Expander" Url="https://www.actiprosoftware.com/docs/controls/avalonia/fundamentals/controls/settings-expander" />
+			<sampleBrowser:ControlExampleLinkItem Title="Settings Group" Url="https://www.actiprosoftware.com/docs/controls/avalonia/fundamentals/controls/settings-group" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExample
+			Header="Sample gallery">
+
+			<StackPanel>
+
+				<actipro:SettingsGroup Header="Appearance">
+					<actipro:SettingsGroup.ItemsHeader>
+						<actipro:InfoBar
+							Message="This gallery is only for layout demonstration and changing the settings will not have an effect. This notice is an example of ItemsHeader using InfoBar."
+							CornerRadius="{actipro:ThemeResource SettingsCardCornerRadius}"
+							Margin="0,0,0,2"/>
+					</actipro:SettingsGroup.ItemsHeader>
+
+					<actipro:SettingsCard Header="App theme">
+						<actipro:SettingsCard.HeaderIcon>
+							<PathIcon Data="{StaticResource icon-fluent-mdl2-color}" />
+						</actipro:SettingsCard.HeaderIcon>
+						<actipro:SettingsCard.Description>
+							<actipro:HyperlinkTextBlock FontWeight="DemiBold" FontSize="{actipro:ThemeResource DefaultFontSizeSmall}"
+								Text="Open system settings"
+								Command="{Binding #sampleRootControl.SettingClickedCommand}" CommandParameter="System Settings"
+								/>
+						</actipro:SettingsCard.Description>
+						<ComboBox SelectedIndex="2">
+							<ComboBoxItem>Light</ComboBoxItem>
+							<ComboBoxItem>Dark</ComboBoxItem>
+							<ComboBoxItem>System default</ComboBoxItem>
+						</ComboBox>
+					</actipro:SettingsCard>
+
+					<actipro:SettingsCard Header="Use high contrast colors" Description="Higher contrast colors improve accessibility">
+						<ToggleSwitch IsChecked="False"/>
+					</actipro:SettingsCard>
+
+					<actipro:SettingsCard Header="System fonts" IsWrapped="True">
+						<actipro:SettingsCard.HeaderIcon>
+							<PathIcon Data="{StaticResource icon-fluent-mdl2-font}" />
+						</actipro:SettingsCard.HeaderIcon>
+						<CheckBox x:Name="galleryCustomizeSystemFonts" IsChecked="False" Content="Allow system fonts to be customized" />
+					</actipro:SettingsCard>
+
+					<actipro:SettingsExpander Header="Heading font" Description="Configure the font used for heading typography (requires 'Allow system fonts to be customized')"
+						IsItemsHeaderVisible="{Binding !#galleryCustomizeSystemFonts.IsChecked}">
+						
+						<actipro:SettingsExpander.ItemsHeader>
+							<actipro:InfoBar CornerRadius="0" BorderThickness="0" CanClose="False" Severity="Error"
+								Message="These settings require 'Allow system fonts to be customized'."
+								Padding="{actipro:ScaledThickness '2.5,1'}" />
+						</actipro:SettingsExpander.ItemsHeader>
+
+						<actipro:SettingsCard Header="Font family" IsEnabled="{Binding #galleryCustomizeSystemFonts.IsChecked}">
+							<ComboBox SelectedIndex="1">
+								<ComboBoxItem>Arial</ComboBoxItem>
+								<ComboBoxItem>Calibri</ComboBoxItem>
+								<ComboBoxItem>Consolas</ComboBoxItem>
+								<ComboBoxItem>Tahoma</ComboBoxItem>
+							</ComboBox>
+						</actipro:SettingsCard>
+
+						<actipro:SettingsCard Header="Font size (pt)" IsEnabled="{Binding #galleryCustomizeSystemFonts.IsChecked}">
+							<StackPanel Orientation="Horizontal" MinWidth="150">
+								<TextBlock Text="A" FontSize="12" VerticalAlignment="Center" />
+								<Slider Margin="10,0" Minimum="10" Maximum="50" MinWidth="100" VerticalAlignment="Center" TickFrequency="10" TickPlacement="BottomRight" />
+								<TextBlock Text="A" FontSize="24" VerticalAlignment="Center" />
+							</StackPanel>
+						</actipro:SettingsCard>
+
+						<actipro:SettingsCard Header="Color" Description="Color should have sufficient contrast to the background" IsEnabled="{Binding #galleryCustomizeSystemFonts.IsChecked}">
+							<ColorPicker Color="DarkGray" />
+						</actipro:SettingsCard>
+
+						<actipro:SettingsCard Header="Opacity (%)" IsEnabled="{Binding #galleryCustomizeSystemFonts.IsChecked}">
+							<Slider Minimum="0" Maximum="100" Value="100" />
+						</actipro:SettingsCard>
+
+					</actipro:SettingsExpander>
+
+				</actipro:SettingsGroup>
+
+				<actipro:SettingsGroup Header="More samples">
+
+					<actipro:SettingsCard Header="Online documentation" Description="View online documentation for more details on the available controls."
+										  Command="{Binding #sampleRootControl.SettingClickedCommand}" CommandParameter="Documentation">
+						<actipro:SettingsCard.HeaderIcon>
+							<PathIcon Data="{StaticResource icon-fluent-mdl2-book-answers}" />
+						</actipro:SettingsCard.HeaderIcon>
+						<actipro:SettingsCard.ActionIcon>
+							<ContentPresenter ContentTemplate="{actipro:GlyphTemplate ExternalLink16}" />
+						</actipro:SettingsCard.ActionIcon>
+					</actipro:SettingsCard>
+
+					<actipro:SettingsExpander Header="Controls" Description="Expand for examples of individual control types.">
+						<actipro:SettingsExpander.HeaderIcon>
+							<PathIcon Data="{StaticResource icon-fluent-mdl2-toolbox}" />
+						</actipro:SettingsExpander.HeaderIcon>
+
+						<actipro:SettingsCard Header="Button">
+							<Button>Example Only</Button>
+						</actipro:SettingsCard>
+
+						<actipro:SettingsCard Header="Buttons">
+							<StackPanel Orientation="Horizontal" Spacing="4">
+								<Button Classes="theme-subtle"><ContentPresenter ContentTemplate="{actipro:GlyphTemplate MarkerTip16}" /></Button>
+								<Button Classes="theme-subtle"><ContentPresenter ContentTemplate="{actipro:GlyphTemplate Menu16}" /></Button>
+							</StackPanel>
+						</actipro:SettingsCard>
+
+						<actipro:SettingsCard x:Name="controlSampleCheckBox" Header="CheckBox" Description="A checkbox typically looks best when wrapped" IsWrapped="True">
+							<CheckBox IsChecked="{Binding #controlSampleCheckBox.IsWrapped}">Is wrapped</CheckBox>
+						</actipro:SettingsCard>
+
+						<actipro:SettingsCard Header="ColorPicker">
+							<ColorPicker Color="Orange" />
+						</actipro:SettingsCard>
+
+						<actipro:SettingsCard Header="ComboBox">
+							<ComboBox SelectedIndex="0" >
+								<ComboBoxItem>Item 1</ComboBoxItem>
+								<ComboBoxItem>Item 2</ComboBoxItem>
+								<ComboBoxItem>Item 3</ComboBoxItem>
+							</ComboBox>
+						</actipro:SettingsCard>
+
+						<actipro:SettingsCard Header="Hyperlinks">
+							<StackPanel Orientation="Horizontal" Spacing="20">
+								<actipro:HyperlinkTextBlock>First option</actipro:HyperlinkTextBlock>
+								<actipro:HyperlinkTextBlock>Second option</actipro:HyperlinkTextBlock>
+							</StackPanel>
+						</actipro:SettingsCard>
+
+						<actipro:SettingsCard Header="Slider">
+							<Slider Minimum="0" Maximum="100" Value="75" TickFrequency="1" IsSnapToTickEnabled="True" />
+						</actipro:SettingsCard>
+
+						<actipro:SettingsCard Header="TextBox (small)">
+							<TextBox MinWidth="150"/>
+						</actipro:SettingsCard>
+
+						<actipro:SettingsCard Header="TextBox (large)" IsWrapped="True" HorizontalContentAlignment="Stretch">
+							<TextBox />
+						</actipro:SettingsCard>
+
+						<actipro:SettingsCard Header="TextBox (multi-line)" IsWrapped="True" HorizontalContentAlignment="Stretch">
+							<TextBox Height="100" AcceptsReturn="True" AcceptsTab="True" />
+						</actipro:SettingsCard>
+
+						<actipro:SettingsCard Header="ToggleSwitch">
+							<ToggleSwitch IsChecked="True" />
+						</actipro:SettingsCard>
+
+					</actipro:SettingsExpander>
+
+				</actipro:SettingsGroup>
+
+			</StackPanel>
+			
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample VerticalContentAlignment="Top"
+			Header="SettingsCard usage"
+			Footer="Any control can be used as the content of a SettingsCard."
+			DataContext="{Binding #basicUsageCardSample}"
+			>
+
+			<actipro:SettingsGroup Header="Use SettingsCard for an individual setting">
+				<actipro:SettingsCard x:Name="basicUsageCardSample"
+					Header="Setting name"
+					Description="Settings can have a description for additional context"
+					>
+					<actipro:SettingsCard.HeaderIcon>
+						<PathIcon Data="{StaticResource icon-fluent-mdl2-settings}" />
+					</actipro:SettingsCard.HeaderIcon>
+				
+					<ToggleSwitch />
+
+				</actipro:SettingsCard>
+			</actipro:SettingsGroup>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<TextBox Text="{Binding Header}" Watermark="Header" UseFloatingWatermark="True" />
+					<TextBox Text="{Binding Description}" Watermark="Description" UseFloatingWatermark="True" />
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="{Binding WrapThreshold, StringFormat='Wrap threshold: {0}'}" />
+						<Slider Minimum="50" Maximum="1000" Value="{Binding WrapThreshold}" TickFrequency="1" IsSnapToTickEnabled="True" SmallChange="1" LargeChange="10" />
+					</StackPanel>
+					<CheckBox IsChecked="{Binding IsHeaderIconVisible}" Content="Is header icon visible" />
+					<CheckBox IsChecked="{Binding IsEnabled}" Content="Is enabled" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:SettingsCard WrapThreshold="$(WrapThreshold)"$(IsHeaderIconVisibleAttribute)$(IsEnabledAttribute)$(HeaderAttribute)$(DescriptionAttribute)
+	<actipro:SettingsCard.HeaderIcon>
+		<PathIcon Data="..." />
+	</actipro:SettingsCard.HeaderIcon>
+	
+	<ToggleSwitch />
+	
+</actipro:SettingsCard>
+]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="DescriptionAttribute"
+															   IsEnabled="{Binding Description, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding Description, StringFormat='&#xA;&#x9;Description=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="HeaderAttribute"
+															   IsEnabled="{Binding Header, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding Header, StringFormat='&#xA;&#x9;Header=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="WrapThreshold" Value="{Binding WrapThreshold}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsHeaderIconVisibleAttribute"
+															   IsEnabled="{Binding !IsHeaderIconVisible}"
+															   Value=" IsHeaderIconVisible=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute"
+															   IsEnabled="{Binding !IsEnabled}"
+															   Value=" IsEnabled=&quot;False&quot;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Actionable card"
+			>
+
+			<actipro:SettingsGroup Header="Use a clickable SettingsCard to attach an action directly to the card">
+
+				<actipro:SettingsGroup.Styles>
+					<Style Selector="actipro|SettingsCard">
+						<Setter Property="IsActionIconVisible" Value="{Binding #clickableSampleIsActionIconVisible.IsChecked}" />
+					</Style>
+				</actipro:SettingsGroup.Styles>
+				<actipro:SettingsCard Header="Command property"
+					Description="Assign a 'Command' and the setting is automatically clickable."
+					Command="{Binding #sampleRootControl.SettingClickedCommand}"
+					CommandParameter="Clickable sample">
+					<actipro:SettingsCard.ActionIcon>
+						<ContentPresenter ContentTemplate="{actipro:GlyphTemplate ExternalLink16}" />
+					</actipro:SettingsCard.ActionIcon>
+				</actipro:SettingsCard>
+
+				<actipro:SettingsCard x:Name="clickEventSample" Header="Click event"
+					Description="Set 'IsClickEnabled=True' to respond to the 'Click' event."
+					IsClickEnabled="True" Click="OnSettingClick">
+					<actipro:SettingsCard.ActionIcon>
+						<ContentPresenter ContentTemplate="{actipro:GlyphTemplate RightArrow16}" />
+					</actipro:SettingsCard.ActionIcon>
+					<CheckBox Content="Is click enabled" IsChecked="{Binding #clickEventSample.IsClickEnabled}" />
+				</actipro:SettingsCard>
+
+			</actipro:SettingsGroup>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<CheckBox x:Name="clickableSampleIsActionIconVisible" IsChecked="True" Content="Is action icon visible" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<!-- Command Sample (assumes ICommand available from DataContext) -->
+<actipro:SettingsCard Header="Header here"$(IsActionIconVisibleAttribute)
+	Description="Description here"
+	Command="{Binding SomeCommand}" CommandParameter="OptionalParameter">
+	<actipro:SettingsCard.ActionIcon>
+		<ContentPresenter ContentTemplate="{actipro:GlyphTemplate ExternalLink16}" />
+	</actipro:SettingsCard.ActionIcon>
+</actipro:SettingsCard>
+
+<!-- Click Event Sample (assumes code-behind Click handler) -->
+<actipro:SettingsCard Header="Header here"$(IsActionIconVisibleAttribute)
+	Description="Description here"
+	IsClickEnabled="True" Click="OnSettingClick">
+	<actipro:SettingsCard.ActionIcon>
+		<ContentPresenter ContentTemplate="{actipro:GlyphTemplate ExternalLink16}" />
+	</actipro:SettingsCard.ActionIcon>
+</actipro:SettingsCard>
+
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="IsActionIconVisibleAttribute"
+															   IsEnabled="{Binding !#clickableSampleIsActionIconVisible.IsChecked}"
+															   Value=" IsActionIconVisible=&quot;False&quot;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="SettingsExpander usage"
+			DataContext="{Binding #basicUsageExpanderSample}" VerticalContentAlignment="Top"
+			>
+
+			<actipro:SettingsGroup Header="Use SettingsExpander to show other settings when expanded">
+
+				<actipro:SettingsExpander x:Name="basicUsageExpanderSample"
+					IsExpanded="True" IsItemsHeaderVisible="True" IsItemsFooterVisible="False"
+					Header="Expander setting name"
+					Description="Most of the SettingsCard properties are supported"
+					>
+					<actipro:SettingsExpander.HeaderIcon>
+						<PathIcon Data="{StaticResource icon-fluent-mdl2-settings}" />
+					</actipro:SettingsExpander.HeaderIcon>
+					<actipro:SettingsExpander.Content>	
+						<TextBox>Optional Setting</TextBox>
+					</actipro:SettingsExpander.Content>
+					<actipro:SettingsExpander.ItemsHeader>
+						<actipro:InfoBar CornerRadius="0" BorderThickness="0" CanClose="False" IsIconVisible="False"
+							Message="Any content can be displayed above the child settings like this InfoBar" />
+					</actipro:SettingsExpander.ItemsHeader>
+					<actipro:SettingsExpander.ItemsFooter>
+						<actipro:InfoBar Severity="Success" CornerRadius="0" BorderThickness="0" CanClose="False" IsIconVisible="False"
+							Message="Any content can be displayed below the child settings like this InfoBar" />
+					</actipro:SettingsExpander.ItemsFooter>
+
+					<actipro:SettingsCard Header="SettingsExpander can display any content above or below the items" IsWrapped="True">
+						<StackPanel Spacing="5">
+							<CheckBox Content="Show items header" IsChecked="{Binding IsItemsHeaderVisible}"/>
+							<CheckBox Content="Show items footer" IsChecked="{Binding IsItemsFooterVisible}"/>
+						</StackPanel>
+					</actipro:SettingsCard>
+					<actipro:SettingsCard Header="Use any SettingsCard within a SettingsExpander.Items collection">
+						<ColorPicker Color="Orange" />
+					</actipro:SettingsCard>
+					<actipro:SettingsCard Header="SettingsExpander can also have its own Content for an individual setting">
+						<ToggleSwitch />
+					</actipro:SettingsCard>
+					<actipro:SettingsCard x:Name="basicUsageExpanderSampleIndentSettingsCard" Header="By default, each SettingsCard is automatically indented by showing the header and action icons even when no icons are defined. Toggle the options below to see how this SettingsCard is impacted by the indentation." IsWrapped="True">
+						<StackPanel Spacing="5">
+							<CheckBox Content="Is header icon visible" IsChecked="{Binding #basicUsageExpanderSampleIndentSettingsCard.IsHeaderIconVisible}"/>
+							<CheckBox Content="Is action icon visible" IsChecked="{Binding #basicUsageExpanderSampleIndentSettingsCard.IsActionIconVisible}"/>
+						</StackPanel>
+					</actipro:SettingsCard>
+
+				</actipro:SettingsExpander>
+
+			</actipro:SettingsGroup>
+
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<TextBox Text="{Binding Header}" Watermark="Header" UseFloatingWatermark="True" />
+					<TextBox Text="{Binding Description}" Watermark="Description" UseFloatingWatermark="True" />
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="{Binding WrapThreshold, StringFormat='Wrap threshold: {0}'}" />
+						<Slider Minimum="50" Maximum="1000" Value="{Binding WrapThreshold}" TickFrequency="1" IsSnapToTickEnabled="True" SmallChange="1" LargeChange="10" />
+					</StackPanel>
+					<CheckBox IsChecked="{Binding IsHeaderIconVisible}" Content="Is header icon visible" />
+					<CheckBox IsChecked="{Binding IsAnimationEnabled}" Content="Is animation enabled" />
+					<CheckBox IsChecked="{Binding IsEnabled}" Content="Is enabled" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:SettingsExpander WrapThreshold="$(WrapThreshold)"$(IsAnimationEnabledAttribute)$(IsHeaderIconVisibleAttribute)$(IsItemsHeaderVisibleAttribute)$(IsItemsFooterVisibleAttribute)$(HeaderAttribute)$(DescriptionAttribute)>
+	<!-- Optionally define a header icon -->
+	<actipro:SettingsExpander.HeaderIcon>
+		<PathIcon Data="..." />
+	</actipro:SettingsExpander.HeaderIcon>
+	
+	<!-- Optionally define an individual setting as content -->
+	<actipro:SettingsExpander.Content>
+		<TextBox>Optional Setting</TextBox>
+	</actipro:SettingsExpander.Content>
+	
+	<!-- Any content can be shown above or below the settings -->
+	<actipro:SettingsExpander.ItemsHeader>
+		<actipro:InfoBar CornerRadius="0" BorderThickness="0" CanClose="False" IsIconVisible="False"
+			Message="Any content can be displayed above the child settings like this InfoBar" />
+	</actipro:SettingsExpander.ItemsHeader>
+	<actipro:SettingsExpander.ItemsFooter>
+		<actipro:InfoBar Severity="Success" CornerRadius="0" BorderThickness="0" CanClose="False" IsIconVisible="False"
+			Message="Any content can be displayed below the child settings like this InfoBar" />
+	</actipro:SettingsExpander.ItemsFooter>
+
+	<!-- Define one or more settings that are visible when expanded -->
+	<actipro:SettingsCard ... />
+	<actipro:SettingsCard ... />
+
+</actipro:SettingsExpander>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="DescriptionAttribute"
+															   IsEnabled="{Binding Description, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding Description, StringFormat='&#xA;&#x9;Description=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="HeaderAttribute"
+															   IsEnabled="{Binding Header, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding Header, StringFormat='&#xA;&#x9;Header=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="WrapThreshold" Value="{Binding WrapThreshold}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsHeaderIconVisibleAttribute"
+															   IsEnabled="{Binding !IsHeaderIconVisible}"
+															   Value=" IsHeaderIconVisible=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsItemsFooterVisibleAttribute"
+															   IsEnabled="{Binding !IsItemsFooterVisible}"
+															   Value=" IsItemsFooterVisible=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsItemsHeaderVisibleAttribute"
+															   IsEnabled="{Binding !IsItemsHeaderVisible}"
+															   Value=" IsItemsHeaderVisible=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsAnimationEnabledAttribute"
+															   IsEnabled="{Binding !IsAnimationEnabled}"
+															   Value=" IsAnimationEnabled=&quot;False&quot;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="SettingsGroup usage"
+			DataContext="{Binding #groupSample}"
+			>
+
+			<StackPanel>
+				<actipro:SettingsGroup x:Name="groupSample" Header="Group name" Description="Use groups to organize related settings under a header">
+					<actipro:SettingsCard Header="Use any SettingsCard in a group">
+						<ComboBox SelectedIndex="0" >
+							<ComboBoxItem>Item 1</ComboBoxItem>
+							<ComboBoxItem>Item 2</ComboBoxItem>
+							<ComboBoxItem>Item 3</ComboBoxItem>
+						</ComboBox>
+					</actipro:SettingsCard>
+					<actipro:SettingsExpander Header="SettingsExpander can also be used in a group">
+						<actipro:SettingsCard Header="Another setting">
+							<ToggleSwitch />
+						</actipro:SettingsCard>
+					</actipro:SettingsExpander>
+				</actipro:SettingsGroup>
+				
+				<actipro:SettingsGroup Header="Another group" Description="Each SettingsGroup has a default margin for consistent vertical spacing between groups">
+					<actipro:SettingsCard Header="Individual settings within a group also have consistent spacing">
+						<actipro:SettingsCard.HeaderIcon>
+							<PathIcon Data="{StaticResource icon-fluent-mdl2-line-spacing}" />
+						</actipro:SettingsCard.HeaderIcon>
+					</actipro:SettingsCard>
+					<actipro:SettingsExpander Header="Compare the spacing of the items in this expander" IsExpanded="True">
+						<actipro:SettingsCard Header="There is no spacing between expander items" />
+						<actipro:SettingsCard Header="Another setting">
+							<ToggleSwitch />
+						</actipro:SettingsCard>
+					</actipro:SettingsExpander>
+					<actipro:SettingsCard Header="Another setting">
+						<ToggleSwitch />
+					</actipro:SettingsCard>
+				</actipro:SettingsGroup>
+
+				<actipro:SettingsGroup Margin="0">
+					<actipro:SettingsCard Header="A SettingsGroup doesn't have to have a header or description" Description="These settings are in a group without a header or description" />
+					<actipro:SettingsCard Header="Set Margin='0' on the last SettingsGroup to prevent the default margin from appearing below the group" />
+					<actipro:SettingsCard Header="Another setting">
+						<ToggleSwitch />
+					</actipro:SettingsCard>
+				</actipro:SettingsGroup>
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<TextBox Text="{Binding Header}" Watermark="Header" UseFloatingWatermark="True" />
+					<TextBox Text="{Binding Description}" Watermark="Description" UseFloatingWatermark="True" />
+					<CheckBox IsChecked="{Binding IsEnabled}" Content="Is enabled" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<StackPanel>
+
+	<actipro:SettingsGroup$(IsEnabledAttribute)$(HeaderAttribute)$(DescriptionAttribute)>
+
+		<!-- Define one or more settings that are visible when expanded -->
+		<actipro:SettingsCard ... />
+		<actipro:SettingsExpander ... />
+
+	</actipro:SettingsGroup>
+	
+	<actipro:SettingsGroup Header="Another group">
+		...
+	</actipro:SettingsGroup>
+
+	<actipro:SettingsGroup Header="Another group">
+		...
+	</actipro:SettingsGroup>
+
+</StackPanel>
+]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="DescriptionAttribute"
+															   IsEnabled="{Binding Description, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding Description, StringFormat='&#xA;&#x9;&#x9;Description=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="HeaderAttribute"
+															   IsEnabled="{Binding Header, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding Header, StringFormat='&#xA;&#x9;&#x9;Header=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute"
+															   IsEnabled="{Binding !IsEnabled}"
+															   Value=" IsEnabled=&quot;False&quot;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Sample: App theme">
+
+			<actipro:SettingsGroup Header="Appearance &amp; behavior">
+				<actipro:SettingsCard Header="App theme">
+					<actipro:SettingsCard.HeaderIcon>
+						<PathIcon Data="{StaticResource icon-fluent-mdl2-color}" />
+					</actipro:SettingsCard.HeaderIcon>
+					<actipro:SettingsCard.Description>
+						<actipro:HyperlinkTextBlock
+							Command="{Binding #sampleRootControl.SettingClickedCommand}"
+							CommandParameter="System Settings"
+							FontSize="{actipro:ThemeResource DefaultFontSizeSmall}"
+							FontWeight="DemiBold"
+							Text="Open system settings" />
+					</actipro:SettingsCard.Description>
+					<ComboBox SelectedIndex="2">
+						<ComboBoxItem>Light</ComboBoxItem>
+						<ComboBoxItem>Dark</ComboBoxItem>
+						<ComboBoxItem>System default</ComboBoxItem>
+					</ComboBox>
+				</actipro:SettingsCard>
+			</actipro:SettingsGroup>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:SettingsGroup Header="Appearance &amp; behavior">
+	
+	<actipro:SettingsCard Header="App theme">
+
+		<actipro:SettingsCard.HeaderIcon>
+			<PathIcon Data="..." />
+		</actipro:SettingsCard.HeaderIcon>
+
+		<actipro:SettingsCard.Description>
+			<actipro:HyperlinkTextBlock
+				Command="{Binding #sampleRootControl.SettingClickedCommand}"
+				CommandParameter="System Settings"
+				FontSize="{actipro:ThemeResource DefaultFontSizeSmall}"
+				FontWeight="DemiBold"
+				Text="Open system settings" />
+		</actipro:SettingsCard.Description>
+
+		<ComboBox SelectedIndex="2">
+			<ComboBoxItem>Light</ComboBoxItem>
+			<ComboBoxItem>Dark</ComboBoxItem>
+			<ComboBoxItem>System default</ComboBoxItem>
+		</ComboBox>
+
+	</actipro:SettingsCard>
+
+</actipro:SettingsGroup>
+]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Sample: Backup &amp; restore">
+
+			<actipro:SettingsGroup Header="Backup &amp; restore">
+				<actipro:SettingsExpander Header="Backup and restore your settings"
+										  Description="The application will restart automatically if needed"
+										  IsExpanded="True">
+					<actipro:SettingsExpander.HeaderIcon>
+						<PathIcon Data="{StaticResource icon-fluent-mdl2-update-restore}" />
+					</actipro:SettingsExpander.HeaderIcon>
+					<actipro:SettingsExpander.Content>
+						<StackPanel Orientation="Horizontal" Spacing="5">
+							<Button Content="Backup" />
+							<Button Content="Restore" />
+						</StackPanel>
+					</actipro:SettingsExpander.Content>
+
+					<actipro:SettingsCard Header="Location">
+						<StackPanel Orientation="Horizontal" Spacing="5">
+							<TextBlock VerticalAlignment="Center"
+								Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}"
+								Text="C:\Users\CurrentUser\Documents\Backup" />
+							<Button Content="..."/>
+						</StackPanel>
+					</actipro:SettingsCard>
+
+					<actipro:SettingsCard Header="Backup information" IsWrapped="True">
+						<Grid ColumnDefinitions="Auto,20,Auto" RowDefinitions="Auto,Auto,Auto,Auto">
+							<TextBlock Grid.Column="0" Grid.Row="0" Text="Status:" />
+							<TextBlock Grid.Column="0" Grid.Row="1" Text="File name:" />
+							<TextBlock Grid.Column="0" Grid.Row="2" Text="Machine name:" />
+							<TextBlock Grid.Column="0" Grid.Row="3" Text="Created at:" />
+
+							<TextBlock Grid.Column="2" Grid.Row="0" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}">
+								<Run>Backup found - </Run>
+								<InlineUIContainer>
+									<actipro:HyperlinkTextBlock>Refresh</actipro:HyperlinkTextBlock>
+								</InlineUIContainer>
+							</TextBlock>
+							<TextBlock Grid.Column="2" Grid.Row="1" Text="app_settings.json" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" />
+							<TextBlock Grid.Column="2" Grid.Row="2" Text="DEV_BOX_A" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" />
+							<TextBlock Grid.Column="2" Grid.Row="3" Text="January 31 at 8:00 AM" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" />
+						</Grid>
+					</actipro:SettingsCard>
+					
+				</actipro:SettingsExpander>
+			</actipro:SettingsGroup>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:SettingsGroup Header="Backup &amp; restore">
+
+	<actipro:SettingsExpander
+		Header="Backup and restore your settings"
+		Description="The application will restart automatically if needed">
+
+		<actipro:SettingsExpander.HeaderIcon>
+			<PathIcon Data="..." />
+		</actipro:SettingsExpander.HeaderIcon>
+
+		<actipro:SettingsExpander.Content>
+			<StackPanel Orientation="Horizontal" Spacing="5">
+				<Button Content="Backup" />
+				<Button Content="Restore" />
+			</StackPanel>
+		</actipro:SettingsExpander.Content>
+
+		<actipro:SettingsCard Header="Location">
+			<StackPanel Orientation="Horizontal" Spacing="5">
+				<TextBlock VerticalAlignment="Center"
+					Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}"
+					Text="C:\Users\CurrentUser\Documents\Backup" />
+				<Button Content="..."/>
+			</StackPanel>
+		</actipro:SettingsCard>
+
+		<actipro:SettingsCard Header="Backup information" IsWrapped="True">
+			<Grid ColumnDefinitions="Auto,20,Auto" RowDefinitions="Auto,Auto,Auto,Auto">
+				<TextBlock Grid.Column="0" Grid.Row="0" Text="Status:" />
+				<TextBlock Grid.Column="0" Grid.Row="1" Text="File name:" />
+				<TextBlock Grid.Column="0" Grid.Row="2" Text="Machine name:" />
+				<TextBlock Grid.Column="0" Grid.Row="3" Text="Created at:" />
+
+				<TextBlock Grid.Column="2" Grid.Row="0" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}">
+					<Run>Backup found - </Run>
+					<InlineUIContainer>
+						<actipro:HyperlinkTextBlock>Refresh</actipro:HyperlinkTextBlock>
+					</InlineUIContainer>
+				</TextBlock>
+				<TextBlock Grid.Column="2" Grid.Row="1" Text="app_settings.json" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" />
+				<TextBlock Grid.Column="2" Grid.Row="2" Text="DEV_BOX_A" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" />
+				<TextBlock Grid.Column="2" Grid.Row="3" Text="January 31 at 8:00 AM" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" />
+			</Grid>
+		</actipro:SettingsCard>
+
+	</actipro:SettingsExpander>
+
+</actipro:SettingsGroup>
+]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+			
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Sample: Sound options">
+
+			<StackPanel>
+				<actipro:SettingsGroup Header="Output">
+					<actipro:SettingsExpander Header="Choose where to play sound" Description="Apps might have their own settings" IsExpanded="True">
+						<actipro:SettingsExpander.HeaderIcon>
+							<PathIcon Data="{StaticResource icon-fluent-mdl2-volume-3}" />
+						</actipro:SettingsExpander.HeaderIcon>
+
+						<actipro:SettingsCard>
+							<RadioButton GroupName="OutputDevice" IsChecked="True">
+								<StackPanel>
+									<TextBlock Text="Speakers" />
+									<TextBlock Text="USB Audio 3.0" FontSize="{actipro:ThemeResource DefaultFontSizeExtraSmall}" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" />
+								</StackPanel>
+							</RadioButton>
+						</actipro:SettingsCard>
+
+						<actipro:SettingsCard>
+							<RadioButton GroupName="OutputDevice">
+								<StackPanel>
+									<TextBlock Text="Headphones" />
+									<TextBlock Text="Bluetooth" FontSize="{actipro:ThemeResource DefaultFontSizeExtraSmall}" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" />
+								</StackPanel>
+							</RadioButton>
+						</actipro:SettingsCard>
+
+						<actipro:SettingsCard>
+							<RadioButton GroupName="OutputDevice">
+								<StackPanel>
+									<TextBlock Text="Digital Output" />
+									<TextBlock Text="Onboard SPDIF" FontSize="{actipro:ThemeResource DefaultFontSizeExtraSmall}" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" />
+								</StackPanel>
+							</RadioButton>
+						</actipro:SettingsCard>
+
+						<actipro:SettingsCard>
+							<RadioButton GroupName="OutputDevice">
+								<StackPanel>
+									<TextBlock Text="Computer Monitor" />
+									<TextBlock Text="DisplayPort" FontSize="{actipro:ThemeResource DefaultFontSizeExtraSmall}" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" />
+								</StackPanel>
+							</RadioButton>
+						</actipro:SettingsCard>
+
+						<actipro:SettingsCard Header="Pair a new output device">
+							<Button>Add device</Button>
+						</actipro:SettingsCard>
+
+					</actipro:SettingsExpander>
+
+					<actipro:SettingsCard Header="Volume">
+						<StackPanel Orientation="Horizontal">
+							<Button Classes="theme-subtle" ToolTip.Tip="Mute">
+								<PathIcon Data="{StaticResource icon-fluent-mdl2-volume-disabled}" />
+							</Button>
+							<TextBlock Text="{Binding #soundSampleOutputVolume.Value}" Width="30" TextAlignment="Right" Margin="5,0" VerticalAlignment="Center" />
+							<Slider x:Name="soundSampleOutputVolume" Width="200" Minimum="0" Maximum="100" Value="10" TickFrequency="1" IsSnapToTickEnabled="True" VerticalAlignment="Center" />
+						</StackPanel>
+					</actipro:SettingsCard>
+
+					<actipro:SettingsCard Header="Mono audio" Description="Combine left and right audio channels into one">
+						<ToggleSwitch />
+					</actipro:SettingsCard>
+
+				</actipro:SettingsGroup>
+
+				<actipro:SettingsGroup Header="Input">
+					<actipro:SettingsExpander Header="Choose a device for speaking or recording" Description="Apps might have their own settings">
+						<actipro:SettingsExpander.HeaderIcon>
+							<PathIcon Data="{StaticResource icon-fluent-mdl2-microphone}" />
+						</actipro:SettingsExpander.HeaderIcon>
+
+						<actipro:SettingsCard>
+							<RadioButton GroupName="InputDevice">
+								<StackPanel>
+									<TextBlock Text="Line in" />
+									<TextBlock Text="Onboard" FontSize="{actipro:ThemeResource DefaultFontSizeExtraSmall}" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" />
+								</StackPanel>
+							</RadioButton>
+						</actipro:SettingsCard>
+
+						<actipro:SettingsCard>
+							<RadioButton GroupName="InputDevice" IsChecked="True">
+								<StackPanel>
+									<TextBlock Text="Microphone" />
+									<TextBlock Text="Bluetooth" FontSize="{actipro:ThemeResource DefaultFontSizeExtraSmall}" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" />
+								</StackPanel>
+							</RadioButton>
+						</actipro:SettingsCard>
+
+						<actipro:SettingsCard Header="Pair a new input device">
+							<Button>Add device</Button>
+						</actipro:SettingsCard>
+
+					</actipro:SettingsExpander>
+
+					<actipro:SettingsCard Header="Volume">
+						<StackPanel Orientation="Horizontal">
+							<Button Classes="theme-subtle" ToolTip.Tip="Mute">
+								<PathIcon Data="{StaticResource icon-fluent-mdl2-mic-off}" />
+							</Button>
+							<TextBlock Text="{Binding #soundSampleInputVolume.Value}" Width="30" TextAlignment="Right" Margin="5,0" VerticalAlignment="Center" />
+							<Slider x:Name="soundSampleInputVolume" Width="200" Minimum="0" Maximum="100" Value="80" TickFrequency="1" IsSnapToTickEnabled="True" VerticalAlignment="Center" />
+						</StackPanel>
+					</actipro:SettingsCard>
+				</actipro:SettingsGroup>
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<StackPanel>
+
+	<!-- Output settings -->
+	<actipro:SettingsGroup Header="Output">
+		<actipro:SettingsExpander Header="Choose where to play sound" Description="Apps might have their own settings" IsExpanded="True">
+			<actipro:SettingsExpander.HeaderIcon>
+				<PathIcon Data="..." />
+			</actipro:SettingsExpander.HeaderIcon>
+
+			<actipro:SettingsCard>
+				<RadioButton GroupName="OutputDevice" IsChecked="True">
+					<StackPanel>
+						<TextBlock Text="Speakers" />
+						<TextBlock Text="USB Audio 3.0" FontSize="{actipro:ThemeResource DefaultFontSizeExtraSmall}" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" />
+					</StackPanel>
+				</RadioButton>
+			</actipro:SettingsCard>
+
+			<actipro:SettingsCard>
+				<RadioButton GroupName="OutputDevice">
+					<StackPanel>
+						<TextBlock Text="Headphones" />
+						<TextBlock Text="Bluetooth" FontSize="{actipro:ThemeResource DefaultFontSizeExtraSmall}" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" />
+					</StackPanel>
+				</RadioButton>
+			</actipro:SettingsCard>
+
+			<actipro:SettingsCard Header="Pair a new output device">
+				<Button>Add device</Button>
+			</actipro:SettingsCard>
+
+		</actipro:SettingsExpander>
+
+		<actipro:SettingsCard Header="Volume">
+			<StackPanel Orientation="Horizontal">
+				<Button Classes="theme-subtle" ToolTip.Tip="Mute">
+					<PathIcon Data="..." />
+				</Button>
+				<TextBlock Text="{Binding #soundSampleOutputVolume.Value}" Width="30" TextAlignment="Right" Margin="5,0" VerticalAlignment="Center" />
+				<Slider x:Name="soundSampleOutputVolume" Width="200" Minimum="0" Maximum="100" Value="10" TickFrequency="1" IsSnapToTickEnabled="True" VerticalAlignment="Center" />
+			</StackPanel>
+		</actipro:SettingsCard>
+
+		<actipro:SettingsCard Header="Mono audio" Description="Combine left and right audio channels into one">
+			<ToggleSwitch />
+		</actipro:SettingsCard>
+
+	</actipro:SettingsGroup>
+
+
+	<!-- Input settings -->
+	<actipro:SettingsGroup Header="Input">
+		<actipro:SettingsExpander Header="Choose a device for speaking or recording" Description="Apps might have their own settings">
+			<actipro:SettingsExpander.HeaderIcon>
+				<PathIcon Data="..." />
+			</actipro:SettingsExpander.HeaderIcon>
+
+			<actipro:SettingsCard>
+				<RadioButton GroupName="InputDevice">
+					<StackPanel>
+						<TextBlock Text="Line in" />
+						<TextBlock Text="Onboard" FontSize="{actipro:ThemeResource DefaultFontSizeExtraSmall}" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" />
+					</StackPanel>
+				</RadioButton>
+			</actipro:SettingsCard>
+
+			<actipro:SettingsCard>
+				<RadioButton GroupName="InputDevice" IsChecked="True">
+					<StackPanel>
+						<TextBlock Text="Microphone" />
+						<TextBlock Text="Bluetooth" FontSize="{actipro:ThemeResource DefaultFontSizeExtraSmall}" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" />
+					</StackPanel>
+				</RadioButton>
+			</actipro:SettingsCard>
+
+			<actipro:SettingsCard Header="Pair a new input device">
+				<Button>Add device</Button>
+			</actipro:SettingsCard>
+
+		</actipro:SettingsExpander>
+
+		<actipro:SettingsCard Header="Volume">
+			<StackPanel Orientation="Horizontal">
+				<Button Classes="theme-subtle" ToolTip.Tip="Mute">
+					<PathIcon Data="..." />
+				</Button>
+				<TextBlock Text="{Binding #soundSampleInputVolume.Value}" Width="30" TextAlignment="Right" Margin="5,0" VerticalAlignment="Center" />
+				<Slider x:Name="soundSampleInputVolume" Width="200" Minimum="0" Maximum="100" Value="80" TickFrequency="1" IsSnapToTickEnabled="True" VerticalAlignment="Center" />
+			</StackPanel>
+		</actipro:SettingsCard>
+
+	</actipro:SettingsGroup>
+
+</StackPanel>
+]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+</UserControl>

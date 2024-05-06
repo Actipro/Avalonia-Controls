@@ -50,6 +50,12 @@ The [MeasureAdjuster](measure-adjuster.md) decorator can measure as zero size or
 
 The [MeshGradientPresenter](mesh-gradient-presenter.md) control renders a gradient background that consists of multiple stacked radial gradients positioned at various locations.
 
+## ScrollableOverflowPresenter
+
+![Screenshot](../images/scrollableoverflowpresenter.png)
+
+The [ScrollableOverflowPresenter](scrollable-overflow-presenter.md) control displays scroll buttons when its content overflows the available space.  Tap the buttons to scroll through the content or hold down a button to scroll quickly.
+
 ## ShadowChrome
 
 ![Screenshot](../images/shadowchrome.png)

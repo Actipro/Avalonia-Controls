@@ -20,36 +20,25 @@
 			<DataTemplate x:DataType="sampleBrowser:ListItemInfo">
 
 				<StackPanel Margin="{actipro:ScaledThickness '0,0,2.5,2.5'}">
-					<Button Theme="{actipro:ControlTheme ButtonCard}" Command="{Binding NavigateViewToItemInfoCommand}" CommandParameter="{Binding TargetUri}" 
-							Content="{Binding}" CornerRadius="10" Padding="0" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
-							ToolTip.Tip="{Binding Title, StringFormat='Open the {0} featured sample'}" ToolTip.ShowDelay="1000">
-						<Button.ContentTemplate>
+					<actipro:Card Classes="theme-elevated" Focusable="True" Content="{Binding}" Padding="0"
+						Command="{Binding NavigateViewToItemInfoCommand}" CommandParameter="{Binding TargetUri}"
+						ToolTip.Tip="{Binding Title, StringFormat='Open the {0} featured sample'}" ToolTip.ShowDelay="1000"
+						actipro:BadgeService.HorizontalAlignment="InsideOfTargetRightEdge"
+						actipro:BadgeService.VerticalAlignment="InsideOfTargetTopEdge"
+						actipro:BadgeService.VerticalOffset="20"
+						>
+
+						<actipro:BadgeService.Badge>
+							<actipro:Badge Template="{StaticResource BlurbBadgeTemplate}" IsHitTestVisible="False" IsActive="{Binding HasBlurbText}" Content="{Binding BlurbText}" />
+						</actipro:BadgeService.Badge>
+						
+						<actipro:Card.ContentTemplate>
 							<DataTemplate x:DataType="sampleBrowser:ListItemInfo">
-								
-								<Panel>
-									<Image x:Name="screenshot" Width="200" Height="150" Source="{Binding ImageSource}" actipro:BorderChildClipConverter.ClipToContainingBorder="True" />
-
-									<StackPanel Margin="0,20,-1,0" Height="18" HorizontalAlignment="Right" VerticalAlignment="Top" Orientation="Horizontal" IsVisible="{Binding HasBlurbText}">
-										<StackPanel.Effect>
-											<DropShadowEffect OffsetX="0" OffsetY="1" BlurRadius="5" Opacity="0.2" />
-										</StackPanel.Effect>
-
-										<Path Data="M 10,0 L 0,0 L 5,5 L 0,10 L 10,10 Z" Fill="{actipro:ThemeResource ControlBackgroundBrushSolidDanger}" Stretch="Fill" />
-										<Border BorderThickness="0,0,1,0" BorderBrush="{actipro:ThemeResource ControlForegroundBrushOutlineDanger}"
-												Background="{actipro:ThemeResource ControlBackgroundBrushSolidDanger}" Padding="0,0,5,0">
-											<TextBlock
-												Text="{Binding BlurbText, Converter={x:Static actipro:StringConverters.ToUpperInvariant}}"
-												Foreground="{actipro:ThemeResource ControlForegroundBrushSolidDanger}"
-												FontSize="{actipro:ThemeResource DefaultFontSizeExtraSmall}"
-												VerticalAlignment="Center"
-												/>
-										</Border>
-									</StackPanel>
-								</Panel>
-
+								<Image x:Name="screenshot" Width="200" Height="150" Source="{Binding ImageSource}" />
 							</DataTemplate>
-						</Button.ContentTemplate>
-					</Button>
+						</actipro:Card.ContentTemplate>
+
+					</actipro:Card>
 
 					<Decorator Grid.Row="1" Margin="10,5,10,0">
 						<DockPanel MinHeight="16">

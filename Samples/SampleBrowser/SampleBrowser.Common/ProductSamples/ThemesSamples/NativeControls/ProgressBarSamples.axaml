@@ -19,6 +19,10 @@
 			<sampleBrowser:ControlExampleLinkItem Title="Control themes" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/native-control-themes#other-controls" />
 		</sampleBrowser:ControlExampleItemsControl.Documentation>
 
+		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+			<sampleBrowser:ControlExampleLinkItem Title="Circular progressbar" Url="/ProductSamples/FundamentalsSamples/Controls/CircularProgressBarIntro/MainControl" />
+			<sampleBrowser:ControlExampleLinkItem Title="Progress spinners" Url="/ProductSamples/FundamentalsSamples/Controls/ProgressSpinners/MainControl" />
+		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
 
 		<sampleBrowser:ControlExample
 			Header="ProgressBar usage"
@@ -68,7 +72,7 @@
 						<sampleBrowser:CodeExampleSubstitution Key="Value" Value="{Binding Value, Converter={StaticResource RoundMathConverter}, ConverterParameter='Round(x)'}" />
 						<sampleBrowser:CodeExampleSubstitution Key="ProgressTextFormatAttribute"
 															   IsEnabled="{Binding ProgressTextFormat, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='{}{1:0}%'}"
-															   Value="{Binding ProgressTextFormat, StringFormat=' ProgressTextFormat=&quot;{0}&quot;'}" />
+															   Value="{Binding ProgressTextFormat, StringFormat=' ProgressTextFormat=&quot;{{}}{0}&quot;'}" />
 						<sampleBrowser:CodeExampleSubstitution Key="ShowProgressTextAttribute"
 															   IsEnabled="{Binding ShowProgressText}"
 															   Value=" ShowProgressText=&quot;True&quot;" />

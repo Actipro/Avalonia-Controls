@@ -21,6 +21,7 @@
 		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
 			<sampleBrowser:ControlExampleLinkItem Title="DataGrid" Url="/ProductSamples/ThemesSamples/NativeControls/DataGridSamples" />
 			<sampleBrowser:ControlExampleLinkItem Title="TreeView" Url="/ProductSamples/ThemesSamples/NativeControls/TreeViewSamples" />
+			<sampleBrowser:ControlExampleLinkItem Title="SegmentedBar" Url="/ProductSamples/FundamentalsSamples/Controls/SegmentedBarIntro/MainControl" />
 		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
 
 

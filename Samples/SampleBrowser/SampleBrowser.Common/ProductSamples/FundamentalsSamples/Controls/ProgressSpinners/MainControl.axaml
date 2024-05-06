@@ -18,6 +18,12 @@
 			<sampleBrowser:ControlExampleLinkItem Title="Progress Spinners" Url="https://www.actiprosoftware.com/docs/controls/avalonia/fundamentals/controls/progress-spinners" />
 		</sampleBrowser:ControlExampleItemsControl.Documentation>
 
+		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+			<sampleBrowser:ControlExampleLinkItem Title="Circular progressbar" Url="/ProductSamples/FundamentalsSamples/Controls/CircularProgressBarIntro/MainControl" />
+			<sampleBrowser:ControlExampleLinkItem Title="ProgressBar" Url="/ProductSamples/ThemesSamples/NativeControls/ProgressBarSamples" />
+			<sampleBrowser:ControlExampleLinkItem Title="Ring slice" Url="/ProductSamples/SharedSamples/Shapes/RingSliceIntro/MainControl" />
+		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+
 
 		<sampleBrowser:ControlExample
 			Header="Basic usage"

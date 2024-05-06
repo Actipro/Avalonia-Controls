@@ -45,7 +45,7 @@ namespace ActiproSoftware.SampleBrowser {
 
 		private const string DefaultSampleUri = null;
 		//private const string DefaultSampleUri = "https://ActiproSoftware/SampleBrowser/Utilities/ColorPalette/ColorPaletteView";
-		//private const string DefaultSampleUri = "https://ActiproSoftware/ProductSamples/SharedSamples/Shapes/RingSliceIntro/MainControl";
+		//private const string DefaultSampleUri = "https://ActiproSoftware/ProductSamples/FundamentalsSamples/Controls/CircularProgressBarIntro/MainControl";
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 		// OBJECT

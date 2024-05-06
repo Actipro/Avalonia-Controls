@@ -1,0 +1,337 @@
+<UserControl
+	x:Name="sampleRootControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
+		<actipro:MathConverter x:Key="RoundMathConverter" />
+
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="A circular progressbar displays a ranged progress value using fluent animations, and can dynamically change to an indeterminate state when no progress range is established.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="CircularProgressBar" Url="https://www.actiprosoftware.com/docs/controls/avalonia/fundamentals/controls/circular-progressbar" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+			<sampleBrowser:ControlExampleLinkItem Title="Progress spinners" Url="/ProductSamples/FundamentalsSamples/Controls/ProgressSpinners/MainControl" />
+			<sampleBrowser:ControlExampleLinkItem Title="ProgressBar" Url="/ProductSamples/ThemesSamples/NativeControls/ProgressBarSamples" />
+			<sampleBrowser:ControlExampleLinkItem Title="Ring slice" Url="/ProductSamples/SharedSamples/Shapes/RingSliceIntro/MainControl" />
+		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+
+		<sampleBrowser:ControlExample
+			Header="Dashboard"
+			Footer="Use circular progressbars to create beautiful dashboards."
+			>
+
+			<Grid RowDefinitions="Auto,10,Auto,Auto" HorizontalAlignment="Center">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="{actipro:ScaledGridLength 6}" />
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="{actipro:ScaledGridLength 6}" />
+					<ColumnDefinition Width="*" />
+				</Grid.ColumnDefinitions>
+
+				<actipro:CircularProgressBar
+					Width="80" Height="80" Value="91"
+					Classes="success" LineThickness="6" FontSize="30" ProgressTextFormat="{}{1}" />
+				<TextBlock Grid.Row="2" Text="User Average" Classes="size-lg" TextAlignment="Center" />
+				<TextBlock Grid.Row="3" Text="74 reviews" TextAlignment="Center" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" />
+
+				<actipro:CircularProgressBar
+					Grid.Column="2" Width="80" Height="80" Value="50"
+					Classes="accent" LineThickness="6" LineDashOffset="-1" LineDashArray="7.7,2" FontSize="20" ProgressTextFormat="Fair" />
+				<TextBlock Grid.Row="2" Grid.Column="2" Text="Critic Rating" Classes="size-lg" TextAlignment="Center" />
+				
+				<actipro:CircularProgressBar 
+					Grid.Column="4" Width="80" Height="80" Value="68" 
+					Classes="warning" LineThickness="6" FontSize="30" ProgressTextFormat="{}{1}" />
+				<TextBlock Grid.Row="2" Grid.Column="4" Text="Critic Average" Classes="size-lg" TextAlignment="Center" />
+				<TextBlock Grid.Row="3" Grid.Column="4" Text="23 reviews" TextAlignment="Center" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" />
+			</Grid>
+
+		</sampleBrowser:ControlExample>
+
+		
+		<sampleBrowser:ControlExample
+			Header="Basic usage"
+			Footer="Circular progressbars can flip between determinate (known value) and indeterminate modes.  Progress text can optionally be hidden."
+			DataContext="{Binding #progressBar}"
+			>
+
+			<StackPanel Orientation="Horizontal" Spacing="{actipro:ScaledDouble 6}" HorizontalAlignment="Center">
+				<actipro:CircularProgressBar
+					x:Name="progressBar"
+					Width="100" Height="100"
+					Classes="accent" FontSize="24"
+					Value="65"
+					/>
+				
+				<actipro:CircularProgressBar
+					Width="50" Height="50"
+					Classes="warning" FontSize="14" FontWeight="SemiBold"
+					IsIndeterminate="{Binding #progressBar.IsIndeterminate}"
+					IsProgressTextAllowed="{Binding #progressBar.IsProgressTextAllowed}"
+					Value="{Binding #progressBar.Value}"
+					/>
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Value" />
+						<Slider Minimum="{Binding Minimum}" Maximum="{Binding Maximum}" Value="{Binding Value}" TickFrequency="5" IsSnapToTickEnabled="True" />
+					</StackPanel>
+					<CheckBox IsChecked="{Binding IsIndeterminate}">Indeterminate</CheckBox>
+					<CheckBox IsChecked="{Binding IsProgressTextAllowed}">Progress text allowed</CheckBox>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:CircularProgressBar Width="100" Height="100" 
+	Classes="accent" FontSize="24"$(IsIndeterminateAttribute)$(IsProgressTextAllowedAttribute)
+	Minimum="$(Minimum)" Maximum="$(Maximum)" Value="$(Value)" />
+	
+<actipro:CircularProgressBar Width="100" Height="100" 
+	Classes="accent" FontSize="14" FontWeight="SemiBold"$(IsIndeterminateAttribute)$(IsProgressTextAllowedAttribute)
+	Minimum="$(Minimum)" Maximum="$(Maximum)" Value="$(Value)" />
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="Minimum" Value="{Binding Minimum}" />
+						<sampleBrowser:CodeExampleSubstitution Key="Maximum" Value="{Binding Maximum}" />
+						<sampleBrowser:CodeExampleSubstitution Key="Value" Value="{Binding Value, Converter={StaticResource RoundMathConverter}, ConverterParameter='Round(x)'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsIndeterminateAttribute"
+															   IsEnabled="{Binding IsIndeterminate}"
+															   Value=" IsIndeterminate=&quot;True&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsProgressTextAllowedAttribute"
+															   IsEnabled="{Binding !IsProgressTextAllowed}"
+															   Value=" IsProgressTextAllowed=&quot;False&quot;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Appearance customization"
+			Footer="Easily change colors, indicator line characteristics, and progress text font properties."
+			DataContext="{Binding #appearanceProgressBar}"
+			>
+
+			<actipro:CircularProgressBar
+				x:Name="appearanceProgressBar" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
+				Width="200" Height="200"
+				LineThickness="20"
+				Value="55"
+				FontSize="40"
+				Classes.accent="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Accent'}"
+				Classes.success="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Success'}"
+				Classes.warning="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Warning'}"
+				Classes.danger="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Danger'}"
+				/>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Variant" />
+						<ComboBox x:Name="sampleVariant" SelectedIndex="2" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Value" />
+						<Slider Minimum="{Binding Minimum}" Maximum="{Binding Maximum}" Value="{Binding Value}" TickFrequency="5" IsSnapToTickEnabled="True" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="{Binding LineThickness, StringFormat='Line thickness: {0}'}" />
+						<Slider Minimum="2" Maximum="20" Value="{Binding LineThickness}" TickFrequency="1" IsSnapToTickEnabled="True" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Line cap" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type=PenLineCap}" SelectedItem="{Binding LineCap}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="{Binding FontSize, StringFormat='Font size: {0}'}" />
+						<Slider Minimum="8" Maximum="60" Value="{Binding FontSize}" TickFrequency="1" IsSnapToTickEnabled="True" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Font weight" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type=FontWeight}" SelectedItem="{Binding FontWeight}" />
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:CircularProgressBar Width="200" Height="200" 
+	$(ClassesAttribute)LineThickness="$(LineThickness)" LineCap="$(LineCap)"
+	FontSize="$(FontSize)" FontWeight="$(FontWeight)"
+	Value="$(Value)" />
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
+															   IsEnabled="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), StringFormat='Classes=&quot;{0}&quot; '}" />
+						<sampleBrowser:CodeExampleSubstitution Key="LineThickness" Value="{Binding LineThickness}" />
+						<sampleBrowser:CodeExampleSubstitution Key="LineCap" Value="{Binding LineCap}" />
+						<sampleBrowser:CodeExampleSubstitution Key="FontSize" Value="{Binding FontSize}" />
+						<sampleBrowser:CodeExampleSubstitution Key="FontWeight" Value="{Binding FontWeight}" />
+						<sampleBrowser:CodeExampleSubstitution Key="Value" Value="{Binding Value, Converter={StaticResource RoundMathConverter}, ConverterParameter='Round(x)'}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Dashed lines"
+			Footer="Use dashed lines to create a unique appearance."
+			DataContext="{Binding #dashProgressBar}"
+			>
+
+			<StackPanel Orientation="Horizontal" Spacing="{actipro:ScaledDouble 6}" HorizontalAlignment="Center">
+				<actipro:CircularProgressBar
+					x:Name="dashProgressBar"
+					Width="100" Height="100"
+					LineThickness="10" LineCap="Flat" LineDashArray="1,0.175"
+					Value="70"
+					FontSize="18" FontWeight="Bold"
+					TrackBrush="{actipro:ThemeResource ControlBackgroundBrushSoftAccentPointerOver}"
+					IndicatorBrush="{actipro:ThemeResource ControlBackgroundBrushSolidAccent}"
+					/>
+				
+				<actipro:CircularProgressBar
+					x:Name="dashProgressBar2"
+					Width="100" Height="100"
+					LineThickness="6" LineDashOffset="-1" LineDashArray="2.9,2"
+					Value="{Binding #dashProgressBar.Value}"
+					FontSize="26" FontWeight="Thin"
+					TrackBrush="{actipro:ThemeResource ControlBackgroundBrushSoftDangerPointerOver}"
+					IndicatorBrush="{actipro:ThemeResource ControlBackgroundBrushSolidDanger}"
+					/>
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Value" />
+						<Slider Minimum="{Binding Minimum}" Maximum="{Binding Maximum}" Value="{Binding Value}" TickFrequency="5" IsSnapToTickEnabled="True" />
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:CircularProgressBar Width="100" Height="100" 
+	LineThickness="10" LineCap="Flat" LineDashArray="1,0.175"
+	FontSize="18" FontWeight="Bold"
+	TrackBrush="{actipro:ThemeResource ControlBackgroundBrushSoftAccentPointerOver}"
+	IndicatorBrush="{actipro:ThemeResource ControlBackgroundBrushSolidAccent}"
+	Value="$(Value)" />
+
+<actipro:CircularProgressBar Width="100" Height="100" 
+	LineThickness="6" LineDashOffset="-1" LineDashArray="2.9,2"
+	FontSize="26" FontWeight="Thin"
+	TrackBrush="{actipro:ThemeResource ControlBackgroundBrushSoftDangerPointerOver}"
+	IndicatorBrush="{actipro:ThemeResource ControlBackgroundBrushSolidDanger}"
+	Value="$(Value)" />
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="Value" Value="{Binding Value, Converter={StaticResource RoundMathConverter}, ConverterParameter='Round(x)'}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Animation"
+			Footer="Fluent animations built into the control occur during progress changes and indeterminate state changes.  These animations can optionally be turned off."
+			DataContext="{Binding #animationProgressBar}"
+			>
+
+			<actipro:CircularProgressBar
+				x:Name="animationProgressBar"
+				Width="100" Height="100"
+				Value="80"
+				FontSize="24"
+				/>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Value" />
+						<Slider Minimum="{Binding Minimum}" Maximum="{Binding Maximum}" Value="{Binding Value}" TickFrequency="5" IsSnapToTickEnabled="True" />
+					</StackPanel>
+					<CheckBox IsChecked="{Binding IsIndeterminate}">Indeterminate</CheckBox>
+					<CheckBox IsChecked="{Binding IsAnimationEnabled}">Animation enabled</CheckBox>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:CircularProgressBar Width="100" Height="100" 
+	FontSize="24"$(IsIndeterminateAttribute)$(IsAnimationEnabledAttribute) 
+	Value="$(Value)" />
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="Value" Value="{Binding Value, Converter={StaticResource RoundMathConverter}, ConverterParameter='Round(x)'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsIndeterminateAttribute"
+															   IsEnabled="{Binding IsIndeterminate}"
+															   Value=" IsIndeterminate=&quot;True&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsAnimationEnabledAttribute"
+															   IsEnabled="{Binding !IsAnimationEnabled}"
+															   Value=" IsAnimationEnabled=&quot;False&quot;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Progress text format"
+			Footer="The progress text uses a default format that is appropriate for the current culture, but can be customized.  It is passed the control's Value, calculated percentage, Minimum, and Maximum values."
+			DataContext="{Binding #progressTextFormatProgressBar}"
+			>
+
+			<actipro:CircularProgressBar
+				x:Name="progressTextFormatProgressBar"
+				Width="100" Height="100"
+				Classes="warning"
+				Minimum="0" Maximum="10" Value="4" ProgressTextFormat="{}{0:0} of {3:0}"
+				FontSize="16"
+				/>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Value" />
+						<Slider Minimum="{Binding Minimum}" Maximum="{Binding Maximum}" Value="{Binding Value}" TickFrequency="1" IsSnapToTickEnabled="True" />
+					</StackPanel>
+					<TextBox Text="{Binding ProgressTextFormat}" Watermark="Progress text format" UseFloatingWatermark="True" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:CircularProgressBar Width="100" Height="100" 
+	Classes="warning" FontSize="16"
+	Minimum="0" Maximum="10" Value="$(Value)" ProgressTextFormat="{}$(ProgressTextFormat)" />
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="Value" Value="{Binding Value, Converter={StaticResource RoundMathConverter}, ConverterParameter='Round(x)'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="ProgressTextFormat" Value="{Binding ProgressTextFormat}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+</UserControl>

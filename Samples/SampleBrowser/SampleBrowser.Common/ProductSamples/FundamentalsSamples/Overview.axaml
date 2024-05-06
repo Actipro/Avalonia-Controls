@@ -7,6 +7,17 @@
 	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
 	xmlns:sampleData="using:ActiproSoftware.SampleBrowser.SampleData"
 	>
+	<UserControl.Resources>
+		<!--
+			Icons from: https://icon-sets.iconify.design/fluent-mdl2/ 
+			- These icons do not have any margin so the icon sizes have been reduced to 20x20
+			- Alternatively, 24x24 icons (the default size) could be used with 2px margin around the glyph content
+		-->
+		<x:Double x:Key="{actipro:ThemeResourceKey SettingsCardHeaderIconLength}">20</x:Double>
+		<StreamGeometry x:Key="icon-fluent-mdl2-book-answers">M384 0h1408v2048H384q-53 0-99-20t-82-55t-55-81t-20-100V256q0-53 20-99t55-82t81-55T384 0m1280 1920v-256H384q-27 0-50 10t-40 27t-28 41t-10 50q0 27 10 50t27 40t41 28t50 10zm0-384V128H384q-27 0-50 10t-40 27t-28 41t-10 50v1314q60-34 128-34zm-768-256V640h128v640zm0-768V384h128v128z</StreamGeometry>
+		<StreamGeometry x:Key="icon-fluent-mdl2-color">M1024 0q141 0 272 36t245 103t207 160t160 208t103 245t37 272q0 141-36 272t-103 245t-160 207t-208 160t-245 103t-272 37q-53 0-99-20t-81-55t-55-81t-21-100q0-49 9-85t24-67t31-56t31-52t23-56t10-68q0-52-20-99t-55-81t-82-55t-99-21q-38 0-67 9t-56 24t-53 31t-56 31t-67 23t-85 10q-53 0-99-20t-81-55t-55-81t-21-100q0-141 36-272t103-245t160-207t208-160T751 37t273-37m0 1920q123 0 237-32t214-90t182-141t140-181t91-214t32-238q0-123-32-237t-90-214t-141-182t-181-140t-214-91t-238-32q-123 0-237 32t-214 90t-182 141t-140 181t-91 214t-32 238q0 27 10 50t27 40t41 28t50 10q38 0 67-9t56-24t52-31t55-31t67-23t87-10q80 0 150 30t122 82t82 122t30 150q0 49-9 86t-24 67t-31 55t-31 52t-23 56t-10 68q0 27 10 50t27 40t41 28t50 10M512 640q27 0 50 10t40 27t28 41t10 50q0 27-10 50t-27 40t-41 28t-50 10q-27 0-50-10t-40-27t-28-41t-10-50q0-27 10-50t27-40t41-28t50-10m384-256q27 0 50 10t40 27t28 41t10 50q0 27-10 50t-27 40t-41 28t-50 10q-27 0-50-10t-40-27t-28-41t-10-50q0-27 10-50t27-40t41-28t50-10m512 384q-27 0-50-10t-40-27t-28-41t-10-50q0-27 10-50t27-40t41-28t50-10q27 0 50 10t40 27t28 41t10 50q0 27-10 50t-27 40t-41 28t-50 10m128 256q27 0 50 10t40 27t28 41t10 50q0 27-10 50t-27 40t-41 28t-50 10q-27 0-50-10t-40-27t-28-41t-10-50q0-27 10-50t27-40t41-28t50-10m-256 384q27 0 50 10t40 27t28 41t10 50q0 27-10 50t-27 40t-41 28t-50 10q-27 0-50-10t-40-27t-28-41t-10-50q0-27 10-50t27-40t41-28t50-10</StreamGeometry>
+		<StreamGeometry x:Key="icon-fluent-mdl2-font">M765 1024H387l-85 256H167L509 256h134l268 802l-81 162zm-43-128L576 458L430 896zm982 679q17 41 31 73t35 54t50 34t78 12v44h-449v-44h37q20 0 39-3t30-17t12-37q0-14-6-39t-16-54t-21-59t-22-58t-19-46t-11-27h-448q-3 8-12 27t-20 46t-24 57t-23 58t-17 54t-7 40q0 24 12 35t31 16t38 5t37 2v44H662v-44q49-9 76-21t44-32t30-52t33-79l392-924h82zm-291-295l-177-381l-169 381z</StreamGeometry>
+	</UserControl.Resources>
 
 	<ScrollViewer Classes="theme-scroll-overlay" HorizontalScrollBarVisibility="Disabled">
 		<StackPanel>
@@ -18,57 +29,188 @@
 
 			<actipro:MultiColumnPanel Classes="sample-layout-panel" Margin="{actipro:ScaledThickness '6,0'}" MinColumnWidth="390" HorizontalSpacing="{actipro:ScaledDouble 4}" VerticalSpacing="{actipro:ScaledDouble 4}">
 
-				<StackPanel Margin="{actipro:ScaledThickness '0,1,0,0'}" Spacing="{actipro:ScaledDouble 4}">
-					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="{actipro:ScaledDouble 4}">
+				<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="{actipro:ScaledDouble 4}">
+					<actipro:Card ToolTip.Tip="Card Control with Cover Image" HorizontalAlignment="Center" CoverDock="Top">
+						<actipro:Card.Cover>
+							<Panel MaxHeight="150">
+								<Image Source="/Images/ProfilePhotos/Man05.jpg" />
+							</Panel>
+						</actipro:Card.Cover>
 
-						<actipro:Avatar Width="64" CornerRadius="20" ToolTip.Tip="Generic Avatar Glyph with Badge"
-										actipro:BadgeService.HorizontalAlignment="CenterOnTarget"
-										actipro:BadgeService.VerticalAlignment="CenterOnTargetTopEdge"
-										>
-							<actipro:BadgeService.Badge>
-								<actipro:Badge Classes="accent" Content="Badge" />
-							</actipro:BadgeService.Badge>
-						</actipro:Avatar>
+						<StackPanel HorizontalAlignment="Center">
+							<TextBlock FontSize="{actipro:ThemeResource DefaultFontSizeExtraLarge}" FontWeight="SemiBold" Text="Erik Lai" TextAlignment="Center" />
+							<TextBlock FontSize="{actipro:ThemeResource DefaultFontSizeMedium}" Foreground="{actipro:ThemeResource DefaultForegroundBrushSecondary}" Text="Operator" TextAlignment="Center" />
+						</StackPanel>
 
-						<actipro:Avatar Width="64" Description="Actipro Software" TextAppearanceKind="Manual" Background="{actipro:ThemeResource ActiproBrandBrush}" />
+						<actipro:Card.Footer>
+							<TextBlock Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" Text="@erik_lai" TextAlignment="Center" />
+						</actipro:Card.Footer>
 
-						<actipro:Avatar Width="64" CornerRadius="10" Description="Avatar Image with Badge as Status Indicator"
-										actipro:BadgeService.HorizontalOffset="5"
-										actipro:BadgeService.VerticalOffset="5"
-										actipro:BadgeService.HorizontalAlignment="InsideOfTargetRightEdge"
-										actipro:BadgeService.VerticalAlignment="InsideOfTargetBottomEdge"
-										>
-							<actipro:BadgeService.Badge>
-								<actipro:Badge Classes="success" Kind="Dot" DotLength="20"
-											   BorderThickness="2" BorderBrush="{actipro:ThemeResource Container2BackgroundBrush}"
-											   ToolTip.Tip="Status: Online" />
-							</actipro:BadgeService.Badge>
-							<Image Source="/Images/ProfilePhotos/Woman05.jpg" />
-						</actipro:Avatar>
+					</actipro:Card>
 
-					</StackPanel>
+					<StackPanel Margin="{actipro:ScaledThickness '0,1,0,0'}" Spacing="{actipro:ScaledDouble 4}">
+						<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="{actipro:ScaledDouble 4}">
+
+							<actipro:Avatar Width="64" CornerRadius="20" ToolTip.Tip="Generic Avatar Glyph with Badge"
+											actipro:BadgeService.HorizontalAlignment="CenterOnTarget"
+											actipro:BadgeService.VerticalAlignment="CenterOnTargetTopEdge"
+											>
+								<actipro:BadgeService.Badge>
+									<actipro:Badge Classes="accent" Content="Badge" />
+								</actipro:BadgeService.Badge>
+							</actipro:Avatar>
+
+							<actipro:Avatar Width="64" Description="Actipro Software" TextAppearanceKind="Manual" Background="{actipro:ThemeResource ActiproBrandBrush}" />
+
+							<actipro:Avatar Width="64" CornerRadius="10" Description="Avatar Image with Badge as Status Indicator"
+											actipro:BadgeService.HorizontalOffset="5"
+											actipro:BadgeService.VerticalOffset="5"
+											actipro:BadgeService.HorizontalAlignment="InsideOfTargetRightEdge"
+											actipro:BadgeService.VerticalAlignment="InsideOfTargetBottomEdge"
+											>
+								<actipro:BadgeService.Badge>
+									<actipro:Badge Classes="success" Kind="Dot" DotLength="20"
+												   BorderThickness="2" BorderBrush="{actipro:ThemeResource Container2BackgroundBrush}"
+												   ToolTip.Tip="Status: Online" />
+								</actipro:BadgeService.Badge>
+								<Image Source="/Images/ProfilePhotos/Woman05.jpg" />
+							</actipro:Avatar>
+
+						</StackPanel>
 					
-					<actipro:AvatarGroup ItemLength="48" MaxInlineCount="5" OverflowKind="Popup" ItemsSource="{x:Static sampleData:People.All}">
-						<actipro:AvatarGroup.ItemContainerTheme>
-							<ControlTheme TargetType="actipro:Avatar" BasedOn="{StaticResource {x:Type actipro:Avatar}}" x:DataType="sampleData:Person">
-								<Setter Property="BorderBrush" Value="{actipro:ThemeResource Container2BackgroundBrush}" />
-								<Setter Property="BorderThickness" Value="2" />
-								<Setter Property="Description" Value="{Binding FullName}" />
-								<Setter Property="Content" Value="{Binding Photo}" />
-							</ControlTheme>
-						</actipro:AvatarGroup.ItemContainerTheme>
-					</actipro:AvatarGroup>
+						<actipro:AvatarGroup ItemLength="48" MaxInlineCount="5" OverflowKind="Popup" ItemsSource="{x:Static sampleData:People.All}">
+							<actipro:AvatarGroup.ItemContainerTheme>
+								<ControlTheme TargetType="actipro:Avatar" BasedOn="{StaticResource {x:Type actipro:Avatar}}" x:DataType="sampleData:Person">
+									<Setter Property="BorderBrush" Value="{actipro:ThemeResource Container2BackgroundBrush}" />
+									<Setter Property="BorderThickness" Value="2" />
+									<Setter Property="Description" Value="{Binding FullName}" />
+									<Setter Property="Content" Value="{Binding Photo}" />
+								</ControlTheme>
+							</actipro:AvatarGroup.ItemContainerTheme>
+						</actipro:AvatarGroup>
 
-					<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="{actipro:ScaledDouble 4}">
-						<actipro:RingSpinner Width="24" Height="24" Classes="accent" 
-											 Background="{actipro:ThemeResource Container5BackgroundBrush}"
-											 LineThickness="3" LineCap="Flat" IsSpinning="True" />
+						<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="{actipro:ScaledDouble 4}">
+						
+							<Border ToolTip.Tip="CircularProgressBar Control" Background="Transparent">
+								<actipro:CircularProgressBar Width="50" Height="50" Classes="warning" FontSize="14" FontWeight="SemiBold" Value="65" />
+							</Border>
+
+							<Border ToolTip.Tip="RingSpinner Control" Background="Transparent">
+								<actipro:RingSpinner Width="24" Height="24" Classes="accent" 
+													 Background="{actipro:ThemeResource Container5BackgroundBrush}"
+													 LineThickness="3" LineCap="Flat" IsSpinning="True" />
+							</Border>
+						</StackPanel>
 					</StackPanel>
 				</StackPanel>
 
-				<actipro:UserPromptControl Margin="{actipro:ScaledThickness '6,0'}" MaxWidth="400" StandardStatusImage="Information" StandardButtons="OKCancel"
-									   Header="User Prompt" Content="The user prompt control can easily display any kind of dialog message to the end user, and can even be configured to render as a complex task dialog with multiple sections."/>
+				<actipro:SegmentedBar Classes="theme-outline accent" HorizontalAlignment="Center" SelectedIndex="2">
+					<actipro:SegmentedBarItem>Never</actipro:SegmentedBarItem>
+					<actipro:SegmentedBarItem>Daily</actipro:SegmentedBarItem>
+					<actipro:SegmentedBarItem>Weekly</actipro:SegmentedBarItem>
+					<actipro:SegmentedBarItem>Montly</actipro:SegmentedBarItem>
+					<actipro:SegmentedBarItem IsEnabled="False">Quarterly</actipro:SegmentedBarItem>
+					<actipro:SegmentedBarItem>Annually</actipro:SegmentedBarItem>
+				</actipro:SegmentedBar>
 				
+				<actipro:UserPromptControl ToolTip.Tip="UserPromptControl with Checkbox and Expanded Information"
+					Width="400"
+					Header="Actipro Avalonia UI Controls"
+					StandardButtons="YesNo"
+					StandardStatusImage="Information"
+					Content="Easily build message box and task dialogs."
+					BorderThickness="1"
+					Elevation="0"
+					ExpandedInformationCollapsedHeaderText="Show Details"
+					ExpandedInformationExpandedHeaderText="Hide Details"
+					ExpandedInformationContent="Additional content can be displayed when expanded"
+					CheckBoxContent="Stop showing messages like this"
+					VerticalAlignment="Center"
+					/>
+
+
+				<Border Background="{actipro:ThemeResource Container2BackgroundBrush}" Padding="10" CornerRadius="5"
+						BorderThickness="1" BorderBrush="{actipro:ThemeResource Container2BorderBrush}"
+						ToolTip.Tip="SettingCard, SettingsExpander, and SettingsGroup Controls">
+					
+					<StackPanel>
+						<StackPanel.Styles>
+							<Style Selector="actipro|SettingsCard">
+								<Setter Property="WrapThreshold" Value="300" />
+							</Style>
+							<Style Selector="actipro|SettingsExpander">
+								<Setter Property="WrapThreshold" Value="300" />
+							</Style>
+						</StackPanel.Styles>
+
+						<actipro:SettingsGroup Header="Appearance" Margin="{actipro:ScaledThickness '0,0,0,3'}" Spacing="2">
+							<actipro:SettingsGroup.ItemsHeader>
+								<actipro:InfoBar ToolTip.Tip="InfoBar Control Within SettingsGroup.ItemsHeader" x:Name="appearanceHeaderInfoBar" Margin="0,0,0,2" Background="{actipro:ThemeResource ControlBackgroundBrushSoftAccent}"
+									Title="Settings Controls" Message="Use settings controls and optional InfoBar (like this) to configure app settings" />
+							</actipro:SettingsGroup.ItemsHeader>
+
+							<actipro:SettingsCard Header="App theme">
+								<actipro:SettingsCard.HeaderIcon>
+									<PathIcon Data="{StaticResource icon-fluent-mdl2-color}" />
+								</actipro:SettingsCard.HeaderIcon>
+								<actipro:SettingsCard.Description>
+									<actipro:HyperlinkTextBlock FontWeight="DemiBold" FontSize="{actipro:ThemeResource DefaultFontSizeSmall}"
+										Text="Open system settings"/>
+								</actipro:SettingsCard.Description>
+								<ComboBox SelectedIndex="2">
+									<ComboBoxItem>Light</ComboBoxItem>
+									<ComboBoxItem>Dark</ComboBoxItem>
+									<ComboBoxItem>System default</ComboBoxItem>
+								</ComboBox>
+							</actipro:SettingsCard>
+
+							<actipro:SettingsCard Header="Use high contrast colors" Description="Higher contrast colors improve accessibility">
+								<ToggleSwitch actipro:ThemeProperties.ToggleSwitchHasFarAffinity="True" IsChecked="{Binding #appearanceHeaderInfoBar.IsOpen}"/>
+							</actipro:SettingsCard>
+
+							<actipro:SettingsExpander Header="Heading font" IsExpanded="True" Description="Configure the font used for heading typography"
+								IsItemsHeaderVisible="True">
+								<actipro:SettingsExpander.HeaderIcon>
+									<PathIcon Data="{StaticResource icon-fluent-mdl2-font}" />
+								</actipro:SettingsExpander.HeaderIcon>
+
+								<actipro:SettingsExpander.ItemsHeader>
+									<actipro:InfoBar ToolTip.Tip="InfoBar Control (Non-Closable, Warning Severity, with Action) Within SettingsExpander.ItemsHeader" CornerRadius="0" BorderThickness="0" CanClose="False" Severity="Warning"
+										Message="Restart the app for changes to take effect.">
+										<actipro:InfoBar.Action>
+											<actipro:HyperlinkTextBlock>Restart now</actipro:HyperlinkTextBlock>
+										</actipro:InfoBar.Action>
+									</actipro:InfoBar>
+								</actipro:SettingsExpander.ItemsHeader>
+
+								<actipro:SettingsCard Header="Font size">
+									<StackPanel Orientation="Horizontal" MinWidth="150">
+										<TextBlock Text="A" FontSize="12" VerticalAlignment="Center" />
+										<Slider Margin="10,0" Minimum="10" Value="20" Maximum="50" MinWidth="100" VerticalAlignment="Center" TickFrequency="10" TickPlacement="BottomRight" />
+										<TextBlock Text="A" FontSize="24" VerticalAlignment="Center" />
+									</StackPanel>
+								</actipro:SettingsCard>
+
+							</actipro:SettingsExpander>
+
+						</actipro:SettingsGroup>
+
+						<actipro:SettingsGroup Header="More samples" Margin="0">
+
+							<actipro:SettingsCard Header="Online documentation" IsClickEnabled="True" Description="View online documentation for more details.">
+								<actipro:SettingsCard.HeaderIcon>
+									<PathIcon Data="{StaticResource icon-fluent-mdl2-book-answers}" />
+								</actipro:SettingsCard.HeaderIcon>
+								<actipro:SettingsCard.ActionIcon>
+									<ContentPresenter ContentTemplate="{actipro:GlyphTemplate ExternalLink16}" />
+								</actipro:SettingsCard.ActionIcon>
+							</actipro:SettingsCard>
+
+						</actipro:SettingsGroup>
+
+					</StackPanel>
+				</Border>
+
 			</actipro:MultiColumnPanel>
 
 			<TextBlock Classes="theme-text-body" Margin="{actipro:ScaledThickness 6}" Text="Dive into our individual samples linked below for many more detailed examples."

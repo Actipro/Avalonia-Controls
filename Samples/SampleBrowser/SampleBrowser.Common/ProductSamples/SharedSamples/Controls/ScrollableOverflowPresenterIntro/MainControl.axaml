@@ -1,0 +1,108 @@
+<UserControl
+	x:Name="sampleRootControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="The ScrollableOverflowPresenter control displays scroll buttons when its content overflows the available space.  Tap the buttons to scroll through the content or hold down a button to scroll quickly.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Scrollable Overflow Presenter" Url="https://www.actiprosoftware.com/docs/controls/avalonia/fundamentals/controls/scrollable-overflow-presenter" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+
+		<sampleBrowser:ControlExample
+			Header="Basic usage"
+			DataContext="{Binding #basicUsage}"
+			>
+
+			<actipro:ShadowChrome Elevation="8">
+				<Border Background="{actipro:ThemeResource Container1BackgroundBrush}" CornerRadius="8" Padding="5">
+					<actipro:ScrollableOverflowPresenter x:Name="basicUsage" Orientation="Horizontal">
+						<ItemsControl ItemsSource="{actipro:DelimitedArray '#ffb900, #e74856, #0078d7, #0099bc, #7a7574, #767676, #ff8d00, #e81123, #0063b1, #2d7d9a, #5d5a58, #4c4a48, #f7630c, #ea005e, #8e8cd8, #00b7c3, #68768a, #69797e, #ca5010, #c30052, #6b69d6, #038387, #515c6b, #4a5459, #da3b01, #e3008c, #8764b8, #00b294, #567c73, #647c64, #ef6950, #bf0077, #744da9, #018574, #486860, #525e54, #d13438, #c239b3, #b146c2, #00cc6a, #498205, #847545, #ff4343, #9a0089, #881798, #10893e, #107c10, #7e735f', Type=actipro:UIColor}">
+							<ItemsControl.ItemsPanel>
+								<ItemsPanelTemplate>
+									<StackPanel Margin="5" Orientation="Horizontal" Spacing="5" />
+								</ItemsPanelTemplate>
+							</ItemsControl.ItemsPanel>
+							<ItemsControl.ItemTemplate>
+								<DataTemplate DataType="actipro:UIColor">
+									<sampleBrowser:CopyColorButton Content="{Binding}" />
+								</DataTemplate>
+							</ItemsControl.ItemTemplate>
+						</ItemsControl>
+					</actipro:ScrollableOverflowPresenter>
+				</Border>
+			</actipro:ShadowChrome>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<CheckBox IsChecked="{Binding IsAnimationEnabled}" Content="Is animation enabled" />
+					<CheckBox IsChecked="{Binding IsEnabled}" Content="Is enabled" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<Border Background="{actipro:ThemeResource Container1BackgroundBrush}" CornerRadius="8" Padding="5">
+	<actipro:ScrollableOverflowPresenter Orientation="Horizontal"$(IsAnimationEnabledAttribute)$(IsEnabledAttribute)>
+		<!-- Content here -->
+	</actipro:ScrollableOverflowPresenter>
+</Border>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="IsAnimationEnabledAttribute"
+															   IsEnabled="{Binding !IsAnimationEnabled}"
+															   Value=" IsAnimationEnabled=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute"
+															   IsEnabled="{Binding !IsEnabled}"
+															   Value=" IsEnabled=&quot;False&quot;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+		<sampleBrowser:ControlExample
+			Header="Vertical orientation"
+			HorizontalContentAlignment="Center"
+			>
+
+			<actipro:ShadowChrome Elevation="8">
+				<Border Background="{actipro:ThemeResource Container1BackgroundBrush}" CornerRadius="8" Padding="5">
+					<actipro:ScrollableOverflowPresenter MaxHeight="400" Orientation="Vertical">
+						<ItemsControl ItemsSource="{actipro:DelimitedArray '#ffb900, #e74856, #0078d7, #0099bc, #7a7574, #767676, #ff8d00, #e81123, #0063b1, #2d7d9a, #5d5a58, #4c4a48, #f7630c, #ea005e, #8e8cd8, #00b7c3, #68768a, #69797e, #ca5010, #c30052, #6b69d6, #038387, #515c6b, #4a5459, #da3b01, #e3008c, #8764b8, #00b294, #567c73, #647c64, #ef6950, #bf0077, #744da9, #018574, #486860, #525e54, #d13438, #c239b3, #b146c2, #00cc6a, #498205, #847545, #ff4343, #9a0089, #881798, #10893e, #107c10, #7e735f', Type=actipro:UIColor}">
+							<ItemsControl.ItemsPanel>
+								<ItemsPanelTemplate>
+									<StackPanel Margin="5" Orientation="Vertical" Spacing="5" />
+								</ItemsPanelTemplate>
+							</ItemsControl.ItemsPanel>
+							<ItemsControl.ItemTemplate>
+								<DataTemplate DataType="actipro:UIColor">
+									<sampleBrowser:CopyColorButton Width="100" Height="50" Content="{Binding}" />
+								</DataTemplate>
+							</ItemsControl.ItemTemplate>
+						</ItemsControl>
+					</actipro:ScrollableOverflowPresenter>
+				</Border>
+			</actipro:ShadowChrome>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<Border Background="{actipro:ThemeResource Container1BackgroundBrush}" CornerRadius="8" Padding="5">
+	<actipro:ScrollableOverflowPresenter MaxHeight="400" Orientation="Vertical">
+		<!-- Content here -->
+	</actipro:ScrollableOverflowPresenter>
+</Border>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+</UserControl>

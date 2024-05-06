@@ -1,0 +1,662 @@
+<UserControl 
+	xmlns="https://github.com/avaloniaui"
+	x:Class="ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.CardIntro.MainControl"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:local="using:ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.CardIntro"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="A Card is typically used to group related information for a single subject.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Card" Url="https://www.actiprosoftware.com/docs/controls/avalonia/fundamentals/controls/card" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+
+		<sampleBrowser:ControlExample
+			Header="Basic usage"
+			Footer="This sample also shows how the optional Cover can be set to any content.  While an image is typically used, this sample demonstrates using our MeshGradientPresenter instead."
+			DataContext="{Binding #basicUsage}"
+			>
+
+			<actipro:Card x:Name="basicUsage" HorizontalAlignment="Center" VerticalAlignment="Center" MaxWidth="400"
+				sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
+				Title="Card Title"
+				Description="The description is integrated into the header."
+				Content="Any content can be hosted in the body of the card.  This paragraph is part of the content.  The Header, Footer, Cover, and Thumbnail also fully support custom content."
+				Footer="This is the footer area."
+				Classes.theme-elevated="{Binding #basicUsageTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Elevated'}"
+				Classes.theme-outline="{Binding #basicUsageTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Outline'}"
+				Classes.theme-solid="{Binding #basicUsageTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Solid'}"
+				Classes.theme-soft="{Binding #basicUsageTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Soft'}"
+				>
+				<actipro:Card.Cover>
+					<Panel>
+						<actipro:MeshGradientPresenter Height="100" Background="#ffcc8cdb" CornerRadius="0">
+							<actipro:MeshGradientNode Center="1%, 95%" Color="#ffb781fd" />
+							<actipro:MeshGradientNode Center="30%, 0%" Color="#ff7999fd" />
+							<actipro:MeshGradientNode Center="99%, 37%" Color="#ffeed5d5" />
+							<actipro:MeshGradientNode Center="83%, 95%" Color="#ffeec6ad" />
+						</actipro:MeshGradientPresenter>
+						<TextBlock Text="Cover" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White"
+								   Classes="theme-text-heading size-xl" />
+					</Panel>
+				</actipro:Card.Cover>
+				<actipro:Card.Thumbnail>
+					<Border CornerRadius="4" VerticalAlignment="Center">
+						<actipro:DynamicImage Height="32" Width="32" UseLayoutRounding="True" actipro:BorderChildClipConverter.ClipToContainingBorder="True">
+							<DrawingImage actipro:ImageProvider.CanAdapt="False">
+								<ImageDrawing ImageSource="/Images/Icons/Actipro.ico" Rect="0,0,32,32" />
+							</DrawingImage>
+						</actipro:DynamicImage>
+					</Border>
+				</actipro:Card.Thumbnail>
+			</actipro:Card>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<TextBox Text="{Binding Title}" Watermark="Title" UseFloatingWatermark="True" />
+					<TextBox Text="{Binding Description}" Watermark="Description" UseFloatingWatermark="True" />
+					<TextBox Text="{Binding Content}" Watermark="Content" UseFloatingWatermark="True" />
+					<TextBox Text="{Binding Footer}" Watermark="Footer" UseFloatingWatermark="True" />
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Theme" />
+						<ComboBox x:Name="basicUsageTheme" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Elevated, Outline, Solid, Soft'}" />
+					</StackPanel>
+					<CheckBox IsChecked="{Binding IsEnabled}" Content="Is enabled" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:Card$(ClassesAttribute) Title="$(Title)"
+	Description="$(Description)">
+
+	<actipro:Card.Cover>
+		<!-- Optional Cover Content -->
+	</actipro:Card.Cover>
+	
+	<actipro:Card.Thumbnail>
+		<!-- Optional Thumbnail Content -->
+	</actipro:Card.Thumbnail>
+	
+	<!-- Card Content -->
+	
+	<actipro:Card.Footer>
+		<!-- Optional Footer Content -->
+	</actipro:Card.Footer>
+
+</actipro:Card>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
+															   IsEnabled="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), StringFormat=' Classes=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="Description" Value="{Binding Description}" />
+						<sampleBrowser:CodeExampleSubstitution Key="Title" Value="{Binding Title}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Themes"
+			Footer="The appearance can be changed from the default with the use of the 'theme-outline', 'theme-solid', 'theme-soft', or 'theme-elevated' style classes."
+			>
+			<Grid RowDefinitions="Auto,10,Auto,10,Auto,10,Auto" ColumnDefinitions="*,Auto,10,Auto,10,Auto,10,Auto,*">
+				<actipro:Card Grid.Row="0" Grid.Column="1" Classes="theme-outline" Content="Outline theme" Title="Outline" />
+				<actipro:Card Grid.Row="2" Grid.Column="1" Classes="theme-outline" Content="Outline theme" Title="Actionable" IsClickEnabled="True" />
+				<actipro:Card Grid.Row="4" Grid.Column="1" Classes="theme-outline" Content="Outline theme" Title="Dividers" HeaderBorderThickness="1" />
+				<actipro:Card Grid.Row="6" Grid.Column="1" Classes="theme-outline" Content="Outline theme" Title="Disabled" IsEnabled="False" />
+
+				<actipro:Card Grid.Row="0" Grid.Column="3" Classes="theme-solid" Content="Solid theme" Title="Solid" />
+				<actipro:Card Grid.Row="2" Grid.Column="3" Classes="theme-solid" Content="Solid theme" Title="Actionable" IsClickEnabled="True" />
+				<actipro:Card Grid.Row="4" Grid.Column="3" Classes="theme-solid" Content="Solid theme" Title="Dividers" HeaderBorderThickness="1" />
+				<actipro:Card Grid.Row="6" Grid.Column="3" Classes="theme-solid" Content="Solid theme" Title="Disabled" IsEnabled="False" />
+				
+				<actipro:Card Grid.Row="0" Grid.Column="5" Classes="theme-soft" Content="Soft theme" Title="Soft" />
+				<actipro:Card Grid.Row="2" Grid.Column="5" Classes="theme-soft" Content="Soft theme" Title="Actionable" IsClickEnabled="True" />
+				<actipro:Card Grid.Row="4" Grid.Column="5" Classes="theme-soft" Content="Soft theme" Title="Dividers" HeaderBorderThickness="1" />
+				<actipro:Card Grid.Row="6" Grid.Column="5" Classes="theme-soft" Content="Soft theme" Title="Disabled" IsEnabled="False" />
+				
+				<actipro:Card Grid.Row="0" Grid.Column="7" Classes="theme-elevated" Content="Elevated theme" Title="Elevated" />
+				<actipro:Card Grid.Row="2" Grid.Column="7" Classes="theme-elevated" Content="Elevated theme" Title="Actionable" IsClickEnabled="True" />
+				<actipro:Card Grid.Row="4" Grid.Column="7" Classes="theme-elevated" Content="Elevated theme" Title="Dividers" HeaderBorderThickness="1" />
+				<actipro:Card Grid.Row="6" Grid.Column="7" Classes="theme-elevated" Content="Elevated theme" Title="Disabled" IsEnabled="False" />
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:Card Classes="theme-outline" Title="Outline" ... />
+
+<actipro:Card Classes="theme-solid" Title="Solid" ... />
+
+<actipro:Card Classes="theme-soft" Title="Soft" ... />
+
+<actipro:Card Classes="theme-elevated" Title="Elevated" ... />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Header and footer borders"
+			Footer="Set 'HeaderBorderThickness.Bottom' or 'FooterBorderThickness.Top' to non-zero values to insert a border."
+			>
+			<actipro:Card HorizontalAlignment="Center" MaxWidth="500"
+				Title="Header and Footer Borders"
+				Content="Card can optionally display a border between the content and header/footer areas. Note how the control padding is consistently applied around the borders."
+				Footer="Use 'HeaderBorderBrush' and 'FooterBorderBrush' properties to control the colors."
+				HeaderBorderThickness="1"
+				FooterBorderThickness="1"
+				/>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:Card ... HeaderBorderThickness="1" FooterBorderThickness="1" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Backgrounds"
+			>
+			<actipro:Card HorizontalAlignment="Center" MaxWidth="500"
+				Title="Header and Footer Backgrounds"
+				Content="The header/footer can optionally have a different background brush than the content.  Note how the control padding is consistently applied above and below the transition in background color."
+				Footer="Use 'HeaderBackground' and 'FooterBackground' properties to control the colors."
+				HeaderBackground="{actipro:ThemeResource Container3BackgroundBrush}"
+				FooterBackground="{actipro:ThemeResource Container2BackgroundBrush}"
+				/>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:Card ...
+	HeaderBackground="{actipro:ThemeResource Container3BackgroundBrush}"
+	FooterBackground="{actipro:ThemeResource Container2BackgroundBrush}" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Thumbnail"
+			>
+			<actipro:Card HorizontalAlignment="Center" MaxWidth="400"
+				Title="Thumbnail"
+				Description="Use a custom theme to change the thumbnail alignment to the top, if preferred."
+				>
+				<actipro:Card.Thumbnail>
+					<Border CornerRadius="4">
+						<actipro:DynamicImage Height="32" Width="32" UseLayoutRounding="True" actipro:BorderChildClipConverter.ClipToContainingBorder="True">
+							<DrawingImage actipro:ImageProvider.CanAdapt="False">
+								<ImageDrawing ImageSource="/Images/Icons/Actipro.ico" Rect="0,0,32,32" />
+							</DrawingImage>
+						</actipro:DynamicImage>
+					</Border>
+				</actipro:Card.Thumbnail>
+				<actipro:Card.ThumbnailTheme>
+					<ControlTheme TargetType="ContentPresenter">
+						<Setter Property="VerticalAlignment" Value="Top" />
+						<Setter Property="Margin" Value="{actipro:ScaledThickness '0,1.0,2.0,0'}" />
+					</ControlTheme>
+				</actipro:Card.ThumbnailTheme>
+			</actipro:Card>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:Card ... >
+
+	<!-- Thumbnail Content -->
+	<actipro:Card.Thumbnail>
+		<Border CornerRadius="4">
+			<actipro:DynamicImage Height="32" Width="32" UseLayoutRounding="True" actipro:BorderChildClipConverter.ClipToContainingBorder="True">
+				<DrawingImage actipro:ImageProvider.CanAdapt="False">
+					<ImageDrawing ImageSource="/Images/Icons/Actipro.ico" Rect="0,0,32,32" />
+				</DrawingImage>
+			</actipro:DynamicImage>
+		</Border>
+	</actipro:Card.Thumbnail>
+
+	<!-- Thumbnail Theme -->
+	<actipro:Card.ThumbnailTheme>
+		<ControlTheme TargetType="ContentPresenter">
+			<Setter Property="VerticalAlignment" Value="Top" />
+			<Setter Property="Margin" Value="{actipro:ScaledThickness '0,1.0,2.0,0'}" />
+		</ControlTheme>
+	</actipro:Card.ThumbnailTheme>
+
+</actipro:Card>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Cover Content"
+			Footer="Cover content is optional and can be docked to any side of the card."
+			DataContext="{Binding #cardCover}"
+			>
+			<sampleBrowser:ControlExample.Styles>
+				<Style Selector="actipro|Card[CoverDock=Left], actipro|Card[CoverDock=Right]">
+					<Setter Property="CoverTemplate">
+						<DataTemplate>
+							<Image Source="/Images/Photos/Beach.jpg" MaxWidth="150" Stretch="Uniform" />
+						</DataTemplate>
+					</Setter>
+				</Style>
+				<Style Selector="actipro|Card[CoverDock=Top], actipro|Card[CoverDock=Bottom]">
+					<Setter Property="CoverTemplate">
+						<DataTemplate>
+							<Image Source="/Images/Photos/Beach.jpg" MaxHeight="150" Stretch="UniformToFill" />
+						</DataTemplate>
+					</Setter>
+				</Style>
+			</sampleBrowser:ControlExample.Styles>
+			<!-- NOTE: Since Cover is not explicitly defined (only CoverTemplate), force the cover to be visible using IsCoverVisible property -->
+			<actipro:Card x:Name="cardCover" HorizontalAlignment="Center" CoverDock="Left" Width="400"
+				IsCoverVisible="True"
+				Title="Cover content"
+				Content="Cover is typically docked to the top for vertical layouts or left for horizontal layouts." />
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel>
+					<TextBlock Classes="theme-form-control-label" Text="Dock" />
+					<ComboBox x:Name="basicUsageCoverDock" SelectedItem="{Binding CoverDock}" ItemsSource="{actipro:DelimitedArray Type={x:Type Dock}}" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:Card$(CoverDockAttribute) ... >
+
+	<!-- Cover Content Here -->
+	<actipro:Card.Cover>
+		<Image Source="..." />
+	</actipro:Card.Cover>
+
+	<!-- Other Card Content Here -->
+
+</actipro:Card>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="CoverDockAttribute"
+															   IsEnabled="{Binding CoverDock, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Top'}"
+															   Value="{Binding CoverDock, StringFormat=' CoverDock=&quot;{0}&quot;'}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Actionable card"
+			DataContext="{Binding #cardActionable}"
+			>
+			<actipro:Card x:Name="cardActionable" HorizontalAlignment="Center"
+				Title="Actionable Card" IsClickEnabled="True" Cursor="Hand"
+				Click="OnActionableCardClick"
+				Content="An actionable card supports Command properties or Click events like a button and responds to 'pointerover' and 'pressed' states."/>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<CheckBox IsChecked="{Binding IsEnabled}" Content="Is enabled" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<!-- Command Model -->
+<actipro:Card ... Cursor="Hand" Command="{Binding SomeCommand}" />
+
+<!-- Click Event Model -->
+<actipro:Card ... Cursor="Hand" IsClickEnabled="True" Click="OnCardClick" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Custom header button"
+			Footer="This sample demonstrates using a custom header that adds an 'Options' button."
+			>
+
+			<actipro:Card Title="Profile" HorizontalAlignment="Center">
+				<actipro:Card.Header>
+					<DockPanel>
+						<!-- Add an Options Button -->
+						<Button DockPanel.Dock="Right" Classes="theme-subtle" ToolTip.Tip="Options" ContentTemplate="{actipro:GlyphTemplate Options16}" />
+
+						<!-- Add the Title (reusing the TitleTheme) -->
+						<TextBlock VerticalAlignment="Center"
+									Theme="{Binding $parent[actipro:Card].TitleTheme}"
+									Text="{Binding $parent[actipro:Card].Title}" />
+					</DockPanel>
+				</actipro:Card.Header>
+
+				<StackPanel HorizontalAlignment="Center">
+					<actipro:Avatar Height="{actipro:ScaledDouble '4+144'}">
+						<Image Source="/Images/ProfilePhotos/Woman05.jpg" />
+					</actipro:Avatar>
+
+					<TextBlock Margin="{actipro:ScaledThickness '0,1,0,0'}" FontSize="{actipro:ThemeResource DefaultFontSizeLarge}" FontWeight="SemiBold" Text="Marina Carpenter" TextAlignment="Center" />
+					<TextBlock FontSize="{actipro:ThemeResource DefaultFontSizeSmall}" Foreground="{actipro:ThemeResource DefaultForegroundBrushSecondary}" Text="@marina_carpenter" TextAlignment="Center" />
+
+					<TextBlock Margin="{actipro:ScaledThickness '0,3,0,0'}" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" Text="12 mutual contacts" TextAlignment="Center" />
+
+				</StackPanel>
+
+			</actipro:Card>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:Card Title="Profile">
+
+	<actipro:Card.Header>
+		<DockPanel>
+			<!-- Add an Options Button -->
+			<Button DockPanel.Dock="Right" Classes="theme-subtle" ToolTip.Tip="Options"
+				ContentTemplate="{actipro:GlyphTemplate Options16}" />
+
+			<!-- Add the Title (reusing the TitleTheme) -->
+			<TextBlock VerticalAlignment="Center"
+				Theme="{Binding $parent[actipro:Card].TitleTheme}"
+				Text="{Binding $parent[actipro:Card].Title}" />
+		</DockPanel>
+	</actipro:Card.Header>
+
+	<!-- Card Content -->
+	<StackPanel HorizontalAlignment="Center">
+
+		<actipro:Avatar Height="{actipro:ScaledDouble '4+144'}">
+			<Image Source="/Images/ProfilePhotos/Woman05.jpg" />
+		</actipro:Avatar>
+
+		<TextBlock Margin="{actipro:ScaledThickness '0,1,0,0'}"
+			FontSize="{actipro:ThemeResource DefaultFontSizeLarge}"
+			FontWeight="SemiBold"
+			Text="Marina Carpenter"
+			TextAlignment="Center" />
+		<TextBlock FontSize="{actipro:ThemeResource DefaultFontSizeSmall}"
+			Foreground="{actipro:ThemeResource DefaultForegroundBrushSecondary}"
+			Text="@marina_carpenter"
+			TextAlignment="Center" />
+
+		<TextBlock Margin="{actipro:ScaledThickness '0,3,0,0'}"
+			Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}"
+			Text="12 mutual contacts"
+			TextAlignment="Center" />
+
+	</StackPanel>
+
+</actipro:Card>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Custom cover button"
+			Footer="This sample demonstrates using a custom cover that adds a 'Menu' button whose padding is consistent with the card."
+			>
+
+			<actipro:Card HorizontalAlignment="Center" MaxWidth="200">
+				<actipro:Card.Cover>
+					<Panel>
+						<!-- Full size image -->
+						<Image Source="/Images/ProfilePhotos/Man02.jpg" Stretch="UniformToFill" />
+
+						<!-- Themed button -->
+						<ThemeVariantScope RequestedThemeVariant="Dark">
+							<Button Classes="theme-soft" HorizontalAlignment="Right" VerticalAlignment="Top"
+									Margin="{Binding $parent[actipro:Card].Padding}"
+									ContentTemplate="{actipro:GlyphTemplate MenuBars16}" />
+						</ThemeVariantScope>
+
+					</Panel>
+				</actipro:Card.Cover>
+
+				<StackPanel HorizontalAlignment="Center">
+					<TextBlock FontSize="{actipro:ThemeResource DefaultFontSizeExtraLarge}" FontWeight="SemiBold" Text="Cliff Ellington" TextAlignment="Center" />
+					<TextBlock FontSize="{actipro:ThemeResource DefaultFontSizeMedium}" Foreground="{actipro:ThemeResource DefaultForegroundBrushSecondary}" Text="Manager" TextAlignment="Center" />
+				</StackPanel>
+
+				<actipro:Card.Footer>
+					<TextBlock Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" Text="@cliff_ellington" TextAlignment="Center" />
+				</actipro:Card.Footer>
+
+			</actipro:Card>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:Card>
+
+	<actipro:Card.Cover>
+		<Panel>
+			<!-- Full size image -->
+			<Image Source="/Images/ProfilePhotos/Man02.jpg" Stretch="UniformToFill" />
+
+			<!-- Themed button -->
+			<ThemeVariantScope RequestedThemeVariant="Dark">
+				<Button Classes="theme-soft" HorizontalAlignment="Right" VerticalAlignment="Top"
+						Margin="{Binding $parent[actipro:Card].Padding}"
+						ContentTemplate="{actipro:GlyphTemplate MenuBars16}" />
+			</ThemeVariantScope>
+
+		</Panel>
+	</actipro:Card.Cover>
+
+	<!-- Card Content -->
+	<StackPanel HorizontalAlignment="Center">
+		<TextBlock FontSize="{actipro:ThemeResource DefaultFontSizeExtraLarge}"
+			FontWeight="SemiBold"
+			Text="Cliff Ellignton" TextAlignment="Center" />
+		<TextBlock FontSize="{actipro:ThemeResource DefaultFontSizeMedium}"
+			Foreground="{actipro:ThemeResource DefaultForegroundBrushSecondary}"
+			Text="Manager"
+			TextAlignment="Center" />
+	</StackPanel>
+
+	<actipro:Card.Footer>
+		<TextBlock Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}"
+			Text="@cliff_ellington"
+			TextAlignment="Center" />
+	</actipro:Card.Footer>
+
+</actipro:Card>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Custom cover padding"
+			Footer="This sample demonstrates adding padding to the cover, which normally does not have padding."
+			>
+
+			<actipro:Card HorizontalAlignment="Center" MaxWidth="250"
+						  Title="Erik Lai" Description="erik.lai@corpticaenterprises.com">
+				
+				<actipro:Card.Resources>
+					<!-- Cover padding is only applied to Left/Top/Right since Bottom already has padding -->
+					<actipro:ThicknessConverter x:Key="CoverPaddingConverter" Filter="Left,Top,Right" BaseThickness="0" />
+				</actipro:Card.Resources>
+				
+				<actipro:Card.Cover>
+					<Border Margin="{Binding $parent[actipro:Card].Padding, Converter={StaticResource CoverPaddingConverter}}"
+							CornerRadius="{actipro:ScaledCornerRadius 1}">
+						<Image actipro:BorderChildClipConverter.ClipToContainingBorder="True"
+							Source="/Images/ProfilePhotos/Man05.jpg" Stretch="UniformToFill" />
+					</Border>
+				</actipro:Card.Cover>
+
+				<Button Classes="theme-solid accent" Content="Connect" FontSize="{actipro:ThemeResource DefaultFontSizeLarge}" />
+
+			</actipro:Card>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:Card Title="Erik Lai" Description="erik.lai@corpticaenterprises.com">
+
+	<actipro:Card.Resources>
+		<!-- Cover padding is only applied to Left/Top/Right since Bottom already has padding -->
+		<actipro:ThicknessConverter x:Key="CoverPaddingConverter" Filter="Left,Top,Right" BaseThickness="0" />
+	</actipro:Card.Resources>
+
+	<actipro:Card.Cover>
+		<Border Margin="{Binding $parent[actipro:Card].Padding, Converter={StaticResource CoverPaddingConverter}}"
+			CornerRadius="{actipro:ScaledCornerRadius 1}">
+			
+			<Image actipro:BorderChildClipConverter.ClipToContainingBorder="True"
+				Source="/Images/ProfilePhotos/Man05.jpg" Stretch="UniformToFill" />
+
+		</Border>
+	</actipro:Card.Cover>
+
+	<Button Classes="theme-solid accent" Content="Connect"
+		FontSize="{actipro:ThemeResource DefaultFontSizeLarge}" />
+
+</actipro:Card>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Accented header"
+			Footer="The Card header can be any content. This sample demonstrates showing multiple values in the header with an accented background."
+			>
+
+			<actipro:Card HorizontalAlignment="Center" Width="350"
+						  HeaderBackground="{actipro:ThemeResource ControlBackgroundBrushSolidAccent}">
+				<actipro:Card.Header>
+					<StackPanel Orientation="Horizontal" Spacing="20">
+						<StackPanel.Styles>
+							<Style Selector="TextBlock.label">
+								<Setter Property="Foreground" Value="{actipro:ThemeResource ControlForegroundBrushSolidAccent}" />
+							</Style>
+							<Style Selector="TextBlock.value">
+								<Setter Property="Foreground" Value="{actipro:ThemeResource ControlForegroundBrushSolidAccent}" />
+								<Setter Property="FontWeight" Value="DemiBold" />
+							</Style>
+						</StackPanel.Styles>
+						<actipro:Avatar Height="64" BorderBrush="{actipro:ThemeResource ControlForegroundBrushSolidAccent}" BorderThickness="2">
+							<Image Source="/Images/ProfilePhotos/Woman02.jpg" />
+						</actipro:Avatar>
+						<StackPanel VerticalAlignment="Center">
+							<TextBlock Classes="label" Text="Posts" />
+							<TextBlock Classes="value" Text="42" />
+						</StackPanel>
+						<StackPanel VerticalAlignment="Center">
+							<TextBlock Classes="label" Text="Followers" />
+							<TextBlock Classes="value" Text="183" />
+						</StackPanel>
+						<StackPanel VerticalAlignment="Center">
+							<TextBlock Classes="label" Text="Following" />
+							<TextBlock Classes="value" Text="301" />
+						</StackPanel>
+					</StackPanel>
+				</actipro:Card.Header>
+
+				<StackPanel>
+					<TextBlock Text="Tammy Mitchell" FontSize="{actipro:ThemeResource DefaultFontSizeLarge}" FontWeight="SemiBold" />
+					<TextBlock Text="Accountant" Foreground="{actipro:ThemeResource DefaultForegroundBrushSecondary}" />
+				</StackPanel>
+
+				<actipro:Card.Footer>
+					<StackPanel HorizontalAlignment="Stretch">
+						<TextBlock Text="About" FontSize="{actipro:ThemeResource DefaultFontSizeSmall}" FontWeight="SemiBold" />
+						<TextBlock TextWrapping="Wrap" FontSize="{actipro:ThemeResource DefaultFontSizeExtraSmall}" >Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Vitae auctor eu augue ut. Molestie nunc non blandit massa enim nec. Blandit turpis cursus in hac.</TextBlock>
+					</StackPanel>
+				</actipro:Card.Footer>
+
+			</actipro:Card>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:Card HeaderBackground="{actipro:ThemeResource ControlBackgroundBrushSolidAccent}">
+
+	<actipro:Card.Header>
+		<StackPanel Orientation="Horizontal" Spacing="20">
+			<StackPanel.Styles>
+				<Style Selector="TextBlock.label">
+					<Setter Property="Foreground" Value="{actipro:ThemeResource ControlForegroundBrushSolidAccent}" />
+				</Style>
+				<Style Selector="TextBlock.value">
+					<Setter Property="Foreground" Value="{actipro:ThemeResource ControlForegroundBrushSolidAccent}" />
+					<Setter Property="FontWeight" Value="DemiBold" />
+				</Style>
+			</StackPanel.Styles>
+			<actipro:Avatar Grid.Column="0" Height="64">
+				<Image Source="/Images/ProfilePhotos/Woman02.jpg" />
+			</actipro:Avatar>
+			<StackPanel Grid.Column="1" VerticalAlignment="Center">
+				<TextBlock Classes="label" Text="Posts" />
+				<TextBlock Classes="value" Text="42" />
+			</StackPanel>
+			<StackPanel Grid.Column="2" VerticalAlignment="Center">
+				<TextBlock Classes="label" Text="Followers" />
+				<TextBlock Classes="value" Text="183" />
+			</StackPanel>
+			<StackPanel Grid.Column="3" VerticalAlignment="Center">
+				<TextBlock Classes="label" Text="Following" />
+				<TextBlock Classes="value" Text="301" />
+			</StackPanel>
+		</StackPanel>
+	</actipro:Card.Header>
+
+	<StackPanel>
+		<TextBlock Text="Tammy Mitchell" 
+			FontSize="{actipro:ThemeResource DefaultFontSizeLarge}"
+			FontWeight="SemiBold" />
+		<TextBlock Text="Accountant"
+			Foreground="{actipro:ThemeResource DefaultForegroundBrushSecondary}" />
+	</StackPanel>
+
+	<actipro:Card.Footer>
+		<StackPanel HorizontalAlignment="Stretch">
+			<TextBlock Text="About"
+				FontSize="{actipro:ThemeResource DefaultFontSizeSmall}"
+				FontWeight="SemiBold" />
+			<TextBlock Text="Lorem ipsum ..." TextWrapping="Wrap"
+				FontSize="{actipro:ThemeResource DefaultFontSizeExtraSmall}" />
+		</StackPanel>
+	</actipro:Card.Footer>
+
+</actipro:Card>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+</UserControl>

@@ -27,6 +27,7 @@
 
 		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
 			<sampleBrowser:ControlExampleLinkItem Title="User prompt" Url="/ProductSamples/FundamentalsSamples/Controls/UserPromptIntro/MainControl" />
+			<sampleBrowser:ControlExampleLinkItem Title="InfoBar" Url="/ProductSamples/FundamentalsSamples/Controls/InfoBarIntro/MainControl" />
 		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
 
 

@@ -1,7 +1,7 @@
 ---
 title: "WindowResizeGrip"
 page-title: "WindowResizeGrip - Shared Library Controls"
-order: 11
+order: 50
 ---
 # WindowResizeGrip
 

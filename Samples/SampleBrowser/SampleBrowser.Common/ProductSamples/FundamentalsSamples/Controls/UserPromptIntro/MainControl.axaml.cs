@@ -185,7 +185,7 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 				.WithCheckBox("This checked state is reflected on the clipboard", isChecked: true)
 				.WithFooterContent("Click 'Show Sample as Dialog' button and then press copy shortcut")
 				.WithFooterClipboardText($"The '{nameof(UserPromptControl.Footer)}' property is auto-converted to clipboard text, but the footer of this instance is configured to use this custom text instead.")
-				.WithFooterImage(ImageProvider.Default.GetImageSource(SharedImageKeys.Question))
+				.WithFooterImage(ImageProvider.Default.GetImageSource(SharedImageSourceKeys.Question))
 				.WithExpandedInformationHeaderText("Show more", "Show less")
 				.WithExpandedInformationContent($"Clipboard text can be customized for '{nameof(UserPromptControl.Header)}', '{nameof(UserPromptControl.Content)}', '{nameof(UserPromptControl.Footer)}', '{nameof(UserPromptControl.ButtonItems)}', '{nameof(UserPromptControl.ExpandedInformationContent)}', and '{nameof(UserPromptControl.CheckBoxContent)}'.")
 				.WithExpandedInformationContentClipboardText($"Use the '{nameof(UserPromptControl.HeaderClipboardText)}', '{nameof(UserPromptControl.ContentClipboardText)}', '{nameof(UserPromptControl.FooterClipboardText)}', '{nameof(UserPromptControl.ButtonItemsClipboardText)}', '{nameof(UserPromptControl.ExpandedInformationContentClipboardText)}', and '{nameof(UserPromptControl.CheckBoxContentClipboardText)}' properties to explicitly set clipboard text.")
@@ -324,7 +324,7 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 						new Run(" for more information")
 					}
 				})
-				.WithFooterImage(ImageProvider.Default.GetImageSource(SharedImageKeys.Question))
+				.WithFooterImage(ImageProvider.Default.GetImageSource(SharedImageSourceKeys.Question))
 				.WithButton(MessageBoxResult.OK)
 				.Show();
 		}

@@ -1,6 +1,6 @@
 ---
 title: "Progress Spinners"
-page-title: "Progress Spinners - Shared Library Controls"
+page-title: "Progress Spinners - Fundamentals Controls"
 order: 40
 ---
 # Progress Spinners

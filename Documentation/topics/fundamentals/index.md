@@ -18,12 +18,17 @@ Actipro Fundamentals is a library that contains professionally-developed control
 
 ### General Controls
 
-- An [Avatar](controls/avatar.md) to represent people or objects.
-- An [Avatar Group](controls/avatar-group.md) renders multiple [Avatar](controls/avatar.md) controls.
-- A [Badge](controls/badge.md) for displaying contextual information for other elements or can be used stand-alone.
-- A [RingSpinner](controls/progress-spinners.md) control that is a circular busy indicator.
-- A [User Prompt](user-prompt/index.md) for displaying **MessageBox** and **Task Dialog** style prompts.
+- [Avatar](controls/avatar.md) represents people or objects.
+- [AvatarGroup](controls/avatar-group.md) renders multiple [Avatar](controls/avatar.md) controls.
+- [Badge](controls/badge.md) displays contextual information for other elements or can be used stand-alone.
+- [Card](controls/card.md) displays visually grouped information for a single subject.
+- [CircularProgressBar](controls/circular-progressbar.md) displays a ranged progress value using fluent animations.  It is similar to a native linear `ProgressBar`, except that it renders the progress in a ring shape.
+- [InfoBar](controls/info-bar.md) displays essential information to a user without disrupting the user flow.
+- [RingSpinner](controls/progress-spinners.md) renders a circular busy indicator.
+- [SegmentedBar](controls/segmented-bar.md) allows a user to select a single item with support for fluent animations when changing selection.
+- [SettingsCard](controls/settings-card.md), [SettingsExpander](controls/settings-expander.md), and [Settings Group](controls/settings-group.md) controls are used together to organize and present configurable settings.
+- [User Prompt](user-prompt/index.md) displays **MessageBox** and **Task Dialog** style prompts.
 
 ### Panels
 
-- A [MultiColumnPanel](xref:@ActiproUIRoot.Controls.MultiColumnPanel) that can arrange child elements in multiple columns, collapsing columns down as available space decreases.
+- [MultiColumnPanel](xref:@ActiproUIRoot.Controls.MultiColumnPanel) arranges child elements in multiple columns, collapsing columns down as available space decreases.

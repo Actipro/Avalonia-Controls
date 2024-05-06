@@ -20,7 +20,8 @@
 				<sampleBrowser:ProductFamilyInfo.LogoImageSource>
 					<actiproImages:ReleaseHistoryLogo48 />
 				</sampleBrowser:ProductFamilyInfo.LogoImageSource>
-				
+
+				<sampleBrowser:ProductItemInfo Category="Versions" Title="v24.1" Path="/SampleBrowser/Documents/ReleaseHistories/v24.1.md" />
 				<sampleBrowser:ProductItemInfo Category="Versions" Title="v23.1" Path="/SampleBrowser/Documents/ReleaseHistories/v23.1.md" />
 			</sampleBrowser:ProductFamilyInfo>
 		</sampleBrowser:ProductData.ReleaseHistory>
@@ -46,9 +47,8 @@
 			</sampleBrowser:ProductFamilyInfo.LogoImageSource>
 
 			<sampleBrowser:ProductFamilyInfo.News>
-				<sampleBrowser:ListItemInfo Title="Professionally-designed styles and templates for all native Avalonia controls" />
+				<sampleBrowser:ListItemInfo Title="Native templates updated through Avalonia v11.0.10" />
 				<sampleBrowser:ListItemInfo Title="Customizable theme generator" />
-				<sampleBrowser:ListItemInfo Title="Multiple user interface density options" />
 			</sampleBrowser:ProductFamilyInfo.News>
 
 			<sampleBrowser:ProductFamilyInfo.TeaserBulletItems>
@@ -112,8 +112,7 @@
 			</sampleBrowser:ProductFamilyInfo.LogoImageSource>
 
 			<sampleBrowser:ProductFamilyInfo.News>
-				<sampleBrowser:ListItemInfo Title="A number of helpful controls that work in tandem with native Avalonia controls" />
-				<sampleBrowser:ListItemInfo Title="A ring slice shape often used in progress indicators" />
+				<sampleBrowser:ListItemInfo Title="A presenter for scrolling through overflowed content." />
 			</sampleBrowser:ProductFamilyInfo.News>
 
 			<sampleBrowser:ProductFamilyInfo.TeaserBulletItems>
@@ -132,9 +131,11 @@
 			<sampleBrowser:ProductItemInfo Category="Controls" Title="Dynamic Image" Path="/ProductSamples/SharedSamples/Controls/DynamicImageIntro/MainControl"/>
 			<sampleBrowser:ProductItemInfo Category="Controls" Title="Hyperlink Text Block" Path="/ProductSamples/SharedSamples/Controls/HyperlinkTextBlockIntro/MainControl"/>
 			<sampleBrowser:ProductItemInfo Category="Controls" Title="Mesh Gradient Presenter" Path="/ProductSamples/SharedSamples/Controls/MeshGradientPresenterIntro/MainControl"/>
+			<sampleBrowser:ProductItemInfo BlurbText="New!" Category="Controls" Title="Scrollable Overflow" Path="/ProductSamples/SharedSamples/Controls/ScrollableOverflowPresenterIntro/MainControl"/>
 			<sampleBrowser:ProductItemInfo Category="Controls" Title="Shadow Chrome" Path="/ProductSamples/SharedSamples/Controls/ShadowChromeIntro/MainControl"/>
 			<sampleBrowser:ProductItemInfo Category="Controls" Title="Toggle Theme Button" Path="/ProductSamples/SharedSamples/Controls/ToggleThemeButtonIntro/MainControl"/>
 			<sampleBrowser:ProductItemInfo Category="Controls" Title="Window Resize Grip" Path="/ProductSamples/SharedSamples/Controls/WindowResizeGripIntro/MainControl"/>
+			
 			
 			<sampleBrowser:ProductItemInfo BlurbText="New!" Category="Shapes" Title="Ring Slice" Path="/ProductSamples/SharedSamples/Shapes/RingSliceIntro/MainControl"/>
 
@@ -154,17 +155,19 @@
 			</sampleBrowser:ProductFamilyInfo.LogoImageSource>
 
 			<sampleBrowser:ProductFamilyInfo.News>
-				<sampleBrowser:ListItemInfo Title="A user prompt control that provides traditional MessageBox and task dialog functionality" />
-				<sampleBrowser:ListItemInfo Title="Avatar that renders an image, glyph, initials, or text to represent a person" />
-				<sampleBrowser:ListItemInfo Title="Avatar group for displaying many avatars, with overflow support" />
+				<sampleBrowser:ListItemInfo Title="Settings card and other controls for organizing and presenting configurable settings" />
+				<sampleBrowser:ListItemInfo Title="Card that displays grouped information for a single subject" />
+				<sampleBrowser:ListItemInfo Title="InfoBar that displays messages without breaking user flow" />
+				<sampleBrowser:ListItemInfo Title="Avatar that renders an image, glyph, initials, or text to represent a person which can optionally be combined in an overflowable avatar group" />
 				<sampleBrowser:ListItemInfo Title="Badge and numeric badge that add contextual information to other controls" />
-				<sampleBrowser:ListItemInfo Title="Progress spinners" />
+				<sampleBrowser:ListItemInfo Title="Progress spinners and circular progressbar" />
+				<sampleBrowser:ListItemInfo Title="SegmentedBar for fluent selection of an individual item" />
 			</sampleBrowser:ProductFamilyInfo.News>
 
 			<sampleBrowser:ProductFamilyInfo.TeaserBulletItems>
 				<x:String>User prompt for displaying messages and task dialogs</x:String>
-				<x:String>Responsive multi-column panel</x:String>
-				<x:String>Avatar, badge, and spinner controls</x:String>
+				<x:String>Settings controls for organizing and presenting configurable settings</x:String>
+				<x:String>Avatar, badge, card, info bar, segmented bar, progress, and spinner controls</x:String>
 				<x:String>More coming soon</x:String>
 			</sampleBrowser:ProductFamilyInfo.TeaserBulletItems>
 
@@ -174,8 +177,13 @@
 
 			<sampleBrowser:ProductItemInfo BlurbText="New!" Category="Controls" Title="Avatar" Path="/ProductSamples/FundamentalsSamples/Controls/AvatarIntro/MainControl"/>
 			<sampleBrowser:ProductItemInfo BlurbText="New!" Category="Controls" Title="Badge" Path="/ProductSamples/FundamentalsSamples/Controls/BadgeIntro/MainControl"/>
+			<sampleBrowser:ProductItemInfo BlurbText="New!" Category="Controls" Title="Card" Path="/ProductSamples/FundamentalsSamples/Controls/CardIntro/MainControl"/>
+			<sampleBrowser:ProductItemInfo BlurbText="New!" Category="Controls" Title="Circular Progressbar" Path="/ProductSamples/FundamentalsSamples/Controls/CircularProgressBarIntro/MainControl"/>
+			<sampleBrowser:ProductItemInfo BlurbText="New!" Category="Controls" Title="Info Bar" Path="/ProductSamples/FundamentalsSamples/Controls/InfoBarIntro/MainControl"/>
 			<sampleBrowser:ProductItemInfo Category="Controls" Title="MessageBox" Path="/ProductSamples/FundamentalsSamples/Controls/MessageBoxIntro/MainControl"/>
 			<sampleBrowser:ProductItemInfo BlurbText="New!" Category="Controls" Title="Progress Spinners" Path="/ProductSamples/FundamentalsSamples/Controls/ProgressSpinners/MainControl"/>
+			<sampleBrowser:ProductItemInfo BlurbText="New!" Category="Controls" Title="Segmented Bar" Path="/ProductSamples/FundamentalsSamples/Controls/SegmentedBarIntro/MainControl"/>
+			<sampleBrowser:ProductItemInfo BlurbText="New!" Category="Controls" Title="Settings" Path="/ProductSamples/FundamentalsSamples/Controls/SettingsIntro/MainControl"/>
 			<sampleBrowser:ProductItemInfo Category="Controls" Title="User Prompt" Path="/ProductSamples/FundamentalsSamples/Controls/UserPromptIntro/MainControl"/>
 			
 

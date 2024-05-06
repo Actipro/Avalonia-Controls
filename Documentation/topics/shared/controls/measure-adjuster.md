@@ -1,7 +1,7 @@
 ---
 title: "MeasureAdjuster"
 page-title: "MeasureAdjuster - Shared Library Controls"
-order: 7
+order: 25
 ---
 # MeasureAdjuster
 

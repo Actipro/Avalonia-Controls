@@ -60,3 +60,7 @@ catch (Exception ex) {
 
 > [!TIP]
 > See the [Localization](localization.md) topic for details on how to customize the string resources used for exception prompt.
+
+## Tag Property
+
+The [UserPromptBuilder](xref:@ActiproUIRoot.Controls.UserPromptBuilder).[Tag](xref:@ActiproUIRoot.Controls.UserPromptBuilder.Tag) property can be used to store an arbitrary object value on the builder, and this can be useful for extension methods that need to store custom values while building the prompt.  Use the [UserPromptBuilder](xref:@ActiproUIRoot.Controls.UserPromptBuilder).[WithTag](xref:@ActiproUIRoot.Controls.UserPromptBuilder.WithTag*) method to assign values to this property.

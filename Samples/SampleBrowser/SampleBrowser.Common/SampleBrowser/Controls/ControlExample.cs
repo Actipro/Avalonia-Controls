@@ -14,6 +14,7 @@ namespace ActiproSoftware.SampleBrowser {
 	/// Displays a sample with a header and optional footer and code sections.
 	/// </summary>
 	[TemplatePart(CodeExamplePanelPartName, typeof(Panel))]
+	[PseudoClasses(pcOptions)]
 	[PseudoClasses(pcWide)]
 	public class ControlExample : HeaderedContentControl {
 	
@@ -72,6 +73,7 @@ namespace ActiproSoftware.SampleBrowser {
 		private const string CodeExamplePanelPartName = "PART_CodeExamplePanel";
 
 		// Pseudo classes
+		private const string pcOptions = ":options";
 		private const string pcWide = ":wide";
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -80,6 +82,7 @@ namespace ActiproSoftware.SampleBrowser {
 
 		static ControlExample() {
 			IsCodeExpandedProperty.Changed.AddClassHandler<ControlExample>((x, e) => x.OnIsCodeExpandedPropertyValueChanged(e));
+			OptionsProperty.Changed.AddClassHandler<ControlExample>((x, _) => x.UpdatePseudoClasses());
 		}
 
 		public ControlExample() {
@@ -128,8 +131,10 @@ namespace ActiproSoftware.SampleBrowser {
 		private void UpdateHasCode()
 			=> HasCode = (this.CodeExamples.Any(x => x is not null));
 		
-		private void UpdatePseudoClasses()
-			=> PseudoClasses.Set(pcWide, _isWideMeasure);
+		private void UpdatePseudoClasses() {
+			PseudoClasses.Set(pcOptions, Options is not null);
+			PseudoClasses.Set(pcWide, _isWideMeasure);
+		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 		// PUBLIC PROCEDURES

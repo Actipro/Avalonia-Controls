@@ -9,4 +9,4 @@ The [ActiproSoftware.UI.Avalonia.Controls.Shapes](xref:@ActiproUIRoot.Controls.S
 
 ## RingSlice
 
-The [RingSlice](ring-slice.md) shape renders a portion (or the entire circle) of a ring shape.  Its start/end angles, radius, thickness, and other stroke properties can be set.
+The [RingSlice](ring-slice.md) shape renders a portion (or the entire circle) of a ring shape.  Its start and sweep angles, radius, thickness, and other stroke properties can be set.

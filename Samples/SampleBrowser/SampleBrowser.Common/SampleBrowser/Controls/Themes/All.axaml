@@ -7,7 +7,9 @@
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
 
+				<MergeResourceInclude Source="/SampleBrowser/Controls/Themes/BlurbBadgeTemplate.axaml" />
 				<MergeResourceInclude Source="/SampleBrowser/Controls/Themes/CategorizedSampleItemsControl.axaml" />
+				<MergeResourceInclude Source="/SampleBrowser/Controls/Themes/CopyColorButton.axaml" />
 				<MergeResourceInclude Source="/SampleBrowser/Controls/Themes/DocumentViewer.axaml" />
 				<MergeResourceInclude Source="/SampleBrowser/Controls/Themes/FeaturedSampleItemsControl.axaml" />
 				<MergeResourceInclude Source="/SampleBrowser/Controls/Themes/ControlExample.axaml" />

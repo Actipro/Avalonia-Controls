@@ -178,7 +178,7 @@
 						<sampleBrowser:CodeExampleSubstitution Key="OverflowCount" Value="{Binding OverflowCount}" />
 						<sampleBrowser:CodeExampleSubstitution Key="OverflowStringFormatAttribute"
 															   IsEnabled="{Binding OverflowStringFormat, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='{}{0}+'}"
-															   Value="{Binding OverflowStringFormat, StringFormat=' OverflowStringFormat=&quot;{0}&quot;'}" />
+															   Value="{Binding OverflowStringFormat, StringFormat=' OverflowStringFormat=&quot;{{}}{0}&quot;'}" />
 						<sampleBrowser:CodeExampleSubstitution Key="IsActiveWhenZeroAttribute"
 															   IsEnabled="{Binding IsActiveWhenZero}"
 															   Value=" IsActiveWhenZero=&quot;True&quot;" />
@@ -404,7 +404,7 @@
 				<actipro:Badge Classes="theme-outline success" Content="NEW" />
 				<actipro:NumericBadge Count="100" />
 				<actipro:Badge Classes="theme-soft danger" ContentTemplate="{actipro:GlyphTemplate SmallIndeterminateCheck16}" />
-				<actipro:Badge Classes="theme-solid accent" />
+				<actipro:Badge Classes="theme-solid accent" Kind="Dot" />
 				<actipro:Badge Classes="theme-solid" Background="{actipro:ThemeResource AvaloniaBrandBrush}" Content="Avalonia" CornerRadius="2" BorderThickness="0" />
 
 			</StackPanel>

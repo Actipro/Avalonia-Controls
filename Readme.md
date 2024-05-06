@@ -46,7 +46,7 @@ Elevate your application by licensing additional professionally designed commerc
 
 ![Themes](.github/image-content/fundamentals-welcome.png)
 
-[Actipro Fundamentals](https://www.actiprosoftware.com/docs/controls/avalonia/fundamentals/index) provides a collection of advanced controls that are useful for many different types of applications.
+[Actipro Fundamentals](https://www.actiprosoftware.com/docs/controls/avalonia/fundamentals/index) provides a collection of advanced controls that are useful for many different types of applications, including user prompts, message boxes, avatars, badges, progress spinners, and more.
 
 ## Getting Started
 
