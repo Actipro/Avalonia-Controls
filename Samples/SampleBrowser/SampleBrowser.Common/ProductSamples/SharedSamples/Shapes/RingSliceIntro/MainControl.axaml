@@ -8,18 +8,21 @@
 	>
 	<UserControl.Resources>
 
-		<sample:AngleToDecimalConverter x:Key="AngleToDecimalConverter" />
 		<converters:ColorToBrushConverter x:Key="ColorToBrushConverter" />
 		
 	</UserControl.Resources>
 	
 	<sampleBrowser:ControlExampleItemsControl
-		Header="The RingSlice shape renders a portion (or the entire circle) of a ring shape.  Its start/end angles, radius, thickness, and other stroke properties can be set.">
+		Header="The RingSlice shape renders a portion (or the entire circle) of a ring shape.  Its start and sweep angles, radius, thickness, and other stroke properties can be set.">
 
 		<sampleBrowser:ControlExampleItemsControl.Documentation>
 			<sampleBrowser:ControlExampleLinkItem Title="RingSlice" Url="https://www.actiprosoftware.com/docs/controls/avalonia/shared/shapes/ring-slice" />
 		</sampleBrowser:ControlExampleItemsControl.Documentation>
 
+		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+			<sampleBrowser:ControlExampleLinkItem Title="Circular progressbar" Url="/ProductSamples/FundamentalsSamples/Controls/CircularProgressBarIntro/MainControl" />
+			<sampleBrowser:ControlExampleLinkItem Title="Progress spinners" Url="/ProductSamples/FundamentalsSamples/Controls/ProgressSpinners/MainControl" />
+		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
 
 		<sampleBrowser:ControlExample
 			Header="Basic usage"
@@ -33,11 +36,11 @@
 				<StackPanel Spacing="10">
 					<StackPanel>
 						<TextBlock Classes="theme-form-control-label" Text="Start angle" />
-						<NumericUpDown Value="{Binding StartAngle, Converter={StaticResource AngleToDecimalConverter}}" Minimum="0" Maximum="360" FormatString="0" Increment="5" />
+						<NumericUpDown Value="{Binding StartAngle}" Minimum="0" Maximum="360" FormatString="0" Increment="10" />
 					</StackPanel>
 					<StackPanel>
-						<TextBlock Classes="theme-form-control-label" Text="End angle" />
-						<NumericUpDown Value="{Binding EndAngle, Converter={StaticResource AngleToDecimalConverter}}" Minimum="0" Maximum="360" FormatString="0" Increment="5" />
+						<TextBlock Classes="theme-form-control-label" Text="Sweep angle" />
+						<NumericUpDown Value="{Binding SweepAngle}" Minimum="-720" Maximum="720" FormatString="0" Increment="10" />
 					</StackPanel>
 					<StackPanel>
 						<TextBlock Classes="theme-form-control-label" Text="Radius" />
@@ -57,12 +60,12 @@
 			<sampleBrowser:ControlExample.CodeExamples>
 				<sampleBrowser:CodeExample xml:space="preserve">
 					<![CDATA[
-<actipro:RingSlice StartAngle="$(StartAngle)" EndAngle="$(EndAngle)" Radius="$(Radius)"
+<actipro:RingSlice StartAngle="$(StartAngle)" SweepAngle="$(SweepAngle)" Radius="$(Radius)"
 	StrokeThickness="$(StrokeThickness)" Stroke="$(Stroke)"$(IsRenderedWhenFullCircle) />
 					]]>
 					<sampleBrowser:CodeExample.Substitutions>
-						<sampleBrowser:CodeExampleSubstitution Key="StartAngle" Value="{Binding #sample.StartAngle.Degrees}" />
-						<sampleBrowser:CodeExampleSubstitution Key="EndAngle" Value="{Binding #sample.EndAngle.Degrees}" />
+						<sampleBrowser:CodeExampleSubstitution Key="StartAngle" Value="{Binding #sample.StartAngle}" />
+						<sampleBrowser:CodeExampleSubstitution Key="SweepAngle" Value="{Binding #sample.SweepAngle}" />
 						<sampleBrowser:CodeExampleSubstitution Key="Radius" Value="{Binding #sample.Radius}" />
 						<sampleBrowser:CodeExampleSubstitution Key="StrokeThickness" Value="{Binding #sample.StrokeThickness}" />
 						<sampleBrowser:CodeExampleSubstitution Key="Stroke" Value="{Binding #sample.Stroke}" />
@@ -79,10 +82,10 @@
 			>
 
 			<Grid>
-				<actipro:RingSlice Stroke="{actipro:ThemeResource ControlBackgroundBrushSolidSuccess}" Radius="60" StartAngle="2" EndAngle="88" />
-				<actipro:RingSlice Stroke="{actipro:ThemeResource ControlBackgroundBrushSolidSuccess}" Radius="60" StartAngle="92" EndAngle="178" />
-				<actipro:RingSlice Stroke="{actipro:ThemeResource Container5BackgroundBrush}" Radius="60" StartAngle="182" EndAngle="268" />
-				<actipro:RingSlice Stroke="{actipro:ThemeResource Container5BackgroundBrush}" Radius="60" StartAngle="272" EndAngle="358" />
+				<actipro:RingSlice Stroke="{actipro:ThemeResource ControlBackgroundBrushSolidSuccess}" Radius="60" StartAngle="2" SweepAngle="86" />
+				<actipro:RingSlice Stroke="{actipro:ThemeResource ControlBackgroundBrushSolidSuccess}" Radius="60" StartAngle="92" SweepAngle="86" />
+				<actipro:RingSlice Stroke="{actipro:ThemeResource Container5BackgroundBrush}" Radius="60" StartAngle="182" SweepAngle="86" />
+				<actipro:RingSlice Stroke="{actipro:ThemeResource Container5BackgroundBrush}" Radius="60" StartAngle="272" SweepAngle="86" />
 				<TextBlock Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Center" Text="50%" />
 			</Grid>
 
@@ -90,10 +93,10 @@
 				<sampleBrowser:CodeExample xml:space="preserve">
 					<![CDATA[
 <Grid>
-	<actipro:RingSlice Stroke="{actipro:ThemeResource ControlBackgroundBrushSolidSuccess}" Radius="60" StartAngle="2" EndAngle="88" />
-	<actipro:RingSlice Stroke="{actipro:ThemeResource ControlBackgroundBrushSolidSuccess}" Radius="60" StartAngle="92" EndAngle="178" />
-	<actipro:RingSlice Stroke="{actipro:ThemeResource Container5BackgroundBrush}" Radius="60" StartAngle="182" EndAngle="268" />
-	<actipro:RingSlice Stroke="{actipro:ThemeResource Container5BackgroundBrush}" Radius="60" StartAngle="272" EndAngle="358" />
+	<actipro:RingSlice Stroke="{actipro:ThemeResource ControlBackgroundBrushSolidSuccess}" Radius="60" StartAngle="2" SweepAngle="86" />
+	<actipro:RingSlice Stroke="{actipro:ThemeResource ControlBackgroundBrushSolidSuccess}" Radius="60" StartAngle="92" SweepAngle="86" />
+	<actipro:RingSlice Stroke="{actipro:ThemeResource Container5BackgroundBrush}" Radius="60" StartAngle="182" SweepAngle="86" />
+	<actipro:RingSlice Stroke="{actipro:ThemeResource Container5BackgroundBrush}" Radius="60" StartAngle="272" SweepAngle="86" />
 	<TextBlock Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Center" Text="50%" />
 </Grid>
 					]]>
@@ -110,7 +113,7 @@
 			<Grid>
 				<actipro:RingSlice Fill="{actipro:ThemeResource ControlBackgroundBrushSoftAccent}" Stroke="{actipro:ThemeResource ControlBackgroundBrushSoftAccentPointerOver}" StrokeThickness="1" Radius="56" />
 				<actipro:RingSlice Fill="{actipro:ThemeResource Container3BackgroundBrush}" Stroke="{actipro:ThemeResource ControlBackgroundBrushSoftAccentPointerOver}" StrokeThickness="1" Radius="35" />
-				<actipro:RingSlice Stroke="{actipro:ThemeResource ControlBackgroundBrushSolidAccent}" StrokeThickness="20" Radius="55" EndAngle="160" />
+				<actipro:RingSlice Stroke="{actipro:ThemeResource ControlBackgroundBrushSolidAccent}" StrokeThickness="20" Radius="55" SweepAngle="160" />
 				<TextBlock Foreground="{actipro:ThemeResource ControlBackgroundBrushSolidAccent}" FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Center" Text="133" />
 			</Grid>
 
@@ -123,7 +126,7 @@
 	<actipro:RingSlice Fill="{actipro:ThemeResource Container3BackgroundBrush}" 
 		Stroke="{actipro:ThemeResource ControlBackgroundBrushSoftAccentPointerOver}" StrokeThickness="1" Radius="35" />
 	<actipro:RingSlice Stroke="{actipro:ThemeResource ControlBackgroundBrushSolidAccent}" 
-		StrokeThickness="20" Radius="55" EndAngle="160" />
+		StrokeThickness="20" Radius="55" SweepAngle="160" />
 	<TextBlock Foreground="{actipro:ThemeResource ControlBackgroundBrushSolidAccent}" 
 		FontSize="28" HorizontalAlignment="Center" VerticalAlignment="Center" Text="133" />
 </Grid>
@@ -155,12 +158,12 @@
 			HorizontalContentAlignment="Center"
 			>
 
-			<actipro:RingSlice Stroke="#77b4c3" Radius="60" EndAngle="270" StrokeLineCap="Round" />
+			<actipro:RingSlice Stroke="#77b4c3" Radius="60" SweepAngle="270" StrokeLineCap="Round" />
 
 			<sampleBrowser:ControlExample.CodeExamples>
 				<sampleBrowser:CodeExample xml:space="preserve">
 					<![CDATA[
-<actipro:RingSlice Stroke="#77b4c3" Radius="60" EndAngle="270" StrokeLineCap="Round" />
+<actipro:RingSlice Stroke="#77b4c3" Radius="60" SweepAngle="270" StrokeLineCap="Round" />
 					]]>
 				</sampleBrowser:CodeExample>
 			</sampleBrowser:ControlExample.CodeExamples>
@@ -172,12 +175,12 @@
 			HorizontalContentAlignment="Center"
 			>
 
-			<actipro:RingSlice Stroke="#9e5aac" StrokeThickness="4" Radius="60" EndAngle="270" StrokeDashArray="5,0.5" />
+			<actipro:RingSlice Stroke="#9e5aac" StrokeThickness="4" Radius="60" SweepAngle="270" StrokeDashArray="5,0.5" />
 
 			<sampleBrowser:ControlExample.CodeExamples>
 				<sampleBrowser:CodeExample xml:space="preserve">
 					<![CDATA[
-<actipro:RingSlice Stroke="#9e5aac" StrokeThickness="4" Radius="60" EndAngle="270" StrokeDashArray="5,0.5" />
+<actipro:RingSlice Stroke="#9e5aac" StrokeThickness="4" Radius="60" SweepAngle="270" StrokeDashArray="5,0.5" />
 					]]>
 				</sampleBrowser:CodeExample>
 			</sampleBrowser:ControlExample.CodeExamples>
@@ -189,12 +192,12 @@
 			HorizontalContentAlignment="Center"
 			>
 
-			<actipro:RingSlice Stroke="#9e5aac" StrokeThickness="6" Radius="60" EndAngle="270" StrokeDashArray="3" StrokeLineCap="Round" StrokeDashOffset="-1" />
+			<actipro:RingSlice Stroke="#9e5aac" StrokeThickness="6" Radius="60" SweepAngle="270" StrokeDashArray="3" StrokeLineCap="Round" StrokeDashOffset="-1" />
 
 			<sampleBrowser:ControlExample.CodeExamples>
 				<sampleBrowser:CodeExample xml:space="preserve">
 					<![CDATA[
-<actipro:RingSlice Stroke="#9e5aac" StrokeThickness="6" Radius="60" EndAngle="270" StrokeDashArray="3" StrokeLineCap="Round" StrokeDashOffset="-1" />
+<actipro:RingSlice Stroke="#9e5aac" StrokeThickness="6" Radius="60" SweepAngle="270" StrokeDashArray="3" StrokeLineCap="Round" StrokeDashOffset="-1" />
 					]]>
 				</sampleBrowser:CodeExample>
 			</sampleBrowser:ControlExample.CodeExamples>
@@ -206,12 +209,12 @@
 			HorizontalContentAlignment="Center"
 			>
 
-			<actipro:RingSlice Stroke="#9e5aac" StrokeThickness="4" Radius="60" EndAngle="270" StrokeDashArray="1" />
+			<actipro:RingSlice Stroke="#9e5aac" StrokeThickness="4" Radius="60" SweepAngle="270" StrokeDashArray="1" />
 
 			<sampleBrowser:ControlExample.CodeExamples>
 				<sampleBrowser:CodeExample xml:space="preserve">
 					<![CDATA[
-<actipro:RingSlice Stroke="#9e5aac" StrokeThickness="4" Radius="60" EndAngle="270" StrokeDashArray="1" />
+<actipro:RingSlice Stroke="#9e5aac" StrokeThickness="4" Radius="60" SweepAngle="270" StrokeDashArray="1" />
 					]]>
 				</sampleBrowser:CodeExample>
 			</sampleBrowser:ControlExample.CodeExamples>
@@ -223,12 +226,12 @@
 			HorizontalContentAlignment="Center"
 			>
 
-			<actipro:RingSlice Stroke="#9e5aac" StrokeThickness="4" Radius="60" EndAngle="270" StrokeDashArray="0.5" />
+			<actipro:RingSlice Stroke="#9e5aac" StrokeThickness="4" Radius="60" SweepAngle="270" StrokeDashArray="0.5" />
 
 			<sampleBrowser:ControlExample.CodeExamples>
 				<sampleBrowser:CodeExample xml:space="preserve">
 					<![CDATA[
-<actipro:RingSlice Stroke="#9e5aac" StrokeThickness="4" Radius="60" EndAngle="270" StrokeDashArray="0.5" />
+<actipro:RingSlice Stroke="#9e5aac" StrokeThickness="4" Radius="60" SweepAngle="270" StrokeDashArray="0.5" />
 					]]>
 				</sampleBrowser:CodeExample>
 			</sampleBrowser:ControlExample.CodeExamples>
@@ -242,7 +245,7 @@
 
 			<Grid>
 				<actipro:RingSlice Stroke="#fffc20" StrokeThickness="60" Radius="60" />
-				<actipro:RingSlice Stroke="#ffae00" StrokeThickness="60" Radius="60" StartAngle="75" EndAngle="120" />
+				<actipro:RingSlice Stroke="#ffae00" StrokeThickness="60" Radius="60" StartAngle="75" SweepAngle="45" />
 				<actipro:RingSlice Stroke="#f0e800" StrokeThickness="2" Radius="60" />
 			</Grid>
 
@@ -251,7 +254,7 @@
 					<![CDATA[
 <Grid>
 	<actipro:RingSlice Stroke="#fffc20" StrokeThickness="60" Radius="60" />
-	<actipro:RingSlice Stroke="#ffae00" StrokeThickness="60" Radius="60" StartAngle="75" EndAngle="120" />
+	<actipro:RingSlice Stroke="#ffae00" StrokeThickness="60" Radius="60" StartAngle="75" SweepAngle="45" />
 	<actipro:RingSlice Stroke="#f0e800" StrokeThickness="2" Radius="60" />
 </Grid>
 					]]>

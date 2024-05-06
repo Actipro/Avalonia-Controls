@@ -70,30 +70,46 @@ by using a binding which reads as "ComboBox.SelectedItem EqualTo 'Allow Clear'".
 	/>
 ```
 
+## ImageControlConverter
 
-## ImageKeyToImageConverter
+The [ImageControlConverter](xref:@ActiproUIRoot.Controls.Converters.ImageControlConverter) value converter can create an `Image` control for a bound `IImage` source.  This is useful when data-binding a `MenuItem` control's `Icon` property to an `IImage` such as a bitmap, and the `MenuItem.Icon` must be a control.
 
-The [ImageKeyToImageConverter](xref:@ActiproUIRoot.Controls.Converters.ImageKeyToImageConverter) represents a value converter that uses an [ImageProvider](xref:@ActiproUIRoot.Media.ImageProvider) to lookup an `IImage` associated with a specified key.
+The following example demonstrates how to use the converter when binding to a view model's `ImageSource` property:
+
+```xaml
+xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+...
+<UserControl.Resources>
+	<actipro:ImageControlConverter x:Key="ImageControlConverter" />
+</UserControl.Resources>
+...
+
+<MenuItem Icon="{Binding ImageSource, Converter={StaticResource ImageControlConverter}}" ... />
+```
+
+## ImageKeyToImageSourceConverter
+
+The [ImageKeyToImageSourceConverter](xref:@ActiproUIRoot.Controls.Converters.ImageKeyToImageSourceConverter) represents a value converter that uses an [ImageProvider](xref:@ActiproUIRoot.Media.ImageProvider) to lookup an `IImage` associated with a specified key.
 
 | Specification | Details |
 |-----|-----|
-| Original value | A `String` key that identifies the image. Non-`String` values are automatically converted using `Object.ToString()`. The key value must be recognized by [ImageProvider](xref:@ActiproUIRoot.Media.ImageProvider).[GetImageSource](xref:@ActiproUIRoot.Media.ImageProvider.GetImageSource*).  Built-in keys are defined by [SharedImageKeys](xref:@ActiproUIRoot.Media.SharedImageKeys). |
+| Original value | A `String` key that identifies the image. Non-`String` values are automatically converted using `Object.ToString()`. The key value must be recognized by [ImageProvider](xref:@ActiproUIRoot.Media.ImageProvider).[GetImageSource](xref:@ActiproUIRoot.Media.ImageProvider.GetImageSource*).  Built-in keys are defined by [SharedImageSourceKeys](xref:@ActiproUIRoot.Media.SharedImageSourceKeys). |
 | Converted result | An `IImage` or `null` if the key is not found. |
 | Parameter | An [ImageProvider](xref:@ActiproUIRoot.Media.ImageProvider) instance or `null` to use [ImageProvider](xref:@ActiproUIRoot.Media.ImageProvider).[Default](xref:@ActiproUIRoot.Media.ImageProvider.Default). |
 | Target type | Not used. |
 | Culture | Not used. |
 | Can convert back | No. |
 
-The following example demonstrates how to use the converter with the key constants defined by the [SharedImageKeys](xref:@ActiproUIRoot.Media.SharedImageKeys) class:
+The following example demonstrates how to use the converter with the key constants defined by the [SharedImageSourceKeys](xref:@ActiproUIRoot.Media.SharedImageSourceKeys) class:
 
 ```xaml
 xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 ...
 <UserControl.Resources>
-    <actipro:ImageKeyToImageConverter x:Key="ImageKeyToImageConverter" />
+    <actipro:ImageKeyToImageSourceConverter x:Key="ImageKeyToImageSourceConverter" />
 </UserControl.Resources>
 ...
-<SampleControl Image="{Binding Source={x:Static actipro:SharedImageKeys.Warning}, Converter={StaticResource ImageKeyToImageConverter}}" ... />
+<SampleControl Image="{Binding Source={x:Static actipro:SharedImageSourceKeys.Warning}, Converter={StaticResource ImageKeyToImageSourceConverter}}" ... />
 ```
 
 ## MathConverter

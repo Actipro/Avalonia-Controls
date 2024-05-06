@@ -3,7 +3,7 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
-	xmlns:system="clr-namespace:System;assembly=System.Runtime"
+	xmlns:system="using:System"
 	>
 	<sampleBrowser:ControlExampleItemsControl
 		Header="ShadowChrome is a decorator that renders a beautiful modern drop shadow around its child control.">

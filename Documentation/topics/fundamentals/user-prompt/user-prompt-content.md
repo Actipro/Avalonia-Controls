@@ -135,9 +135,9 @@ The `Footer` property can be defined to display content at the bottom of the pro
 Any `TextBlock` controls used within `Footer` will wrap text by default.
 
 @if (avalonia) {
-Use the [FooterImage](xref:@ActiproUIRoot.Controls.UserPromptControl.FooterImage) property to optionally display a 16x16 image next to the `Footer` content. Any `IImage` is supported.
+Use the [FooterImageSource](xref:@ActiproUIRoot.Controls.UserPromptControl.FooterImageSource) property to optionally display a 16x16 image next to the `Footer` content. Any `IImage` is supported.
 
-When using the [builder pattern](builder-pattern.md), the [WithFooterContent](xref:@ActiproUIRoot.Controls.UserPromptBuilder.WithFooterContent*) method is used to configure the [UserPromptBuilder](xref:@ActiproUIRoot.Controls.UserPromptControl.Footer) property and the [WithFooterImage](xref:@ActiproUIRoot.Controls.UserPromptBuilder.WithFooterImage*) method configures the [FooterImage](xref:@ActiproUIRoot.Controls.UserPromptControl.FooterImage) property.
+When using the [builder pattern](builder-pattern.md), the [WithFooterContent](xref:@ActiproUIRoot.Controls.UserPromptBuilder.WithFooterContent*) method is used to configure the [UserPromptBuilder](xref:@ActiproUIRoot.Controls.UserPromptControl.Footer) property and the [WithFooterImage](xref:@ActiproUIRoot.Controls.UserPromptBuilder.WithFooterImage*) method configures the [FooterImageSource](xref:@ActiproUIRoot.Controls.UserPromptControl.FooterImageSource) property.
 
 ```csharp
 await UserPromptBuilder.Configure()
@@ -260,12 +260,12 @@ UserPromptBuilder.Configure()
 An image can be used to visually communicate the status or classification of the prompt displayed. Users can quickly differentiate an error from a warning based on the image displayed with the prompt.
 
 @if (avalonia) {
-The [StatusImage](xref:@ActiproUIRoot.Controls.UserPromptControl.StatusImage) property can be set to any 32x32 `IImage`.
+The [StatusImageSource](xref:@ActiproUIRoot.Controls.UserPromptControl.StatusImageSource) property can be set to any 32x32 `IImage`.
 
-Several common images, like those for an error or warning, are defined by the [MessageBoxImage](xref:@ActiproUIRoot.Controls.MessageBoxImage) enumeration.  Instead of populating the [StatusImage](xref:@ActiproUIRoot.Controls.UserPromptControl.StatusImage) property, set the [StandardStatusImage](xref:@ActiproUIRoot.Controls.UserPromptControl.StandardStatusImage) property to one of the [MessageBoxImage](xref:@ActiproUIRoot.Controls.MessageBoxImage) values.
+Several common images, like those for an error or warning, are defined by the [MessageBoxImage](xref:@ActiproUIRoot.Controls.MessageBoxImage) enumeration.  Instead of populating the [StatusImageSource](xref:@ActiproUIRoot.Controls.UserPromptControl.StatusImageSource) property, set the [StandardStatusImage](xref:@ActiproUIRoot.Controls.UserPromptControl.StandardStatusImage) property to one of the [MessageBoxImage](xref:@ActiproUIRoot.Controls.MessageBoxImage) values.
 
 > [!WARNING]
-> The [StandardStatusImage](xref:@ActiproUIRoot.Controls.UserPromptControl.StandardStatusImage) property is ignored if the [StatusImage](xref:@ActiproUIRoot.Controls.UserPromptControl.StatusImage) property is explicitly populated.
+> The [StandardStatusImage](xref:@ActiproUIRoot.Controls.UserPromptControl.StandardStatusImage) property is ignored if the [StatusImageSource](xref:@ActiproUIRoot.Controls.UserPromptControl.StatusImageSource) property is explicitly populated.
 
 When using the [builder pattern](builder-pattern.md), the [WithStatusImage](xref:@ActiproUIRoot.Controls.UserPromptBuilder.WithStatusImage*) has one overload that accepts a custom `IImage` and another for a standard [MessageBoxImage](xref:@ActiproUIRoot.Controls.MessageBoxImage):
 

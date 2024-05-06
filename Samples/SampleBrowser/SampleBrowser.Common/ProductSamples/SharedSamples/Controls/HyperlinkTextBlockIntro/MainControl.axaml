@@ -118,5 +118,34 @@ private void OnHyperlinkTextBlockClicked(object? sender, RoutedEventArgs e) {
 			</sampleBrowser:ControlExample.CodeExamples>
 		</sampleBrowser:ControlExample>
 
+
+		<sampleBrowser:ControlExample
+			Header="Size style classes"
+			Footer="Supplemental 'size-*' style classes can be specified to use larger or smaller font sizes."
+			HorizontalContentAlignment="Center"
+			>
+
+			<StackPanel Spacing="5">
+				<actipro:HyperlinkTextBlock Classes="size-xl" Text="Extra large link" />
+				<actipro:HyperlinkTextBlock Classes="size-lg" Text="Large link" />
+				<actipro:HyperlinkTextBlock Classes="size-md" Text="Medium link" />
+				<actipro:HyperlinkTextBlock Classes="size-sm" Text="Small link" />
+				<actipro:HyperlinkTextBlock Classes="size-xs" Text="Extra small link" />
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:HyperlinkTextBlock Classes="size-xl" Text="Extra large link" />
+<actipro:HyperlinkTextBlock Classes="size-lg" Text="Large link" />
+<actipro:HyperlinkTextBlock Classes="size-md" Text="Medium link" />
+<actipro:HyperlinkTextBlock Classes="size-sm" Text="Small link" />
+<actipro:HyperlinkTextBlock Classes="size-xs" Text="Extra small link" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+		
 	</sampleBrowser:ControlExampleItemsControl>
 </UserControl>

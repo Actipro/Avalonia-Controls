@@ -25,6 +25,7 @@ The Actipro Shared Library is a common control library referenced by all of our 
 - A [HyperlinkTextBlock](controls/hyperlink-textblock.md) that is a `TextBlock` implementation which renders like a hyperlink and behaves like a `Button`.
 - A [MeasureAdjuster](controls/measure-adjuster.md) decorator that can measure as zero size or round the measurement of its child content to integer values, thereby helping to ensure elements are arranged as desired and without sitting on a pixel boundary.
 - A [MeshGradientPresenter](controls/mesh-gradient-presenter.md) that renders a mesh gradient background.
+- A [ScrollableOverflowPresenter](controls/scrollable-overflow-presenter.md) control displays scroll buttons when its content overflows the available space.
 - A [ShadowChrome](controls/shadow-chrome.md) decorator that renders a drop shadow around its child control.
 - A [ToggleThemeButton](controls/toggle-theme-button.md) that, when invoked, toggles a `RequestedThemeVariant` property value between `ThemeVariant.Light` and `ThemeVariant.Dark`.
 - A [WindowResizeGrip](controls/window-resize-grip.md) that can be placed in the lower-right corner of a `Window` or its status bar, providing a larger area to drag-resize the `Window` both horizontally and vertically.

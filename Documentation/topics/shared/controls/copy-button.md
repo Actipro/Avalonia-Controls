@@ -1,7 +1,7 @@
 ---
 title: "CopyButton"
 page-title: "CopyButton - Shared Library Controls"
-order: 4
+order: 10
 ---
 # CopyButton
 
@@ -60,7 +60,7 @@ The following string resources are available to localize or customize built-in s
 
 | Resource key | Description |
 |-----|-----|
-| `UICopyButtonSuccessText` | The text displayed as popup feedback on a successful copy operation. The default value is `"Copied!"`. |
-| `UICopyButtonFailureText` | The text displayed as popup feedback on a failed copy operation. The default value is `"Error copying text!"`. |
+| [UICopyButtonSuccessText](xref:ActiproSoftware.Properties.Shared.SRName.UICopyButtonSuccessText) | The text displayed as popup feedback on a successful copy operation. The default value is `"Copied!"`. |
+| [UICopyButtonFailureText](xref:ActiproSoftware.Properties.Shared.SRName.UICopyButtonFailureText) | The text displayed as popup feedback on a failed copy operation. The default value is `"Error copying text!"`. |
 
 See the [Customizing String Resources](../../customizing-string-resources.md) topic for additional details.

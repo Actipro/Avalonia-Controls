@@ -1,0 +1,950 @@
+<UserControl 
+	x:Name="sampleRootControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:controlsPrims="using:Avalonia.Controls.Primitives"
+	xmlns:layout="using:Avalonia.Layout"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:system="using:System"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="SegmentedBar allows a user to select a single item with support for fluent animations when changing selection.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="SegmentedBar" Url="https://www.actiprosoftware.com/docs/controls/avalonia/fundamentals/segmented-bar" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+			<sampleBrowser:ControlExampleLinkItem Title="ListBox" Url="/ProductSamples/ThemesSamples/NativeControls/ListBoxSamples" />
+		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+
+
+		<sampleBrowser:ControlExample
+			Header="Basic usage"
+			DataContext="{Binding #basicUsage}"
+			>
+
+			<Border HorizontalAlignment="Center" Padding="20"
+				Background="{actipro:ThemeResource Container1BackgroundBrush}"
+				BorderBrush="{actipro:ThemeResource Container1BorderBrush}"
+				BorderThickness="1"
+				CornerRadius="5">
+
+				<actipro:SegmentedBar x:Name="basicUsage" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
+					Classes.theme-elevated="{Binding #basicUsageTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Elevated'}"
+					Classes.theme-outline="{Binding #basicUsageTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Outline'}"
+					Classes.theme-soft="{Binding #basicUsageTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Soft'}"
+					Classes.theme-solid="{Binding #basicUsageTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Solid'}"
+					Classes.theme-subtle="{Binding #basicUsageTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Subtle'}"
+					Classes.accent="{Binding #basicUsageVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Accent'}"
+					Classes.success="{Binding #basicUsageVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Success'}"
+					Classes.warning="{Binding #basicUsageVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Warning'}"
+					Classes.danger="{Binding #basicUsageVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Danger'}"
+					>
+
+					<actipro:SegmentedBarItem>Daily</actipro:SegmentedBarItem>
+					<actipro:SegmentedBarItem>Weekly</actipro:SegmentedBarItem>
+					<actipro:SegmentedBarItem>Monthly</actipro:SegmentedBarItem>
+					<actipro:SegmentedBarItem IsEnabled="False">Quarterly</actipro:SegmentedBarItem>
+					<actipro:SegmentedBarItem>Yearly</actipro:SegmentedBarItem>
+
+				</actipro:SegmentedBar>
+			</Border>
+			
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Theme" />
+						<ComboBox x:Name="basicUsageTheme" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Elevated, Outline, Soft, Solid, Subtle'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Variant" />
+						<ComboBox x:Name="basicUsageVariant" SelectedIndex="1" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Orientation" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type=Orientation}" SelectedValue="{Binding Orientation}" />
+					</StackPanel>
+					<CheckBox IsChecked="{Binding IsAnimationEnabled}">Is animation enabled</CheckBox>
+					<CheckBox IsChecked="{Binding IsEnabled}">Is enabled</CheckBox>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:SegmentedBar$(ClassesAttribute)$(OrientationAttribute)$(IsAnimationEnabledAttribute)$(IsEnabledAttribute)>
+	<!-- Define items explicitly or bind to an ItemsSource -->
+	<actipro:SegmentedBarItem>Daily</actipro:SegmentedBarItem>
+	<actipro:SegmentedBarItem>Weekly</actipro:SegmentedBarItem>
+	<actipro:SegmentedBarItem>Monthly</actipro:SegmentedBarItem>
+	<actipro:SegmentedBarItem IsEnabled="False">Quarterly</actipro:SegmentedBarItem>
+	<actipro:SegmentedBarItem>Yearly</actipro:SegmentedBarItem>
+</actipro:SegmentedBar>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
+															   IsEnabled="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), StringFormat=' Classes=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsAnimationEnabledAttribute"
+															   IsEnabled="{Binding !IsAnimationEnabled}"
+															   Value=" IsAnimationEnabled=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute"
+															   IsEnabled="{Binding !IsEnabled}"
+															   Value=" IsEnabled=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="OrientationAttribute"
+															   IsEnabled="{Binding Orientation, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Horizontal'}"
+															   Value="{Binding Orientation, StringFormat=' Orientation=&quot;{0}&quot;'}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Themes"
+			Footer="The appearance can be changed from the default with the use of the 'theme-elevated', 'theme-outline', 'theme-soft', 'theme-solid', or 'theme-subtle' style classes."
+			>
+			<Border HorizontalAlignment="Center" Padding="20"
+				Background="{actipro:ThemeResource Container1BackgroundBrush}"
+				BorderBrush="{actipro:ThemeResource Container1BorderBrush}"
+				BorderThickness="1"
+				CornerRadius="5">
+				<ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
+					<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,Auto,10,Auto,10,Auto,10,Auto,10,Auto,*">
+						<Grid.Styles>
+							<Style Selector="actipro|SegmentedBar">
+								<Setter Property="HorizontalAlignment" Value="Left" />
+								<Setter Property="VerticalAlignment" Value="Center" />
+							</Style>
+						</Grid.Styles>
+
+						<actipro:SegmentedBar Classes="theme-elevated" Grid.Row="0" Grid.Column="1">
+							<actipro:SegmentedBarItem>Elevated</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-outline" Grid.Row="0" Grid.Column="3">
+							<actipro:SegmentedBarItem>Outline</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-solid" Grid.Row="0" Grid.Column="5">
+							<actipro:SegmentedBarItem>Solid</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-soft" Grid.Row="0" Grid.Column="7">
+							<actipro:SegmentedBarItem>Soft</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-subtle" Grid.Row="0" Grid.Column="9">
+							<actipro:SegmentedBarItem>Subtle</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-elevated" Grid.Row="2" Grid.Column="1" IsEnabled="False">
+							<actipro:SegmentedBarItem>Disabled</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-outline" Grid.Row="2" Grid.Column="3" IsEnabled="False">
+							<actipro:SegmentedBarItem>Disabled</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-solid" Grid.Row="2" Grid.Column="5" IsEnabled="False">
+							<actipro:SegmentedBarItem>Disabled</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-soft" Grid.Row="2" Grid.Column="7" IsEnabled="False">
+							<actipro:SegmentedBarItem>Disabled</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-subtle" Grid.Row="2" Grid.Column="9" IsEnabled="False">
+							<actipro:SegmentedBarItem>Disabled</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+					</Grid>
+				</ScrollViewer>
+			</Border>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:SegmentedBar Classes="theme-elevated" ItemsSource="{Binding Items}" />
+
+<actipro:SegmentedBar Classes="theme-outline" ItemsSource="{Binding Items}" />
+
+<actipro:SegmentedBar Classes="theme-solid" ItemsSource="{Binding Items}" />
+
+<actipro:SegmentedBar Classes="theme-soft" ItemsSource="{Binding Items}" />
+
+<actipro:SegmentedBar Classes="theme-subtle" ItemsSource="{Binding Items}" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Accent variants"
+			Footer="Add the 'accent' style class to a SegmentedBar and the theme accent color will be used to provide emphasis."
+			>
+
+			<Border HorizontalAlignment="Center" Padding="20"
+				Background="{actipro:ThemeResource Container1BackgroundBrush}"
+				BorderBrush="{actipro:ThemeResource Container1BorderBrush}"
+				BorderThickness="1"
+				CornerRadius="5">
+
+				<ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
+					<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,Auto,10,Auto,10,Auto,10,Auto,10,Auto,*">
+						<Grid.Styles>
+							<Style Selector="actipro|SegmentedBar">
+								<Setter Property="HorizontalAlignment" Value="Left" />
+								<Setter Property="VerticalAlignment" Value="Center" />
+							</Style>
+						</Grid.Styles>
+
+						<actipro:SegmentedBar Classes="theme-elevated accent" Grid.Row="0" Grid.Column="1">
+							<actipro:SegmentedBarItem>Elevated</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-outline accent" Grid.Row="0" Grid.Column="3">
+							<actipro:SegmentedBarItem>Outline</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-solid accent" Grid.Row="0" Grid.Column="5">
+							<actipro:SegmentedBarItem>Solid</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-soft accent" Grid.Row="0" Grid.Column="7">
+							<actipro:SegmentedBarItem>Soft</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-subtle accent" Grid.Row="0" Grid.Column="9">
+							<actipro:SegmentedBarItem>Subtle</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-elevated accent" Grid.Row="2" Grid.Column="1" IsEnabled="False">
+							<actipro:SegmentedBarItem>Disabled</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-outline accent" Grid.Row="2" Grid.Column="3" IsEnabled="False">
+							<actipro:SegmentedBarItem>Disabled</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-solid accent" Grid.Row="2" Grid.Column="5" IsEnabled="False">
+							<actipro:SegmentedBarItem>Disabled</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-soft accent" Grid.Row="2" Grid.Column="7" IsEnabled="False">
+							<actipro:SegmentedBarItem>Disabled</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-subtle accent" Grid.Row="2" Grid.Column="9" IsEnabled="False">
+							<actipro:SegmentedBarItem>Disabled</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+					</Grid>
+				</ScrollViewer>
+			</Border>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:SegmentedBar Classes="theme-elevated accent" ItemsSource="{Binding Items}" />
+
+<actipro:SegmentedBar Classes="theme-outline accent" ItemsSource="{Binding Items}" />
+
+<actipro:SegmentedBar Classes="theme-solid accent" ItemsSource="{Binding Items}" />
+
+<actipro:SegmentedBar Classes="theme-soft accent" ItemsSource="{Binding Items}" />
+
+<actipro:SegmentedBar Classes="theme-subtle accent" ItemsSource="{Binding Items}" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Success variants"
+			Footer="Add the 'success' style class to a SegmentedBar and a color will be used to indicate success."
+			>
+
+			<Border HorizontalAlignment="Center" Padding="20"
+				Background="{actipro:ThemeResource Container1BackgroundBrush}"
+				BorderBrush="{actipro:ThemeResource Container1BorderBrush}"
+				BorderThickness="1"
+				CornerRadius="5">
+
+				<ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
+					<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,Auto,10,Auto,10,Auto,10,Auto,10,Auto,*">
+						<Grid.Styles>
+							<Style Selector="actipro|SegmentedBar">
+								<Setter Property="HorizontalAlignment" Value="Left" />
+								<Setter Property="VerticalAlignment" Value="Center" />
+							</Style>
+						</Grid.Styles>
+
+						<actipro:SegmentedBar Classes="theme-elevated success" Grid.Row="0" Grid.Column="1">
+							<actipro:SegmentedBarItem>Elevated</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-outline success" Grid.Row="0" Grid.Column="3">
+							<actipro:SegmentedBarItem>Outline</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-solid success" Grid.Row="0" Grid.Column="5">
+							<actipro:SegmentedBarItem>Solid</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-soft success" Grid.Row="0" Grid.Column="7">
+							<actipro:SegmentedBarItem>Soft</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-subtle success" Grid.Row="0" Grid.Column="9">
+							<actipro:SegmentedBarItem>Subtle</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-elevated success" Grid.Row="2" Grid.Column="1" IsEnabled="False">
+							<actipro:SegmentedBarItem>Disabled</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-outline success" Grid.Row="2" Grid.Column="3" IsEnabled="False">
+							<actipro:SegmentedBarItem>Disabled</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-solid success" Grid.Row="2" Grid.Column="5" IsEnabled="False">
+							<actipro:SegmentedBarItem>Disabled</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-soft success" Grid.Row="2" Grid.Column="7" IsEnabled="False">
+							<actipro:SegmentedBarItem>Disabled</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-subtle success" Grid.Row="2" Grid.Column="9" IsEnabled="False">
+							<actipro:SegmentedBarItem>Disabled</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+					</Grid>
+				</ScrollViewer>
+			</Border>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:SegmentedBar Classes="theme-elevated success" ItemsSource="{Binding Items}" />
+
+<actipro:SegmentedBar Classes="theme-outline success" ItemsSource="{Binding Items}" />
+
+<actipro:SegmentedBar Classes="theme-solid success" ItemsSource="{Binding Items}" />
+
+<actipro:SegmentedBar Classes="theme-soft success" ItemsSource="{Binding Items}" />
+
+<actipro:SegmentedBar Classes="theme-subtle success" ItemsSource="{Binding Items}" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Warning variants"
+			Footer="Add the 'warning' style class to a SegmentedBar and a color will be used to indicate caution."
+			>
+
+			<Border HorizontalAlignment="Center" Padding="20"
+				Background="{actipro:ThemeResource Container1BackgroundBrush}"
+				BorderBrush="{actipro:ThemeResource Container1BorderBrush}"
+				BorderThickness="1"
+				CornerRadius="5">
+
+				<ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
+					<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,Auto,10,Auto,10,Auto,10,Auto,10,Auto,*">
+						<Grid.Styles>
+							<Style Selector="actipro|SegmentedBar">
+								<Setter Property="HorizontalAlignment" Value="Left" />
+								<Setter Property="VerticalAlignment" Value="Center" />
+							</Style>
+						</Grid.Styles>
+
+						<actipro:SegmentedBar Classes="theme-elevated warning" Grid.Row="0" Grid.Column="1">
+							<actipro:SegmentedBarItem>Elevated</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-outline warning" Grid.Row="0" Grid.Column="3">
+							<actipro:SegmentedBarItem>Outline</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-solid warning" Grid.Row="0" Grid.Column="5">
+							<actipro:SegmentedBarItem>Solid</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-soft warning" Grid.Row="0" Grid.Column="7">
+							<actipro:SegmentedBarItem>Soft</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-subtle warning" Grid.Row="0" Grid.Column="9">
+							<actipro:SegmentedBarItem>Subtle</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-elevated warning" Grid.Row="2" Grid.Column="1" IsEnabled="False">
+							<actipro:SegmentedBarItem>Disabled</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-outline warning" Grid.Row="2" Grid.Column="3" IsEnabled="False">
+							<actipro:SegmentedBarItem>Disabled</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-solid warning" Grid.Row="2" Grid.Column="5" IsEnabled="False">
+							<actipro:SegmentedBarItem>Disabled</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-soft warning" Grid.Row="2" Grid.Column="7" IsEnabled="False">
+							<actipro:SegmentedBarItem>Disabled</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-subtle warning" Grid.Row="2" Grid.Column="9" IsEnabled="False">
+							<actipro:SegmentedBarItem>Disabled</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+					</Grid>
+				</ScrollViewer>
+			</Border>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:SegmentedBar Classes="theme-elevated warning" ItemsSource="{Binding Items}" />
+
+<actipro:SegmentedBar Classes="theme-outline warning" ItemsSource="{Binding Items}" />
+
+<actipro:SegmentedBar Classes="theme-solid warning" ItemsSource="{Binding Items}" />
+
+<actipro:SegmentedBar Classes="theme-soft warning" ItemsSource="{Binding Items}" />
+
+<actipro:SegmentedBar Classes="theme-subtle warning" ItemsSource="{Binding Items}" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Danger variants"
+			Footer="Add the 'danger' style class to a SegmentedBar and a color will be used to indicate extreme caution."
+			>
+
+			<Border HorizontalAlignment="Center" Padding="20"
+				Background="{actipro:ThemeResource Container1BackgroundBrush}"
+				BorderBrush="{actipro:ThemeResource Container1BorderBrush}"
+				BorderThickness="1"
+				CornerRadius="5">
+
+				<ScrollViewer VerticalScrollBarVisibility="Disabled" HorizontalScrollBarVisibility="Auto">
+					<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,Auto,10,Auto,10,Auto,10,Auto,10,Auto,*">
+						<Grid.Styles>
+							<Style Selector="actipro|SegmentedBar">
+								<Setter Property="HorizontalAlignment" Value="Left" />
+								<Setter Property="VerticalAlignment" Value="Center" />
+							</Style>
+						</Grid.Styles>
+
+						<actipro:SegmentedBar Classes="theme-elevated danger" Grid.Row="0" Grid.Column="1">
+							<actipro:SegmentedBarItem>Elevated</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-outline danger" Grid.Row="0" Grid.Column="3">
+							<actipro:SegmentedBarItem>Outline</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-solid danger" Grid.Row="0" Grid.Column="5">
+							<actipro:SegmentedBarItem>Solid</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-soft danger" Grid.Row="0" Grid.Column="7">
+							<actipro:SegmentedBarItem>Soft</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-subtle danger" Grid.Row="0" Grid.Column="9">
+							<actipro:SegmentedBarItem>Subtle</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-elevated danger" Grid.Row="2" Grid.Column="1" IsEnabled="False">
+							<actipro:SegmentedBarItem>Disabled</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-outline danger" Grid.Row="2" Grid.Column="3" IsEnabled="False">
+							<actipro:SegmentedBarItem>Disabled</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-solid danger" Grid.Row="2" Grid.Column="5" IsEnabled="False">
+							<actipro:SegmentedBarItem>Disabled</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-soft danger" Grid.Row="2" Grid.Column="7" IsEnabled="False">
+							<actipro:SegmentedBarItem>Disabled</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<actipro:SegmentedBar Classes="theme-subtle danger" Grid.Row="2" Grid.Column="9" IsEnabled="False">
+							<actipro:SegmentedBarItem>Disabled</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>2</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem>3</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+					</Grid>
+				</ScrollViewer>
+			</Border>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:SegmentedBar Classes="theme-elevated danger" ItemsSource="{Binding Items}" />
+
+<actipro:SegmentedBar Classes="theme-outline danger" ItemsSource="{Binding Items}" />
+
+<actipro:SegmentedBar Classes="theme-solid danger" ItemsSource="{Binding Items}" />
+
+<actipro:SegmentedBar Classes="theme-soft danger" ItemsSource="{Binding Items}" />
+
+<actipro:SegmentedBar Classes="theme-subtle danger" ItemsSource="{Binding Items}" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Custom theme"
+			Footer="This sample uses custom themes for a distinct look"
+			>
+
+			<Border HorizontalAlignment="Center" Padding="20"
+				Background="{actipro:ThemeResource Container1BackgroundBrush}"
+				BorderBrush="{actipro:ThemeResource Container1BorderBrush}"
+				BorderThickness="1"
+				CornerRadius="5">
+
+				<actipro:SegmentedBar>
+
+					<!-- Custom SegmentedBarItem ControlTheme -->
+					<actipro:SegmentedBar.ItemContainerTheme>
+						<ControlTheme TargetType="actipro:SegmentedBarItem" BasedOn="{actipro:ControlTheme SegmentedBarItemBase}">
+							<Setter Property="Template">
+								<ControlTemplate>
+									<Panel>
+
+										<!-- Primary control presentation (replicates default presentation) -->
+										<Border
+											Background="{TemplateBinding Background}"
+											BorderBrush="{TemplateBinding BorderBrush}"
+											BorderThickness="{TemplateBinding BorderThickness}"
+											CornerRadius="{TemplateBinding CornerRadius}"
+											Padding="{TemplateBinding Padding}"
+											>
+											<Panel actipro:BorderChildClipConverter.ClipToContainingBorder="True">
+												<ContentPresenter x:Name="PART_ContentPresenter"
+													Content="{TemplateBinding Content}"
+													ContentTemplate="{TemplateBinding ContentTemplate}"
+													HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+													VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+													/>
+											</Panel>
+										</Border>
+
+										<!-- Custom indicator for pointer over (initially hidden) -->
+										<Border x:Name="hoverBorder"
+											Background="{actipro:ThemeResource Container5BorderBrush}"
+											CornerRadius="1"
+											Height="{actipro:ScaledDouble 0.5}"
+											Width="{actipro:ScaledDouble 3}"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Bottom"
+											IsVisible="False"
+											/>
+
+									</Panel>
+								</ControlTemplate>
+							</Setter>
+
+							<!-- Show indicator on pointer over for unselected items only -->
+							<Style Selector="^:pointerover:not(:selected) /template/ Border#hoverBorder">
+								<Setter Property="IsVisible" Value="True" />
+							</Style>
+
+						</ControlTheme>
+					</actipro:SegmentedBar.ItemContainerTheme>
+
+					<!-- Custom Selection DataTemplate -->
+					<actipro:SegmentedBar.SelectionTemplate>
+						<DataTemplate>
+
+							<Border
+								Background="{actipro:ThemeResource ActiproBrandBrush}"
+								CornerRadius="1"
+								Height="{actipro:ScaledDouble 0.5}"
+								Width="{actipro:ScaledDouble 3}"
+								HorizontalAlignment="Center"
+								VerticalAlignment="Bottom"
+								/>
+
+						</DataTemplate>
+					</actipro:SegmentedBar.SelectionTemplate>
+
+					<actipro:SegmentedBarItem>Daily</actipro:SegmentedBarItem>
+					<actipro:SegmentedBarItem>Weekly</actipro:SegmentedBarItem>
+					<actipro:SegmentedBarItem>Monthly</actipro:SegmentedBarItem>
+					<actipro:SegmentedBarItem IsEnabled="False">Quarterly</actipro:SegmentedBarItem>
+					<actipro:SegmentedBarItem>Yearly</actipro:SegmentedBarItem>
+
+				</actipro:SegmentedBar>
+			</Border>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:SegmentedBar>
+
+	<!-- Custom SegmentedBarItem ControlTheme -->
+	<actipro:SegmentedBar.ItemContainerTheme>
+		<ControlTheme TargetType="actipro:SegmentedBarItem" BasedOn="{actipro:ControlTheme SegmentedBarItemBase}">
+			<Setter Property="Template">
+				<ControlTemplate>
+					<Panel>
+
+						<!-- Primary control presentation (replicates default presentation) -->
+						<Border
+							Background="{TemplateBinding Background}"
+							BorderBrush="{TemplateBinding BorderBrush}"
+							BorderThickness="{TemplateBinding BorderThickness}"
+							CornerRadius="{TemplateBinding CornerRadius}"
+							Padding="{TemplateBinding Padding}"
+							>
+							<Panel actipro:BorderChildClipConverter.ClipToContainingBorder="True">
+								<ContentPresenter x:Name="PART_ContentPresenter"
+									Content="{TemplateBinding Content}"
+									ContentTemplate="{TemplateBinding ContentTemplate}"
+									HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+									VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+									/>
+							</Panel>
+						</Border>
+							
+						<!-- Custom indicator for pointer over (initially hidden) -->
+						<Border x:Name="hoverBorder"
+							Background="{actipro:ThemeResource Container5BorderBrush}"
+							CornerRadius="1"
+							Height="3"
+							Width="16"
+							HorizontalAlignment="Center"
+							VerticalAlignment="Bottom"
+							IsVisible="False"
+							/>
+
+					</Panel>
+				</ControlTemplate>
+			</Setter>
+			
+			<!-- Show indicator on pointer over for unselected items only -->
+			<Style Selector="^:pointerover:not(:selected) /template/ Border#hoverBorder">
+				<Setter Property="IsVisible" Value="True" />
+			</Style>
+
+		</ControlTheme>
+	</actipro:SegmentedBar.ItemContainerTheme>
+
+	<!-- Custom Selection DataTemplate -->
+	<actipro:SegmentedBar.SelectionTemplate>
+		<DataTemplate>
+
+			<Border
+				Background="{actipro:ThemeResource ActiproBrandBrush}"
+				CornerRadius="1"
+				Height="3"
+				Width="16"
+				HorizontalAlignment="Center"
+				VerticalAlignment="Bottom"
+				/>
+
+		</DataTemplate>
+	</actipro:SegmentedBar.SelectionTemplate>
+
+	<actipro:SegmentedBarItem>Daily</actipro:SegmentedBarItem>
+	<actipro:SegmentedBarItem>Weekly</actipro:SegmentedBarItem>
+	<actipro:SegmentedBarItem>Monthly</actipro:SegmentedBarItem>
+	<actipro:SegmentedBarItem IsEnabled="False">Quarterly</actipro:SegmentedBarItem>
+	<actipro:SegmentedBarItem>Yearly</actipro:SegmentedBarItem>
+
+</actipro:SegmentedBar>
+					]]>
+
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Icon sample"
+			Footer="Any content, like icons, can be displayed as a segment."
+			>
+
+			<actipro:SegmentedBar Classes="theme-outline accent"
+				HorizontalAlignment="Center"
+				Padding="{actipro:ScaledThickness 1}"
+				Spacing="{actipro:ScaledDouble 1}">
+				<actipro:SegmentedBar.Resources>
+					<!-- Icons from: https://icon-sets.iconify.design/fluent-mdl2/ -->
+					<StreamGeometry x:Key="icon-fluent-mdl2-align-center">M0 128h2048v128H0zm256 384h1536v128H256zm0 768h1536v128H256zM0 1792v-128h2048v128zm0-768V896h2048v128z</StreamGeometry>
+					<StreamGeometry x:Key="icon-fluent-mdl2-align-justify">M2048 128v128H0V128zM0 1664h2048v128H0zm0-768h2048v128H0zm0-384h2048v128H0zm0 768h2048v128H0z</StreamGeometry>
+					<StreamGeometry x:Key="icon-fluent-mdl2-align-left">M2048 128v128H0V128zm0 1664H0v-128h2048zm0-768H0V896h2048zm-512-384H0V512h1536zm0 768H0v-128h1536z</StreamGeometry>
+					<StreamGeometry x:Key="icon-fluent-mdl2-align-right">M0 128h2048v128H0zm0 1664v-128h2048v128zm0-768V896h2048v128zm512-384V512h1536v128zm0 768v-128h1536v128z</StreamGeometry>
+				</actipro:SegmentedBar.Resources>
+
+				<PathIcon Height="32" Width="32" Data="{StaticResource icon-fluent-mdl2-align-left}" />
+				<PathIcon Height="32" Width="32" Data="{StaticResource icon-fluent-mdl2-align-center}" />
+				<PathIcon Height="32" Width="32" Data="{StaticResource icon-fluent-mdl2-align-right}" />
+				<PathIcon Height="32" Width="32" Data="{StaticResource icon-fluent-mdl2-align-justify}" />
+
+			</actipro:SegmentedBar>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:SegmentedBar Classes="theme-outline accent"
+	HorizontalAlignment="Center"
+	Padding="{actipro:ScaledThickness 1}"
+	Spacing="{actipro:ScaledDouble 1}">
+	<actipro:SegmentedBar.Resources>
+		<!-- Icons from: https://icon-sets.iconify.design/fluent-mdl2/ -->
+		<StreamGeometry x:Key="icon-fluent-mdl2-align-center">...</StreamGeometry>
+		<StreamGeometry x:Key="icon-fluent-mdl2-align-justify">...</StreamGeometry>
+		<StreamGeometry x:Key="icon-fluent-mdl2-align-left">...</StreamGeometry>
+		<StreamGeometry x:Key="icon-fluent-mdl2-align-right">...</StreamGeometry>
+	</actipro:SegmentedBar.Resources>
+
+	<PathIcon Height="32" Width="32" Data="{StaticResource icon-fluent-mdl2-align-left}" />
+	<PathIcon Height="32" Width="32" Data="{StaticResource icon-fluent-mdl2-align-center}" />
+	<PathIcon Height="32" Width="32" Data="{StaticResource icon-fluent-mdl2-align-right}" />
+	<PathIcon Height="32" Width="32" Data="{StaticResource icon-fluent-mdl2-align-justify}" />
+
+</actipro:SegmentedBar>
+					]]>
+
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Overflow"
+			Footer="Built-in support for overflow is there is not enough room to display all the items."
+			DataContext="{Binding #overflowUsage}"
+			>
+
+			<Border HorizontalAlignment="Center" Padding="20"
+				Background="{actipro:ThemeResource Container1BackgroundBrush}"
+				BorderBrush="{actipro:ThemeResource Container1BorderBrush}"
+				BorderThickness="1"
+				CornerRadius="5">
+
+				<actipro:SegmentedBar x:Name="overflowUsage" MaxWidth="225" MaxHeight="150"
+					Classes.theme-elevated="{Binding #overflowUsageTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Elevated'}"
+					Classes.theme-outline="{Binding #overflowUsageTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Outline'}"
+					Classes.theme-soft="{Binding #overflowUsageTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Soft'}"
+					Classes.theme-solid="{Binding #overflowUsageTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Solid'}"
+					Classes.theme-subtle="{Binding #overflowUsageTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Subtle'}"
+					>
+
+					<actipro:SegmentedBarItem>Item 0</actipro:SegmentedBarItem>
+					<actipro:SegmentedBarItem>Item 1</actipro:SegmentedBarItem>
+					<actipro:SegmentedBarItem>Item 2</actipro:SegmentedBarItem>
+					<actipro:SegmentedBarItem>Item 3</actipro:SegmentedBarItem>
+					<actipro:SegmentedBarItem>Item 4</actipro:SegmentedBarItem>
+					<actipro:SegmentedBarItem>Item 5</actipro:SegmentedBarItem>
+					<actipro:SegmentedBarItem>Item 6</actipro:SegmentedBarItem>
+					<actipro:SegmentedBarItem>Item 7</actipro:SegmentedBarItem>
+					<actipro:SegmentedBarItem>Item 8</actipro:SegmentedBarItem>
+					<actipro:SegmentedBarItem>Item 9</actipro:SegmentedBarItem>
+
+				</actipro:SegmentedBar>
+			</Border>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Orientation" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type=Orientation}" SelectedValue="{Binding Orientation}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Theme" />
+						<ComboBox x:Name="overflowUsageTheme" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Elevated, Outline, Soft, Solid, Subtle'}" />
+					</StackPanel>
+					<CheckBox IsChecked="{Binding IsAnimationEnabled}">Is animation enabled</CheckBox>
+					<CheckBox IsChecked="{Binding IsEnabled}">Is enabled</CheckBox>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Uniform sizes"
+			Footer="Replace the default ItemsPanel with a UniformGrid and every item will be the same size."
+			>
+
+			<actipro:SegmentedBar Classes="theme-solid success" HorizontalAlignment="Center" Orientation="Horizontal">
+				<actipro:SegmentedBar.ItemsPanel>
+					<ItemsPanelTemplate>
+						<UniformGrid Rows="1" />
+					</ItemsPanelTemplate>
+				</actipro:SegmentedBar.ItemsPanel>
+
+				<actipro:SegmentedBar.ItemContainerTheme>
+					<ControlTheme TargetType="actipro:SegmentedBarItem" BasedOn="{actipro:ControlTheme SegmentedBarItemSolid}">
+						<Setter Property="Margin" Value="1" />
+					</ControlTheme>
+				</actipro:SegmentedBar.ItemContainerTheme>
+
+				<actipro:SegmentedBarItem>First Item</actipro:SegmentedBarItem>
+				<actipro:SegmentedBarItem>2nd</actipro:SegmentedBarItem>
+				<actipro:SegmentedBarItem>3rd</actipro:SegmentedBarItem>
+				<actipro:SegmentedBarItem>4th</actipro:SegmentedBarItem>
+				<actipro:SegmentedBarItem>Last Item</actipro:SegmentedBarItem>
+
+			</actipro:SegmentedBar>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:SegmentedBar Classes="theme-solid success" Orientation="Horizontal">
+
+	<actipro:SegmentedBar.ItemsPanel>
+		<ItemsPanelTemplate>
+			<UniformGrid Rows="1" />
+		</ItemsPanelTemplate>
+	</actipro:SegmentedBar.ItemsPanel>
+
+	<actipro:SegmentedBar.ItemContainerTheme>
+		<ControlTheme TargetType="actipro:SegmentedBarItem" BasedOn="{actipro:ControlTheme SegmentedBarItemSolid}">
+			<Setter Property="Margin" Value="1" />
+		</ControlTheme>
+	</actipro:SegmentedBar.ItemContainerTheme>
+
+	<actipro:SegmentedBarItem>First Item</actipro:SegmentedBarItem>
+	<actipro:SegmentedBarItem>2nd</actipro:SegmentedBarItem>
+	<actipro:SegmentedBarItem>3rd</actipro:SegmentedBarItem>
+	<actipro:SegmentedBarItem>4th</actipro:SegmentedBarItem>
+	<actipro:SegmentedBarItem>Last Item</actipro:SegmentedBarItem>
+
+</actipro:SegmentedBar>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+</UserControl>

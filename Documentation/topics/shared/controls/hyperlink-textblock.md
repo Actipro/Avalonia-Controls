@@ -1,7 +1,7 @@
 ---
 title: "HyperlinkTextBlock"
 page-title: "HyperlinkTextBlock - Shared Library Controls"
-order: 6
+order: 20
 ---
 # HyperlinkTextBlock
 
@@ -43,6 +43,16 @@ xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 	<Run> for more information</Run>
 </TextBlock>
 ```
+
+## Font Sizing
+
+An explicit size can be set using one of following style class names:
+
+- `size-xs` - An extra-small font size.
+- `size-sm` - A small font size.
+- `size-md` - A normal font size (default).
+- `size-lg` - A large font size.
+- `size-xl` - An extra-large font size.
 
 ## Pseudo-classes
 

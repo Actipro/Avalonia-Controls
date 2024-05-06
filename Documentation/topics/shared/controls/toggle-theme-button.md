@@ -1,7 +1,7 @@
 ---
 title: "ToggleThemeButton"
 page-title: "ToggleThemeButton - Shared Library Controls"
-order: 10
+order: 45
 ---
 # ToggleThemeButton
 

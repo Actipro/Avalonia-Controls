@@ -5,7 +5,7 @@
 	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
-	xmlns:system="clr-namespace:System;assembly=System.Runtime"
+	xmlns:system="using:System"
 	>
 
 	<ScrollViewer Classes="theme-scroll-overlay" HorizontalScrollBarVisibility="Disabled">

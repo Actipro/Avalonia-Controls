@@ -81,7 +81,7 @@ xmlns:actiproPropertiesShared="using:ActiproSoftware.Properties.Shared"
 Now lets use the `UITextBoxButtonShowPasswordText` resource's text as a `Button`'s tooltip content:
 
 ```xaml
-<Button ToolTip="{actiproPropertiesShared:SR UITextBoxButtonShowPasswordText}" />
+<Button ToolTip.Tip="{actiproPropertiesShared:SR UITextBoxButtonShowPasswordText}" />
 ```
 
 That's all there is to it!

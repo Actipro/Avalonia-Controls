@@ -1,7 +1,7 @@
 ---
 title: "ChromedTitleBar"
 page-title: "ChromedTitleBar - Shared Library Controls"
-order: 3
+order: 7
 ---
 # ChromedTitleBar
 

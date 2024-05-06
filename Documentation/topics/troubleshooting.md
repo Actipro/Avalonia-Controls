@@ -88,4 +88,4 @@ Avalonia UI supports running in the browser with WebAssembly. As of v11.0, the A
 
 ## Badge Adornments Aren't Clipped Properly
 
-The Avalonia adorner system (last tested on v11.0.7) doesn't properly clip adornments based on the clip regions of ancestors of the adorned element.  This can lead to possible scenarios where an adorned element might be scrolled out of view, but the badge adornment is still visible.  The [Badge](fundamentals/controls/badge.md) topic has additional detail on this issue and offers a workaround if the problem is encountered.
+The Avalonia adorner system (last tested on v11.0.7) may not properly clip adornments based on the clip regions of ancestors of the adorned element.  This can lead to possible scenarios where an adorned element might be scrolled out of view, but the badge adornment is still visible.  The [Badge](fundamentals/controls/badge.md) topic has additional detail on this issue and offers a workaround if the problem is encountered.

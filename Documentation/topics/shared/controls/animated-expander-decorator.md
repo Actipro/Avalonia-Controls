@@ -1,7 +1,7 @@
 ---
 title: "AnimatedExpanderDecorator"
 page-title: "AnimatedExpanderDecorator - Shared Library Controls"
-order: 2
+order: 4
 ---
 # AnimatedExpander
 

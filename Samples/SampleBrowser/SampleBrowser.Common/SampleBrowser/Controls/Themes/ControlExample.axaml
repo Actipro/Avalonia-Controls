@@ -139,10 +139,10 @@
 			</ControlTemplate>
 		</Setter>
 		
-		<Style Selector="^:wide /template/ ContentPresenter#contentPresenter">
+		<Style Selector="^:options:wide /template/ ContentPresenter#contentPresenter">
 			<Setter Property="Grid.ColumnSpan" Value="1" />
 		</Style>
-		<Style Selector="^:wide /template/ Border#optionsBorder">
+		<Style Selector="^:options:wide /template/ Border#optionsBorder">
 			<Setter Property="Grid.Row" Value="0" />
 			<Setter Property="Grid.Column" Value="1" />
 			<Setter Property="Margin" Value="{actipro:ScaledThickness '0,1,1,1'}" />

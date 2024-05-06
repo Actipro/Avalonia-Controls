@@ -25,6 +25,36 @@ The Fundamentals product contains various using interface controls that may be u
 
 [Badge](badge.md) provides contextual information for other elements or can be used stand-alone.
 
+## Card
+
+![Screenshot](../images/card.png)
+
+[Card](card.md) controls are typically used to present visually grouped information for a single subject.
+
+## Circular Progressbar
+
+![Screenshot](../images/circular-progressbar.png)
+
+[CircularProgressBar](circular-progressbar.md) displays a ranged progress value using fluent animations.  It is similar to a native linear `ProgressBar`, except that it renders the progress in a ring shape.
+
+## Info Bar
+
+![Screenshot](../images/info-bar-action.png)
+
+[Info Bar](info-bar.md) can be used to display essential information to a user without disrupting the user flow.
+
+## Segmented Bar
+
+![Screenshot](../images/segmented-bar.png)
+
+[Segmented Bar](segmented-bar.md) allows a user to select a single item with support for fluent animations when changing selection.
+
+## Settings Controls
+
+![Screenshot](../images/settings-examples.png)
+
+The [SettingsCard](settings-card.md), [SettingsExpander](settings-expander.md), and [SettingsGroup](settings-group.md) controls are used together to organize and present configurable settings.
+
 ## Progress Spinners
 
 ![Screenshot](../images/ring-spinner-examples.png)

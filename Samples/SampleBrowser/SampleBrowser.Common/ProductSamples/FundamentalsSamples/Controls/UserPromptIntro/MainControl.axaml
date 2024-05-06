@@ -14,7 +14,7 @@
 
 		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
 		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
-		<actipro:ImageKeyToImageConverter x:Key="ImageKeyToImageConverter" />
+		<actipro:ImageKeyToImageSourceConverter x:Key="ImageKeyToImageSourceConverter" />
 
 		<local:ConfirmationCommand x:Key="ConfirmationCommand" />
 		
@@ -83,6 +83,7 @@
 
 		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
 			<sampleBrowser:ControlExampleLinkItem Title="MessageBox" Url="/ProductSamples/FundamentalsSamples/Controls/MessageBoxIntro/MainControl" />
+			<sampleBrowser:ControlExampleLinkItem Title="InfoBar" Url="/ProductSamples/FundamentalsSamples/Controls/InfoBarIntro/MainControl" />
 		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
 
 
@@ -346,7 +347,7 @@ var result = await UserPromptBuilder.Configure()
 									   Header="Footer usage"
 									   Content="Optionally define a footer for additional content with or without an associated image."
 									   Footer="Any content can be hosted here"
-									   FooterImage="{Binding #sampleRootControl.BasicFooterSampleImage}"
+									   FooterImageSource="{Binding #sampleRootControl.BasicFooterSampleImage}"
 									   Responding="OnUserPromptControlRespondingShowFeedback" />
 
 			<sampleBrowser:ControlExample.Options>
@@ -358,12 +359,12 @@ var result = await UserPromptBuilder.Configure()
 			<sampleBrowser:ControlExample.CodeExamples>
 				<sampleBrowser:CodeExample xml:space="preserve">
 					<![CDATA[
-<actipro:UserPromptControl $(FooterImageAttribute)
+<actipro:UserPromptControl $(FooterImageSourceAttribute)
 	Footer="$(Footer)" />
 					]]>
 					<sampleBrowser:CodeExample.Substitutions>
 						<sampleBrowser:CodeExampleSubstitution Key="Footer" Value="{Binding Footer}" />
-						<sampleBrowser:CodeExampleSubstitution Key="FooterImageAttribute" IsEnabled="{Binding #sampleRootControl.ShowBasicFooterSampleImage}" Value="FooterImage=&quot;/Images/Icons/Help16.png&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="FooterImageSourceAttribute" IsEnabled="{Binding #sampleRootControl.ShowBasicFooterSampleImage}" Value="FooterImageSource=&quot;/Images/Icons/Help16.png&quot;" />
 					</sampleBrowser:CodeExample.Substitutions>
 				</sampleBrowser:CodeExample>
 				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
@@ -433,7 +434,7 @@ var result = await UserPromptBuilder.Configure()
 			<actipro:UserPromptControl Classes="inline-sample"
 									   Header="Exporting Project (Sample Project)"
 									   HeaderForeground="White"
-									   StatusImage="/Images/Icons/Save32.png"
+									   StatusImageSource="/Images/Icons/Save32.png"
 									   StandardButtons="Cancel"
 									   Responding="OnUserPromptControlRespondingShowFeedback" >
 				<actipro:UserPromptControl.HeaderBackground>
@@ -464,7 +465,7 @@ var result = await UserPromptBuilder.Configure()
 					<![CDATA[
 <actipro:UserPromptControl Header="Exporting Project (Sample Project)"
 	HeaderForeground="White"
-	StatusImage="/Images/Icons/Save32.png"
+	StatusImageSource="/Images/Icons/Save32.png"
 	StandardButtons="Cancel"
 	>
 	<actipro:UserPromptControl.HeaderBackground>
@@ -541,7 +542,7 @@ IImage? GetImage(string relPath) {
 			>
 			<actipro:UserPromptControl Classes="inline-sample"
 									   Header="Customize the footer content"
-									   FooterImage="{Binding Source={x:Static actipro:SharedImageKeys.Question}, Converter={StaticResource ImageKeyToImageConverter}}"
+									   FooterImageSource="{Binding Source={x:Static actipro:SharedImageSourceKeys.Question}, Converter={StaticResource ImageKeyToImageSourceConverter}}"
 									   Content="A footer can be used to provide additional context for a prompt. This sample demonstrates using a hyperlink to provide contextual help."
 									   Responding="OnUserPromptControlRespondingShowFeedback" >
 				<actipro:UserPromptControl.Footer>
@@ -564,7 +565,7 @@ IImage? GetImage(string relPath) {
 				<sampleBrowser:CodeExample xml:space="preserve">
 					<![CDATA[
 <actipro:UserPromptControl Header="Customize the footer content"
-	FooterImage="{Binding Source={x:Static actipro:SharedImageKeys.Question}, Converter={StaticResource ImageKeyToImageConverter}}"
+	FooterImageSource="{Binding Source={x:Static actipro:SharedImageSourceKeys.Question}, Converter={StaticResource ImageKeyToImageSourceConverter}}"
 	Content="A footer can be used to provide additional context for a prompt. This sample demonstrates using a hyperlink to provide contextual help."
 	>
 	<actipro:UserPromptControl.Footer>
@@ -599,7 +600,7 @@ var result = await UserPromptBuilder.Configure()
 			new Run(" for more information")
 		}
 	})
-	.WithFooterImage(ImageProvider.Default.GetImageSource(SharedImageKeys.Question))
+	.WithFooterImage(ImageProvider.Default.GetImageSource(SharedImageSourceKeys.Question))
 	.WithButton(MessageBoxResult.OK)
 	.Show();
 					]]>
@@ -1186,7 +1187,7 @@ var result = await UserPromptBuilder.Configure()
 									   StandardButtons="YesNoCancel"
 									   Footer="Click 'Show Sample as Dialog' button and then press copy shortcut"
 									   FooterClipboardText="The 'Content' property is auto-converted to clipboard text, but the footer is configured to use this custom text instead."
-									   FooterImage="{Binding Source={x:Static actipro:SharedImageKeys.Question}, Converter={StaticResource ImageKeyToImageConverter}}"
+									   FooterImageSource="{Binding Source={x:Static actipro:SharedImageSourceKeys.Question}, Converter={StaticResource ImageKeyToImageSourceConverter}}"
 									   ExpandedInformationCollapsedHeaderText="Show more"
 									   ExpandedInformationExpandedHeaderText="Show less"
 									   ExpandedInformationContent="Clipboard text can be customized for 'Header', 'Content', 'Footer', 'ButtonItems', 'ExpandedInformationContent', and 'CheckBoxContent'."
@@ -1405,25 +1406,25 @@ var result = await UserPromptBuilder.Configure()
 				</StackPanel.Styles>
 				<Button x:Name="customizedAppearanceInformationButton" Click="OnSampleShowDialogCustomAppearanceClick">
 					<StackPanel>
-						<actipro:DynamicImage Source="{Binding Source={x:Static actipro:SharedImageKeys.Information}, Converter={StaticResource ImageKeyToImageConverter}}" />
+						<actipro:DynamicImage Source="{Binding Source={x:Static actipro:SharedImageSourceKeys.Information}, Converter={StaticResource ImageKeyToImageSourceConverter}}" />
 						<TextBlock>Show Information Themed Dialog</TextBlock>
 					</StackPanel>
 				</Button>
 				<Button x:Name="customizedAppearanceQuestionButton" Click="OnSampleShowDialogCustomAppearanceClick">
 					<StackPanel>
-						<actipro:DynamicImage Source="{Binding Source={x:Static actipro:SharedImageKeys.Question}, Converter={StaticResource ImageKeyToImageConverter}}" />
+						<actipro:DynamicImage Source="{Binding Source={x:Static actipro:SharedImageSourceKeys.Question}, Converter={StaticResource ImageKeyToImageSourceConverter}}" />
 						<TextBlock>Show Question Themed Dialog</TextBlock>
 					</StackPanel>
 				</Button>
 				<Button x:Name="customizedAppearanceWarningButton" Click="OnSampleShowDialogCustomAppearanceClick">
 					<StackPanel>
-						<actipro:DynamicImage Source="{Binding Source={x:Static actipro:SharedImageKeys.Warning}, Converter={StaticResource ImageKeyToImageConverter}}" />
+						<actipro:DynamicImage Source="{Binding Source={x:Static actipro:SharedImageSourceKeys.Warning}, Converter={StaticResource ImageKeyToImageSourceConverter}}" />
 						<TextBlock>Show Warning Themed Dialog</TextBlock>
 					</StackPanel>
 				</Button>
 				<Button x:Name="customizedAppearanceErrorButton" Click="OnSampleShowDialogCustomAppearanceClick">
 					<StackPanel>
-						<actipro:DynamicImage Source="{Binding Source={x:Static actipro:SharedImageKeys.Error}, Converter={StaticResource ImageKeyToImageConverter}}" />
+						<actipro:DynamicImage Source="{Binding Source={x:Static actipro:SharedImageSourceKeys.Error}, Converter={StaticResource ImageKeyToImageSourceConverter}}" />
 						<TextBlock>Show Error Themed Dialog</TextBlock>
 					</StackPanel>
 				</Button>

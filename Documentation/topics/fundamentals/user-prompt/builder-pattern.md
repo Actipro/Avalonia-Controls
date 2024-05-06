@@ -40,6 +40,7 @@ There are two methods available to register callbacks that are always invoked to
 
 The [UserPromptBuilder](xref:@ActiproUIRoot.Controls.UserPromptBuilder).[RegisterGlobalConfigureCallback](xref:@ActiproUIRoot.Controls.UserPromptBuilder.RegisterGlobalConfigureCallback*) method is used to register a callback that is invoked immediately after creating a new instance of [UserPromptBuilder](xref:@ActiproUIRoot.Controls.UserPromptBuilder). Use this method to define an application-wide configuration that will be applied to all user prompts without having to configure each builder instance individually.
 
+@if (avalonia) {
 The following example demonstrates how a global callback can be registered to use the `theme-solid accent` style classes on the default button (if any) for every prompt:
 
 ```csharp
@@ -47,6 +48,17 @@ UserPromptBuilder.RegisterGlobalConfigureCallback(_ => _
 	.WithDefaultButtonClasses("theme-solid accent")
 );
 ```
+}
+@if (wpf) {
+The following example demonstrates how a global callback can be registered to customize the header for every prompt:
+
+```csharp
+UserPromptBuilder.RegisterGlobalConfigureCallback(_ => _
+	.WithHeaderFontSize(16)
+    .WithHeaderForeground(new SolidColorBrush(Colors.Blue))
+);
+```
+}
 
 @if (avalonia) {
 ##### MessageBox Only
@@ -166,6 +178,10 @@ The [UserPromptBuilder](xref:@ActiproUIRoot.Controls.UserPromptBuilder).[Instanc
 
 > [!TIP]
 > To interact with the [UserPromptBuilder](xref:@ActiproUIRoot.Controls.UserPromptBuilder).[Instance](xref:@ActiproUIRoot.Controls.UserPromptBuilder.Instance) from one of the global configuration callbacks, use the global configuration to add a callback for one of the other callbacks (like [AfterInitialize](xref:@ActiproUIRoot.Controls.UserPromptBuilder.AfterInitialize*)) that will be invoked after the instance is defined.
+
+### Tag Property
+
+The [UserPromptBuilder](xref:@ActiproUIRoot.Controls.UserPromptBuilder).[Tag](xref:@ActiproUIRoot.Controls.UserPromptBuilder.Tag) property can be used to store an arbitrary object value on the builder, and this can be used to store data that is accessibile from multiple callback methods.  Use the [UserPromptBuilder](xref:@ActiproUIRoot.Controls.UserPromptBuilder).[WithTag](xref:@ActiproUIRoot.Controls.UserPromptBuilder.WithTag*) method to assign values to this property.
 
 ### AfterInitialize Callback
 

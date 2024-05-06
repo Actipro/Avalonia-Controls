@@ -66,6 +66,7 @@ Color ramp name properties should be set to [Hue](xref:@ActiproUIRoot.Themes.Gen
 | [SwitchBorderWidth](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.SwitchBorderWidth) | The border width for checkbox and radio button controls. |
 | [SwitchScale](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.SwitchScale) | The scale factor for checkbox and radio button controls. |
 | [ToggleSwitchAppearanceKind](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.ToggleSwitchAppearanceKind) | The [SwitchAppearanceKind](xref:@ActiproUIRoot.Themes.Generation.SwitchAppearanceKind) that indicates the default appearance for `ToggleSwitch` controls. |
+| [ToggleSwitchHasFarAffinity](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.ToggleSwitchHasFarAffinity) | Whether to use far affinity for `ToggleSwitch` controls, which will align the track/knob to the far side of the control (e.g., track/knob on right side in left-to-right cultures). |
 
 ### ScrollBar Options
 
@@ -83,8 +84,11 @@ Color ramp name properties should be set to [Hue](xref:@ActiproUIRoot.Themes.Gen
 
 | Property | Description |
 |-----|-----|
+| [BadgeAppearanceKind](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.BadgeAppearanceKind) | The [BadgeAppearanceKind](xref:@ActiproUIRoot.Themes.Generation.BadgeAppearanceKind) that indicates the default appearance for [Badge](../fundamentals/controls/badge.md) controls. |
 | [ButtonAppearanceKind](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.ButtonAppearanceKind) | The [ButtonAppearanceKind](xref:@ActiproUIRoot.Themes.Generation.ButtonAppearanceKind) that indicates the default appearance for various button controls (e.g., `Button`, `SplitButton`). |
+| [CardAppearanceKind](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.CardAppearanceKind) | The [CardAppearanceKind](xref:@ActiproUIRoot.Themes.Generation.CardAppearanceKind) that indicates the default appearance for [Card](../fundamentals/controls/card.md) controls. |
 | [EditAppearanceKind](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.EditAppearanceKind) | The [EditAppearanceKind](xref:@ActiproUIRoot.Themes.Generation.EditAppearanceKind) that indicates the default appearance for various edit controls (e.g., `ComboBox`, `TextBox`). |
+| [SegmentedBarAppearanceKind](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.SegmentedBarAppearanceKind) | The [SegmentedBarAppearanceKind](xref:@ActiproUIRoot.Themes.Generation.SegmentedBarAppearanceKind) that indicates the default appearance for [Segmented Bar](../fundamentals/controls/segmented-bar.md) controls. |
 | [SpinnerHasHorizontalOrientation](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.SpinnerHasHorizontalOrientation) | Whether to arrange `ButtonSpinner` buttons horizontally.
 | [TabAppearanceKind](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.TabAppearanceKind) | The [TabAppearanceKind](xref:@ActiproUIRoot.Themes.Generation.TabAppearanceKind) that indicates the default appearance for various tab controls (e.g., `TabControl`). |
 

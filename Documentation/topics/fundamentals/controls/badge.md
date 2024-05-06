@@ -91,7 +91,7 @@ xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 ```xaml
 xmlns:shared="http://schemas.actiprosoftware.com/winfx/xaml/shared"
 ...
-<shared:NumericBadge Count="5"  />
+<shared:NumericBadge Count="5" />
 ```
 }
 
@@ -109,6 +109,26 @@ When the current value of the [Count](xref:@ActiproUIRoot.Controls.NumericBadge.
 Use the [OverflowStringFormat](xref:@ActiproUIRoot.Controls.NumericBadge.OverflowStringFormat) property to customize how overflowed counts are formatted. The default value is `"{0}+"`, where `{0}` is the placeholder for the current value of [OverflowCount](xref:@ActiproUIRoot.Controls.NumericBadge.OverflowCount).
 
 Overflow behavior can be disabled by setting [OverflowCount](xref:@ActiproUIRoot.Controls.NumericBadge.OverflowCount) to `0`.
+
+> [!WARNING]
+> When specifying a custom [OverflowStringFormat](xref:@ActiproUIRoot.Controls.NumericBadge.OverflowStringFormat) value in XAML, prefix the actual value with `{}` to ensure the XAML parser doesn't interpret the open curly braces of the format string as a meaningful XAML delimiter.
+
+The following example demonstrates how to define a [NumericBadge](xref:@ActiproUIRoot.Controls.NumericBadge) that overlows at `9` and uses a custom string format of `"{0}*"`:
+
+@if (avalonia) {
+```xaml
+xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+...
+<actipro:NumericBadge Count="5" OverflowCount="9" OverflowStringFormat="{}{0}*" />
+```
+}
+@if (wpf) {
+```xaml
+xmlns:shared="http://schemas.actiprosoftware.com/winfx/xaml/shared"
+...
+<shared:NumericBadge Count="5" OverflowCount="9" OverflowStringFormat="{}{0}*" />
+```
+}
 
 ## Using as an adornment
 
@@ -213,11 +233,11 @@ xmlns:shared="http://schemas.actiprosoftware.com/winfx/xaml/shared"
 ### Notes on Avalonia Adorner Issues
 
 > [!WARNING]
-> The Avalonia adorner system may not properly clip adornments.
+> The Avalonia adorner system may not properly clip adornments when the adornment is outside the bounds of the adorned element.
 
-The Avalonia adorner system (last tested on v11.0.7) doesn't properly clip adornments based on the clip regions of ancestors of the adorned element.  This is an issue we are working with the Avalonia team to solve.  A symptom of this issue can sometimes be seen when a badge adornment is used on an adorned element, that adorned element is scrolled out of view within a `ScrollViewer`, and the badge adornment remains visible.
+The Avalonia adorner system (last tested on v11.0.7) may not properly clip adornments based on the clip regions of ancestors of the adorned element.  This is an issue we are working with the Avalonia team to solve.  A symptom of this issue can sometimes be seen when a badge adornment is used on an adorned element, that adorned element is scrolled out of view within a `ScrollViewer`, and the badge adornment remains visible.
 
-If this scenario is encountered, a workaround is to not use [BadgeService](xref:@ActiproUIRoot.Controls.BadgeService), thereby avoiding use of the Avalonia adorner system.  Place the adorned element and the badge element in a `Panel` instead and apply the `HorizontalAlignment`, `VerticalAlignment`, and `RenderTransform` properties on the badge to position it.
+We believe our badge implementation has worked around this issue in most scenarios.  If this scenario is still encountered, one workaround is to position the adornment within the bounds of the adorned element so clipping can be enabled.  Another option is to not use [BadgeService](xref:@ActiproUIRoot.Controls.BadgeService), thereby avoiding use of the Avalonia adorner system.  Place the adorned element and the badge element in a `Panel` instead and apply the `HorizontalAlignment`, `VerticalAlignment`, and `RenderTransform` properties on the badge to position it.
 
 ```xaml
 <Panel>
@@ -340,5 +360,7 @@ The following theme resources are available for customizing the appearance of th
 | [BadgeCornerRadius](xref:@ActiproUIRoot.Themes.ThemeResourceKind.BadgeCornerRadius) | The default `CornerRadius`. |
 | [BadgeDotLength](xref:@ActiproUIRoot.Themes.ThemeResourceKind.BadgeDotLength) | The default [DotLength](xref:@ActiproUIRoot.Controls.Badge.DotLength) for when the badge is displayed as a "dot". |
 | [BadgeStringContentPadding](xref:@ActiproUIRoot.Themes.ThemeResourceKind.BadgeStringContentPadding) | The default `Padding` applied to `String`-based content. |
+
+See the [Theme Assets](../../themes/theme-assets.md) topic for more details on working with theme resources.
 
 }

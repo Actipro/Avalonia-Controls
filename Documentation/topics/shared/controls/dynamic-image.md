@@ -1,7 +1,7 @@
 ---
 title: "DynamicImage"
 page-title: "DynamicImage - Shared Library Controls"
-order: 5
+order: 15
 ---
 # DynamicImage
 
@@ -32,6 +32,9 @@ Set the `IsEnabled` property to `false` and the image content will be rendered i
 *A single image that is altered to appear as grayscale with varying degrees of opacity*
 
 To further emphasize the disabled state, use the [DisabledOpacity](xref:@ActiproUIRoot.Controls.DynamicImage.DisabledOpacity) property to blend the image content into the background.  The default value is `1.0`, meaning the opacity is not changed when disabled.
+
+> [!NOTE]
+> The [DisabledOpacity](xref:@ActiproUIRoot.Controls.DynamicImage.DisabledOpacity) is relative to the control's `Opacity`.  So if the [DisabledOpacity](xref:@ActiproUIRoot.Controls.DynamicImage.DisabledOpacity) is set to `0.5` and the control's `Opacity` is `0.8` then the effective opacity when disabled will be `0.4`.
 
 ## Monochrome Adaptation
 

@@ -52,11 +52,9 @@
 			<sampleBrowser:ControlExample.Options>
 				<StackPanel x:DataType="sampleBrowser:ApplicationViewModel">
 					<TextBlock Classes="theme-form-control-label" Text="User interface density:" />
-					<UniformGrid Columns="3" HorizontalAlignment="Left">
-						<ToggleButton BorderThickness="1,1,0,1" x:Name="compactDensityButton1" CornerRadius="{actipro:ScaledCornerRadius '1, 0, 0, 1'}" Content="Compact" Command="{Binding SetUserInterfaceDensityCommand}" CommandParameter="{x:Static actipro:UserInterfaceDensity.Compact}" />
-						<ToggleButton BorderThickness="1" x:Name="normalDensityButton1" CornerRadius="0" Content="Normal" Command="{Binding SetUserInterfaceDensityCommand}" CommandParameter="{x:Static actipro:UserInterfaceDensity.Normal}" />
-						<ToggleButton BorderThickness="0,1,1,1" x:Name="spaciousDensityButton1" CornerRadius="{actipro:ScaledCornerRadius '0, 1, 1, 0'}" Content="Spacious" Command="{Binding SetUserInterfaceDensityCommand}" CommandParameter="{x:Static actipro:UserInterfaceDensity.Spacious}" />
-					</UniformGrid>
+					<actipro:SegmentedBar x:Name="uiDensityBar" Classes="theme-outline accent" HorizontalAlignment="Left"
+						ItemsSource="{actipro:DelimitedArray Type={x:Type actipro:UserInterfaceDensity}}"
+						SelectionChanged="OnUiDensitySelectionChanged"/>
 				</StackPanel>
 			</sampleBrowser:ControlExample.Options>
 			<sampleBrowser:ControlExample.CodeExamples>

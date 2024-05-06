@@ -1,0 +1,491 @@
+<UserControl 
+	x:Name="sampleRootControl"
+	x:Class="ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.InfoBarIntro.MainControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:controlsPrims="using:Avalonia.Controls.Primitives"
+	xmlns:local="using:ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.MessageBoxIntro"
+	xmlns:layout="using:Avalonia.Layout"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:system="using:System"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+		
+		<system:String x:Key="ShortMessage">An essential application message for the user.</system:String>
+
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="InfoBar can be used to display essential information to a user without disrupting the user flow.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="InfoBar" Url="https://www.actiprosoftware.com/docs/controls/avalonia/fundamentals/info-bar" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+			<sampleBrowser:ControlExampleLinkItem Title="MessageBox" Url="/ProductSamples/FundamentalsSamples/Controls/MessageBoxIntro/MainControl" />
+			<sampleBrowser:ControlExampleLinkItem Title="User prompt" Url="/ProductSamples/FundamentalsSamples/Controls/UserPromptIntro/MainControl" />
+		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+
+
+		<sampleBrowser:ControlExample
+			Header="Basic usage"
+			DataContext="{Binding #basicUsage}"
+			>
+
+			<actipro:InfoBar x:Name="basicUsage" HorizontalAlignment="Center"
+				Title="Title"
+				Message="{StaticResource ShortMessage}" />
+			
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<TextBox Text="{Binding Title}" Watermark="Title" UseFloatingWatermark="True" />
+					<TextBox Text="{Binding Message}" Watermark="Message" UseFloatingWatermark="True" />
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Severity" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type=actipro:InfoBarSeverity}" SelectedValue="{Binding Severity}" />
+					</StackPanel>
+					<CheckBox IsChecked="{Binding IsOpen}">Is open</CheckBox>
+					<CheckBox IsChecked="{Binding IsIconVisible}">Is icon visible</CheckBox>
+					<CheckBox IsChecked="{Binding CanClose}">Can close</CheckBox>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:InfoBar$(SeverityAttribute)$(IsIconVisibleAttribute)$(CanCloseAttribute)$(IsOpenAttribute)
+	Title="$(Title)"
+	Message="$(Message)"
+	/>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="Title" Value="{Binding Title}" />
+						<sampleBrowser:CodeExampleSubstitution Key="Message" Value="{Binding Message}" />
+						<sampleBrowser:CodeExampleSubstitution Key="CanCloseAttribute"
+															   IsEnabled="{Binding !CanClose}"
+															   Value=" CanClose=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsIconVisibleAttribute"
+															   IsEnabled="{Binding !IsIconVisible}"
+															   Value=" IsIconVisible=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsOpenAttribute"
+															   IsEnabled="{Binding !IsOpen}"
+															   Value=" IsOpen=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="SeverityAttribute"
+															   IsEnabled="{Binding Severity, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Information'}"
+															   Value="{Binding Severity, StringFormat=' Severity=&quot;{0}&quot;'}" />
+					</sampleBrowser:CodeExample.Substitutions>
+
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Pre-defined severity"
+			Footer="Several pre-defined severity levels with coordinated icons and colors are available."
+			>
+
+			<StackPanel Spacing="10" HorizontalAlignment="Center">
+				<actipro:InfoBar Message="{StaticResource ShortMessage}" CloseButtonCommand="{Binding #sampleRootControl.NoCloseCommand}" Title="Information" Severity="Information" />
+				<actipro:InfoBar Message="{StaticResource ShortMessage}" CloseButtonCommand="{Binding #sampleRootControl.NoCloseCommand}" Title="Success" Severity="Success" />
+				<actipro:InfoBar Message="{StaticResource ShortMessage}" CloseButtonCommand="{Binding #sampleRootControl.NoCloseCommand}" Title="Warning" Severity="Warning" />
+				<actipro:InfoBar Message="{StaticResource ShortMessage}" CloseButtonCommand="{Binding #sampleRootControl.NoCloseCommand}" Title="Error" Severity="Error" />
+			</StackPanel>
+
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Action element"
+			Footer="Optionally include an interactive element the user can act upon."
+			DataContext="{Binding #buttonActionSample}"
+			>
+
+			<StackPanel Spacing="20">
+				<actipro:InfoBar x:Name="buttonActionSample" HorizontalAlignment="Center"
+						Severity="Warning"
+						Title="Metered Connection"
+						Message="{Binding #actionSampleMessageComboBox.SelectedValue}">
+					<actipro:InfoBar.Action>
+						<Panel>
+							<Button HorizontalAlignment="Left" Command="{Binding #sampleRootControl.ActionCommand}" IsVisible="{Binding #actionSampleKindComboBox.SelectedValue, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Button'}">Resume Sync</Button>
+							<actipro:HyperlinkTextBlock Command="{Binding #sampleRootControl.ActionCommand}" IsVisible="{Binding #actionSampleKindComboBox.SelectedValue, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Hyperlink'}" >Resume Sync</actipro:HyperlinkTextBlock>
+						</Panel>
+					</actipro:InfoBar.Action>
+				</actipro:InfoBar>
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<CheckBox IsChecked="{Binding IsOpen}">Is open</CheckBox>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Action kind" />
+						<ComboBox x:Name="actionSampleKindComboBox" SelectedIndex="0" SelectedValueBinding="{Binding Content, DataType=ComboBoxItem}">
+							<ComboBoxItem>Button</ComboBoxItem>
+							<ComboBoxItem>Hyperlink</ComboBoxItem>
+						</ComboBox>
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Message length" />
+						<ComboBox x:Name="actionSampleMessageComboBox" SelectedIndex="0" SelectedValueBinding="{Binding Tag, DataType=ComboBoxItem}" >
+							<ComboBoxItem Tag="Syncing paused.">Short</ComboBoxItem>
+							<ComboBoxItem Tag="Syncing has been paused to preserve data over a metered connection. Syncing will resume once an unmetered connection is available, or click 'Resume Sync' to force syncing now.">Long</ComboBoxItem>
+						</ComboBox>
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:InfoBar Title="$(Title)" Severity="$(Severity)" Message="...">
+	
+	<actipro:InfoBar.Action>
+		$(ButtonDefinition)$(HyperlinkDefinition)
+	</actipro:InfoBar.Action>
+	
+</actipro:InfoBar>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="Title" Value="{Binding Title}" />
+						<sampleBrowser:CodeExampleSubstitution Key="Severity" Value="{Binding Severity}" />
+						<sampleBrowser:CodeExampleSubstitution Key="ButtonDefinition"
+															   IsEnabled="{Binding #actionSampleKindComboBox.SelectedValue, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Button'}"
+															   Value="&lt;Button HorizontalAlignment=&quot;Left&quot; Command=&quot;{Binding ResumeSyncCommand}&quot;&gt;Resume Sync&lt;/Button&gt;" />
+						<sampleBrowser:CodeExampleSubstitution Key="HyperlinkDefinition"
+															   IsEnabled="{Binding #actionSampleKindComboBox.SelectedValue, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Hyperlink'}"
+															   Value="&lt;actipro:HyperlinkTextBlock Command=&quot;{Binding ResumeSyncCommand}&quot;&gt;Resume Sync&lt;/actipro:HyperlinkTextBlock&gt;" />
+					</sampleBrowser:CodeExample.Substitutions>
+
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Custom content"
+			Footer="Any content supported by ContentPresenter can be added below the message."
+			DataContext="{Binding #contentSample}"
+			>
+
+			<actipro:InfoBar x:Name="contentSample" HorizontalAlignment="Center" Title="Sync In Progress" Padding="{actipro:ScaledThickness 2}"
+							 Message="{Binding ElementName=contentSampleMessageComboBox, Path=SelectedValue}" CanClose="False">
+				<actipro:InfoBar.Resources>
+					<x:Double x:Key="{actipro:ThemeResourceKey ProgressBarMinAscent}">6</x:Double>
+				</actipro:InfoBar.Resources>
+				<ProgressBar IsIndeterminate="True" />
+			</actipro:InfoBar>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Message length" />
+						<ComboBox x:Name="contentSampleMessageComboBox" SelectedIndex="0" SelectedValueBinding="{Binding Tag, DataType=ComboBoxItem}" >
+							<ComboBoxItem Tag="Syncing app settings with the cloud.">Short</ComboBoxItem>
+							<ComboBoxItem Tag="Syncing application settings with the cloud.  Update your profile to control which settings are synchronized with the cloud so your configuration is consistent on every machine where you work.">Long</ComboBoxItem>
+						</ComboBox>
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:InfoBar Title="$(Title)" CanClose="False" 
+	Padding="{actipro:ScaledThickness 2}" Message="...">
+	<actipro:InfoBar.Resources>
+		<x:Double x:Key="{actipro:ThemeResourceKey ProgressBarMinAscent}">6</x:Double>
+	</actipro:InfoBar.Resources>
+	
+	<ProgressBar IsIndeterminate="True" />
+	
+</actipro:InfoBar>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="Title" Value="{Binding Title}" />
+					</sampleBrowser:CodeExample.Substitutions>
+
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Cancel close"
+			Footer="Use the 'Closing' event to cancel an attempt to close the info bar."
+			DataContext="{Binding #cancelCloseSample}"
+			>
+
+			<actipro:InfoBar HorizontalAlignment="Center" x:Name="cancelCloseSample" Title="Title" Message="Check the 'Cancel' options to prevent closing based on the close reason." Severity="Error"
+							 Closing="OnInfoBarClosing" />
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<CheckBox IsChecked="{Binding IsOpen}">Is open</CheckBox>
+					<CheckBox x:Name="cancelCloseButtonCheckBox" IsChecked="True">Cancel close button click</CheckBox>
+					<CheckBox x:Name="cancelProgrammaticCloseCheckBox" IsChecked="True">Cancel programmatic close</CheckBox>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample Language="XAML" xml:space="preserve">
+					<![CDATA[
+<actipro:InfoBar
+	Title="$(Title)"
+	Message="$(Message)"
+	Closing="OnInfoBarClosing"
+	/>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="Title" Value="{Binding Title}" />
+						<sampleBrowser:CodeExampleSubstitution Key="Message" Value="{Binding Message}" />
+					</sampleBrowser:CodeExample.Substitutions>
+
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+private void OnInfoBarClosing(object? sender, InfoBarClosingEventArgs e) {
+	if ((e.Reason == InfoBarCloseReason.CloseButton) && !TrySomeOperation()) {
+		// Operation failed - do not close
+		e.Cancel = true;
+	}
+}
+]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="Title" Value="{Binding Title}" />
+						<sampleBrowser:CodeExampleSubstitution Key="Message" Value="{Binding Message}" />
+					</sampleBrowser:CodeExample.Substitutions>
+
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Close button command"
+			Footer="Any ICommand can be associated with the close button."
+			DataContext="{Binding #closeCommandSample}"
+			>
+
+			<actipro:InfoBar HorizontalAlignment="Center" x:Name="closeCommandSample"
+				Title="Title"
+				Message="{StaticResource ShortMessage}"
+				CloseButtonClick="OnInfoBarCloseButtonClick"
+				CloseButtonCommand="{Binding #sampleRootControl.CloseButtonCommand}"
+				CloseButtonCommandParameter="{Binding $self}"
+				/>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<CheckBox IsChecked="{Binding IsOpen}">Is open</CheckBox>
+					<CheckBox x:Name="closeCommandHandleClickCheckBox" IsChecked="False">Handle click event</CheckBox>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:InfoBar Title="Close button command"
+	Message="Any command can be associated with the close button."
+	CloseButtonCommand="{Binding SampleCloseCommand}"
+	CloseButtonCommandParameter="{Binding $self}"
+	/>
+					]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+public ICommand SampleCloseCommand { get; } = new DelegateCommand<object>(
+	async (param) => {
+		if (param is InfoBar infoBar) {
+			var result = await MessageBox.Show($"Are you sure you want to close the '{infoBar.Title}' info bar?",
+				button: MessageBoxButtons.YesNo,
+				image: MessageBoxImage.Question);
+
+			if (result == MessageBoxResult.Yes) {
+				// Close the info bar
+				infoBar.IsOpen = false;
+			}
+		}
+	});
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Animation"
+			Footer="Opening and closing an info bar can be animated for fluent transitions."
+			DataContext="{Binding #animationSample}"
+			>
+
+			<Border Height="200" CornerRadius="5" Padding="5" BorderThickness="1" BorderBrush="{actipro:ThemeResource Container3BorderBrush}"
+					Background="{actipro:ThemeResource Container3BackgroundBrush}">
+
+				<Grid RowDefinitions="Auto,*">
+					<actipro:InfoBar x:Name="animationSample" Grid.Row="0" Severity="Success"
+						Title="Title"
+						Message="{StaticResource ShortMessage}"
+						Margin="0,0,0,5"
+						/>
+					<Border Grid.Row="1" CornerRadius="3" Background="{actipro:ThemeResource Container2BackgroundBrush}">
+						<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap" Padding="20">The InfoBar is displayed above this area and will animate into position while opening and closing.</TextBlock>
+					</Border>
+				</Grid>
+			</Border>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<CheckBox IsChecked="{Binding IsOpen}" Content="Is open"/>
+					<CheckBox IsChecked="{Binding IsAnimationEnabled}" Content="Is animation enabled"/>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:InfoBar$(IsAnimationEnabledAttribute)$(SeverityAttribute)
+	Title="$(Title)"
+	Message="$(Message)"
+	/>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="Title" Value="{Binding Title}" />
+						<sampleBrowser:CodeExampleSubstitution Key="Message" Value="{Binding Message}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsAnimationEnabledAttribute"
+															   IsEnabled="{Binding !IsAnimationEnabled}"
+															   Value=" IsAnimationEnabled=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="SeverityAttribute"
+															   IsEnabled="{Binding Severity, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Information'}"
+															   Value="{Binding Severity, StringFormat=' Severity=&quot;{0}&quot;'}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Custom appearance"
+			Footer="Customize the icon, brushes, close button, and other appearance properties for a unique look."
+			DataContext="{Binding #appearanceSample}"
+			>
+
+			<actipro:InfoBar x:Name="appearanceSample" HorizontalAlignment="Center"
+				Title="Microphone Muted"
+				Message="Meeting attendees cannot hear you speak."
+				Background="{actipro:ThemeResource ControlBackgroundBrushSoftAccent}"
+				BorderBrush="{actipro:ThemeResource Container4BorderBrush}" BorderThickness="1" CornerRadius="0"
+				Padding="10,2">
+
+				<!-- Custom Icon (https://pictogrammers.com/library/mdi/icon/microphone-off/) -->
+				<actipro:InfoBar.Icon>
+					<Viewbox Height="16" Width="16">
+						<PathIcon Foreground="{actipro:ThemeResource ControlBackgroundBrushSolidDanger}" 
+								  Data="M19,11C19,12.19 18.66,13.3 18.1,14.28L16.87,13.05C17.14,12.43 17.3,11.74 17.3,11H19M15,11.16L9,5.18V5A3,3 0 0,1 12,2A3,3 0 0,1 15,5V11L15,11.16M4.27,3L21,19.73L19.73,21L15.54,16.81C14.77,17.27 13.91,17.58 13,17.72V21H11V17.72C7.72,17.23 5,14.41 5,11H6.7C6.7,14 9.24,16.1 12,16.1C12.81,16.1 13.6,15.91 14.31,15.58L12.65,13.92L12,14A3,3 0 0,1 9,11V10.28L3,4.27L4.27,3Z" />
+					</Viewbox>
+				</actipro:InfoBar.Icon>
+
+				<!-- Custom Close Button Theme -->
+				<actipro:InfoBar.CloseButtonTheme>
+					<ControlTheme TargetType="Button" BasedOn="{actipro:ControlTheme ButtonBase}">
+
+						<Setter Property="Background" Value="Transparent" />
+						<Setter Property="BorderBrush" Value="Transparent" />
+						<Setter Property="BorderThickness" Value="1" />
+						<Setter Property="CornerRadius" Value="0" />
+						<Setter Property="Foreground" Value="{actipro:ThemeResource ButtonForegroundBrush}" />
+						<Setter Property="Height" Value="16" />
+						<Setter Property="Width" Value="16" />
+						<Setter Property="Padding" Value="0" />
+
+						<Setter Property="ContentTemplate">
+							<DataTemplate>
+								<Viewbox Height="10" Width="10">
+									<PathIcon Data="M9.414,8l3,3l-1.414,1.414l-3,-3l-3,3l-1.414,-1.414l3,-3l-3,-3l1.414,-1.414l3,3l3,-3l1.414,1.414l-3,3Z" />
+								</Viewbox>
+							</DataTemplate>
+						</Setter>
+
+						<Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+							<Setter Property="Background" Value="{actipro:ThemeResource ControlBackgroundBrushSolidAccentPointerOver}" />
+							<Setter Property="BorderBrush" Value="{actipro:ThemeResource ControlBackgroundBrushSolidAccentPointerOver}" />
+							<Setter Property="Foreground" Value="{actipro:ThemeResource ControlForegroundBrushSolidAccent}" />
+						</Style>
+
+						<Style Selector="^:pressed /template/ ContentPresenter#PART_ContentPresenter">
+							<Setter Property="Background" Value="{actipro:ThemeResource ControlBackgroundBrushSolidAccentPressed}" />
+							<Setter Property="BorderBrush" Value="{actipro:ThemeResource ControlBackgroundBrushSolidAccentPressed}" />
+							<Setter Property="Foreground" Value="{actipro:ThemeResource ControlForegroundBrushSolidAccent}" />
+						</Style>
+
+					</ControlTheme>
+				</actipro:InfoBar.CloseButtonTheme>
+			</actipro:InfoBar>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<CheckBox IsChecked="{Binding IsOpen}" Content="Is open" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:InfoBar Title="Microphone Muted"
+	Message="Meeting attendees cannot hear you speak."
+	Background="{actipro:ThemeResource ControlBackgroundBrushSoftAccent}"
+	BorderBrush="{actipro:ThemeResource Container4BorderBrush}" BorderThickness="1" CornerRadius="0"
+	Padding="10,2">
+	
+	<!-- Custom Icon (https://pictogrammers.com/library/mdi/icon/microphone-off/) -->
+	<actipro:InfoBar.Icon>
+		<Viewbox Height="16" Width="16">
+			<PathIcon Foreground="#f17777" Data="M19,11C19,12.19 18.66,13.3 18.1,14.28L16.87,13.05C17.14,12.43 17.3,11.74 17.3,11H19M15,11.16L9,5.18V5A3,3 0 0,1 12,2A3,3 0 0,1 15,5V11L15,11.16M4.27,3L21,19.73L19.73,21L15.54,16.81C14.77,17.27 13.91,17.58 13,17.72V21H11V17.72C7.72,17.23 5,14.41 5,11H6.7C6.7,14 9.24,16.1 12,16.1C12.81,16.1 13.6,15.91 14.31,15.58L12.65,13.92L12,14A3,3 0 0,1 9,11V10.28L3,4.27L4.27,3Z" />
+		</Viewbox>
+	</actipro:InfoBar.Icon>
+
+	<!-- Custom Close Button Theme -->
+	<actipro:InfoBar.CloseButtonTheme>
+		<ControlTheme TargetType="Button" BasedOn="{actipro:ControlTheme ButtonBase}">
+
+			<Setter Property="Foreground" Value="{actipro:ThemeResource ButtonForegroundBrush}" />
+			<Setter Property="Background" Value="Transparent" />
+			<Setter Property="BorderBrush" Value="Transparent" />
+			<Setter Property="BorderThickness" Value="1" />
+			<Setter Property="CornerRadius" Value="0" />
+			<Setter Property="Height" Value="16" />
+			<Setter Property="Width" Value="16" />
+			<Setter Property="Padding" Value="0" />
+
+			<Setter Property="ContentTemplate">
+				<DataTemplate>
+					<Viewbox Height="10" Width="10">
+						<PathIcon Data="M9.414,8l3,3l-1.414,1.414l-3,-3l-3,3l-1.414,-1.414l3,-3l-3,-3l1.414,-1.414l3,3l3,-3l1.414,1.414l-3,3Z" />
+					</Viewbox>
+				</DataTemplate>
+			</Setter>
+
+			<Style Selector="^:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+				<Setter Property="Background" Value="{actipro:ThemeResource ControlBackgroundBrushSolidAccentPointerOver}" />
+				<Setter Property="BorderBrush" Value="{actipro:ThemeResource ControlBackgroundBrushSolidAccentPointerOver}" />
+				<Setter Property="Foreground" Value="{actipro:ThemeResource ControlForegroundBrushSolidAccent}" />
+			</Style>
+
+			<Style Selector="^:pressed /template/ ContentPresenter#PART_ContentPresenter">
+				<Setter Property="Background" Value="{actipro:ThemeResource ControlBackgroundBrushSolidAccentPressed}" />
+				<Setter Property="BorderBrush" Value="{actipro:ThemeResource ControlBackgroundBrushSolidAccentPressed}" />
+				<Setter Property="Foreground" Value="{actipro:ThemeResource ControlForegroundBrushSolidAccent}" />
+			</Style>
+
+		</ControlTheme>
+	</actipro:InfoBar.CloseButtonTheme>
+
+</actipro:InfoBar>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+</UserControl>

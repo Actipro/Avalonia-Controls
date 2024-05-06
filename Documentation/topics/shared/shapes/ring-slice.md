@@ -3,9 +3,9 @@ title: "Ring Slice"
 page-title: "Ring Slice - Shared Library Shapes"
 order: 10
 ---
-# RingSlice
+# Ring Slice
 
-The [RingSlice](xref:@ActiproUIRoot.Controls.Shapes.RingSlice) shape renders a portion (or the entire circle) of a ring shape.  Its start/end angles, radius, thickness, and other stroke properties can be set.
+The [RingSlice](xref:@ActiproUIRoot.Controls.Shapes.RingSlice) shape renders a portion (or the entire circle) of a ring shape.  Its start and sweep angles, radius, thickness, and other stroke properties can be set.
 
 ![Screenshot](../images/ringslice-intro.png)
 
@@ -15,7 +15,9 @@ Ring slice shapes can be combined in many interesting ways within UI, primarily 
 
 ## Angles, Radius, and Thickness
 
-The shape renders a ring slice between two angles, specified in degrees, where `0` is upward and the degree values increase as they go clockwise, meaning `90` degrees is to the right.  To render a quarter circle ring from the top to the right, use a [StartAngle](xref:@ActiproUIRoot.Controls.Shapes.RingSlice.StartAngle) of `0` and an [EndAngle](xref:@ActiproUIRoot.Controls.Shapes.RingSlice.EndAngle) of `90`.
+The shape renders a ring slice between two angles, specified in degrees, where `0` is upward and the degree values increase as they go clockwise, meaning `90` degrees is to the right.
+
+To render a quarter circle ring from the top to the right, use a [StartAngle](xref:@ActiproUIRoot.Controls.Shapes.RingSlice.StartAngle) of `0` and an [SweepAngle](xref:@ActiproUIRoot.Controls.Shapes.RingSlice.SweepAngle) of `90`.  The sweep angle is relative to the start angle, and can be negative.
 
 ![Screenshot](../images/ringslice-progress-indicator.png)
 
@@ -40,7 +42,7 @@ xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 
 ## Entire Circle
 
-When the [StartAngle](xref:@ActiproUIRoot.Controls.Shapes.RingSlice.StartAngle) and [EndAngle](xref:@ActiproUIRoot.Controls.Shapes.RingSlice.EndAngle) are the same value, the ring slice will by default render a full circular ring.  The [IsRenderedWhenFullCircle](xref:@ActiproUIRoot.Controls.Shapes.RingSlice.IsRenderedWhenFullCircle) property can be set to `false` to disable this behavior.  When set to `false` and the angles are the same, nothing will be rendered.
+When the [SweepAngle](xref:@ActiproUIRoot.Controls.Shapes.RingSlice.SweepAngle) is non-zero but normalizes to zero (e.g., a sweep angle of `360`), the ring slice will by default render a full circular ring.  The [IsRenderedWhenFullCircle](xref:@ActiproUIRoot.Controls.Shapes.RingSlice.IsRenderedWhenFullCircle) property can be set to `false` to disable this behavior.  When set to `false` and the sweep angle normalizes to zero, nothing will be rendered.
 
 > [!NOTE]
 > Degree angles are normalized when comparing equality.  Therefore, the angles `0` and `360` are considered to be the same angle.

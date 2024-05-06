@@ -42,6 +42,20 @@ items:
       href: fundamentals/controls/avatar-group.md
     - name: "Badge"
       href: fundamentals/controls/badge.md
+    - name: "Card"
+      href: fundamentals/controls/card.md
+    - name: "Circular Progressbar"
+      href: fundamentals/controls/circular-progressbar.md
+    - name: "Info Bar"
+      href: fundamentals/controls/info-bar.md
+    - name: "Segmented Bar"
+      href: fundamentals/controls/segmented-bar.md
+    - name: "Settings Card"
+      href: fundamentals/controls/settings-card.md
+    - name: "Settings Expander"
+      href: fundamentals/controls/settings-expander.md
+    - name: "Settings Group"
+      href: fundamentals/controls/settings-group.md
     - name: "Progress Spinners"
       href: fundamentals/controls/progress-spinners.md
   - name: "Panels"
@@ -102,6 +116,8 @@ items:
       href: shared/controls/measure-adjuster.md
     - name: "MeshGradientPresenter"
       href: shared/controls/mesh-gradient-presenter.md
+    - name: "ScrollableOverflowPresenter"
+      href: shared/controls/scrollable-overflow-presenter.md
     - name: "ShadowChrome"
       href: shared/controls/shadow-chrome.md
     - name: "ToggleThemeButton"
@@ -156,6 +172,8 @@ items:
   items:
   - name: "Overview"
     href: conversion/index.md
+  - name: "Converting to v24.1"
+    href: conversion/converting-to-v24-1.md
   - name: "Converting to v23.1"
     href: conversion/converting-to-v23-1.md
 - name: "Troubleshooting"

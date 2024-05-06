@@ -86,7 +86,6 @@ All button control themes support the `accent`, `success`, `warning`, and `dange
 *Button controls in the outline, solid, soft, subtle, and link control themes with neutral colors*
 
 - [ButtonBase](xref:@ActiproUIRoot.Themes.ControlThemeKind.ButtonBase) - Base control theme used by several others.
-- [ButtonCard](xref:@ActiproUIRoot.Themes.ControlThemeKind.ButtonCard) (`theme-card`) - Has a card-like appearance.
 - [ButtonInvisible](xref:@ActiproUIRoot.Themes.ControlThemeKind.ButtonInvisible) (`theme-invisible`) - Completely transparent but can be clicked.
 - [ButtonLink](xref:@ActiproUIRoot.Themes.ControlThemeKind.ButtonLink) (`theme-link`) - Has a link-like appearance.
 - [ButtonOutline](xref:@ActiproUIRoot.Themes.ControlThemeKind.ButtonOutline) (`theme-outline`) - Has an outline appearance.
@@ -461,6 +460,8 @@ The following additional control themes are used by the `Slider` control themes:
 - [ToggleSwitchBase](xref:@ActiproUIRoot.Themes.ControlThemeKind.ToggleSwitchBase) - Base control theme used by several others.
 - [ToggleSwitchOutline](xref:@ActiproUIRoot.Themes.ControlThemeKind.ToggleSwitchOutline) (`theme-outline`) - Has an outline appearance.
 - [ToggleSwitchSolid](xref:@ActiproUIRoot.Themes.ControlThemeKind.ToggleSwitchSolid) (`theme-solid`) - Has a solid appearance.
+
+Set the [ThemeProperties](xref:@ActiproUIRoot.Themes.ThemeProperties).[ToggleSwitchHasFarAffinityProperty](xref:@ActiproUIRoot.Themes.ThemeProperties.ToggleSwitchHasFarAffinityProperty) attached property on a `ToggleSwitch` to `true` to arrange the knob/track on the right side of the control instead of the left side (assuming left-to-right culture).  See the [Theme Definitions](theme-definitions.md) topic for details on how to change the global default.
 
 ### Tab Controls
 

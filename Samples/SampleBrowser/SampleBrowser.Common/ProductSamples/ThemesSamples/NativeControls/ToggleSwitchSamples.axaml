@@ -55,6 +55,7 @@
 					<TextBox x:Name="sampleOnContent" Text="On" Watermark="On Content" UseFloatingWatermark="True" />
 					<TextBox x:Name="sampleOffContent" Text="Off" Watermark="Off Content" UseFloatingWatermark="True" />
 					<TextBox x:Name="sampleLabel" Text="Label Content" Watermark="Label" UseFloatingWatermark="True" />
+					<CheckBox IsChecked="{Binding (actipro:ThemeProperties.ToggleSwitchHasFarAffinity)}">Has far affinity</CheckBox>
 					<CheckBox IsChecked="{Binding IsChecked}">Checked</CheckBox>
 					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
 				</StackPanel>
@@ -62,7 +63,7 @@
 			<sampleBrowser:ControlExample.CodeExamples>
 				<sampleBrowser:CodeExample xml:space="preserve">
 					<![CDATA[
-<ToggleSwitch$(ClassesAttribute)$(IsCheckedAttribute)$(IsEnabledAttribute)
+<ToggleSwitch$(ClassesAttribute)$(IsCheckedAttribute)$(HasFarAffinityAttribute)$(IsEnabledAttribute)
 	OnContent="$(OnContent)" OffContent="$(OffContent)">
 	$(Content)
 </ToggleSwitch>
@@ -74,6 +75,9 @@
 						<sampleBrowser:CodeExampleSubstitution Key="OnContent" Value="{Binding #sampleOnContent.Text}" />
 						<sampleBrowser:CodeExampleSubstitution Key="OffContent" Value="{Binding #sampleOffContent.Text}" />
 						<sampleBrowser:CodeExampleSubstitution Key="Content" Value="{Binding #sampleLabel.Text}" />
+						<sampleBrowser:CodeExampleSubstitution Key="HasFarAffinityAttribute"
+															   IsEnabled="{Binding (actipro:ThemeProperties.ToggleSwitchHasFarAffinity)}"
+															   Value=" actipro:ThemeProperties.ToggleSwitchHasFarAffinity=&quot;True&quot;" />
 						<sampleBrowser:CodeExampleSubstitution Key="IsCheckedAttribute" IsEnabled="{Binding IsChecked, Converter={x:Static ObjectConverters.IsNotNull}}" Value="{Binding IsChecked, StringFormat=' IsChecked=&quot;{0}&quot;'}" />
 						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute" IsEnabled="{Binding !IsEnabled}" Value=" IsEnabled=&quot;False&quot;" />
 					</sampleBrowser:CodeExample.Substitutions>

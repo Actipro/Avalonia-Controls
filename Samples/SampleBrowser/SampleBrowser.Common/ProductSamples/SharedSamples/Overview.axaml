@@ -24,17 +24,19 @@
 			</sampleBrowser:ProductOverviewHeader>
 
 			<actipro:MultiColumnPanel Classes="sample-layout-panel" Margin="{actipro:ScaledThickness '6,0'}" MinColumnWidth="390" HorizontalSpacing="{actipro:ScaledDouble 4}" VerticalSpacing="{actipro:ScaledDouble 4}">
-				<WrapPanel Orientation="Horizontal">
-					<actipro:CopyButton Margin="{actipro:ScaledThickness '0,0,4,0'}" CopyText="Text copied from a CopyButton" VerticalAlignment="Center" />
-					<actipro:CopyButton Margin="{actipro:ScaledThickness '0,0,4,0'}" Classes="theme-soft" CopyText="Text copied from a CopyButton" CornerRadius="99" Padding="10" VerticalAlignment="Center" />
-					<actipro:ToggleThemeButton Margin="{actipro:ScaledThickness '0,0,4,0'}" VerticalAlignment="Center" />
-					<actipro:ToggleThemeButton Classes="theme-soft" CornerRadius="99" Padding="10" VerticalAlignment="Center" />
-				</WrapPanel>
+				<actipro:MultiColumnPanel MinColumnWidth="260" HorizontalSpacing="{actipro:ScaledDouble 4}" VerticalSpacing="{actipro:ScaledDouble 4}">
+					<WrapPanel Orientation="Horizontal">
+						<actipro:CopyButton Margin="{actipro:ScaledThickness '0,0,4,0'}" CopyText="Text copied from a CopyButton" VerticalAlignment="Center" />
+						<actipro:CopyButton Margin="{actipro:ScaledThickness '0,0,4,0'}" Classes="theme-soft" CopyText="Text copied from a CopyButton" CornerRadius="99" Padding="10" VerticalAlignment="Center" />
+						<actipro:ToggleThemeButton Margin="{actipro:ScaledThickness '0,0,4,0'}" VerticalAlignment="Center" />
+						<actipro:ToggleThemeButton Classes="theme-soft" CornerRadius="99" Padding="10" VerticalAlignment="Center" />
+					</WrapPanel>
 
-				<StackPanel>
-					<TextBlock Classes="theme-form-control-label" Text="Hyperlink Text Block" />
-					<actipro:HyperlinkTextBlock Text="{Binding ActiproWebSiteUrl}" Command="{Binding OpenUrlCommand}" CommandParameter="{Binding $self.Text}" />
-				</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Hyperlink Text Block" />
+						<actipro:HyperlinkTextBlock Text="{Binding ActiproWebSiteUrl}" Command="{Binding OpenUrlCommand}" CommandParameter="{Binding $self.Text}" />
+					</StackPanel>
+				</actipro:MultiColumnPanel>
 
 				<StackPanel>
 					<TextBlock Classes="theme-form-control-label" Text="Mesh Gradient Presenter" />
@@ -53,37 +55,52 @@
 							<Border Padding="{actipro:ScaledThickness 2.5}" BorderThickness="1" CornerRadius="{actipro:ScaledCornerRadius 1}"
 									Background="{actipro:ThemeResource Container1BackgroundBrush}"
 									BorderBrush="{actipro:ThemeResource Container1BorderBrush}">
-								<StackPanel>
-									<actipro:DynamicImage Width="32" Height="32">
+								<DockPanel>
+									<actipro:DynamicImage DockPanel.Dock="Left" Width="32" Height="32">
 										<DrawingImage Drawing="{StaticResource CheckVectorDrawing}" />
 									</actipro:DynamicImage>
-									<TextBlock Margin="0,5,0,0" FontSize="{actipro:ThemeResource DefaultFontSizeSmall}" Text="Image designed for light theme" 
-											   FontStyle="Italic" Foreground="{actipro:ThemeResource DefaultForegroundBrushSecondary}" TextWrapping="Wrap" TextAlignment="Center" />
-								</StackPanel>
+									<TextBlock Margin="10,0,0,0" FontSize="{actipro:ThemeResource DefaultFontSizeSmall}" Text="Image designed for light theme" 
+											   FontStyle="Italic" Foreground="{actipro:ThemeResource DefaultForegroundBrushSecondary}" TextWrapping="Wrap" VerticalAlignment="Center" />
+								</DockPanel>
 							</Border>
 						</ThemeVariantScope>
 						<ThemeVariantScope Grid.Column="2" RequestedThemeVariant="Dark">
 							<Border Padding="{actipro:ScaledThickness 2.5}" BorderThickness="1" CornerRadius="{actipro:ScaledCornerRadius 1}"
 									Background="{actipro:ThemeResource Container1BackgroundBrush}"
 									BorderBrush="{actipro:ThemeResource Container1BorderBrush}">
-								<StackPanel>
-									<actipro:DynamicImage Width="32" Height="32">
+								<DockPanel>
+									<actipro:DynamicImage DockPanel.Dock="Left" Width="32" Height="32">
 										<DrawingImage Drawing="{StaticResource CheckVectorDrawing}" />
 									</actipro:DynamicImage>
-									<TextBlock Margin="0,5,0,0" FontSize="{actipro:ThemeResource DefaultFontSizeSmall}" Text="Image auto-adapted for dark theme"
-											   FontStyle="Italic" Foreground="{actipro:ThemeResource DefaultForegroundBrushSecondary}" TextWrapping="Wrap" TextAlignment="Center" />
-								</StackPanel>
+									<TextBlock Margin="10,0,0,0" FontSize="{actipro:ThemeResource DefaultFontSizeSmall}" Text="Image auto-adapted for dark theme"
+											   FontStyle="Italic" Foreground="{actipro:ThemeResource DefaultForegroundBrushSecondary}" TextWrapping="Wrap" VerticalAlignment="Center" />
+								</DockPanel>
 							</Border>
 						</ThemeVariantScope>
 					</Grid>
 				</StackPanel>
 
-				<actipro:ShadowChrome Elevation="8">
-					<Border Background="{actipro:ThemeResource Container1BackgroundBrush}" CornerRadius="{actipro:ScaledCornerRadius 1}" Padding="{actipro:ScaledThickness '4,2.5'}">
-						<TextBlock Text="Shadow Chrome" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}"
-								   HorizontalAlignment="Center" VerticalAlignment="Center" />
-					</Border>
-				</actipro:ShadowChrome>
+				<StackPanel>
+					<TextBlock Classes="theme-form-control-label" Text="Shadow Chrome and Scrollable Overflow Presenter" />
+					<actipro:ShadowChrome Elevation="8">
+						<Border Background="{actipro:ThemeResource Container1BackgroundBrush}" CornerRadius="8" Padding="5">
+							<actipro:ScrollableOverflowPresenter Orientation="Horizontal">
+								<ItemsControl ItemsSource="{actipro:DelimitedArray '#ffb900, #e74856, #0078d7, #0099bc, #7a7574, #767676, #ff8d00, #e81123, #0063b1, #2d7d9a, #5d5a58, #4c4a48, #f7630c, #ea005e, #8e8cd8, #00b7c3, #68768a, #69797e, #ca5010, #c30052, #6b69d6, #038387, #515c6b, #4a5459, #da3b01, #e3008c, #8764b8, #00b294, #567c73, #647c64, #ef6950, #bf0077, #744da9, #018574, #486860, #525e54, #d13438, #c239b3, #b146c2, #00cc6a, #498205, #847545, #ff4343, #9a0089, #881798, #10893e, #107c10, #7e735f', Type=actipro:UIColor}">
+									<ItemsControl.ItemsPanel>
+										<ItemsPanelTemplate>
+											<StackPanel Margin="5" Orientation="Horizontal" Spacing="5" />
+										</ItemsPanelTemplate>
+									</ItemsControl.ItemsPanel>
+									<ItemsControl.ItemTemplate>
+										<DataTemplate DataType="actipro:UIColor">
+											<sampleBrowser:CopyColorButton Height="60" Content="{Binding}" />
+										</DataTemplate>
+									</ItemsControl.ItemTemplate>
+								</ItemsControl>
+							</actipro:ScrollableOverflowPresenter>
+						</Border>
+					</actipro:ShadowChrome>
+				</StackPanel>
 
 			</actipro:MultiColumnPanel>
 
