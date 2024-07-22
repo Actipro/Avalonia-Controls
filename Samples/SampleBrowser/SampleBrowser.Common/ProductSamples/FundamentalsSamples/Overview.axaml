@@ -154,7 +154,7 @@
 									<PathIcon Data="{StaticResource icon-fluent-mdl2-color}" />
 								</actipro:SettingsCard.HeaderIcon>
 								<actipro:SettingsCard.Description>
-									<actipro:HyperlinkTextBlock FontWeight="DemiBold" FontSize="{actipro:ThemeResource DefaultFontSizeSmall}"
+									<actipro:HyperlinkTextBlock FontWeight="SemiBold" FontSize="{actipro:ThemeResource DefaultFontSizeSmall}"
 										Text="Open system settings"/>
 								</actipro:SettingsCard.Description>
 								<ComboBox SelectedIndex="2">

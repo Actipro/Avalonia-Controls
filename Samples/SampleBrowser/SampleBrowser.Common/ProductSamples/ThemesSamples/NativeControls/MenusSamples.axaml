@@ -655,17 +655,17 @@ private void OnMenuItemClicked(object? sender, Avalonia.Interactivity.RoutedEven
 				<TextBox Watermark="This textbox has a custom context menu">
 					<TextBox.ContextMenu>
 						<ContextMenu>
-							<MenuItem Header="Cu_t" Command="{Binding $parent[TextBox].Cut}" IsEnabled="{Binding $parent[TextBox].CanCut}">
+							<MenuItem Header="Cu_t" Command="{Binding $parent[TextBox].Cut}" IsEnabled="{Binding $parent[TextBox].CanCut}" InputGesture="{x:Static TextBox.CutGesture}">
 								<MenuItem.Icon>
 									<actipro:DynamicImage Source="/Images/Icons/Cut16.png" />
 								</MenuItem.Icon>
 							</MenuItem>
-							<MenuItem Header="Cop_y" Command="{Binding $parent[TextBox].Copy}" IsEnabled="{Binding $parent[TextBox].CanCopy}">
+							<MenuItem Header="Cop_y" Command="{Binding $parent[TextBox].Copy}" IsEnabled="{Binding $parent[TextBox].CanCopy}" InputGesture="{x:Static TextBox.CopyGesture}">
 								<MenuItem.Icon>
 									<actipro:DynamicImage Source="/Images/Icons/Copy16.png" />
 								</MenuItem.Icon>
 							</MenuItem>
-							<MenuItem Header="_Paste" Command="{Binding $parent[TextBox].Paste}" IsEnabled="{Binding $parent[TextBox].CanPaste}">
+							<MenuItem Header="_Paste" Command="{Binding $parent[TextBox].Paste}" IsEnabled="{Binding $parent[TextBox].CanPaste}" InputGesture="{x:Static TextBox.PasteGesture}">
 								<MenuItem.Icon>
 									<actipro:DynamicImage Source="/Images/Icons/Paste16.png" />
 								</MenuItem.Icon>
@@ -685,21 +685,24 @@ private void OnMenuItemClicked(object? sender, Avalonia.Interactivity.RoutedEven
 		<ContextMenu>
 			<MenuItem Header="Cu_t"
 				Command="{Binding $parent[TextBox].Cut}"
-				IsEnabled="{Binding $parent[TextBox].CanCut}">
+				IsEnabled="{Binding $parent[TextBox].CanCut}"
+				InputGesture="{x:Static TextBox.CutGesture}">
 				<MenuItem.Icon>
 					<actipro:DynamicImage Source="/Images/Icons/Cut16.png" />
 				</MenuItem.Icon>
 			</MenuItem>
 			<MenuItem Header="Cop_y"
 				Command="{Binding $parent[TextBox].Copy}"
-				IsEnabled="{Binding $parent[TextBox].CanCopy}">
+				IsEnabled="{Binding $parent[TextBox].CanCopy}"
+				InputGesture="{x:Static TextBox.CopyGesture}">
 				<MenuItem.Icon>
 					<actipro:DynamicImage Source="/Images/Icons/Copy16.png" />
 				</MenuItem.Icon>
 			</MenuItem>
 			<MenuItem Header="_Paste"
 				Command="{Binding $parent[TextBox].Paste}"
-				IsEnabled="{Binding $parent[TextBox].CanPaste}">
+				IsEnabled="{Binding $parent[TextBox].CanPaste}"
+				InputGesture="{x:Static TextBox.PasteGesture}">
 				<MenuItem.Icon>
 					<actipro:DynamicImage Source="/Images/Icons/Paste16.png" />
 				</MenuItem.Icon>
@@ -725,9 +728,9 @@ private void OnMenuItemClicked(object? sender, Avalonia.Interactivity.RoutedEven
 			<StackPanel Spacing="10">
 				<StackPanel.Resources>
 					<MenuFlyout x:Key="CustomTextBoxContextFlyout">
-						<MenuItem Header="Cu_t" Command="{Binding $parent[TextBox].Cut}" IsEnabled="{Binding $parent[TextBox].CanCut}" />
-						<MenuItem Header="Cop_y" Command="{Binding $parent[TextBox].Copy}" IsEnabled="{Binding $parent[TextBox].CanCopy}" />
-						<MenuItem Header="_Paste" Command="{Binding $parent[TextBox].Paste}" IsEnabled="{Binding $parent[TextBox].CanPaste}" />
+						<MenuItem Header="Cu_t" Command="{Binding $parent[TextBox].Cut}" IsEnabled="{Binding $parent[TextBox].CanCut}" InputGesture="{x:Static TextBox.CutGesture}" />
+						<MenuItem Header="Cop_y" Command="{Binding $parent[TextBox].Copy}" IsEnabled="{Binding $parent[TextBox].CanCopy}" InputGesture="{x:Static TextBox.CopyGesture}" />
+						<MenuItem Header="_Paste" Command="{Binding $parent[TextBox].Paste}" IsEnabled="{Binding $parent[TextBox].CanPaste}" InputGesture="{x:Static TextBox.PasteGesture}" />
 						<Separator />
 						<MenuItem Header="_Select All" Command="{Binding $parent[TextBox].SelectAll}" IsEnabled="{Binding $parent[TextBox].Text, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
 					</MenuFlyout>
@@ -750,13 +753,16 @@ private void OnMenuItemClicked(object? sender, Avalonia.Interactivity.RoutedEven
 	<MenuFlyout x:Key="CustomTextBoxContextFlyout">
 		<MenuItem Header="Cu_t"
 			Command="{Binding $parent[TextBox].Cut}"
-			IsEnabled="{Binding $parent[TextBox].CanCut}" />
+			IsEnabled="{Binding $parent[TextBox].CanCut}"
+			InputGesture="{x:Static TextBox.CutGesture}" />
 		<MenuItem Header="Cop_y"
 			Command="{Binding $parent[TextBox].Copy}"
-			IsEnabled="{Binding $parent[TextBox].CanCopy}" />
+			IsEnabled="{Binding $parent[TextBox].CanCopy}"
+			InputGesture="{x:Static TextBox.CopyGesture}" />
 		<MenuItem Header="_Paste"
 			Command="{Binding $parent[TextBox].Paste}"
-			IsEnabled="{Binding $parent[TextBox].CanPaste}" />
+			IsEnabled="{Binding $parent[TextBox].CanPaste}"
+			InputGesture="{x:Static TextBox.PasteGesture}" />
 		<Separator />
 		<MenuItem Header="_Select All"
 			Command="{Binding $parent[TextBox].SelectAll}"

@@ -7,6 +7,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleBrowser.Desktop", "Sa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleBrowser.Common", "SampleBrowser.Common\SampleBrowser.Common.csproj", "{DE7A96E8-FBA2-448D-B3FF-13C7AEC73174}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{785AA8DD-A34F-450C-B712-A32FA39DD20F}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+		Notices.md = Notices.md
+	EndProjectSection
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "References", "References", "{92DCB58B-EACE-419E-89BE-5A5F44497BE6}"
 	ProjectSection(SolutionItems) = preProject
 		References\ActiproSoftware.References.props = References\ActiproSoftware.References.props

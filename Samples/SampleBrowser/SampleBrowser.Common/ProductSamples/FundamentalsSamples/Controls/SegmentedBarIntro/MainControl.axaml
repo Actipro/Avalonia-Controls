@@ -882,6 +882,7 @@
 						<TextBlock Classes="theme-form-control-label" Text="Theme" />
 						<ComboBox x:Name="overflowUsageTheme" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Elevated, Outline, Soft, Solid, Subtle'}" />
 					</StackPanel>
+					<CheckBox IsChecked="{Binding (ScrollViewer.IsScrollChainingEnabled)}">Is scroll chaining enabled</CheckBox>
 					<CheckBox IsChecked="{Binding IsAnimationEnabled}">Is animation enabled</CheckBox>
 					<CheckBox IsChecked="{Binding IsEnabled}">Is enabled</CheckBox>
 				</StackPanel>

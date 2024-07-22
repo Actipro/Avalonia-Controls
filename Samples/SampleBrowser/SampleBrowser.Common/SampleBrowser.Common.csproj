@@ -1,4 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	<!-- NOTE: Additional configuration defined within 'Directory.Build.props' file -->
 
 	<PropertyGroup>
 		<AssemblyName>SampleBrowser</AssemblyName>
