@@ -104,5 +104,64 @@
 		</sampleBrowser:ControlExample>
 
 
+		<sampleBrowser:ControlExample
+			Header="Custom scroll buttons"
+			Footer="Optionally hide the built-in scroll buttons for a custom scroll user interface."
+			HorizontalContentAlignment="Center"
+			>
+
+			<actipro:ShadowChrome Elevation="8">
+				<Border Background="{actipro:ThemeResource Container1BackgroundBrush}" CornerRadius="8" Padding="5">
+					<Grid ColumnDefinitions="*,Auto" >
+						<actipro:ScrollableOverflowPresenter x:Name="customScrollUsage" AllowEmbeddedScrollButtons="False">
+							<ItemsControl ItemsSource="{actipro:DelimitedArray '#ffb900, #e74856, #0078d7, #0099bc, #7a7574, #767676, #ff8d00, #e81123, #0063b1, #2d7d9a, #5d5a58, #4c4a48, #f7630c, #ea005e, #8e8cd8, #00b7c3, #68768a, #69797e, #ca5010, #c30052, #6b69d6, #038387, #515c6b, #4a5459, #da3b01, #e3008c, #8764b8, #00b294, #567c73, #647c64, #ef6950, #bf0077, #744da9, #018574, #486860, #525e54, #d13438, #c239b3, #b146c2, #00cc6a, #498205, #847545, #ff4343, #9a0089, #881798, #10893e, #107c10, #7e735f', Type=actipro:UIColor}">
+								<ItemsControl.ItemsPanel>
+									<ItemsPanelTemplate>
+										<StackPanel Margin="5" Orientation="Horizontal" Spacing="5" />
+									</ItemsPanelTemplate>
+								</ItemsControl.ItemsPanel>
+								<ItemsControl.ItemTemplate>
+									<DataTemplate DataType="actipro:UIColor">
+										<sampleBrowser:CopyColorButton Content="{Binding}" />
+									</DataTemplate>
+								</ItemsControl.ItemTemplate>
+							</ItemsControl>
+						</actipro:ScrollableOverflowPresenter>
+						<StackPanel Grid.Column="1" Orientation="Horizontal">
+							<RepeatButton Command="{Binding #customScrollUsage.ScrollBackwardCommand}" ContentTemplate="{actipro:GlyphTemplate LeftArrow16}" />
+							<RepeatButton Command="{Binding #customScrollUsage.ScrollForwardCommand}" ContentTemplate="{actipro:GlyphTemplate RightArrow16}"/>
+						</StackPanel>
+					</Grid>
+				</Border>
+			</actipro:ShadowChrome>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<Grid ColumnDefinitions="*,Auto">
+
+	<!-- Disable the built-in scroll buttons -->
+	<actipro:ScrollableOverflowPresenter
+		x:Name="overflowPresenter"
+		AllowEmbeddedScrollButtons="False"
+		Orientation="Horizontal">
+
+		<!-- Content here -->
+
+	</actipro:ScrollableOverflowPresenter>
+	
+	<!-- Define custom buttons bound to the scroll commands -->
+	<StackPanel Grid.Column="1" Orientation="Horizontal">
+		<RepeatButton Command="{Binding #overflowPresenter.ScrollBackwardCommand}" ContentTemplate="{actipro:GlyphTemplate LeftArrow16}" />
+		<RepeatButton Command="{Binding #overflowPresenter.ScrollForwardCommand}" ContentTemplate="{actipro:GlyphTemplate RightArrow16}"/>
+	</StackPanel>
+
+</Grid>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
 	</sampleBrowser:ControlExampleItemsControl>
 </UserControl>

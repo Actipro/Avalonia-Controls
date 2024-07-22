@@ -564,7 +564,7 @@
 							</Style>
 							<Style Selector="TextBlock.value">
 								<Setter Property="Foreground" Value="{actipro:ThemeResource ControlForegroundBrushSolidAccent}" />
-								<Setter Property="FontWeight" Value="DemiBold" />
+								<Setter Property="FontWeight" Value="SemiBold" />
 							</Style>
 						</StackPanel.Styles>
 						<actipro:Avatar Height="64" BorderBrush="{actipro:ThemeResource ControlForegroundBrushSolidAccent}" BorderThickness="2">
@@ -612,7 +612,7 @@
 				</Style>
 				<Style Selector="TextBlock.value">
 					<Setter Property="Foreground" Value="{actipro:ThemeResource ControlForegroundBrushSolidAccent}" />
-					<Setter Property="FontWeight" Value="DemiBold" />
+					<Setter Property="FontWeight" Value="SemiBold" />
 				</Style>
 			</StackPanel.Styles>
 			<actipro:Avatar Grid.Column="0" Height="64">

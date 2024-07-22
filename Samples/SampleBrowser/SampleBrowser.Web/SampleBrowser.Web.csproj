@@ -1,4 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
+	<!-- NOTE: Additional configuration defined within 'Directory.Build.props' file -->
+
 	<PropertyGroup>
 		<TargetFramework>net7.0</TargetFramework>
 		<RuntimeIdentifier>browser-wasm</RuntimeIdentifier>
