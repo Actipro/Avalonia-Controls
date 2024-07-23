@@ -73,7 +73,7 @@ This example shows how to render a solid accented button:
 
 ### Button Controls
 
-All button control themes support the `accent`, `success`, `warning`, and `danger` style class names for semantic color variants.
+Most button control themes support the `accent`, `success`, `warning`, and `danger` style class names for semantic color variants.
 
 ![Screenshot](images/semantic-colors-button.png)
 
@@ -87,7 +87,7 @@ All button control themes support the `accent`, `success`, `warning`, and `dange
 
 - [ButtonBase](xref:@ActiproUIRoot.Themes.ControlThemeKind.ButtonBase) - Base control theme used by several others.
 - [ButtonInvisible](xref:@ActiproUIRoot.Themes.ControlThemeKind.ButtonInvisible) (`theme-invisible`) - Completely transparent but can be clicked.
-- [ButtonLink](xref:@ActiproUIRoot.Themes.ControlThemeKind.ButtonLink) (`theme-link`) - Has a link-like appearance.
+- [ButtonLink](xref:@ActiproUIRoot.Themes.ControlThemeKind.ButtonLink) (`theme-link`) - Has a link-like appearance (unrelated to `HyperlinkButton` control).
 - [ButtonOutline](xref:@ActiproUIRoot.Themes.ControlThemeKind.ButtonOutline) (`theme-outline`) - Has an outline appearance.
 - [ButtonSoft](xref:@ActiproUIRoot.Themes.ControlThemeKind.ButtonSoft) (`theme-soft`) - Has a soft fill appearance.
 - [ButtonSolid](xref:@ActiproUIRoot.Themes.ControlThemeKind.ButtonSolid) (`theme-solid`) - Has a solid appearance.
@@ -106,6 +106,12 @@ All button control themes support the `accent`, `success`, `warning`, and `dange
 - [DropDownButtonSoft](xref:@ActiproUIRoot.Themes.ControlThemeKind.DropDownButtonSoft) (`theme-soft`) - Has a soft fill appearance.
 - [DropDownButtonSolid](xref:@ActiproUIRoot.Themes.ControlThemeKind.DropDownButtonSolid) (`theme-solid`) - Has a solid appearance.
 - [DropDownButtonSubtle](xref:@ActiproUIRoot.Themes.ControlThemeKind.DropDownButtonSubtle) (`theme-subtle`) - Has a subtle fill appearance, only on pointer over.
+
+#### HyperlinkButton Type
+
+`HyperlinkButton` is a special button with a link-like appearance that can show alternate colors if a link has already been visited and open a URI when clicked.  Due to the specific nature of this control and the base need for two distinct colors (visited and un-visited), this button type **does not** support the control themes discussed in the "Button Type" section or semantic color variants.
+
+If theme and semantic color variant capabilities are desired, an alternative to `HyperlinkButton` is to use a standard `Button` with the `theme-link` theme.  This will achieve a similar appearance as `HyperlinkButton`, although without URI navigation or distinct color options for visited links.
 
 #### RepeatButton Type
 
@@ -347,16 +353,14 @@ The following additional control theme is used by the default control theme:
 #### MenuFlyoutPresenter Type
 
 - [MenuFlyoutPresenter](xref:@ActiproUIRoot.Themes.ControlThemeKind.MenuFlyoutPresenter) - Default control theme.
+- [MenuFlyoutPresenterHorizontal](xref:@ActiproUIRoot.Themes.ControlThemeKind.MenuFlyoutPresenterHorizontal) - Control theme used for horizontal flyout menus.
 
 #### MenuItem Type
 
 - [MenuItem](xref:@ActiproUIRoot.Themes.ControlThemeKind.MenuItem) - Default control theme.
 - [MenuItemHeading](xref:@ActiproUIRoot.Themes.ControlThemeKind.MenuItemHeading) (`theme-menuitem-heading`) - Bold heading that is a disabled menu item.
 - [MenuItemTopLevel](xref:@ActiproUIRoot.Themes.ControlThemeKind.MenuItemTopLevel) - A menu item directly within a menu bar.
-
-#### NativeMenuBar Type
-
-- [NativeMenuBar](xref:@ActiproUIRoot.Themes.ControlThemeKind.NativeMenuBar) - Default control theme.
+- [MenuItemHorizontal](xref:@ActiproUIRoot.Themes.ControlThemeKind.MenuItemHorizontal) - A menu item used within a horizontal flyout menu.
 
 #### Separator Type
 
@@ -423,7 +427,7 @@ The `CheckBox`, `RadioButton`, and `ToggleSwitch` control type themes automatica
 - [CheckBoxBase](xref:@ActiproUIRoot.Themes.ControlThemeKind.CheckBoxBase) - Base control theme used by several others.
 - [CheckBoxOutline](xref:@ActiproUIRoot.Themes.ControlThemeKind.CheckBoxOutline) (`theme-outline`) - Has an outline appearance.
 - [CheckBoxSolid](xref:@ActiproUIRoot.Themes.ControlThemeKind.CheckBoxSolid) (`theme-solid`) - Has a solid appearance.
-- [CheckBoxMenuIndicator](xref:@ActiproUIRoot.Themes.ControlThemeKind.CheckBoxMenuIndicator) - Used within `MenuItem.Icon` to indicate checked state.
+- [CheckBoxMenuIndicator](xref:@ActiproUIRoot.Themes.ControlThemeKind.CheckBoxMenuIndicator) - (Deprecated) Used within `MenuItem.Icon` to indicate checked state. This theme is no longer necessary since `MenuItem` added built-in support for toggle indicators.
 
 #### RadioButton Type
 
@@ -434,7 +438,7 @@ The `CheckBox`, `RadioButton`, and `ToggleSwitch` control type themes automatica
 - [RadioButtonBase](xref:@ActiproUIRoot.Themes.ControlThemeKind.RadioButtonBase) - Base control theme used by several others.
 - [RadioButtonOutline](xref:@ActiproUIRoot.Themes.ControlThemeKind.RadioButtonOutline) (`theme-outline`) - Has an outline appearance.
 - [RadioButtonSolid](xref:@ActiproUIRoot.Themes.ControlThemeKind.RadioButtonSolid) (`theme-solid`) - Has a solid appearance.
-- [RadioButtonMenuIndicator](xref:@ActiproUIRoot.Themes.ControlThemeKind.RadioButtonMenuIndicator) - Used within `MenuItem.Icon` to indicate checked state.
+- [RadioButtonMenuIndicator](xref:@ActiproUIRoot.Themes.ControlThemeKind.RadioButtonMenuIndicator) - (Deprecated) Used within `MenuItem.Icon` to indicate checked state. This theme is no longer necessary since `MenuItem` added built-in support for toggle indicators.
 
 #### Slider Type
 
@@ -593,10 +597,10 @@ The following default control themes are defined for their respective control ty
 
 - [AdornerLayer](xref:@ActiproUIRoot.Themes.ControlThemeKind.AdornerLayer)
 - [Carousel](xref:@ActiproUIRoot.Themes.ControlThemeKind.Carousel)
-- [ContentControl](xref:@ActiproUIRoot.Themes.ControlThemeKind.ContentControl)
 - [EmbeddableControlRoot](xref:@ActiproUIRoot.Themes.ControlThemeKind.EmbeddableControlRoot)
 - [EmbeddableCoFlyoutPresenterntrolRoot](xref:@ActiproUIRoot.Themes.ControlThemeKind.FlyoutPresenter)
 - [GridSplitter](xref:@ActiproUIRoot.Themes.ControlThemeKind.GridSplitter)
+- [HeaderedContentControl](xref:@ActiproUIRoot.Themes.ControlThemeKind.HeaderedContentControl)
 - [ManagedFileChooser](xref:@ActiproUIRoot.Themes.ControlThemeKind.ManagedFileChooser)
 - [OverlayPopupHost](xref:@ActiproUIRoot.Themes.ControlThemeKind.OverlayPopupHost)
 - [PathIcon](xref:@ActiproUIRoot.Themes.ControlThemeKind.PathIcon)
@@ -608,7 +612,6 @@ The following default control themes are defined for their respective control ty
 - [TitleBar](xref:@ActiproUIRoot.Themes.ControlThemeKind.TitleBar)
 - [ToolTip](xref:@ActiproUIRoot.Themes.ControlThemeKind.ToolTip)
 - [TransitioningContentControl](xref:@ActiproUIRoot.Themes.ControlThemeKind.TransitioningContentControl)
-- [UserControl](xref:@ActiproUIRoot.Themes.ControlThemeKind.UserControl)
 - [Window](xref:@ActiproUIRoot.Themes.ControlThemeKind.Window)
 - [WindowNotificationManager](xref:@ActiproUIRoot.Themes.ControlThemeKind.WindowNotificationManager)
 

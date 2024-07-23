@@ -2,9 +2,11 @@ using ActiproSoftware.UI.Avalonia.Input;
 using ActiproSoftware.UI.Avalonia.Themes;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Layout;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
+using Avalonia.Threading;
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -144,6 +146,26 @@ namespace ActiproSoftware.SampleBrowser {
 			}
 
 			return transitionForward;
+		}
+
+		public static void OpenExternalUri(Uri uri) {
+			var launcher = ResolveDefaultTopLevel()?.Launcher;
+			if (launcher is not null) {
+				Dispatcher.UIThread.Post(async () => {
+					_ = await launcher.LaunchUriAsync(uri);
+				});
+			}
+		}
+
+		/// <summary>
+		/// Resolves the default <see cref="TopLevel"/> to be used for the current application.
+		/// </summary>
+		private static TopLevel? ResolveDefaultTopLevel() {
+			return Application.Current?.ApplicationLifetime switch {
+				IClassicDesktopStyleApplicationLifetime desktopLifetime => desktopLifetime.MainWindow,
+				ISingleViewApplicationLifetime singleView => TopLevel.GetTopLevel(singleView.MainView),
+				_ => null
+			};
 		}
 
 		/// <summary>
@@ -413,15 +435,16 @@ namespace ActiproSoftware.SampleBrowser {
 				return _openUrlCommand ??= new DelegateCommand<object>((param) => {
 					if ((param is string uriString) && !string.IsNullOrEmpty(uriString)) {
 						// For web URLs, navigate externally
-						if ((uriString.StartsWith("https://")) || (uriString.StartsWith("http://"))) {
+						if ((uriString.StartsWith("https://", StringComparison.OrdinalIgnoreCase)) || (uriString.StartsWith("http://", StringComparison.OrdinalIgnoreCase))) {
 							try {
-								if (PlatformHelper is null)
-									MessageService?.ShowError($"Platform support undefined.");
+								// NOTE: Browser still requires IPlatformHelper due to issue with ILauncher no working on Avalonia 11.1.0.  Not expected to be fixed until at least 11.1.1.
+								if (this.PlatformHelper is { } platformHelper)
+									platformHelper.OpenExternalUri(new Uri(uriString));
 								else
-									PlatformHelper.OpenExternalUri(new Uri(uriString));
+									OpenExternalUri(new Uri(uriString));
 							}
 							catch {
-								MessageService?.ShowError($"Navigation to the URL '{uriString}' was unable to be completed.  This {Environment.OSVersion.Platform} platform may not support easily launching browser windows from C# code.");
+								MessageService?.ShowError($"Navigation to the URL '{uriString}' was unable to be completed.  This {Environment.OSVersion.Platform} platform may not support opening an external URI.");
 							}
 							return;
 						}

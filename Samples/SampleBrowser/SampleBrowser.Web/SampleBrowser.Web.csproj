@@ -1,20 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk.WebAssembly">
 	<!-- NOTE: Additional configuration defined within 'Directory.Build.props' file -->
 
 	<PropertyGroup>
-		<TargetFramework>net7.0</TargetFramework>
-		<RuntimeIdentifier>browser-wasm</RuntimeIdentifier>
-		<WasmMainJSPath>AppBundle\main.js</WasmMainJSPath>
-		<OutputType>Exe</OutputType>
+		<TargetFramework>net8.0-browser</TargetFramework>
 
 		<!-- Required for JSImport -->
-		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-		
-	</PropertyGroup>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>	
 
-	<ItemGroup>
-		<WasmExtraFilesToDeploy Include="AppBundle\**" />
-	</ItemGroup>
+	</PropertyGroup>
 
 	<Import Project="..\References\Avalonia.References.props" />
 
