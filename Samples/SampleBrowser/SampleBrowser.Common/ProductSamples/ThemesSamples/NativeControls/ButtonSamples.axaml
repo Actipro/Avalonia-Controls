@@ -20,6 +20,7 @@
 
 		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
 			<sampleBrowser:ControlExampleLinkItem Title="DropDownButton" Url="/ProductSamples/ThemesSamples/NativeControls/DropDownButtonSamples" />
+			<sampleBrowser:ControlExampleLinkItem Title="HyperlinkButton" Url="/ProductSamples/ThemesSamples/NativeControls/HyperlinkButtonSamples" />
 			<sampleBrowser:ControlExampleLinkItem Title="SplitButton" Url="/ProductSamples/ThemesSamples/NativeControls/SplitButtonSamples" />
 			<sampleBrowser:ControlExampleLinkItem Title="ToggleButton" Url="/ProductSamples/ThemesSamples/NativeControls/ToggleButtonSamples" />
 			<sampleBrowser:ControlExampleLinkItem Title="ToggleSplitButton" Url="/ProductSamples/ThemesSamples/NativeControls/ToggleSplitButtonSamples" />
@@ -33,22 +34,18 @@
 			>
 
 			<Button x:Name="sample" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
-					HorizontalAlignment="Center"
-					Classes.theme-outline="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Outline'}"
-					Classes.theme-solid="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Solid'}"
-					Classes.theme-soft="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Soft'}"
-					Classes.theme-subtle="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Subtle'}"
-					Classes.theme-link="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Link'}"
-					Classes.accent="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Accent'}"
-					Classes.success="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Success'}"
-					Classes.warning="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Warning'}"
-					Classes.danger="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Danger'}"
-					>
-				<Panel>
-					<TextBlock Text="{Binding #sampleText.Text}" IsVisible="{Binding #sampleTheme.SelectedItem, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Link'}" />
-					<TextBlock Text="{Binding #sampleText.Text}" TextDecorations="Underline" IsVisible="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Link'}"/>
-				</Panel>
-			</Button>
+				Content="{Binding #sampleText.Text}"
+				HorizontalAlignment="Center"
+				Classes.theme-outline="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Outline'}"
+				Classes.theme-solid="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Solid'}"
+				Classes.theme-soft="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Soft'}"
+				Classes.theme-subtle="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Subtle'}"
+				Classes.theme-link="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Link'}"
+				Classes.accent="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Accent'}"
+				Classes.success="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Success'}"
+				Classes.warning="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Warning'}"
+				Classes.danger="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Danger'}"
+				/>
 
 			<sampleBrowser:ControlExample.Options>
 				<StackPanel Spacing="10">
@@ -68,7 +65,7 @@
 				<sampleBrowser:CodeExample xml:space="preserve">
 					<![CDATA[
 <Button$(ClassesAttribute)$(IsEnabledAttribute)>
-	$(LinkPreContent)$(Content)$(LinkPostContent)
+	$(Content)
 </Button>
 					]]>
 					<sampleBrowser:CodeExample.Substitutions>
@@ -79,12 +76,6 @@
 						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute"
 															   IsEnabled="{Binding !IsEnabled}"
 															   Value=" IsEnabled=&quot;False&quot;" />
-						<sampleBrowser:CodeExampleSubstitution Key="LinkPreContent"
-															   IsEnabled="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Link'}"
-															   Value="&lt;TextBlock Text=&quot;" />
-						<sampleBrowser:CodeExampleSubstitution Key="LinkPostContent"
-															   IsEnabled="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Link'}"
-															   Value="&quot; TextDecorations=&quot;Underline&quot; /&gt;" />
 					</sampleBrowser:CodeExample.Substitutions>
 				</sampleBrowser:CodeExample>
 			</sampleBrowser:ControlExample.CodeExamples>
@@ -108,12 +99,8 @@
 				<Button Grid.Row="0" Grid.Column="7" Classes="theme-subtle" Content="Subtle" />
 				<Button Grid.Row="2" Grid.Column="7" Classes="theme-subtle" Content="Disabled" IsEnabled="False" />
 
-				<Button Grid.Row="0" Grid.Column="9" Classes="theme-link">
-					<TextBlock Text="Link" TextDecorations="Underline" />
-				</Button>
-				<Button Grid.Row="2" Grid.Column="9" Classes="theme-link" IsEnabled="False">
-					<TextBlock Text="Disabled" TextDecorations="Underline" />
-				</Button>
+				<Button Grid.Row="0" Grid.Column="9" Classes="theme-link" Content="Link" />
+				<Button Grid.Row="2" Grid.Column="9" Classes="theme-link" Content="Disabled" IsEnabled="False" />
 			</Grid>
 
 			<sampleBrowser:ControlExample.CodeExamples>
@@ -127,9 +114,7 @@
 
 <Button Classes="theme-subtle" Content="Subtle" />
 
-<Button Classes="theme-link">
-	<TextBlock Text="Link" TextDecorations="Underline" />
-</Button>
+<Button Classes="theme-link" Content="Link" />
 					]]>
 				</sampleBrowser:CodeExample>
 			</sampleBrowser:ControlExample.CodeExamples>
@@ -153,12 +138,8 @@
 				<Button Grid.Row="0" Grid.Column="7" Classes="theme-subtle accent" Content="Subtle" />
 				<Button Grid.Row="2" Grid.Column="7" Classes="theme-subtle accent" Content="Disabled" IsEnabled="False" />
 
-				<Button Grid.Row="0" Grid.Column="9" Classes="theme-link accent">
-					<TextBlock Text="Link" TextDecorations="Underline" />
-				</Button>
-				<Button Grid.Row="2" Grid.Column="9" Classes="theme-link accent" IsEnabled="False">
-					<TextBlock Text="Disabled" TextDecorations="Underline" />
-				</Button>
+				<Button Grid.Row="0" Grid.Column="9" Classes="theme-link accent" Content="Link" />
+				<Button Grid.Row="2" Grid.Column="9" Classes="theme-link accent" Content="Disabled" IsEnabled="False" />
 			</Grid>
 
 			<sampleBrowser:ControlExample.CodeExamples>
@@ -172,9 +153,7 @@
 
 <Button Classes="theme-subtle accent" Content="Subtle" />
 
-<Button Classes="theme-link accent">
-	<TextBlock Text="Link" TextDecorations="Underline" />
-</Button>
+<Button Classes="theme-link accent" Content="Link" />
 					]]>
 				</sampleBrowser:CodeExample>
 			</sampleBrowser:ControlExample.CodeExamples>
@@ -198,12 +177,8 @@
 				<Button Grid.Row="0" Grid.Column="7" Classes="theme-subtle success" Content="Subtle" />
 				<Button Grid.Row="2" Grid.Column="7" Classes="theme-subtle success" Content="Disabled" IsEnabled="False" />
 
-				<Button Grid.Row="0" Grid.Column="9" Classes="theme-link success">
-					<TextBlock Text="Link" TextDecorations="Underline" />
-				</Button>
-				<Button Grid.Row="2" Grid.Column="9" Classes="theme-link success" IsEnabled="False">
-					<TextBlock Text="Disabled" TextDecorations="Underline" />
-				</Button>
+				<Button Grid.Row="0" Grid.Column="9" Classes="theme-link success" Content="Link" />
+				<Button Grid.Row="2" Grid.Column="9" Classes="theme-link success" Content="Disabled" IsEnabled="False" />
 			</Grid>
 
 			<sampleBrowser:ControlExample.CodeExamples>
@@ -217,9 +192,7 @@
 
 <Button Classes="theme-subtle success" Content="Subtle" />
 
-<Button Classes="theme-link success">
-	<TextBlock Text="Link" TextDecorations="Underline" />
-</Button>
+<Button Classes="theme-link success" Content="Link" />
 					]]>
 				</sampleBrowser:CodeExample>
 			</sampleBrowser:ControlExample.CodeExamples>
@@ -243,12 +216,8 @@
 				<Button Grid.Row="0" Grid.Column="7" Classes="theme-subtle warning" Content="Subtle" />
 				<Button Grid.Row="2" Grid.Column="7" Classes="theme-subtle warning" Content="Disabled" IsEnabled="False" />
 
-				<Button Grid.Row="0" Grid.Column="9" Classes="theme-link warning">
-					<TextBlock Text="Link" TextDecorations="Underline" />
-				</Button>
-				<Button Grid.Row="2" Grid.Column="9" Classes="theme-link warning" IsEnabled="False">
-					<TextBlock Text="Disabled" TextDecorations="Underline" />
-				</Button>
+				<Button Grid.Row="0" Grid.Column="9" Classes="theme-link warning" Content="Link" />
+				<Button Grid.Row="2" Grid.Column="9" Classes="theme-link warning" Content="Disabled" IsEnabled="False" />
 			</Grid>
 
 			<sampleBrowser:ControlExample.CodeExamples>
@@ -262,9 +231,7 @@
 
 <Button Classes="theme-subtle warning" Content="Subtle" />
 
-<Button Classes="theme-link warning">
-	<TextBlock Text="Link" TextDecorations="Underline" />
-</Button>
+<Button Classes="theme-link warning" Content="Link" />
 					]]>
 				</sampleBrowser:CodeExample>
 			</sampleBrowser:ControlExample.CodeExamples>
@@ -288,12 +255,8 @@
 				<Button Grid.Row="0" Grid.Column="7" Classes="theme-subtle danger" Content="Subtle" />
 				<Button Grid.Row="2" Grid.Column="7" Classes="theme-subtle danger" Content="Disabled" IsEnabled="False" />
 
-				<Button Grid.Row="0" Grid.Column="9" Classes="theme-link danger">
-					<TextBlock Text="Link" TextDecorations="Underline" />
-				</Button>
-				<Button Grid.Row="2" Grid.Column="9" Classes="theme-link danger" IsEnabled="False">
-					<TextBlock Text="Disabled" TextDecorations="Underline" />
-				</Button>
+				<Button Grid.Row="0" Grid.Column="9" Classes="theme-link danger" Content="Link" />
+				<Button Grid.Row="2" Grid.Column="9" Classes="theme-link danger" Content="Disabled" IsEnabled="False" />
 			</Grid>
 
 			<sampleBrowser:ControlExample.CodeExamples>
@@ -307,9 +270,7 @@
 
 <Button Classes="theme-subtle danger" Content="Subtle" />
 
-<Button Classes="theme-link danger">
-	<TextBlock Text="Link" TextDecorations="Underline" />
-</Button>
+<Button Classes="theme-link danger" Content="Link" />
 					]]>
 				</sampleBrowser:CodeExample>
 			</sampleBrowser:ControlExample.CodeExamples>
@@ -352,21 +313,11 @@
 				<RepeatButton Grid.Row="6" Grid.Column="7" IsEnabled="{Binding #repeatButtonIsEnabled.IsChecked}" Classes="theme-subtle warning" Content="Subtle" />
 				<RepeatButton Grid.Row="8" Grid.Column="7" IsEnabled="{Binding #repeatButtonIsEnabled.IsChecked}" Classes="theme-subtle danger" Content="Subtle" />
 
-				<RepeatButton Grid.Row="0" Grid.Column="9" IsEnabled="{Binding #repeatButtonIsEnabled.IsChecked}" Classes="theme-link">
-					<TextBlock Text="Link" TextDecorations="Underline" />
-				</RepeatButton>
-				<RepeatButton Grid.Row="2" Grid.Column="9" IsEnabled="{Binding #repeatButtonIsEnabled.IsChecked}" Classes="theme-link accent">
-					<TextBlock Text="Link" TextDecorations="Underline" />
-				</RepeatButton>
-				<RepeatButton Grid.Row="4" Grid.Column="9" IsEnabled="{Binding #repeatButtonIsEnabled.IsChecked}" Classes="theme-link success">
-					<TextBlock Text="Link" TextDecorations="Underline" />
-				</RepeatButton>
-				<RepeatButton Grid.Row="6" Grid.Column="9" IsEnabled="{Binding #repeatButtonIsEnabled.IsChecked}" Classes="theme-link warning">
-					<TextBlock Text="Link" TextDecorations="Underline" />
-				</RepeatButton>
-				<RepeatButton Grid.Row="8" Grid.Column="9" IsEnabled="{Binding #repeatButtonIsEnabled.IsChecked}" Classes="theme-link danger">
-					<TextBlock Text="Link" TextDecorations="Underline" />
-				</RepeatButton>
+				<RepeatButton Grid.Row="0" Grid.Column="9" IsEnabled="{Binding #repeatButtonIsEnabled.IsChecked}" Classes="theme-link" Content="Link" />
+				<RepeatButton Grid.Row="2" Grid.Column="9" IsEnabled="{Binding #repeatButtonIsEnabled.IsChecked}" Classes="theme-link accent" Content="Link" />
+				<RepeatButton Grid.Row="4" Grid.Column="9" IsEnabled="{Binding #repeatButtonIsEnabled.IsChecked}" Classes="theme-link success" Content="Link" />
+				<RepeatButton Grid.Row="6" Grid.Column="9" IsEnabled="{Binding #repeatButtonIsEnabled.IsChecked}" Classes="theme-link warning" Content="Link" />
+				<RepeatButton Grid.Row="8" Grid.Column="9" IsEnabled="{Binding #repeatButtonIsEnabled.IsChecked}" Classes="theme-link danger" Content="Link" />
 			</Grid>
 
 			<sampleBrowser:ControlExample.Options>
@@ -385,9 +336,7 @@
 
 <RepeatButton Classes="theme-subtle accent" Content="Subtle" />
 
-<RepeatButton Classes="theme-link accent">
-	<TextBlock Text="Link" TextDecorations="Underline" />
-</RepeatButton>
+<RepeatButton Classes="theme-link accent" Content="Link" />
 					]]>
 				</sampleBrowser:CodeExample>
 			</sampleBrowser:ControlExample.CodeExamples>

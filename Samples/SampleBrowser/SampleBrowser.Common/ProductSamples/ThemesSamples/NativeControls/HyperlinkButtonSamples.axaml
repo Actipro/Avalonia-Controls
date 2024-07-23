@@ -1,0 +1,101 @@
+<UserControl 
+	x:Class="ActiproSoftware.ProductSamples.ThemeSamples.NativeControls.HyperlinkButtonSamples"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Actipro's control themes create a modern appearance for native HyperlinkButton controls.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Button control themes" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/native-control-themes#button-controls" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+			<sampleBrowser:ControlExampleLinkItem Title="Button" Url="/ProductSamples/ThemesSamples/NativeControls/ButtonSamples" />
+			<sampleBrowser:ControlExampleLinkItem Title="HyperlinkTextBlock" Url="/ProductSamples/SharedSamples/Controls/HyperlinkTextBlockIntro/MainControl" />
+		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+
+
+		<sampleBrowser:ControlExample
+			Header="Basic usage"
+			DataContext="{Binding #sample}"
+			>
+
+			<HyperlinkButton x:Name="sample" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
+						Content="{Binding #sampleText.Text}"
+						NavigateUri="{Binding #sampleUri.Text}"
+						HorizontalAlignment="Center"
+						/>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<TextBox x:Name="sampleText" Text="Button Text" Watermark="Content" UseFloatingWatermark="True" />
+					<TextBox x:Name="sampleUri" Text="https://www.actiprosoftware.com" Watermark="Navigate URI" UseFloatingWatermark="True" />
+					<CheckBox IsChecked="{Binding IsVisited}">Visited</CheckBox>
+					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<HyperlinkButton NavigateUri="$(NavigateUri)"$(IsVisitedAttribute)$(IsEnabledAttribute)>
+	$(Content)
+</HyperlinkButton>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="Content" Value="{Binding #sampleText.Text}" />
+						<sampleBrowser:CodeExampleSubstitution Key="NavigateUri" Value="{Binding #sampleUri.Text}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute"
+															   IsEnabled="{Binding !IsEnabled}"
+															   Value=" IsEnabled=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsVisitedAttribute"
+															   IsEnabled="{Binding IsVisited}"
+															   Value=" IsVisited=&quot;True&quot;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Command model"
+			Footer="Use the command model to automatically update the enabled state and invoke the command when clicked."
+			DataContext="{Binding #commandSample}"
+			HorizontalContentAlignment="Center"
+			>
+
+			<HyperlinkButton x:Name="commandSample" Content="HyperlinkButton bound to an ICommand" />
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<CheckBox x:Name="commandIsEnabledCheckBox" IsChecked="True" Content="Command enabled" Click="OnCommandEnabledCheckBoxClick" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<!-- This sample assumes a view model with a command is the DataContext -->
+<HyperlinkButton Command="{Binding HyperlinkCommand}"
+	Content="$(Content)" />
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="Content" Value="{Binding Content}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

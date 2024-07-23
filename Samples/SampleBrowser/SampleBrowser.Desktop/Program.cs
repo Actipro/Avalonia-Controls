@@ -1,5 +1,4 @@
 using Avalonia;
-using Avalonia.Dialogs;
 using System;
 
 namespace ActiproSoftware.SampleBrowser {
@@ -33,11 +32,7 @@ namespace ActiproSoftware.SampleBrowser {
 
 				.WithInterFont()
 				.UsePlatformDetect()
-				.LogToTrace()
-				.AfterSetup(x => {
-					// ApplicationViewModel platform-specific configuration
-					ApplicationViewModel.Instance.PlatformHelper = new DesktopPlatformHelper();
-				});
+				.LogToTrace();
 
 	}
 

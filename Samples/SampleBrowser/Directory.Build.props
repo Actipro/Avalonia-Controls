@@ -7,8 +7,8 @@
 		<Nullable>enable</Nullable>
 		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
 
-		<Version>24.1.1.0</Version>
-		<InformationalVersion>24.1.1.0 - 20240722</InformationalVersion>
+		<Version>24.2.0.0</Version>
+		<InformationalVersion>24.2.0.0 - 20240723</InformationalVersion>
 
 		<Product>Actipro Avalonia UI Controls Sample Browser</Product>
 		<Title>$(Product)</Title>

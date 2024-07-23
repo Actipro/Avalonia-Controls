@@ -77,43 +77,28 @@
 				</MenuItem>
 				<MenuItem Header="_View">
 					<MenuItem Classes="theme-menuitem-heading" Header="Tool Windows" />
-					<MenuItem Header="_Error List" Click="OnMenuItemClicked">
+					<MenuItem Header="_Error List" IsChecked="True" ToggleType="CheckBox" Click="OnMenuItemClicked">
 						<MenuItem.Icon>
-							<CheckBox IsChecked="True" />
+							<actipro:DynamicImage Source="/Images/Icons/ErrorList16.png" />
 						</MenuItem.Icon>
 					</MenuItem>
-					<MenuItem Header="_Output Window" Click="OnMenuItemClicked">
+					<MenuItem Header="_Output Window" IsChecked="True" ToggleType="CheckBox" Click="OnMenuItemClicked">
 						<MenuItem.Icon>
-							<CheckBox IsChecked="True" />
+							<actipro:DynamicImage Source="/Images/Icons/Output16.png" />
 						</MenuItem.Icon>
 					</MenuItem>
 					<Separator />
+					<MenuItem Classes="theme-menuitem-heading" Header="Toolbars" />
+					<MenuItem Header="_Debug" IsChecked="False" ToggleType="CheckBox" Click="OnMenuItemClicked" />
+					<MenuItem Header="D_esigner" IsChecked="True" ToggleType="CheckBox" Click="OnMenuItemClicked" />
+					<MenuItem Header="_Standard" IsChecked="True" ToggleType="CheckBox" Click="OnMenuItemClicked" />
+					<Separator />
 					<MenuItem Classes="theme-menuitem-heading" Header="Zoom" />
-					<MenuItem Header="125%" Click="OnMenuItemClicked">
-						<MenuItem.Icon>
-							<RadioButton GroupName="ZoomLevel" />
-						</MenuItem.Icon>
-					</MenuItem>
-					<MenuItem Header="100%" Click="OnMenuItemClicked">
-						<MenuItem.Icon>
-							<RadioButton GroupName="ZoomLevel" IsChecked="True"/>
-						</MenuItem.Icon>
-					</MenuItem>
-					<MenuItem Header="75%" Click="OnMenuItemClicked">
-						<MenuItem.Icon>
-							<RadioButton GroupName="ZoomLevel" />
-						</MenuItem.Icon>
-					</MenuItem>
-					<MenuItem Header="50%" Click="OnMenuItemClicked">
-						<MenuItem.Icon>
-							<RadioButton GroupName="ZoomLevel" />
-						</MenuItem.Icon>
-					</MenuItem>
-					<MenuItem Header="25%" Click="OnMenuItemClicked">
-						<MenuItem.Icon>
-							<RadioButton GroupName="ZoomLevel" />
-						</MenuItem.Icon>
-					</MenuItem>
+					<MenuItem Header="150%" ToggleType="Radio" GroupName="ZoomLevel" Click="OnMenuItemClicked" />
+					<MenuItem Header="125%" ToggleType="Radio" GroupName="ZoomLevel" Click="OnMenuItemClicked" />
+					<MenuItem Header="100%" ToggleType="Radio" GroupName="ZoomLevel" IsChecked="True" Click="OnMenuItemClicked" />
+					<MenuItem Header="75%" ToggleType="Radio" GroupName="ZoomLevel" Click="OnMenuItemClicked" />
+					<MenuItem Header="50%" ToggleType="Radio" GroupName="ZoomLevel" Click="OnMenuItemClicked" />
 					<Separator />
 					<MenuItem Header="_Reset Zoom" Click="OnMenuItemClicked" />
 				</MenuItem>
@@ -399,52 +384,36 @@
 			</sampleBrowser:ControlExample.CodeExamples>
 		</sampleBrowser:ControlExample>
 
-
 		<sampleBrowser:ControlExample
 			Header="Menu with checkboxes and radio buttons"
-			Footer="This sample shows how a CheckBox or RadioButton can be used as the 'icon' content instead of an image."
+			Footer="This sample shows the CheckBox and Radio toggle types including how checked state is reflected when icons are used."
 			>
 
 			<Menu>
 				<MenuItem Header="_View">
 					<MenuItem Classes="theme-menuitem-heading" Header="Tool Windows" />
-					<MenuItem Header="_Error List" Click="OnMenuItemClicked">
+					<MenuItem Header="_Error List" IsChecked="True" ToggleType="CheckBox" Click="OnMenuItemClicked">
 						<MenuItem.Icon>
-							<CheckBox IsChecked="True" />
+							<actipro:DynamicImage Source="/Images/Icons/ErrorList16.png" />
 						</MenuItem.Icon>
 					</MenuItem>
-					<MenuItem Header="_Output Window" Click="OnMenuItemClicked">
+					<MenuItem Header="_Output Window" IsChecked="True" ToggleType="CheckBox" Click="OnMenuItemClicked">
 						<MenuItem.Icon>
-							<CheckBox IsChecked="True" />
+							<actipro:DynamicImage Source="/Images/Icons/Output16.png" />
 						</MenuItem.Icon>
 					</MenuItem>
 					<Separator />
+					<MenuItem Classes="theme-menuitem-heading" Header="Toolbars" />
+					<MenuItem Header="_Debug" IsChecked="False" ToggleType="CheckBox" Click="OnMenuItemClicked" />
+					<MenuItem Header="D_esigner" IsChecked="True" ToggleType="CheckBox" Click="OnMenuItemClicked" />
+					<MenuItem Header="_Standard" IsChecked="True" ToggleType="CheckBox" Click="OnMenuItemClicked" />
+					<Separator />
 					<MenuItem Classes="theme-menuitem-heading" Header="Zoom" />
-					<MenuItem Header="125%" Click="OnMenuItemClicked">
-						<MenuItem.Icon>
-							<RadioButton GroupName="ZoomLevel2" />
-						</MenuItem.Icon>
-					</MenuItem>
-					<MenuItem Header="100%" Click="OnMenuItemClicked">
-						<MenuItem.Icon>
-							<RadioButton GroupName="ZoomLevel2" IsChecked="True"/>
-						</MenuItem.Icon>
-					</MenuItem>
-					<MenuItem Header="75%" Click="OnMenuItemClicked">
-						<MenuItem.Icon>
-							<RadioButton GroupName="ZoomLevel2" />
-						</MenuItem.Icon>
-					</MenuItem>
-					<MenuItem Header="50%" Click="OnMenuItemClicked">
-						<MenuItem.Icon>
-							<RadioButton GroupName="ZoomLevel2" />
-						</MenuItem.Icon>
-					</MenuItem>
-					<MenuItem Header="25%" Click="OnMenuItemClicked">
-						<MenuItem.Icon>
-							<RadioButton GroupName="ZoomLevel2" />
-						</MenuItem.Icon>
-					</MenuItem>
+					<MenuItem Header="150%" ToggleType="Radio" GroupName="ZoomLevel2" Click="OnMenuItemClicked" />
+					<MenuItem Header="125%" ToggleType="Radio" GroupName="ZoomLevel2" Click="OnMenuItemClicked" />
+					<MenuItem Header="100%" ToggleType="Radio" GroupName="ZoomLevel2" IsChecked="True" Click="OnMenuItemClicked" />
+					<MenuItem Header="75%" ToggleType="Radio" GroupName="ZoomLevel2" Click="OnMenuItemClicked" />
+					<MenuItem Header="50%" ToggleType="Radio" GroupName="ZoomLevel2" Click="OnMenuItemClicked" />
 					<Separator />
 					<MenuItem Header="_Reset Zoom" Click="OnMenuItemClicked" />
 				</MenuItem>
@@ -459,43 +428,28 @@
 <Menu>
 	<MenuItem Header="_View">
 		<MenuItem Classes="theme-menuitem-heading" Header="Tool Windows" />
-		<MenuItem Header="_Error List" Click="OnMenuItemClicked">
+		<MenuItem Header="_Error List" IsChecked="True" ToggleType="CheckBox">
 			<MenuItem.Icon>
-				<CheckBox IsChecked="True" />
+				<actipro:DynamicImage Source="/Images/Icons/ErrorList16.png" />
 			</MenuItem.Icon>
 		</MenuItem>
-		<MenuItem Header="_Output Window" Click="OnMenuItemClicked">
+		<MenuItem Header="_Output Window" IsChecked="True" ToggleType="CheckBox">
 			<MenuItem.Icon>
-				<CheckBox IsChecked="True" />
+				<actipro:DynamicImage Source="/Images/Icons/Output16.png" />
 			</MenuItem.Icon>
 		</MenuItem>
 		<Separator />
+		<MenuItem Classes="theme-menuitem-heading" Header="Toolbars" />
+		<MenuItem Header="_Debug" IsChecked="False" ToggleType="CheckBox" />
+		<MenuItem Header="D_esigner" IsChecked="True" ToggleType="CheckBox" />
+		<MenuItem Header="_Standard" IsChecked="True" ToggleType="CheckBox" />
+		<Separator />
 		<MenuItem Classes="theme-menuitem-heading" Header="Zoom" />
-		<MenuItem Header="125%" Click="OnMenuItemClicked">
-			<MenuItem.Icon>
-				<RadioButton GroupName="ZoomLevel" />
-			</MenuItem.Icon>
-		</MenuItem>
-		<MenuItem Header="100%" Click="OnMenuItemClicked">
-			<MenuItem.Icon>
-				<RadioButton GroupName="ZoomLevel" IsChecked="True"/>
-			</MenuItem.Icon>
-		</MenuItem>
-		<MenuItem Header="75%" Click="OnMenuItemClicked">
-			<MenuItem.Icon>
-				<RadioButton GroupName="ZoomLevel" />
-			</MenuItem.Icon>
-		</MenuItem>
-		<MenuItem Header="50%" Click="OnMenuItemClicked">
-			<MenuItem.Icon>
-				<RadioButton GroupName="ZoomLevel" />
-			</MenuItem.Icon>
-		</MenuItem>
-		<MenuItem Header="25%" Click="OnMenuItemClicked">
-			<MenuItem.Icon>
-				<RadioButton GroupName="ZoomLevel" />
-			</MenuItem.Icon>
-		</MenuItem>
+		<MenuItem Header="150%" ToggleType="Radio" GroupName="ZoomLevel" />
+		<MenuItem Header="125%" ToggleType="Radio" GroupName="ZoomLevel" />
+		<MenuItem Header="100%" ToggleType="Radio" GroupName="ZoomLevel" IsChecked="True" />
+		<MenuItem Header="75%" ToggleType="Radio" GroupName="ZoomLevel" />
+		<MenuItem Header="50%" ToggleType="Radio" GroupName="ZoomLevel" />
 		<Separator />
 		<MenuItem Header="_Reset Zoom" />
 	</MenuItem>
@@ -503,24 +457,6 @@
 		<MenuItem Header="_About" />
 	</MenuItem>
 </Menu>
-					]]>
-				</sampleBrowser:CodeExample>
-				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
-					<![CDATA[
-private void OnMenuItemClicked(object? sender, Avalonia.Interactivity.RoutedEventArgs e) {
-	if (sender is MenuItem menuItem) {
-		if (menuItem.Icon is CheckBox checkBox) {
-			// Toggle check state
-			checkBox.IsChecked = !checkBox.IsChecked;
-		}
-		else if (menuItem.Icon is RadioButton radioButton) {
-			// Select new radio button and other radio buttons
-			// with same group name will be unselected
-			radioButton.IsChecked = true;
-		}
-		...
-	}
-}
 					]]>
 				</sampleBrowser:CodeExample>
 			</sampleBrowser:ControlExample.CodeExamples>

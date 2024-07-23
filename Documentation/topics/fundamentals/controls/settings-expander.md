@@ -256,12 +256,66 @@ xmlns:shared="http://schemas.actiprosoftware.com/winfx/xaml/shared"
 xmlns:themes="http://schemas.actiprosoftware.com/winfx/xaml/themes"
 xmlns:views="http://schemas.actiprosoftware.com/winfx/xaml/views"
 ...
-<views:SettingsExpanderHeader="Setting name" ... >
+<views:SettingsExpander Header="Setting name" ... >
 
 	<views:SettingsExpander.ItemContainerStyle>
 		<Style TargetType="views:SettingsCard" BasedOn="{StaticResource {x:Static themes:ViewsResourceKeys.SettingsCardSettingsExpanderItemStyleKey}}">
 			<Setter Property="IsHeaderIconVisible" Value="{x:Null}" />
 			<Setter Property="IsActionIconVisible" Value="{x:Null}" />
+		</Style>
+	</views:SettingsExpander.ItemContainerStyle>
+
+	<!-- Define child settings here -->
+
+</views:SettingsExpander>
+```
+}
+
+### Working with MVVM
+
+All children of [SettingsExpander](xref:@ActiproUIRoot.Controls.SettingsExpander) must be instances of [SettingsCard](settings-card.md). When binding `ItemsSource` to a collection of view models, each view model will automatically be wrapped in a [SettingsCard](settings-card.md) container with the `DataContext` set to the view model.
+
+@if (avalonia) {
+Properties on the view model can be bound to properties on the [SettingsCard](settings-card.md) by assigning an `ItemContainerTheme` like shown in the following example:
+
+```xaml
+xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+...
+<actipro:SettingsExpander Header="Setting name" ... >
+
+	<actipro:SettingsExpander.ItemContainerTheme>
+		<ControlTheme
+			TargetType="actipro:SettingsCard"
+			BasedOn="{actipro:ControlTheme SettingsCardSettingsExpanderItem}"
+			x:DataType="custom:MyViewModelType">
+
+			<!-- Bind to view model properties -->
+			<Setter Property="Header" Value="{Binding Header}" />
+			<Setter Property="Description" Value="{Binding Description}" />
+
+		</ControlTheme>
+	</actipro:SettingsExpander.ItemContainerTheme>
+
+</actipro:SettingsExpander>
+```
+}
+@if (wpf) {
+Properties on the view model can be bound to properties on the [SettingsCard](settings-card.md) by assigning an `ItemContainerStyle` like shown in the following example:
+
+```xaml
+xmlns:shared="http://schemas.actiprosoftware.com/winfx/xaml/shared"
+xmlns:themes="http://schemas.actiprosoftware.com/winfx/xaml/themes"
+xmlns:views="http://schemas.actiprosoftware.com/winfx/xaml/views"
+...
+<views:SettingsExpander Header="Setting name" ... >
+
+	<views:SettingsExpander.ItemContainerStyle>
+		<Style TargetType="views:SettingsCard" BasedOn="{StaticResource {x:Static themes:ViewsResourceKeys.SettingsCardSettingsExpanderItemStyleKey}}">
+
+			<!-- Bind to view model properties -->
+			<Setter Property="Header" Value="{Binding Header}" />
+			<Setter Property="Description" Value="{Binding Description}" />
+
 		</Style>
 	</views:SettingsExpander.ItemContainerStyle>
 

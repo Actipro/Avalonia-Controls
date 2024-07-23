@@ -21,6 +21,7 @@
 					<actiproImages:ReleaseHistoryLogo48 />
 				</sampleBrowser:ProductFamilyInfo.LogoImageSource>
 
+				<sampleBrowser:ProductItemInfo Category="Versions" Title="v24.2" Path="/SampleBrowser/Documents/ReleaseHistories/v24.2.md" />
 				<sampleBrowser:ProductItemInfo Category="Versions" Title="v24.1" Path="/SampleBrowser/Documents/ReleaseHistories/v24.1.md" />
 				<sampleBrowser:ProductItemInfo Category="Versions" Title="v23.1" Path="/SampleBrowser/Documents/ReleaseHistories/v23.1.md" />
 			</sampleBrowser:ProductFamilyInfo>
@@ -47,7 +48,7 @@
 			</sampleBrowser:ProductFamilyInfo.LogoImageSource>
 
 			<sampleBrowser:ProductFamilyInfo.News>
-				<sampleBrowser:ListItemInfo Title="Native templates updated through Avalonia v11.0.10" />
+				<sampleBrowser:ListItemInfo Title="Native templates updated through Avalonia v11.1.0" />
 				<sampleBrowser:ListItemInfo Title="Customizable theme generator" />
 			</sampleBrowser:ProductFamilyInfo.News>
 
@@ -68,7 +69,7 @@
 
 			<sampleBrowser:ProductItemInfo Category="Styling" Title="Containers" Path="/ProductSamples/ThemesSamples/Styling/ContainerSamples"/>
 			<sampleBrowser:ProductItemInfo Category="Styling" Title="Typography" Path="/ProductSamples/ThemesSamples/Styling/TypographySamples"/>
-			<sampleBrowser:ProductItemInfo BlurbText="New!" Category="Styling" Title="User Interface Density" Path="/ProductSamples/ThemesSamples/Styling/UserInterfaceDensitySamples"/>
+			<sampleBrowser:ProductItemInfo Category="Styling" Title="User Interface Density" Path="/ProductSamples/ThemesSamples/Styling/UserInterfaceDensitySamples"/>
 
 			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="AutoCompleteBox" Path="/ProductSamples/ThemesSamples/NativeControls/AutoCompleteBoxSamples"/>
 			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="Button" Path="/ProductSamples/ThemesSamples/NativeControls/ButtonSamples"/>
@@ -82,8 +83,9 @@
 			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="DatePicker" Path="/ProductSamples/ThemesSamples/NativeControls/DatePickerSamples"/>
 			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="DropDownButton" Path="/ProductSamples/ThemesSamples/NativeControls/DropDownButtonSamples"/>
 			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="Expander" Path="/ProductSamples/ThemesSamples/NativeControls/ExpanderSamples"/>
+			<sampleBrowser:ProductItemInfo BlurbText="New!" Category="Native Controls" Title="HyperlinkButton" Path="/ProductSamples/ThemesSamples/NativeControls/HyperlinkButtonSamples"/>
 			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="ListBox" Path="/ProductSamples/ThemesSamples/NativeControls/ListBoxSamples"/>
-			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="Menus" Path="/ProductSamples/ThemesSamples/NativeControls/MenusSamples"/>
+			<sampleBrowser:ProductItemInfo BlurbText="Updated!" Category="Native Controls" Title="Menus" Path="/ProductSamples/ThemesSamples/NativeControls/MenusSamples"/>
 			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="NumericUpDown" Path="/ProductSamples/ThemesSamples/NativeControls/NumericUpDownSamples"/>
 			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="ProgressBar" Path="/ProductSamples/ThemesSamples/NativeControls/ProgressBarSamples"/>
 			<sampleBrowser:ProductItemInfo Category="Native Controls" Title="RadioButton" Path="/ProductSamples/ThemesSamples/NativeControls/RadioButtonSamples"/>
@@ -168,7 +170,6 @@
 				<x:String>User prompt for displaying messages and task dialogs</x:String>
 				<x:String>Settings controls for organizing and presenting configurable settings</x:String>
 				<x:String>Avatar, badge, card, info bar, segmented bar, progress, and spinner controls</x:String>
-				<x:String>More coming soon</x:String>
 			</sampleBrowser:ProductFamilyInfo.TeaserBulletItems>
 
 			<sampleBrowser:ProductFamilyInfo.OverviewItem>

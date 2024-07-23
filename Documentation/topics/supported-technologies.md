@@ -13,10 +13,54 @@ The products have assemblies available for multiple runtime frameworks, includin
 
 - .NET 6 or later
 
-The assemblies have the following dependencies on UI frameworks:
+### Avalonia UI Support Matrix
+
+The assemblies have dependencies on the Avalonia UI framework as follows:
+
+<table>
+<thead>
+
+<tr>
+<th>Actipro Controls Versions</th>
+<th>Avalonia UI Support</th>
+</tr>
+
+</thead>
+<tbody>
+
+<tr>
+<td>Actipro Controls v24.2</td>
+<td>
+
+- Avalonia UI v11.1.0 or later
+- Native themes compatible up to Avalonia UI v11.1.0
+- *Minor updates to Avalonia UI are expected to be supported and will be verified as they are released*
+
+</td>
+</tr>
+
+<tr>
+<td>Actipro Controls v24.1</td>
+<td>
 
 - Avalonia UI v11.0.7 or later
 - Native themes compatible up to Avalonia UI v11.0.11
+
+</td>
+</tr>
+
+<tr>
+<td>Actipro Controls v23.1</td>
+<td>
+
+- Avalonia UI v11.0.5 or later
+- Native themes compatible up to Avalonia UI v11.0.7
+
+</td>
+</tr>
+
+</tbody>
+</table>
 
 > [!NOTE]
 > While they do not change frequently, native themes must be kept in sync with Avalonia control updates and may not work with untested releases. If you encounter any issues with native themes, please contact [Support](support.md).

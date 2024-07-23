@@ -1,4 +1,4 @@
-﻿using System.Runtime.Versioning;
+using System.Runtime.Versioning;
 using System.Threading.Tasks;
 using ActiproSoftware.SampleBrowser;
 using Avalonia;
@@ -8,8 +8,8 @@ using Avalonia.Browser;
 
 internal partial class Program {
 
-	private static async Task Main(string[] args)
-		=> await BuildAvaloniaApp()
+	private static Task Main(string[] args)
+		=> BuildAvaloniaApp()
 
 			// NOTE: See the 'Licensing' documentation topic for details on how to register an evaluation or paid license here:
 			// .RegisterActiproLicense(licensee, licenseKey)

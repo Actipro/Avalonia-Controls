@@ -13,6 +13,9 @@
 			<sampleBrowser:ControlExampleLinkItem Title="HyperlinkTextBlock" Url="https://www.actiprosoftware.com/docs/controls/avalonia/shared/controls/hyperlink-textblock" />
 		</sampleBrowser:ControlExampleItemsControl.Documentation>
 
+		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+			<sampleBrowser:ControlExampleLinkItem Title="HyperlinkButton" Url="/ProductSamples/ThemesSamples/NativeControls/HyperlinkButtonSamples" />
+		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
 
 		<sampleBrowser:ControlExample
 			Header="Basic usage"
