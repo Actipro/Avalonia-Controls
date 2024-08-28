@@ -17,13 +17,13 @@ Several products are **freely available** for anyone to use in their application
 
 ![Screenshot](themes/images/welcome.png)
 
-[Actipro Themes](themes/index.md) ensures that a great consistent visual appearance is applied to all controls within your application, regardless of whether they are Actipro Avalonia UI control products or native Avalonia UI controls.
+[Actipro Themes](themes/index.md) ensures that a great consistent visual appearance is applied to all controls within your application, regardless of whether they are Actipro Avalonia control products or native Avalonia controls.
 
 ### Shared Library
 
 ![Screenshot](shared/images/welcome.png)
 
-The [Actipro Shared Library](shared/index.md) is a common control library referenced by all our Actipro Avalonia UI controls.  It contains several very useful controls, components, value converters, and utilities that can be used in your projects.
+The [Actipro Shared Library](shared/index.md) is a common control library referenced by all our Actipro Avalonia controls.  It contains several very useful controls, components, value converters, and utilities that can be used in your projects.
 
 ### Core Library
 

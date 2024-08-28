@@ -11,7 +11,7 @@ A string resource is a text string that generally can be displayed in the user i
 
 For instance, when hovering the mouse over the **Show Password** button of a password textbox, a tooltip whose default text is `"Show Password"` is displayed.  The string `"Show Password"` is defined as a string resource in the Shared assembly.
 
-All Actipro Avalonia UI controls that have displayable strings will have string resources defined for those items. You can view all the string resources in our products with the [String Resource Browser](utilities/string-resource-browser.md).
+All Actipro Avalonia controls that have displayable strings will have string resources defined for those items. You can view all the string resources in our products with the [String Resource Browser](utilities/string-resource-browser.md).
 
 ## Localization
 

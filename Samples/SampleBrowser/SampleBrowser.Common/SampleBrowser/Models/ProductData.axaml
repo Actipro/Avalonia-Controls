@@ -108,7 +108,7 @@
 		<!--
 			Shared Library
 		-->
-		<sampleBrowser:ProductFamilyInfo ShortTitle="Shared" Title="Shared Library" Summary="Free useful components and controls for the Avalonia UI framework">
+		<sampleBrowser:ProductFamilyInfo ShortTitle="Shared" Title="Shared Library" Summary="Free useful components and controls for the Avalonia framework">
 			<sampleBrowser:ProductFamilyInfo.LogoImageSource>
 				<actiproImages:SharedLogo48 />
 			</sampleBrowser:ProductFamilyInfo.LogoImageSource>
@@ -151,7 +151,7 @@
 		<!--
 			Fundamentals
 		-->
-		<sampleBrowser:ProductFamilyInfo IsPro="True" ShortTitle="Fundamentals" Title="Fundamentals" Summary="Advanced components and controls for the Avalonia UI framework">
+		<sampleBrowser:ProductFamilyInfo IsPro="True" ShortTitle="Fundamentals" Title="Fundamentals" Summary="Advanced components and controls for the Avalonia framework">
 			<sampleBrowser:ProductFamilyInfo.LogoImageSource>
 				<actiproImages:FundamentalsLogo48 />
 			</sampleBrowser:ProductFamilyInfo.LogoImageSource>

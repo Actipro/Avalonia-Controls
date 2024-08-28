@@ -18,7 +18,7 @@ It is available from the **View** menu within the **Sample Browser**'s title bar
 
 ## Using the Theme Resource Browser
 
-The browser can be used to scroll through all the available theme resources (brushes, thicknesses, etc.) that are defined in the current theme.  These asset resources are used throughout the styles and templates for Actipro's control products, as well as for Actipro's native Avalonia UI control themes.  By reusing these resources, developers can create a consistent user interface that can universally adapt to changes in the theme.
+The browser can be used to scroll through all the available theme resources (brushes, thicknesses, etc.) that are defined in the current theme.  These asset resources are used throughout the styles and templates for Actipro's control products, as well as for Actipro's native Avalonia control themes.  By reusing these resources, developers can create a consistent user interface that can universally adapt to changes in the theme.
 
 The browser's list of resources consists of several columns:
 - **Resource Preview** - A representation of the resource's value.  For instance, in the case of a `Brush` resource, a brush swatch is displayed.

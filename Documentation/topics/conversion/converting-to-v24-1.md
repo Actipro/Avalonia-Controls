@@ -5,9 +5,9 @@ order: 99
 ---
 # Converting to v24.1
 
-## Avalonia UI Dependency
+## Avalonia Dependency
 
-Updated the minimum Avalonia UI dependency from v11.0.5 to v11.0.7.
+Updated the minimum Avalonia dependency from v11.0.5 to v11.0.7.
 
 ## RingSlice
 

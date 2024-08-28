@@ -26,11 +26,11 @@ This table describes where referenced assemblies appear after project compilatio
 
 ## Redistributable Files
 
-When you use our Actipro Avalonia UI Free products or own a license for Actipro Avalonia UI Pro, you are licensed to redistribute certain files with your application.
+When you use our Actipro Avalonia Free products or own a license for Actipro Avalonia Pro, you are licensed to redistribute certain files with your application.
 
 The lists below show the product assemblies that may be redistributed based on the product(s) for which you own licenses, along with the NuGet packages that contain them.
 
-### Actipro Avalonia UI Free
+### Actipro Avalonia Free
 
 The following assemblies may be redistributed for free:
 - *ActiproSoftware.Avalonia.Core.dll* - via `ActiproSoftware.Controls.Avalonia` NuGet package.
@@ -40,9 +40,9 @@ Optional free additional native control theme libraries:
 - *ActiproSoftware.Avalonia.Themes.Native.ColorPicker.dll* - via `ActiproSoftware.Controls.Avalonia.Themes.ColorPicker` NuGet package.
 - *ActiproSoftware.Avalonia.Themes.Native.DataGrid.dll* - via `ActiproSoftware.Controls.Avalonia.Themes.DataGrid` NuGet package.
 
-### Actipro Avalonia UI Pro
+### Actipro Avalonia Pro
 
-The following assemblies may be redistributed when you own a license for Actipro Avalonia UI Pro:
+The following assemblies may be redistributed when you own a license for Actipro Avalonia Pro:
 - *ActiproSoftware.Avalonia.Core.dll* - via `ActiproSoftware.Controls.Avalonia` NuGet package.
 - *ActiproSoftware.Avalonia.Shared.dll* - via `ActiproSoftware.Controls.Avalonia` NuGet package.
 - *ActiproSoftware.Avalonia.Fundamentals.dll* - via `ActiproSoftware.Controls.Avalonia.Pro` NuGet package.

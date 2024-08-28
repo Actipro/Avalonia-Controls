@@ -5,11 +5,11 @@ order: 45
 ---
 # Troubleshooting
 
-This topic provides several tips on common questions or issues that you may encounter while using Actipro Avalonia UI controls.
+This topic provides several tips on common questions or issues that you may encounter while using Actipro Avalonia controls.
 
 ## Actipro Controls are Blank, Transparent or Missing Content
 
-If a control does not appear the way it should (especially if it is blank), this can be caused by missing themes.  Actipro Avalonia UI controls require the [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme) to be loaded for control templates and resources to be available for the controls.
+If a control does not appear the way it should (especially if it is blank), this can be caused by missing themes.  Actipro Avalonia controls require the [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme) to be loaded for control templates and resources to be available for the controls.
 
 If [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme) is loaded but controls from the `ActiproSoftware.Controls.Avalonia.Pro` NuGet package are still not rendering properly (like the [Fundamentals](fundamentals/index.md) product controls), make sure [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme).[Includes](xref:@ActiproUIRoot.Themes.ModernTheme.Includes) property includes the [Pro](xref:@ActiproUIRoot.Themes.ThemeStyleIncludes.Pro) controls.
 
@@ -36,7 +36,7 @@ As indicated by a note in the [Customizing String Resources](customizing-string-
 
 ## Data Binding Errors at Run-Time
 
-Sometimes there may be some data binding errors that show up in the Visual Studio console window when executing an application that uses an Actipro Avalonia UI control product.  Actipro Avalonia UI has some very large and complex templates for its products' controls and these error messages may show up in the Visual Studio console due to the timing between data binding resolution and visual tree creation.
+Sometimes there may be some data binding errors that show up in the Visual Studio console window when executing an application that uses an Actipro Avalonia control product.  Actipro Avalonia controls have some very large and complex templates and these error messages may show up in the Visual Studio console due to the timing between data binding resolution and visual tree creation.
 
 It is very important to note that the data binding errors are NOT problems in our code.  If they were, the bindings would not work at all at run-time and you would see broken UI functionality.  This is not the case, everything works correctly at run-time after the visual tree has been fully constructed and the bindings have been re-evaluated.  The Avalonia team plans on refactoring the data binding system in the future to prevent these misleading error messages from being logged.
 
@@ -84,7 +84,7 @@ The [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme).[Includes](xref:@Actip
 
 ## WebAssembly (WASM) Performance Issues
 
-Avalonia UI supports running in the browser with WebAssembly. As of v11.0, the Avalonia UI framework documention is clear to indicate the functionality is not ready for production.  During testing with Actipro Avalonia UI controls in a browser, you may notice less-than-desired performance compared to running natively. This is expected to improve with .NET 8.
+Avalonia supports running in the browser with WebAssembly. As of v11.0, the Avalonia framework documention is clear to indicate the functionality is not ready for production.  During testing with Actipro Avalonia controls in a browser, you may notice less-than-desired performance compared to running natively. This is expected to improve with .NET 8.
 
 ## Badge Adornments Aren't Clipped Properly
 

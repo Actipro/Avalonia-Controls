@@ -97,7 +97,7 @@ When using the [builder pattern](builder-pattern.md), the [WithTitle](xref:@Acti
 ```csharp
 await UserPromptBuilder.Configure()
 	// ... other configuration options here
-	.WithTitle("Actipro Avalonia UI Controls")
+	.WithTitle("Actipro Avalonia Controls")
 	.Show();
 ```
 }

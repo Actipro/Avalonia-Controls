@@ -5,7 +5,7 @@ order: 34
 ---
 # Samples
 
-The **Sample Browser** is the main sample project for evaluating Actipro Avalonia UI controls, and the [full source is available on GitHub](open-source.md).  It is designed to provide information, comprehensive demos, and detailed samples for all the Actipro @@PlatformName products.
+The **Sample Browser** is the main sample project for evaluating Actipro Avalonia controls, and the [full source is available on GitHub](open-source.md).  It is designed to provide information, comprehensive demos, and detailed samples for all the Actipro @@PlatformName products.
 
 We pride ourselves in providing more full-source samples than our competition, allowing you to learn about our products more easily and avoid
 having to rewrite common logic and design patterns.

@@ -115,7 +115,7 @@
 				
 				<actipro:UserPromptControl ToolTip.Tip="UserPromptControl with Checkbox and Expanded Information"
 					Width="400"
-					Header="Actipro Avalonia UI Controls"
+					Header="Actipro Avalonia Controls"
 					StandardButtons="YesNo"
 					StandardStatusImage="Information"
 					Content="Easily build message box and task dialogs."
