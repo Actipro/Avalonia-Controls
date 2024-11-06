@@ -1,0 +1,510 @@
+<UserControl
+	x:Name="sampleRootControl"
+	x:Class="ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.QuickAccessToolBar.MainControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:barsPrims="using:ActiproSoftware.UI.Avalonia.Controls.Bars.Primitives"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Resources>
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+	</UserControl.Resources>
+	<UserControl.Styles>
+		<Style Selector="actipro|Ribbon">
+			<Setter Property="IsApplicationButtonVisible" Value="False" />
+			<Setter Property="LayoutMode" Value="Simplified" />
+			<Setter Property="Margin" Value="0" />
+		</Style>
+	</UserControl.Styles>
+
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="The quick access toolbar provides access to the most commonly used commands in an application.">
+
+		<sampleBrowser:ControlExample
+			Header="Basic usage"
+			>
+
+			<sampleBrowser:ControlExample.XamlContent>
+
+				<!-- XAML-based sample -->
+				<StackPanel Spacing="20">
+
+					<actipro:Ribbon
+						AllowLabelsOnQuickAccessToolBar="{Binding #sampleRootControl.BasicUsageOptions.AllowLabels, Mode=TwoWay}"
+						QuickAccessToolBarLocation="{Binding #sampleRootControl.BasicUsageOptions.Location, Mode=TwoWay}"
+						QuickAccessToolBarMode="{Binding #sampleRootControl.BasicUsageOptions.Mode, Mode=TwoWay}"
+						>
+
+						<actipro:Ribbon.QuickAccessToolBarContent>
+							<actipro:RibbonQuickAccessToolBar
+								IsCustomizeButtonVisible="{Binding #sampleRootControl.BasicUsageOptions.IsCustomizeButtonVisible, Mode=TwoWay}" >
+							
+								<actipro:BarButton Key="Save" Label="Save Document" SmallIcon="/Images/Icons/Save16.png" LargeIcon="/Images/Icons/Save32.png" ToolBarItemVariantBehavior="All" />
+
+							</actipro:RibbonQuickAccessToolBar>
+						
+						</actipro:Ribbon.QuickAccessToolBarContent>
+
+						<actipro:RibbonTabItem Key="Home">
+							<actipro:RibbonGroup Key="Documents">
+								<actipro:BarButton Key="Open" Label="Open Document" SmallIcon="/Images/Icons/Open16.png" LargeIcon="/Images/Icons/Open32.png" ToolBarItemVariantBehavior="All" />
+								<actipro:BarButton Key="Save" Label="Save Document" SmallIcon="/Images/Icons/Save16.png" LargeIcon="/Images/Icons/Save32.png" ToolBarItemVariantBehavior="All" />
+							</actipro:RibbonGroup>
+						</actipro:RibbonTabItem>
+
+					</actipro:Ribbon>
+
+					<actipro:InfoBar Title="Tip" Severity="Success" Message="Use the context menu of a button to add or remove it from the quick access toolbar." CanClose="False" />
+
+				</StackPanel>
+
+			</sampleBrowser:ControlExample.XamlContent>
+
+			<sampleBrowser:ControlExample.MvvmContent>
+
+				<!-- MVVM-based sample -->
+				<StackPanel Spacing="20">
+					
+					<actipro:Ribbon
+						DataContext="{Binding #sampleRootControl.BasicUsageRibbonViewModel}"
+						Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+						/>
+
+					<actipro:InfoBar Title="Tip" Severity="Success" Message="Use the context menu of a button to add or remove it from the quick access toolbar." CanClose="False" />
+
+				</StackPanel>
+
+			</sampleBrowser:ControlExample.MvvmContent>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10" DataContext="{Binding #sampleRootControl.BasicUsageOptions}">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Location" />
+						<ComboBox x:Name="locationComboBox" SelectedItem="{Binding Location}" ItemsSource="{actipro:DelimitedArray Type={x:Type actipro:RibbonQuickAccessToolBarLocation}}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Mode" />
+						<ComboBox x:Name="modeComboBox" SelectedItem="{Binding Mode}" ItemsSource="{actipro:DelimitedArray Type={x:Type actipro:RibbonQuickAccessToolBarMode}}" />
+					</StackPanel>
+					<CheckBox x:Name="allowLabelsCheckbox" IsChecked="{Binding AllowLabels}" Content="Allow labels when below ribbon" />
+					<CheckBox x:Name="isCustomizeButtonVisibleCheckbox" IsChecked="{Binding IsCustomizeButtonVisible}" Content="Is customize button visible" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample Kind="Xaml" xml:space="preserve">
+					<![CDATA[
+<actipro:Ribbon$(AllowLabelsOnQuickAccessToolBarAttribute)
+	QuickAccessToolBarLocation="$(QuickAccessToolBarLocation)"$(QuickAccessToolBarModeAttribute)
+	... >
+
+	<actipro:Ribbon.QuickAccessToolBarContent>
+		<actipro:RibbonQuickAccessToolBar$(IsCustomizeButtonVisibleAttribute)>
+							
+			<actipro:BarButton Key="Save" Label="Save Document" ... />
+			...
+
+		</actipro:RibbonQuickAccessToolBar>
+						
+	</actipro:Ribbon.QuickAccessToolBarContent>
+
+	<actipro:RibbonTabItem Key="Home">
+		...
+	</actipro:RibbonTabItem>
+
+	...
+
+</actipro:Ribbon>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="AllowLabelsOnQuickAccessToolBarAttribute"
+															   IsEnabled="{Binding #sampleRootControl.BasicUsageOptions.AllowLabels}"
+															   Value="&#xD;&#x9;AllowLabelsOnQuickAccessToolBar=&quot;True&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="QuickAccessToolBarLocation" Value="{Binding #sampleRootControl.BasicUsageOptions.Location}" />
+						<sampleBrowser:CodeExampleSubstitution Key="QuickAccessToolBarModeAttribute"
+															   IsEnabled="{Binding #sampleRootControl.BasicUsageOptions.Mode, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Visible'}"
+															   Value="{Binding #sampleRootControl.BasicUsageOptions.Mode, StringFormat='&#xD;&#x9;QuickAccessToolBarMode=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsCustomizeButtonVisibleAttribute"
+															   IsEnabled="{Binding !#sampleRootControl.BasicUsageOptions.IsCustomizeButtonVisible}"
+															   Value=" IsCustomizeButtonVisible=&quot;False&quot;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" xml:space="preserve">
+				<![CDATA[
+<!-- DataContext is bound to an instance of RibbonViewModel -->
+<actipro:Ribbon
+	DataContext="{Binding #sampleRootControl.BasicUsageRibbonViewModel}"
+	Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+	/>
+				]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" Language="C#" xml:space="preserve">
+					<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Bars;
+using ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm;
+
+public partial class SampleRootControl : UserControl {
+	
+	/// <summary>
+	/// Creates the ribbon view model.
+	/// </summary>
+	private static void CreateBasicUsageRibbonViewModel() {
+		return new RibbonViewModel() {$(AllowLabelsOnQuickAccessToolBarSetter)
+			QuickAccessToolBarLocation = RibbonQuickAccessToolBarLocation.$(QuickAccessToolBarLocation)$(QuickAccessToolBarModeSetter)
+		
+			QuickAccessToolBar = new RibbonQuickAccessToolBarViewModel() {
+				$(IsCustomizeButtonVisibleSetter)Items = {
+					new BarButtonViewModel("Save", "Save Document") { ... },
+					...
+				},
+			},
+		
+			// Additional view model properties omitted that are unrelated to the sample
+			Tabs = { ... }
+		};
+	}
+	
+	/// <summary>
+	/// Gets the view model to be bound to the ribbon.
+	/// </summary>
+	public RibbonViewModel BasicUsageRibbonViewModel { get; } = CreateBasicUsageRibbonViewModel();
+	
+}
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="AllowLabelsOnQuickAccessToolBarSetter"
+															   IsEnabled="{Binding #sampleRootControl.BasicUsageOptions.AllowLabels}"
+															   Value="&#xD;&#x9;&#x9;&#x9;AllowLabelsOnQuickAccessToolBar = true," />
+						<sampleBrowser:CodeExampleSubstitution Key="QuickAccessToolBarLocation" Value="{Binding #sampleRootControl.BasicUsageOptions.Location}" />
+						<sampleBrowser:CodeExampleSubstitution Key="QuickAccessToolBarModeSetter"
+															   IsEnabled="{Binding #sampleRootControl.BasicUsageOptions.Mode, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Visible'}"
+															   Value="{Binding #sampleRootControl.BasicUsageOptions.Mode, StringFormat='&#xD;&#x9;&#x9;&#x9;QuickAccessToolBarMode = RibbonQuickAccessToolBarMode.{0},'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsCustomizeButtonVisibleSetter"
+															   IsEnabled="{Binding !#sampleRootControl.BasicUsageOptions.IsCustomizeButtonVisible}"
+															   Value="IsCustomizeButtonVisible = false,&#xD;&#x9;&#x9;&#x9;&#x9;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Common items"
+			Footer="Commonly used commands can be pre-defined so users can easily add/remove those commands from the customize menu."
+			>
+
+			<sampleBrowser:ControlExample.XamlContent>
+
+				<!-- XAML-based sample -->
+				<StackPanel Spacing="20">
+					
+					<actipro:Ribbon Margin="0" IsApplicationButtonVisible="False" LayoutMode="Simplified"
+						QuickAccessToolBarLocation="Below"
+						>
+
+						<actipro:Ribbon.QuickAccessToolBarContent>
+							<actipro:RibbonQuickAccessToolBar IsCustomizeButtonVisible="{Binding #isCustomizeButtonVisibleCheckbox.IsChecked}">
+
+								<!-- Common items to be easily added/removed -->
+								<actipro:RibbonQuickAccessToolBar.CommonItems>
+									<actipro:BarButton Key="Cut" SmallIcon="/Images/Icons/Cut16.png" />
+									<actipro:BarButton Key="Copy" SmallIcon="/Images/Icons/Copy16.png" />
+									<actipro:BarButton Key="Paste" SmallIcon="/Images/Icons/Paste16.png" />
+								</actipro:RibbonQuickAccessToolBar.CommonItems>
+
+								<!-- Items already in the toolbar -->
+								<actipro:BarButton Key="Copy" SmallIcon="/Images/Icons/Copy16.png" />
+							
+							</actipro:RibbonQuickAccessToolBar>
+
+						</actipro:Ribbon.QuickAccessToolBarContent>
+
+						<actipro:RibbonTabItem Key="Home">
+							<actipro:RibbonGroup Key="Documents">
+								<actipro:BarButton Key="Open" Label="Open Document" SmallIcon="/Images/Icons/Open16.png" LargeIcon="/Images/Icons/Open32.png" ToolBarItemVariantBehavior="All" />
+								<actipro:BarButton Key="Save" Label="Save Document" SmallIcon="/Images/Icons/Save16.png" LargeIcon="/Images/Icons/Save32.png" ToolBarItemVariantBehavior="All" />
+							</actipro:RibbonGroup>
+						</actipro:RibbonTabItem>
+
+					</actipro:Ribbon>
+
+					<actipro:InfoBar Title="Tip" Severity="Success" Message="Use the quick access toolbar's customize menu to easily toggle common items like clipboard commands." CanClose="False" />
+
+				</StackPanel>
+
+			</sampleBrowser:ControlExample.XamlContent>
+
+			<sampleBrowser:ControlExample.MvvmContent>
+
+				<!-- MVVM-based sample -->
+				<StackPanel Spacing="20">
+					
+					<actipro:Ribbon Margin="0"
+						DataContext="{Binding #sampleRootControl.CommonItemsRibbonViewModel}"
+						Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+						/>
+
+					<actipro:InfoBar Title="Tip" Severity="Success" Message="Use the quick access toolbar's customize menu to easily toggle common items like clipboard commands." CanClose="False" />
+
+				</StackPanel>
+
+			</sampleBrowser:ControlExample.MvvmContent>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample Kind="Xaml" xml:space="preserve">
+					<![CDATA[
+<actipro:Ribbon ... >
+
+	<actipro:Ribbon.QuickAccessToolBarContent>
+		<actipro:RibbonQuickAccessToolBar>
+			
+			<!-- Common items to be easily added/removed -->
+			<actipro:RibbonQuickAccessToolBar.CommonItems>
+				<actipro:BarButton Key="Cut" ... />
+				<actipro:BarButton Key="Copy" ... />
+				<actipro:BarButton Key="Paste" ... />
+			</actipro:RibbonQuickAccessToolBar.CommonItems>
+
+			<!-- Items already in the toolbar -->
+			<actipro:BarButton Key="Copy" ... />
+			
+		</actipro:RibbonQuickAccessToolBar>
+						
+	</actipro:Ribbon.QuickAccessToolBarContent>
+
+	<actipro:RibbonTabItem Key="Home">
+		...
+	</actipro:RibbonTabItem>
+
+	...
+
+</actipro:Ribbon>
+					]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" xml:space="preserve">
+				<![CDATA[
+<!-- DataContext is bound to an instance of RibbonViewModel -->
+<actipro:Ribbon
+	DataContext="{Binding #sampleRootControl.CommonItemsRibbonViewModel}"
+	Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+	/>
+				]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" Language="C#" xml:space="preserve">
+					<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm;
+
+public partial class SampleRootControl : UserControl {
+	
+	/// <summary>
+	/// Creates the ribbon view model.
+	/// </summary>
+	private static void CreateCommonItemsRibbonViewModel() {
+
+		var cutControlViewModel = new BarButtonViewModel("Cut") {
+			SmallIcon = ImageLoader.GetIcon("Cut16.png"),
+			ToolBarItemVariantBehavior = ItemVariantBehavior.All,
+		};
+		var copyControlViewModel = new BarButtonViewModel("Copy") {
+			SmallIcon = ImageLoader.GetIcon("Copy16.png"),
+			ToolBarItemVariantBehavior = ItemVariantBehavior.All,
+		};
+		var pasteControlViewModel = new BarButtonViewModel("Paste") {
+			SmallIcon = ImageLoader.GetIcon("Paste16.png"),
+			ToolBarItemVariantBehavior = ItemVariantBehavior.All,
+		};
+		
+		return new RibbonViewModel() {
+		
+			QuickAccessToolBar = new RibbonQuickAccessToolBarViewModel() {
+				// Common items to be easily added/removed
+				CommonItems = {
+					cutControlViewModel,
+					copyControlViewModel,
+					pasteControlViewModel,
+					...
+				},
+				
+				// Items already in the toolbar
+				Items = {
+					copyControlViewModel,
+					...
+				},
+			},
+		
+			// Additional view model properties omitted that are unrelated to the sample
+			Tabs = { ... }
+		};
+	}
+	
+	/// <summary>
+	/// Gets the view model to be bound to the ribbon.
+	/// </summary>
+	public RibbonViewModel CommonItemsRibbonViewModel { get; } = CreateCommonItemsRibbonViewModel();
+	
+}
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Overflow scenario"
+			Footer="Controls automatically overflow to a flyout when space is limited."
+			>
+
+			<actipro:Ribbon
+				QuickAccessToolBarLocation="Below"
+				>
+
+				<actipro:Ribbon.QuickAccessToolBarContent>
+					<actipro:RibbonQuickAccessToolBar IsCustomizeButtonVisible="{Binding #isCustomizeButtonVisibleCheckbox.IsChecked}">
+						<actipro:BarButton Key="Save" SmallIcon="/Images/Icons/Save16.png" ToolBarItemVariantBehavior="All" />
+						<actipro:BarButton Key="Open" SmallIcon="/Images/Icons/Open16.png" ToolBarItemVariantBehavior="All" />
+						<actipro:BarButton Key="Cut" SmallIcon="/Images/Icons/Cut16.png" ToolBarItemVariantBehavior="All" />
+						<actipro:BarButton Key="Copy" SmallIcon="/Images/Icons/Copy16.png" ToolBarItemVariantBehavior="All" />
+						<actipro:BarButton Key="Paste" SmallIcon="/Images/Icons/Paste16.png" ToolBarItemVariantBehavior="All" />
+						<actipro:BarButton Key="Delete" SmallIcon="/Images/Icons/Delete16.png" ToolBarItemVariantBehavior="All" />
+						<actipro:BarButton Key="Bold" SmallIcon="/Images/Icons/Bold16.png" ToolBarItemVariantBehavior="All" />
+						<actipro:BarButton Key="Italic" SmallIcon="/Images/Icons/Italic16.png" ToolBarItemVariantBehavior="All" />
+						<actipro:BarButton Key="Underline" SmallIcon="/Images/Icons/Underline16.png" ToolBarItemVariantBehavior="All" />
+						<actipro:BarButton Key="AlignTextLeft" SmallIcon="/Images/Icons/AlignTextLeft16.png" ToolBarItemVariantBehavior="All" />
+						<actipro:BarButton Key="AlignTextCenter" SmallIcon="/Images/Icons/AlignTextCenter16.png" ToolBarItemVariantBehavior="All" />
+						<actipro:BarButton Key="AlignTextRight" SmallIcon="/Images/Icons/AlignTextRight16.png" ToolBarItemVariantBehavior="All" />
+						<actipro:BarButton Key="AlignTextJustify" SmallIcon="/Images/Icons/AlignTextJustify16.png" ToolBarItemVariantBehavior="All" />
+						<actipro:BarButton Key="Chart" SmallIcon="/Images/Icons/Chart16.png" ToolBarItemVariantBehavior="All" />
+						<actipro:BarButton Key="Bookmark" SmallIcon="/Images/Icons/Bookmark16.png" ToolBarItemVariantBehavior="All" />
+						<actipro:BarButton Key="CoverPage" SmallIcon="/Images/Icons/CoverPage16.png" ToolBarItemVariantBehavior="All" />
+						<actipro:BarButton Key="CrossReference" SmallIcon="/Images/Icons/CrossReference16.png" ToolBarItemVariantBehavior="All" />
+						<actipro:BarButton Key="DecreaseIndent" SmallIcon="/Images/Icons/DecreaseIndent16.png" ToolBarItemVariantBehavior="All" />
+						<actipro:BarButton Key="IncreaseIndent" SmallIcon="/Images/Icons/IncreaseIndent16.png" ToolBarItemVariantBehavior="All" />
+						<actipro:BarButton Key="Footer" SmallIcon="/Images/Icons/Footer16.png" ToolBarItemVariantBehavior="All" />
+						<actipro:BarButton Key="Header" SmallIcon="/Images/Icons/Header16.png" ToolBarItemVariantBehavior="All" />
+						<actipro:BarButton Key="BottomBorder" SmallIcon="/Images/Icons/BorderBottom16.png" ToolBarItemVariantBehavior="All" />
+						<actipro:BarButton Key="TopBorder" SmallIcon="/Images/Icons/BorderTop16.png" ToolBarItemVariantBehavior="All" />
+						<actipro:BarButton Key="LeftBorder" SmallIcon="/Images/Icons/BorderLeft16.png" ToolBarItemVariantBehavior="All" />
+						<actipro:BarButton Key="RightBorder" SmallIcon="/Images/Icons/BorderRight16.png" ToolBarItemVariantBehavior="All" />
+						<actipro:BarButton Key="NoBorder" SmallIcon="/Images/Icons/BorderNone16.png" ToolBarItemVariantBehavior="All" />
+						<actipro:BarButton Key="AllBorders" SmallIcon="/Images/Icons/BorderAll16.png" ToolBarItemVariantBehavior="All" />
+						<actipro:BarButton Key="OutsideBorders" SmallIcon="/Images/Icons/BorderOutside16.png" ToolBarItemVariantBehavior="All" />
+						<actipro:BarButton Key="InsideBorders" SmallIcon="/Images/Icons/BorderInside16.png" ToolBarItemVariantBehavior="All" />
+
+					</actipro:RibbonQuickAccessToolBar>
+
+				</actipro:Ribbon.QuickAccessToolBarContent>
+
+				<actipro:RibbonTabItem Key="Home">
+					<actipro:RibbonGroup Key="Documents">
+						<actipro:BarButton Key="Open" Label="Open Document" SmallIcon="/Images/Icons/Open16.png" LargeIcon="/Images/Icons/Open32.png" ToolBarItemVariantBehavior="All" />
+						<actipro:BarButton Key="Save" Label="Save Document" SmallIcon="/Images/Icons/Save16.png" LargeIcon="/Images/Icons/Save32.png" ToolBarItemVariantBehavior="All" />
+					</actipro:RibbonGroup>
+				</actipro:RibbonTabItem>
+
+			</actipro:Ribbon>
+
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="External 'Above' Host"
+			Footer="Specify any location for the QAT when shown above the ribbon, like a title bar."
+			>
+
+			<StackPanel Spacing="0">
+
+				<Border
+					Background="{actipro:ThemeResource Container3BackgroundBrush}"
+					BorderThickness="1"
+					BorderBrush="{actipro:ThemeResource Container3BorderBrush}"
+					CornerRadius="6"
+					Padding="0"
+					HorizontalAlignment="Center">
+
+					<actipro:MeasureAdjuster VerticalRoundMode="CeilingToEven">
+						<Panel MinHeight="{actipro:ScaledDouble '2.5+20'}">
+							<barsPrims:RibbonQuickAccessToolBarHost />
+							<TextBlock
+								Padding="10,0"
+								HorizontalAlignment="Center"
+								VerticalAlignment="Center"
+								IsVisible="{Binding #qatHostUsage.QuickAccessToolBarLocation, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Above'}"
+								Text="The QAT will be shown here when 'Above' the ribbon"
+								/>
+						</Panel>
+					</actipro:MeasureAdjuster>
+
+				</Border>
+
+				<actipro:Ribbon x:Name="qatHostUsage" Margin="0" IsApplicationButtonVisible="False" LayoutMode="Simplified"
+					AllowExternalQuickAccessToolBarHost="True"
+					QuickAccessToolBarLocation="Above"
+					>
+
+					<actipro:Ribbon.QuickAccessToolBarContent>
+						<actipro:RibbonQuickAccessToolBar IsCustomizeButtonVisible="{Binding #isCustomizeButtonVisibleCheckbox.IsChecked}">
+
+							<!-- Common items to be easily added/removed -->
+							<actipro:RibbonQuickAccessToolBar.CommonItems>
+								<actipro:BarButton Key="Cut" SmallIcon="/Images/Icons/Cut16.png" />
+								<actipro:BarButton Key="Copy" SmallIcon="/Images/Icons/Copy16.png" />
+								<actipro:BarButton Key="Paste" SmallIcon="/Images/Icons/Paste16.png" />
+							</actipro:RibbonQuickAccessToolBar.CommonItems>
+
+							<!-- Items already in the toolbar -->
+							<actipro:BarButton Key="Open" Label="Open Document" SmallIcon="/Images/Icons/Open16.png" LargeIcon="/Images/Icons/Open32.png" ToolBarItemVariantBehavior="All" />
+							<actipro:BarButton Key="Save" Label="Save Document" SmallIcon="/Images/Icons/Save16.png" LargeIcon="/Images/Icons/Save32.png" ToolBarItemVariantBehavior="All" />
+							<actipro:BarButton Key="Copy" SmallIcon="/Images/Icons/Copy16.png" />
+
+						</actipro:RibbonQuickAccessToolBar>
+
+					</actipro:Ribbon.QuickAccessToolBarContent>
+
+					<actipro:RibbonTabItem Key="Home">
+						<actipro:RibbonGroup Key="Documents">
+							<actipro:BarButton Key="Open" Label="Open Document" SmallIcon="/Images/Icons/Open16.png" LargeIcon="/Images/Icons/Open32.png" ToolBarItemVariantBehavior="All" />
+							<actipro:BarButton Key="Save" Label="Save Document" SmallIcon="/Images/Icons/Save16.png" LargeIcon="/Images/Icons/Save32.png" ToolBarItemVariantBehavior="All" />
+						</actipro:RibbonGroup>
+					</actipro:RibbonTabItem>
+
+				</actipro:Ribbon>
+
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+xmlns:barsPrims="using:ActiproSoftware.UI.Avalonia.Controls.Bars.Primitives"
+...
+
+<Border ... >
+
+	<!--
+	Use the MeasureAdjuster and MinHeight formula below if it is desireable to reserve
+	height for the QAT at all UI densities even when it is not currently visible
+	-->
+	<actipro:MeasureAdjuster VerticalRoundMode="CeilingToEven">
+		<Decorator MinHeight="{actipro:ScaledDouble '2.5+20'}">
+			<barsPrims:RibbonQuickAccessToolBarHost />
+		</Decorator>
+	</actipro:MeasureAdjuster>
+
+</Border>
+
+<actipro:Ribbon AllowExternalQuickAccessToolBarHost="True" ... >
+
+	...
+
+</actipro:Ribbon>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+
+</UserControl>

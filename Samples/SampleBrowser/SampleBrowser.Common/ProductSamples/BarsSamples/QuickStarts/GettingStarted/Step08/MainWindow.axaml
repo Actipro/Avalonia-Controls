@@ -1,0 +1,75 @@
+<!--
+
+RIBBON GETTING STARTED SERIES - STEP 8
+
+STEP SUMMARY:
+
+	Enable and configure the Quick Access Toolbar.
+	
+CHANGES SINCE LAST STEP:
+	
+	This XAML is fundamentally unchanged by this step.
+	
+	Prior sample comments were removed/condensed.
+	
+	See the SampleWindowViewModel class for details on configuring the Quick Access Toolbar.
+	
+EXPECTED OPERATION:
+	
+	When this sample window is opened, The Undo/Redo and Cut/Copy/Paste commands will be displayed in
+	the Quick Access Toolbar (QAT) shown below the Ribbon control. Clicking the drop-down arrow next to
+	the QAT will display the Cut/Copy/Paste commands in the Customize menu. Selecting any of the
+	Cut/Copy/Paste commands in the customize menu will add/remove the corresponding command to/from the QAT.
+
+-->
+
+<actipro:RibbonWindow
+	x:Class="ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.Step08.MainWindow"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:gettingStartedCommon="using:ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.Common"
+	xmlns:local="using:ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.Step08"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	Title="Actipro Ribbon Getting Started Series - Step 8"
+	Height="450" Width="800"
+	x:DataType="local:SampleWindowViewModel"
+	>
+
+	<actipro:RibbonContainerPanel>
+
+		<!-- Ribbon Control -->
+		<actipro:Ribbon
+			DataContext="{Binding Ribbon}"
+			Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+			/>
+
+
+		<!-- Window Content -->
+		<DockPanel>
+
+			<!-- Configure common StatusBar that is unrelated to this sample -->
+			<gettingStartedCommon:CommonStatusBar DockPanel.Dock="Bottom" SampleCodePath="/Step08/MainWindow.axaml" />
+
+			<!-- Editor Control -->
+			<ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Focusable="False">
+				<sampleBrowser:AdvancedTextBox x:Name="editor"
+					Margin="32,20"
+					AcceptsReturn="True"
+					AcceptsTab="True"
+					Text="Actipro Bars contains a comprehensive implementation of an Office-like ribbon user interface for Avalonia applications, including its modern fluent design and ability to create content-rich galleries."
+					TextWrapping="Wrap">
+					<TextBox.ContextFlyout>
+						<actipro:BarMenuFlyout
+							ItemsSource="{Binding EditorContextMenuItems}"
+							ItemContainerTemplateSelector="{Binding Ribbon.ItemContainerTemplateSelector}"
+							/>
+					</TextBox.ContextFlyout>
+				</sampleBrowser:AdvancedTextBox>
+			</ScrollViewer>
+
+		</DockPanel>
+
+	</actipro:RibbonContainerPanel>
+
+</actipro:RibbonWindow>

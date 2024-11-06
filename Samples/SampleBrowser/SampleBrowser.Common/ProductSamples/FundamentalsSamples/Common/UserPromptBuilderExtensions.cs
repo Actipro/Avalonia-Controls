@@ -28,8 +28,8 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Common {
 				.WithHeaderContent("Unsupported platform")
 				.WithContent($"Dialogs are not supported on this platform, and attempting to display as a '{nameof(UserPromptDisplayMode.Dialog)}' would normally throw a PlatformNotSupportedException.")
 				.WithFooterContent($"Use '{nameof(UserPromptDisplayMode.DialogPreferred)}' to fallback to overlays on unsupported platforms.")
-				.WithStatusImage(MessageBoxImage.Error)
-				.WithStatusImageTheme(MessageBoxImage.Error)
+				.WithStatusIcon(MessageBoxImage.Error)
+				.WithStatusIconTheme(MessageBoxImage.Error)
 				.WithDisplayMode(UserPromptDisplayMode.Overlay);
 		}
 
@@ -38,18 +38,18 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Common {
 		/// that corresponds to the intent of the given status image (e.g., red hue for error messages).
 		/// </summary>
 		/// <param name="builder">The builder to configure.</param>
-		/// <param name="statusImage">The status image whose intent will be used to determine the <see cref="Hue"/>.</param>
+		/// <param name="statusIcon">The status icon whose intent will be used to determine the <see cref="Hue"/>.</param>
 		/// <returns>The builder, for use with method-chaining.</returns>
 		/// <exception cref="InvalidOperationException" />
-		public static UserPromptBuilder WithStatusImageTheme(this UserPromptBuilder builder, MessageBoxImage? statusImage = null) {
+		public static UserPromptBuilder WithStatusIconTheme(this UserPromptBuilder builder, MessageBoxImage? statusIcon = null) {
 			return builder.AfterBuild(_ => {
 
 				var userPromptControl = builder.Instance!;
 
-				statusImage ??= userPromptControl.StandardStatusImage;
+				statusIcon ??= userPromptControl.StandardStatusIcon;
 
 				Hue hue;
-				switch (statusImage) {
+				switch (statusIcon) {
 					case MessageBoxImage.Error:
 						hue = Hue.Red;
 						break;

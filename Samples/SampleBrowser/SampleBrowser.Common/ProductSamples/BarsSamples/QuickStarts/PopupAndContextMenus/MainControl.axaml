@@ -1,0 +1,1224 @@
+<UserControl
+	x:Name="sampleRootControl"
+	x:Class="ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.PopupAndContextMenus.MainControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:local="using:ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.PopupAndContextMenus"
+	>
+	<UserControl.Resources>
+
+		<!-- Extend a theme for BarGalleryItem that should use circles instead of rectangles -->
+		<ControlTheme x:Key="CircularColorSwatchGalleryItemTheme" TargetType="{x:Type actipro:BarGalleryItem}" BasedOn="{actipro:ControlTheme BarGalleryItem}">
+			<!-- Define a corner radius that matches the circle template so the accented item border will match the template. -->
+			<Setter Property="CornerRadius" Value="8" />
+		</ControlTheme>
+		
+		<!-- Custom DataTemplate used by XAML and MVVM samples to use circles (instead of squares) for gallery items -->
+		<DataTemplate x:Key="CircleStyleGalleryItemItemplate" x:DataType="{x:Type actipro:ColorBarGalleryItemViewModel}">
+			<!-- The CornerRadius defined here must match the CornerRadius defined by CircularColorSwatchGalleryItemTheme -->
+			<Border Width="16" Height="16"
+				BorderBrush="{actipro:ThemeResource Container3BorderBrush}"
+				BorderThickness="1"
+				CornerRadius="8">
+				<Border.Background>
+					<SolidColorBrush Color="{Binding Value}" />
+				</Border.Background>
+			</Border>
+		</DataTemplate>
+
+		<!-- Custom DataTemplate used by XAML and MVVM samples to display special paste options in a menu -->
+		<DataTemplate x:Key="PasteOptionGalleryItemTemplate" DataType="{x:Type local:PasteOptionGalleryItem}">
+			<actipro:DynamicImage Margin="4" MaxHeight="24" MaxWidth="24" Source="{Binding Image}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		</DataTemplate>
+	</UserControl.Resources>
+
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Popup and context menus can be defined using MVVM or XAML and are capable of supporting a complex layout of items.">
+
+		<sampleBrowser:ControlExample
+			Header="Popup menu"
+			Footer="Click the Popup Menu button to see various menu controls configured based on the available options.">
+
+			<sampleBrowser:ControlExample.XamlContent>
+
+				<!-- XAML-based sample -->
+				<actipro:Ribbon IsApplicationButtonVisible="False" LayoutMode="Simplified" QuickAccessToolBarMode="None">
+
+					<actipro:RibbonTabItem Key="SampleTab">
+						<actipro:RibbonGroup Key="SampleGroup">
+						
+							<actipro:BarPopupButton Key="PopupMenu" SmallIcon="/Images/Icons/Menu16.png" LargeIcon="/Images/Icons/Menu32.png"
+								ToolBarItemVariantBehavior="All"
+								ToolTip.Tip="Common menu controls shown in states and configurations based on the sample options.">
+							
+								<actipro:BarPopupButton.Styles>
+									<Style Selector=":is(MenuItem)">
+										<Setter Property="IsEnabled" Value="{Binding #basicUsagePopupMenuIsEnabledCheckBox.IsChecked}" />
+										<Setter Property="StaysOpenOnClick" Value="{Binding #basicUsagePopupMenuStaysOpenOnClickCheckBox.IsChecked}" />
+										<Style Selector="^.no-icon">
+											<Setter Property="IsVisible" Value="{Binding !#basicUsagePopupMenuShowIconsCheckBox.IsChecked}" />
+										</Style>
+										<Style Selector="^.icon">
+											<Setter Property="IsVisible" Value="{Binding #basicUsagePopupMenuShowIconsCheckBox.IsChecked}" />
+										</Style>
+									</Style>
+								</actipro:BarPopupButton.Styles>
+
+								<actipro:BarMenuHeading Label="BarMenuItem Samples" />
+								<actipro:BarMenuItem Classes="no-icon" Label="BarMenuItem" />
+								<actipro:BarMenuItem Classes="no-icon" Label="BarMenuItem (Checkable)" ToggleType="CheckBox" IsChecked="True" />
+								<actipro:BarMenuItem Classes="no-icon" Label="BarMenuItem (With Children)">
+									<actipro:BarMenuItem Label="BarMenuItem (Child 1)" />
+									<actipro:BarMenuItem Label="BarMenuItem (Child 2)" />
+								</actipro:BarMenuItem>
+								<actipro:BarMenuItem Classes="icon" Label="BarMenuItem" SmallIcon="/Images/Icons/New16.png" />
+								<actipro:BarMenuItem Classes="icon" Label="BarMenuItem (Checkable)" ToggleType="CheckBox" IsChecked="True" SmallIcon="/Images/Icons/QuickStart16.png" />
+								<actipro:BarMenuItem Classes="icon" Label="BarMenuItem (With Children)" SmallIcon="/Images/Icons/Open16.png" >
+									<actipro:BarMenuItem Label="BarMenuItem (Child 1)" />
+									<actipro:BarMenuItem Label="BarMenuItem (Child 2)" />
+								</actipro:BarMenuItem>
+
+								<actipro:BarMenuSeparator />
+
+								<actipro:BarMenuHeading Label="BarSplitMenuItem Samples" />
+								<actipro:BarSplitMenuItem Classes="no-icon" Label="BarSplitMenuItem">
+									<actipro:BarMenuItem Label="BarMenuItem (Child 1)" />
+									<actipro:BarMenuItem Label="BarMenuItem (Child 2)" />
+								</actipro:BarSplitMenuItem>
+								<actipro:BarSplitMenuItem Classes="no-icon" Label="BarSplitMenuItem (Checkable)" ToggleType="CheckBox" IsChecked="True">
+									<actipro:BarMenuItem Label="BarMenuItem (Child 1)" />
+									<actipro:BarMenuItem Label="BarMenuItem (Child 2)" />
+								</actipro:BarSplitMenuItem>
+								<actipro:BarSplitMenuItem Classes="icon" Label="BarSplitMenuItem" SmallIcon="/Images/Icons/Save16.png" >
+									<actipro:BarMenuItem Label="BarMenuItem (Child 1)" />
+									<actipro:BarMenuItem Label="BarMenuItem (Child 2)" />
+								</actipro:BarSplitMenuItem>
+								<actipro:BarSplitMenuItem Classes="icon" Label="BarSplitMenuItem (Checkable)" ToggleType="CheckBox" IsChecked="True" SmallIcon="/Images/Icons/Print16.png" >
+									<actipro:BarMenuItem Label="BarMenuItem (Child 1)" />
+									<actipro:BarMenuItem Label="BarMenuItem (Child 2)" />
+								</actipro:BarSplitMenuItem>
+
+							</actipro:BarPopupButton>
+						</actipro:RibbonGroup>
+					</actipro:RibbonTabItem>
+				</actipro:Ribbon>
+
+			</sampleBrowser:ControlExample.XamlContent>
+
+			<sampleBrowser:ControlExample.MvvmContent>
+
+				<!-- MVVM-based sample -->
+				<actipro:Ribbon x:Name="basicUsagePopupMenuRibbonMvvm"
+					Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+					/>
+
+			</sampleBrowser:ControlExample.MvvmContent>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<CheckBox x:Name="basicUsagePopupMenuShowIconsCheckBox" Content="Menu items have icons" IsChecked="True" />
+					<CheckBox x:Name="basicUsagePopupMenuIsEnabledCheckBox" Content="Menu items enabled" IsChecked="True" />
+					<CheckBox x:Name="basicUsagePopupMenuStaysOpenOnClickCheckBox" Content="Menu stays open on click" IsChecked="False" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample Kind="Xaml" xml:space="preserve">
+				<![CDATA[
+<actipro:Ribbon ... >
+
+	<actipro:RibbonTabItem ... >
+		<actipro:RibbonGroup ... >
+						
+			<actipro:BarPopupButton ... >
+
+				<actipro:BarMenuHeading Label="BarMenuItem Samples" />
+				<actipro:BarMenuItem Label="BarMenuItem"$(IsEnabledAttribute)$(StaysOpenOnClickAttribute)$(SmallIcon1Attribute) />
+				<actipro:BarMenuItem Label="BarMenuItem (Checkable)" ToggleType="CheckBox" IsChecked="True"$(IsEnabledAttribute)$(StaysOpenOnClickAttribute)$(SmallIcon2Attribute) />
+				<actipro:BarMenuItem Label="BarMenuItem (With Children)"$(IsEnabledAttribute)$(StaysOpenOnClickAttribute)$(SmallIcon3Attribute)>
+					<actipro:BarMenuItem ... />
+					<actipro:BarMenuItem ... />
+				</actipro:BarMenuItem>
+				
+				<actipro:BarMenuSeparator />
+
+				<actipro:BarMenuHeading Label="BarSplitMenuItem Samples" />
+				<actipro:BarSplitMenuItem Label="BarSplitMenuItem"$(IsEnabledAttribute)$(StaysOpenOnClickAttribute)$(SmallIcon4Attribute)>
+					<actipro:BarMenuItem ... />
+					<actipro:BarMenuItem ... />
+				</actipro:BarSplitMenuItem>
+				<actipro:BarSplitMenuItem Label="BarSplitMenuItem (Checkable)" ToggleType="CheckBox" IsChecked="True"$(IsEnabledAttribute)$(StaysOpenOnClickAttribute)$(SmallIcon5Attribute)>
+					<actipro:BarMenuItem ... />
+					<actipro:BarMenuItem ... />
+				</actipro:BarSplitMenuItem>
+				
+			</actipro:BarPopupButton>
+
+		</actipro:RibbonGroup>
+	</actipro:RibbonTabItem>
+
+</actipro:Ribbon>
+				]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute"
+															   IsEnabled="{Binding !#basicUsagePopupMenuIsEnabledCheckBox.IsChecked}"
+															   Value=" IsEnabled=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="StaysOpenOnClickAttribute"
+															   IsEnabled="{Binding #basicUsagePopupMenuStaysOpenOnClickCheckBox.IsChecked}"
+															   Value=" StaysOpenOnClick=&quot;True&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="SmallIcon1Attribute"
+															   IsEnabled="{Binding #basicUsagePopupMenuShowIconsCheckBox.IsChecked}"
+															   Value=" SmallIcon=&quot;/Images/Icons/New16.png&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="SmallIcon2Attribute"
+															   IsEnabled="{Binding #basicUsagePopupMenuShowIconsCheckBox.IsChecked}"
+															   Value=" SmallIcon=&quot;/Images/Icons/QuickStart16.png&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="SmallIcon3Attribute"
+															   IsEnabled="{Binding #basicUsagePopupMenuShowIconsCheckBox.IsChecked}"
+															   Value=" SmallIcon=&quot;/Images/Icons/Open16.png&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="SmallIcon4Attribute"
+															   IsEnabled="{Binding #basicUsagePopupMenuShowIconsCheckBox.IsChecked}"
+															   Value=" SmallIcon=&quot;/Images/Icons/Save16.png&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="SmallIcon5Attribute"
+															   IsEnabled="{Binding #basicUsagePopupMenuShowIconsCheckBox.IsChecked}"
+															   Value=" SmallIcon=&quot;/Images/Icons/Print16.png&quot;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" xml:space="preserve">
+				<![CDATA[
+<!-- DataContext is bound to an instance of RibbonViewModel -->
+<actipro:Ribbon
+	DataContext="{Binding #sampleRootControl.BasicUsagePopupMenuRibbonViewModel}"
+	Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+	/>
+				]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" Language="C#" xml:space="preserve">
+				<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm;
+...
+
+public partial class SampleRootControl : UserControl {
+
+	/// <summary>
+	/// Creates the ribbon view model.
+	/// </summary>
+	private static void CreateBasicUsagePopupMenuRibbonViewModel() {
+		// Some view model properties omitted that are unrelated to the sample
+		return new RibbonViewModel() {
+			Tabs = {
+				new RibbonTabViewModel("SampleTab") {
+					Groups = {
+						new RibbonGroupViewModel("SampleGroup") {
+							Items = {
+							
+								// NOTE: The ICommand.CanExecute result of the view model's associated command determines if a menu item is enabled
+
+								new BarPopupButtonViewModel("PopupMenu") {
+									Description = "Common menu controls shown in states and configurations based on the sample options.",
+									LargeIcon = ImageLoader.GetIcon("Menu32.png"),
+									SmallIcon = ImageLoader.GetIcon("Menu16.png"),
+									MenuItems = {
+
+										new BarHeadingViewModel("Standard Button Samples"),
+										new BarButtonViewModel("New") {
+											Label = "BarButtonViewModel",
+											Command = PopupMenuSampleCommand,$(SmallIcon1Setter)$(StaysOpenOnClickSetter)
+										},
+										new BarToggleButtonViewModel("QuickStart") {
+											Label = "BarToggleButtonViewModel (Checkable)",
+											Command = PopupMenuSampleCommand,
+											IsChecked = true,$(SmallIcon2Setter)$(StaysOpenOnClickSetter)
+										},
+										new BarPopupButtonViewModel("Open") {
+											Label = "BarPopupButtonViewModel (With Children)",
+											Command = PopupMenuSampleCommand,$(SmallIcon3Setter)$(StaysOpenOnClickSetter)
+											MenuItems = {
+												new BarButtonViewModel() { Label = "BarButtonViewModel (Child 1)"$(StaysOpenOnClickSetterInline)},
+												new BarButtonViewModel() { Label = "BarButtonViewModel (Child 2)"$(StaysOpenOnClickSetterInline)},
+											}
+										},
+
+										new BarSeparatorViewModel(),
+
+										new BarHeadingViewModel("Split Button Samples"),
+										new BarSplitButtonViewModel("Save") {
+											Label = "BarSplitButtonViewModel",
+											Command = PopupMenuSampleCommand,$(SmallIcon4Setter)$(StaysOpenOnClickSetter)
+											MenuItems = {
+												new BarButtonViewModel() { Label = "BarButtonViewModel (Child 1)"$(StaysOpenOnClickSetterInline)},
+												new BarButtonViewModel() { Label = "BarButtonViewModel (Child 2)"$(StaysOpenOnClickSetterInline)},
+											}
+										},
+										new BarSplitToggleButtonViewModel("Print") {
+											Label = "BarSplitToggleButtonViewModel (Checkable)",
+											Command = PopupMenuSampleCommand,
+											IsChecked = true,$(SmallIcon5Setter)$(StaysOpenOnClickSetter)
+											MenuItems = {
+												new BarButtonViewModel() { Label = "BarButtonViewModel (Child 1)"$(StaysOpenOnClickSetterInline)},
+												new BarButtonViewModel() { Label = "BarButtonViewModel (Child 2)"$(StaysOpenOnClickSetterInline)},
+											},
+										},
+
+									}
+								},
+
+							},
+						},
+					}
+				},
+			}
+		};
+	}
+	
+	/// <summary>
+	/// Gets the view model to be bound to the ribbon.
+	/// </summary>
+	public RibbonViewModel BasicUsagePopupMenuRibbonViewModel { get; } = CreateBasicUsagePopupMenuRibbonViewModel();
+	
+}
+				]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="StaysOpenOnClickSetter"
+															   IsEnabled="{Binding #basicUsagePopupMenuStaysOpenOnClickCheckBox.IsChecked}"
+															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;StaysOpenOnClick = true," />
+						<sampleBrowser:CodeExampleSubstitution Key="StaysOpenOnClickSetterInline"
+															   IsEnabled="{Binding #basicUsagePopupMenuStaysOpenOnClickCheckBox.IsChecked}"
+															   Value=", StaysOpenOnClick = true" />
+						<sampleBrowser:CodeExampleSubstitution Key="SmallIcon1Setter"
+															   IsEnabled="{Binding #basicUsagePopupMenuShowIconsCheckBox.IsChecked}"
+															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;SmallIcon = ImageLoader.GetIcon(&quot;New16.png&quot;)," />
+						<sampleBrowser:CodeExampleSubstitution Key="SmallIcon2Setter"
+															   IsEnabled="{Binding #basicUsagePopupMenuShowIconsCheckBox.IsChecked}"
+															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;SmallIcon = ImageLoader.GetIcon(&quot;QuickStart16.png&quot;)," />
+						<sampleBrowser:CodeExampleSubstitution Key="SmallIcon3Setter"
+															   IsEnabled="{Binding #basicUsagePopupMenuShowIconsCheckBox.IsChecked}"
+															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;SmallIcon = ImageLoader.GetIcon(&quot;Open16.png&quot;)," />
+						<sampleBrowser:CodeExampleSubstitution Key="SmallIcon4Setter"
+															   IsEnabled="{Binding #basicUsagePopupMenuShowIconsCheckBox.IsChecked}"
+															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;SmallIcon = ImageLoader.GetIcon(&quot;Save16.png&quot;)," />
+						<sampleBrowser:CodeExampleSubstitution Key="SmallIcon5Setter"
+															   IsEnabled="{Binding #basicUsagePopupMenuShowIconsCheckBox.IsChecked}"
+															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;SmallIcon = ImageLoader.GetIcon(&quot;Print16.png&quot;)," />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Context menu"
+			>
+
+			<sampleBrowser:ControlExample.XamlContent>
+
+				<!-- XAML-based sample -->
+				<TextBox Text="Right-click on this TextBox to show a custom BarMenuFlyout defined in XAML.">
+					<TextBox.ContextFlyout>
+						<actipro:BarMenuFlyout>
+							<actipro:BarMenuItem Key="Undo" SmallIcon="/Images/Icons/Undo16.png"
+								Command="{Binding $parent[TextBox].Undo}"
+								IsEnabled="{Binding $parent[TextBox].CanUndo}" />
+							<actipro:BarMenuItem Key="Redo" SmallIcon="/Images/Icons/Redo16.png"
+								Command="{Binding $parent[TextBox].Redo}"
+								IsEnabled="{Binding $parent[TextBox].CanRedo}" />
+							<actipro:BarMenuSeparator />
+							<actipro:BarMenuItem Key="Cut" SmallIcon="/Images/Icons/Cut16.png"
+								Command="{Binding $parent[TextBox].Cut}"
+								IsEnabled="{Binding $parent[TextBox].CanCut}"
+								InputGesture="{x:Static TextBox.CutGesture}" />
+							<actipro:BarMenuItem Key="Copy" SmallIcon="/Images/Icons/Copy16.png"
+								Command="{Binding $parent[TextBox].Copy}"
+								IsEnabled="{Binding $parent[TextBox].CanCopy}"
+								InputGesture="{x:Static TextBox.CopyGesture}"/>
+							<actipro:BarMenuItem Key="Paste" SmallIcon="/Images/Icons/Paste16.png"
+								Command="{Binding $parent[TextBox].Paste}"
+								IsEnabled="{Binding $parent[TextBox].CanPaste}"
+								InputGesture="{x:Static TextBox.PasteGesture}" />
+							<actipro:BarMenuSeparator />
+							<actipro:BarMenuItem Key="SelectAll" SmallIcon="/Images/Icons/SelectAll16.png"
+								Command="{Binding $parent[TextBox].SelectAll}"
+								IsEnabled="{Binding $parent[TextBox].Text, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+						</actipro:BarMenuFlyout>
+					</TextBox.ContextFlyout>
+				</TextBox>
+
+			</sampleBrowser:ControlExample.XamlContent>
+
+			<sampleBrowser:ControlExample.MvvmContent>
+				
+				<!-- MVVM-based sample -->
+				<TextBox x:Name="contextMenuTextBoxMvvm" DataContext="{Binding #sampleRootControl}" 
+					Text="Right-click on this TextBox to show a custom BarMenuFlyout defined using MVVM.">
+					
+					<TextBox.ContextFlyout>
+						<actipro:BarMenuFlyout ItemsSource="{Binding ContextMenuItems}">
+							<actipro:BarMenuFlyout.ItemContainerTemplateSelector>
+								<actipro:BarControlTemplateSelector />
+							</actipro:BarMenuFlyout.ItemContainerTemplateSelector>
+						</actipro:BarMenuFlyout>
+					</TextBox.ContextFlyout>
+
+				</TextBox>
+				
+			</sampleBrowser:ControlExample.MvvmContent>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample Kind="Xaml" xml:space="preserve">
+				<![CDATA[
+<TextBox ... >
+	<TextBox.ContextFlyout>
+		<actipro:BarMenuFlyout>
+
+			<actipro:BarMenuItem Key="Undo" SmallIcon="/Images/Icons/Undo16.png"
+				Command="{Binding $parent[TextBox].Undo}"
+				IsEnabled="{Binding $parent[TextBox].CanUndo}" />
+
+			<actipro:BarMenuItem Key="Redo" SmallIcon="/Images/Icons/Redo16.png"
+				Command="{Binding $parent[TextBox].Redo}"
+				IsEnabled="{Binding $parent[TextBox].CanRedo}" />
+
+			<actipro:BarMenuSeparator />
+
+			<actipro:BarMenuItem Key="Cut" SmallIcon="/Images/Icons/Cut16.png"
+				Command="{Binding $parent[TextBox].Cut}"
+				IsEnabled="{Binding $parent[TextBox].CanCut}"
+				InputGesture="{x:Static TextBox.CutGesture}" />
+
+			<actipro:BarMenuItem Key="Copy" SmallIcon="/Images/Icons/Copy16.png"
+				Command="{Binding $parent[TextBox].Copy}"
+				IsEnabled="{Binding $parent[TextBox].CanCopy}"
+				InputGesture="{x:Static TextBox.CopyGesture}"/>
+
+			<actipro:BarMenuItem Key="Paste" SmallIcon="/Images/Icons/Paste16.png"
+				Command="{Binding $parent[TextBox].Paste}"
+				IsEnabled="{Binding $parent[TextBox].CanPaste}"
+				InputGesture="{x:Static TextBox.PasteGesture}" />
+
+			<actipro:BarMenuSeparator />
+
+			<actipro:BarMenuItem Key="SelectAll" SmallIcon="/Images/Icons/SelectAll16.png"
+				Command="{Binding $parent[TextBox].SelectAll}"
+				IsEnabled="{Binding $parent[TextBox].Text, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+
+		</actipro:BarMenuFlyout>
+	</TextBox.ContextFlyout>
+</TextBox>
+				]]>
+				</sampleBrowser:CodeExample>
+			<sampleBrowser:CodeExample Kind="Mvvm" xml:space="preserve">
+				<![CDATA[
+
+<TextBox x:Name="contextMenuTextBoxMvvm" ... >
+	<TextBox.ContextFlyout>
+
+		<!-- This sample assumes the DataContext is set to an instance of MainControl -->
+		<actipro:BarMenuFlyout ItemsSource="{Binding ContextMenuItems}" >
+			<actipro:BarMenuFlyout.ItemContainerTemplateSelector>
+				<actipro:BarControlTemplateSelector />
+			</actipro:BarMenuFlyout.ItemContainerTemplateSelector>
+		</actipro:BarMenuFlyout>
+
+	</TextBox.ContextFlyout>
+</TextBox>
+				]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" Language="C#" xml:space="preserve">
+				<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm;
+using ActiproSoftware.UI.Avalonia.Input;
+...
+
+public partial class MainControl : UserControl {
+
+	public MainControl() {
+
+		InitializeComponent();
+			
+		//
+		// Configure TextBox Context Menu
+		//
+
+		var keymap = Application.Current?.PlatformSettings?.HotkeyConfiguration;
+		var textBox = contextMenuTextBoxMvvm;
+		ContextMenuItems = new ObservableCollection<object>() {
+			new BarButtonViewModel("Undo") {
+				Command = new DelegateCommand<TextBox>(p => p?.Undo(), p => p?.CanUndo == true),
+				CommandParameter = textBox,
+				InputGesture = keymap?.Undo.FirstOrDefault(),
+				SmallIcon = ImageLoader.GetIcon("Undo16.png")
+			},
+			new BarButtonViewModel("Redo") {
+				Command = new DelegateCommand<TextBox>(p => p?.Redo(), p => p?.CanRedo == true),
+				CommandParameter = textBox,
+				InputGesture = keymap?.Redo.FirstOrDefault(),
+				SmallIcon = ImageLoader.GetIcon("Redo16.png")
+			},
+			new BarSeparatorViewModel(),
+			new BarButtonViewModel("Cut") {
+				Command = new DelegateCommand<TextBox>(p => p?.Cut(), p => p?.CanCut == true),
+				CommandParameter = textBox,
+				InputGesture = keymap?.Cut.FirstOrDefault(),
+				SmallIcon = ImageLoader.GetIcon("Cut16.png")
+			},
+			new BarButtonViewModel("Copy") {
+				Command = new DelegateCommand<TextBox>(p => p?.Copy(), p => p?.CanCopy == true),
+				CommandParameter = textBox,
+				InputGesture = keymap?.Copy.FirstOrDefault(),
+				SmallIcon = ImageLoader.GetIcon("Copy16.png")
+			},
+			new BarButtonViewModel("Paste") {
+				Command = new DelegateCommand<TextBox>(p => p?.Paste(), p => p?.CanPaste== true),
+				CommandParameter = textBox,
+				InputGesture = keymap?.Paste.FirstOrDefault(),
+				SmallIcon = ImageLoader.GetIcon("Paste16.png")
+			},
+			new BarSeparatorViewModel(),
+			new BarButtonViewModel("SelectAll") {
+				Command = new DelegateCommand<TextBox>(p => p?.SelectAll()),
+				CommandParameter = textBox,
+				InputGesture = keymap?.SelectAll.FirstOrDefault(),
+				SmallIcon = ImageLoader.GetIcon("SelectAll16.png")
+			},
+		};
+			
+	}
+
+	/// <summary>
+	/// The collection of menu item view models to be displayed in the context menu.
+	/// </summary>
+	public ObservableCollection<object> ContextMenuItems { get; private set; }
+
+}
+				]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Large size"
+			Footer="Large-sized menu items can be used for emphasis or to add descriptions.">
+
+			<sampleBrowser:ControlExample.XamlContent>
+				
+				<!-- XAML-based sample -->
+				<actipro:Ribbon IsApplicationButtonVisible="False" LayoutMode="Simplified" QuickAccessToolBarMode="None">
+
+					<actipro:RibbonTabItem Key="SampleTab">
+						<actipro:RibbonGroup Key="SampleGroup">
+
+							<actipro:BarPopupButton Key="PopupMenu" SmallIcon="/Images/Icons/Height16.png" LargeIcon="/Images/Icons/Height32.png" ToolBarItemVariantBehavior="All">
+
+								<actipro:BarMenuHeading Label="Large Items" />
+								<actipro:BarMenuItem Key="New" UseLargeSize="True" LargeIcon="/Images/Icons/New32.png" Description="Create a new document.">
+									<actipro:BarMenuItem Key="NewChild1" Label="BarMenuItem (Child 1)" />
+									<actipro:BarMenuItem Key="NewChild2" Label="BarMenuItem (Child 2)" />
+								</actipro:BarMenuItem>
+								<actipro:BarSplitMenuItem Key="Open" UseLargeSize="True" LargeIcon="/Images/Icons/Open32.png" Description="Open an existing document.">
+									<actipro:BarMenuItem Key="OpenChild1" Label="BarMenuItem (Child 1)" />
+									<actipro:BarMenuItem Key="OpenChild2" Label="BarMenuItem (Child 2)" />
+								</actipro:BarSplitMenuItem>
+								<actipro:BarMenuItem Key="Save" UseLargeSize="True" LargeIcon="/Images/Icons/Save32.png" Description="Save the current document." />
+								<actipro:BarMenuSeparator />
+								<actipro:BarMenuHeading Label="Large Items (No Description)" />
+								<actipro:BarMenuItem Key="NewNoDesc" Label="New" UseLargeSize="True" LargeIcon="/Images/Icons/New32.png">
+									<actipro:BarMenuItem Key="NewNoDescChild1" Label="BarMenuItem (Child 1)" />
+									<actipro:BarMenuItem Key="NewNoDescChild2" Label="BarMenuItem (Child 2)" />
+								</actipro:BarMenuItem>
+								<actipro:BarSplitMenuItem Key="OpenNoDesc" Label="Open" UseLargeSize="True" LargeIcon="/Images/Icons/Open32.png">
+									<actipro:BarMenuItem Key="OpenNoDescChild1" Label="BarMenuItem (Child 1)" />
+									<actipro:BarMenuItem Key="OpenNoDescChild2" Label="BarMenuItem (Child 2)" />
+								</actipro:BarSplitMenuItem>
+								<actipro:BarMenuItem Key="SaveNoDesc" Label="Save" UseLargeSize="True" LargeIcon="/Images/Icons/Save32.png" />
+								<actipro:BarMenuSeparator />
+								<actipro:BarMenuHeading Label="Checkable (BarMenuItem)" />
+								<actipro:BarMenuItem Key="DefaultCheck" UseLargeSize="True" ToggleType="CheckBox" IsChecked="True" Description="A checkmark glyph is automatically used as image for checkable menu items." />
+								<actipro:BarMenuItem Key="ExplicitImage" UseLargeSize="True" ToggleType="CheckBox" IsChecked="True" LargeIcon="/Images/Icons/QuickStart32.png" Description="Explicit images also supported with a checked state." />
+								<actipro:BarMenuSeparator />
+								<actipro:BarMenuHeading Label="Checkable (BarSplitMenuItem)" />
+								<actipro:BarSplitMenuItem Key="DefaultCheckSplit" Label="Default Check" UseLargeSize="True" ToggleType="CheckBox" IsChecked="True" Description="A checkmark glyph is automatically used as image for checkable menu items.">
+									<actipro:BarMenuItem Key="DefaultCheckSplitChild1" Label="BarMenuItem (Child 1)" />
+									<actipro:BarMenuItem Key="DefaultCheckSplitChild2" Label="BarMenuItem (Child 2)" />
+								</actipro:BarSplitMenuItem>
+								<actipro:BarSplitMenuItem Key="ExplicitImageSplit" Label="Explicit Image" UseLargeSize="True" ToggleType="CheckBox" IsChecked="True" LargeIcon="/Images/Icons/QuickStart32.png" Description="Explicit images also supported with a checked state.">
+									<actipro:BarMenuItem Key="ExplicitImageSplitChild1" Label="BarMenuItem (Child 1)" />
+									<actipro:BarMenuItem Key="ExplicitImageSplitChild2" Label="BarMenuItem (Child 2)" />
+								</actipro:BarSplitMenuItem>
+								<actipro:BarMenuSeparator />
+								<actipro:BarMenuHeading Label="Small Items in Same Menu" />
+								<actipro:BarMenuItem Key="Undo" SmallIcon="/Images/Icons/Undo16.png" />
+								<actipro:BarMenuItem Key="Redo" SmallIcon="/Images/Icons/Redo16.png" />
+
+							</actipro:BarPopupButton>
+						</actipro:RibbonGroup>
+					</actipro:RibbonTabItem>
+				</actipro:Ribbon>
+
+			</sampleBrowser:ControlExample.XamlContent>
+			
+			<sampleBrowser:ControlExample.MvvmContent>
+				<!-- MVVM-based sample -->
+				<actipro:Ribbon x:Name="largeSizeRibbonMvvm"
+					Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+					/>
+			</sampleBrowser:ControlExample.MvvmContent>
+			
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample Kind="Xaml" xml:space="preserve">
+				<![CDATA[
+<actipro:Ribbon ... >
+
+	<actipro:RibbonTabItem ... >
+		<actipro:RibbonGroup ... >
+						
+			<actipro:BarPopupButton ... >
+			
+				<!-- Set UseLargeSize="True" with optional Description and LargeIcon for large menu items -->
+
+				<actipro:BarMenuHeading Label="Large BarMenuItem Samples" />
+				<actipro:BarMenuItem UseLargeSize="True" Label="BarMenuItem" LargeIcon="/Images/Icons/New32.png" />
+				<actipro:BarMenuItem UseLargeSize="True" Label="BarMenuItem (Description)" Description="This is a large menu item." LargeIcon="/Images/Icons/New32.png" />
+				<actipro:BarMenuItem UseLargeSize="True" Label="BarMenuItem (Checkable)" ToggleType="CheckBox" IsChecked="True" LargeIcon="/Images/Icons/QuickStart32.png" />
+				<actipro:BarMenuItem UseLargeSize="True" Label="BarMenuItem (With Children)" LargeIcon="/Images/Icons/Open32.png">
+					<actipro:BarMenuItem ... />
+					<actipro:BarMenuItem ... />
+				</actipro:BarMenuItem>
+				
+				<actipro:BarMenuSeparator />
+
+				<actipro:BarMenuHeading Label="Large BarSplitMenuItem Samples" />
+				<actipro:BarSplitMenuItem UseLargeSize="True" Label="BarSplitMenuItem" LargeIcon="/Images/Icons/Save32.png">
+					<actipro:BarMenuItem ... />
+					<actipro:BarMenuItem ... />
+				</actipro:BarSplitMenuItem>
+				<actipro:BarSplitMenuItem UseLargeSize="True" Label="BarSplitMenuItem (Description)" Description="This is a large menu item." LargeIcon="/Images/Icons/Save32.png">
+					<actipro:BarMenuItem ... />
+					<actipro:BarMenuItem ... />
+				</actipro:BarSplitMenuItem>
+				<actipro:BarSplitMenuItem UseLargeSize="True" Label="BarSplitMenuItem (Checkable)" ToggleType="CheckBox" IsChecked="True" LargeIcon="/Images/Icons/Print32.png">
+					<actipro:BarMenuItem ... />
+					<actipro:BarMenuItem ... />
+				</actipro:BarSplitMenuItem>
+				
+			</actipro:BarPopupButton>
+
+		</actipro:RibbonGroup>
+	</actipro:RibbonTabItem>
+
+</actipro:Ribbon>
+				]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" xml:space="preserve">
+				<![CDATA[
+<!-- DataContext is bound to an instance of RibbonViewModel -->
+<actipro:Ribbon
+	DataContext="{Binding #sampleRootControl.LargeSizePopupMenuRibbonViewModel}"
+	Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+	/>
+				]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" Language="C#" xml:space="preserve">
+				<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm;
+...
+
+public partial class SampleRootControl : UserControl {
+
+	/// <summary>
+	/// Creates the ribbon view model.
+	/// </summary>
+	private static void CreateLargeSizePopupMenuRibbonViewModel() {
+		// Some view model properties omitted that are unrelated to the sample
+		return new RibbonViewModel() {
+			Tabs = {
+				new RibbonTabViewModel("SampleTab") {
+					Groups = {
+						new RibbonGroupViewModel("SampleGroup") {
+							Items = {
+							
+								// Set UseLargeMenuItem = true with optional Description and LargeIcon for large menu items
+
+								new BarPopupButtonViewModel("PopupMenu") {
+									LargeIcon = ImageLoader.GetIcon("Menu32.png"),
+									MenuItems = {
+
+										new BarButtonViewModel() {
+											Label = "BarButtonViewModel",
+											Description = "This is a large menu item.",
+											LargeIcon = "/Images/Icons/QuickStart32.png",
+											UseLargeMenuItem = true,
+										},
+
+										new BarButtonViewModel() {
+											Label = "BarButtonViewModel (No Description)",
+											LargeIcon = "/Images/Icons/QuickStart32.png",
+											UseLargeMenuItem = true,
+										},
+
+										new BarPopupButtonViewModel() {
+											Label = "BarPopupButtonViewModel",
+											Description = "This is a large menu item with children.",
+											LargeIcon = "/Images/Icons/QuickStart32.png",
+											UseLargeMenuItem = true,
+											MenuItems = {
+												new BarButtonViewModel() { Label = "BarButtonViewModel (Child 1)" },
+												new BarButtonViewModel() { Label = "BarButtonViewModel (Child 2)" },
+											}
+										},
+
+										new BarToggleButtonViewModel() {
+											Label = "BarToggleButtonViewModel (Default Check)",
+											Description = "A checkmark glyph is automatically used as image for checkable menu items.",
+											IsChecked = true,
+											UseLargeMenuItem = true,
+										},
+
+										new BarSplitToggleButtonViewModel() {
+											Label = "BarSplitToggleButtonViewModel (Explicit Image)",
+											Description = "Explicit images also supported with a checked state.",
+											IsChecked = true,
+											LargeIcon = "/Images/Icons/QuickStart32.png",
+											UseLargeMenuItem = true,
+											MenuItems = {
+												new BarButtonViewModel() { Label = "BarButtonViewModel (Child 1)" },
+												new BarButtonViewModel() { Label = "BarButtonViewModel (Child 2)" },
+											}
+										},
+
+									}
+								},
+
+							},
+						},
+					}
+				},
+			}
+		};
+	}
+	
+	/// <summary>
+	/// Gets the view model to be bound to the ribbon.
+	/// </summary>
+	public RibbonViewModel LargeSizePopupMenuRibbonViewModel { get; } = CreateLargeSizePopupMenuRibbonViewModel();
+	
+}
+				]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Input gesture"
+			Footer="Input gestures are populated, when provided.">
+
+			<actipro:Ribbon IsApplicationButtonVisible="False" LayoutMode="Simplified" QuickAccessToolBarMode="None">
+
+				<actipro:RibbonTabItem Key="SampleTab">
+					<actipro:RibbonGroup Key="SampleGroup">
+
+						<actipro:BarPopupButton Key="PopupMenu" SmallIcon="/Images/Icons/KeyboardShortcut16.png" LargeIcon="/Images/Icons/KeyboardShortcut32.png" ToolBarItemVariantBehavior="All">
+
+							<actipro:BarMenuHeading Label="From KeyGesture" />
+							<actipro:BarMenuItem Key="Cut" SmallIcon="/Images/Icons/Cut16.png" InputGesture="{x:Static TextBox.CutGesture}" />
+							<actipro:BarMenuItem Key="Copy" SmallIcon="/Images/Icons/Copy16.png" InputGesture="{x:Static TextBox.CopyGesture}" />
+							<actipro:BarMenuItem Key="Paste" SmallIcon="/Images/Icons/Paste16.png" InputGesture="{x:Static TextBox.PasteGesture}" />
+							<actipro:BarMenuSeparator />
+							<actipro:BarMenuHeading Label="Parsed From Text" />
+							<actipro:BarMenuItem Key="Custom" SmallIcon="/Images/Icons/QuickStart16.png" InputGesture="Ctrl+Shift+U" />
+							<actipro:BarMenuSeparator />
+							<actipro:BarMenuItem Key="PasteLarge" Label="Large Menu Item" UseLargeSize="True" Description="Gestures not shown on large menus" LargeIcon="/Images/Icons/Paste32.png" InputGesture="{x:Static TextBox.PasteGesture}" />
+
+						</actipro:BarPopupButton>
+					</actipro:RibbonGroup>
+				</actipro:RibbonTabItem>
+			</actipro:Ribbon>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+				<![CDATA[
+<actipro:Ribbon ... >
+
+	<actipro:RibbonTabItem ... >
+		<actipro:RibbonGroup ... >
+						
+			<actipro:BarPopupButton ... >
+
+				<actipro:BarMenuHeading Label="From KeyGesture" />
+				<actipro:BarMenuItem Key="Cut" InputGesture="{x:Static TextBox.CutGesture}" ... />
+				<actipro:BarMenuItem Key="Copy" InputGesture="{x:Static TextBox.CopyGesture}" ... />
+				<actipro:BarMenuItem Key="Paste" InputGesture="{x:Static TextBox.PasteGesture}" ... />
+
+				<actipro:BarMenuSeparator />
+
+				<actipro:BarMenuHeading Label="Parsed From Text" />
+				<actipro:BarMenuItem Key="Custom" InputGesture="Ctrl+Shift+U" ... />
+
+				<actipro:BarMenuSeparator />
+
+				<actipro:BarMenuItem Key="PasteLarge" UseLargeSize="True" InputGesture="{x:Static TextBox.PasteGesture}" ... />
+
+			</actipro:BarPopupButton>
+
+		</actipro:RibbonGroup>
+	</actipro:RibbonTabItem>
+
+</actipro:Ribbon>
+				]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Vertical scrolling"
+			Footer="Vertical scrolling is fully supported when the menu is too tall.">
+
+			<actipro:Ribbon IsApplicationButtonVisible="False" LayoutMode="Simplified" QuickAccessToolBarMode="None">
+
+				<actipro:RibbonTabItem Key="SampleTab">
+					<actipro:RibbonGroup Key="SampleGroup">
+
+						<actipro:BarPopupButton Key="PopupMenu" SmallIcon="/Images/Icons/VerticalScroll16.png" LargeIcon="/Images/Icons/VerticalScroll32.png" ToolBarItemVariantBehavior="All">
+
+							<actipro:BarMenuHeading Label="Group A" />
+							<actipro:BarMenuItem Key="BarMenuItemA0" KeyTipText="A0" Label="BarMenuItem 0" />
+							<actipro:BarMenuItem Key="BarMenuItemA1" KeyTipText="A1" Label="BarMenuItem 1" />
+							<actipro:BarMenuItem Key="BarMenuItemA2" KeyTipText="A2" Label="BarMenuItem 2" />
+							<actipro:BarMenuItem Key="BarMenuItemA3" KeyTipText="A3" Label="BarMenuItem 3" />
+							<actipro:BarMenuItem Key="BarMenuItemA4" KeyTipText="A4" Label="BarMenuItem 4" />
+							<actipro:BarMenuItem Key="BarMenuItemA5" KeyTipText="A5" Label="BarMenuItem 5" />
+							<actipro:BarMenuItem Key="BarMenuItemA6" KeyTipText="A6" Label="BarMenuItem 6" />
+							<actipro:BarMenuItem Key="BarMenuItemA7" KeyTipText="A7" Label="BarMenuItem 7" />
+							<actipro:BarMenuItem Key="BarMenuItemA8" KeyTipText="A8" Label="BarMenuItem 8" />
+							<actipro:BarMenuItem Key="BarMenuItemA9" KeyTipText="A9" Label="BarMenuItem 9" />
+							<actipro:BarMenuSeparator />
+							<actipro:BarMenuHeading Label="Group B" />
+							<actipro:BarMenuItem Key="BarMenuItemB0" KeyTipText="B0" Label="BarMenuItem 0" />
+							<actipro:BarMenuItem Key="BarMenuItemB1" KeyTipText="B1" Label="BarMenuItem 1" />
+							<actipro:BarMenuItem Key="BarMenuItemB2" KeyTipText="B2" Label="BarMenuItem 2" />
+							<actipro:BarMenuItem Key="BarMenuItemB3" KeyTipText="B3" Label="BarMenuItem 3" />
+							<actipro:BarMenuItem Key="BarMenuItemB4" KeyTipText="B4" Label="BarMenuItem 4" />
+							<actipro:BarMenuItem Key="BarMenuItemB5" KeyTipText="B5" Label="BarMenuItem 5" />
+							<actipro:BarMenuItem Key="BarMenuItemB6" KeyTipText="B6" Label="BarMenuItem 6" />
+							<actipro:BarMenuItem Key="BarMenuItemB7" KeyTipText="B7" Label="BarMenuItem 7" />
+							<actipro:BarMenuItem Key="BarMenuItemB8" KeyTipText="B8" Label="BarMenuItem 8" />
+							<actipro:BarMenuItem Key="BarMenuItemB9" KeyTipText="B9" Label="BarMenuItem 9" />
+							<actipro:BarMenuSeparator />
+							<actipro:BarMenuHeading Label="Group C" />
+							<actipro:BarMenuItem Key="BarMenuItemC0" KeyTipText="C0" Label="BarMenuItem 0" />
+							<actipro:BarMenuItem Key="BarMenuItemC1" KeyTipText="C1" Label="BarMenuItem 1" />
+							<actipro:BarMenuItem Key="BarMenuItemC2" KeyTipText="C2" Label="BarMenuItem 2" />
+							<actipro:BarMenuItem Key="BarMenuItemC3" KeyTipText="C3" Label="BarMenuItem 3" />
+							<actipro:BarMenuItem Key="BarMenuItemC4" KeyTipText="C4" Label="BarMenuItem 4" />
+							<actipro:BarMenuItem Key="BarMenuItemC5" KeyTipText="C5" Label="BarMenuItem 5" />
+							<actipro:BarMenuItem Key="BarMenuItemC6" KeyTipText="C6" Label="BarMenuItem 6" />
+							<actipro:BarMenuItem Key="BarMenuItemC7" KeyTipText="C7" Label="BarMenuItem 7" />
+							<actipro:BarMenuItem Key="BarMenuItemC8" KeyTipText="C8" Label="BarMenuItem 8" />
+							<actipro:BarMenuItem Key="BarMenuItemC9" KeyTipText="C9" Label="BarMenuItem 9" />
+							<actipro:BarMenuSeparator />
+							<actipro:BarMenuHeading Label="Group D" />
+							<actipro:BarMenuItem Key="BarMenuItemD0" KeyTipText="D0" Label="BarMenuItem 0" />
+							<actipro:BarMenuItem Key="BarMenuItemD1" KeyTipText="D1" Label="BarMenuItem 1" />
+							<actipro:BarMenuItem Key="BarMenuItemD2" KeyTipText="D2" Label="BarMenuItem 2" />
+							<actipro:BarMenuItem Key="BarMenuItemD3" KeyTipText="D3" Label="BarMenuItem 3" />
+							<actipro:BarMenuItem Key="BarMenuItemD4" KeyTipText="D4" Label="BarMenuItem 4" />
+							<actipro:BarMenuItem Key="BarMenuItemD5" KeyTipText="D5" Label="BarMenuItem 5" />
+							<actipro:BarMenuItem Key="BarMenuItemD6" KeyTipText="D6" Label="BarMenuItem 6" />
+							<actipro:BarMenuItem Key="BarMenuItemD7" KeyTipText="D7" Label="BarMenuItem 7" />
+							<actipro:BarMenuItem Key="BarMenuItemD8" KeyTipText="D8" Label="BarMenuItem 8" />
+							<actipro:BarMenuItem Key="BarMenuItemD9" KeyTipText="D9" Label="BarMenuItem 9" />
+							<actipro:BarMenuSeparator />
+							<actipro:BarMenuHeading Label="Group E" />
+							<actipro:BarMenuItem Key="BarMenuItemE0" KeyTipText="E0" Label="BarMenuItem 0" />
+							<actipro:BarMenuItem Key="BarMenuItemE1" KeyTipText="E1" Label="BarMenuItem 1" />
+							<actipro:BarMenuItem Key="BarMenuItemE2" KeyTipText="E2" Label="BarMenuItem 2" />
+							<actipro:BarMenuItem Key="BarMenuItemE3" KeyTipText="E3" Label="BarMenuItem 3" />
+							<actipro:BarMenuItem Key="BarMenuItemE4" KeyTipText="E4" Label="BarMenuItem 4" />
+							<actipro:BarMenuItem Key="BarMenuItemE5" KeyTipText="E5" Label="BarMenuItem 5" />
+							<actipro:BarMenuItem Key="BarMenuItemE6" KeyTipText="E6" Label="BarMenuItem 6" />
+							<actipro:BarMenuItem Key="BarMenuItemE7" KeyTipText="E7" Label="BarMenuItem 7" />
+							<actipro:BarMenuItem Key="BarMenuItemE8" KeyTipText="E8" Label="BarMenuItem 8" />
+							<actipro:BarMenuItem Key="BarMenuItemE9" KeyTipText="E9" Label="BarMenuItem 9" />
+							<actipro:BarMenuSeparator />
+							<actipro:BarMenuHeading Label="Group F" />
+							<actipro:BarMenuItem Key="BarMenuItemF0" KeyTipText="F0" Label="BarMenuItem 0" />
+							<actipro:BarMenuItem Key="BarMenuItemF1" KeyTipText="F1" Label="BarMenuItem 1" />
+							<actipro:BarMenuItem Key="BarMenuItemF2" KeyTipText="F2" Label="BarMenuItem 2" />
+							<actipro:BarMenuItem Key="BarMenuItemF3" KeyTipText="F3" Label="BarMenuItem 3" />
+							<actipro:BarMenuItem Key="BarMenuItemF4" KeyTipText="F4" Label="BarMenuItem 4" />
+							<actipro:BarMenuItem Key="BarMenuItemF5" KeyTipText="F5" Label="BarMenuItem 5" />
+							<actipro:BarMenuItem Key="BarMenuItemF6" KeyTipText="F6" Label="BarMenuItem 6" />
+							<actipro:BarMenuItem Key="BarMenuItemF7" KeyTipText="F7" Label="BarMenuItem 7" />
+							<actipro:BarMenuItem Key="BarMenuItemF8" KeyTipText="F8" Label="BarMenuItem 8" />
+							<actipro:BarMenuItem Key="BarMenuItemF9" KeyTipText="F9" Label="BarMenuItem 9" />
+							<actipro:BarMenuSeparator />
+							<actipro:BarMenuHeading Label="Group G" />
+							<actipro:BarMenuItem Key="BarMenuItemG0" KeyTipText="G0" Label="BarMenuItem 0" />
+							<actipro:BarMenuItem Key="BarMenuItemG1" KeyTipText="G1" Label="BarMenuItem 1" />
+							<actipro:BarMenuItem Key="BarMenuItemG2" KeyTipText="G2" Label="BarMenuItem 2" />
+							<actipro:BarMenuItem Key="BarMenuItemG3" KeyTipText="G3" Label="BarMenuItem 3" />
+							<actipro:BarMenuItem Key="BarMenuItemG4" KeyTipText="G4" Label="BarMenuItem 4" />
+							<actipro:BarMenuItem Key="BarMenuItemG5" KeyTipText="G5" Label="BarMenuItem 5" />
+							<actipro:BarMenuItem Key="BarMenuItemG6" KeyTipText="G6" Label="BarMenuItem 6" />
+							<actipro:BarMenuItem Key="BarMenuItemG7" KeyTipText="G7" Label="BarMenuItem 7" />
+							<actipro:BarMenuItem Key="BarMenuItemG8" KeyTipText="G8" Label="BarMenuItem 8" />
+							<actipro:BarMenuItem Key="BarMenuItemG9" KeyTipText="G9" Label="BarMenuItem 9" />
+
+						</actipro:BarPopupButton>
+					</actipro:RibbonGroup>
+				</actipro:RibbonTabItem>
+			</actipro:Ribbon>
+
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Advanced paste options"
+			Footer="A sample clipboard menu using a gallery to provide multiple paste options.">
+
+			<actipro:Ribbon IsApplicationButtonVisible="False" LayoutMode="Simplified" QuickAccessToolBarMode="None">
+
+				<actipro:RibbonTabItem Key="SampleTab">
+					<actipro:RibbonGroup Key="SampleGroup">
+
+						<actipro:BarPopupButton Key="PopupMenu" SmallIcon="/Images/Icons/Paste16.png" LargeIcon="/Images/Icons/Paste32.png" ToolBarItemVariantBehavior="All">
+
+							<actipro:BarMenuItem Key="Cut" SmallIcon="/Images/Icons/Cut16.png" />
+							<actipro:BarMenuItem Key="Copy" SmallIcon="/Images/Icons/Copy16.png" />
+							<actipro:BarMenuGallery Key="PasteOptions"
+								AreSurroundingSeparatorsAllowed="True"
+								IsSelectionSupported="False"
+								ItemContainerTheme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.BarGalleryItemControlTheme}}"
+								ItemsSource="{Binding #sampleRootControl.PasteOptions}"
+								ItemTemplate="{StaticResource PasteOptionGalleryItemTemplate}"
+								MaxColumnCount="6"
+								UseMenuItemIndent="False" />
+							<actipro:BarMenuItem Key="PasteSpecial" Label="Paste Special..." KeyTipText="S" />
+
+						</actipro:BarPopupButton>
+					</actipro:RibbonGroup>
+				</actipro:RibbonTabItem>
+			</actipro:Ribbon>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+				<![CDATA[
+<actipro:Ribbon ... >
+
+	<actipro:Ribbon.Resources>
+
+		<!-- Custom DataTemplate used by XAML and MVVM samples to display special paste options in a menu -->
+		<DataTemplate x:Key="PasteOptionGalleryItemTemplate" DataType="{x:Type local:PasteOptionGalleryItem}">
+			<actipro:DynamicImage Margin="4" MaxHeight="24" MaxWidth="24" Source="{Binding Image}" HorizontalAlignment="Center" VerticalAlignment="Center" />
+		</DataTemplate>
+
+	</actipro:Ribbon.Resources>
+
+	<actipro:RibbonTabItem ... >
+		<actipro:RibbonGroup ... >
+
+			<actipro:BarPopupButton Key="PopupMenu" ... >
+
+				<actipro:BarMenuItem Key="Cut" ... />
+				<actipro:BarMenuItem Key="Copy" ... />
+				<actipro:BarMenuGallery Key="PasteOptions"
+					AreSurroundingSeparatorsAllowed="True"
+					IsSelectionSupported="False"
+					ItemContainerTheme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.BarGalleryItemControlTheme}}"
+					ItemsSource="{Binding PasteOptions}"
+					ItemTemplate="{StaticResource PasteOptionGalleryItemTemplate}"
+					MaxColumnCount="6" />
+				<actipro:BarMenuItem Key="PasteSpecial" Label="Paste Special..." KeyTipText="S" />
+
+			</actipro:BarPopupButton>
+
+		</actipro:RibbonGroup>
+	</actipro:RibbonTabItem>
+
+</actipro:Ribbon>
+				]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+public partial class SampleRootControl : UserControl {
+
+	/// <summary>
+	/// The collection of view models for the available paste options used by the "Advanced paste options" sample.
+	/// </summary>
+	public ICollectionView PasteOptions
+		=> _pasteOptions ??= PasteOptionGalleryItem.CreateDefaultCollectionView();
+
+}
+					]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm;
+...
+
+/// <summary>
+/// Represents a paste option for a gallery item used by the "Advanced Paste Options" showcase sample.
+/// </summary>
+public class PasteOptionGalleryItem : BarGalleryItemViewModel<PasteSpecialKind> {
+
+	private IImage? _image;
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	// OBJECT
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/// <summary>
+	/// Initializes a new instance of the <see cref="PasteOptionGalleryItem"/> class.
+	/// </summary>
+	/// <param name="kind">The kind of special paste operation represented by the gallery item.</param>
+	public PasteOptionGalleryItem(PasteSpecialKind kind)
+		: base(kind, category: "Paste Options:") {
+
+		// NOTE: The base gallery item category is used to display the category name above the paste options
+	}
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	// PUBLIC PROCEDURES
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/// <summary>
+	/// Creates the default <see cref="ICollectionView"/> of <see cref="PasteOptionGalleryItem"/> instances.
+	/// </summary>
+	public static ICollectionView CreateDefaultCollectionView() {
+		// NOTE: An ICollectionView is necessary to support the display of categories
+		return BarGalleryViewModel.CreateCollectionView(new [] {
+			new PasteOptionGalleryItem(PasteSpecialKind.MergeFormatting) { Label = "Merge Formatting", KeyTipText = "M", Image = ImageLoader.GetIcon("PasteGalleryMerge24.png") },
+			new PasteOptionGalleryItem(PasteSpecialKind.TextOnly) { Label = "Keep Text Only", KeyTipText = "T", Image = ImageLoader.GetIcon("PasteGalleryTextOnly24.png") },
+			new PasteOptionGalleryItem(PasteSpecialKind.Picture) { Label = "Picture", KeyTipText = "U", Image = ImageLoader.GetIcon("PasteGalleryPicture24.png") },
+		}, categorize: true);
+	}
+
+	/// <summary>
+	/// The image for this paste option.
+	/// </summary>
+	public IImage? Image {
+		get => _image;
+		set => SetProperty(ref _image, value);
+	}
+
+}
+				]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+/// <summary>
+/// Defines the kind of "Paste Special" operation to be performed.
+/// </summary>
+public enum PasteSpecialKind {
+
+	/// <summary>
+	/// Default.
+	/// </summary>
+	Default = 0,
+
+	/// <summary>
+	/// Merge formatting.
+	/// </summary>
+	MergeFormatting,
+
+	/// <summary>
+	/// Paste as picture.
+	/// </summary>
+	Picture,
+
+	/// <summary>
+	/// Text only.
+	/// </summary>
+	TextOnly,
+}
+				]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="View options with color tagging"
+			Footer="A sample 'View' menu that includes a gallery to provide color-based tagging.">
+
+			<actipro:Ribbon IsApplicationButtonVisible="False" LayoutMode="Simplified" QuickAccessToolBarMode="None">
+
+				<actipro:RibbonTabItem Key="SampleTab">
+					<actipro:RibbonGroup Key="SampleGroup">
+
+						<actipro:BarPopupButton Key="PopupMenu" SmallIcon="/Images/Icons/QuickStartGreen16.png" LargeIcon="/Images/Icons/QuickStartGreen32.png" ToolBarItemVariantBehavior="All">
+
+							<actipro:BarMenuItem Key="UseStacks" />
+							<actipro:BarMenuItem Key="SortBy" KeyTipText="B">
+								<actipro:BarMenuItem Key="Name" ToggleType="CheckBox" IsChecked="True" />
+								<actipro:BarMenuItem Key="DateModified" />
+							</actipro:BarMenuItem>
+							<actipro:BarMenuItem Key="CleanUpSelections" />
+							<actipro:BarMenuItem Key="ShowViewOptions" KeyTipText="O" />
+							<actipro:BarMenuSeparator />
+							<actipro:BarMenuGallery Key="TagColors"
+								AreSurroundingSeparatorsAllowed="False"
+								ItemContainerTheme="{StaticResource CircularColorSwatchGalleryItemTheme}"
+								ItemSpacing="6"
+								ItemsSource="{Binding #sampleRootControl.TagColors}"
+								ItemTemplate="{StaticResource CircleStyleGalleryItemItemplate}"
+								MinColumnCount="7"
+								UseAccentedItemBorder="True"
+								UseMenuItemIndent="True" />
+							<actipro:BarMenuItem Key="Tags" Label="Tags..." />
+							<actipro:BarMenuSeparator />
+							<actipro:BarMenuItem Key="Services" KeyTipText="V">
+								<actipro:BarMenuItem Key="SampleService" />
+							</actipro:BarMenuItem>
+							
+						</actipro:BarPopupButton>
+					</actipro:RibbonGroup>
+				</actipro:RibbonTabItem>
+			</actipro:Ribbon>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+				<![CDATA[
+<actipro:Ribbon ... >
+
+	<actipro:Ribbon.Resources>
+
+		<!-- Extend a theme for BarGalleryItem that should use circles instead of rectangles -->
+		<ControlTheme x:Key="CircularColorSwatchGalleryItemTheme" TargetType="{x:Type actipro:BarGalleryItem}" BasedOn="{actipro:ControlTheme BarGalleryItem}">
+			<!-- Define a corner radius that matches the circle template so the accented item border will match the template. -->
+			<Setter Property="CornerRadius" Value="8" />
+		</ControlTheme>
+		
+		<!-- Custom DataTemplate used by XAML and MVVM samples to use circles (instead of squares) for gallery items -->
+		<DataTemplate x:Key="CircleStyleGalleryItemItemplate" x:DataType="{x:Type actipro:ColorBarGalleryItemViewModel}">
+			<!-- The CornerRadius defined here must match the CornerRadius defined by CircularColorSwatchGalleryItemTheme -->
+			<Border Width="16" Height="16"
+				BorderBrush="{actipro:ThemeResource Container3BorderBrush}"
+				BorderThickness="1"
+				CornerRadius="8">
+				<Border.Background>
+					<SolidColorBrush Color="{Binding Value}" />
+				</Border.Background>
+			</Border>
+		</DataTemplate>
+
+	</actipro:Ribbon.Resources>
+
+	<actipro:RibbonTabItem ... >
+		<actipro:RibbonGroup ... >
+
+			<actipro:BarPopupButton Key="PopupMenu" ... >
+
+				<actipro:BarMenuItem Key="UseStacks" />
+
+				<actipro:BarMenuItem Key="SortBy" KeyTipText="B">
+					<actipro:BarMenuItem Key="Name" ToggleType="CheckBox" IsChecked="True" />
+					<actipro:BarMenuItem Key="DateModified" />
+				</actipro:BarMenuItem>
+
+				<actipro:BarMenuItem Key="CleanUpSelections" />
+
+				<actipro:BarMenuItem Key="ShowViewOptions" KeyTipText="O" />
+
+				<actipro:BarMenuSeparator />
+
+				<actipro:BarMenuGallery Key="TagColors"
+					AreSurroundingSeparatorsAllowed="False"
+					ItemContainerTheme="{StaticResource CircularColorSwatchGalleryItemTheme}"
+					ItemSpacing="6"
+					ItemsSource="{Binding #sampleRootControl.TagColors}"
+					ItemTemplate="{StaticResource CircleStyleGalleryItemItemplate}"
+					MinColumnCount="7"
+					UseAccentedItemBorder="True"
+					UseMenuItemIndent="True" />
+				
+				<actipro:BarMenuItem Key="Tags" Label="Tags..." />
+				
+				<actipro:BarMenuSeparator />
+				
+				<actipro:BarMenuItem Key="Services" KeyTipText="V">
+					<actipro:BarMenuItem Key="SampleService" />
+				</actipro:BarMenuItem>
+
+			</actipro:BarPopupButton>
+
+		</actipro:RibbonGroup>
+	</actipro:RibbonTabItem>
+
+</actipro:Ribbon>
+				]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm;
+
+public partial class SampleRootControl : UserControl {
+
+	/// <summary>
+	/// The collection of view models for the available tag colors used by the "View Options with Color Tagging" showcase sample.
+	/// </summary>
+	public ObservableCollection<TagColorGalleryItem> TagColors { get; }
+		= new(TagColorGalleryItem.CreateDefaultCollection());
+
+}
+					]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm;
+
+/// <summary>
+/// Represents a tag color for a gallery item used by the "View Options with Color Tagging" showcase sample.
+/// </summary>
+public class TagColorGalleryItem : ColorBarGalleryItemViewModel {
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	// OBJECT
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/// <summary>
+	/// Initializes a new instance of the <see cref="TagColorGalleryItem"/> class.
+	/// </summary>
+	/// <param name="value">The color associated with the tag.</param>
+	/// <param name="label">The label associated with the tag.</param>
+	public TagColorGalleryItem(UIColor value, string label)
+		: base(value.ToRgb(), category: null, label) { }
+
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	// PUBLIC PROCEDURES
+	/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/// <summary>
+	/// Creates the default collection of <see cref="TagColorGalleryItem"/> instances.
+	/// </summary>
+	/// <returns>An array of type <see cref="TagColorGalleryItem"/>.</returns>
+	public static TagColorGalleryItem[] CreateDefaultCollection() {
+		return new TagColorGalleryItem[] {
+			new TagColorGalleryItem(UIColor.Parse("#f04f58"), "Red"),
+			new TagColorGalleryItem(UIColor.Parse("#f1a247"), "Orange"),
+			new TagColorGalleryItem(UIColor.Parse("#f3cf4a"), "Yellow"),
+			new TagColorGalleryItem(UIColor.Parse("#5dd260"), "Green"),
+			new TagColorGalleryItem(UIColor.Parse("#5c85f5"), "Blue"),
+			new TagColorGalleryItem(UIColor.Parse("#b163d3"), "Purple"),
+			new TagColorGalleryItem(UIColor.Parse("#9c9ca0"), "Gray"),
+		};
+	}
+
+}
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+
+</UserControl>

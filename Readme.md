@@ -14,8 +14,8 @@ Samples, documentation, and other related open-source projects for [Actipro Aval
 
 ## Table of Contents
 
-- [Actipro Avalonia Free Products](#actipro-avalonia-free-products)
 - [Actipro Avalonia Pro Products](#actipro-avalonia-pro-products)
+- [Actipro Avalonia Free Products](#actipro-avalonia-free-products)
 - [Getting Started](#getting-started)
   - [Download and Run Samples](#download-and-run-samples)
   - [Review Product Documentation](#review-product-documentation)
@@ -25,6 +25,18 @@ Samples, documentation, and other related open-source projects for [Actipro Aval
 - [Contributing](#contributing)
 - [Support](#support)
 - [Licensing](#licensing)
+
+## Actipro Avalonia Pro Products
+
+Elevate your application by licensing professionally designed commercial controls and getting access to the XAML source for all of our default control styles and themes.
+
+![Bars](.github/image-content/bars-welcome.gif)
+
+[Actipro Bars](https://www.actiprosoftware.com/docs/controls/avalonia/bars/index) contains everything you need to implement advanced Office-like ribbon, toolbar, and menu functionality in your Avalonia applications.  Multiple ribbon layout modes, variant sizing, content-rich galleries, screen tips, key tips, backstage, and MVVM support are all included.
+
+![Fundamentals](.github/image-content/fundamentals-welcome.png)
+
+[Actipro Fundamentals](https://www.actiprosoftware.com/docs/controls/avalonia/fundamentals/index) provides a collection of advanced controls that are useful for many different types of applications, including settings configuration controls, user prompts, message boxes, info bars, avatars, badges, segmented bars, progress spinners, and more.
 
 ## Actipro Avalonia Free Products
 
@@ -39,14 +51,6 @@ Several Actipro products are **freely available** for anyone to use in their app
 The [Actipro Shared Library](https://www.actiprosoftware.com/docs/controls/avalonia/shared/index) is a common control library referenced by all our Actipro Avalonia controls. It contains several very useful controls, components, value converters, and utilities that can be used in your projects.
 
 The [Actipro Core Library](https://www.actiprosoftware.com/docs/controls/avalonia/core/index) is a class library that is completely UI framework agnostic. It contains numerous helpful utilities and base classes that can be used in your .NET projects.
-
-## Actipro Avalonia Pro Products
-
-Elevate your application by licensing additional professionally designed commercial controls.
-
-![Themes](.github/image-content/fundamentals-welcome.png)
-
-[Actipro Fundamentals](https://www.actiprosoftware.com/docs/controls/avalonia/fundamentals/index) provides a collection of advanced controls that are useful for many different types of applications, including user prompts, message boxes, avatars, badges, progress spinners, and more.
 
 ## Getting Started
 
@@ -82,6 +86,10 @@ One of these NuGet packages must be referenced at a minimum to use our products:
 - [ActiproSoftware.Controls.Avalonia.Pro](https://www.nuget.org/packages/ActiproSoftware.Controls.Avalonia.Pro) - Contains all of the Actipro Avalonia Pro product assemblies, and is for customers who have licensed the Actipro Avalonia Pro controls.  Also includes the `ActiproSoftware.Controls.Avalonia` NuGet package as a dependency.
 
 #### Optional NuGet Packages
+
+This NuGet package is for customers who have licensed the Actipro Avalonia Pro controls:
+
+- [ActiproSoftware.Controls.Avalonia.Bars.Mvvm](https://www.nuget.org/packages/ActiproSoftware.Controls.Avalonia.Bars.Mvvm) - Free classes and themes that support using the MVVM (Model-View-ViewModel) pattern with the Actipro Bars product.
 
 These two NuGet packages can be referenced if you wish to use Actipro's themes for the native `ColorPicker` and/or `DataGrid` controls that complement other Actipro Avalonia control themes:
 

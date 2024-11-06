@@ -180,7 +180,7 @@
 					</StackPanel>
 
 					<StackPanel Grid.Column="4" Classes="form-input">
-						<TextBlock Classes="theme-form-control-label" Text="ZIP / Postal Code" />
+						<TextBlock Classes="theme-form-control-label" Text="ZIP / Postal code" />
 						<TextBox />
 					</StackPanel>
 				</Grid>
@@ -205,9 +205,9 @@
 				</DockPanel>
 			</StackPanel>
 
-			<UniformGrid Classes="form-buttons" Columns="2">
-				<Button Classes="theme-solid accent" Content="Save" />
-				<Button Classes="theme-subtle" Content="Cancel" />
+			<UniformGrid Classes="form-buttons" Columns="2" >
+				<Button Classes="theme-solid accent" Content="Save" FlowDirection="LeftToRight" />
+				<Button Classes="theme-subtle" Content="Cancel" FlowDirection="LeftToRight" />
 			</UniformGrid>
 
 		</StackPanel>

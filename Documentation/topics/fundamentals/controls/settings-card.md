@@ -105,9 +105,9 @@ The [SettingsCard](xref:@ActiproUIRoot.Controls.SettingsCard) supports two icons
 - [HeaderIcon](xref:@ActiproUIRoot.Controls.SettingsCard.HeaderIcon) - An icon displayed on the left side of the card with a default size of `24x24`.  This icon is typically related to the value(s) defined by the setting.  For example, a speaker icon might be used for a setting related to output sound volume.
 - [ActionIcon](xref:@ActiproUIRoot.Controls.SettingsCard.ActionIcon) - Typically used for cards with click enabled (see the "Enable Click" topic below), this icon is displayed on the right side of the card with a default size of `16x16`.  It is most often related to the action that will be performed if a card is clicked.  For example, if clicking a card opens a new window, an icon that represents opening an external window can help convey to the user what will happen if the card is clicked.
 
-The following sample demonstrates two different techniques for defining either icon, but any content supported by `ContentPresenter` can be used to define the icons (like `Image` or @if (avalonia) { [DynamicImage](../../shared/controls/dynamic-image.md) }@if (wpf) { [DynamicImage](../../shared/windows-controls/dynamicimage.md) } controls):
-
 @if (avalonia) {
+The following sample demonstrates two different techniques for defining either icon, but any content supported by [Icon Presenter](../../themes/icon-presenter.md) can be used to define the icons (like `IImage` data, `PathIcon` control, or [DynamicImage](../../shared/controls/dynamic-image.md) control):
+
 ```xaml
 xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 ...
@@ -129,6 +129,8 @@ xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 ```
 }
 @if (wpf) {
+The following sample demonstrates two different techniques for defining either icon, but any content supported by `ContentPresenter` can be used to define the icons (like `Image` or [DynamicImage](../../shared/windows-controls/dynamicimage.md) controls):
+
 ```xaml
 xmlns:views="http://schemas.actiprosoftware.com/winfx/xaml/views"
 xmlns:themes="http://schemas.actiprosoftware.com/winfx/xaml/themes"

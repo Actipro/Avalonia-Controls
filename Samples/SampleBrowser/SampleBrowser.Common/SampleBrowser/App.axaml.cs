@@ -11,6 +11,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Avalonia.Styling;
 using Avalonia.Data.Core.Plugins;
+using System.Reflection;
 #if FLUENT_THEME
 using Avalonia.Themes.Fluent;
 #elif SIMPLE_THEME
@@ -50,6 +51,9 @@ namespace ActiproSoftware.SampleBrowser {
 		public override void Initialize() {
 			_logger?.LogInformation("Initializing app from XAML...");
 			AvaloniaXamlLoader.Load(this);
+
+			// Configure ImageProvider to use this assembly as the base URI for relative image paths
+			ImageProvider.Default.RelativePathBaseUri = new System.Uri("avares://" + Assembly.GetExecutingAssembly().GetName().Name);
 			
 			#if FLUENT_THEME
 			// Fluent theme must be loaded before Actipro themes

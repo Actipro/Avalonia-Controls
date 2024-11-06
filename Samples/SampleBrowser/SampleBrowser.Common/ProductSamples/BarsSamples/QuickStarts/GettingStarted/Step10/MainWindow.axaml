@@ -1,0 +1,208 @@
+<!--
+
+RIBBON GETTING STARTED SERIES - STEP 10
+
+STEP SUMMARY:
+
+	Update the Backstage with "Home" and "New" tabs that, when selected, will present tab-specific
+	content in the Backstage.
+	
+CHANGES SINCE LAST STEP:
+	
+	Added "SampleBackstageHeadingTextBlockStyle" and "SampleBackstageSubHeadingTextBlockStyle" themes
+	to be reused within Backstage Tab content.
+	
+	Added a TypedDataTemplateSelector instance as a resource for determining which IDataTemplate to be
+	used for the Home and New tabs. Updated RibbonBackstageViewModel.ContentTemplate to use this
+	resource (via code behind).
+	
+	Added the HomeRibbonBackstageTabViewModel and NewRibbonBackstageTabViewModel classes.
+	
+EXPECTED OPERATION:
+	
+	When this sample window is opened, the "File" Application Button will be displayed next to the Ribbon Tabs.
+	Clicking the Application Button will reveal a RibbonBackstage that covers the entire application window. The
+	"Home" and "New" tabs are displayed aligned to the top and separated from the previously defined "Close"
+	and "Print" buttons.
+	
+	Clicking the "Home" or "New" tabs will show additional content without closing the Backstage.
+	
+	On the "New" tab, clicking either button for a new document will show a popup message that the command
+	has not been implemented and the Backstage will remain open.  In a real application, the command
+	logic associated with these buttons would be responsible for closing the Backstage if the command
+	executed successfully.
+
+-->
+
+<actipro:RibbonWindow
+	x:Class="ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.Step10.MainWindow"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:local="using:ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.Step10"
+	xmlns:gettingStartedCommon="using:ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.Common"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	Title="Actipro Ribbon Getting Started Series - Step 10"
+	Height="450" Width="800"
+	x:DataType="local:SampleWindowViewModel"
+	>
+
+	<actipro:RibbonWindow.Resources>
+		<!-- 
+		SAMPLE NOTE 10.1:
+			Add some reusable themes that will be applied to controls displayed on the Backstage.
+		-->
+
+		<ControlTheme x:Key="BackstageHeadingTextBlockTheme" TargetType="TextBlock">
+			<Setter Property="FontSize" Value="{actipro:ThemeResource HeadingFontSizeLarge}" />
+			<Setter Property="FontFamily" Value="{actipro:ThemeResource HeadingFontFamily}" />
+			<Setter Property="FontWeight" Value="{actipro:ThemeResource HeadingFontWeightLarge}" />
+			<Setter Property="Margin" Value="0,0,0,30" />
+			<Setter Property="TextWrapping" Value="Wrap" />
+		</ControlTheme>
+
+		<ControlTheme x:Key="BackstageSubHeadingTextBlockTheme" TargetType="TextBlock">
+			<Setter Property="FontSize" Value="{actipro:ThemeResource HeadingFontSizeSmall}" />
+			<Setter Property="FontFamily" Value="{actipro:ThemeResource HeadingFontFamily}" />
+			<Setter Property="FontWeight" Value="{actipro:ThemeResource HeadingFontWeightSmall}" />
+			<Setter Property="Margin" Value="0,0,0,10" />
+			<Setter Property="TextWrapping" Value="Wrap" />
+		</ControlTheme>
+		
+		<!--
+		SAMPLE NOTE 10.2:
+			TypedDataTemplateSelector is a specialized IDataTemplate that uses the type of a
+			view model to determine which IDataTemplate to apply.  Each backstage ribbon tab
+			in this sample uses a distinct type that derives from RibbonBackstageTabViewModel
+			so that it is easy to associate the desired tab contents with the view model.
+							
+			See the code behind of this view for details on how this resources is resolved
+			at runtime and assigned to RibbonBackstageViewModel.ContentTemplate.
+		-->
+		<actipro:TypedDataTemplateSelector x:Key="BackstageContentTemplates">
+
+			<!-- Backstage Home Tab Content -->
+			<DataTemplate DataType="{x:Type local:HomeRibbonBackstageTabViewModel}">
+				<ScrollViewer VerticalScrollBarVisibility="Auto">
+					<Grid Margin="40,30,0,30">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="*" />
+						</Grid.RowDefinitions>
+
+						<!--
+						SAMPLE NOTE 10.3:
+							The "Home" tab can be used like a landing page for an application with a set of
+							common-used actions or other information that might be relevant.
+							
+							This sample will display a simple "welcome" message.
+						-->
+						<TextBlock Grid.Row="0" Text="Actipro Ribbon Sample" Theme="{StaticResource BackstageHeadingTextBlockTheme}" />
+						<TextBlock Grid.Row="1" TextWrapping="Wrap" Text="Welcome to the Getting Started series for the Actipro Ribbon." />
+
+					</Grid>
+				</ScrollViewer>
+			</DataTemplate>
+
+			<!-- Backstage New Tab Content -->
+			<DataTemplate DataType="{x:Type local:NewRibbonBackstageTabViewModel}">
+				<ScrollViewer VerticalScrollBarVisibility="Auto">
+					<Grid Margin="40,30,0,30">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="30" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="30" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="*" />
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition Width="*" MinWidth="200" MaxWidth="500" />
+						</Grid.ColumnDefinitions>
+
+						<!--
+						SAMPLE NOTE 10.4:
+							The "New" tab for this sample is designed to present the user with options for
+							creating a new document. These options are for demonstration purposes and the
+							associated commands are not implemented.
+						-->
+
+						<!-- Tab Header -->
+						<TextBlock Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Text="New" Theme="{StaticResource BackstageHeadingTextBlockTheme}" />
+
+						<!-- Blank Document Option -->
+						<actipro:BarButton
+							Grid.Row="1"
+							Margin="0,0,15,0"
+							Command="{x:Static local:SampleBarManager.NotImplementedCommand}"
+							KeyTipText="B"
+							Label="Blank Document"
+							LargeIcon="/Images/Icons/BlankPage32.png"
+							Theme="{actipro:ControlTheme RibbonBackstageBarButtonOutline}"
+							/>
+						<StackPanel Grid.Row="1" Grid.Column="1">
+							<TextBlock Theme="{StaticResource BackstageSubHeadingTextBlockTheme}" Text="No Content" />
+							<TextBlock TextWrapping="Wrap" Text="Create a document without any initial content." />
+						</StackPanel>
+
+						<!-- Default Template Option -->
+						<actipro:BarButton
+							Grid.Row="3"
+							Margin="0,0,15,0"
+							Command="{x:Static local:SampleBarManager.NotImplementedCommand}"
+							KeyTipText="I"
+							Label="Default Document"
+							LargeIcon="/Images/Icons/RichTextDocument32.png"
+							Theme="{actipro:ControlTheme RibbonBackstageBarButtonOutline}"
+							/>
+						<StackPanel Grid.Row="3" Grid.Column="1">
+							<TextBlock Theme="{StaticResource BackstageSubHeadingTextBlockTheme}" Text="Default Content" />
+							<TextBlock TextWrapping="Wrap" Text="Create a document that has some default content." />
+						</StackPanel>
+
+					</Grid>
+				</ScrollViewer>
+			</DataTemplate>
+
+		</actipro:TypedDataTemplateSelector>
+	</actipro:RibbonWindow.Resources>
+
+	<actipro:RibbonContainerPanel>
+
+		<!-- Ribbon Control -->
+		<actipro:Ribbon
+			DataContext="{Binding Ribbon}"
+			Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+			/>
+
+
+		<!-- Window Content -->
+		<DockPanel>
+
+			<!-- Configure common StatusBar that is unrelated to this sample -->
+			<gettingStartedCommon:CommonStatusBar DockPanel.Dock="Bottom" SampleCodePath="/Step10/MainWindow.axaml" />
+
+			<!-- Editor Control -->
+			<ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Focusable="False">
+				<sampleBrowser:AdvancedTextBox x:Name="editor"
+					Margin="32,20"
+					AcceptsReturn="True"
+					AcceptsTab="True"
+					Text="Actipro Bars contains a comprehensive implementation of an Office-like ribbon user interface for Avalonia applications, including its modern fluent design and ability to create content-rich galleries."
+					TextWrapping="Wrap">
+					<TextBox.ContextFlyout>
+						<actipro:BarMenuFlyout
+							ItemsSource="{Binding EditorContextMenuItems}"
+							ItemContainerTemplateSelector="{Binding Ribbon.ItemContainerTemplateSelector}"
+							/>
+					</TextBox.ContextFlyout>
+				</sampleBrowser:AdvancedTextBox>
+			</ScrollViewer>
+
+		</DockPanel>
+
+	</actipro:RibbonContainerPanel>
+
+</actipro:RibbonWindow>

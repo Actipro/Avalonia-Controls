@@ -129,6 +129,11 @@ var result = UserPromptBuilder.Configure()
 }
 The fluent API allows the entire configuration to be defined as a single statement.
 
+@if (avalonia) {
+> [!WARNING]
+> The return value of [UserPromptBuilder](xref:@ActiproUIRoot.Controls.UserPromptBuilder).[Show](xref:@ActiproUIRoot.Controls.UserPromptBuilder.Show*) is a `Task<MessageBoxResult>` that must be awaited to prevent the calling thread from proceeding before the user responds.
+}
+
 See the [User Prompt Content](user-prompt-content.md) and [User Prompt Buttons](user-prompt-buttons.md) topics for more details and examples.
 
 ## Builder Lifecycle and Callbacks

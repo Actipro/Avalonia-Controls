@@ -15,10 +15,6 @@ internal partial class Program {
 			// .RegisterActiproLicense(licensee, licenseKey)
 
 			.WithInterFont()
-			.AfterSetup(x => {
-				// ApplicationViewModel platform-specific configuration
-				ApplicationViewModel.Instance.PlatformHelper = new BrowserPlatformHelper();
-			})
 			.StartBrowserAppAsync("out");
 
 	public static AppBuilder BuildAvaloniaApp()

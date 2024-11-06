@@ -1,0 +1,123 @@
+<UserControl
+	x:Name="sampleRootControl"
+	x:Class="ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.LayoutModes.MainControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Resources>
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+	</UserControl.Resources>
+	<UserControl.Styles>
+		<Style Selector="sampleBrowser|ControlExample">
+			<Setter Property="WideThreshold" Value="1200" />
+		</Style>
+	</UserControl.Styles>
+
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Actipro Ribbon supports two different layout modes: Classic and Simplified. The user can switch between layouts at run-time without any changes in configuration.">
+
+		<sampleBrowser:ControlExample
+			Header="Layout modes"
+			Footer="Both ribbons in this sample use the same configuration. Try resizing the window and watch as each ribbon adjusts the layout to accomodate the available space."
+			>
+
+			<StackPanel Spacing="40">
+				<actipro:Ribbon
+					LayoutMode="Classic" 
+					CanChangeLayoutMode="{Binding #canChangeLayoutModeCheckBox.IsChecked}"
+					DataContext="{Binding #sampleRootControl.RibbonViewModel}"
+					Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+					/>
+				
+				<actipro:Ribbon 
+					LayoutMode="Simplified" 
+					CanChangeLayoutMode="{Binding #canChangeLayoutModeCheckBox.IsChecked}"
+					DataContext="{Binding #sampleRootControl.RibbonViewModel}"
+					Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+					/>
+				
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="20">
+					<CheckBox x:Name="canChangeLayoutModeCheckBox" IsChecked="True" Content="Can change layout mode" />
+					<StackPanel>
+						<TextBlock Classes="theme-text-heading size-xs">Classic layout</TextBlock>
+						<TextBlock Classes="theme-text-body" TextWrapping="Wrap">The Classic layout, first introduced with Office 2007, uses a taller ribbon with a combination of large buttons and multi-row groups of controls that dynamically adjust to fill as much or as little space as is available.</TextBlock>
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-text-heading size-xs">Simplified layout</TextBlock>
+						<TextBlock Classes="theme-text-body" TextWrapping="Wrap">The Simplified layout is a modern refinement of the ribbon that appears more like a traditional toolbar with a single row of controls but can still dynamically adjust to fill the available space.  When necessary, controls that do not have room to appear on the primary ribbon are moved to an overflow menu.</TextBlock>
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Tab visibility and group labels"
+			Footer="For a minimal ribbon appearance, tabs can optionally be hidden.  Group labels can optionally be forced to display when in Simplified layout mode, which can provide more context about contained controls."
+			>
+
+			<actipro:Ribbon x:Name="minimalRibbon"
+				LayoutMode="Simplified"
+				AreTabsVisible="False"
+				DataContext="{Binding #sampleRootControl.MinimalRibbonViewModel}"
+				GroupLabelMode="Always"
+				Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+				/>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="20">
+					<CheckBox IsChecked="{Binding #minimalRibbon.AreTabsVisible}" Content="Are tabs visible" />
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Group label mode" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type={x:Type actipro:RibbonGroupLabelMode}}" SelectedValue="{Binding #minimalRibbon.GroupLabelMode}" />
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample Kind="Xaml" xml:space="preserve">
+				<![CDATA[
+<actipro:Ribbon$(AreTabsVisibleAttribute)$(GroupLabelModeAttribute) ... >
+	...
+</actipro:Ribbon>
+				]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="AreTabsVisibleAttribute"
+															   IsEnabled="{Binding !#minimalRibbon.AreTabsVisible}"
+															   Value=" AreTabsVisible=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="GroupLabelModeAttribute"
+															   IsEnabled="{Binding #minimalRibbon.GroupLabelMode}, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Default'}"
+															   Value="{Binding #minimalRibbon.GroupLabelMode, StringFormat=' GroupLabelMode=&quot;{0}&quot;'}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" Language="C#" xml:space="preserve">
+				<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Bars;
+using ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm;
+...
+
+var ribbon = new RibbonViewModel() {$(AreTabsVisibleSetter)$(GroupLabelModeSetter)
+	...
+}
+				]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="AreTabsVisibleSetter"
+															   IsEnabled="{Binding !#minimalRibbon.AreTabsVisible}"
+															   Value="&#xD;&#x9;AreTabsVisible = false," />
+						<sampleBrowser:CodeExampleSubstitution Key="GroupLabelModeSetter"
+															   IsEnabled="{Binding #minimalRibbon.GroupLabelMode}, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Default'}"
+															   Value="{Binding #minimalRibbon.GroupLabelMode, StringFormat='&#xD;&#x9;GroupLabelMode = RibbonGroupLabelMode.{0},'}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

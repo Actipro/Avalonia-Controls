@@ -1,0 +1,17 @@
+<ResourceDictionary
+	x:ClassModifier="internal"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	>
+
+	<DataTemplate x:Key="{x:Static actipro:BarsMvvmResourceKeys.RibbonFooterDefaultItemContainerTemplate}" DataType="actipro:RibbonFooterViewModel">
+		<actipro:RibbonFooterControl
+			Content="{Binding Content}"
+			ContentTemplate="{Binding ContentTemplate}"
+			Kind="{Binding Kind}"
+			Padding="{Binding Padding}"
+			/>
+	</DataTemplate>
+
+</ResourceDictionary>

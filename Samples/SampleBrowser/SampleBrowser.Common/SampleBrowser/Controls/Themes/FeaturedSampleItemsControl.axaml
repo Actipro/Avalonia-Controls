@@ -25,13 +25,13 @@
 						ToolTip.Tip="{Binding Title, StringFormat='Open the {0} featured sample'}" ToolTip.ShowDelay="1000"
 						actipro:BadgeService.HorizontalAlignment="InsideOfTargetRightEdge"
 						actipro:BadgeService.VerticalAlignment="InsideOfTargetTopEdge"
-						actipro:BadgeService.VerticalOffset="20"
+						actipro:BadgeService.VerticalOffset="{actipro:ScaledDouble 3}"
 						>
 
 						<actipro:BadgeService.Badge>
 							<actipro:Badge Template="{StaticResource BlurbBadgeTemplate}" IsHitTestVisible="False" IsActive="{Binding HasBlurbText}" Content="{Binding BlurbText}" />
 						</actipro:BadgeService.Badge>
-						
+
 						<actipro:Card.ContentTemplate>
 							<DataTemplate x:DataType="sampleBrowser:ListItemInfo">
 								<Image x:Name="screenshot" Width="200" Height="150" Source="{Binding ImageSource}" />

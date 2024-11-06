@@ -80,7 +80,7 @@ By default, info bar will display an icon that corresponds to the value of the [
 To customize the icon, assign the desired control to the [Icon](xref:@ActiproUIRoot.Controls.InfoBar.Icon) property.
 
 @if (avalonia) {
-The following sample demonstrates using an `Image` for the icon, but any content supported by `ContentPresenter` can be used (like `PathIcon` or [DynamicImage](../../shared/controls/dynamic-image.md) controls):
+The following sample demonstrates using an `Image` for the icon, but any content supported by [Icon Presenter](../../themes/icon-presenter.md) can be used (like `IImage` data, `PathIcon` control, or [DynamicImage](../../shared/controls/dynamic-image.md) control):
 
 ```xaml
 xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"

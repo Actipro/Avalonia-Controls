@@ -40,7 +40,7 @@ var userPromptControl = new UserPromptControl() {
 	Content = "This file has been modified. Do you want to save your changes before closing?",
 	StandardButtons = MessageBoxButtons.YesNo,
 };
-var result = UserPromptWindow.ShowDialog(userPromptControl, "Save Changes?");
+var result = await UserPromptWindow.ShowDialog(userPromptControl, "Save Changes?");
 if (result == MessageBoxResult.Yes) {
 	// Insert code to save changes here
 }
@@ -82,6 +82,11 @@ if (result == UserPromptStandardResult.Yes) {
 	// Insert code to save changes here
 }
 ```
+}
+
+@if (avalonia) {
+> [!WARNING]
+> The return value of [UserPromptWindow](xref:@ActiproUIRoot.Controls.UserPromptWindow).[ShowDialog](xref:@ActiproUIRoot.Controls.UserPromptWindow.ShowDialog*) and [UserPromptBuilder](xref:@ActiproUIRoot.Controls.UserPromptBuilder).[Show](xref:@ActiproUIRoot.Controls.UserPromptBuilder.Show*) is a `Task<MessageBoxResult>` that must be awaited to prevent the calling thread from proceeding before the user responds.  Attempting to read the `Task.Result` without awaiting its completion can result in thread deadlock.
 }
 
 > [!NOTE]
@@ -128,7 +133,12 @@ The [UserPromptBuilder](xref:@ActiproUIRoot.Controls.UserPromptBuilder).[WithOve
 
 #### Inferred and Fallback Titles
 
-When a title is undefined or `null`, the [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl).[StandardStatusImage](xref:@ActiproUIRoot.Controls.UserPromptControl.StandardStatusImage) property is used to infer a contextually appropriate title. For example, the title is set to `"Warning"` when the status image is @if (avalonia) { [MessageBoxImage](xref:@ActiproUIRoot.Controls.MessageBoxImage).[Warning](xref:@ActiproUIRoot.Controls.MessageBoxImage.Warning) }@if (wpf) { [UserPromptStandardImage](xref:@ActiproUIRoot.Controls.UserPromptStandardImage).[Warning](xref:@ActiproUIRoot.Controls.UserPromptStandardImage.Warning) }.
+@if (avalonia) {
+When a title is undefined or `null`, the [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl).[StandardStatusIcon](xref:@ActiproUIRoot.Controls.UserPromptControl.StandardStatusIcon) property is used to infer a contextually appropriate title. For example, the title is set to `"Warning"` when the status icon is [MessageBoxImage](xref:@ActiproUIRoot.Controls.MessageBoxImage).[Warning](xref:@ActiproUIRoot.Controls.MessageBoxImage.Warning).
+}
+@if (wpf) {
+When a title is undefined or `null`, the [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl).[StandardStatusImage](xref:@ActiproUIRoot.Controls.UserPromptControl.StandardStatusImage) property is used to infer a contextually appropriate title. For example, the title is set to `"Warning"` when the status image is [UserPromptStandardImage](xref:@ActiproUIRoot.Controls.UserPromptStandardImage).[Warning](xref:@ActiproUIRoot.Controls.UserPromptStandardImage.Warning).
+}
 
 If a title cannot be inferred, the static [UserPromptBuilder](xref:@ActiproUIRoot.Controls.UserPromptBuilder).[FallbackTitle](xref:@ActiproUIRoot.Controls.UserPromptBuilder.FallbackTitle) value will be used.
 
@@ -177,11 +187,30 @@ UserPromptBuilder.Configure()
 
 The [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl).[Result](xref:@ActiproUIRoot.Controls.UserPromptControl.Result) property is used to read or write the user's response to a prompt and is typically only used when working with custom buttons.
 
+@if (avalonia) {
+The [UserPromptWindow](xref:@ActiproUIRoot.Controls.UserPromptWindow).[ShowDialog](xref:@ActiproUIRoot.Controls.UserPromptWindow.ShowDialog*) method returns a `Task` that, once completed, will return the [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl).[Result](xref:@ActiproUIRoot.Controls.UserPromptControl.Result).  If the [UserPromptWindow](xref:@ActiproUIRoot.Controls.UserPromptWindow) is closed without invoking one of the available buttons, the value of [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl).[CloseResult](xref:@ActiproUIRoot.Controls.UserPromptControl.CloseResult) is used instead.
+}
+@if (wpf) {
 The [UserPromptWindow](xref:@ActiproUIRoot.Controls.UserPromptWindow).[ShowDialog](xref:@ActiproUIRoot.Controls.UserPromptWindow.ShowDialog*) method returns the [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl).[Result](xref:@ActiproUIRoot.Controls.UserPromptControl.Result).  If the [UserPromptWindow](xref:@ActiproUIRoot.Controls.UserPromptWindow) is closed without invoking one of the available buttons, the value of [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl).[CloseResult](xref:@ActiproUIRoot.Controls.UserPromptControl.CloseResult) is returned instead.
+}
 
 The [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl).[Responding](xref:@ActiproUIRoot.Controls.UserPromptControl.Responding) event is raised when the [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl).[Result](xref:@ActiproUIRoot.Controls.UserPromptControl.Result) property is changed. [UserPromptWindow](xref:@ActiproUIRoot.Controls.UserPromptWindow) listens to this event to know when to close the dialog.
 
-When using the [builder pattern](builder-pattern.md), the [Show](xref:@ActiproUIRoot.Controls.UserPromptBuilder.Show*) method returns the same result as [UserPromptWindow](xref:@ActiproUIRoot.Controls.UserPromptWindow).[ShowDialog](xref:@ActiproUIRoot.Controls.UserPromptWindow.ShowDialog*).
+When using the [builder pattern](builder-pattern.md), the [Show](xref:@ActiproUIRoot.Controls.UserPromptBuilder.Show*) method behaves the same as
+[UserPromptWindow](xref:@ActiproUIRoot.Controls.UserPromptWindow).[ShowDialog](xref:@ActiproUIRoot.Controls.UserPromptWindow.ShowDialog*).
+
+@if (avalonia) {
+> [!WARNING]
+> The various `Show` and `ShowDialog` methods return a `Task<MessageBoxResult>` that must be awaited to prevent the calling thread from proceeding before the user responds.  Attempting to read the `Task.Result` without awaiting its completion can result in thread deadlock.
+
+The following example demonstrates the correct way to evaluate the result:
+
+```csharp
+var result = await UserPromptBuilder.Configure()
+	// ... other configuration options here
+	.Show();
+```
+}
 
 ### Default Button
 
@@ -222,7 +251,6 @@ await UserPromptBuilder.Configure()
 	.OnResponding((builder, args) => {
 		if ((builder?.Instance is UserPromptControl userPromptControl) && (userPromptControl.IsChecked)) {
 			// Cancel the response
-			MessageBox.Show($"Cancelling response of '{args.Response}'", "Result Canceled");
 			args.Cancel = true;
 		}
 	})
@@ -236,7 +264,6 @@ UserPromptBuilder.Configure()
 	.OnResponding((builder, args) => {
 		if ((builder?.Instance is UserPromptControl userPromptControl) && (userPromptControl.IsChecked)) {
 			// Cancel the response
-			ThemedMessageBox.Show($"Cancelling response of '{args.Response}'", "Result Canceled");
 			args.Cancel = true;
 		}
 	})

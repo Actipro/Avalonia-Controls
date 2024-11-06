@@ -1,0 +1,57 @@
+<ResourceDictionary
+	x:ClassModifier="internal"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	>
+	
+	<DataTemplate x:Key="{x:Static actipro:BarsMvvmResourceKeys.BarSplitToggleButtonDefaultItemContainerTemplate}" DataType="actipro:BarSplitToggleButtonViewModel">
+		<actipro:BarSplitToggleButton 
+			CanCloneToRibbonQuickAccessToolBar="{Binding CanCloneToRibbonQuickAccessToolBar}"
+			Command="{Binding Command}"
+			CommandParameter="{Binding CommandParameter}"
+			InputGesture="{Binding InputGesture}"
+			IsChecked="{Binding IsChecked, Mode=TwoWay}"
+			IsInputGestureTextVisible="{Binding IsInputGestureTextVisible}"
+			IsVisible="{Binding IsVisible}"
+			ItemsSource="{Binding MenuItems}"
+			Key="{Binding Key}"
+			KeyTipText="{Binding KeyTipText}"
+			Label="{Binding Label}"
+			LargeIcon="{Binding LargeIcon}"
+			MediumIcon="{Binding MediumIcon}"
+			PopupOpeningCommand="{Binding PopupOpeningCommand}"
+			SmallIcon="{Binding SmallIcon}"
+			Title="{Binding Title}"
+			ToolBarItemCollapseBehavior="{Binding ToolBarItemCollapseBehavior}"
+			ToolBarItemVariantBehavior="{Binding ToolBarItemVariantBehavior}"
+			ToolTip.Tip="{Binding Description}"
+			/>
+	</DataTemplate>
+
+	<DataTemplate x:Key="{x:Static actipro:BarsMvvmResourceKeys.BarSplitToggleButtonMenuItemItemContainerTemplate}" DataType="actipro:BarSplitToggleButtonViewModel">
+		<actipro:BarSplitMenuItem
+			CanCloneToRibbonQuickAccessToolBar="{Binding CanCloneToRibbonQuickAccessToolBar}"
+			Command="{Binding Command}"
+			CommandParameter="{Binding CommandParameter}"
+			Description="{Binding Description}"
+			InputGesture="{Binding InputGesture}"
+			IsChecked="{Binding IsChecked, Mode=TwoWay}"
+			IsInputGestureTextVisible="{Binding IsInputGestureTextVisible}"
+			IsVisible="{Binding IsVisible}"
+			ItemsSource="{Binding MenuItems}"
+			Key="{Binding Key}"
+			KeyTipText="{Binding KeyTipText}"
+			Label="{Binding Label}"
+			LargeIcon="{Binding LargeIcon}"
+			PopupOpeningCommand="{Binding PopupOpeningCommand}"
+			SmallIcon="{Binding SmallIcon}"
+			StaysOpenOnClick="{Binding StaysOpenOnClick}"
+			Title="{Binding Title}"
+			ToggleType="CheckBox"
+			ToolTip.Tip="{Binding Description}"
+			UseLargeSize="{Binding UseLargeMenuItem}"
+			/>
+	</DataTemplate>
+
+</ResourceDictionary>

@@ -1,0 +1,21 @@
+<Styles
+	x:Class="ActiproSoftware.UI.Avalonia.Themes.Bars.Mvvm.BarsMvvmResources"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	>
+
+	<Styles.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+
+				<MergeResourceInclude Source="avares://ActiproSoftware.Avalonia.Bars.Mvvm/Themes/ControlThemes.axaml" />
+				<MergeResourceInclude Source="avares://ActiproSoftware.Avalonia.Bars.Mvvm/Themes/GalleryItemViewModelDataTemplates.axaml" />
+				<MergeResourceInclude Source="avares://ActiproSoftware.Avalonia.Bars.Mvvm/Themes/RibbonFooterContentViewModelDataTemplates.axaml" />
+				<MergeResourceInclude Source="avares://ActiproSoftware.Avalonia.Bars.Mvvm/Themes/ControlViewModelContainerTemplates/All.axaml" />
+
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</Styles.Resources>
+
+</Styles>

@@ -33,6 +33,7 @@ namespace ActiproSoftware.SampleBrowser.Utilities.StringResourceBrowser {
 		public IEnumerable<AssemblyStringResourcesModel> All {
 			get {
 				return new AssemblyStringResourcesModel[] {
+					new AssemblyStringResourcesModel(typeof(AP.Bars.SR), typeof(AP.Bars.SRName)),
 					new AssemblyStringResourcesModel(typeof(AP.Fundamentals.SR), typeof(AP.Fundamentals.SRName)),
 					new AssemblyStringResourcesModel(typeof(AP.Shared.SR), typeof(AP.Shared.SRName)),
 				};

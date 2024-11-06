@@ -1,0 +1,92 @@
+<!--
+
+RIBBON GETTING STARTED SERIES - STEP 7
+
+STEP SUMMARY:
+
+	Replace the editor control's default ContextMenu with one based on Bars
+	controls for a consistent user experience. Improve the default context
+	menu by adding support for the 'SelectAll' command.
+	
+CHANGES SINCE LAST STEP:
+	
+	Assigned the TextBox.ContextMenu property an instance of BarsContextMenu
+	whose items are bound to the sample window view model.
+	
+EXPECTED OPERATION:
+	
+	When this sample window is opened, right-click the editor control to display the context
+	menu. Instead of the default context menu with only Cut/Copy/Paste commands, a Bars context
+	menu will be displayed instead.
+	
+	The menu items will display with the same images registered for Ribbon, and the additional
+	"Select All" command will be displayed.
+
+-->
+
+<actipro:RibbonWindow
+	x:Class="ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.Step07.MainWindow"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:gettingStartedCommon="using:ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.Common"
+	xmlns:local="using:ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.Step07"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	Title="Actipro Ribbon Getting Started Series - Step 7"
+	Height="450" Width="800"
+	x:DataType="local:SampleWindowViewModel"
+	>
+
+	<actipro:RibbonContainerPanel>
+
+		<!-- Ribbon Control -->
+		<actipro:Ribbon
+			DataContext="{Binding Ribbon}"
+			Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+			/>
+
+
+		<!-- Window Content -->
+		<DockPanel>
+
+			<!-- Configure common StatusBar that is unrelated to this sample -->
+			<gettingStartedCommon:CommonStatusBar DockPanel.Dock="Bottom" SampleCodePath="/Step07/MainWindow.axaml" />
+
+			<!-- Editor Control -->
+			<ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Focusable="False">
+				<sampleBrowser:AdvancedTextBox x:Name="editor"
+					Margin="32,20"
+					AcceptsReturn="True"
+					AcceptsTab="True"
+					Text="Actipro Bars contains a comprehensive implementation of an Office-like ribbon user interface for Avalonia applications, including its modern fluent design and ability to create content-rich galleries."
+					TextWrapping="Wrap">
+
+					<!--
+					SAMPLE NOTE 7.1:
+						A BarMenuFlyout derives from the native MenuFlyout and can be used anywhere a standard
+						MenuFlyout is used.
+							
+						For this sample application, the BarMenuFlyout.ItemsSource is bound to instances
+						of the same view models that are used to populate the Ribbon controls. The control
+						templates are contextually-aware and will generate a control that is appropriate for
+						use on a MenuFlyout (e.g., MenuItem controls).
+							
+						The BarMenuFlyout.ItemContainerTemplateSelector must be configured the same way
+						as Ribbon.ItemContainerTemplateSelector for view models to be properly translated
+						to the controls.
+					-->
+					<TextBox.ContextFlyout>
+						<actipro:BarMenuFlyout
+							ItemsSource="{Binding EditorContextMenuItems}"
+							ItemContainerTemplateSelector="{Binding Ribbon.ItemContainerTemplateSelector}"
+							/>
+					</TextBox.ContextFlyout>
+					
+				</sampleBrowser:AdvancedTextBox>
+			</ScrollViewer>
+
+		</DockPanel>
+
+	</actipro:RibbonContainerPanel>
+
+</actipro:RibbonWindow>

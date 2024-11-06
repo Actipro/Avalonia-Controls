@@ -1,0 +1,64 @@
+<UserControl
+	x:Name="sampleRootControl"
+	x:Class="ActiproSoftware.ProductSamples.BarsSamples.Demos.DocumentEditorMvvm.MainControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:local="using:ActiproSoftware.ProductSamples.BarsSamples.Demos.DocumentEditorMvvm"
+	Background="{actipro:ThemeResource Container2BackgroundBrush}"
+	>
+
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.MergedDictionaries>
+
+				<MergeResourceInclude Source="/ProductSamples/BarsSamples/Demos/DocumentEditorMvvm/BackstageContentTemplates.axaml" />
+
+			</ResourceDictionary.MergedDictionaries>
+		</ResourceDictionary>
+	</UserControl.Resources>
+
+	<Grid RowDefinitions="*,Auto">
+
+		<actipro:RibbonContainerPanel>
+			<actipro:Ribbon x:Name="ribbon" Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}" />
+
+			<ScrollViewer x:Name="scrollViewer" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Focusable="False">
+				<actipro:ShadowChrome Margin="32,20" Elevation="8" ShadowOpacity="0.1">
+					<sampleBrowser:AdvancedTextBox x:Name="textBox" AcceptsReturn="True" TextWrapping="Wrap">
+						<sampleBrowser:AdvancedTextBox.ContextFlyout>
+							<actipro:BarMenuFlyout OverlayDismissEventPassThrough="{OnFormFactor Default=False, Desktop=True}">
+								<actipro:BarMenuItem SmallIcon="/Images/Icons/Undo16.png" Label="Undo" Command="{Binding $parent[TextBox].Undo}"
+									IsEnabled="{Binding $parent[TextBox].CanUndo}" />
+								<actipro:BarMenuItem SmallIcon="/Images/Icons/Redo16.png" Label="Redo" Command="{Binding $parent[TextBox].Redo}"
+									IsEnabled="{Binding $parent[TextBox].CanRedo}" />
+								<actipro:BarMenuSeparator />
+								<actipro:BarMenuItem SmallIcon="/Images/Icons/Cut16.png" Label="Cut" Command="{Binding $parent[TextBox].Cut}"
+									IsEnabled="{Binding $parent[TextBox].CanCut}" InputGesture="{x:Static TextBox.CutGesture}" />
+								<actipro:BarMenuItem SmallIcon="/Images/Icons/Copy16.png" Label="Copy" Command="{Binding $parent[TextBox].Copy}"
+									IsEnabled="{Binding $parent[TextBox].CanCopy}" InputGesture="{x:Static TextBox.CopyGesture}" />
+								<actipro:BarMenuItem SmallIcon="/Images/Icons/Paste16.png" Label="Paste" Command="{Binding $parent[TextBox].Paste}"
+									IsEnabled="{Binding $parent[TextBox].CanPaste}" InputGesture="{x:Static TextBox.PasteGesture}" />
+								<actipro:BarMenuSeparator />
+								<actipro:BarMenuItem SmallIcon="/Images/Icons/SelectAll16.png" Label="Select All" Command="{Binding $parent[TextBox].SelectAll}" />
+							</actipro:BarMenuFlyout>
+						</sampleBrowser:AdvancedTextBox.ContextFlyout>
+					</sampleBrowser:AdvancedTextBox>
+				</actipro:ShadowChrome>
+			</ScrollViewer>
+		</actipro:RibbonContainerPanel>
+
+		<actipro:InfoBar Grid.Row="1" Margin="6"
+			Title="External Window"
+			Message="This demo is also available as a stand-alone window."
+			CanClose="False"
+			IsVisible="{Binding #sampleRootControl.IsExternalSampleOptionVisible}">
+			<actipro:InfoBar.Action>
+				<actipro:HyperlinkTextBlock Command="{Binding #sampleRootControl.OpenExternalWindowCommand}">Open window</actipro:HyperlinkTextBlock>
+			</actipro:InfoBar.Action>
+		</actipro:InfoBar>
+
+	</Grid>
+
+</UserControl>

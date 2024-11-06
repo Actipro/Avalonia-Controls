@@ -1,0 +1,229 @@
+<UserControl
+	x:Name="sampleRootControl"
+	x:Class="ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.ContextualTabs.MainControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:local="using:ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.ContextualTabs"
+	>
+	<UserControl.Resources>
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+	</UserControl.Resources>
+
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Contextual tabs are only visible when the application is in a specific state.  One or more tabs can be associated with a contextual tab group, and the associated tabs will only be visible when that tab group is active.">
+
+		<sampleBrowser:ControlExample
+			Header="Basic usage"
+			Footer="The Picture Tools group contains one tab, and the Table Tools group contains two tabs."
+			>
+
+			<sampleBrowser:ControlExample.XamlContent>
+				
+				<!-- XAML-based sample -->
+				<actipro:Ribbon IsApplicationButtonVisible="False" QuickAccessToolBarMode="None">
+
+					<actipro:Ribbon.ContextualTabGroups>
+						<!-- 
+						The visibility of a RibbonContextualTabGroup will determine the visibility of all
+						RibbonTabItem instances whose ContextualTabGroupKey matches RibbonContextualTabGroup.Key
+						-->
+						<actipro:RibbonContextualTabGroup Key="{x:Static local:ContextualTabGroupKeys.PictureTools}"
+							IsVisible="{Binding #sampleRootControl.Options.IsPictureToolsContextualTabGroupVisible}" />
+						<actipro:RibbonContextualTabGroup Key="{x:Static local:ContextualTabGroupKeys.TableTools}"
+							IsVisible="{Binding #sampleRootControl.Options.IsTableToolsContextualTabGroupVisible}" />
+					</actipro:Ribbon.ContextualTabGroups>
+					
+					<!-- Standard Tabs (Always Visible) -->
+					<actipro:RibbonTabItem Key="SampleTab">
+						<actipro:RibbonGroup Key="ContextualTabs" DataContext="{Binding #sampleRootControl.Options}">
+							<actipro:BarToggleButton Key="TogglePictureTools"
+								Label="Picture Tools"
+								IsChecked="{Binding IsPictureToolsContextualTabGroupVisible}"
+								LargeIcon="/Images/Icons/Picture32.png"
+								SmallIcon="/Images/Icons/Picture16.png"
+								ToolBarItemVariantBehavior="All"
+								ToolTip.Tip="Click to toggle the visibility of the Picture Tools contextual tab group." />
+							<actipro:BarToggleButton Key="ToggleTableTools"
+								Label="Table Tools"
+								IsChecked="{Binding IsTableToolsContextualTabGroupVisible}"
+								LargeIcon="/Images/Icons/Table32.png"
+								SmallIcon="/Images/Icons/Table16.png"
+								ToolBarItemVariantBehavior="All"
+								ToolTip.Tip="Click to toggle the visibility of the Table Tools contextual tab group." />
+						</actipro:RibbonGroup>
+					</actipro:RibbonTabItem>
+					<actipro:RibbonTabItem Key="Home">
+						<actipro:RibbonGroup Key="Placeholder">
+							<actipro:BarButton Key="Placeholder" Label="Non-Contextual Tab for Demo" LargeIcon="/Images/Icons/QuickStart32.png" SmallIcon="/Images/Icons/QuickStart16.png" ToolBarItemVariantBehavior="All" />
+						</actipro:RibbonGroup>
+					</actipro:RibbonTabItem>
+
+					<!-- Picture Tools Contextual Tabs -->
+					<actipro:RibbonTabItem Key="PictureFormat" ContextualTabGroupKey="{x:Static local:ContextualTabGroupKeys.PictureTools}">
+						<actipro:RibbonGroup Key="ImageSize" LargeIcon="/Images/Icons/Height32.png" SmallIcon="/Images/Icons/Height16.png" >
+							<actipro:RibbonControlGroup ItemVariantBehavior="NeverLarge" >
+								<actipro:BarTextBox Key="PictureHeight" Label="Height" RequestedWidth="75" Text='3.5"' />
+								<actipro:BarTextBox Key="PictureWidth" Label="Width" RequestedWidth="75" Text='5.0"' />
+							</actipro:RibbonControlGroup>
+						</actipro:RibbonGroup>
+					</actipro:RibbonTabItem>
+
+					<!-- Table Tools Contextual Tabs -->
+					<actipro:RibbonTabItem Key="TableDesign" ContextualTabGroupKey="{x:Static local:ContextualTabGroupKeys.TableTools}">
+						<actipro:RibbonGroup Key="TableStyleOptions" LargeIcon="/Images/Icons/Table32.png" SmallIcon="/Images/Icons/Table16.png">
+							<actipro:RibbonControlGroup ItemVariantBehavior="NeverLarge">
+								<actipro:BarCheckBox Key="HeaderRow" />
+								<actipro:BarCheckBox Key="TotalRow" />
+								<actipro:BarCheckBox Key="BandedRows" />
+								<actipro:BarCheckBox Key="FirstColumn" />
+								<actipro:BarCheckBox Key="LastColumn" />
+								<actipro:BarCheckBox Key="BandedColumns" />
+							</actipro:RibbonControlGroup>
+						</actipro:RibbonGroup>
+					</actipro:RibbonTabItem>
+					<actipro:RibbonTabItem Key="Layout" ContextualTabGroupKey="{x:Static local:ContextualTabGroupKeys.TableTools}">
+						<actipro:RibbonGroup Key="CellSize" LargeIcon="/Images/Icons/Height32.png" SmallIcon="/Images/Icons/Height16.png" >
+							<actipro:RibbonControlGroup ItemVariantBehavior="NeverLarge">
+								<actipro:BarTextBox Key="TableCellHeight" Label="Height" RequestedWidth="75" Text='0.20"' />
+								<actipro:BarTextBox Key="TableCellWidth" Label="Width" RequestedWidth="75" Text='2.15"' />
+							</actipro:RibbonControlGroup>
+						</actipro:RibbonGroup>
+						<actipro:RibbonGroup Key="Alignment" LargeIcon="/Images/Icons/AlignTextCenter32.png" SmallIcon="/Images/Icons/AlignTextCenter16.png">
+							<actipro:RibbonControlGroup ItemVariantBehavior="NeverLarge">
+								<actipro:BarToggleButton Key="Left" SmallIcon="/Images/Icons/AlignTextLeft16.png" />
+								<actipro:BarToggleButton Key="Center" SmallIcon="/Images/Icons/AlignTextCenter16.png" />
+								<actipro:BarToggleButton Key="Right" SmallIcon="/Images/Icons/AlignTextRight16.png" />
+							</actipro:RibbonControlGroup>
+						</actipro:RibbonGroup>
+					</actipro:RibbonTabItem>
+
+
+				</actipro:Ribbon>
+			</sampleBrowser:ControlExample.XamlContent>
+
+			<sampleBrowser:ControlExample.MvvmContent>
+
+				<!-- MVVM-based sample -->
+				<actipro:Ribbon x:Name="basicUsageRibbonMvvm"
+					Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+					/>
+
+			</sampleBrowser:ControlExample.MvvmContent>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10" DataContext="{Binding #sampleRootControl.Options}">
+					<CheckBox Content="Show picture tools" IsChecked="{Binding IsPictureToolsContextualTabGroupVisible}" />
+					<CheckBox Content="Show table tools" IsChecked="{Binding IsTableToolsContextualTabGroupVisible}" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample Kind="Xaml" xml:space="preserve">
+					<![CDATA[
+<actipro:Ribbon ... >
+
+	<!-- 
+		The visibility of a RibbonContextualTabGroup will determine the visibility of all
+		RibbonTabItem instances whose ContextualTabGroupKey matches RibbonContextualTabGroup.Key
+	-->
+	<actipro:Ribbon.ContextualTabGroups>
+
+		<actipro:RibbonContextualTabGroup
+			Key="PictureToolsGroupKey"
+			IsVisible="$(ShowPictureTools)" />
+
+		<actipro:RibbonContextualTabGroup
+			Key="TableToolsGroupKey"
+			IsVisible="$(ShowTableTools)" />
+
+	</actipro:Ribbon.ContextualTabGroups>
+
+	<!-- Standard Tabs (Always Visible) -->
+	<actipro:RibbonTabItem Key="SampleTab" ... />
+	<actipro:RibbonTabItem Key="Home" ... />
+
+	<!-- Picture Tools Contextual Tabs -->
+	<actipro:RibbonTabItem Key="PictureFormat" ContextualTabGroupKey="PictureToolsGroupKey" ... />
+
+	<!-- Table Tools Contextual Tabs -->
+	<actipro:RibbonTabItem Key="TableDesign" ContextualTabGroupKey="TableToolsGroupKey" ... />
+	<actipro:RibbonTabItem Key="Layout" ContextualTabGroupKey="TableToolsGroupKey" ... />
+
+	...
+
+</actipro:Ribbon>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ShowPictureTools" Value="{Binding #sampleRootControl.Options.IsPictureToolsContextualTabGroupVisible}" />
+						<sampleBrowser:CodeExampleSubstitution Key="ShowTableTools" Value="{Binding #sampleRootControl.Options.IsTableToolsContextualTabGroupVisible}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" xml:space="preserve">
+				<![CDATA[
+<!-- DataContext is bound to an instance of RibbonViewModel -->
+<actipro:Ribbon
+	DataContext="{Binding #sampleRootControl.BasicUsageRibbonViewModel}"
+	Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+	/>
+				]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" Language="C#" xml:space="preserve">
+					<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm;
+
+public partial class SampleRootControl : UserControl {
+	
+	/// <summary>
+	/// Creates the ribbon view model.
+	/// </summary>
+	private static void CreateBasicUsageRibbonViewModel() {
+		return new RibbonViewModel() {
+		
+			// The IsActive property of a RibbonContextualTabGroupViewModel will determine the visibility of all
+			// RibbonTabViewModel instances whose ContextualTabGroupKey matches RibbonContextualTabGroupViewModel.Key
+			ContextualTabGroups = {
+				new RibbonContextualTabGroupViewModel("PictureToolsGroupKey") { IsActive = $(ShowPictureTools) },
+				new RibbonContextualTabGroupViewModel("TableToolsGroupKey") { IsActive = $(ShowTableTools) },
+			},
+		
+			Tabs = {
+			
+				// Standard Tabs (Always Visible)
+				new RibbonTabViewModel("SampleTab") { ... },
+				new RibbonTabViewModel("Home") { ... },
+	
+				// Picture Tools Contextual Tabs
+				new RibbonTabViewModel("PictureFormat") { ContextualTabGroupKey = "PictureToolsGroupKey" ... },
+
+				// Table Tools Contextual Tabs
+				new RibbonTabViewModel("TableDesign") { ContextualTabGroupKey = "TableToolsGroupKey" ... },
+				new RibbonTabViewModel("Layout") { ContextualTabGroupKey = "TableToolsGroupKey" ... },
+	
+			}
+			
+			...
+		};
+	}
+	
+	/// <summary>
+	/// Gets the view model to be bound to the ribbon.
+	/// </summary>
+	public RibbonViewModel BasicUsageRibbonViewModel { get; } = CreateBasicUsageRibbonViewModel();
+	
+}
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ShowPictureTools" Value="{Binding #sampleRootControl.Options.IsPictureToolsContextualTabGroupVisible, Converter={x:Static actipro:StringConverters.ToLowerInvariant}}" />
+						<sampleBrowser:CodeExampleSubstitution Key="ShowTableTools" Value="{Binding #sampleRootControl.Options.IsTableToolsContextualTabGroupVisible, Converter={x:Static actipro:StringConverters.ToLowerInvariant}}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+
+		</sampleBrowser:ControlExample>
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+
+</UserControl>

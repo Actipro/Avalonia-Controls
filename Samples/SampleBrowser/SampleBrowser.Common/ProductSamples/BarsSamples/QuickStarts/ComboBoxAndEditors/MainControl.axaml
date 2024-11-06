@@ -1,0 +1,1792 @@
+<UserControl
+	x:Name="sampleRootControl"
+	x:Class="ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.ComboBoxAndEditors.MainControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:local="using:ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.ComboBoxAndEditors"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+
+		<DataTemplate x:Key="{x:Static local:LocalResourceKeys.LargeMenuComboBoxGalleryItemTemplate}" DataType="actipro:TextBarGalleryItemViewModel">
+			<Grid Margin="10,4">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="32" />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+				<ContentControl Grid.Column="0" Classes="theme-icon-presenter" Content="{Binding Icon}" />
+				<TextBlock Grid.Column="1" Margin="12,0,0,0" Text="{Binding Label}" VerticalAlignment="Center" />
+			</Grid>
+		</DataTemplate>
+
+		<DataTemplate x:Key="{x:Static local:LocalResourceKeys.NumberComboBoxGalleryItemTemplate}" DataType="actipro:TextBarGalleryItemViewModel">
+			<TextBlock Margin="15,4" Text="{Binding Label}" TextAlignment="Center" />
+		</DataTemplate>
+
+		<DrawingImage x:Key="{x:Static local:LocalResourceKeys.RedSwatch}">
+			<DrawingImage.Drawing>
+				<DrawingGroup>
+					<GeometryDrawing Brush="Red">
+						<GeometryDrawing.Geometry>
+							<RectangleGeometry Rect="0,0,32,32" />
+						</GeometryDrawing.Geometry>
+						<GeometryDrawing.Pen>
+							<Pen Brush="{actipro:ThemeResource Container5BorderBrush}" />
+						</GeometryDrawing.Pen>
+					</GeometryDrawing>
+				</DrawingGroup>
+			</DrawingImage.Drawing>
+		</DrawingImage>
+		<DrawingImage x:Key="{x:Static local:LocalResourceKeys.YellowSwatch}">
+			<DrawingImage.Drawing>
+				<DrawingGroup>
+					<GeometryDrawing Brush="Yellow">
+						<GeometryDrawing.Geometry>
+							<RectangleGeometry Rect="0,0,32,32" />
+						</GeometryDrawing.Geometry>
+						<GeometryDrawing.Pen>
+							<Pen Brush="{actipro:ThemeResource Container5BorderBrush}" />
+						</GeometryDrawing.Pen>
+					</GeometryDrawing>
+				</DrawingGroup>
+			</DrawingImage.Drawing>
+		</DrawingImage>
+		<DrawingImage x:Key="{x:Static local:LocalResourceKeys.BlueSwatch}">
+			<DrawingImage.Drawing>
+				<DrawingGroup>
+					<GeometryDrawing Brush="Blue">
+						<GeometryDrawing.Geometry>
+							<RectangleGeometry Rect="0,0,32,32" />
+						</GeometryDrawing.Geometry>
+						<GeometryDrawing.Pen>
+							<Pen Brush="{actipro:ThemeResource Container5BorderBrush}" />
+						</GeometryDrawing.Pen>
+					</GeometryDrawing>
+				</DrawingGroup>
+			</DrawingImage.Drawing>
+		</DrawingImage>
+		<DrawingImage x:Key="{x:Static local:LocalResourceKeys.GreenSwatch}">
+			<DrawingImage.Drawing>
+				<DrawingGroup>
+					<GeometryDrawing Brush="Green">
+						<GeometryDrawing.Geometry>
+							<RectangleGeometry Rect="0,0,32,32" />
+						</GeometryDrawing.Geometry>
+						<GeometryDrawing.Pen>
+							<Pen Brush="{actipro:ThemeResource Container5BorderBrush}" />
+						</GeometryDrawing.Pen>
+					</GeometryDrawing>
+				</DrawingGroup>
+			</DrawingImage.Drawing>
+		</DrawingImage>
+		<DrawingImage x:Key="{x:Static local:LocalResourceKeys.OrangeSwatch}">
+			<DrawingImage.Drawing>
+				<DrawingGroup>
+					<GeometryDrawing Brush="Orange">
+						<GeometryDrawing.Geometry>
+							<RectangleGeometry Rect="0,0,32,32" />
+						</GeometryDrawing.Geometry>
+						<GeometryDrawing.Pen>
+							<Pen Brush="{actipro:ThemeResource Container5BorderBrush}" />
+						</GeometryDrawing.Pen>
+					</GeometryDrawing>
+				</DrawingGroup>
+			</DrawingImage.Drawing>
+		</DrawingImage>
+		<DrawingImage x:Key="{x:Static local:LocalResourceKeys.PurpleSwatch}">
+			<DrawingImage.Drawing>
+				<DrawingGroup>
+					<GeometryDrawing Brush="Purple">
+						<GeometryDrawing.Geometry>
+							<RectangleGeometry Rect="0,0,32,32" />
+						</GeometryDrawing.Geometry>
+						<GeometryDrawing.Pen>
+							<Pen Brush="{actipro:ThemeResource Container5BorderBrush}" />
+						</GeometryDrawing.Pen>
+					</GeometryDrawing>
+				</DrawingGroup>
+			</DrawingImage.Drawing>
+		</DrawingImage>
+
+	</UserControl.Resources>
+	<UserControl.Styles>
+		<Style Selector="actipro|Ribbon">
+			<Setter Property="IsApplicationButtonVisible" Value="False" />
+			<Setter Property="IsCollapsible" Value="False" />
+			<Setter Property="QuickAccessToolBarLocation" Value="Below" />
+			<Setter Property="QuickAccessToolBarMode" Value="Hidden" />
+		</Style>
+	</UserControl.Styles>
+
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="BarComboBox is a control that can be used to provide combobox-like functionality. Its popup content is presented as a menu where the traditional combobox items are managed by a BarMenuGallery.  Other editors are also supported.">
+
+		<sampleBrowser:ControlExample
+			Header="Basic combobox usage"
+			>
+
+			<!-- XAML-based sample -->
+			<sampleBrowser:ControlExample.XamlContent>
+				<actipro:Ribbon>
+					<actipro:Ribbon.Styles>
+						<Style Selector="actipro|BarComboBox">
+							<Setter Property="ItemContainerTheme" Value="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.BarGalleryItemControlTheme}}" />
+							<Setter Property="ItemTemplateSelector">
+								<actipro:BarGalleryItemTemplateSelector />
+							</Setter>
+						</Style>
+					</actipro:Ribbon.Styles>
+
+					<actipro:RibbonTabItem Key="SampleTab">
+						<actipro:RibbonGroup Key="SampleGroup">
+							<actipro:RibbonControlGroup ItemVariantBehavior="AlwaysMedium">
+								
+								<actipro:BarComboBox DataContext="{Binding #sampleRootControl.BasicComboBoxUsageOptions}"
+									Key="SampleCombobox"
+									CanCategorizeOnMenu="{Binding CanCategorizeOnMenu}"
+									IsEditable="{Binding IsEditable}"
+									IsReadOnly="{Binding IsReadOnly}"
+									IsTextCompletionEnabled="{Binding IsTextCompletionEnabled}"
+									IsTextSearchCaseSensitive="{Binding IsTextSearchCaseSensitive}"
+									IsTextSearchEnabled="{Binding IsTextSearchEnabled}"
+									IsUnmatchedTextAllowed="{Binding IsUnmatchedTextAllowed}"
+									MenuResizeMode="{Binding MenuResizeMode}"
+									PlaceholderText="{Binding PlaceholderText}"
+									Command="{Binding #sampleRootControl.ComboBoxGalleryCommand}"
+									UnmatchedTextCommand="{Binding #sampleRootControl.ComboBoxUnmatchedTextCommand}"
+									RequestedWidth="140"
+									ItemsSource="{Binding #sampleRootControl.ComboBoxPersonItems}"
+									TextMemberBinding="{Binding Label, x:DataType=actipro:IBarGalleryItemViewModel}"
+									/>
+							
+							</actipro:RibbonControlGroup>
+						</actipro:RibbonGroup>
+
+					</actipro:RibbonTabItem>
+
+				</actipro:Ribbon>
+			</sampleBrowser:ControlExample.XamlContent>
+
+			<!-- MVVM-based sample -->
+			<sampleBrowser:ControlExample.MvvmContent>
+				<actipro:Ribbon x:Name="basicComboBoxUsageRibbonMvvm"
+					Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+					/>
+			</sampleBrowser:ControlExample.MvvmContent>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10" DataContext="{Binding #sampleRootControl.BasicComboBoxUsageOptions}">
+					<CheckBox Content="Categorize" IsChecked="{Binding CanCategorizeOnMenu}" />
+					<CheckBox Content="Editable" IsChecked="{Binding IsEditable}" />
+					<StackPanel IsEnabled="{Binding IsEditable}" Spacing="10">
+						<CheckBox Content="Text completion" IsChecked="{Binding IsTextCompletionEnabled}" />
+						<CheckBox Content="Read-only" IsChecked="{Binding IsReadOnly}" />
+						<CheckBox Content="Allow unmatched text" IsEnabled="{Binding !IsReadOnly}" IsChecked="{Binding IsUnmatchedTextAllowed}" />
+					</StackPanel>
+					<CheckBox Content="Text search enabled" IsChecked="{Binding IsTextSearchEnabled}" />
+					<StackPanel IsEnabled="{Binding IsTextSearchEnabled}" Spacing="10">
+						<CheckBox Content="Text search case-sensitive" IsChecked="{Binding IsTextSearchCaseSensitive}" />
+					</StackPanel>
+					<sampleBrowser:NullableStringSettingControl IsEnabled="{Binding IsEditable}" Label="Placeholder text" Text="{Binding PlaceholderText, Mode=TwoWay}" CoerceEmptyAsNull="True" IsCoerceCheckBoxVisible="False"/>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Menu resize mode" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type={x:Type actipro:ControlResizeMode}}" SelectedValue="{Binding MenuResizeMode}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Preview value" />
+						<TextBlock x:Name="basicUsagePreviewLabel" />
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample Kind="Xaml" xml:space="preserve">
+				<![CDATA[
+<actipro:Ribbon ... >
+	<actipro:RibbonTabItem Key="SampleTab" ... >
+		<actipro:RibbonGroup Key="SampleGroup" ... >
+			<actipro:RibbonControlGroup>
+
+				<actipro:BarComboBox
+					Key="SampleCombobox"$(CanCategorizeOnMenuAttribute)
+					Command="{Binding #sampleRootControl.ComboBoxGalleryCommand}"$(IsEditableAttribute)$(IsReadOnlyAttribute)$(IsTextSearchEnabledAttribute)$(IsTextSearchCaseSensitiveAttribute)$(IsTextCompletionEnabledAttribute)$(IsUnmatchedTextAllowedAttribute)
+					ItemsSource="{Binding #sampleRootControl.ComboBoxPersonItems}" 
+					ItemContainerTheme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.BarGalleryItemControlTheme}}"$(MenuResizeModeAttribute)$(PlaceholderTextAttribute)
+					RequestedWidth="140"
+					TextMemberBinding="{Binding Label, x:DataType=actipro:IBarGalleryItemViewModel}"$(UnmatchedTextCommandAttribute)
+					>
+					<actipro:BarComboBox.ItemTemplateSelector>
+						<actipro:BarGalleryItemTemplateSelector />
+					</actipro:BarComboBox.ItemTemplateSelector>
+				</actipro:BarComboBox>
+
+			</actipro:RibbonControlGroup>
+		</actipro:RibbonGroup>
+	</actipro:RibbonTabItem>
+
+	...
+
+</actipro:Ribbon>
+				]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="CanCategorizeOnMenuAttribute"
+															   IsEnabled="{Binding !#sampleRootControl.BasicComboBoxUsageOptions.CanCategorizeOnMenu}"
+															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;CanCategorizeOnMenu=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsEditableAttribute"
+															   IsEnabled="{Binding #sampleRootControl.BasicComboBoxUsageOptions.IsEditable}"
+															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;IsEditable=&quot;True&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsReadOnlyAttribute"
+															   IsEnabled="{Binding #sampleRootControl.BasicComboBoxUsageOptions.IsReadOnly}"
+															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;IsReadOnly=&quot;True&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsTextCompletionEnabledAttribute"
+															   IsEnabled="{Binding !#sampleRootControl.BasicComboBoxUsageOptions.IsTextCompletionEnabled}"
+															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;IsTextCompletionEnabled=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsTextSearchCaseSensitiveAttribute"
+															   IsEnabled="{Binding #sampleRootControl.BasicComboBoxUsageOptions.IsTextSearchCaseSensitive}"
+															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;IsTextSearchCaseSensitive=&quot;True&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsTextSearchEnabledAttribute"
+															   IsEnabled="{Binding !#sampleRootControl.BasicComboBoxUsageOptions.IsTextSearchEnabled}"
+															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;IsTextSearchEnabled=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsUnmatchedTextAllowedAttribute"
+															   IsEnabled="{Binding !#sampleRootControl.BasicComboBoxUsageOptions.IsUnmatchedTextAllowed}"
+															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;IsUnmatchedTextAllowed=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="UnmatchedTextCommandAttribute"
+															   IsEnabled="{Binding #sampleRootControl.BasicComboBoxUsageOptions.IsUnmatchedTextSupported}"
+															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;UnmatchedTextCommand=&quot;{Binding #sampleRootControl.ComboBoxUnmatchedTextCommand}&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="MenuResizeModeAttribute"
+															   Value="{Binding #sampleRootControl.BasicComboBoxUsageOptions.MenuResizeMode, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;MenuResizeMode=&quot;{0}&quot;'}">
+							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
+								<Binding Path="#sampleRootControl.BasicComboBoxUsageOptions.MenuResizeMode" Converter="{StaticResource NotEqualToComparisonConverter}">
+									<Binding.ConverterParameter>
+										<actipro:ControlResizeMode>None</actipro:ControlResizeMode>
+									</Binding.ConverterParameter>
+								</Binding>
+							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
+						</sampleBrowser:CodeExampleSubstitution>
+						<sampleBrowser:CodeExampleSubstitution Key="PlaceholderTextAttribute"
+															   IsEnabled="{Binding #sampleRootControl.BasicComboBoxUsageOptions.PlaceholderText, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding #sampleRootControl.BasicComboBoxUsageOptions.PlaceholderText, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;PlaceholderText=&quot;{0}&quot;'}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Xaml" Language="C#" xml:space="preserve">
+				<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Bars;
+using ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm;
+...
+
+public partial class SampleRootControl : UserControl {
+
+	private ICommand? _comboBoxGalleryCommand;$(UnmatchedTextCommandFieldDeclaration)
+
+	private IEnumerable? _comboBoxPersonItems;
+	
+	/// <summary>
+	/// The items to be displayed in combobox for selecting people.
+	/// </summary>
+	public IEnumerable ComboBoxPersonItems {
+		get {
+			if (_comboBoxPersonItems is null) {
+				// Define the gallery item view models displayed in the combobox
+				var items = new List<TextBarGalleryItemViewModel>() {
+					new TextBarGalleryItemViewModel("Harold Barnes", "Vice President"),
+					new TextBarGalleryItemViewModel("Miguel Cazalla", "Operator"),
+					...
+				};
+
+				// Wrap the items in an ICollectionView to support categorization
+				_comboBoxPersonItems = BarGalleryViewModel.CreateCollectionView(items, categorize: true);
+			}
+
+			return _comboBoxPersonItems;
+		}
+	}
+	
+	/// <summary>
+	/// The command for a gallery item selection from a combobox.
+	/// </summary>
+	public ICommand ComboBoxGalleryCommand
+		=> _comboBoxGalleryCommand ??= new PreviewableDelegateCommand<IBarGalleryItemViewModel>(
+			executeAction: param => ApplicationViewModel.Instance.MessageService?.ShowMessage($"The value '{param?.Label}' was matched from the gallery.", "Value Committed", NotificationType.Success),
+			canExecuteFunc: _ => true,
+
+			// The items of BarComboBox support previewing the current item just like other gallery-based controls
+			previewAction: _ => { /* support preview action here */ },
+			cancelPreviewAction: _ => { /* cancel preview action here */ }
+		);
+	
+$(UnmatchedTextCommandPropertyDeclaration)
+}
+				]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="UnmatchedTextCommandFieldDeclaration"
+															   IsEnabled="{Binding #sampleRootControl.BasicComboBoxUsageOptions.IsUnmatchedTextSupported}">
+							<sampleBrowser:CodeExampleSubstitution.Value>
+								<![CDATA[
+	private ICommand? _comboBoxUnmatchedTextCommand;]]>
+							</sampleBrowser:CodeExampleSubstitution.Value>
+						</sampleBrowser:CodeExampleSubstitution>
+						<sampleBrowser:CodeExampleSubstitution Key="UnmatchedTextCommandPropertyDeclaration"
+															   IsEnabled="{Binding #sampleRootControl.BasicComboBoxUsageOptions.IsUnmatchedTextSupported}">
+							<sampleBrowser:CodeExampleSubstitution.Value>
+								<![CDATA[
+	/// <summary>
+	/// The command that is executed when a value is entered into a general combobox that does not match one of the known gallery items.
+	/// </summary>
+	public ICommand ComboBoxUnmatchedTextCommand
+		=> _comboBoxUnmatchedTextCommand ??= new DelegateCommand<string>(
+			executeAction: param => {
+				// No action necessary, but show a message to indicate that the value was accepted
+				ApplicationViewModel.Instance.MessageService?.ShowMessage($"The text value '{param}' was manually entered and accepted without a match in the gallery.", "Custom Text Value Committed", NotificationType.Success);
+			},
+			canExecuteFunc: _ => {
+				// The BarComboBox.UnmatchedTextCommand.CanExecute result will determine if the
+				// typed text should be allowed... true to allow the value and false to reject it
+				return true;
+			}
+		);
+
+								]]>
+							</sampleBrowser:CodeExampleSubstitution.Value>
+						</sampleBrowser:CodeExampleSubstitution>
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" xml:space="preserve">
+				<![CDATA[
+<!-- DataContext is bound to an instance of RibbonViewModel -->
+<actipro:Ribbon
+	DataContext="{Binding #sampleRootControl.BasicUsageRibbonViewModel}"
+	Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+	/>
+				]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" Language="C#" xml:space="preserve">
+				<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Bars;
+using ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm;
+...
+
+public partial class SampleRootControl : UserControl {
+
+	private ICommand? _comboBoxGalleryCommand;$(UnmatchedTextCommandFieldDeclaration)
+
+	private IEnumerable? _comboBoxPersonItems;
+	
+	public SampleRootControl() {
+		BasicComboBoxUsageRibbonViewModel = CreateBasicComboBoxUsageRibbonViewModel();
+		
+		InitializeComponent();
+	}
+
+	/// <summary>
+	/// Creates the ribbon view model.
+	/// </summary>
+	private static void CreateBasicComboBoxUsageRibbonViewModel() {
+		return new RibbonViewModel() {
+			Tabs = {
+				new RibbonTabViewModel("SampleTab") {
+					Groups = {
+						new RibbonGroupViewModel("SampleGroup") {
+							Items = {
+								new BarComboBoxViewModel("SampleCombobox") {$(CanCategorizeSetter)$(IsEditableSetter)$(IsReadOnlySetter)$(IsTextSearchCaseSensitiveSetter)$(IsTextCompletionEnabledSetter)$(IsTextSearchEnabledSetter)$(IsUnmatchedTextAllowedSetter)$(MenuResizeModeSetter)$(PlaceholderTextSetter)
+									Command = ComboBoxGalleryCommand,$(UnmatchedTextCommandSetter)
+									RequestedWidth = 140,
+									ItemTemplateSelector = new BarGalleryItemTemplateSelector(),
+									Items = ComboBoxPersonItems,
+								}
+							}
+						},
+					}
+				},
+			}
+			...
+		};
+	}
+
+	/// <summary>
+	/// Gets the view model to be bound to the ribbon.
+	/// </summary>
+	public RibbonViewModel BasicComboBoxUsageRibbonViewModel { get; }
+
+	/// <summary>
+	/// The items to be displayed in combobox for selecting people.
+	/// </summary>
+	public IEnumerable ComboBoxPersonItems {
+		get {
+			if (_comboBoxPersonItems is null) {
+				// Define the gallery item view models displayed in the combobox
+				var items = new List<TextBarGalleryItemViewModel>() {
+					new TextBarGalleryItemViewModel("Harold Barnes", "Vice President"),
+					new TextBarGalleryItemViewModel("Miguel Cazalla", "Operator"),
+					...
+				};
+
+				// Wrap the items in an ICollectionView to support categorization
+				_comboBoxPersonItems = BarGalleryViewModel.CreateCollectionView(items, categorize: true);
+			}
+
+			return _comboBoxPersonItems;
+		}
+	}
+	
+	/// <summary>
+	/// The command for a gallery item selection from a combobox.
+	/// </summary>
+	public ICommand ComboBoxGalleryCommand
+		=> _comboBoxGalleryCommand ??= new PreviewableDelegateCommand<IBarGalleryItemViewModel>(
+			executeAction: param => ApplicationViewModel.Instance.MessageService?.ShowMessage($"The value '{param?.Label}' was matched from the gallery.", "Value Committed", NotificationType.Success),
+			canExecuteFunc: _ => true,
+
+			// The items of BarComboBox support previewing the current item just like other gallery-based controls
+			previewAction: _ => { /* support preview action here */ },
+			cancelPreviewAction: _ => { /* cancel preview action here */ }
+		);
+	
+$(UnmatchedTextCommandPropertyDeclaration)
+}
+				]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="CanCategorizeSetter"
+															   IsEnabled="{Binding !#sampleRootControl.BasicComboBoxUsageOptions.CanCategorizeOnMenu}"
+															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;CanCategorize = false," />
+						<sampleBrowser:CodeExampleSubstitution Key="IsEditableSetter"
+															   IsEnabled="{Binding #sampleRootControl.BasicComboBoxUsageOptions.IsEditable}"
+															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;IsEditable = true," />
+						<sampleBrowser:CodeExampleSubstitution Key="IsReadOnlySetter"
+															   IsEnabled="{Binding #sampleRootControl.BasicComboBoxUsageOptions.IsReadOnly}"
+															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;IsReadOnly = true," />
+						<sampleBrowser:CodeExampleSubstitution Key="IsTextCompletionEnabledSetter"
+															   IsEnabled="{Binding !#sampleRootControl.BasicComboBoxUsageOptions.IsTextCompletionEnabled}"
+															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;IsTextCompletionEnabled = false," />
+						<sampleBrowser:CodeExampleSubstitution Key="IsTextSearchCaseSensitiveSetter"
+															   IsEnabled="{Binding #sampleRootControl.BasicComboBoxUsageOptions.IsTextSearchCaseSensitive}"
+															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;IsTextSearchCaseSensitive = true," />
+						<sampleBrowser:CodeExampleSubstitution Key="IsTextSearchEnabledSetter"
+															   IsEnabled="{Binding !#sampleRootControl.BasicComboBoxUsageOptions.IsTextSearchEnabled}"
+															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;IsTextSearchEnabled = false," />
+						<sampleBrowser:CodeExampleSubstitution Key="IsUnmatchedTextAllowedSetter"
+															   IsEnabled="{Binding !#sampleRootControl.BasicComboBoxUsageOptions.IsUnmatchedTextAllowed}"
+															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;IsUnmatchedTextAllowed = false," />
+						<sampleBrowser:CodeExampleSubstitution Key="UnmatchedTextCommandSetter"
+															   IsEnabled="{Binding #sampleRootControl.BasicComboBoxUsageOptions.IsUnmatchedTextSupported}"
+															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;UnmatchedTextCommand = ComboBoxUnmatchedTextCommand," />
+						<sampleBrowser:CodeExampleSubstitution Key="MenuResizeModeSetter"
+															   Value="{Binding #sampleRootControl.BasicComboBoxUsageOptions.MenuResizeMode, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;MenuResizeMode = ControlResizeMode.{0},'}">
+							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
+								<Binding Path="#sampleRootControl.BasicComboBoxUsageOptions.MenuResizeMode" Converter="{StaticResource NotEqualToComparisonConverter}">
+									<Binding.ConverterParameter>
+										<actipro:ControlResizeMode>None</actipro:ControlResizeMode>
+									</Binding.ConverterParameter>
+								</Binding>
+							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
+						</sampleBrowser:CodeExampleSubstitution>
+						<sampleBrowser:CodeExampleSubstitution Key="PlaceholderTextSetter"
+															   IsEnabled="{Binding #sampleRootControl.BasicComboBoxUsageOptions.PlaceholderText, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding #sampleRootControl.BasicComboBoxUsageOptions.PlaceholderText, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;PlaceholderText = &quot;{0}&quot;,'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="UnmatchedTextCommandFieldDeclaration"
+															   IsEnabled="{Binding #sampleRootControl.BasicComboBoxUsageOptions.IsUnmatchedTextSupported}">
+							<sampleBrowser:CodeExampleSubstitution.Value>
+								<![CDATA[
+	private ICommand? _comboBoxUnmatchedTextCommand;]]>
+							</sampleBrowser:CodeExampleSubstitution.Value>
+						</sampleBrowser:CodeExampleSubstitution>
+						<sampleBrowser:CodeExampleSubstitution Key="UnmatchedTextCommandPropertyDeclaration"
+															   IsEnabled="{Binding #sampleRootControl.BasicComboBoxUsageOptions.IsUnmatchedTextSupported}">
+							<sampleBrowser:CodeExampleSubstitution.Value>
+								<![CDATA[
+	/// <summary>
+	/// The command that is executed when a value is entered into a general combobox that does not match one of the known gallery items.
+	/// </summary>
+	public ICommand ComboBoxUnmatchedTextCommand
+		=> _comboBoxUnmatchedTextCommand ??= new DelegateCommand<string>(
+			executeAction: param => {
+				// No action necessary, but show a message to indicate that the value was accepted
+				ApplicationViewModel.Instance.MessageService?.ShowMessage($"The text value '{param}' was manually entered and accepted without a match in the gallery.", "Custom Text Value Committed", NotificationType.Success);
+			},
+			canExecuteFunc: _ => {
+				// The BarComboBox.UnmatchedTextCommand.CanExecute result will determine if the
+				// typed text should be allowed... true to allow the value and false to reject it
+				return true;
+			}
+		);
+
+								]]>
+							</sampleBrowser:CodeExampleSubstitution.Value>
+						</sampleBrowser:CodeExampleSubstitution>
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Categorized combobox usage"
+			>
+
+			<!-- XAML-based sample -->
+			<sampleBrowser:ControlExample.XamlContent>
+				<actipro:Ribbon>
+					<actipro:Ribbon.Styles>
+						<Style Selector="actipro|BarComboBox">
+							<Setter Property="ItemContainerTheme" Value="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.BarGalleryItemControlTheme}}" />
+							<Setter Property="SelectedIndex" Value="0" />
+						</Style>
+					</actipro:Ribbon.Styles>
+
+					<actipro:RibbonTabItem Key="SampleTab">
+						<actipro:RibbonGroup Key="SampleGroup">
+							<actipro:RibbonControlGroup ItemVariantBehavior="AlwaysMedium">
+
+								<!-- Categorized items in a single column -->
+								<actipro:BarComboBox Key="CategorizedSingleColumn" Label="Single-Column"
+									IsEditable="True"
+									ToolTip.Tip="A combobox with items categorized and displayed in a single column."
+									Command="{Binding #sampleRootControl.ComboBoxGalleryCommand}"
+									UnmatchedTextCommand="{Binding #sampleRootControl.ComboBoxUnmatchedTextCommand}"
+									ItemsSource="{Binding #sampleRootControl.ComboBoxPersonItems}"
+									TextMemberBinding="{Binding Label, x:DataType=actipro:IBarGalleryItemViewModel}"
+									>
+									<actipro:BarComboBox.ItemTemplateSelector>
+										<actipro:BarGalleryItemTemplateSelector />
+									</actipro:BarComboBox.ItemTemplateSelector>
+								</actipro:BarComboBox>
+
+								<!-- Categorized items in multiple columns -->
+								<actipro:BarComboBox Key="CategorizedMultiColumn" Label="Multi-Column"
+									IsEditable="True"
+									ToolTip.Tip="A combobox with items categorized and displayed using multiple columns."
+									Command="{Binding #sampleRootControl.ComboBoxGalleryCommand}"
+									UnmatchedTextCommand="{Binding #sampleRootControl.ComboBoxUnmatchedNumberTextCommand}"
+									MinMenuColumnCount="5"
+									MaxMenuColumnCount="5"
+									ItemsSource="{Binding #sampleRootControl.ComboBoxNumberItems}" 
+									ItemTemplate="{StaticResource NumberComboBoxGalleryItemTemplate}"
+									TextMemberBinding="{Binding Label, x:DataType=actipro:IBarGalleryItemViewModel}"
+									/>													 
+
+								<!-- Categorized/Filtered items with menu item appearance consistent with large menu items -->
+								<actipro:BarComboBox
+									Key="MenuStyle" IsEditable="True"
+									ToolTip.Tip="A combobox using a menu-like appearance for items, filtering, and an additional menu item below the list of combobox items."
+									CanFilterOnMenu="True"
+									Command="{Binding #sampleRootControl.ComboBoxGalleryCommand}"
+									UnmatchedTextCommand="{Binding #sampleRootControl.ComboBoxUnmatchedTextCommand}"
+									InlineIconMemberBinding="{Binding Icon, x:DataType=actipro:IBarGalleryItemViewModel}"
+									ItemsSource="{Binding #sampleRootControl.ComboBoxColorItems}"
+									ItemTemplate="{StaticResource LargeMenuComboBoxGalleryItemTemplate}"
+									TextMemberBinding="{Binding Label, x:DataType=actipro:IBarGalleryItemViewModel}"
+									>
+									<actipro:BarComboBox.BelowMenuItems>
+										<actipro:BarMenuItem Label="More colors..." />
+									</actipro:BarComboBox.BelowMenuItems>
+								</actipro:BarComboBox>
+
+							</actipro:RibbonControlGroup>
+						</actipro:RibbonGroup>
+
+					</actipro:RibbonTabItem>
+
+				</actipro:Ribbon>
+			</sampleBrowser:ControlExample.XamlContent>
+
+			<!-- MVVM-based sample -->
+			<sampleBrowser:ControlExample.MvvmContent>
+				<actipro:Ribbon x:Name="categorizedComboBoxUsageRibbonMvvm"
+					Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+					/>
+			</sampleBrowser:ControlExample.MvvmContent>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample Kind="Xaml" xml:space="preserve">
+				<![CDATA[
+<actipro:Ribbon ... >
+
+	<actipro:Ribbon.Resources>
+
+		<!-- DataTemplate for an appearance similar to large menu items -->
+		<DataTemplate x:Key="{x:Static local:LocalResourceKeys.LargeMenuComboBoxGalleryItemTemplate}" DataType="actipro:TextBarGalleryItemViewModel">
+			<Grid Margin="10,4">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="32" />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+				<ContentControl Grid.Column="0" Classes="theme-icon-presenter" Content="{Binding Icon}" />
+				<TextBlock Grid.Column="1" Margin="12,0,0,0" Text="{Binding Label}" VerticalAlignment="Center" />
+			</Grid>
+		</DataTemplate>
+
+		<!-- Data template used for multi-column layout -->
+		<DataTemplate x:Key="{x:Static local:LocalResourceKeys.NumberComboBoxGalleryItemTemplate}" DataType="actipro:TextBarGalleryItemViewModel">
+			<TextBlock Margin="15,4" Text="{Binding Label}" TextAlignment="Center" />
+		</DataTemplate>
+
+		<!-- Images used to define color swatches -->
+		<DrawingImage x:Key="RedSwatch">
+			<DrawingImage.Drawing>
+				<DrawingGroup>
+					<GeometryDrawing Brush="Red">
+						<GeometryDrawing.Geometry>
+							<RectangleGeometry Rect="0,0,32,32" />
+						</GeometryDrawing.Geometry>
+						<GeometryDrawing.Pen>
+							<Pen Brush="{actipro:ThemeResource Container5BorderBrush}" />
+						</GeometryDrawing.Pen>
+					</GeometryDrawing>
+				</DrawingGroup>
+			</DrawingImage.Drawing>
+		</DrawingImage>
+		<DrawingImage x:Key="OrangeSwatch">...</DrawingImage>
+		...
+
+	</actipro:Ribbon.Resources>
+	
+	<actipro:Ribbon.Styles>
+		<Style Selector="actipro|BarComboBox">
+			<Setter Property="ItemContainerTheme" Value="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.BarGalleryItemControlTheme}}" />
+			<Setter Property="SelectedIndex" Value="0" />
+		</Style>
+	</actipro:Ribbon.Styles>
+
+	<actipro:RibbonTabItem Key="SampleTab" ... >
+		<actipro:RibbonGroup Key="SampleGroup" ... >
+			<actipro:RibbonControlGroup>
+
+				<!-- Categorized items in a single column -->
+				<actipro:BarComboBox Key="CategorizedSingleColumn" Label="Single-Column"
+					IsEditable="True"
+					ToolTip.Tip="A combobox with items categorized and displayed in a single column."
+					ItemsSource="{Binding #sampleRootControl.ComboBoxPersonItems}"
+					TextMemberBinding="{Binding Label, x:DataType=actipro:IBarGalleryItemViewModel}"
+					>
+					<actipro:BarComboBox.ItemTemplateSelector>
+						<actipro:BarGalleryItemTemplateSelector />
+					</actipro:BarComboBox.ItemTemplateSelector>
+				</actipro:BarComboBox>
+
+				<!-- Categorized items in multiple columns, only positive numeric values can be selected/typed -->
+				<actipro:BarComboBox Key="CategorizedMultiColumn" Label="Multi-Column"
+					IsEditable="True"
+					ToolTip.Tip="A combobox with items categorized and displayed using multiple columns."
+					UnmatchedTextCommand="{Binding #sampleRootControl.ComboBoxUnmatchedNumberTextCommand}"
+					MinMenuColumnCount="5"
+					MaxMenuColumnCount="5"
+					ItemsSource="{Binding #sampleRootControl.ComboBoxNumberItems}" 
+					ItemTemplate="{StaticResource NumberComboBoxGalleryItemTemplate}"
+					TextMemberBinding="{Binding Label, x:DataType=actipro:IBarGalleryItemViewModel}"
+					/>
+
+				<!-- Categorized/Filtered items with menu item appearance consistent with large menu items -->
+				<actipro:BarComboBox
+					Key="MenuStyle" IsEditable="True"
+					ToolTip.Tip="A combobox using a menu-like appearance for items, filtering, and an additional menu item below the list of combobox items."
+					CanFilterOnMenu="True"
+					InlineIconMemberBinding="{Binding Icon, x:DataType=actipro:IBarGalleryItemViewModel}"
+					ItemsSource="{Binding #sampleRootControl.ComboBoxColorItems}"
+					ItemTemplate="{StaticResource LargeMenuComboBoxGalleryItemTemplate}"
+					TextMemberBinding="{Binding Label, x:DataType=actipro:IBarGalleryItemViewModel}"
+					>
+					<actipro:BarComboBox.BelowMenuItems>
+						<actipro:BarMenuItem Label="More colors..." />
+					</actipro:BarComboBox.BelowMenuItems>
+				</actipro:BarComboBox>
+
+			</actipro:RibbonControlGroup>
+		</actipro:RibbonGroup>
+	</actipro:RibbonTabItem>
+
+	...
+
+</actipro:Ribbon>
+				]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Xaml" Language="C#" xml:space="preserve">
+				<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Bars;
+using ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm;
+...
+
+public partial class SampleRootControl : UserControl {
+
+	private IEnumerable? _comboBoxColorItems;
+	private IEnumerable? _comboBoxNumberItems;
+	private IEnumerable? _comboBoxPersonItems;
+	
+	private ICommand? _comboBoxUnmatchedNumberTextCommand;
+	
+	/// <summary>
+	/// The items to be displayed in combobox for selecting colors.
+	/// </summary>
+	public IEnumerable ComboBoxColorItems {
+		get {
+			if (_comboBoxColorItems is null) {
+				// Wrap the items in an ICollectionView to support categorization
+				_comboBoxColorItems = BarGalleryViewModel.CreateCollectionView(new [] {
+					new TextBarGalleryItemViewModel("Red", "Primary Colors") { Icon = ResolveResource<IImage>("RedSwatch") },
+					...
+					new TextBarGalleryItemViewModel("Orange", "Secondary Colors") { Icon = ResolveResource<IImage>("OrangeSwatch") },
+					...
+				}, categorize: true);
+			}
+
+			return _comboBoxColorItems;
+		}
+	}
+
+	/// <summary>
+	/// The items to be displayed in combobox for selecting numbers.
+	/// </summary>
+	public IEnumerable ComboBoxNumberItems {
+		get {
+			if (_comboBoxNumberItems is null) {
+				var items = new List<TextBarGalleryItemViewModel>();
+				for (var i = 1; i <= 20; i++) {
+					bool isEven = (i % 2 == 0);
+					items.Add(new TextBarGalleryItemViewModel(i.ToString(), (isEven ? "Even Numbers" : "Odd Numbers")));
+				}
+
+				// Wrap the items in an ICollectionView to support categorization
+				_comboBoxNumberItems = BarGalleryViewModel.CreateCollectionView(items, categorize: true);
+			}
+
+			return _comboBoxNumberItems;
+		}
+	}
+
+	/// <summary>
+	/// The items to be displayed in combobox for selecting people.
+	/// </summary>
+	public IEnumerable ComboBoxPersonItems {
+		get {
+			if (_comboBoxPersonItems is null) {
+				// Define the gallery item view models displayed in the combobox
+				var items = new List<TextBarGalleryItemViewModel>() {
+					new TextBarGalleryItemViewModel("Harold Barnes", "Vice President"),
+					new TextBarGalleryItemViewModel("Miguel Cazalla", "Operator"),
+					...
+				};
+
+				// Wrap the items in an ICollectionView to support categorization
+				_comboBoxPersonItems = BarGalleryViewModel.CreateCollectionView(items, categorize: true);
+			}
+
+			return _comboBoxPersonItems;
+		}
+	}
+
+	/// <summary>
+	/// The command that is executed when a value is entered into a combobox for
+	/// selecting numbers that does not match one of the known gallery items.
+	/// </summary>
+	public ICommand ComboBoxUnmatchedNumberTextCommand
+		=> _comboBoxUnmatchedNumberTextCommand ??= new DelegateCommand<string>(
+			executeAction: _ => { /* No action necessary */ },
+			canExecuteFunc: param => {
+				// The BarComboBox.UnmatchedTextCommand.CanExecute result will determine if the
+				// typed text should be allowed... true to allow the value and false to reject it
+				return int.TryParse(param, out var number) && (number > 0);
+			}
+		);
+
+	/// <summary>
+	/// Attempt to resolve a resource with the given key.
+	/// </summary>
+	private T? ResolveResource<T>(string key) {
+		if (this.TryGetResource(key, out var resource) && (resource is T typedResource))
+			return typedResource;
+		return default;
+	}
+
+}
+				]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" xml:space="preserve">
+				<![CDATA[
+<!-- DataContext is bound to an instance of RibbonViewModel -->
+<actipro:Ribbon
+	DataContext="{Binding #sampleRootControl.CategorizedComboBoxUsageRibbonViewModel}"
+	Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}">
+	
+	<actipro:Ribbon.Resources>
+
+		<!-- DataTemplate for an appearance similar to large menu items -->
+		<DataTemplate x:Key="{x:Static local:LocalResourceKeys.LargeMenuComboBoxGalleryItemTemplate}" DataType="actipro:TextBarGalleryItemViewModel">
+			<Grid Margin="10,4">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="32" />
+					<ColumnDefinition Width="Auto" />
+				</Grid.ColumnDefinitions>
+				<ContentControl Grid.Column="0" Classes="theme-icon-presenter" Content="{Binding Icon}" />
+				<TextBlock Grid.Column="1" Margin="12,0,0,0" Text="{Binding Label}" VerticalAlignment="Center" />
+			</Grid>
+		</DataTemplate>
+
+		<!-- Data template used for multi-column layout -->
+		<DataTemplate x:Key="{x:Static local:LocalResourceKeys.NumberComboBoxGalleryItemTemplate}" DataType="actipro:TextBarGalleryItemViewModel">
+			<TextBlock Margin="15,4" Text="{Binding Label}" TextAlignment="Center" />
+		</DataTemplate>
+
+		<!-- Images used to define color swatches -->
+		<DrawingImage x:Key="RedSwatch">
+			<DrawingImage.Drawing>
+				<DrawingGroup>
+					<GeometryDrawing Brush="Red">
+						<GeometryDrawing.Geometry>
+							<RectangleGeometry Rect="0,0,32,32" />
+						</GeometryDrawing.Geometry>
+						<GeometryDrawing.Pen>
+							<Pen Brush="{actipro:ThemeResource Container5BorderBrush}" />
+						</GeometryDrawing.Pen>
+					</GeometryDrawing>
+				</DrawingGroup>
+			</DrawingImage.Drawing>
+		</DrawingImage>
+		<DrawingImage x:Key="OrangeSwatch">...</DrawingImage>
+		...
+
+	</actipro:Ribbon.Resources>
+	
+</actipro:Ribbon>
+				]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" Language="C#" xml:space="preserve">
+				<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Bars;
+using ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm;
+...
+
+public partial class SampleRootControl : UserControl {
+	
+	private IEnumerable? _comboBoxColorItems;
+	private IEnumerable? _comboBoxNumberItems;
+	private IEnumerable? _comboBoxPersonItems;
+	
+	private ICommand? _comboBoxUnmatchedNumberTextCommand;
+	
+	public SampleRootControl() {
+		CategorizedComboBoxUsageRibbonViewModel = CreateCategorizedComboBoxUsageRibbonViewModel();
+		
+		InitializeComponent();
+	}
+
+	/// <summary>
+	/// Creates the ribbon view model.
+	/// </summary>
+	private static void CreateCategorizedComboBoxUsageRibbonViewModel() {
+		return new RibbonViewModel() {
+			Tabs = {
+				new RibbonTabViewModel("SampleTab") {
+					Groups = {
+						new RibbonGroupViewModel("SampleGroup") {
+							Items = {
+								// Categorized items in a single column
+								new BarComboBoxViewModel("CategorizedSingleColumn", "Single-Column", ComboBoxPersonItems) {
+									Description = "A combobox with items categorized and displayed in a single column.",
+									IsEditable = true,
+									ItemTemplateSelector = new BarGalleryItemTemplateSelector(),
+								},
+
+								// Categorized items in multiple columns
+								new BarComboBoxViewModel("CategorizedMultiColumn", "Multi-Column", ComboBoxNumberItems) {
+									Description = "A combobox with items categorized and displayed using multiple columns.",
+									IsEditable = true,
+									ItemTemplate = ResolveResource<IDataTemplate>(LocalResourceKeys.NumberComboBoxGalleryItemTemplate),
+									MinMenuColumnCount = 5,
+									MaxMenuColumnCount = 5,
+									UnmatchedTextCommand = ComboBoxUnmatchedNumberTextCommand,
+								},
+
+								// Categorized/Filtered items with menu item appearance consistent with large menu items
+								new BarComboBoxViewModel("MenuStyle", ComboBoxColorItems) {
+									CanFilter = true,
+									Description = "A combobox using a menu-like appearance for items, filtering, and an additional menu item below the list of combobox items.",
+									IsEditable = true,
+									ItemTemplate = ResolveResource<IDataTemplate>(LocalResourceKeys.LargeMenuComboBoxGalleryItemTemplate),
+									BelowMenuItems = {
+										new BarButtonViewModel("MoreColors", "More colors...")
+									}
+								},
+							}
+						},
+					}
+				},
+			}
+			...
+		};
+	}
+
+	/// <summary>
+	/// Gets the view model to be bound to the ribbon.
+	/// </summary>
+	public RibbonViewModel CategorizedComboBoxUsageRibbonViewModel { get; }
+
+	/// <summary>
+	/// The items to be displayed in combobox for selecting colors.
+	/// </summary>
+	public IEnumerable ComboBoxColorItems {
+		get {
+			if (_comboBoxColorItems is null) {
+				// Wrap the items in an ICollectionView to support categorization
+				_comboBoxColorItems = BarGalleryViewModel.CreateCollectionView(new [] {
+					new TextBarGalleryItemViewModel("Red", "Primary Colors") { Icon = ResolveResource<IImage>("RedSwatch") },
+					...
+					new TextBarGalleryItemViewModel("Orange", "Secondary Colors") { Icon = ResolveResource<IImage>("OrangeSwatch") },
+					...
+				}, categorize: true);
+			}
+
+			return _comboBoxColorItems;
+		}
+	}
+
+	/// <summary>
+	/// The items to be displayed in combobox for selecting numbers.
+	/// </summary>
+	public IEnumerable ComboBoxNumberItems {
+		get {
+			if (_comboBoxNumberItems is null) {
+				var items = new List<TextBarGalleryItemViewModel>();
+				for (var i = 1; i <= 20; i++) {
+					bool isEven = (i % 2 == 0);
+					items.Add(new TextBarGalleryItemViewModel(i.ToString(), (isEven ? "Even Numbers" : "Odd Numbers")));
+				}
+
+				// Wrap the items in an ICollectionView to support categorization
+				_comboBoxNumberItems = BarGalleryViewModel.CreateCollectionView(items, categorize: true);
+			}
+
+			return _comboBoxNumberItems;
+		}
+	}
+
+	/// <summary>
+	/// The items to be displayed in combobox for selecting people.
+	/// </summary>
+	public IEnumerable ComboBoxPersonItems {
+		get {
+			if (_comboBoxPersonItems is null) {
+				// Define the gallery item view models displayed in the combobox
+				var items = new List<TextBarGalleryItemViewModel>() {
+					new TextBarGalleryItemViewModel("Harold Barnes", "Vice President"),
+					new TextBarGalleryItemViewModel("Miguel Cazalla", "Operator"),
+					...
+				};
+
+				// Wrap the items in an ICollectionView to support categorization
+				_comboBoxPersonItems = BarGalleryViewModel.CreateCollectionView(items, categorize: true);
+			}
+
+			return _comboBoxPersonItems;
+		}
+	}
+
+	/// <summary>
+	/// The command that is executed when a value is entered into a combobox for
+	/// selecting numbers that does not match one of the known gallery items.
+	/// </summary>
+	public ICommand ComboBoxUnmatchedNumberTextCommand
+		=> _comboBoxUnmatchedNumberTextCommand ??= new DelegateCommand<string>(
+			executeAction: _ => { /* No action necessary */ },
+			canExecuteFunc: param => {
+				// The BarComboBox.UnmatchedTextCommand.CanExecute result will determine if the
+				// typed text should be allowed... true to allow the value and false to reject it
+				return int.TryParse(param, out var number) && (number > 0);
+			}
+		);
+
+	/// <summary>
+	/// Attempt to resolve a resource with the given key.
+	/// </summary>
+	private T? ResolveResource<T>(string key) {
+		if (this.TryGetResource(key, out var resource) && (resource is T typedResource))
+			return typedResource;
+		return default;
+	}
+
+}
+				]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Font combobox usage"
+			>
+
+			<!-- XAML-based sample -->
+			<sampleBrowser:ControlExample.XamlContent>
+				<actipro:Ribbon>
+					<actipro:Ribbon.Styles>
+						<Style Selector="actipro|BarComboBox">
+							<Setter Property="ItemContainerTheme" Value="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.BarGalleryItemControlTheme}}" />
+							<Setter Property="ItemTemplateSelector">
+								<actipro:BarGalleryItemTemplateSelector />
+							</Setter>
+							<Setter Property="SelectedIndex" Value="0" />
+						</Style>
+					</actipro:Ribbon.Styles>
+
+					<actipro:RibbonTabItem Key="SampleTab">
+						<actipro:RibbonGroup Key="SampleGroup">
+							<actipro:RibbonControlGroup ItemVariantBehavior="AlwaysMedium">
+
+								<!-- Font family -->
+								<actipro:BarComboBox Key="FontFamily"
+									IsEditable="True"
+									IsUnmatchedTextAllowed="False"
+									RequestedWidth="140"
+									ToolTip.Tip="A combobox with system fonts and a category for recently-used fonts."
+									Command="{Binding #sampleRootControl.ComboBoxGalleryCommand}"
+									IsPreviewEnabledWhenPopupClosed="True"
+									MenuResizeMode="Vertical"
+									ItemsSource="{Binding #sampleRootControl.ComboBoxFontFamilyItems}"
+									TextMemberBinding="{Binding Label, x:DataType=actipro:IBarGalleryItemViewModel}"
+									/>
+
+								<!-- Font size -->
+								<actipro:BarComboBox Key="FontSize"
+									IsEditable="True"
+									IsTextCompletionEnabled="False"
+									RequestedWidth="60"
+									ToolTip.Tip="A combobox with common font sizes."
+									Command="{Binding #sampleRootControl.ComboBoxGalleryCommand}"
+									UnmatchedTextCommand="{Binding #sampleRootControl.ComboBoxUnmatchedNumberTextCommand}"
+									MenuResizeMode="Vertical"
+									ItemsSource="{Binding #sampleRootControl.ComboBoxFontSizeItems}"
+									TextMemberBinding="{Binding Label, x:DataType=actipro:IBarGalleryItemViewModel}"
+									/>
+
+							</actipro:RibbonControlGroup>
+						</actipro:RibbonGroup>
+
+					</actipro:RibbonTabItem>
+
+				</actipro:Ribbon>
+			</sampleBrowser:ControlExample.XamlContent>
+
+			<!-- MVVM-based sample -->
+			<sampleBrowser:ControlExample.MvvmContent>
+				<actipro:Ribbon x:Name="fontComboBoxUsageRibbonMvvm"
+					Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+					/>
+			</sampleBrowser:ControlExample.MvvmContent>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample Kind="Xaml" xml:space="preserve">
+				<![CDATA[
+<actipro:Ribbon ... >
+
+	<actipro:Ribbon.Styles>
+		<Style Selector="actipro|BarComboBox">
+			<Setter Property="ItemContainerTheme" Value="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.BarGalleryItemControlTheme}}" />
+			<Setter Property="ItemTemplateSelector">
+				<actipro:BarGalleryItemTemplateSelector />
+			</Setter>
+			<Setter Property="SelectedIndex" Value="0" />
+		</Style>
+	</actipro:Ribbon.Styles>
+
+	<actipro:RibbonTabItem Key="SampleTab" ... >
+		<actipro:RibbonGroup Key="SampleGroup" ... >
+			<actipro:RibbonControlGroup>
+
+				<!-- Font family -->
+				<actipro:BarComboBox Key="FontFamily"
+					IsEditable="True"
+					IsUnmatchedTextAllowed="False"
+					RequestedWidth="140"
+					ToolTip.Tip="A combobox with system fonts and a category for recently-used fonts."
+					MenuResizeMode="Vertical"
+					ItemsSource="{Binding #sampleRootControl.ComboBoxFontFamilyItems}" 
+					TextMemberBinding="{Binding Label, x:DataType=actipro:IBarGalleryItemViewModel}"
+					/>
+
+				<!-- Font size -->
+				<actipro:BarComboBox Key="FontSize"
+					IsEditable="True"
+					IsTextCompletionEnabled="False"
+					RequestedWidth="60"
+					ToolTip.Tip="A combobox with common font sizes."
+					UnmatchedTextCommand="{Binding #sampleRootControl.ComboBoxUnmatchedNumberTextCommand}"
+					MenuResizeMode="Vertical"
+					ItemsSource="{Binding #sampleRootControl.ComboBoxFontSizeItems}" 
+					TextMemberBinding="{Binding Label, x:DataType=actipro:IBarGalleryItemViewModel}"
+					/>
+
+			</actipro:RibbonControlGroup>
+		</actipro:RibbonGroup>
+	</actipro:RibbonTabItem>
+
+	...
+
+</actipro:Ribbon>
+				]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Xaml" Language="C#" xml:space="preserve">
+				<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Bars;
+using ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm;
+...
+
+public partial class SampleRootControl : UserControl {
+
+	private IEnumerable? _comboBoxFontFamilyItems;
+	private IEnumerable? _comboBoxFontSizeItems;
+
+	private ICommand? _comboBoxUnmatchedNumberTextCommand;
+
+	/// <summary>
+	/// The items to be displayed in combobox for selecting font families.
+	/// </summary>
+	public IEnumerable ComboBoxFontFamilyItems {
+		get {
+			if (_comboBoxFontFamilyItems is null) {
+				const string RecentlyUsedCategory = "Recently-Used Fonts";
+
+				// Create a list of recently-used fonts (this sample just uses the default font)
+				var recentlyUsedFonts = new List<FontFamilyBarGalleryItemViewModel>() {
+					new(FontSettings.DefaultFontFamilyName, RecentlyUsedCategory)
+				};
+
+				// Create a list of the view models for the available fonts
+				var defaultFontCollection = FontFamilyBarGalleryItemViewModel.CreateDefaultCollection();
+
+				// Combine the recently-used fonts with the default fonts and
+				// wrap in an ICollectionView to support categorization
+				_comboBoxFontFamilyItems = BarGalleryViewModel.CreateCollectionView(
+					recentlyUsedFonts.Concat(defaultFontCollection),
+					categorize: true
+				);
+			}
+
+			return _comboBoxFontFamilyItems;
+		}
+	}
+
+	/// <summary>
+	/// The items to be displayed in combobox for selecting font sizes.
+	/// </summary>
+	public IEnumerable ComboBoxFontSizeItems
+		=> _comboBoxFontSizeItems ??= FontSizeBarGalleryItemViewModel.CreateDefaultCollection();
+
+	/// <summary>
+	/// The command that is executed when a value is entered into a combobox for
+	/// selecting numbers that does not match one of the known gallery items.
+	/// </summary>
+	public ICommand ComboBoxUnmatchedNumberTextCommand
+		=> _comboBoxUnmatchedNumberTextCommand ??= new DelegateCommand<string>(
+			executeAction: _ => { /* No action necessary */ },
+			canExecuteFunc: param => {
+				// The BarComboBox.UnmatchedTextCommand.CanExecute result will determine if the
+				// typed text should be allowed... true to allow the value and false to reject it
+				return int.TryParse(param, out var number) && (number > 0);
+			}
+		);
+
+}
+				]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" xml:space="preserve">
+				<![CDATA[
+<!-- DataContext is bound to an instance of RibbonViewModel -->
+<actipro:Ribbon
+	DataContext="{Binding #sampleRootControl.FontComboBoxUsageRibbonViewModel}"
+	Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}" />
+				]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" Language="C#" xml:space="preserve">
+				<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Bars;
+using ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm;
+...
+
+public partial class SampleRootControl : UserControl {
+	
+	private IEnumerable? _comboBoxFontFamilyItems;
+	private IEnumerable? _comboBoxFontSizeItems;
+	
+	private ICommand? _comboBoxUnmatchedNumberTextCommand;
+	
+	public SampleRootControl() {
+		FontComboBoxUsageRibbonViewModel = CreateFontComboBoxUsageRibbonViewModel();
+		
+		InitializeComponent();
+	}
+
+	/// <summary>
+	/// Creates the ribbon view model.
+	/// </summary>
+	private static void CreateFontComboBoxUsageRibbonViewModel() {
+		return new RibbonViewModel() {
+			Tabs = {
+				new RibbonTabViewModel("SampleTab") {
+					Groups = {
+						new RibbonGroupViewModel("SampleGroup") {
+							Items = {
+								// Font family
+								new BarComboBoxViewModel("FontFamily", ComboBoxFontFamilyItems) {
+									Description = "A combobox with system fonts and a category for recently-used fonts.",
+									IsEditable = true,
+									IsUnmatchedTextAllowed = false,
+									ItemTemplateSelector = new BarGalleryItemTemplateSelector(),
+									MenuResizeMode = ControlResizeMode.Vertical,
+									RequestedWidth = 140,
+								},
+
+								// Font size
+								new BarComboBoxViewModel("FontSize", ComboBoxFontSizeItems) {
+									Description = "A combobox with common font sizes.",
+									IsEditable = true,
+									IsTextCompletionEnabled = false,
+									ItemTemplateSelector = new BarGalleryItemTemplateSelector(),
+									MenuResizeMode = ControlResizeMode.Vertical,
+									RequestedWidth = 60,
+									UnmatchedTextCommand = ComboBoxUnmatchedNumberTextCommand,
+								},
+							}
+						},
+					}
+				},
+			}
+			...
+		};
+	}
+
+	/// <summary>
+	/// Gets the view model to be bound to the ribbon.
+	/// </summary>
+	public RibbonViewModel FontComboBoxUsageRibbonViewModel { get; }
+
+	/// <summary>
+	/// The items to be displayed in combobox for selecting font families.
+	/// </summary>
+	public IEnumerable ComboBoxFontFamilyItems {
+		get {
+			if (_comboBoxFontFamilyItems is null) {
+				const string RecentlyUsedCategory = "Recently-Used Fonts";
+
+				// Create a list of recently-used fonts (this sample just uses the default font)
+				var recentlyUsedFonts = new List<FontFamilyBarGalleryItemViewModel>() {
+					new(FontSettings.DefaultFontFamilyName, RecentlyUsedCategory)
+				};
+
+				// Create a list of the view models for the available fonts
+				var defaultFontCollection = FontFamilyBarGalleryItemViewModel.CreateDefaultCollection();
+
+				// Combine the recently-used fonts with the default fonts and
+				// wrap in an ICollectionView to support categorization
+				_comboBoxFontFamilyItems = BarGalleryViewModel.CreateCollectionView(
+					recentlyUsedFonts.Concat(defaultFontCollection),
+					categorize: true
+				);
+			}
+
+			return _comboBoxFontFamilyItems;
+		}
+	}
+
+	/// <summary>
+	/// The items to be displayed in combobox for selecting font sizes.
+	/// </summary>
+	public IEnumerable ComboBoxFontSizeItems
+		=> _comboBoxFontSizeItems ??= FontSizeBarGalleryItemViewModel.CreateDefaultCollection();
+
+	/// <summary>
+	/// The command that is executed when a value is entered into a combobox for
+	/// selecting numbers that does not match one of the known gallery items.
+	/// </summary>
+	public ICommand ComboBoxUnmatchedNumberTextCommand
+		=> _comboBoxUnmatchedNumberTextCommand ??= new DelegateCommand<string>(
+			executeAction: _ => { /* No action necessary */ },
+			canExecuteFunc: param => {
+				// The BarComboBox.UnmatchedTextCommand.CanExecute result will determine if the
+				// typed text should be allowed... true to allow the value and false to reject it
+				return int.TryParse(param, out var number) && (number > 0);
+			}
+		);
+
+}
+				]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Enum combobox usage"
+			>
+
+			<!-- XAML-based sample -->
+			<sampleBrowser:ControlExample.XamlContent>
+				<actipro:Ribbon>
+					<actipro:Ribbon.Styles>
+						<Style Selector="actipro|BarComboBox">
+							<Setter Property="ItemContainerTheme" Value="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.BarGalleryItemControlTheme}}" />
+							<Setter Property="ItemTemplateSelector">
+								<actipro:BarGalleryItemTemplateSelector />
+							</Setter>
+							<Setter Property="SelectedIndex" Value="0" />
+						</Style>
+					</actipro:Ribbon.Styles>
+
+					<actipro:RibbonTabItem Key="SampleTab">
+						<actipro:RibbonGroup Key="SampleGroup">
+							<actipro:RibbonControlGroup ItemVariantBehavior="AlwaysMedium">
+
+								<!-- Enum -->
+								<actipro:BarComboBox
+									Key="EnumValue"
+									IsUnmatchedTextAllowed="False"
+									RequestedWidth="120"
+									ToolTip.Tip="A combobox with items automatically generated from the fields of an Enum type."
+									Command="{Binding #sampleRootControl.ComboBoxGalleryCommand}"
+									ItemsSource="{Binding #sampleRootControl.ComboBoxEnumItems}"
+									TextMemberBinding="{Binding Label, x:DataType=actipro:IBarGalleryItemViewModel}"
+									/>
+
+							</actipro:RibbonControlGroup>
+						</actipro:RibbonGroup>
+
+					</actipro:RibbonTabItem>
+
+				</actipro:Ribbon>
+			</sampleBrowser:ControlExample.XamlContent>
+
+			<!-- MVVM-based sample -->
+			<sampleBrowser:ControlExample.MvvmContent>
+				<actipro:Ribbon x:Name="enumComboBoxUsageRibbonMvvm"
+					Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+					/>
+			</sampleBrowser:ControlExample.MvvmContent>
+
+			
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample Kind="Xaml" xml:space="preserve">
+				<![CDATA[
+<actipro:Ribbon ... >
+	<actipro:RibbonTabItem Key="SampleTab" ... >
+		<actipro:RibbonGroup Key="SampleGroup" ... >
+			<actipro:RibbonControlGroup>
+
+				<actipro:BarComboBox
+					Key="EnumValue"
+					IsUnmatchedTextAllowed="False"
+					RequestedWidth="120"
+					ToolTip.Tip="A combobox with items automatically generated from the fields of an Enum type."
+					ItemContainerTheme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.BarGalleryItemControlTheme}}"
+					ItemsSource="{Binding #sampleRootControl.ComboBoxEnumItems}"
+					TextMemberBinding="{Binding Label, x:DataType=actipro:IBarGalleryItemViewModel}"
+					SelectedIndex="0"
+					>
+					<actipro:BarComboBox.ItemTemplateSelector>
+						<actipro:BarGalleryItemTemplateSelector />
+					</actipro:BarComboBox.ItemTemplateSelector>
+				</actipro:BarComboBox>
+
+			</actipro:RibbonControlGroup>
+		</actipro:RibbonGroup>
+	</actipro:RibbonTabItem>
+
+	...
+
+</actipro:Ribbon>
+				]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Xaml" Language="C#" xml:space="preserve">
+				<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Bars;
+using ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm;
+...
+
+public partial class SampleRootControl : UserControl {
+
+	private IEnumerable? _comboBoxEnumItems;
+
+	/// <summary>
+	/// The items to be displayed in combobox based on an enum.
+	/// </summary>
+	public IEnumerable ComboBoxEnumItems
+		=> _comboBoxEnumItems ??= BarGalleryViewModel.CreateCollectionView(
+			EnumBarGalleryItemViewModel<SampleEnum>.CreateCollection().Select(x => {
+				// Apply a default category
+				if (x.Category is null)
+					x.Category = "Uncategorized";
+				return x;
+			}),
+			categorize: true
+		);
+
+}
+				]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" xml:space="preserve">
+				<![CDATA[
+<!-- DataContext is bound to an instance of RibbonViewModel -->
+<actipro:Ribbon
+	DataContext="{Binding #sampleRootControl.EnumComboBoxUsageRibbonViewModel}"
+	Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}" />
+				]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" Language="C#" xml:space="preserve">
+				<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Bars;
+using ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm;
+...
+
+public partial class SampleRootControl : UserControl {
+
+	private IEnumerable? _comboBoxEnumItems;
+	
+	public SampleRootControl() {
+		EnumComboBoxUsageRibbonViewModel = CreateEnumComboBoxUsageRibbonViewModel();
+		
+		InitializeComponent();
+	}
+
+	/// <summary>
+	/// The items to be displayed in combobox based on an enum.
+	/// </summary>
+	public IEnumerable ComboBoxEnumItems
+		=> _comboBoxEnumItems ??= BarGalleryViewModel.CreateCollectionView(
+				EnumBarGalleryItemViewModel<SampleEnum>.CreateCollection().Select(x => {
+					// Apply a default category
+					if (x.Category is null)
+						x.Category = "Uncategorized";
+					return x;
+				}),
+				categorize: true);
+
+	/// <summary>
+	/// Creates the ribbon view model for the "Enum combobox usage" sample.
+	/// </summary>
+	private RibbonViewModel CreateEnumComboBoxUsageRibbonViewModel() {
+		return new RibbonViewModel() {
+			Tabs = {
+				new RibbonTabViewModel("SampleTab") {
+					Groups = {
+						new RibbonGroupViewModel("SampleGroup") {
+							Items = {
+								new RibbonControlGroupViewModel() {
+									ItemVariantBehavior = ItemVariantBehavior.AlwaysMedium,
+									Items = {
+										new BarComboBoxViewModel("EnumValue", ComboBoxEnumItems) {
+											Description = "A combobox with items automatically generated from the fields of an Enum type.",
+											IsUnmatchedTextAllowed = false,
+											ItemTemplateSelector = new BarGalleryItemTemplateSelector(),
+											RequestedWidth = 120,
+										},
+									}
+								}
+							},
+						},
+					}
+				},
+			}
+		};
+	}
+
+	/// <summary>
+	/// The ribbon view model for the "Enum combobox usage" sample.
+	/// </summary>
+	public RibbonViewModel EnumComboBoxUsageRibbonViewModel { get; }
+
+}
+				]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Basic textbox usage"
+			Footer="BarTextBox is a special TextBox implementation that supports executing an ICommand when its value is changed."
+			>
+
+			<!-- XAML-based sample -->
+			<sampleBrowser:ControlExample.XamlContent>
+				<actipro:Ribbon>
+
+					<actipro:RibbonTabItem Key="SampleTab">
+						<actipro:RibbonGroup Key="SampleGroup">
+							<actipro:RibbonControlGroup ItemVariantBehavior="AlwaysMedium">
+
+								<actipro:BarTextBox Key="Text"
+									RequestedWidth="120"
+									Text="A text value"
+									PlaceholderText="(empty)"
+									Command="{Binding #sampleRootControl.TextBoxCommitCommand}"
+									CommandParameter="{Binding $self.Text}"
+									ToolTip.Tip="A BarTextBox control that commits changed text on Enter or focus loss." />
+
+							</actipro:RibbonControlGroup>
+						</actipro:RibbonGroup>
+
+					</actipro:RibbonTabItem>
+
+				</actipro:Ribbon>
+			</sampleBrowser:ControlExample.XamlContent>
+
+			<!-- MVVM-based sample -->
+			<sampleBrowser:ControlExample.MvvmContent>
+				<actipro:Ribbon x:Name="basicTextBoxUsageRibbonMvvm"
+					Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+					/>
+			</sampleBrowser:ControlExample.MvvmContent>
+
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample Kind="Xaml" xml:space="preserve">
+				<![CDATA[
+<actipro:Ribbon ... >
+	<actipro:RibbonTabItem Key="SampleTab" ... >
+		<actipro:RibbonGroup Key="SampleGroup" ... >
+			<actipro:RibbonControlGroup>
+
+				<actipro:BarTextBox Key="Text"
+					RequestedWidth="120"
+					Text="A text value"
+					PlaceholderText="(empty)"
+					Command="{Binding #sampleRootControl.TextBoxCommitCommand}"
+					CommandParameter="{Binding $self.Text}"
+					ToolTip.Tip="A BarTextBox control that commits changed text on Enter or focus loss." />
+
+			</actipro:RibbonControlGroup>
+		</actipro:RibbonGroup>
+	</actipro:RibbonTabItem>
+
+	...
+
+</actipro:Ribbon>
+				]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Xaml" Language="C#" xml:space="preserve">
+				<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Bars;
+...
+
+public partial class SampleRootControl : UserControl {
+
+	private ICommand? _textBoxCommitCommand;
+
+	/// <summary>
+	/// The command to commit text from a textbox.
+	/// </summary>
+	public ICommand TextBoxCommitCommand
+		=> _textBoxCommitCommand ??= new DelegateCommand<string>(
+			executeAction: param => {
+				ApplicationViewModel.Instance.MessageService?.ShowMessage($"The value '{param}' was committed from the textbox.", "Value Committed", NotificationType.Success);
+			},
+			canExecuteFunc: param => true
+		);
+
+}
+				]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" xml:space="preserve">
+				<![CDATA[
+<!-- DataContext is bound to an instance of RibbonViewModel -->
+<actipro:Ribbon
+	DataContext="{Binding #sampleRootControl.BasicTextBoxUsageRibbonViewModel}"
+	Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}" />
+				]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" Language="C#" xml:space="preserve">
+				<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Bars;
+using ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm;
+...
+
+public partial class SampleRootControl : UserControl {
+
+	private ICommand? _textBoxCommitCommand;
+
+	public SampleRootControl() {
+		BasicTextBoxUsageRibbonViewModel = CreateBasicTextBoxUsageRibbonViewModel();
+		
+		InitializeComponent();
+	}
+	
+	/// <summary>
+	/// Creates the ribbon view model for the "Basic textbox usage" sample.
+	/// </summary>
+	private RibbonViewModel CreateBasicTextBoxUsageRibbonViewModel() {
+		var textBoxViewModel = new BarTextBoxViewModel("Text") {
+			Command = TextBoxCommitCommand,
+			Description = "A textbox control that commits changed text on Enter or focus loss.",
+			RequestedWidth = 120,
+			Text = "A text value",
+		};
+		textBoxViewModel.CommandParameter = textBoxViewModel; // Pass the view model to the command
+
+		return new RibbonViewModel() {
+			Tabs = {
+				new RibbonTabViewModel("SampleTab") {
+					Groups = {
+						new RibbonGroupViewModel("SampleGroup") {
+							Items = {
+								new RibbonControlGroupViewModel() {
+									Items = { textBoxViewModel }
+								}
+							},
+						},
+					}
+				},
+			}
+		};
+	}
+
+
+	/// <summary>
+	/// The command to commit text from a textbox.
+	/// </summary>
+	public ICommand TextBoxCommitCommand
+		=> _textBoxCommitCommand ??= new DelegateCommand<object>(
+			executeAction: param => {
+				var textBoxValue = (param is BarTextBoxViewModel viewModel) ? viewModel.Text : null;
+				ApplicationViewModel.Instance.MessageService?.ShowMessage($"The value '{textBoxValue}' was committed from the textbox.", "Value Committed", NotificationType.Success);
+			},
+			canExecuteFunc: param => true
+		);
+
+	/// <summary>
+	/// The ribbon view model for the "Basic textbox usage" sample.
+	/// </summary>
+	public RibbonViewModel BasicTextBoxUsageRibbonViewModel { get; }
+
+}
+				]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Other editors"
+			Footer="Other controls can also be integrated within the ribbon."
+			>
+
+			<actipro:Ribbon>
+				<actipro:RibbonTabItem Key="SampleTab">
+					<actipro:RibbonGroup Key="SampleGroup">
+						<actipro:RibbonControlGroup ItemVariantBehavior="AlwaysMedium">
+
+							<!-- Native ColorPicker -->
+							<ColorPicker Classes="has-value-text"
+								Color="#20b2aa"
+								IsAlphaEnabled="False"
+								actipro:BarControlService.HasExternalHeader="True"
+								actipro:BarControlService.Key="Color"
+								actipro:BarControlService.Label="Color"
+								actipro:BarControlService.PanelSpacingSuggestion="Both">
+								<ToolTip.Tip>
+									<actipro:ScreenTip Header="Color">
+										A native ColorPicker control.
+									</actipro:ScreenTip>
+								</ToolTip.Tip>
+							</ColorPicker>
+
+							<!-- Native CalendarDatePicker -->
+							<CalendarDatePicker
+								actipro:BarControlService.HasExternalHeader="True"
+								actipro:BarControlService.Key="Date"
+								actipro:BarControlService.Label="Date"
+								actipro:BarControlService.PanelSpacingSuggestion="Both">
+								<ToolTip.Tip>
+									<actipro:ScreenTip Header="Date">
+										A native CalendarDatePicker control.
+									</actipro:ScreenTip>
+								</ToolTip.Tip>
+							</CalendarDatePicker>
+
+							<!-- Native NumericUpDown -->
+							<NumericUpDown
+								FormatString="0"
+								Value="10"
+								actipro:BarControlService.HasExternalHeader="True"
+								actipro:BarControlService.Key="Number"
+								actipro:BarControlService.Label="Number"
+								actipro:BarControlService.PanelSpacingSuggestion="Both">
+								<ToolTip.Tip>
+									<actipro:ScreenTip Header="Number">
+										A native NumericUpDown control.
+									</actipro:ScreenTip>
+								</ToolTip.Tip>
+							</NumericUpDown>
+
+						</actipro:RibbonControlGroup>
+					</actipro:RibbonGroup>
+
+				</actipro:RibbonTabItem>
+
+			</actipro:Ribbon>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+				<![CDATA[
+<actipro:Ribbon ... >
+	<actipro:RibbonTabItem Key="SampleTab" ... >
+		<actipro:RibbonGroup Key="SampleGroup" ... >
+			<actipro:RibbonControlGroup>
+
+				<!-- Native ColorPicker -->
+				<ColorPicker Classes="has-value-text"
+					Color="#20b2aa"
+					IsAlphaEnabled="False"
+					actipro:BarControlService.HasExternalHeader="True"
+					actipro:BarControlService.Key="Color"
+					actipro:BarControlService.Label="Color"
+					actipro:BarControlService.PanelSpacingSuggestion="Both">
+					<ToolTip.Tip>
+						<actipro:ScreenTip Header="Color">
+							A native ColorPicker control.
+						</actipro:ScreenTip>
+					</ToolTip.Tip>
+				</ColorPicker>
+
+				<!-- Native CalendarDatePicker -->
+				<CalendarDatePicker
+					actipro:BarControlService.HasExternalHeader="True"
+					actipro:BarControlService.Key="Date"
+					actipro:BarControlService.Label="Date"
+					actipro:BarControlService.PanelSpacingSuggestion="Both">
+					<ToolTip.Tip>
+						<actipro:ScreenTip Header="Date">
+							A native CalendarDatePicker control.
+						</actipro:ScreenTip>
+					</ToolTip.Tip>
+				</CalendarDatePicker>
+
+				<!-- Native NumericUpDown -->
+				<NumericUpDown
+					FormatString="0"
+					Value="10"
+					actipro:BarControlService.HasExternalHeader="True"
+					actipro:BarControlService.Key="Number"
+					actipro:BarControlService.Label="Number"
+					actipro:BarControlService.PanelSpacingSuggestion="Both">
+					<ToolTip.Tip>
+						<actipro:ScreenTip Header="Number">
+							A native NumericUpDown control.
+						</actipro:ScreenTip>
+					</ToolTip.Tip>
+				</NumericUpDown>
+
+			</actipro:RibbonControlGroup>
+		</actipro:RibbonGroup>
+	</actipro:RibbonTabItem>
+
+	...
+
+</actipro:Ribbon>
+				]]>
+			</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+
+</UserControl>

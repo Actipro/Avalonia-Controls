@@ -27,7 +27,7 @@
 
 		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
 			<sampleBrowser:ControlExampleLinkItem Title="User prompt" Url="/ProductSamples/FundamentalsSamples/Controls/UserPromptIntro/MainControl" />
-			<sampleBrowser:ControlExampleLinkItem Title="InfoBar" Url="/ProductSamples/FundamentalsSamples/Controls/InfoBarIntro/MainControl" />
+			<sampleBrowser:ControlExampleLinkItem Title="Info bar" Url="/ProductSamples/FundamentalsSamples/Controls/InfoBarIntro/MainControl" />
 		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
 
 
@@ -60,7 +60,7 @@
 								so a dialog caption can be simulated above the control
 							-->
 							<actipro:UserPromptControl StandardButtons="{Binding ButtonsResolved, Mode=OneWay}"
-													   StandardStatusImage="{Binding Image}"
+													   StandardStatusIcon="{Binding Image}"
 													   DefaultResult="{Binding DefaultResult}"
 													   Content="{Binding Text}"
 													   Elevation="0"

@@ -663,7 +663,7 @@
 
 			<StackPanel Spacing="10">
 				<StackPanel.Resources>
-					<MenuFlyout x:Key="CustomTextBoxContextFlyout">
+					<MenuFlyout x:Key="CustomTextBoxContextFlyout" OverlayDismissEventPassThrough="{OnFormFactor Default=False, Desktop=True}">
 						<MenuItem Header="Cu_t" Command="{Binding $parent[TextBox].Cut}" IsEnabled="{Binding $parent[TextBox].CanCut}" InputGesture="{x:Static TextBox.CutGesture}" />
 						<MenuItem Header="Cop_y" Command="{Binding $parent[TextBox].Copy}" IsEnabled="{Binding $parent[TextBox].CanCopy}" InputGesture="{x:Static TextBox.CopyGesture}" />
 						<MenuItem Header="_Paste" Command="{Binding $parent[TextBox].Paste}" IsEnabled="{Binding $parent[TextBox].CanPaste}" InputGesture="{x:Static TextBox.PasteGesture}" />
@@ -686,7 +686,7 @@
 					<![CDATA[
 <Application.Resources>
 	<!-- Define the custom menu as a resource -->
-	<MenuFlyout x:Key="CustomTextBoxContextFlyout">
+	<MenuFlyout x:Key="CustomTextBoxContextFlyout" OverlayDismissEventPassThrough="{OnFormFactor Default=False, Desktop=True}">
 		<MenuItem Header="Cu_t"
 			Command="{Binding $parent[TextBox].Cut}"
 			IsEnabled="{Binding $parent[TextBox].CanCut}"

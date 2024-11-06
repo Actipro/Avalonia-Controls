@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Metadata;
 using Avalonia.Controls.Primitives;
 using Avalonia.Controls.Templates;
+using Avalonia.Data;
 using Avalonia.VisualTree;
 using System;
 using System.Collections.ObjectModel;
@@ -21,7 +22,7 @@ namespace ActiproSoftware.SampleBrowser {
 		private bool _hasCode;
 		private bool _isWideMeasure;
 
-		private const double WideThreshold = 800;
+		private const double DefaultWideThreshold = 800;
 
 		#region Property Definitions
 
@@ -56,6 +57,18 @@ namespace ActiproSoftware.SampleBrowser {
 			= AvaloniaProperty.Register<ControlExample, bool>(nameof(IsCodeExpanded));
 
 		/// <summary>
+		/// Defines the <see cref="IsCodeExampleKindSelectorVisible"/> property.
+		/// </summary>
+		public static readonly StyledProperty<bool?> IsCodeExampleKindSelectorVisibleProperty
+			= AvaloniaProperty.Register<ControlExample, bool?>(nameof(IsCodeExampleKindSelectorVisible), coerce: CoerceIsCodeExampleKindSelectorVisibleProperty);
+
+		/// <summary>
+		/// Defines the <see cref="MvvmContent"/> property.
+		/// </summary>
+		public static readonly StyledProperty<object?> MvvmContentProperty
+			= AvaloniaProperty.Register<ControlExample, object?>(nameof(MvvmContent));
+
+		/// <summary>
 		/// Defines the <see cref="Options"/> property.
 		/// </summary>
 		public static readonly StyledProperty<object?> OptionsProperty
@@ -66,7 +79,25 @@ namespace ActiproSoftware.SampleBrowser {
 		/// </summary>
 		public static readonly StyledProperty<IDataTemplate?> OptionsTemplateProperty
 			= AvaloniaProperty.Register<ControlExample, IDataTemplate?>(nameof(OptionsTemplate));
-		
+
+		/// <summary>
+		/// Defines the <see cref="SelectedCodeExampleKind"/> property.
+		/// </summary>
+		public static readonly StyledProperty<CodeExampleKind> SelectedCodeExampleKindProperty
+			= AvaloniaProperty.Register<ControlExample, CodeExampleKind>(nameof(SelectedCodeExampleKind), defaultValue: CodeExampleKind.Unspecified, coerce: CoerceSelectedCodeExampleKindProperty);
+
+		/// <summary>
+		/// Defines the <see cref="WideThreshold"/> property.
+		/// </summary>
+		public static readonly StyledProperty<double> WideThresholdProperty
+			= AvaloniaProperty.Register<ControlExample, double>(nameof(WideThreshold), defaultValue: DefaultWideThreshold);
+
+		/// <summary>
+		/// Defines the <see cref="XamlContent"/> property.
+		/// </summary>
+		public static readonly StyledProperty<object?> XamlContentProperty
+			= AvaloniaProperty.Register<ControlExample, object?>(nameof(XamlContent));
+
 		#endregion
 
 		// Part names
@@ -81,12 +112,18 @@ namespace ActiproSoftware.SampleBrowser {
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		static ControlExample() {
+			ContentProperty.OverrideMetadata<ControlExample>(new StyledPropertyMetadata<object?>(coerce: CoerceContentProperty));
 			IsCodeExpandedProperty.Changed.AddClassHandler<ControlExample>((x, e) => x.OnIsCodeExpandedPropertyValueChanged(e));
+			MvvmContentProperty.Changed.AddClassHandler<ControlExample>((x, _) => x.CoerceValue(ContentProperty));
 			OptionsProperty.Changed.AddClassHandler<ControlExample>((x, _) => x.UpdatePseudoClasses());
+			SelectedCodeExampleKindProperty.Changed.AddClassHandler<ControlExample>((x, _) => x.OnSelectedCodeExampleKindPropertyValueChanged());
+			XamlContentProperty.Changed.AddClassHandler<ControlExample>((x, _) => x.CoerceValue(ContentProperty));
 		}
 
 		public ControlExample() {
-			this.CodeExamples.CollectionChanged += (_, _) => UpdateHasCode();
+			this.CodeExamples.CollectionChanged += (_, _) => OnCodeExamplesCollectionChanged();
+
+			CoerceAllProperties();
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -123,14 +160,68 @@ namespace ActiproSoftware.SampleBrowser {
 
 		private Panel? CodeExamplePanel { get; set; }
 
+		private void CoerceAllProperties() {
+			CoerceValue(ContentProperty);
+			CoerceValue(IsCodeExampleKindSelectorVisibleProperty);
+			CoerceValue(SelectedCodeExampleKindProperty);
+		}
+
+		private static object? CoerceContentProperty(AvaloniaObject obj, object? value) {
+			if ((obj is ControlExample control) && (value is null)) {
+				return control.SelectedCodeExampleKind switch {
+					CodeExampleKind.Mvvm => control.MvvmContent,
+					CodeExampleKind.Xaml => control.XamlContent,
+					_ => value
+				};
+			}
+			return value;
+		}
+
+		private static bool? CoerceIsCodeExampleKindSelectorVisibleProperty(AvaloniaObject obj, bool? value) {
+			if ((obj is ControlExample control) && (value is null)) {
+				// Visible if MVVM/XAML-specific content is defined or any MVVM or XAML code examples are available
+				return control.MvvmContent is not null
+					|| control.XamlContent is not null
+					|| control.CodeExamples.Any(x => (x is not null) && (x.Kind != CodeExampleKind.Unspecified));
+			}
+			return true;
+		}
+
+		private static CodeExampleKind CoerceSelectedCodeExampleKindProperty(AvaloniaObject obj, CodeExampleKind kind) {
+			if ((obj is ControlExample control) && (control.IsCodeExampleKindSelectorVisible == true) && (kind == CodeExampleKind.Unspecified)) {
+				// "Unspecified" is not a valid selection when the selector is visible, so coerce to a default value
+				return CodeExampleKind.Xaml;
+			}
+			return kind;
+		}
+
+		private void OnCodeExamplesCollectionChanged() {
+			UpdateCodeExampleVisibility();
+			UpdateHasCode();
+			CoerceAllProperties();
+		}
+
 		private void OnIsCodeExpandedPropertyValueChanged(AvaloniaPropertyChangedEventArgs e) {
 			if (true.Equals(e.NewValue) && IsKeyboardFocusWithin)
 				BringCodeExamplesIntoView();
 		}
 
+		private void OnSelectedCodeExampleKindPropertyValueChanged() {
+			UpdateCodeExampleVisibility();
+			CoerceValue(ContentProperty);
+		}
+
+		private void UpdateCodeExampleVisibility() {
+			foreach (var codeExample in CodeExamples) {
+				if ((codeExample is not null) && (codeExample.Kind != CodeExampleKind.Unspecified)) {
+					codeExample.SetValue(CodeExample.IsVisibleProperty, (codeExample.Kind == SelectedCodeExampleKind), BindingPriority.Style);
+				}
+			}
+		}
+
 		private void UpdateHasCode()
-			=> HasCode = (this.CodeExamples.Any(x => x is not null));
-		
+			=> HasCode = this.CodeExamples.Any(x => x?.IsVisible == true);
+
 		private void UpdatePseudoClasses() {
 			PseudoClasses.Set(pcOptions, Options is not null);
 			PseudoClasses.Set(pcWide, _isWideMeasure);
@@ -177,6 +268,19 @@ namespace ActiproSoftware.SampleBrowser {
 			set => SetValue(IsCodeExpandedProperty, value);
 		}
 
+		/// <summary>
+		/// Indiates if teh code example kind selector control is visible.
+		/// </summary>
+		/// <value>
+		/// <c>true</c> to force the selector to be visible,
+		/// <c>false</c> to force the selector to be hidden, or
+		/// <c>null</c> to show the selector only when a <see cref="CodeExample"/> is defined that uses <see cref="CodeExampleKind.Mvvm"/> or <see cref="CodeExampleKind.Xaml"/>.
+		/// </value>
+		public bool? IsCodeExampleKindSelectorVisible {
+			get => GetValue(IsCodeExampleKindSelectorVisibleProperty);
+			set => SetValue(IsCodeExampleKindSelectorVisibleProperty, value);
+		}
+
 		/// <inheritdoc/>
 		protected override Size MeasureOverride(Size availableSize) {
 			_isWideMeasure = (availableSize.Width >= WideThreshold);
@@ -185,9 +289,19 @@ namespace ActiproSoftware.SampleBrowser {
 			return base.MeasureOverride(availableSize);
 		}
 		
+		/// <summary>
+		/// The content to be displayed when <see cref="SelectedCodeExampleKind"/> is <see cref="CodeExampleKind.Mvvm"/>.
+		/// </summary>
+		public object? MvvmContent {
+			get => GetValue(MvvmContentProperty);
+			set => SetValue(MvvmContentProperty, value);
+		}
+
 		/// <inheritdoc/>
 		protected override void OnApplyTemplate(TemplateAppliedEventArgs e) {
 			base.OnApplyTemplate(e);
+
+			CoerceAllProperties();
 
 			CodeExamplePanel = e.NameScope.Get<Panel>(CodeExamplePanelPartName);
 		}
@@ -207,7 +321,34 @@ namespace ActiproSoftware.SampleBrowser {
 			get => GetValue(OptionsTemplateProperty);
 			set => SetValue(OptionsTemplateProperty, value);
 		}
-		
+
+		/// <summary>
+		/// The selected code example kind (e.g., MVVM or XAML).
+		/// </summary>
+		public CodeExampleKind SelectedCodeExampleKind {
+			get => GetValue(SelectedCodeExampleKindProperty);
+			set => SetValue(SelectedCodeExampleKindProperty, value);
+		}
+
+		/// <summary>
+		/// The minimum width of the control to use wide layout.
+		/// </summary>
+		/// <remarks>
+		/// The default value is 800.
+		/// </remarks>
+		public double WideThreshold {
+			get => GetValue(WideThresholdProperty);
+			set => SetValue(WideThresholdProperty, value);
+		}
+
+		/// <summary>
+		/// The content to be displayed when <see cref="SelectedCodeExampleKind"/> is <see cref="CodeExampleKind.Xaml"/>.
+		/// </summary>
+		public object? XamlContent {
+			get => GetValue(XamlContentProperty);
+			set => SetValue(XamlContentProperty, value);
+		}
+
 	}
 
 }

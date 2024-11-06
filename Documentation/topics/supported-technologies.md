@@ -29,6 +29,17 @@ The assemblies have dependencies on the Avalonia framework as follows:
 <tbody>
 
 <tr>
+<td>Actipro Controls v25.1</td>
+<td>
+
+- Avalonia UI v11.2.0 or later
+- Native themes compatible up to Avalonia UI v11.2.0
+- *Minor updates to Avalonia UI are expected to be supported and will be verified as they are released*
+
+</td>
+</tr>
+
+<tr>
 <td>Actipro Controls v24.2</td>
 <td>
 

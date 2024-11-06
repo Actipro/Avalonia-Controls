@@ -1,0 +1,25 @@
+<ResourceDictionary
+	x:ClassModifier="internal"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	>
+
+	<DataTemplate x:Key="{x:Static actipro:BarsMvvmResourceKeys.RibbonBackstageTabDefaultItemContainerTemplate}" DataType="actipro:RibbonBackstageTabViewModel">
+		<actipro:RibbonBackstageTabItem
+			Content="{Binding Content}"
+			ContentTemplate="{Binding ContentTemplate}"
+			HeaderAlignment="{Binding HeaderAlignment}"
+			IsVisible="{Binding IsVisible}"
+			Key="{Binding Key}"
+			KeyTipText="{Binding KeyTipText}"
+			Label="{Binding Label}"
+			LargeIcon="{Binding LargeIcon}"
+			SmallIcon="{Binding SmallIcon}"
+			Title="{Binding Title}"
+			ToolTip.Tip="{Binding Description}"
+			VariantSize="{Binding VariantSize}"
+			/>
+	</DataTemplate>
+
+</ResourceDictionary>

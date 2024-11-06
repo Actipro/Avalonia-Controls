@@ -1,0 +1,21 @@
+<ResourceDictionary
+	x:ClassModifier="internal"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	>
+
+	<DataTemplate x:Key="{x:Static actipro:BarsMvvmResourceKeys.BarGalleryItemDefaultItemContainerTemplate}" DataType="actipro:IBarGalleryItemViewModel">
+		<!-- Any changes to properties that bind to the view model should be replicated in BarGalleryItemControlTheme -->
+		<actipro:BarGalleryItem
+			Content="{Binding}"
+			actipro:BarControlService.IsLabelVisible="{Binding IsLabelVisible}"
+			IsVisible="{Binding IsVisible}"
+			KeyTipText="{Binding KeyTipText}"
+			Label="{Binding Label}"
+			LayoutBehavior="{Binding LayoutBehavior}"
+			ToolTip.Tip="{Binding Description}"
+			/>
+	</DataTemplate>
+
+</ResourceDictionary>

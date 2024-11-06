@@ -1,0 +1,101 @@
+<ResourceDictionary
+	x:ClassModifier="internal"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:controlsPrimitives="using:ActiproSoftware.UI.Avalonia.Controls.Primitives"
+	>
+
+	<actipro:BarGalleryItemBorderThicknessConverter x:Key="BarGalleryItemBorderThicknessConverter" />
+
+	<DataTemplate x:Key="{x:Static actipro:BarsMvvmResourceKeys.BarGalleryItemColorDataTemplate}" DataType="actipro:ColorBarGalleryItemViewModel">
+		<Border BorderBrush="{actipro:ThemeResource Container3BorderBrush}"
+				BorderThickness="{Binding LayoutBehavior, Converter={StaticResource BarGalleryItemBorderThicknessConverter}}"
+				IsVisible="{Binding IsVisible}">
+			<Border.Background>
+				<SolidColorBrush Color="{Binding Value}" />
+			</Border.Background>
+		</Border>
+	</DataTemplate>
+
+	<DataTemplate x:Key="{x:Static actipro:BarsMvvmResourceKeys.BarGalleryItemColorMenuItemDataTemplate}" DataType="actipro:ColorBarGalleryItemViewModel" >
+		<actipro:MeasureAdjuster VerticalRoundMode="CeilingToEven">
+			<Grid IsVisible="{Binding IsVisible}">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition MinWidth="{StaticResource	{actipro:ThemeResourceKey MenuItemIconColumnWidth}}" Width="Auto" SharedSizeGroup="MenuItemIconColumnGroup" />
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="Auto" SharedSizeGroup="MenuItemIGTColumnGroup" />
+					<ColumnDefinition MinWidth="{StaticResource	{actipro:ThemeResourceKey MenuItemPopupColumnWidth}}" Width="Auto" SharedSizeGroup="MenuItemPopupArrowColumnGroup" />
+				</Grid.ColumnDefinitions>
+
+				<Border Margin="3" Width="16" Height="16" 
+						BorderBrush="{actipro:ThemeResource Container3BorderBrush}" BorderThickness="1"
+						HorizontalAlignment="Center" VerticalAlignment="Center">
+					<Border.Background>
+						<SolidColorBrush Color="{Binding Value}" />
+					</Border.Background>
+				</Border>
+
+				<TextBlock
+					Grid.Column="1"
+					Margin="{actipro:ThemeResource MenuItemPadding}"
+					Text="{Binding Label}"
+					VerticalAlignment="Center"
+					/>
+			</Grid>
+		</actipro:MeasureAdjuster>
+	</DataTemplate>
+
+	<DataTemplate x:Key="{x:Static actipro:BarsMvvmResourceKeys.BarGalleryItemDefaultDataTemplate}" DataType="actipro:IBarGalleryItemViewModel">
+		<TextBlock Margin="15,4" Text="{Binding Label}" IsVisible="{Binding IsVisible}" />
+	</DataTemplate>
+
+	<DataTemplate x:Key="{x:Static actipro:BarsMvvmResourceKeys.BarGalleryItemFontFamilyDataTemplate}" DataType="actipro:FontFamilyBarGalleryItemViewModel">
+		<Decorator MinHeight="26" IsVisible="{Binding IsVisible}">
+			<TextBlock Margin="22,0" Text="{Binding Label}" FontSize="16" FontFamily="{Binding Value}" VerticalAlignment="Center" />
+		</Decorator>
+	</DataTemplate>
+
+	<DataTemplate x:Key="{x:Static actipro:BarsMvvmResourceKeys.BarGalleryItemFontSizeDataTemplate}" DataType="actipro:FontSizeBarGalleryItemViewModel">
+		<TextBlock Margin="12,4" Text="{Binding Label}" IsVisible="{Binding IsVisible}" />
+	</DataTemplate>
+
+	<DataTemplate x:Key="{x:Static actipro:BarsMvvmResourceKeys.BarGalleryItemMenuItemDataTemplate}" DataType="actipro:IBarGalleryItemViewModel" >
+		<actipro:MeasureAdjuster VerticalRoundMode="CeilingToEven">
+			<Grid IsVisible="{Binding IsVisible}">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition MinWidth="{StaticResource	{actipro:ThemeResourceKey MenuItemIconColumnWidth}}" Width="Auto" SharedSizeGroup="MenuItemIconColumnGroup" />
+					<ColumnDefinition Width="*" />
+					<ColumnDefinition Width="Auto" SharedSizeGroup="MenuItemIGTColumnGroup" />
+					<ColumnDefinition MinWidth="{StaticResource	{actipro:ThemeResourceKey MenuItemPopupColumnWidth}}" Width="Auto" SharedSizeGroup="MenuItemPopupArrowColumnGroup" />
+				</Grid.ColumnDefinitions>
+
+				<Panel Margin="3" Width="16" Height="16" HorizontalAlignment="Center" VerticalAlignment="Center">
+					<Viewbox x:Name="iconHost" StretchDirection="DownOnly">
+						<ContentControl Classes="theme-icon-presenter" Content="{Binding Icon}" />
+					</Viewbox>
+				</Panel>
+
+				<TextBlock
+					Grid.Column="1"
+					Margin="{actipro:ThemeResource MenuItemPadding}"
+					Text="{Binding Label}"
+					VerticalAlignment="Center"
+					/>
+			</Grid>
+		</actipro:MeasureAdjuster>
+	</DataTemplate>
+
+	<DataTemplate x:Key="{x:Static actipro:BarsMvvmResourceKeys.BarGalleryItemSizeSelectionDataTemplate}">
+		<Border Margin="1" BorderBrush="{actipro:ThemeResource Container5BorderBrush}" BorderThickness="1" />
+	</DataTemplate>
+
+	<DataTemplate x:Key="{x:Static actipro:BarsMvvmResourceKeys.BarGalleryItemSymbolDataTemplate}" DataType="actipro:SymbolBarGalleryItemViewModel">
+		<actipro:SymbolPresenter MinWidth="30" MinHeight="30" TextElement.FontSize="{actipro:ThemeResource DefaultFontSizeExtraLarge}" IsVisible="{Binding IsVisible}" />
+	</DataTemplate>
+
+	<DataTemplate x:Key="{x:Static actipro:BarsMvvmResourceKeys.BarGalleryItemTextStyleDataTemplate}" DataType="actipro:TextStyleBarGalleryItemViewModel">
+		<actipro:TextStylePresenter Background="#ffffff" IsVisible="{Binding IsVisible}" />
+	</DataTemplate>
+
+</ResourceDictionary>

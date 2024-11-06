@@ -220,15 +220,18 @@ namespace ActiproSoftware.SampleBrowser {
 				"case",
 				"break",
 				"default",
+				"catch",
 				"continue",
 				"do",
 				"else",
+				"finally",
 				"for",
 				"foreach",
 				"if",
 				"return",
 				"switch",
 				"throw",
+				"try",
 				"when",
 				"while",
 				"yield",
@@ -330,7 +333,7 @@ namespace ActiproSoftware.SampleBrowser {
 					var c = Character;
 					switch (c) {
 						case '/' when GetText(2) == "//":
-							// Comment
+							// Single-line comment
 							FinalizeToken();
 
 							tokenBrush = _commentBrush;
@@ -338,11 +341,32 @@ namespace ActiproSoftware.SampleBrowser {
 							FinalizeToken();
 							continue;
 
+						case '/' when GetText(2) == "/*":
+							// Multi-line comment
+							FinalizeToken();
+
+							tokenBrush = _commentBrush;
+							tokenText.Append(ReadCharacter());
+
+							while (!IsAtEnd && GetText(2) != "*/")
+								tokenText.Append(ReadCharacter());
+
+							if (GetText(2) == "*/") {
+								tokenText.Append(ReadCharacter());
+								tokenText.Append(ReadCharacter());
+							}
+
+							FinalizeToken();
+							continue;
+
 						case '"':
+						case '$' when GetText(2) == "$\"": // Interpolated string
 							// String
 							FinalizeToken();
 
 							tokenBrush = _stringBrush;
+							if (Character == '$')
+								tokenText.Append(ReadCharacter());
 							tokenText.Append(ReadCharacter());
 
 							while (!IsAtEnd && Character != '"') {

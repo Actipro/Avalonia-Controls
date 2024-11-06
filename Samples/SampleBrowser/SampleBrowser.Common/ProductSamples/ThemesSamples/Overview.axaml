@@ -193,7 +193,7 @@
 
 							<SplitButton Margin="{actipro:ScaledThickness '4,0,0,0'}" Content="New" VerticalAlignment="Center">
 								<SplitButton.Flyout>
-									<MenuFlyout Placement="Bottom">
+									<MenuFlyout Placement="Bottom" OverlayDismissEventPassThrough="{OnFormFactor Default=False, Desktop=True}">
 										<MenuItem Header="Tab" />
 										<MenuItem Header="Window" />
 									</MenuFlyout>

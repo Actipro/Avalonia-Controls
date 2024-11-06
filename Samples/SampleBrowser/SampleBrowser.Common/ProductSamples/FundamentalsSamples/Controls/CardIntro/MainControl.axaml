@@ -361,9 +361,9 @@
 					</actipro:Avatar>
 
 					<TextBlock Margin="{actipro:ScaledThickness '0,1,0,0'}" FontSize="{actipro:ThemeResource DefaultFontSizeLarge}" FontWeight="SemiBold" Text="Marina Carpenter" TextAlignment="Center" />
-					<TextBlock FontSize="{actipro:ThemeResource DefaultFontSizeSmall}" Foreground="{actipro:ThemeResource DefaultForegroundBrushSecondary}" Text="@marina_carpenter" TextAlignment="Center" />
+					<TextBlock FontSize="{actipro:ThemeResource DefaultFontSizeSmall}" Foreground="{actipro:ThemeResource DefaultForegroundBrushSecondary}" Text="@marina_carpenter" TextAlignment="Center" FlowDirection="LeftToRight" />
 
-					<TextBlock Margin="{actipro:ScaledThickness '0,3,0,0'}" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" Text="12 mutual contacts" TextAlignment="Center" />
+					<TextBlock Margin="{actipro:ScaledThickness '0,3,0,0'}" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" Text="12 mutual contacts" TextAlignment="Center" FlowDirection="LeftToRight" />
 
 				</StackPanel>
 
@@ -445,7 +445,7 @@
 				</StackPanel>
 
 				<actipro:Card.Footer>
-					<TextBlock Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" Text="@cliff_ellington" TextAlignment="Center" />
+					<TextBlock Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" Text="@cliff_ellington" TextAlignment="Center" FlowDirection="LeftToRight" />
 				</actipro:Card.Footer>
 
 			</actipro:Card>

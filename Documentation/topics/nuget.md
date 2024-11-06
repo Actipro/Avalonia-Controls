@@ -25,6 +25,13 @@ This package references all of the Actipro Avalonia Pro product assemblies ([vie
 
 - `ActiproSoftware.Controls.Avalonia`
 
+### ActiproSoftware.Controls.Avalonia.Bars.Mvvm Package
+
+This package includes free classes and themes that support using the MVVM (Model-View-ViewModel) pattern with the Actipro Bars product ([view on nuget.org](https://www.nuget.org/packages/ActiproSoftware.Controls.Avalonia.Bars.Mvvm)), and is for customers who have licensed the Actipro Avalonia Pro controls.  Dependencies include:
+
+- `ActiproSoftware.Controls.Avalonia`
+- `ActiproSoftware.Controls.Avalonia.Pro`
+
 ### ActiproSoftware.Controls.Avalonia.Themes.ColorPicker Package
 
 This package includes free themes for the native Avalonia `ColorPicker` control that complement other Actipro Avalonia control themes ([view on nuget.org](https://www.nuget.org/packages/ActiproSoftware.Controls.Avalonia.Themes.ColorPicker)).  Dependencies include:

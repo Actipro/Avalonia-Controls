@@ -1,0 +1,455 @@
+<UserControl
+	x:Name="sampleRootControl"
+	x:Class="ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.DynamicPopupMenus.MainControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:local="using:ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.DynamicPopupMenus"
+	>
+
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Easily create and/or change a popup menu before the menu is displayed.">
+
+		<sampleBrowser:ControlExample
+			Header="Dynamic popup menus"
+			Footer="The menus displayed in this sample are dynamically generated in the code-behind."
+			>
+
+			<sampleBrowser:ControlExample.XamlContent>
+
+				<!-- XAML-based sample -->
+				<StackPanel Spacing="10">
+
+					<actipro:Ribbon x:Name="xamlRibbon" Margin="0" IsApplicationButtonVisible="False" LayoutMode="Simplified" QuickAccessToolBarMode="None">
+
+						<actipro:RibbonTabItem Key="SampleTab">
+							<actipro:RibbonGroup Key="Sample" CanAutoCollapse="False">
+								<actipro:BarSplitButton Key="{x:Static local:BarControlKeys.OpenDocument}"
+									LargeIcon="/Images/Icons/Open32.png" SmallIcon="/Images/Icons/Open16.png"
+									ToolBarItemVariantBehavior="All"
+									ToolTip.Tip="The recent documents in this popup menu are dynamically generated.">
+									<actipro:BarSplitButton.Items>
+										<actipro:BarMenuItem Key="{x:Static local:BarControlKeys.PlaceholderChild}" />
+									</actipro:BarSplitButton.Items>
+								</actipro:BarSplitButton>
+								<actipro:BarPopupButton Key="{x:Static local:BarControlKeys.DynamicPopupButton}" Label="Popup Button with Dynamic Menu"
+									LargeIcon="/Images/Icons/QuickStart32.png" SmallIcon="/Images/Icons/QuickStart16.png"
+									ToolBarItemVariantBehavior="All"
+									ToolTip.Tip="The menu of this popup button is dynamically generated when the popup is opened.">
+									<actipro:BarPopupButton.Items>
+										<actipro:BarMenuItem Key="{x:Static local:BarControlKeys.PlaceholderChild}" />
+									</actipro:BarPopupButton.Items>
+								</actipro:BarPopupButton>
+							</actipro:RibbonGroup>
+
+							<actipro:RibbonGroup Key="SimplifiedLayoutOverflow" CanAutoCollapse="False">
+								<actipro:BarPopupButton Key="{x:Static local:BarControlKeys.DynamicPopupOverflowButton}" Label="Popup Button Overflowed in Simplified Layout"
+									LargeIcon="/Images/Icons/QuickStartGreen32.png" SmallIcon="/Images/Icons/QuickStartGreen16.png"
+									ToolBarItemCollapseBehavior="Always"
+									ToolTip.Tip="This button overflows as a standard menu when using simplified layout and menu items are dynamically generated when opened.">
+									<actipro:BarPopupButton.Items>
+										<actipro:BarMenuItem Key="{x:Static local:BarControlKeys.PlaceholderChild}" />
+									</actipro:BarPopupButton.Items>
+								</actipro:BarPopupButton>
+							</actipro:RibbonGroup>
+						</actipro:RibbonTabItem>
+
+					</actipro:Ribbon>
+
+					<TextBox MinLines="6" IsReadOnly="True" TextWrapping="Wrap" Text="The ribbon controls above and this control's context menu define menus that are dynamically generated when they are opened.">
+						<TextBox.ContextFlyout>
+							<!--
+								The context menu flyout must have a RootBarControl set so the MenuOpening event can be raised
+								that allows for customizing the popup menu. See the MVVM sample for an example of setting
+								the property from code-behind instead.
+							-->
+							<actipro:BarMenuFlyout actipro:BarControlService.RootBarControl="{Binding #xamlRibbon}">
+								<actipro:BarSplitMenuItem Key="{x:Static local:BarControlKeys.OpenDocument}"
+									LargeIcon="/Images/Icons/Open32.png" SmallIcon="/Images/Icons/Open16.png"
+									ToolTip.Tip="The recent documents in this popup menu are dynamically generated.">
+									<actipro:BarSplitMenuItem.Items>
+										<actipro:BarMenuItem Key="{x:Static local:BarControlKeys.PlaceholderChild}" />
+									</actipro:BarSplitMenuItem.Items>
+								</actipro:BarSplitMenuItem>
+								<actipro:BarMenuItem Key="{x:Static local:BarControlKeys.DynamicPopupButton}" Label="Popup Button with Dynamic Menu"
+									LargeIcon="/Images/Icons/QuickStart32.png" SmallIcon="/Images/Icons/QuickStart16.png"
+									ToolTip.Tip="The menu of this popup button is dynamically generated when the popup is opened.">
+									<actipro:BarMenuItem.Items>
+										<actipro:BarMenuItem Key="{x:Static local:BarControlKeys.PlaceholderChild}" />
+									</actipro:BarMenuItem.Items>
+								</actipro:BarMenuItem>
+
+							</actipro:BarMenuFlyout>
+						</TextBox.ContextFlyout>
+					</TextBox>
+					
+				</StackPanel>
+
+			</sampleBrowser:ControlExample.XamlContent>
+
+			<sampleBrowser:ControlExample.MvvmContent>
+
+				<!-- MVVM-based sample -->
+				<StackPanel Spacing="10">
+
+					<actipro:Ribbon x:Name="mvvmRibbon" Margin="0" DataContext="{Binding #sampleRootControl.RibbonViewModel}"
+						Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+						/>
+
+					<TextBox x:Name="mvvmTextBox" MinLines="6" IsReadOnly="True" TextWrapping="Wrap" Text="The ribbon controls above and this control's context menu define menus that are dynamically generated when they are opened." />
+
+				</StackPanel>
+
+			</sampleBrowser:ControlExample.MvvmContent>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample Kind="Xaml" xml:space="preserve">
+				<![CDATA[
+<actipro:Ribbon x:Name="ribbon" ... >
+	<actipro:RibbonTabItem ... >
+
+		<actipro:RibbonGroup ... >
+		
+			<actipro:BarSplitButton Key="OpenDocument" ... >
+				<actipro:BarSplitButton.Items>
+					<actipro:BarMenuItem Key="PLACEHOLDER_CHILD" />
+				</actipro:BarSplitButton.Items>
+			</actipro:BarSplitButton>
+
+			<actipro:BarPopupButton Key="DynamicPopupButton" ... >
+				<actipro:BarPopupButton.Items>
+					<actipro:BarMenuItem Key="PLACEHOLDER_CHILD" />
+				</actipro:BarPopupButton.Items>
+			</actipro:BarPopupButton>
+
+			<actipro:BarPopupButton Key="DynamicPopupOverflowButton" ToolBarItemCollapseBehavior="Always" ... >
+				<actipro:BarPopupButton.Items>
+					<actipro:BarMenuItem Key="PLACEHOLDER_CHILD" />
+				</actipro:BarPopupButton.Items>
+			</actipro:BarPopupButton>
+
+		</actipro:RibbonGroup>
+
+	</actipro:RibbonTabItem>
+</actipro:Ribbon>
+
+<TextBox ... >
+	<TextBox.ContextFlyout>
+		<!--
+			The context menu must have a RootBarControl set so the MenuOpening event can be raised
+			that allows for customizing the popup menu. See the MVVM sample for an example of setting
+			the property from code-behind instead.
+		-->
+		<actipro:BarMenuFlyout actipro:BarControlService.RootBarControl="{Binding #ribbon}">
+
+			<actipro:BarSplitMenuItem Key="OpenDocument" ... >
+				<actipro:BarSplitMenuItem.Items>
+					<actipro:BarMenuItem Key="PLACEHOLDER_CHILD" />
+				</actipro:BarSplitMenuItem.Items>
+			</actipro:BarSplitMenuItem>
+
+			<actipro:BarMenuItem Key="DynamicPopupButton" ... >
+				<actipro:BarMenuItem.Items>
+					<actipro:BarMenuItem Key="PLACEHOLDER_CHILD" />
+				</actipro:BarMenuItem.Items>
+			</actipro:BarMenuItem>
+
+		</actipro:BarMenuFlyout>
+	</TextBox.ContextFlyout>
+</TextBox>
+				]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Xaml" Language="C#" xml:space="preserve">
+				<![CDATA[
+public partial class SampleRootControl : UserControl {
+
+	public SampleRootControl() {
+		InitializeComponent();
+
+		// Listen to the MenuOpening event
+		ribbon.MenuOpening += OnRibbonMenuOpening;
+	}
+	
+	/// <summary>
+	/// Occurs when a ribbon menu is opening.
+	/// </summary>
+	private void OnRibbonMenuOpening(object? sender, BarMenuEventArgs e) {
+		// This demo focuses only on command popup menus
+		if (e.Kind == BarMenuKind.PopupButtonMenu
+			|| e.Kind == BarMenuKind.MenuItemSubmenu) {
+
+			InitializeDynamicMenuItems(e.Menu);
+		}
+	}
+
+	/// <summary>
+	/// Initializes the items for a dynamically generated menu.
+	/// </summary>
+	private void InitializeDynamicMenuItems(ItemsControl? menu) {
+		if (menu is null)
+			return;
+
+		// Use the menu's key to determine which items will be added
+		var key = BarControlService.GetKey(menu);
+		switch (key) {
+			case "DynamicMenuItem":
+			case "DynamicPopupButton":
+			case "DynamicPopupOverflowButton":
+				// Populate with sample menu items that clearly show they are dynamically generated
+				var dynamicMenuItems = (menu.ItemsSource as IList) ?? menu.Items;
+				if (dynamicMenuItems is not null) {
+					dynamicMenuItems.Clear();
+					PopulateSampleDynamicMenuItems(key, dynamicMenuItems);
+				}
+				break;
+
+			case "OpenDocument":
+				// Refer to the source code of this sample for details on how the
+				// open documents menu was created
+				break;
+		}
+	}
+
+	/// <summary>
+	/// Populates a list of dynamically generated menu items.
+	/// </summary>
+	/// <param name="key">The key of the control whose menu is being generated.</param>
+	/// <param name="menuItems">The list of menu items to populate.</param>
+	private void PopulateSampleDynamicMenuItems(string key, IList menuItems) {
+		// Dynamically generate new menu items
+		menuItems.Add(new BarMenuHeading(key));
+		menuItems.Add(new BarMenuSeparator());
+		var itemCount = 5;
+		for (int index = 0; index < itemCount; index++) {
+			var menuItem = new BarMenuItem(label: $"Dynamic Item #{(index + 1)}") {
+				CanCloneToRibbonQuickAccessToolBar = false,
+				Key = $"DynamicItem{(index + 1)}"
+			};
+			menuItems.Add(menuItem);
+		}
+		if (key != "DynamicMenuItem") {
+			// Add a menu item whose sub-menu is dynamically generated
+			menuItems.Add(new BarMenuSeparator());
+			menuItems.Add(new BarMenuItem() {
+				CanCloneToRibbonQuickAccessToolBar = false,
+				Key = "DynamicMenuItem",
+				Label = "Dynamic Sub-Menu",
+				Items = { CreateChildPlaceholder() }
+			});
+		}
+		menuItems.Add(new BarMenuSeparator());
+		menuItems.Add(new BarMenuHeading($"Menu Created @ {DateTime.Now.ToLongTimeString()}"));
+	}
+
+	/// <summary>
+	/// Creates a menu item that is used as a placeholder child item in a menu until the full menu is dynamically created.
+	/// </summary>
+	private BarMenuItem CreateChildPlaceholder() {
+		// A BarPopupButton or BarSplitButton will always raise the MenuOpening
+		// event even if they do not have children, but a BarMenuItem (which derives from MenuItem)
+		// must define at least one child to be recognized as a MenuItem with a sub-menu.
+		// Since BarPopupButton and BarSplitButton can be cloned to an overflow menu where they are
+		// displayed as BarMenuItem, it is still important to add a placeholder child item.
+		return new BarMenuItem() { Key = "PLACEHOLDER_CHILD" };
+	}
+
+}
+				]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" xml:space="preserve">
+				<![CDATA[
+<!-- DataContext is bound to an instance of RibbonViewModel -->
+<actipro:Ribbon x:Name="ribbon"
+	DataContext="{Binding #sampleRootControl.RibbonViewModel}"
+	Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+	/>
+
+<TextBox x:Name="textBox" ... />
+				]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" Language="C#" xml:space="preserve">
+				<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm;
+...
+
+public partial class SampleRootControl : UserControl {
+
+	public SampleRootControl() {
+		RibbonViewModel = CreateRibbonViewModel();
+
+		InitializeComponent();
+
+		// Listen to the MenuOpening event
+		ribbon.MenuOpening += OnRibbonMenuOpening;
+		
+		// Create context menu for textbox
+		textBox.ContextFlyout = CreateTextBoxContextFlyout();
+	}
+
+	/// <summary>
+	/// Create the view model for the ribbon.
+	/// </summary>
+	private RibbonViewModel CreateRibbonViewModel() {
+		return new RibbonViewModel() {
+			...
+			Tabs = {
+				new RibbonTabViewModel() {
+					Groups = {
+						new RibbonGroupViewModel() {
+							...
+							Items = {
+
+								new BarSplitButtonViewModel("OpenDocument") {
+									...
+									MenuItems = { CreateChildPlaceholder() }
+								},
+
+								new BarPopupButtonViewModel("DynamicPopupButton") {
+									...
+									MenuItems = { CreateChildPlaceholder() }
+								},
+
+								new BarPopupButtonViewModel("DynamicPopupOverflowButton") {
+									ToolBarItemCollapseBehavior = ItemCollapseBehavior.Always,
+									...
+									MenuItems = { CreateChildPlaceholder() }
+								},
+
+							},
+						},
+
+					}
+				},
+
+			}
+		};
+	}
+
+	/// <summary>
+	/// Create the context menu flyout that will be assigned to the <c>TextBox</c> control used by this sample.
+	/// </summary>
+	private MenuFlyout CreateTextBoxContextFlyout() {
+		var menu = new BarMenuFlyout() {
+
+			// Make sure the MenuFlyout has the same ItemContainerTemplateSelector as the Ribbon so
+			// view models are properly templated
+			ItemContainerTemplateSelector = RibbonViewModel.ItemContainerTemplateSelector,
+
+			Items = {
+				new BarSplitButtonViewModel("OpenDocument") {
+					...
+					MenuItems = { CreateChildPlaceholder() }
+				},
+				new BarPopupButtonViewModel("DynamicPopupButton") {
+					...
+					MenuItems = { CreateChildPlaceholder() }
+				},
+			}
+		};
+
+		// The context menu flyout must have a RootBarControl set so the MenuOpening event can
+		// be raised that allows for customizing the popup menu
+		BarControlService.SetRootBarControl(menu, ribbon);
+
+		return menu;
+	}
+	
+	/// <summary>
+	/// Occurs when a ribbon menu is opening.
+	/// </summary>
+	private void OnRibbonMenuOpening(object? sender, BarMenuEventArgs e) {
+		// This demo focuses only on command popup menus
+		if (e.Kind == BarMenuKind.PopupButtonMenu
+			|| e.Kind == BarMenuKind.MenuItemSubmenu) {
+
+			InitializeDynamicMenuItems(e.Menu);
+		}
+	}
+
+	/// <summary>
+	/// Initializes the items for a dynamically generated menu.
+	/// </summary>
+	private void InitializeDynamicMenuItems(ItemsControl? menu) {
+		if (menu is null)
+			return;
+
+		// Use the menu's key to determine which items will be added
+		var key = BarControlService.GetKey(menu);
+		switch (key) {
+			case "DynamicMenuItem":
+			case "DynamicPopupButton":
+			case "DynamicPopupOverflowButton":
+				// Populate with sample menu items that clearly show they are dynamically generated
+				var dynamicMenuItems = (menu.ItemsSource as IList) ?? menu.Items;
+				if (dynamicMenuItems is not null) {
+					dynamicMenuItems.Clear();
+					PopulateSampleDynamicMenuItems(key, dynamicMenuItems);
+				}
+				break;
+
+			case "OpenDocument":
+				// Refer to the source code of this sample for details on how the
+				// open documents menu was created
+				break;
+		}
+	}
+
+	/// <summary>
+	/// Populates a list of dynamically generated menu items.
+	/// </summary>
+	/// <param name="key">The key of the control whose menu is being generated.</param>
+	/// <param name="menuItems">The list of menu items to populate.</param>
+	private void PopulateSampleDynamicMenuItemsMvvm(string key, IList menuItems) {
+		// Dynamically generate new menu items
+		menuItems.Add(new BarHeadingViewModel(key));
+		menuItems.Add(new BarSeparatorViewModel());
+		var itemCount = 5;
+		for (int index = 0; index < itemCount; index++) {
+			var menuItem = new BarButtonViewModel(key: $"DynamicItem{(index + 1)}", label: $"Dynamic Item #{(index + 1)}") {
+				CanCloneToRibbonQuickAccessToolBar = false,
+			};
+			menuItems.Add(menuItem);
+		}
+		if (key != "DynamicMenuItem") {
+			// Add a menu item whose sub-menu is dynamically generated
+			menuItems.Add(new BarSeparatorViewModel());
+			menuItems.Add(new BarPopupButtonViewModel(key: "DynamicMenuItem", label: "Dynamic Sub-Menu") {
+				CanCloneToRibbonQuickAccessToolBar = false,
+				MenuItems = { CreateChildPlaceholder() }
+			});
+		}
+		menuItems.Add(new BarSeparatorViewModel());
+		menuItems.Add(new BarHeadingViewModel($"Menu Created @ {DateTime.Now.ToLongTimeString()}"));
+	}
+
+	/// <summary>
+	/// Creates a view model that is used as a placeholder child item in a menu until the full menu is dynamically created.
+	/// </summary>
+	private static BarButtonViewModel CreateChildPlaceholder() {
+		// A BarPopupButtonViewModel or BarSplitButtonViewModel will always raise the MenuOpening
+		// event even if they do not have children, but when displayed on a menu as a
+		// BarMenuItem (which derives from MenuItem) it must define at least one child to be recognized
+		// as a MenuItem with a sub-menu. Since BarPopupButtonViewModel and BarSplitButtonViewModel
+		// can be cloned to an overflow menu where they are displayed as BarMenuItem, it is still
+		// important to add a placeholder child item.
+		return new BarButtonViewModel("PLACEHOLDER_CHILD");
+	}
+
+	/// <summary>
+	/// Gets the view model to be bound to the ribbon.
+	/// </summary>
+	public RibbonViewModel RibbonViewModel { get; } = CreateRibbonViewModel();
+	
+}
+				]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+
+</UserControl>

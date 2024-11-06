@@ -9,19 +9,35 @@ The Actipro @@PlatformName controls are a diverse set of UI controls, components
 
 We believe that **@@PlatformName is a natural evolution of WPF** and provides an ideal platform for modern app development utilizing existing C# and WPF skills.  We are committed to enhancing and expanding our @@PlatformName product offerings going forward.
 
+## Actipro @@PlatformName Pro Products
+
+Elevate your application by [licensing](licensing.md) professionally designed commercial controls and getting access to the XAML source for all of our default control styles and themes.
+
+### Bars
+
+![Screenshot](bars/images/ribbon.png)
+
+[Actipro Bars](bars/index.md) contains everything you need to implement advanced Office-like ribbon, toolbar, and menu functionality in your Avalonia applications. Multiple ribbon layout modes, variant sizing, content-rich galleries, screen tips, key tips, backstage, and MVVM support are all included.
+
+### Fundamentals
+
+![Screenshot](fundamentals/images/overview.png)
+
+[Actipro Fundamentals](fundamentals/index.md) provides a collection of advanced controls that are useful for many different types of applications, including settings configuration controls, user prompts, message boxes, info bars, avatars, badges, segmented bars, progress spinners, and more.
+
 ## Actipro @@PlatformName Free Products
 
 Several products are **freely available** for anyone to use in their applications, providing a strong foundation for building high-quality applications.
 
 ### Themes
 
-![Screenshot](themes/images/welcome.png)
+![Screenshot](themes/images/overview.png)
 
 [Actipro Themes](themes/index.md) ensures that a great consistent visual appearance is applied to all controls within your application, regardless of whether they are Actipro Avalonia control products or native Avalonia controls.
 
 ### Shared Library
 
-![Screenshot](shared/images/welcome.png)
+![Screenshot](shared/images/overview.png)
 
 The [Actipro Shared Library](shared/index.md) is a common control library referenced by all our Actipro Avalonia controls.  It contains several very useful controls, components, value converters, and utilities that can be used in your projects.
 
@@ -29,17 +45,7 @@ The [Actipro Shared Library](shared/index.md) is a common control library refere
 
 The [Actipro Core Library](core/index.md) is a class library that is completely UI framework agnostic.  It contains numerous helpful utilities and base classes that can be used in your .NET projects.
 
-## Actipro @@PlatformName Pro Products
-
-Elevate your application by [licensing](licensing.md) additional professionally designed commercial controls and getting access to the XAML source for all of our default control styles and themes.
-
-### Fundamentals
-
-![Screenshot](fundamentals/images/welcome.png)
-
-[Actipro Fundamentals](fundamentals/index.md) provides a collection of advanced controls that are useful for many different types of applications.
-
-### XAML Source
+## XAML Source
 
 Pro license customers can download the full XAML source for all our Free and Pro products.  The XAML source includes the default control styles and themes used by Actipro and native Avalonia controls in Actipro's themes.
 

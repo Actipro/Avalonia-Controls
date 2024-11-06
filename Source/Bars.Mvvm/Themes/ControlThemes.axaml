@@ -1,0 +1,55 @@
+<ResourceDictionary
+	x:ClassModifier="internal"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	>
+	
+
+	<!-- BarGalleryItem -->
+	<ControlTheme x:Key="{x:Static actipro:BarsMvvmResourceKeys.BarGalleryItemControlTheme}" x:DataType="actipro:IBarGalleryItemViewModel" TargetType="actipro:BarGalleryItem" BasedOn="{actipro:ControlTheme BarGalleryItem}">
+		<!-- Any changes to properties that bind to the view model should be replicated in BarGalleryItemDefaultItemContainerTemplate -->
+		<Setter Property="actipro:BarControlService.IsLabelVisible" Value="{Binding IsLabelVisible}" />
+		<Setter Property="KeyTipText" Value="{Binding KeyTipText, Mode=TwoWay}" />
+		<Setter Property="Label" Value="{Binding Label, Mode=TwoWay}" />
+		<Setter Property="LayoutBehavior" Value="{Binding LayoutBehavior, Mode=TwoWay}" />
+		<Setter Property="ToolTip.Tip" Value="{Binding Description}" />
+	</ControlTheme>
+
+
+	<!-- Ribbon -->
+	<ControlTheme x:Key="{x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}" x:DataType="actipro:RibbonViewModel" TargetType="actipro:Ribbon" BasedOn="{StaticResource {x:Type actipro:Ribbon}}">
+		<!-- NOTE: Include the ItemContainerTemplateSelector selector first for best performance -->
+		<Setter Property="ItemContainerTemplateSelector" Value="{Binding ItemContainerTemplateSelector}" />
+
+		<Setter Property="AllowLabelsOnQuickAccessToolBar" Value="{Binding AllowLabelsOnQuickAccessToolBar, Mode=TwoWay}" />
+		<Setter Property="ApplicationButtonContent" Value="{Binding ApplicationButton}" />
+		<Setter Property="AreTabsVisible" Value="{Binding AreTabsVisible, Mode=TwoWay}" />
+		<Setter Property="BackstageContent" Value="{Binding Backstage}" />
+		<Setter Property="CanChangeLayoutMode" Value="{Binding CanChangeLayoutMode, Mode=TwoWay}" />
+		<Setter Property="ClearFooterCommand" Value="{Binding ClearFooterCommand, Mode=TwoWay}" />
+		<Setter Property="ContextualTabGroups" Value="{Binding ContextualTabGroups}" />
+		<Setter Property="FooterContent" Value="{Binding Footer}" />
+		<Setter Property="GroupLabelMode" Value="{Binding GroupLabelMode, Mode=TwoWay}" />
+		<Setter Property="IsApplicationButtonVisible" Value="{Binding IsApplicationButtonVisible, Mode=TwoWay}" />
+		<Setter Property="IsCollapsible" Value="{Binding IsCollapsible, Mode=TwoWay}" />
+		<Setter Property="IsMinimizable" Value="{Binding IsMinimizable, Mode=TwoWay}" />
+		<Setter Property="ItemsSource" Value="{Binding Tabs}" />
+		<Setter Property="LayoutMode" Value="{Binding LayoutMode, Mode=TwoWay}" />
+		<Setter Property="TabRowToolBarContent" Value="{Binding TabRowToolBar}" />
+		<Setter Property="QuickAccessToolBarContent" Value="{Binding QuickAccessToolBar}" />
+		<Setter Property="QuickAccessToolBarLocation" Value="{Binding QuickAccessToolBarLocation, Mode=TwoWay}" />
+		<Setter Property="QuickAccessToolBarMode" Value="{Binding QuickAccessToolBarMode, Mode=TwoWay}" />
+	</ControlTheme>
+
+
+	<!-- StandaloneToolBar -->
+	<ControlTheme x:Key="{x:Static actipro:BarsMvvmResourceKeys.StandaloneToolBarControlTheme}" x:DataType="actipro:StandaloneToolBarViewModel" TargetType="actipro:StandaloneToolBar" BasedOn="{StaticResource {x:Type actipro:StandaloneToolBar}}">
+		<!-- NOTE: Include the ItemContainerTemplateSelector selector first for best performance -->
+		<Setter Property="ItemContainerTemplateSelector" Value="{Binding ItemContainerTemplateSelector}" />
+
+		<Setter Property="ItemsSource" Value="{Binding Items}" />
+	</ControlTheme>
+
+		
+</ResourceDictionary>

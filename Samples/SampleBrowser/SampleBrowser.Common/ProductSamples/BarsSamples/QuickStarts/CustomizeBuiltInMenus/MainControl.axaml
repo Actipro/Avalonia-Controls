@@ -1,0 +1,162 @@
+<UserControl
+	x:Name="sampleRootControl"
+	x:Class="ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.CustomizeBuiltInMenus.MainControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Use the MenuOpening event to examine built-in menus and optionally customize the menu items.">
+
+		<sampleBrowser:ControlExample
+			Header="Customize built-in menus"
+			Footer="Built-in menus like the Ribbon Options and QAT Customize buttons demonstrate customizing a menu."
+			>
+
+			<StackPanel Spacing="10" DataContext="{Binding #sampleRootControl}">
+
+				<actipro:Ribbon x:Name="ribbon" Margin="0"
+					DataContext="{Binding #sampleRootControl.RibbonViewModel}"
+					Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+					/>
+
+				<TextBox x:Name="outputTextBox" MinLines="12" IsReadOnly="True" Watermark="Menu data" UseFloatingWatermark="True" />
+					
+			</StackPanel>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+				<![CDATA[
+<actipro:Ribbon x:Name="ribbon" ... />
+				]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Bars;
+
+public partial class SampleRootControl : UserControl {
+
+	public SampleRootControl() {
+		InitializeComponent();
+		
+		// Listen for ribbon menus are opening
+		ribbon.MenuOpening += this.OnRibbonMenuOpening;
+	}
+	
+	private void OnRibbonMenuOpening(object? sender, BarMenuEventArgs e) {
+		// Customize built-in menus
+		bool isBuiltInMenu = !(e.Kind == BarMenuKind.PopupButtonMenu || e.Kind == BarMenuKind.MenuItemSubmenu);
+		if (isBuiltInMenu)
+			CustomizeMenu(e);
+	}
+	
+	/// <summary>
+	/// Customizes a context menu.
+	/// </summary>
+	/// <param name="e">A <see cref="BarMenuEventArgs"/> that contains the event data.</param>
+	private void CustomizeMenu(BarMenuEventArgs e) {
+		var menu = e.Menu;
+		if (menu is null)
+			return;
+
+		// Add custom menu items at the bottom
+		menu.Items.Add(CreateBarMenuSeparator());
+		menu.Items.Add(CreateBarMenuHeading($"Customization of {e.Kind}"));
+		menu.Items.Add(CreateCustomActionBarMenuItem(e.Owner));
+
+		// Customize the pre-defined 'Add to Quick Access Toolbar' and 'Remove from Quick Access Toolbar' menu items
+		// by disabling the menu item associated with the corresponding commands
+		if (e.Kind == BarMenuKind.ControlContextMenu) {
+			foreach (var menuItem in menu.Items.OfType<BarMenuItem>()) {
+				if (menuItem.Command == ribbon.AddToQuickAccessToolBarCommand || menuItem.Command == ribbon.RemoveFromQuickAccessToolBarCommand) {
+
+					// Disable the menu item
+					menuItem.IsEnabled = false;
+
+					// Update the label to indicate why the commands are disabled
+					menuItem.Label += " (Programmatically Disabled)";
+
+					// IMPORTANT NOTE:
+					//
+					// While this sample demonstrates that built-in command labels can be changed programmatically,
+					// this is not the method that would typically be used to customize or localize strings.
+					// Refer to "Customizing String Resources" documentation for additional information
+					//
+					// https://www.actiprosoftware.com/docs/controls/avalonia/customizing-string-resources
+				}
+			}
+		}
+
+	}
+
+	/// <summary>
+	/// Creates a new <see cref="BarMenuHeading"/> for use in the menu.
+	/// </summary>
+	/// <param name="label">The label to be set for the heading.</param>
+	private static BarMenuHeading CreateBarMenuHeading(string label) {
+		var barMenuHeading = new BarMenuHeading(label);
+
+		// Block the built-in context menu (with commands like "Add to Quick Access Toolbar") from
+		// being displayed for this menu item.
+		BarControlService.SetAllowContextMenu(barMenuHeading, false);
+
+		return barMenuHeading;
+	}
+
+	/// <summary>
+	/// Creates a new <see cref="BarMenuSeparator"/> for use in the menu.
+	/// </summary>
+	private static BarMenuSeparator CreateBarMenuSeparator() {
+		var barMenuSeparator = new BarMenuSeparator();
+
+		// Block the built-in context menu (with commands like "Add to Quick Access Toolbar") from
+		// being displayed for this menu item.
+		BarControlService.SetAllowContextMenu(barMenuSeparator, false);
+
+		return barMenuSeparator;
+	}
+
+	/// <summary>
+	/// Creates a new <see cref="BarMenuItem"/> for use in the menu that will trigger a custom action when invoked.
+	/// </summary>
+	private BarMenuItem CreateCustomActionBarMenuItem(object? owner) {
+		var customActionMenuItem = new BarMenuItem() {
+			Command = CustomCommand,
+			CommandParameter = owner,
+			KeyTipText = "C",
+			Label = $"Custom Action (Created @ {DateTime.Now.ToLongTimeString()})",
+			ScreenTipHeader = "Custom Action",
+			SmallIcon = ImageLoader.GetIcon("QuickStartGreen16.png"),
+		};
+
+		// Block the built-in context menu (with commands like "Add to Quick Access Toolbar") from
+		// being displayed for this menu item.
+		BarControlService.SetAllowContextMenu(customActionMenuItem, false);
+
+		return customActionMenuItem;
+	}
+
+	/// <summary>
+	/// Gets the command that will be associated with the custom menu item.
+	/// </summary>
+	/// <value>An <see cref="ICommand"/>.</value>
+	private ICommand CustomCommand { get; }
+		= new DelegateCommand<object>(param => {
+			var message = (param is null)
+				? "You clicked the programmatically-added custom menu item."
+				: $"You clicked the programmatically-added custom menu item for:{Environment.NewLine}{Environment.NewLine}{param}";
+			MessageBox.Show(message, "Custom Action", MessageBoxButtons.OK, MessageBoxImage.Information);
+		});
+
+}
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+
+</UserControl>

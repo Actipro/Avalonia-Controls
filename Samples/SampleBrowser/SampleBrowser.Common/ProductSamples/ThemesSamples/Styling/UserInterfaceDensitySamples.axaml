@@ -32,7 +32,7 @@
 						Padding="{actipro:ScaledThickness 5}">
 					<StackPanel Spacing="{actipro:ScaledDouble 1.5}">
 
-						<TextBox Classes="has-clear-button" Text="sales@actiprosoftware.com" UseFloatingWatermark="True" Watermark="E-mail Address" />
+						<TextBox Classes="has-clear-button" Text="sales@actiprosoftware.com" UseFloatingWatermark="True" Watermark="E-mail address" />
 
 						<StackPanel>
 							<TextBox Classes="has-reveal-password-button danger" UseFloatingWatermark="True" Watermark="Password" PasswordChar="{actipro:ThemeResource EditPasswordChar}" />
@@ -51,7 +51,7 @@
 
 			<sampleBrowser:ControlExample.Options>
 				<StackPanel x:DataType="sampleBrowser:ApplicationViewModel">
-					<TextBlock Classes="theme-form-control-label" Text="User interface density:" />
+					<TextBlock Classes="theme-form-control-label" Text="User interface density" />
 					<actipro:SegmentedBar x:Name="uiDensityBar" Classes="theme-outline accent" HorizontalAlignment="Left"
 						ItemsSource="{actipro:DelimitedArray Type={x:Type actipro:UserInterfaceDensity}}"
 						SelectionChanged="OnUiDensitySelectionChanged"/>

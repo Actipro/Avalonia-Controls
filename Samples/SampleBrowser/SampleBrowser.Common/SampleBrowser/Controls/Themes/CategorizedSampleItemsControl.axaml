@@ -41,7 +41,7 @@
 										</actipro:Badge.ContentTemplate>
 									</actipro:Badge>
 
-									<actipro:HyperlinkTextBlock Command="{Binding NavigateViewToItemInfoCommand}" CommandParameter="{Binding}" Text="{Binding Title}" />
+									<actipro:HyperlinkTextBlock Command="{Binding NavigateViewToItemInfoCommand}" CommandParameter="{Binding}" Text="{Binding Title}" TextTrimming="CharacterEllipsis" />
 								</DockPanel>
 							</DataTemplate>
 						</ItemsControl.ItemTemplate>

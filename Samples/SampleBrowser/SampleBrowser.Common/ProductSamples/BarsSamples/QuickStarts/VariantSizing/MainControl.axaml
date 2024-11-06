@@ -1,0 +1,975 @@
+<UserControl
+	x:Name="sampleRootControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:generic="using:System.Collections.Generic"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Resources>
+		<actipro:ComparisonConverter x:Key="MvvmComparisonConverter" Operator="EqualTo" CompareTo="Mvvm" />
+		<actipro:ComparisonConverter x:Key="XamlComparisonConverter" Operator="EqualTo" CompareTo="Xaml" />
+	</UserControl.Resources>
+	<UserControl.Styles>
+		<Style Selector="actipro|Ribbon">
+			<Setter Property="IsApplicationButtonVisible" Value="False" />
+			<Setter Property="Margin" Value="0" />
+			<Setter Property="QuickAccessToolBarMode" Value="None" />
+		</Style>
+	</UserControl.Styles>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Actipro Ribbon supports multiple sizes for controls and is designed to automatically adjust the layout of controls based on the available width.">
+
+		<sampleBrowser:ControlExample
+			Header="Overflow (Simplified layout)"
+			Footer="By default buttons overflow starting at the far side of the Ribbon. The Clipboard group has its own overflow menu.">
+
+			<StackPanel Spacing="20">
+
+				<actipro:Ribbon
+						CanChangeLayoutMode="False"
+						IsApplicationButtonVisible="False"
+						IsCollapsible="False"
+						LayoutMode="Simplified"
+						QuickAccessToolBarMode="None">
+					
+					<actipro:RibbonTabItem x:Name="SimplifiedOverflowTab" Label="Sample Tab">
+						<actipro:RibbonGroup Key="Undo">
+							<actipro:BarButton Key="Undo" SmallIcon="/Images/Icons/Undo16.png" />
+							<actipro:BarButton Key="Redo" SmallIcon="/Images/Icons/Redo16.png" />
+						</actipro:RibbonGroup>
+						<actipro:RibbonGroup Key="File">
+							<actipro:BarButton Key="New" SmallIcon="/Images/Icons/New16.png" />
+							<actipro:BarButton Key="Open" SmallIcon="/Images/Icons/Open16.png" />
+							<actipro:BarButton Key="Save" SmallIcon="/Images/Icons/Save16.png" />
+						</actipro:RibbonGroup>
+						<actipro:RibbonGroup Key="Clipboard" ChildOverflowTarget="Group">
+							<actipro:RibbonControlGroup>
+								<actipro:BarButton Key="Cut" SmallIcon="/Images/Icons/Cut16.png" />
+								<actipro:BarButton Key="Copy" SmallIcon="/Images/Icons/Copy16.png" />
+								<actipro:BarButton Key="Paste" SmallIcon="/Images/Icons/Paste16.png" />
+								<actipro:BarButton Key="FormatPainter" SmallIcon="/Images/Icons/FormatPainter16.png" />
+							</actipro:RibbonControlGroup>
+						</actipro:RibbonGroup>
+						<actipro:RibbonGroup Key="Format">
+							<actipro:BarButton Key="Bold" SmallIcon="/Images/Icons/Bold16.png" />
+							<actipro:BarButton Key="Underline" SmallIcon="/Images/Icons/Underline16.png" />
+							<actipro:BarButton Key="Italic" SmallIcon="/Images/Icons/Italic16.png" />
+						</actipro:RibbonGroup>
+						<actipro:RibbonGroup Key="Font">
+							<actipro:BarButton Key="IncreaseFontSize" SmallIcon="/Images/Icons/GrowFont16.png" />
+							<actipro:BarButton Key="DecreaseFontSize" SmallIcon="/Images/Icons/ShrinkFont16.png" />
+							<actipro:BarButton Key="Subscript" SmallIcon="/Images/Icons/Subscript16.png" />
+							<actipro:BarButton Key="Superscript" SmallIcon="/Images/Icons/Superscript16.png" />
+						</actipro:RibbonGroup>
+					</actipro:RibbonTabItem>
+
+				</actipro:Ribbon>
+
+				<actipro:InfoBar Title="Tip" Severity="Success" Message="Resize this window and watch as items are overflowed one-by-one from the far side of the Ribbon." CanClose="False" />
+
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+				<![CDATA[
+<actipro:Ribbon LayoutMode="Simplified" ... >
+
+	<actipro:RibbonTabItem Key="SampleTab" ... >
+
+		<actipro:RibbonGroup Key="Undo">
+			<actipro:BarButton Key="Undo" ... />
+			<actipro:BarButton Key="Redo" ... />
+		</actipro:RibbonGroup>
+		
+		<actipro:RibbonGroup Key="File">
+			<actipro:BarButton Key="New" ... />
+			<actipro:BarButton Key="Open" ... />
+			<actipro:BarButton Key="Save" ... />
+		</actipro:RibbonGroup>
+
+		<!--
+		Setting ChildOverflowTarget="Group" will create an overflow button specifically
+		for the group instead of using the shared overflow button for the entire tab.
+		-->
+		<actipro:RibbonGroup Key="Clipboard" ChildOverflowTarget="Group">
+			<actipro:RibbonControlGroup>
+				<actipro:BarButton Key="Cut" ... />
+				<actipro:BarButton Key="Copy" ... />
+				<actipro:BarButton Key="Paste" ... />
+				<actipro:BarButton Key="FormatPainter" ... />
+			</actipro:RibbonControlGroup>
+		</actipro:RibbonGroup>
+
+		<actipro:RibbonGroup Key="Format">
+			<actipro:BarButton Key="Bold" ... />
+			<actipro:BarButton Key="Underline" ... />
+			<actipro:BarButton Key="Italic" ... />
+		</actipro:RibbonGroup>
+
+		<actipro:RibbonGroup Key="Font">
+			<actipro:BarButton Key="IncreaseFontSize" ... />
+			<actipro:BarButton Key="DecreaseFontSize" ... />
+			<actipro:BarButton Key="Subscript" ... />
+			<actipro:BarButton Key="Superscript" ... />
+		</actipro:RibbonGroup>
+
+	</actipro:RibbonTabItem>
+
+</actipro:Ribbon>
+				]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Variant sizes (Simplified layout)"
+			Footer="Setting ToolBarItemVariantBehavior to All will show a control label when there is enough space. Setting ToolBarItemOverflowBehavior to Always will force the control to the overflow menu.">
+
+			<StackPanel Spacing="20">
+				
+				<actipro:Ribbon
+						CanChangeLayoutMode="False"
+						IsApplicationButtonVisible="False"
+						IsCollapsible="False"
+						LayoutMode="Simplified"
+						QuickAccessToolBarMode="None">
+
+					<actipro:RibbonTabItem x:Name="SimplifiedVariantSizeTab" Label="Sample Tab" KeyTipText="V">
+						<!--
+						The ToolBarItemVariantBehavior property determines the variant size behavior of a control
+						when it is displayed in a Ribbon with the Simplified layout mode.
+								
+						The default value is AlwaysSmall (e.g., just the icon for a BarButton), but you can optionally
+						set the value to All to allow other sizes like Medium (e.g., icon plus a label for a BarButton).
+						The Large variant size is not used in the Simplified layout mode.
+						-->
+						<actipro:RibbonGroup Key="AllowMediumSize">
+							<!-- The following buttons will appear in the Medium size (e.g., with label) if there is space, then shift to Small size before moving to the Overflow menu -->
+							<actipro:BarButton Key="MaxMedium1" Label="(Max Medium)" KeyTipText="M" SmallIcon="/Images/Icons/New16.png" ToolBarItemVariantBehavior="All" />
+							<actipro:BarButton Key="MaxMedium2" Label="(Max Medium)" KeyTipText="M" SmallIcon="/Images/Icons/New16.png" ToolBarItemVariantBehavior="All" />
+							<actipro:BarButton Key="MaxMedium3" Label="(Max Medium)" KeyTipText="M" SmallIcon="/Images/Icons/New16.png" ToolBarItemVariantBehavior="All" />
+							<actipro:BarButton Key="MaxMedium4" Label="(Max Medium)" KeyTipText="M" SmallIcon="/Images/Icons/New16.png" ToolBarItemVariantBehavior="All" />
+						</actipro:RibbonGroup>
+						<actipro:RibbonGroup Label="Always Small Size (Default)">
+							<!-- The following buttons will appear in the Small size (default) before moving to the Overflow menu -->
+							<actipro:BarButton Key="MaxSmall1" Label="(Max Small)" KeyTipText="S" SmallIcon="/Images/Icons/Open16.png"/>
+							<actipro:BarButton Key="MaxSmall2" Label="(Max Small)" KeyTipText="S" SmallIcon="/Images/Icons/Open16.png"/>
+							<actipro:BarButton Key="MaxSmall3" Label="(Max Small)" KeyTipText="S" SmallIcon="/Images/Icons/Open16.png"/>
+							<actipro:BarButton Key="MaxSmall4" Label="(Max Small)" KeyTipText="S" SmallIcon="/Images/Icons/Open16.png"/>
+						</actipro:RibbonGroup>
+						<actipro:RibbonGroup Label="Always Collapsed Size">
+							<!-- The following buttons will always appear in the Overflow menu even if there is space in the Ribbon -->
+							<actipro:BarButton Key="AlwaysCollapsed1" Label="(Always Collapsed)" KeyTipText="C" SmallIcon="/Images/Icons/Save16.png" ToolBarItemCollapseBehavior="Always" />
+							<actipro:BarButton Key="AlwaysCollapsed2" Label="(Always Collapsed)" KeyTipText="C" SmallIcon="/Images/Icons/Save16.png" ToolBarItemCollapseBehavior="Always" />
+						</actipro:RibbonGroup>
+					</actipro:RibbonTabItem>
+
+				</actipro:Ribbon>
+
+				<actipro:InfoBar Title="Tip" Severity="Success" Message="Resize this window and watch as the medium labels are only displayed when there is enough space and the labels will be removed one-by-one before overflowing items from the far side of the Ribbon." CanClose="False" />
+
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+				<![CDATA[
+<actipro:Ribbon LayoutMode="Simplified" ... >
+
+	<actipro:RibbonTabItem Key="SampleTab" ... >
+		<!--
+		The ToolBarItemVariantBehavior property determines the variant size behavior of a control
+		when it is displayed in a Ribbon with the Simplified layout mode.
+								
+		The default value is AlwaysSmall (e.g., just the icon for a BarButton), but you can optionally
+		set the value to All to allow other sizes like Medium (e.g., icon plus a label for a BarButton).
+		The Large variant size is not used in the Simplified layout mode.
+		-->
+
+		<actipro:RibbonGroup Key="AllowMediumSize">
+			<!-- The following buttons will appear in the Medium size (e.g., with label) if there is space, then shift to Small size before moving to the Overflow menu -->
+			<actipro:BarButton Key="MaxMedium1" Label="(Max Medium)" ToolBarItemVariantBehavior="All" ... />
+			<actipro:BarButton Key="MaxMedium2" Label="(Max Medium)" ToolBarItemVariantBehavior="All" ... />
+			<actipro:BarButton Key="MaxMedium3" Label="(Max Medium)" ToolBarItemVariantBehavior="All" ... />
+			<actipro:BarButton Key="MaxMedium4" Label="(Max Medium)" ToolBarItemVariantBehavior="All" ... />
+		</actipro:RibbonGroup>
+
+		<actipro:RibbonGroup Label="Always Small Size (Default)">
+			<!-- The following buttons will appear in the Small size (default) before moving to the Overflow menu -->
+			<actipro:BarButton Key="MaxSmall1" Label="(Max Small)" ... />
+			<actipro:BarButton Key="MaxSmall2" Label="(Max Small)" ... />
+			<actipro:BarButton Key="MaxSmall3" Label="(Max Small)" ... />
+			<actipro:BarButton Key="MaxSmall4" Label="(Max Small)" ... />
+		</actipro:RibbonGroup>
+
+		<actipro:RibbonGroup Label="Always Collapsed Size">
+			<!-- The following buttons will always appear in the Overflow menu even if there is space in the Ribbon -->
+			<actipro:BarButton Key="AlwaysCollapsed1" Label="(Always Collapsed)" ToolBarItemCollapseBehavior="Always" ... />
+			<actipro:BarButton Key="AlwaysCollapsed2" Label="(Always Collapsed)" ToolBarItemCollapseBehavior="Always" ... />
+		</actipro:RibbonGroup>
+
+	</actipro:RibbonTabItem>
+
+</actipro:Ribbon>
+				]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Explicit sizing (Simplified layout)"
+			Footer="Take control of sizing behavior with explicit control variants. Controls in this sample overflow using a pre-defined order with some related controls grouped to overflow at the same time.">
+
+			<StackPanel Spacing="20">
+				
+				<actipro:Ribbon
+					CanChangeLayoutMode="False"
+					IsApplicationButtonVisible="False"
+					IsCollapsible="False"
+					LayoutMode="Simplified"
+					QuickAccessToolBarMode="None">
+
+				<actipro:RibbonTabItem x:Name="SimplifiedExplicitSizingTab" Label="Sample Tab">
+					<actipro:RibbonTabItem.ControlVariants>
+						<actipro:VariantCollection>
+							<actipro:VariantSet>
+								<actipro:SizeVariant TargetKey="Undo" Size="Collapsed" />
+								<actipro:SizeVariant TargetKey="Redo" Size="Collapsed" />
+							</actipro:VariantSet>
+							<actipro:VariantSet>
+								<actipro:SizeVariant TargetKey="Subscript" Size="Collapsed" />
+								<actipro:SizeVariant TargetKey="Superscript" Size="Collapsed" />
+							</actipro:VariantSet>
+							<actipro:VariantSet>
+								<actipro:SizeVariant TargetKey="FormatPainter" Size="Collapsed" />
+								<actipro:SizeVariant TargetKey="Cut" Size="Collapsed" />
+								<actipro:SizeVariant TargetKey="Copy" Size="Collapsed" />
+								<actipro:SizeVariant TargetKey="Paste" Size="Collapsed" />
+							</actipro:VariantSet>
+							<actipro:SizeVariant TargetKey="New" Size="Small" />
+							<actipro:VariantSet>
+								<actipro:SizeVariant TargetKey="IncreaseFontSize" Size="Collapsed" />
+								<actipro:SizeVariant TargetKey="DecreaseFontSize" Size="Collapsed" />
+							</actipro:VariantSet>
+						</actipro:VariantCollection>
+					</actipro:RibbonTabItem.ControlVariants>
+					<actipro:RibbonGroup Label="Undo">
+						<actipro:BarButton Key="Undo" SmallIcon="/Images/Icons/Undo16.png" />
+						<actipro:BarButton Key="Redo" SmallIcon="/Images/Icons/Redo16.png" />
+					</actipro:RibbonGroup>
+					<actipro:RibbonGroup Label="File">
+						<actipro:BarButton Key="New" SmallIcon="/Images/Icons/New16.png" ToolBarItemVariantBehavior="All" />
+						<actipro:BarButton Key="Open" SmallIcon="/Images/Icons/Open16.png" />
+						<actipro:BarButton Key="Save" SmallIcon="/Images/Icons/Save16.png" />
+					</actipro:RibbonGroup>
+					<actipro:RibbonGroup Label="Clipboard" ChildOverflowTarget="Group">
+						<actipro:RibbonControlGroup>
+							<actipro:BarButton Key="Cut" SmallIcon="/Images/Icons/Cut16.png" />
+							<actipro:BarButton Key="Copy" SmallIcon="/Images/Icons/Copy16.png" />
+							<actipro:BarButton Key="Paste" SmallIcon="/Images/Icons/Paste16.png" />
+							<actipro:BarButton Key="FormatPainter" SmallIcon="/Images/Icons/FormatPainter16.png" />
+						</actipro:RibbonControlGroup>
+					</actipro:RibbonGroup>
+					<actipro:RibbonGroup Label="Format">
+						<actipro:BarButton Key="Bold" SmallIcon="/Images/Icons/Bold16.png" />
+						<actipro:BarButton Key="Underline" SmallIcon="/Images/Icons/Underline16.png" />
+						<actipro:BarButton Key="Italic" SmallIcon="/Images/Icons/Italic16.png" />
+					</actipro:RibbonGroup>
+					<actipro:RibbonGroup Label="Font">
+						<actipro:BarButton Key="IncreaseFontSize" SmallIcon="/Images/Icons/GrowFont16.png" />
+						<actipro:BarButton Key="DecreaseFontSize" SmallIcon="/Images/Icons/ShrinkFont16.png" />
+						<actipro:BarButton Key="Subscript" SmallIcon="/Images/Icons/Subscript16.png" />
+						<actipro:BarButton Key="Superscript" SmallIcon="/Images/Icons/Superscript16.png" />
+					</actipro:RibbonGroup>
+				</actipro:RibbonTabItem>
+
+			</actipro:Ribbon>
+
+				<actipro:InfoBar Title="Tip" Severity="Success" Message="Resize this window and watch the Undo group overflows first, then two items from Font group, then the Clipboard group, and so on. See the sample code for more details." CanClose="False" />
+
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+				<![CDATA[
+<actipro:Ribbon LayoutMode="Simplified" ... >
+
+	<actipro:RibbonTabItem Key="SampleTab">
+	
+		<!-- Use control variants to define the order in which items are resized/overflowed -->
+		<actipro:RibbonTabItem.ControlVariants>
+			<actipro:VariantCollection>
+
+				<!-- Step 1: Move entire Undo group to overflow menu -->
+				<actipro:VariantSet>
+					<actipro:SizeVariant TargetKey="Undo" Size="Collapsed" />
+					<actipro:SizeVariant TargetKey="Redo" Size="Collapsed" />
+				</actipro:VariantSet>
+
+				<!-- Step 2: Move just Subscript/Superscript of Font group to overflow menu -->
+				<actipro:VariantSet>
+					<actipro:SizeVariant TargetKey="Subscript" Size="Collapsed" />
+					<actipro:SizeVariant TargetKey="Superscript" Size="Collapsed" />
+				</actipro:VariantSet>
+
+				<!-- Step 3: Move entire Clipboard to its own overflow menu -->
+				<actipro:VariantSet>
+					<actipro:SizeVariant TargetKey="FormatPainter" Size="Collapsed" />
+					<actipro:SizeVariant TargetKey="Cut" Size="Collapsed" />
+					<actipro:SizeVariant TargetKey="Copy" Size="Collapsed" />
+					<actipro:SizeVariant TargetKey="Paste" Size="Collapsed" />
+				</actipro:VariantSet>
+
+				<!-- Step 4: New button from Medium to Small (i.e., no label) -->
+				<actipro:SizeVariant TargetKey="New" Size="Small" />
+
+				<!-- Step 5: Move remaining Font group to overflow menu -->
+				<actipro:VariantSet>
+					<actipro:SizeVariant TargetKey="IncreaseFontSize" Size="Collapsed" />
+					<actipro:SizeVariant TargetKey="DecreaseFontSize" Size="Collapsed" />
+				</actipro:VariantSet>
+				
+				<!-- Step 6: Remaining items overflow from the far side of the Ribbon -->
+
+			</actipro:VariantCollection>
+		</actipro:RibbonTabItem.ControlVariants>
+
+		<actipro:RibbonGroup Label="Undo">
+			<actipro:BarButton Key="Undo" ... />
+			<actipro:BarButton Key="Redo" ... />
+		</actipro:RibbonGroup>
+
+		<actipro:RibbonGroup Label="File">
+			<actipro:BarButton Key="New" ToolBarItemVariantBehavior="All" ... />
+			<actipro:BarButton Key="Open" ... />
+			<actipro:BarButton Key="Save" ... />
+		</actipro:RibbonGroup>
+
+		<actipro:RibbonGroup Label="Clipboard" ChildOverflowTarget="Group">
+			<actipro:RibbonControlGroup>
+				<actipro:BarButton Key="Cut" ... />
+				<actipro:BarButton Key="Copy" ... />
+				<actipro:BarButton Key="Paste" ... />
+				<actipro:BarButton Key="FormatPainter" ... />
+			</actipro:RibbonControlGroup>
+		</actipro:RibbonGroup>
+
+		<actipro:RibbonGroup Label="Format">
+			<actipro:BarButton Key="Bold" ... />
+			<actipro:BarButton Key="Underline" ... />
+			<actipro:BarButton Key="Italic" ... />
+		</actipro:RibbonGroup>
+
+		<actipro:RibbonGroup Label="Font">
+			<actipro:BarButton Key="IncreaseFontSize" ... />
+			<actipro:BarButton Key="DecreaseFontSize" ... />
+			<actipro:BarButton Key="Subscript" ... />
+			<actipro:BarButton Key="Superscript" ... />
+		</actipro:RibbonGroup>
+	</actipro:RibbonTabItem>
+
+</actipro:Ribbon>
+				]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+
+		<sampleBrowser:ControlExample
+			Header="Variant sizes (Classic layout)"
+			Footer="Most controls support large, medium, and small variant sizes, and the control group determines the variant size of each control contained within.">
+
+			<StackPanel Spacing="20">
+				<actipro:Ribbon LayoutMode="Classic" CanChangeLayoutMode="False">
+					<actipro:RibbonTabItem Key="SampleTab">
+
+						<!--
+						NOTE: When used in a Ribbon, the individual control's VariantSize property is managed
+						by the RibbonControlGroup and cannot be set individually
+						-->
+
+						<actipro:RibbonGroup Key="Large" CanAutoCollapse="False">
+							<actipro:RibbonControlGroup ItemVariantBehavior="AlwaysLarge">
+								<actipro:BarButton Key="One" KeyTipText="L" LargeIcon="/Images/Icons/Save32.png" SmallIcon="/Images/Icons/Save16.png" />
+								<actipro:BarButton Key="Two" KeyTipText="L" LargeIcon="/Images/Icons/Open32.png" SmallIcon="/Images/Icons/Open16.png" />
+								<actipro:BarButton Key="Three" KeyTipText="L" LargeIcon="/Images/Icons/Paste32.png" SmallIcon="/Images/Icons/Paste16.png" />
+							</actipro:RibbonControlGroup>
+						</actipro:RibbonGroup>
+
+						<actipro:RibbonGroup Key="Medium" CanAutoCollapse="False">
+							<actipro:RibbonControlGroup ItemVariantBehavior="AlwaysMedium">
+								<actipro:BarButton Key="One" KeyTipText="M" LargeIcon="/Images/Icons/Save32.png" SmallIcon="/Images/Icons/Save16.png" />
+								<actipro:BarButton Key="Two" KeyTipText="M" LargeIcon="/Images/Icons/Open32.png" SmallIcon="/Images/Icons/Open16.png" />
+								<actipro:BarButton Key="Three" KeyTipText="M" LargeIcon="/Images/Icons/Paste32.png" SmallIcon="/Images/Icons/Paste16.png" />
+								<actipro:BarButton Key="Four" KeyTipText="M" LargeIcon="/Images/Icons/CoverPage32.png" SmallIcon="/Images/Icons/CoverPage16.png" />
+								<actipro:BarButton Key="Five" KeyTipText="M" LargeIcon="/Images/Icons/PageBreak32.png" SmallIcon="/Images/Icons/PageBreak16.png" />
+							</actipro:RibbonControlGroup>
+						</actipro:RibbonGroup>
+
+						<actipro:RibbonGroup Key="Small" CanAutoCollapse="False">
+							<actipro:RibbonControlGroup ItemVariantBehavior="AlwaysSmall">
+								<actipro:BarButton Key="One" KeyTipText="S" LargeIcon="/Images/Icons/Save32.png" SmallIcon="/Images/Icons/Save16.png" />
+								<actipro:BarButton Key="Two" KeyTipText="S" LargeIcon="/Images/Icons/Open32.png" SmallIcon="/Images/Icons/Open16.png" />
+								<actipro:BarButton Key="Three" KeyTipText="S" LargeIcon="/Images/Icons/Paste32.png" SmallIcon="/Images/Icons/Paste16.png" />
+								<actipro:BarButton Key="Four" KeyTipText="S" LargeIcon="/Images/Icons/CoverPage32.png" SmallIcon="/Images/Icons/CoverPage16.png" />
+								<actipro:BarButton Key="Five" KeyTipText="S" LargeIcon="/Images/Icons/PageBreak32.png" SmallIcon="/Images/Icons/PageBreak16.png" />
+							</actipro:RibbonControlGroup>
+						</actipro:RibbonGroup>
+
+						<!-- Multiple RibbonControlGroup instances can be used within the same RibbonGroup -->
+						<actipro:RibbonGroup Key="Mixed" CanAutoCollapse="False">
+							<actipro:RibbonControlGroup ItemVariantBehavior="AlwaysLarge">
+								<actipro:BarButton Key="One (Large)" KeyTipText="L" LargeIcon="/Images/Icons/Save32.png" SmallIcon="/Images/Icons/Save16.png" />
+							</actipro:RibbonControlGroup>
+							<actipro:RibbonControlGroup ItemVariantBehavior="AlwaysMedium">
+								<actipro:BarButton Key="Two (Medium)" KeyTipText="M" LargeIcon="/Images/Icons/Open32.png" SmallIcon="/Images/Icons/Open16.png" />
+								<actipro:BarButton Key="Three (Medium)" KeyTipText="M" LargeIcon="/Images/Icons/Paste32.png" SmallIcon="/Images/Icons/Paste16.png" />
+								<actipro:BarButton Key="Four (Medium)" KeyTipText="M" LargeIcon="/Images/Icons/CoverPage32.png" SmallIcon="/Images/Icons/CoverPage16.png" />
+							</actipro:RibbonControlGroup>
+							<actipro:RibbonControlGroup ItemVariantBehavior="AlwaysSmall">
+								<actipro:BarButton Key="Five (Small)" KeyTipText="S" LargeIcon="/Images/Icons/PageBreak32.png" SmallIcon="/Images/Icons/PageBreak16.png" />
+								<actipro:BarButton Key="Size (Small)" KeyTipText="S" LargeIcon="/Images/Icons/Chart32.png" SmallIcon="/Images/Icons/Chart16.png" />
+							</actipro:RibbonControlGroup>
+						</actipro:RibbonGroup>
+
+					</actipro:RibbonTabItem>
+				</actipro:Ribbon>
+
+				<actipro:InfoBar Title="Note" Message="For demonstrations purposes, this Ribbon is configured with a fixed size for each group." CanClose="False" />
+
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+				<![CDATA[
+<actipro:Ribbon ... >
+	<actipro:RibbonTabItem Key="SampleTab" ... >
+
+		<!--
+		NOTE: When used in a Ribbon, the individual control's VariantSize property is managed
+		by the RibbonControlGroup and cannot be set individually
+		-->
+
+		<actipro:RibbonGroup Key="Large" ... >
+			<actipro:RibbonControlGroup ItemVariantBehavior="AlwaysLarge">
+				<actipro:BarButton Key="One" ... />
+				<actipro:BarButton Key="Two" ... />
+				<actipro:BarButton Key="Three" ... />
+			</actipro:RibbonControlGroup>
+		</actipro:RibbonGroup>
+
+		<actipro:RibbonGroup Key="Medium" ... >
+			<actipro:RibbonControlGroup ItemVariantBehavior="AlwaysMedium">
+				<actipro:BarButton Key="One" ... />
+				<actipro:BarButton Key="Two" ... />
+				<actipro:BarButton Key="Three" ... />
+			</actipro:RibbonControlGroup>
+		</actipro:RibbonGroup>
+
+		<actipro:RibbonGroup Key="Small" ... >
+			<actipro:RibbonControlGroup ItemVariantBehavior="AlwaysSmall">
+				<actipro:BarButton Key="One" ... />
+				<actipro:BarButton Key="Two" ... />
+				<actipro:BarButton Key="Three" ... />
+			</actipro:RibbonControlGroup>
+		</actipro:RibbonGroup>
+
+		<!-- Multiple RibbonControlGroup instances can be used within the same RibbonGroup -->
+		<actipro:RibbonGroup Key="Mixed" ... >
+			<actipro:RibbonControlGroup ItemVariantBehavior="AlwaysLarge">
+				<actipro:BarButton Key="One (Large)" ... />
+			</actipro:RibbonControlGroup>
+			<actipro:RibbonControlGroup ItemVariantBehavior="AlwaysMedium">
+				<actipro:BarButton Key="Two (Medium)" ... />
+				<actipro:BarButton Key="Three (Medium)" ... />
+				<actipro:BarButton Key="Four (Medium)" ... />
+			</actipro:RibbonControlGroup>
+			<actipro:RibbonControlGroup ItemVariantBehavior="AlwaysSmall">
+				<actipro:BarButton Key="Five (Small)" ... />
+				<actipro:BarButton Key="Six (Small)" ... />
+			</actipro:RibbonControlGroup>
+		</actipro:RibbonGroup>
+
+	</actipro:RibbonTabItem>
+</actipro:Ribbon>
+				]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+		<sampleBrowser:ControlExample
+			Header="Item variant behavior (Classic layout)"
+			Footer="A control group tries to use the largest size available, and the item variant behavior grants you control over which variant sizes are allowed for a group.">
+
+			<StackPanel Spacing="20">
+
+				<actipro:Ribbon LayoutMode="Classic" CanChangeLayoutMode="False">
+					<actipro:RibbonTabItem x:Name="ClassicVariantTab" Label="Sample Tab">
+						<actipro:RibbonGroup x:Name="ClassicVariantDefaultGroup" Key="All" SmallIcon="/Images/Icons/QuickStart16.png">
+							<actipro:RibbonControlGroup ItemVariantBehavior="All">
+								<actipro:BarButton Key="One" KeyTipText="D" LargeIcon="/Images/Icons/Save32.png" SmallIcon="/Images/Icons/Save16.png" />
+								<actipro:BarButton Key="Two" KeyTipText="D" LargeIcon="/Images/Icons/Open32.png" SmallIcon="/Images/Icons/Open16.png" />
+								<actipro:BarButton Key="Three" KeyTipText="D" LargeIcon="/Images/Icons/Paste32.png" SmallIcon="/Images/Icons/Paste16.png" />
+								<actipro:BarButton Key="Four" KeyTipText="D" LargeIcon="/Images/Icons/CoverPage32.png" SmallIcon="/Images/Icons/CoverPage16.png" />
+								<actipro:BarButton Key="Five" KeyTipText="D" LargeIcon="/Images/Icons/PageBreak32.png" SmallIcon="/Images/Icons/PageBreak16.png" />
+							</actipro:RibbonControlGroup>
+						</actipro:RibbonGroup>
+						<actipro:RibbonGroup x:Name="ClassicVariantAlwaysLargeGroup" Label="Always Large" SmallIcon="/Images/Icons/QuickStart16.png">
+							<actipro:RibbonControlGroup ItemVariantBehavior="AlwaysLarge">
+								<actipro:BarButton Key="One" KeyTipText="L" LargeIcon="/Images/Icons/Save32.png" SmallIcon="/Images/Icons/Save16.png" />
+							</actipro:RibbonControlGroup>
+						</actipro:RibbonGroup>
+						<actipro:RibbonGroup x:Name="ClassicVariantAlwaysMediumGroup" Label="Always Medium" SmallIcon="/Images/Icons/QuickStart16.png">
+							<actipro:RibbonControlGroup ItemVariantBehavior="AlwaysMedium">
+								<actipro:BarButton Key="One" KeyTipText="M" LargeIcon="/Images/Icons/Save32.png" SmallIcon="/Images/Icons/Save16.png" />
+								<actipro:BarButton Key="Two" KeyTipText="M" LargeIcon="/Images/Icons/Open32.png" SmallIcon="/Images/Icons/Open16.png" />
+								<actipro:BarButton Key="Three" KeyTipText="M" LargeIcon="/Images/Icons/Paste32.png" SmallIcon="/Images/Icons/Paste16.png" />
+							</actipro:RibbonControlGroup>
+						</actipro:RibbonGroup>
+						<actipro:RibbonGroup x:Name="ClassicVariantAlwaysSmallGroup" Label="Always Small" SmallIcon="/Images/Icons/QuickStart16.png">
+							<actipro:RibbonControlGroup ItemVariantBehavior="AlwaysSmall">
+								<actipro:BarButton Key="One" KeyTipText="S" LargeIcon="/Images/Icons/Save32.png" SmallIcon="/Images/Icons/Save16.png" />
+								<actipro:BarButton Key="Two" KeyTipText="S" LargeIcon="/Images/Icons/Open32.png" SmallIcon="/Images/Icons/Open16.png" />
+								<actipro:BarButton Key="Three" KeyTipText="S" LargeIcon="/Images/Icons/Paste32.png" SmallIcon="/Images/Icons/Paste16.png" />
+							</actipro:RibbonControlGroup>
+						</actipro:RibbonGroup>
+						<actipro:RibbonGroup x:Name="ClassicVariantNeverLargeGroup" Label="Never Large" SmallIcon="/Images/Icons/QuickStart16.png">
+							<actipro:RibbonControlGroup ItemVariantBehavior="NeverLarge">
+								<actipro:BarButton Key="One" KeyTipText="G" LargeIcon="/Images/Icons/Save32.png" SmallIcon="/Images/Icons/Save16.png" />
+								<actipro:BarButton Key="Two" KeyTipText="G" LargeIcon="/Images/Icons/Open32.png" SmallIcon="/Images/Icons/Open16.png" />
+								<actipro:BarButton Key="Three" KeyTipText="G" LargeIcon="/Images/Icons/Paste32.png" SmallIcon="/Images/Icons/Paste16.png" />
+							</actipro:RibbonControlGroup>
+						</actipro:RibbonGroup>
+						<actipro:RibbonGroup x:Name="ClassicVariantNeverMediumGroup" Label="Never Medium" SmallIcon="/Images/Icons/QuickStart16.png">
+							<actipro:RibbonControlGroup ItemVariantBehavior="NeverMedium">
+								<actipro:BarButton Key="One" KeyTipText="U" LargeIcon="/Images/Icons/Save32.png" SmallIcon="/Images/Icons/Save16.png" />
+								<actipro:BarButton Key="Two" KeyTipText="U" LargeIcon="/Images/Icons/Open32.png" SmallIcon="/Images/Icons/Open16.png" />
+								<actipro:BarButton Key="Three" KeyTipText="U" LargeIcon="/Images/Icons/Paste32.png" SmallIcon="/Images/Icons/Paste16.png" />
+							</actipro:RibbonControlGroup>
+						</actipro:RibbonGroup>
+						<actipro:RibbonGroup x:Name="ClassicVariantNeverSmallGroup" Label="Never Small" SmallIcon="/Images/Icons/QuickStart16.png">
+							<actipro:RibbonControlGroup ItemVariantBehavior="NeverSmall">
+								<actipro:BarButton Key="One" KeyTipText="A" LargeIcon="/Images/Icons/Save32.png" SmallIcon="/Images/Icons/Save16.png" />
+								<actipro:BarButton Key="Two" KeyTipText="A" LargeIcon="/Images/Icons/Open32.png" SmallIcon="/Images/Icons/Open16.png" />
+								<actipro:BarButton Key="Three" KeyTipText="A" LargeIcon="/Images/Icons/Paste32.png" SmallIcon="/Images/Icons/Paste16.png" />
+							</actipro:RibbonControlGroup>
+						</actipro:RibbonGroup>
+					</actipro:RibbonTabItem>
+				</actipro:Ribbon>
+
+				<StackPanel>
+					<TextBlock>Current group variant sizes:</TextBlock>
+					<TextBlock TextWrapping="Wrap">
+						<Run Text="{Binding ElementName=ClassicVariantDefaultGroup, Path=VariantSize}" FontWeight="SemiBold" />
+						<Run Text=">" />
+						<Run Text="{Binding ElementName=ClassicVariantAlwaysLargeGroup, Path=VariantSize}" FontWeight="SemiBold" />
+						<Run Text=">" />
+						<Run Text="{Binding ElementName=ClassicVariantAlwaysMediumGroup, Path=VariantSize}" FontWeight="SemiBold" />
+						<Run Text=">" />
+						<Run Text="{Binding ElementName=ClassicVariantAlwaysSmallGroup, Path=VariantSize}" FontWeight="SemiBold" />
+						<Run Text=">" />
+						<Run Text="{Binding ElementName=ClassicVariantNeverLargeGroup, Path=VariantSize}" FontWeight="SemiBold" />
+						<Run Text=">" />
+						<Run Text="{Binding ElementName=ClassicVariantNeverMediumGroup, Path=VariantSize}" FontWeight="SemiBold" />
+						<Run Text=">" />
+						<Run Text="{Binding ElementName=ClassicVariantNeverSmallGroup, Path=VariantSize}" FontWeight="SemiBold" />
+					</TextBlock>
+				</StackPanel>
+
+				<actipro:InfoBar Title="Tip" Severity="Success" Message="Resize this window and watch as the Ribbon adjusts variant sizes to the available width." CanClose="False" />
+
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+				<![CDATA[
+<actipro:Ribbon ... >
+	<actipro:RibbonTabItem ... >
+
+		<actipro:RibbonGroup Key="All" ... >
+			<actipro:RibbonControlGroup ItemVariantBehavior="All">
+				<actipro:BarButton Key="One" ... />
+				<actipro:BarButton Key="Two" ... />
+				<actipro:BarButton Key="Three" ... />
+			</actipro:RibbonControlGroup>
+		</actipro:RibbonGroup>
+		
+		<actipro:RibbonGroup Label="Always Large" ... >
+			<actipro:RibbonControlGroup ItemVariantBehavior="AlwaysLarge">
+				<actipro:BarButton Key="One" ... />
+			</actipro:RibbonControlGroup>
+		</actipro:RibbonGroup>
+
+		<actipro:RibbonGroup Label="Always Medium" ... >
+			<actipro:RibbonControlGroup ItemVariantBehavior="AlwaysMedium">
+				<actipro:BarButton Key="One" ... />
+				<actipro:BarButton Key="Two" ... />
+				<actipro:BarButton Key="Three" ... />
+			</actipro:RibbonControlGroup>
+		</actipro:RibbonGroup>
+
+		<actipro:RibbonGroup Label="Always Small" ... >
+			<actipro:RibbonControlGroup ItemVariantBehavior="AlwaysSmall">
+				<actipro:BarButton Key="One" ... />
+				<actipro:BarButton Key="Two" ... />
+				<actipro:BarButton Key="Three" ... />
+			</actipro:RibbonControlGroup>
+		</actipro:RibbonGroup>
+
+		<actipro:RibbonGroup Label="Never Large" ... >
+			<actipro:RibbonControlGroup ItemVariantBehavior="NeverLarge">
+				<actipro:BarButton Key="One" ... />
+				<actipro:BarButton Key="Two" ... />
+				<actipro:BarButton Key="Three" ... />
+			</actipro:RibbonControlGroup>
+		</actipro:RibbonGroup>
+
+		<actipro:RibbonGroup Label="Never Medium" ... >
+			<actipro:RibbonControlGroup ItemVariantBehavior="NeverMedium">
+				<actipro:BarButton Key="One" ... />
+				<actipro:BarButton Key="Two" ... />
+				<actipro:BarButton Key="Three" ... />
+			</actipro:RibbonControlGroup>
+		</actipro:RibbonGroup>
+
+		<actipro:RibbonGroup Label="Never Small" ... >
+			<actipro:RibbonControlGroup ItemVariantBehavior="NeverSmall">
+				<actipro:BarButton Key="One" ... />
+				<actipro:BarButton Key="Two" ... />
+				<actipro:BarButton Key="Three" ... />
+			</actipro:RibbonControlGroup>
+		</actipro:RibbonGroup>
+
+	</actipro:RibbonTabItem>
+</actipro:Ribbon>
+				]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Multi-Row layouts (Classic layout)"
+			Footer="Multi-row layouts offer the most dense presentation of controls in either two- or three-row configurations.">
+
+			<StackPanel Spacing="20">
+
+				<actipro:Ribbon LayoutMode="Classic" CanChangeLayoutMode="False">
+					<actipro:RibbonTabItem x:Name="ClassicMultiRowTab" Label="Sample Tab">
+						<actipro:RibbonGroup Key="Default" SmallIcon="/Images/Icons/QuickStart16.png" CanAutoCollapse="False">
+							<actipro:RibbonMultiRowControlGroup>
+								<actipro:RibbonControlGroup SeparatorMode="{Binding #separatorModeComboBox.SelectedItem}">
+									<actipro:BarButton Key="Undo" SmallIcon="/Images/Icons/Undo16.png" />
+									<actipro:BarButton Key="Redo" SmallIcon="/Images/Icons/Redo16.png" />
+								</actipro:RibbonControlGroup>
+								<actipro:RibbonControlGroup SeparatorMode="{Binding #separatorModeComboBox.SelectedItem}">
+									<actipro:BarButton Key="New" SmallIcon="/Images/Icons/New16.png" />
+									<actipro:BarButton Key="Open" SmallIcon="/Images/Icons/Open16.png" />
+								</actipro:RibbonControlGroup>
+								<actipro:RibbonControlGroup SeparatorMode="{Binding #separatorModeComboBox.SelectedItem}">
+									<actipro:BarButton Key="Cut" SmallIcon="/Images/Icons/Cut16.png" />
+									<actipro:BarButton Key="Copy" SmallIcon="/Images/Icons/Copy16.png" />
+									<actipro:BarButton Key="Paste" SmallIcon="/Images/Icons/Paste16.png" />
+									<actipro:BarButton Key="Format Painter" SmallIcon="/Images/Icons/FormatPainter16.png" />
+								</actipro:RibbonControlGroup>
+								<actipro:RibbonControlGroup SeparatorMode="{Binding #separatorModeComboBox.SelectedItem}">
+									<actipro:BarButton Key="Bold" SmallIcon="/Images/Icons/Bold16.png" />
+									<actipro:BarButton Key="Underline" SmallIcon="/Images/Icons/Underline16.png" />
+									<actipro:BarButton Key="Italic" SmallIcon="/Images/Icons/Italic16.png" />
+								</actipro:RibbonControlGroup>
+								<actipro:RibbonControlGroup SeparatorMode="{Binding #separatorModeComboBox.SelectedItem}">
+									<actipro:BarButton Key="Save" SmallIcon="/Images/Icons/Save16.png" />
+								</actipro:RibbonControlGroup>
+							</actipro:RibbonMultiRowControlGroup>
+						</actipro:RibbonGroup>
+
+						<actipro:RibbonGroup Key="Filler Buttons to Take Up Space" VariantSize="Large" CanAutoCollapse="False">
+							<actipro:BarButton Label="Filler Button" IsEnabled="False" SmallIcon="/Images/Icons/QuickStart32.png" />
+							<actipro:BarButton Label="Filler Button" IsEnabled="False" SmallIcon="/Images/Icons/QuickStart32.png" />
+							<actipro:BarButton Label="Filler Button" IsEnabled="False" SmallIcon="/Images/Icons/QuickStart32.png" />
+							<actipro:BarButton Label="Filler Button" IsEnabled="False" SmallIcon="/Images/Icons/QuickStart32.png" />
+							<actipro:BarButton Label="Filler Button" IsEnabled="False" SmallIcon="/Images/Icons/QuickStart32.png" />
+						</actipro:RibbonGroup>
+					</actipro:RibbonTabItem>
+				</actipro:Ribbon>
+
+				<actipro:InfoBar Title="Tip" Severity="Success" Message="Resize this window and watch as the multi-row control group adjusts between two or three rows based on the available width." CanClose="False" />
+
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label">Separator mode</TextBlock>
+						<ComboBox x:Name="separatorModeComboBox" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray Type={x:Type actipro:RibbonControlGroupSeparatorMode}, DelimitedText='Default,Never,MultiRowTwoRowOnly,MultiRowThreeRowOnly'}" />
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+				<![CDATA[
+<actipro:Ribbon ... >
+	<actipro:RibbonTabItem ... >
+		<actipro:RibbonGroup ... >
+
+			<actipro:RibbonMultiRowControlGroup>
+
+				<actipro:RibbonControlGroup SeparatorMode="$(SeparatorMode)">
+					<actipro:BarButton Key="Undo" ... />
+					<actipro:BarButton Key="Redo" ... />
+				</actipro:RibbonControlGroup>
+
+				<actipro:RibbonControlGroup SeparatorMode="$(SeparatorMode)">
+					<actipro:BarButton Key="New" ... />
+					<actipro:BarButton Key="Open" ... />
+				</actipro:RibbonControlGroup>
+
+				<actipro:RibbonControlGroup SeparatorMode="$(SeparatorMode)">
+					<actipro:BarButton Key="Cut" ... />
+					<actipro:BarButton Key="Copy" ... />
+					<actipro:BarButton Key="Paste" ... />
+					<actipro:BarButton Key="FormatPainter" ... />
+				</actipro:RibbonControlGroup>
+
+				<actipro:RibbonControlGroup SeparatorMode="$(SeparatorMode)">
+					<actipro:BarButton Key="Bold" ... />
+					<actipro:BarButton Key="Underline" ... />
+					<actipro:BarButton Key="Italic" ... />
+				</actipro:RibbonControlGroup>
+
+				<actipro:RibbonControlGroup SeparatorMode="$(SeparatorMode)">
+					<actipro:BarButton Key="Save" ... />
+				</actipro:RibbonControlGroup>
+
+			</actipro:RibbonMultiRowControlGroup>
+
+		</actipro:RibbonGroup>
+	</actipro:RibbonTabItem>
+</actipro:Ribbon>
+				]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="SeparatorMode" Value="{Binding #separatorModeComboBox.SelectedItem}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Explicit sizing (Classic layout)"
+			Footer="Take control of sizing with explicit group variants and custom multi-row sort order.">
+
+			<StackPanel Spacing="20">
+
+				<actipro:Ribbon LayoutMode="Classic" CanChangeLayoutMode="False">
+					<actipro:RibbonTabItem x:Name="ClassicExplicitSizingTab" Label="Sample Tab">
+						<actipro:RibbonTabItem.GroupVariants>
+							<actipro:VariantCollection>
+								<actipro:VariantSet>
+									<actipro:SizeVariant TargetKey="GroupA1" Size="Medium" />
+									<actipro:SizeVariant TargetKey="GroupA2" Size="Medium" />
+								</actipro:VariantSet>
+								<actipro:SizeVariant TargetKey="GroupB" Size="Collapsed" />
+								<actipro:SizeVariant TargetKey="GroupC" Size="Small" />
+								<actipro:VariantSet>
+									<actipro:SizeVariant TargetKey="GroupA1" Size="Small" />
+									<actipro:SizeVariant TargetKey="GroupA2" Size="Small" />
+								</actipro:VariantSet>
+								<actipro:VariantSet>
+									<actipro:SizeVariant TargetKey="GroupA1" Size="Collapsed" />
+									<actipro:SizeVariant TargetKey="GroupA2" Size="Collapsed" />
+								</actipro:VariantSet>
+								<actipro:SizeVariant TargetKey="GroupC" Size="Collapsed" />
+							</actipro:VariantCollection>
+						</actipro:RibbonTabItem.GroupVariants>
+						<actipro:RibbonGroup Key="GroupA1" Label="Group A1" CollapsedButtonKeyTipText="ZA1" SmallIcon="/Images/Icons/QuickStart16.png">
+							<actipro:RibbonControlGroup>
+								<actipro:BarButton Key="One" LargeIcon="/Images/Icons/Save32.png" SmallIcon="/Images/Icons/Save16.png" />
+								<actipro:BarButton Key="Two" LargeIcon="/Images/Icons/Open32.png" SmallIcon="/Images/Icons/Open16.png" />
+								<actipro:BarButton Key="Three" LargeIcon="/Images/Icons/Paste32.png" SmallIcon="/Images/Icons/Paste16.png" />
+								<actipro:BarButton Key="Four" LargeIcon="/Images/Icons/CoverPage32.png" SmallIcon="/Images/Icons/CoverPage16.png" />
+								<actipro:BarButton Key="Five" LargeIcon="/Images/Icons/PageBreak32.png" SmallIcon="/Images/Icons/PageBreak16.png" />
+							</actipro:RibbonControlGroup>
+						</actipro:RibbonGroup>
+						<actipro:RibbonGroup Key="GroupA2" Label="Group A2" CollapsedButtonKeyTipText="ZA2" SmallIcon="/Images/Icons/QuickStart16.png">
+							<actipro:RibbonControlGroup>
+								<actipro:BarButton Key="One" LargeIcon="/Images/Icons/Save32.png" SmallIcon="/Images/Icons/Save16.png" />
+								<actipro:BarButton Key="Two" LargeIcon="/Images/Icons/Open32.png" SmallIcon="/Images/Icons/Open16.png" />
+								<actipro:BarButton Key="Three" LargeIcon="/Images/Icons/Paste32.png" SmallIcon="/Images/Icons/Paste16.png" />
+								<actipro:BarButton Key="Four" LargeIcon="/Images/Icons/CoverPage32.png" SmallIcon="/Images/Icons/CoverPage16.png" />
+								<actipro:BarButton Key="Five" LargeIcon="/Images/Icons/PageBreak32.png" SmallIcon="/Images/Icons/PageBreak16.png" />
+							</actipro:RibbonControlGroup>
+						</actipro:RibbonGroup>
+						<actipro:RibbonGroup Key="GroupB" Label="Group B" CollapsedButtonKeyTipText="ZB" SmallIcon="/Images/Icons/QuickStart16.png">
+							<actipro:RibbonControlGroup>
+								<actipro:BarButton Key="One" LargeIcon="/Images/Icons/Save32.png" SmallIcon="/Images/Icons/Save16.png" />
+								<actipro:BarButton Key="Two" LargeIcon="/Images/Icons/Open32.png" SmallIcon="/Images/Icons/Open16.png" />
+								<actipro:BarButton Key="Three" LargeIcon="/Images/Icons/Paste32.png" SmallIcon="/Images/Icons/Paste16.png" />
+							</actipro:RibbonControlGroup>
+						</actipro:RibbonGroup>
+						<actipro:RibbonGroup Key="GroupC" Label="Group C (Multi-Row)" CollapsedButtonKeyTipText="ZC" SmallIcon="/Images/Icons/QuickStart16.png">
+							<actipro:RibbonMultiRowControlGroup>
+								<actipro:RibbonMultiRowControlGroup.ThreeRowItemSortOrder>
+									<generic:List x:TypeArguments="x:Int32">
+										<x:Int32>0</x:Int32>
+										<x:Int32>1</x:Int32>
+										<x:Int32>3</x:Int32>
+										<x:Int32>4</x:Int32>
+										<x:Int32>2</x:Int32>
+									</generic:List>
+								</actipro:RibbonMultiRowControlGroup.ThreeRowItemSortOrder>
+								<!--
+								In Two-Row mode, items are sorted in the order they are defined.
+								
+								In Three-Row mode, the default sort order can be changed using ThreeRowItemSortOrder where
+								the zero-based index of each item is listed in the order. In this example, the group with
+								Clipboard commands (index 2) is moved to the end when in three-row mode.
+								-->
+								<actipro:RibbonControlGroup>
+									<actipro:BarButton Key="Undo" SmallIcon="/Images/Icons/Undo16.png" />
+									<actipro:BarButton Key="Redo" SmallIcon="/Images/Icons/Redo16.png" />
+								</actipro:RibbonControlGroup>
+								<actipro:RibbonControlGroup>
+									<actipro:BarButton Key="New" SmallIcon="/Images/Icons/New16.png" />
+									<actipro:BarButton Key="Open" SmallIcon="/Images/Icons/Open16.png" />
+								</actipro:RibbonControlGroup>
+								<actipro:RibbonControlGroup>
+									<actipro:BarButton Key="Cut" SmallIcon="/Images/Icons/Cut16.png" />
+									<actipro:BarButton Key="Copy" SmallIcon="/Images/Icons/Copy16.png" />
+									<actipro:BarButton Key="Paste" SmallIcon="/Images/Icons/Paste16.png" />
+									<actipro:BarButton Key="FormatPainter" SmallIcon="/Images/Icons/FormatPainter16.png" />
+								</actipro:RibbonControlGroup>
+								<actipro:RibbonControlGroup>
+									<actipro:BarButton Key="Bold" SmallIcon="/Images/Icons/Bold16.png" />
+									<actipro:BarButton Key="Underline" SmallIcon="/Images/Icons/Underline16.png" />
+									<actipro:BarButton Key="Italic" SmallIcon="/Images/Icons/Italic16.png" />
+								</actipro:RibbonControlGroup>
+								<actipro:RibbonControlGroup>
+									<actipro:BarButton Key="Save" SmallIcon="/Images/Icons/Save16.png" />
+								</actipro:RibbonControlGroup>
+							</actipro:RibbonMultiRowControlGroup>
+						</actipro:RibbonGroup>
+					</actipro:RibbonTabItem>
+				</actipro:Ribbon>
+
+				<actipro:InfoBar Title="Tip" Severity="Success" Message="Resize this window and watch as Groups A1 and A2 downsize together and Group B collapses before the others. The multi-row group also customizes the sort order in 3-row mode." CanClose="False" />
+
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+				<![CDATA[
+xmlns:generic="using:System.Collections.Generic"
+...
+<actipro:Ribbon ... >
+	<actipro:RibbonTabItem ... >
+
+		<!-- Use GroupVariants to explicitly define variant sizing from large to small -->
+		<actipro:RibbonTabItem.GroupVariants>
+			<actipro:VariantCollection>
+				<actipro:VariantSet>
+					<actipro:SizeVariant TargetKey="GroupA1" Size="Medium" />
+					<actipro:SizeVariant TargetKey="GroupA2" Size="Medium" />
+				</actipro:VariantSet>
+				<actipro:SizeVariant TargetKey="GroupB" Size="Collapsed" />
+				<actipro:SizeVariant TargetKey="GroupC" Size="Small" />
+				<actipro:VariantSet>
+					<actipro:SizeVariant TargetKey="GroupA1" Size="Small" />
+					<actipro:SizeVariant TargetKey="GroupA2" Size="Small" />
+				</actipro:VariantSet>
+				<actipro:VariantSet>
+					<actipro:SizeVariant TargetKey="GroupA1" Size="Collapsed" />
+					<actipro:SizeVariant TargetKey="GroupA2" Size="Collapsed" />
+				</actipro:VariantSet>
+				<actipro:SizeVariant TargetKey="GroupC" Size="Collapsed" />
+			</actipro:VariantCollection>
+		</actipro:RibbonTabItem.GroupVariants>
+
+		<actipro:RibbonGroup Key="GroupA1" ... >
+			<actipro:RibbonControlGroup>
+				<actipro:BarButton Key="One" ... />
+				<actipro:BarButton Key="Two" ... />
+				<actipro:BarButton Key="Three" ... />
+				<actipro:BarButton Key="Four" ... />
+				<actipro:BarButton Key="Five" ... />
+			</actipro:RibbonControlGroup>
+		</actipro:RibbonGroup>
+
+		<actipro:RibbonGroup Key="GroupA2" ... >
+			<actipro:RibbonControlGroup>
+				<actipro:BarButton Key="One" ... />
+				<actipro:BarButton Key="Two" ... />
+				<actipro:BarButton Key="Three" ... />
+				<actipro:BarButton Key="Four" ... />
+				<actipro:BarButton Key="Five" ... />
+			</actipro:RibbonControlGroup>
+		</actipro:RibbonGroup>
+
+		<actipro:RibbonGroup Key="GroupB" ... >
+			<actipro:RibbonControlGroup>
+				<actipro:BarButton Key="One" ... />
+				<actipro:BarButton Key="Two" ... />
+				<actipro:BarButton Key="Three" ... />
+			</actipro:RibbonControlGroup>
+		</actipro:RibbonGroup>
+
+		<actipro:RibbonGroup Key="GroupC" ... >
+			<actipro:RibbonMultiRowControlGroup>
+				<actipro:RibbonMultiRowControlGroup.ThreeRowItemSortOrder>
+					<generic:List x:TypeArguments="x:Int32">
+						<x:Int32>0</x:Int32>
+						<x:Int32>1</x:Int32>
+						<x:Int32>3</x:Int32>
+						<x:Int32>4</x:Int32>
+						<x:Int32>2</x:Int32>
+					</generic:List>
+				</actipro:RibbonMultiRowControlGroup.ThreeRowItemSortOrder>
+				<!--
+				In Two-Row mode, items are sorted in the order they are defined.
+								
+				In Three-Row mode, the default sort order can be changed using ThreeRowItemSortOrder where
+				the zero-based index of each item is listed in the order. In this example, the group with
+				Clipboard commands (index 2) is moved to the end when in three-row mode.
+				-->
+				<actipro:RibbonControlGroup>
+					<actipro:BarButton Key="Undo" ... />
+					<actipro:BarButton Key="Redo" ... />
+				</actipro:RibbonControlGroup>
+				<actipro:RibbonControlGroup>
+					<actipro:BarButton Key="New" ... />
+					<actipro:BarButton Key="Open" ... />
+				</actipro:RibbonControlGroup>
+				<actipro:RibbonControlGroup>
+					<actipro:BarButton Key="Cut" ... />
+					<actipro:BarButton Key="Copy" ... />
+					<actipro:BarButton Key="Paste" ... />
+					<actipro:BarButton Key="FormatPainter" ... />
+				</actipro:RibbonControlGroup>
+				<actipro:RibbonControlGroup>
+					<actipro:BarButton Key="Bold" ... />
+					<actipro:BarButton Key="Underline" ... />
+					<actipro:BarButton Key="Italic" ... />
+				</actipro:RibbonControlGroup>
+				<actipro:RibbonControlGroup>
+					<actipro:BarButton Key="Save" ... />
+				</actipro:RibbonControlGroup>
+
+			</actipro:RibbonMultiRowControlGroup>
+		</actipro:RibbonGroup>
+
+	</actipro:RibbonTabItem>
+</actipro:Ribbon>
+				]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+
+</UserControl>

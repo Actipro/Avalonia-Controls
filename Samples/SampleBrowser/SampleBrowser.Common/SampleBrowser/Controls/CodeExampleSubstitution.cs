@@ -11,6 +11,12 @@ namespace ActiproSoftware.SampleBrowser {
 		#region Property Definitions
 
 		/// <summary>
+		/// Defines the <see cref="AllowNestedSubstitution"/> property.
+		/// </summary>
+		public static readonly StyledProperty<bool> AllowNestedSubstitutionProperty
+			= AvaloniaProperty.Register<CodeExampleSubstitution, bool>(nameof(AllowNestedSubstitution), defaultValue: false);
+
+		/// <summary>
 		/// Defines the <see cref="IsEnabled"/> property.
 		/// </summary>
 		public static readonly StyledProperty<bool> IsEnabledProperty
@@ -48,6 +54,17 @@ namespace ActiproSoftware.SampleBrowser {
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 		// PUBLIC PROCEDURES
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		/// <summary>
+		/// Indicates if nested substitutions are allowed.
+		/// </summary>
+		/// <remarks>
+		/// When <c>true</c>, the <see cref="Value"/> may define additional substitutions using the format <c>$(Key)</c>.
+		/// </remarks>
+		public bool AllowNestedSubstitution {
+			get => GetValue(AllowNestedSubstitutionProperty);
+			set => SetValue(AllowNestedSubstitutionProperty, value);
+		}
 
 		/// <summary>
 		/// Indicates if the substitution is enabled.

@@ -1,0 +1,105 @@
+<ResourceDictionary
+	x:ClassModifier="internal"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:barsPrimitives="using:ActiproSoftware.UI.Avalonia.Controls.Bars.Primitives"
+	>
+
+	<DataTemplate x:Key="{x:Static actipro:BarsMvvmResourceKeys.BarGalleryDefaultItemContainerTemplate}" DataType="actipro:BarGalleryViewModel">
+		<actipro:RibbonGallery
+			AboveMenuItems="{Binding AboveMenuItems}"
+			AreSurroundingSeparatorsAllowedOnMenu="{Binding AreSurroundingSeparatorsAllowed}"
+			BelowMenuItems="{Binding BelowMenuItems}"
+			CanAutoScrollToSelectedItem="{Binding CanRibbonAutoScrollToSelectedItem}"
+			CanCategorizeOnMenu="{Binding CanCategorize}"
+			CanCloneToRibbonQuickAccessToolBar="{Binding CanCloneToRibbonQuickAccessToolBar}"
+			CanFilterOnMenu="{Binding CanFilter}"
+			CategoryHeaderTemplate="{Binding CategoryHeaderTemplate}"
+			CollapsedButtonToolTip="{Binding CollapsedButtonDescription}"
+			Command="{Binding Command}"
+			HasCategoryHeadersOnMenu="{Binding HasCategoryHeaders}"
+			IsSelectionSupported="{Binding IsSelectionSupported}"
+			IsVisible="{Binding IsVisible}"
+			ItemContainerTheme="{Binding ItemContainerTheme}"
+			ItemSpacing="{Binding ItemSpacing}"
+			ItemsSource="{Binding Items}"
+			ItemTemplate="{Binding ItemTemplate}"
+			ItemTemplateSelector="{Binding ItemTemplateSelector}"
+			Key="{Binding Key}"
+			KeyTipText="{Binding KeyTipText}"
+			Label="{Binding Label}"
+			LargeIcon="{Binding LargeIcon}"
+			MaxColumnCount="{Binding MaxRibbonColumnCount}"
+			MaxMenuColumnCount="{Binding MaxMenuColumnCount}"
+			MediumIcon="{Binding MediumIcon}"
+			MenuResizeMode="{Binding MenuResizeMode}"
+			MinItemHeight="{Binding MinItemHeight}"
+			MinItemWidth="{Binding MinItemWidth}"
+			MinLargeColumnCount="{Binding MinLargeRibbonColumnCount}"
+			MinMediumColumnCount="{Binding MinMediumRibbonColumnCount}"
+			MinMenuColumnCount="{Binding MinMenuColumnCount}"
+			PopupOpeningCommand="{Binding PopupOpeningCommand}"
+			SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+			SmallIcon="{Binding SmallIcon}"
+			Title="{Binding Title}"
+			ToolBarItemCollapseBehavior="{Binding ToolBarItemCollapseBehavior}"
+			ToolBarItemVariantBehavior="{Binding ToolBarItemVariantBehavior}"
+			UseAccentedItemBorder="{Binding UseAccentedItemBorder}"
+			UseMenuItemIndent="{Binding UseMenuItemIndent}"
+			/>
+	</DataTemplate>
+
+	<DataTemplate x:Key="{x:Static actipro:BarsMvvmResourceKeys.BarGalleryMenuItemItemContainerTemplate}" DataType="actipro:BarGalleryViewModel">
+		<actipro:BarMenuGallery
+			AreSurroundingSeparatorsAllowed="{Binding AreSurroundingSeparatorsAllowed}"
+			CanCategorize="{Binding CanCategorize}"
+			CanCloneToRibbonQuickAccessToolBar="{Binding CanCloneToRibbonQuickAccessToolBar}"
+			CanFilter="{Binding CanFilter}"
+			CategoryHeaderTemplate="{Binding CategoryHeaderTemplate}"
+			Command="{Binding Command}"
+			HasCategoryHeaders="{Binding HasCategoryHeaders}"
+			IsSelectionSupported="{Binding IsSelectionSupported}"
+			IsVisible="{Binding IsVisible}"
+			ItemContainerTheme="{Binding ItemContainerTheme}"
+			ItemSpacing="{Binding ItemSpacing}"
+			ItemsSource="{Binding Items}"
+			ItemTemplate="{Binding ItemTemplate}"
+			ItemTemplateSelector="{Binding ItemTemplateSelector}"
+			Key="{Binding Key}"
+			Label="{Binding Label}"
+			LargeIcon="{Binding LargeIcon}"
+			MaxColumnCount="{Binding MaxMenuColumnCount}"
+			MediumIcon="{Binding MediumIcon}"
+			MinColumnCount="{Binding MinMenuColumnCount}"
+			MinItemHeight="{Binding MinItemHeight}"
+			MinItemWidth="{Binding MinItemWidth}"
+			ResizeMode="{Binding MenuResizeMode}"
+			SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+			SmallIcon="{Binding SmallIcon}"
+			Title="{Binding Title}"
+			UseAccentedItemBorder="{Binding UseAccentedItemBorder}"
+			UseMenuItemAppearance="{Binding UseMenuItemAppearance}"
+			UseMenuItemIndent="{Binding UseMenuItemIndent}"
+			/>
+	</DataTemplate>
+
+	<DataTemplate x:Key="{x:Static actipro:BarsMvvmResourceKeys.BarGalleryOverflowMenuItemItemContainerTemplate}" DataType="actipro:BarGalleryViewModel">
+		<actipro:BarMenuItem
+			IsVisible="{Binding IsVisible}"
+			Key="{Binding Key}"
+			Label="{Binding Label}"
+			PopupOpeningCommand="{Binding PopupOpeningCommand}"
+			SmallIcon="{Binding SmallIcon}"
+			>
+			<actipro:BarMenuItem.ItemsSource>
+				<barsPrimitives:OverflowMenuItemCollection
+					AboveMenuItems="{Binding AboveMenuItems}"
+					PrimaryMenuItem="{Binding}"
+					BelowMenuItems="{Binding BelowMenuItems}"
+					/>
+			</actipro:BarMenuItem.ItemsSource>
+		</actipro:BarMenuItem>
+	</DataTemplate>
+
+</ResourceDictionary>

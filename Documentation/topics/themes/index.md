@@ -96,3 +96,10 @@ An image provider has logic to manipulate images for various scenarios, such as:
 - Conversion of images to monochrome, in a specified color.
 
 See the [Image Provider](image-provider.md) topic to learn more about the capabilities of image provider and how it pairs with [DynamicImage](../shared/controls/dynamic-image.md) controls.
+
+## Icon Presenter
+
+The [IconPresenter](xref:@ActiproUIRoot.Controls.Primitives.IconPresenter) class is a `ContentPresenter` specifically for presenting icons based on any `object`-based value.
+
+See the [Icon Presenter](icon-presenter.md) topic to learn more about configuring the control to support custom icons or incorporate the icon presenter into your own user interfaces.
+

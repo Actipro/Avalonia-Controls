@@ -1,0 +1,299 @@
+<UserControl
+	x:Name="sampleRootControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Styles>
+		<Style Selector="actipro|Ribbon">
+			<Setter Property="IsApplicationButtonVisible" Value="False" />
+			<Setter Property="Margin" Value="0" />
+		</Style>
+	</UserControl.Styles>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Bar button controls can also be used outside of a ribbon or toolbar while maintaining themes that are consistent with ribbon usage.">
+
+		<sampleBrowser:ControlExample
+			Header="Standalone usage"
+			Footer="Multiple button types are available in small, medium, and large variants.">
+
+			<StackPanel Spacing="20">
+				<Border CornerRadius="5"
+						Background="{actipro:ThemeResource Container1BackgroundBrush}"
+						BorderBrush="{actipro:ThemeResource Container1BorderBrush}"
+						BorderThickness="1">
+					<Border.Styles>
+						<Style Selector=":is(actipro|BarButton)">
+							<Setter Property="HorizontalAlignment" Value="Center" />
+							<Setter Property="VerticalAlignment" Value="Top" />
+							<Setter Property="LargeIcon" Value="/Images/Icons/Paste32.png" />
+							<Setter Property="SmallIcon" Value="/Images/Icons/Paste16.png" />
+							<Setter Property="Key" Value="{Binding #buttonsKeyTextBox.Text}" />
+							<Setter Property="Label" Value="{Binding #buttonsLabelTextBox.Text}" />
+							<Setter Property="VariantSize" Value="{Binding #buttonsVariantSizeComboBox.SelectedItem}" />
+							<Setter Property="IsEnabled" Value="{Binding #buttonsIsEnabledCheckBox.IsChecked}" />
+						</Style>
+						<Style Selector=":is(actipro|BarPopupButton)">
+							<Setter Property="HorizontalAlignment" Value="Center" />
+							<Setter Property="VerticalAlignment" Value="Top" />
+							<Setter Property="LargeIcon" Value="/Images/Icons/Paste32.png" />
+							<Setter Property="SmallIcon" Value="/Images/Icons/Paste16.png" />
+							<Setter Property="Key" Value="{Binding #buttonsKeyTextBox.Text}" />
+							<Setter Property="Label" Value="{Binding #buttonsLabelTextBox.Text}" />
+							<Setter Property="VariantSize" Value="{Binding #buttonsVariantSizeComboBox.SelectedItem}" />
+							<Setter Property="IsEnabled" Value="{Binding #buttonsIsEnabledCheckBox.IsChecked}" />
+						</Style>
+					</Border.Styles>
+					<WrapPanel Orientation="Horizontal" Margin="10">
+						<StackPanel Margin="10" Spacing="10">
+							<TextBlock Classes="theme-text-heading size-xs" Text="Standard" HorizontalAlignment="Center" />
+							<actipro:BarButton ToolTip.Tip="This is a BarButton control" />
+						</StackPanel>
+						<StackPanel Margin="10" Spacing="10">
+							<TextBlock Classes="theme-text-heading size-xs" Text="Toggle" HorizontalAlignment="Center" />
+							<actipro:BarToggleButton IsChecked="{Binding #buttonsIsCheckedCheckBox.IsChecked, Mode=TwoWay}" ToolTip.Tip="This is a BarToggleButton control" />
+						</StackPanel>
+						<StackPanel Margin="10" Spacing="10">
+							<TextBlock Classes="theme-text-heading size-xs" Text="Popup" HorizontalAlignment="Center" />
+							<actipro:BarPopupButton ToolTip.Tip="This is a BarPopupButton control" >
+								<actipro:BarMenuItem Label="Menu Item 1" />
+								<actipro:BarMenuItem Label="Menu Item 2" />
+							</actipro:BarPopupButton>
+						</StackPanel>
+						<StackPanel Margin="10" Spacing="10">
+							<TextBlock Classes="theme-text-heading size-xs" Text="Split" HorizontalAlignment="Center" />
+							<actipro:BarSplitButton ToolTip.Tip="This is a BarSplitButton control" >
+								<actipro:BarMenuItem Label="Menu Item 1" />
+								<actipro:BarMenuItem Label="Menu Item 2" />
+							</actipro:BarSplitButton>
+						</StackPanel>
+						<StackPanel Margin="10" Spacing="10">
+							<TextBlock Classes="theme-text-heading size-xs" Text="Split Toggle" HorizontalAlignment="Center" />
+							<actipro:BarSplitToggleButton IsChecked="{Binding #buttonsIsCheckedCheckBox.IsChecked, Mode=TwoWay}" ToolTip.Tip="This is a BarSplitToggleButton control">
+								<actipro:BarMenuItem Label="Menu Item 1" />
+								<actipro:BarMenuItem Label="Menu Item 2" />
+							</actipro:BarSplitToggleButton>
+						</StackPanel>
+					</WrapPanel>
+				</Border>
+			
+				<actipro:InfoBar Title="Tip" Severity="Success" Message="When Label is unassigned, the Key is automatically converted to a label." />
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<TextBox x:Name="buttonsKeyTextBox" Watermark="Key" UseFloatingWatermark="True" Text="MyButton"/>
+					<sampleBrowser:NullableStringSettingControl x:Name="buttonsLabelTextBox" Label="Label" Text="" CoerceEmptyAsNull="True" IsCoerceCheckBoxVisible="False"/>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Variant size" />
+						<ComboBox x:Name="buttonsVariantSizeComboBox" SelectedIndex="2" ItemsSource="{actipro:DelimitedArray Type={x:Type actipro:VariantSize}, DelimitedText='Small,Medium,Large'}" />
+					</StackPanel>
+					<CheckBox x:Name="buttonsIsCheckedCheckBox" Content="Checked (toggle buttons)" IsChecked="True" />
+					<CheckBox x:Name="buttonsIsEnabledCheckBox" Content="Enabled" IsChecked="True" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+				<![CDATA[
+<!-- Standard -->
+<actipro:BarButton$(KeyAttribute)$(LabelAttribute)$(IsEnabledAttribute)
+	VariantSize="$(VariantSize)"
+	LargeIcon="..." SmallIcon="..." />
+
+<!-- Toggle -->
+<actipro:BarToggleButton$(KeyAttribute)$(LabelAttribute)$(IsCheckedAttribute)$(IsEnabledAttribute)
+	VariantSize="$(VariantSize)"
+	LargeIcon="..." SmallIcon="..." />
+
+<!-- Popup -->
+<actipro:BarPopupButton$(KeyAttribute)$(LabelAttribute)$(IsEnabledAttribute)
+	VariantSize="$(VariantSize)"
+	LargeIcon="..." SmallIcon="...">
+
+	<actipro:BarMenuItem ... />
+	<actipro:BarMenuItem ... />
+</actipro:BarPopupButton>
+
+<!-- Split -->
+<actipro:BarSplitButton$(KeyAttribute)$(LabelAttribute)$(IsEnabledAttribute)
+	VariantSize="$(VariantSize)"
+	LargeIcon="..." SmallIcon="...">
+
+	<actipro:BarMenuItem ... />
+	<actipro:BarMenuItem ... />
+</actipro:BarSplitButton>
+
+<!-- Split Toggle -->
+<actipro:BarSplitToggleButton$(KeyAttribute)$(LabelAttribute)$(IsCheckedAttribute)$(IsEnabledAttribute)
+	VariantSize="$(VariantSize)"
+	LargeIcon="..." SmallIcon="...">
+
+	<actipro:BarMenuItem ... />
+	<actipro:BarMenuItem ... />
+</actipro:BarSplitToggleButton>
+				]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="IsCheckedAttribute"
+															   IsEnabled="{Binding #buttonsIsCheckedCheckBox.IsChecked}"
+															   Value=" IsChecked=&quot;true&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute"
+															   IsEnabled="{Binding !#buttonsIsEnabledCheckBox.IsChecked}"
+															   Value=" IsEnabled=&quot;false&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="KeyAttribute"
+															   IsEnabled="{Binding #buttonsKeyTextBox.Text, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding #buttonsKeyTextBox.Text, StringFormat=' Key=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="LabelAttribute"
+															   IsEnabled="{Binding #buttonsLabelTextBox.Text, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding #buttonsLabelTextBox.Text, StringFormat=' Label=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="VariantSize" Value="{Binding #buttonsVariantSizeComboBox.SelectedItem}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+		<sampleBrowser:ControlExample
+			Header="Backstage theme"
+			Footer="Buttons have a refined theme that is optimized for use on a Ribbon Backstage.">
+
+			<StackPanel Spacing="20">
+				<Border CornerRadius="5"
+						Background="{actipro:ThemeResource Container1BackgroundBrush}"
+						BorderBrush="{actipro:ThemeResource Container1BorderBrush}"
+						BorderThickness="1">
+					<Border.Styles>
+						<Style Selector=":is(actipro|BarButton)">
+							<Setter Property="HorizontalAlignment" Value="Center" />
+							<Setter Property="VerticalAlignment" Value="Top" />
+							<Setter Property="LargeIcon" Value="/Images/Icons/Paste32.png" />
+							<Setter Property="SmallIcon" Value="/Images/Icons/Paste16.png" />
+							<Setter Property="Key" Value="{Binding #buttonsBackstageKeyTextBox.Text}" />
+							<Setter Property="Label" Value="{Binding #buttonsBackstageLabelTextBox.Text}" />
+							<Setter Property="IsEnabled" Value="{Binding #buttonsBackstageIsEnabledCheckBox.IsChecked}" />
+							<Setter Property="Theme" Value="{actipro:ControlTheme RibbonBackstageBarButtonOutline}" />
+						</Style>
+						<Style Selector=":is(actipro|BarPopupButton)">
+							<Setter Property="HorizontalAlignment" Value="Center" />
+							<Setter Property="VerticalAlignment" Value="Top" />
+							<Setter Property="LargeIcon" Value="/Images/Icons/Paste32.png" />
+							<Setter Property="SmallIcon" Value="/Images/Icons/Paste16.png" />
+							<Setter Property="Key" Value="{Binding #buttonsBackstageKeyTextBox.Text}" />
+							<Setter Property="Label" Value="{Binding #buttonsBackstageLabelTextBox.Text}" />
+							<Setter Property="IsEnabled" Value="{Binding #buttonsBackstageIsEnabledCheckBox.IsChecked}" />
+							<Setter Property="Theme" Value="{actipro:ControlTheme RibbonBackstageBarPopupButtonOutline}" />
+						</Style>
+						<Style Selector="actipro|BarSplitButton">
+							<Setter Property="Theme" Value="{actipro:ControlTheme RibbonBackstageBarSplitButtonOutline}" />
+						</Style>
+					</Border.Styles>
+					<WrapPanel Orientation="Horizontal" Margin="10">
+						<StackPanel Margin="10" Spacing="10">
+							<TextBlock Classes="theme-text-heading size-xs" Text="Standard" HorizontalAlignment="Center" />
+							<actipro:BarButton ToolTip.Tip="This is a BarButton control" />
+						</StackPanel>
+						<StackPanel Margin="10" Spacing="10">
+							<TextBlock Classes="theme-text-heading size-xs" Text="Toggle" HorizontalAlignment="Center" />
+							<actipro:BarToggleButton IsChecked="{Binding #buttonsBackstageIsCheckedCheckBox.IsChecked, Mode=TwoWay}" ToolTip.Tip="This is a BarToggleButton control" />
+						</StackPanel>
+						<StackPanel Margin="10" Spacing="10">
+							<TextBlock Classes="theme-text-heading size-xs" Text="Popup" HorizontalAlignment="Center" />
+							<actipro:BarPopupButton ToolTip.Tip="This is a BarPopupButton control" >
+								<actipro:BarMenuItem Label="Menu Item 1" />
+								<actipro:BarMenuItem Label="Menu Item 2" />
+							</actipro:BarPopupButton>
+						</StackPanel>
+						<StackPanel Margin="10" Spacing="10">
+							<TextBlock Classes="theme-text-heading size-xs" Text="Split" HorizontalAlignment="Center" />
+							<actipro:BarSplitButton ToolTip.Tip="This is a BarSplitButton control" >
+								<actipro:BarMenuItem Label="Menu Item 1" />
+								<actipro:BarMenuItem Label="Menu Item 2" />
+							</actipro:BarSplitButton>
+						</StackPanel>
+						<StackPanel Margin="10" Spacing="10">
+							<TextBlock Classes="theme-text-heading size-xs" Text="Split Toggle" HorizontalAlignment="Center" />
+							<actipro:BarSplitToggleButton IsChecked="{Binding #buttonsBackstageIsCheckedCheckBox.IsChecked, Mode=TwoWay}" ToolTip.Tip="This is a BarSplitToggleButton control" >
+								<actipro:BarMenuItem Label="Menu Item 1" />
+								<actipro:BarMenuItem Label="Menu Item 2" />
+							</actipro:BarSplitToggleButton>
+						</StackPanel>
+					</WrapPanel>
+				</Border>
+
+				<actipro:InfoBar Title="Tip" Severity="Success" Message="When Label is unassigned, the Key is automatically converted to a label." />
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<TextBox x:Name="buttonsBackstageKeyTextBox" Watermark="Key" UseFloatingWatermark="True" Text="MyButton"/>
+					<sampleBrowser:NullableStringSettingControl x:Name="buttonsBackstageLabelTextBox" Label="Label" Text="" CoerceEmptyAsNull="True" IsCoerceCheckBoxVisible="False"/>
+					<CheckBox x:Name="buttonsBackstageIsCheckedCheckBox" Content="Checked (toggle buttons)" IsChecked="True" />
+					<CheckBox x:Name="buttonsBackstageIsEnabledCheckBox" Content="Enabled" IsChecked="True" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+				<![CDATA[
+<!-- Standard -->
+<actipro:BarButton$(KeyAttribute)$(LabelAttribute)$(IsEnabledAttribute)
+	Theme="{actipro:ControlTheme RibbonBackstageBarButtonOutline}"
+	LargeIcon="..." SmallIcon="..." />
+
+<!-- Toggle -->
+<actipro:BarToggleButton$(KeyAttribute)$(LabelAttribute)$(IsCheckedAttribute)$(IsEnabledAttribute)
+	Theme="{actipro:ControlTheme RibbonBackstageBarButtonOutline}"
+	LargeIcon="..." SmallIcon="..." />
+
+<!-- Popup -->
+<actipro:BarPopupButton$(KeyAttribute)$(LabelAttribute)$(IsEnabledAttribute)
+	Theme="{actipro:ControlTheme RibbonBackstageBarPopupButtonOutline}"
+	LargeIcon="..." SmallIcon="...">
+
+	<actipro:BarMenuItem ... />
+	<actipro:BarMenuItem ... />
+</actipro:BarPopupButton>
+
+<!-- Split -->
+<actipro:BarSplitButton$(KeyAttribute)$(LabelAttribute)$(IsEnabledAttribute)
+	Theme="{actipro:ControlTheme RibbonBackstageBarSplitButtonOutline}"
+	LargeIcon="..." SmallIcon="...">
+
+	<actipro:BarMenuItem ... />
+	<actipro:BarMenuItem ... />
+</actipro:BarSplitButton>
+
+<!-- Split Toggle -->
+<actipro:BarSplitToggleButton$(KeyAttribute)$(LabelAttribute)$(IsCheckedAttribute)$(IsEnabledAttribute)
+	Theme="{actipro:ControlTheme RibbonBackstageBarSplitButtonOutline}"
+	LargeIcon="..." SmallIcon="...">
+
+	<actipro:BarMenuItem ... />
+	<actipro:BarMenuItem ... />
+</actipro:BarSplitToggleButton>
+				]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="IsCheckedAttribute"
+															   IsEnabled="{Binding #buttonsBackstageIsCheckedCheckBox.IsChecked}"
+															   Value=" IsChecked=&quot;true&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute"
+															   IsEnabled="{Binding !#buttonsBackstageIsEnabledCheckBox.IsChecked}"
+															   Value=" IsEnabled=&quot;false&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="KeyAttribute"
+															   IsEnabled="{Binding #buttonsBackstageKeyTextBox.Text, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding #buttonsBackstageKeyTextBox.Text, StringFormat=' Key=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="LabelAttribute"
+															   IsEnabled="{Binding #buttonsBackstageLabelTextBox.Text, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding #buttonsBackstageLabelTextBox.Text, StringFormat=' Label=&quot;{0}&quot;'}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+
+</UserControl>

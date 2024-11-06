@@ -83,7 +83,7 @@
 
 		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
 			<sampleBrowser:ControlExampleLinkItem Title="MessageBox" Url="/ProductSamples/FundamentalsSamples/Controls/MessageBoxIntro/MainControl" />
-			<sampleBrowser:ControlExampleLinkItem Title="InfoBar" Url="/ProductSamples/FundamentalsSamples/Controls/InfoBarIntro/MainControl" />
+			<sampleBrowser:ControlExampleLinkItem Title="Info bar" Url="/ProductSamples/FundamentalsSamples/Controls/InfoBarIntro/MainControl" />
 		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
 
 
@@ -94,7 +94,7 @@
 			<actipro:UserPromptControl x:Name="userPrompSampleBasicUsage" Classes="inline-sample"
 									   Header="User prompt header"
 									   StandardButtons="OKCancel"
-									   StandardStatusImage="Information"
+									   StandardStatusIcon="Information"
 									   Content="The user prompt control can easily display any kind of dialog message to the end user."
 									   Responding="OnUserPromptControlRespondingShowFeedback" />
 
@@ -103,8 +103,8 @@
 					<TextBox Text="{Binding Header}" Watermark="Header" UseFloatingWatermark="True" />
 					<TextBox Text="{Binding Content}" Watermark="Content" UseFloatingWatermark="True" />
 					<StackPanel>
-						<TextBlock Classes="theme-form-control-label" Text="Status image" />
-						<ComboBox ItemsSource="{actipro:DelimitedArray Type=actipro:MessageBoxImage}" SelectedItem="{Binding StandardStatusImage}" />
+						<TextBlock Classes="theme-form-control-label" Text="Status icon" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type=actipro:MessageBoxImage}" SelectedItem="{Binding StandardStatusIcon}" />
 					</StackPanel>
 					<StackPanel>
 						<TextBlock Classes="theme-form-control-label" Text="Standard buttons" />
@@ -118,15 +118,15 @@
 <actipro:UserPromptControl
 	Header="$(Header)"
 	Content="$(Content)"
-	StandardButtons="$(StandardButtons)"$(StandardStatusImageAttribute) />
+	StandardButtons="$(StandardButtons)"$(StandardStatusIconAttribute) />
 					]]>
 					<sampleBrowser:CodeExample.Substitutions>
 						<sampleBrowser:CodeExampleSubstitution Key="Header" Value="{Binding Header}" />
 						<sampleBrowser:CodeExampleSubstitution Key="Content" Value="{Binding Content}" />
 						<sampleBrowser:CodeExampleSubstitution Key="StandardButtons" Value="{Binding StandardButtons}" />
-						<sampleBrowser:CodeExampleSubstitution Key="StandardStatusImageAttribute"
-															   IsEnabled="{Binding StandardStatusImage, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='None'}"
-															   Value="{Binding StandardStatusImage, StringFormat='&#xD;&#x9;StandardStatusImage=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="StandardStatusIconAttribute"
+															   IsEnabled="{Binding StandardStatusIcon, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='None'}"
+															   Value="{Binding StandardStatusIcon, StringFormat='&#xD;&#x9;StandardStatusIcon=&quot;{0}&quot;'}" />
 					</sampleBrowser:CodeExample.Substitutions>
 				</sampleBrowser:CodeExample>
 				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
@@ -135,15 +135,15 @@ var result = await UserPromptBuilder.Configure()
 	.WithHeaderContent("$(Header)")
 	.WithContent("$(Content)")
 	.WithStandardButtons(MessageBoxButtons.$(StandardButtons))
-	$(WithStatusImage).Show();
+	$(WithStatusIcon).Show();
 					]]>
 					<sampleBrowser:CodeExample.Substitutions>
 						<sampleBrowser:CodeExampleSubstitution Key="Header" Value="{Binding Header}" />
 						<sampleBrowser:CodeExampleSubstitution Key="Content" Value="{Binding Content}" />
 						<sampleBrowser:CodeExampleSubstitution Key="StandardButtons" Value="{Binding StandardButtons}" />
-						<sampleBrowser:CodeExampleSubstitution Key="WithStatusImage"
-															   IsEnabled="{Binding StandardStatusImage, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='None'}"
-															   Value="{Binding StandardStatusImage, StringFormat='.WithStatusImage(MessageBoxImage.{0})&#xD;&#x9;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="WithStatusIcon"
+															   IsEnabled="{Binding StandardStatusIcon, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='None'}"
+															   Value="{Binding StandardStatusIcon, StringFormat='.WithStatusIcon(MessageBoxImage.{0})&#xD;&#x9;'}" />
 					</sampleBrowser:CodeExample.Substitutions>
 				</sampleBrowser:CodeExample>
 			</sampleBrowser:ControlExample.CodeExamples>
@@ -157,7 +157,7 @@ var result = await UserPromptBuilder.Configure()
 			>
 			<actipro:UserPromptControl x:Name="userPromptDisplayMode" Classes="inline-sample"
 									   Header="Display mode"
-									   StandardStatusImage="Information"
+									   StandardStatusIcon="Information"
 									   Content="The same prompt can be consistently shown on different platforms even when windows are not supported."
 									   Footer="If the platform doesn't support dialogs, overlays will always be used."
 									   StandardButtons="Yes,No,Cancel"
@@ -347,7 +347,7 @@ var result = await UserPromptBuilder.Configure()
 									   Header="Footer usage"
 									   Content="Optionally define a footer for additional content with or without an associated image."
 									   Footer="Any content can be hosted here"
-									   FooterImageSource="{Binding #sampleRootControl.BasicFooterSampleImage}"
+									   FooterIcon="{Binding #sampleRootControl.BasicFooterSampleImage}"
 									   Responding="OnUserPromptControlRespondingShowFeedback" />
 
 			<sampleBrowser:ControlExample.Options>
@@ -359,12 +359,12 @@ var result = await UserPromptBuilder.Configure()
 			<sampleBrowser:ControlExample.CodeExamples>
 				<sampleBrowser:CodeExample xml:space="preserve">
 					<![CDATA[
-<actipro:UserPromptControl $(FooterImageSourceAttribute)
+<actipro:UserPromptControl $(FooterIconAttribute)
 	Footer="$(Footer)" />
 					]]>
 					<sampleBrowser:CodeExample.Substitutions>
 						<sampleBrowser:CodeExampleSubstitution Key="Footer" Value="{Binding Footer}" />
-						<sampleBrowser:CodeExampleSubstitution Key="FooterImageSourceAttribute" IsEnabled="{Binding #sampleRootControl.ShowBasicFooterSampleImage}" Value="FooterImageSource=&quot;/Images/Icons/Help16.png&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="FooterIconAttribute" IsEnabled="{Binding #sampleRootControl.ShowBasicFooterSampleImage}" Value="FooterIcon=&quot;{StaticResource Help16.png}&quot;" />
 					</sampleBrowser:CodeExample.Substitutions>
 				</sampleBrowser:CodeExample>
 				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
@@ -372,11 +372,11 @@ var result = await UserPromptBuilder.Configure()
 var result = await UserPromptBuilder.Configure()
 	// Other common settings here
 	.WithFooterContent("$(Footer)")
-	$(WithFooterImage).Show();$(GetImageDeclaration)
+	$(WithFooterIcon).Show();$(GetImageDeclaration)
 					]]>
 					<sampleBrowser:CodeExample.Substitutions>
 						<sampleBrowser:CodeExampleSubstitution Key="Footer" Value="{Binding Footer}" />
-						<sampleBrowser:CodeExampleSubstitution Key="WithFooterImage" IsEnabled="{Binding #sampleRootControl.ShowBasicFooterSampleImage}" Value=".WithFooterImage(GetImage(&quot;/Images/Icons/Help16.png&quot;))&#xD;&#x9;" />
+						<sampleBrowser:CodeExampleSubstitution Key="WithFooterIcon" IsEnabled="{Binding #sampleRootControl.ShowBasicFooterSampleImage}" Value=".WithFooterIcon(GetImage(&quot;/Images/Icons/Help16.png&quot;))&#xD;&#x9;" />
 						<sampleBrowser:CodeExampleSubstitution Key="GetImageDeclaration" IsEnabled="{Binding #sampleRootControl.ShowBasicFooterSampleImage}" Value="&#xD;&#xD;IImage? GetImage(string relPath) {&#xD;&#x9;// Load any IImage here&#xD;}" />
 					</sampleBrowser:CodeExample.Substitutions>
 				</sampleBrowser:CodeExample>
@@ -434,7 +434,7 @@ var result = await UserPromptBuilder.Configure()
 			<actipro:UserPromptControl Classes="inline-sample"
 									   Header="Exporting Project (Sample Project)"
 									   HeaderForeground="White"
-									   StatusImageSource="/Images/Icons/Save32.png"
+									   StatusIcon="/Images/Icons/Save32.png"
 									   StandardButtons="Cancel"
 									   Responding="OnUserPromptControlRespondingShowFeedback" >
 				<actipro:UserPromptControl.HeaderBackground>
@@ -465,7 +465,7 @@ var result = await UserPromptBuilder.Configure()
 					<![CDATA[
 <actipro:UserPromptControl Header="Exporting Project (Sample Project)"
 	HeaderForeground="White"
-	StatusImageSource="/Images/Icons/Save32.png"
+	StatusIcon="{StaticResource SaveIcon}"
 	StandardButtons="Cancel"
 	>
 	<actipro:UserPromptControl.HeaderBackground>
@@ -500,7 +500,7 @@ var result = await UserPromptBuilder.Configure()
 			new GradientStop(UIColor.Parse("#066f5c"), 1),
 		}
 	})
-	.WithStatusImage(GetImage("/Images/Icons/Save32.png"))
+	.WithStatusIcon(GetImage("/Images/Icons/Save32.png"))
 	.WithStandardButtons(MessageBoxButtons.Cancel)
 	.WithContent(new StackPanel() {
 		Children = {
@@ -528,8 +528,8 @@ var result = await UserPromptBuilder.Configure()
 	.WithWindowStartupLocation(WindowStartupLocation.CenterOwner)
 	.Show();
 	
-IImage? GetImage(string relPath) {
-	// Load any IImage here
+object? GetImage(string relPath) {
+	// Load any supported image object here
 }
 					]]>
 				</sampleBrowser:CodeExample>
@@ -542,7 +542,7 @@ IImage? GetImage(string relPath) {
 			>
 			<actipro:UserPromptControl Classes="inline-sample"
 									   Header="Customize the footer content"
-									   FooterImageSource="{Binding Source={x:Static actipro:SharedImageSourceKeys.Question}, Converter={StaticResource ImageKeyToImageSourceConverter}}"
+									   FooterIcon="{x:Static actipro:SharedImageSourceKeys.Question}"
 									   Content="A footer can be used to provide additional context for a prompt. This sample demonstrates using a hyperlink to provide contextual help."
 									   Responding="OnUserPromptControlRespondingShowFeedback" >
 				<actipro:UserPromptControl.Footer>
@@ -565,7 +565,7 @@ IImage? GetImage(string relPath) {
 				<sampleBrowser:CodeExample xml:space="preserve">
 					<![CDATA[
 <actipro:UserPromptControl Header="Customize the footer content"
-	FooterImageSource="{Binding Source={x:Static actipro:SharedImageSourceKeys.Question}, Converter={StaticResource ImageKeyToImageSourceConverter}}"
+	FooterIcon="{x:Static actipro:SharedImageSourceKeys.Question}"
 	Content="A footer can be used to provide additional context for a prompt. This sample demonstrates using a hyperlink to provide contextual help."
 	>
 	<actipro:UserPromptControl.Footer>
@@ -600,7 +600,7 @@ var result = await UserPromptBuilder.Configure()
 			new Run(" for more information")
 		}
 	})
-	.WithFooterImage(ImageProvider.Default.GetImageSource(SharedImageSourceKeys.Question))
+	.WithFooterIcon(SharedImageSourceKeys.Question)
 	.WithButton(MessageBoxResult.OK)
 	.Show();
 					]]>
@@ -675,7 +675,7 @@ var result = await UserPromptBuilder.Configure()
 			>
 			<actipro:UserPromptControl Classes="inline-sample"
 									   Header="Error processing request"
-									   StandardStatusImage="Error"
+									   StandardStatusIcon="Error"
 									   ExpandedInformationCollapsedHeaderText="Show details"
 									   ExpandedInformationExpandedHeaderText="Hide details"
 									   Content="Here is where you might normally show an error message. Use the 'Show details' button to toggle a stack trace."
@@ -701,7 +701,7 @@ var result = await UserPromptBuilder.Configure()
 				<sampleBrowser:CodeExample xml:space="preserve">
 					<![CDATA[
 <actipro:UserPromptControl Header="Error processing request"
-	StandardStatusImage="Error"
+	StandardStatusIcon="Error"
 	ExpandedInformationCollapsedHeaderText="Show details"
 	ExpandedInformationExpandedHeaderText="Hide details"
 	Content="Insert error message here."
@@ -748,7 +748,7 @@ try {
 									   Header="Overwrite file?"
 									   StandardButtons="YesNoCancel"
 									   DefaultResult="Cancel"
-									   StandardStatusImage="Question"
+									   StandardStatusIcon="Question"
 									   ExpandedInformationCollapsedHeaderText="Show details"
 									   ExpandedInformationExpandedHeaderText="Hide details"
 									   Responding="OnUserPromptControlRespondingShowFeedback" >
@@ -786,7 +786,7 @@ try {
 					<![CDATA[
 <actipro:UserPromptControl Header="Overwrite file?"
 	StandardButtons="YesNoCancel" DefaultResult="Cancel"
-	StandardStatusImage="Question"
+	StandardStatusIcon="Question"
 	ExpandedInformationCollapsedHeaderText="Show details"
 	ExpandedInformationExpandedHeaderText="Hide details"
 	>
@@ -823,7 +823,7 @@ var result = await UserPromptBuilder.Configure()
 	.WithHeaderContent("Overwrite file?")
 	.WithStandardButtons(MessageBoxButtons.YesNoCancel)
 	.WithDefaultResult(MessageBoxResult.Cancel)
-	.WithStatusImage(MessageBoxImage.Question)
+	.WithStatusIcon(MessageBoxImage.Question)
 	.WithExpandedInformation("Show details", "Hide details", expandedContent: null)
 	.WithAutoSize(true)
 	.WithContent(instance => {
@@ -1028,7 +1028,7 @@ var result = await UserPromptBuilder.Configure()
 	.WithButtonItemsHorizontalAlignment(HorizontalAlignment.Center)
 	.Show();
 
-IImage? GetImage(string relPath) {
+object? GetImage(string relPath) {
 	// Load any IImage here
 }
 					]]>
@@ -1187,7 +1187,7 @@ var result = await UserPromptBuilder.Configure()
 									   StandardButtons="YesNoCancel"
 									   Footer="Click 'Show Sample as Dialog' button and then press copy shortcut"
 									   FooterClipboardText="The 'Content' property is auto-converted to clipboard text, but the footer is configured to use this custom text instead."
-									   FooterImageSource="{Binding Source={x:Static actipro:SharedImageSourceKeys.Question}, Converter={StaticResource ImageKeyToImageSourceConverter}}"
+									   FooterIcon="{x:Static actipro:SharedImageSourceKeys.Question}"
 									   ExpandedInformationCollapsedHeaderText="Show more"
 									   ExpandedInformationExpandedHeaderText="Show less"
 									   ExpandedInformationContent="Clipboard text can be customized for 'Header', 'Content', 'Footer', 'ButtonItems', 'ExpandedInformationContent', and 'CheckBoxContent'."
@@ -1385,14 +1385,13 @@ var result = await UserPromptBuilder.Configure()
 			Header="Use colors to convey status"
 			Footer="This sample customizes the appearance of a prompt based on the type of message displayed."
 			>
-			<StackPanel Orientation="Horizontal">
+			<StackPanel Orientation="Horizontal" Spacing="10">
 				<StackPanel.Styles>
 					<Style Selector="Button">
-						<Setter Property="Margin" Value="5" />
-						<Setter Property="Width" Value="140" />
 						<Setter Property="Height" Value="100" />
 					</Style>
 					<Style Selector="TextBlock">
+						<Setter Property="Width" Value="120" />
 						<Setter Property="HorizontalAlignment" Value="Center" />
 						<Setter Property="TextWrapping" Value="Wrap" />
 						<Setter Property="TextAlignment" Value="Center" />
@@ -1425,7 +1424,7 @@ var result = await UserPromptBuilder.Configure()
 				<Button x:Name="customizedAppearanceErrorButton" Click="OnSampleShowDialogCustomAppearanceClick">
 					<StackPanel>
 						<actipro:DynamicImage Source="{Binding Source={x:Static actipro:SharedImageSourceKeys.Error}, Converter={StaticResource ImageKeyToImageSourceConverter}}" />
-						<TextBlock>Show Error Themed Dialog</TextBlock>
+						<TextBlock TextAlignment="Center">Show Error Themed Dialog</TextBlock>
 					</StackPanel>
 				</Button>
 			</StackPanel>
@@ -1433,7 +1432,7 @@ var result = await UserPromptBuilder.Configure()
 			<sampleBrowser:ControlExample.CodeExamples>
 				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
 					<![CDATA[
-// This sample uses a 'WithStatusImageTheme' custom extension method that adjusts the
+// This sample uses a 'WithStatusIconTheme' custom extension method that adjusts the
 // color hue of the prompt based on the status icon (e.g., error messages are red).
 // Extension methods on the UserPromptBuilder class are a great way to make common
 // configurations reusable.
@@ -1444,9 +1443,9 @@ var result = await UserPromptBuilder.Configure()
 	.WithTitle("Custom Theme Prompt")
 	.WithHeaderContent($"Themed error message")
 	.WithContent($"The color scheme for this prompt has been adjusted to further emphasize the type of message based on the image used.")
-	.WithStatusImage(MessageBoxImage.Error)
+	.WithStatusIcon(MessageBoxImage.Error)
 	.WithStandardButtons(MessageBoxButtons.OKCancel)
-	.WithStatusImageTheme()
+	.WithStatusIconTheme()
 	.Show();
 					]]>
 				</sampleBrowser:CodeExample>

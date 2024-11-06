@@ -1,0 +1,249 @@
+<UserControl
+	x:Name="sampleRootControl"
+	x:Class="ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.StandaloneToolBarIntro.MainControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Resources>
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+	</UserControl.Resources>
+
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="The StandaloneToolBar control can be used in scenarios where you wish to provide a modern toolbar UI, but there aren't enough commands to justify a full-blown Ribbon implementation.  The toolbar supports many of the controls that can appear in a Ribbon hierarchy, such as split buttons that contain menu galleries.">
+		
+		<sampleBrowser:ControlExample
+			Header="Basic usage"
+			Footer="A standalone toolbar using controls that can also be placed within a ribbon."
+			>
+
+			<sampleBrowser:ControlExample.XamlContent>
+
+				<!-- XAML-based sample -->
+				<actipro:StandaloneToolBar
+					HasShadow="{Binding #basicUsageHasShadowCheckBox.IsChecked}"
+					ItemSpacing="{Binding #basicUsageItemSpacingNumeric.Value}"
+					actipro:KeyTipService.IsRootKeyTipScope="{Binding #basicUsageSupportsKeyTipsCheckBox.IsChecked}"
+					>
+
+					<actipro:BarButton Key="Undo" KeyTipText="AZ" SmallIcon="/Images/Icons/Undo16.png" />
+					<actipro:BarButton Key="Redo" KeyTipText="AQ" SmallIcon="/Images/Icons/Redo16.png" />
+					<actipro:BarSeparator />
+					<actipro:BarButton Key="New" SmallIcon="/Images/Icons/New16.png" ToolBarItemVariantBehavior="AlwaysMedium" />
+					<actipro:BarButton Key="Open" SmallIcon="/Images/Icons/Open16.png" ToolBarItemVariantBehavior="AlwaysMedium" />
+					<actipro:BarButton Key="Save" SmallIcon="/Images/Icons/Save16.png" ToolBarItemVariantBehavior="AlwaysMedium" />
+					<actipro:BarSeparator />
+					<actipro:BarButton Key="Cut" KeyTipText="X" SmallIcon="/Images/Icons/Cut16.png" />
+					<actipro:BarButton Key="Copy" KeyTipText="C" SmallIcon="/Images/Icons/Copy16.png" />
+					<actipro:BarSplitButton Key="PasteMenu" KeyTipText="V" Label="Paste" SmallIcon="/Images/Icons/Paste16.png">
+						<actipro:BarMenuItem Key="Paste" SmallIcon="/Images/Icons/Paste16.png" />
+						<actipro:BarMenuItem Key="PasteSpecial" KeyTipText="S" SmallIcon="/Images/Icons/PasteSpecial16.png" />
+					</actipro:BarSplitButton>
+					<actipro:BarButton Key="FormatPainter" SmallIcon="/Images/Icons/FormatPainter16.png" />
+					<actipro:BarSeparator />
+					<actipro:BarButton Key="Bold" KeyTipText="1" SmallIcon="/Images/Icons/Bold16.png" />
+					<actipro:BarButton Key="Italic" KeyTipText="3" SmallIcon="/Images/Icons/Italic16.png" />
+					<actipro:BarButton Key="Underline" KeyTipText="2" SmallIcon="/Images/Icons/Underline16.png" />
+					<actipro:BarSeparator />
+					<actipro:BarButton Key="IncreaseFontSize" KeyTipText="FG" SmallIcon="/Images/Icons/GrowFont16.png" />
+					<actipro:BarButton Key="DecreaseFontSize" KeyTipText="FK" SmallIcon="/Images/Icons/ShrinkFont16.png" />
+					<actipro:BarButton Key="Subscript" KeyTipText="5" SmallIcon="/Images/Icons/Subscript16.png" />
+					<actipro:BarButton Key="Superscript" KeyTipText="6" SmallIcon="/Images/Icons/Superscript16.png" />
+
+				</actipro:StandaloneToolBar>
+
+			</sampleBrowser:ControlExample.XamlContent>
+
+			<sampleBrowser:ControlExample.MvvmContent>
+
+				<!-- MVVM-based sample -->
+				<actipro:StandaloneToolBar x:Name="basicUsageToolBarMvvm"
+					HasShadow="{Binding #basicUsageHasShadowCheckBox.IsChecked}"
+					ItemSpacing="{Binding #basicUsageItemSpacingNumeric.Value}"
+					actipro:KeyTipService.IsRootKeyTipScope="{Binding #basicUsageSupportsKeyTipsCheckBox.IsChecked}"
+					Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.StandaloneToolBarControlTheme}}"
+					/>
+
+			</sampleBrowser:ControlExample.MvvmContent>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Item spacing" />
+						<NumericUpDown x:Name="basicUsageItemSpacingNumeric" Value="1" Minimum="0" Maximum="10" FormatString="0" />
+					</StackPanel>
+					<CheckBox x:Name="basicUsageHasShadowCheckBox" Content="Has shadow" IsChecked="True" />
+					<CheckBox x:Name="basicUsageSupportsKeyTipsCheckBox" Content="Supports key tips" IsChecked="True" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample Kind="Xaml" xml:space="preserve">
+				<![CDATA[
+<actipro:StandaloneToolBar$(HasShadowAttribute)$(ItemSpacingAttribute)$(IsRootKeyTipScopeAttribute)
+	>
+
+	<actipro:BarButton Key="Undo" SmallIcon="/Images/Icons/Undo16.png" />
+	<actipro:BarButton Key="Redo" SmallIcon="/Images/Icons/Redo16.png" />
+	<actipro:BarSeparator />
+	<actipro:BarButton Key="New" ... ToolBarItemVariantBehavior="AlwaysMedium" />
+	<actipro:BarButton Key="Open" ... ToolBarItemVariantBehavior="AlwaysMedium" />
+	<actipro:BarButton Key="Save" ... ToolBarItemVariantBehavior="AlwaysMedium" />
+	<actipro:BarSeparator />
+	...
+
+</actipro:StandaloneToolBar>
+				]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="HasShadowAttribute"
+															   IsEnabled="{Binding #basicUsageHasShadowCheckBox.IsChecked}"
+															   Value="&#xD;&#x9;HasShadow=&quot;True&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsRootKeyTipScopeAttribute"
+															   IsEnabled="{Binding #basicUsageSupportsKeyTipsCheckBox.IsChecked}"
+															   Value="&#xD;&#x9;actipro:KeyTipService.IsRootKeyTipScope==&quot;True&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="ItemSpacingAttribute"
+															   Value="{Binding #basicUsageItemSpacingNumeric.Value, StringFormat='&#xD;&#x9;ItemSpacing=&quot;{0:0}&quot;'}">
+							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
+								<Binding Path="#basicUsageItemSpacingNumeric.Value" Converter="{StaticResource NotEqualToComparisonConverter}">
+									<Binding.ConverterParameter>
+										<x:Decimal>1.0</x:Decimal>
+									</Binding.ConverterParameter>
+								</Binding>
+							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
+						</sampleBrowser:CodeExampleSubstitution>
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" xml:space="preserve">
+				<![CDATA[
+<!-- DataContext is bound to an instance of StandaloneToolBarViewModel -->
+<actipro:StandaloneToolBar
+	DataContext="{Binding #sampleRootControl.BasicUsageStandaloneToolBarViewModel}"
+	Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.StandaloneToolBarControlTheme}}"$(HasShadowAttribute)$(ItemSpacingAttribute)$(IsRootKeyTipScopeAttribute)
+	/>	
+				]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="HasShadowAttribute"
+															   IsEnabled="{Binding #basicUsageHasShadowCheckBox.IsChecked}"
+															   Value="&#xD;&#x9;HasShadow=&quot;True&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsRootKeyTipScopeAttribute"
+															   IsEnabled="{Binding #basicUsageSupportsKeyTipsCheckBox.IsChecked}"
+															   Value="&#xD;&#x9;actipro:KeyTipService.IsRootKeyTipScope==&quot;True&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="ItemSpacingAttribute"
+															   Value="{Binding #basicUsageItemSpacingNumeric.Value, StringFormat='&#xD;&#x9;ItemSpacing=&quot;{0:0}&quot;'}">
+							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
+								<Binding Path="#basicUsageItemSpacingNumeric.Value" Converter="{StaticResource NotEqualToComparisonConverter}">
+									<Binding.ConverterParameter>
+										<x:Decimal>1.0</x:Decimal>
+									</Binding.ConverterParameter>
+								</Binding>
+							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
+						</sampleBrowser:CodeExampleSubstitution>
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" Language="C#" xml:space="preserve">
+					<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm;
+
+public partial class SampleRootControl : UserControl {
+
+	/// <summary>
+	/// Creates the toolbar view model.
+	/// </summary>
+	private static void CreateBasicUsageStandaloneToolBarViewModel() {
+		return new StandaloneToolBarViewModel() {
+			Items = {
+				new BarButtonViewModel("Undo") { KeyTipText = "AZ", SmallIcon = ImageLoader.GetIcon("Undo16.png") },
+				new BarButtonViewModel("Redo") { KeyTipText = "AQ", SmallIcon = ImageLoader.GetIcon("Redo16.png") },
+				new BarSeparatorViewModel(),
+				new BarButtonViewModel("New") { ... , ToolBarItemVariantBehavior = ItemVariantBehavior.AlwaysMedium },
+				new BarButtonViewModel("Open") { ... , ToolBarItemVariantBehavior = ItemVariantBehavior.AlwaysMedium },
+				new BarButtonViewModel("Save") { ... , ToolBarItemVariantBehavior = ItemVariantBehavior.AlwaysMedium },
+				new BarSeparatorViewModel(),
+				...
+			}
+		};
+	}
+
+	/// <summary>
+	/// Gets the view model to be bound to the toolbar.
+	/// </summary>
+	public RibbonViewModel BasicUsageStandaloneToolBarViewModel { get; }
+		= CreateBasicUsageStandaloneToolBarViewModel();
+
+}
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Vertical and embedded usage"
+			Footer="Standalone toolbars can be used in a vertical orientation or embedded within other panes."
+			>
+
+			<Border 
+				Background="{actipro:ThemeResource Container2BackgroundBrush}"
+				BorderBrush="{actipro:ThemeResource Container2BorderBrush}"
+				BorderThickness="1"
+				>
+
+				<Grid ColumnDefinitions="Auto,*,8,300" MinHeight="200">
+					<actipro:StandaloneToolBar x:Name="verticalUsageToolBarMvvm" Grid.Column="0"
+						Background="{actipro:ThemeResource Container2BackgroundBrush}"
+						BorderThickness="0"
+						CornerRadius="0"
+						Orientation="Vertical"
+						Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.StandaloneToolBarControlTheme}}"
+						/>
+
+					<TabControl Classes="theme-outline" Grid.Column="1" Margin="0,8" Padding="4" BorderBrush="{actipro:ThemeResource Container2BorderBrush}">
+						<TabItem Header="Document1.txt" Margin="0" Background="{actipro:ThemeResource Container5BackgroundBrush}" BorderThickness="0">
+							<sampleBrowser:AdvancedTextBox x:Name="verticalUsageTextBox"
+								Margin="0"
+								Padding="0"
+								BorderThickness="0"
+								Text="The standalone toolbar on the left has a vertical orientation."
+								TextWrapping="Wrap" 
+								/>
+						</TabItem>
+					</TabControl>
+
+					<GridSplitter Grid.Column="2" />
+					
+					<Border Grid.Column="3"
+						BorderBrush="{actipro:ThemeResource Container2BorderBrush}"
+						BorderThickness="1,0,0,0"
+						>
+						<DockPanel>
+							<actipro:StandaloneToolBar x:Name="toolWindowUsageToolBarMvvm" DockPanel.Dock="Top"
+								Background="{actipro:ThemeResource Container2BackgroundBrush}"
+								BorderBrush="{actipro:ThemeResource Container2BorderBrush}"
+								BorderThickness="0,0,0,1"
+								CornerRadius="0"
+								ItemSpacing="0"
+								Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.StandaloneToolBarControlTheme}}"
+								/>
+							
+							<sampleBrowser:AdvancedTextBox x:Name="toolWindowUsageTextBox"
+								BorderThickness="0"
+								CornerRadius="0"
+								Text="The standalone toolbar in this pane arranges to the pane's width. Use the resize gripper to the left of this pane to adjust the width."
+								TextWrapping="Wrap"
+								/>
+
+						</DockPanel>
+					</Border>
+
+				</Grid>
+
+			</Border>
+
+		</sampleBrowser:ControlExample>
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+
+</UserControl>

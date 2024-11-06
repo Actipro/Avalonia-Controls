@@ -1,0 +1,46 @@
+<ResourceDictionary
+	x:ClassModifier="internal"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	>
+
+	<DataTemplate x:Key="{x:Static actipro:BarsMvvmResourceKeys.BarTextBoxDefaultItemContainerTemplate}" DataType="actipro:BarTextBoxViewModel">
+		<actipro:BarTextBox
+			CanCloneToRibbonQuickAccessToolBar="{Binding CanCloneToRibbonQuickAccessToolBar}"
+			Command="{Binding Command}"
+			CommandParameter="{Binding CommandParameter}"
+			IsStarSizingAllowed="{Binding IsStarSizingAllowed}"
+			IsVisible="{Binding IsVisible}"
+			Key="{Binding Key}"
+			KeyTipText="{Binding KeyTipText}"
+			Label="{Binding Label}"
+			PlaceholderText="{Binding PlaceholderText}"
+			RequestedWidth="{Binding RequestedWidth}"
+			SmallIcon="{Binding SmallIcon}"
+			Text="{Binding Text, Mode=TwoWay}"
+			Title="{Binding Title}"
+			ToolBarItemCollapseBehavior="{Binding ToolBarItemCollapseBehavior}"
+			ToolTip.Tip="{Binding Description}"
+			/>
+	</DataTemplate>
+
+	<DataTemplate x:Key="{x:Static actipro:BarsMvvmResourceKeys.BarTextBoxMenuItemItemContainerTemplate}" DataType="actipro:BarTextBoxViewModel">
+		<actipro:BarTextBox
+			CanCloneToRibbonQuickAccessToolBar="{Binding CanCloneToRibbonQuickAccessToolBar}"
+			Command="{Binding Command}"
+			CommandParameter="{Binding CommandParameter}"
+			IsStarSizingAllowed="{Binding IsStarSizingAllowed}"
+			IsVisible="{Binding IsVisible}"
+			Key="{Binding Key}"
+			KeyTipText="{Binding KeyTipText}"
+			Label="{Binding Label}"
+			PlaceholderText="{Binding PlaceholderText}"
+			SmallIcon="{Binding SmallIcon}"
+			Text="{Binding Text, Mode=TwoWay}"
+			Title="{Binding Title}"
+			ToolTip.Tip="{Binding Description}"
+			/>
+	</DataTemplate>
+
+</ResourceDictionary>

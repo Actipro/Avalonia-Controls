@@ -46,6 +46,10 @@ The read-only [HasCaptionButtons](xref:@ActiproUIRoot.Controls.ChromedTitleBar.H
 
 ### Extend Client Area Configuration
 
+Various `Window` client area extension properties are set if the [CanConfigureWindowClientArea](xref:@ActiproUIRoot.Controls.ChromedTitleBar.CanConfigureWindowClientArea) property has its default value of `true`.  The property can be set to `false` before the [ChromedTitleBar](xref:@ActiproUIRoot.Controls.ChromedTitleBar) is added to the visual tree in scenarios where the various client area extension properties need to be manually configured.
+
+#### Operating System Settings When Enabled
+
 On the Windows operating system, the ancestor `Window` is automatically configured with the following properties for ideal display of the client area:
 - `Window.ExtendClientAreaChromeHints` set to `ExtendClientAreaChromeHints.NoChrome`.
 - `Window.ExtendClientAreaToDecorationsHint` set to `true`.

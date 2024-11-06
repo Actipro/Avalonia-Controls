@@ -9,20 +9,22 @@ order: 1
 
 @if (avalonia) {
 ![Screenshot](../images/user-prompt.png)
+
+*UserPromptControl with optional content areas labeled, OK/Cancel buttons, Information status icon, and optional footer icon*
 }
 @if (wpf) {
 ![Screenshot](../../images/user-prompt.png)
-}
 
 *UserPromptControl with optional content areas labeled, OK/Cancel buttons, Information status image, and optional footer image*
+}
 
 ## Features
 
 Key features of User Prompt include:
 - A [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl) with comprehensive out-of-the-box capabilities to build rich prompts, including:
-  - Pre-defined and custom status images
+  - Pre-defined and custom status @if (avalonia) { icons }@if (wpf) { images }
   - Header
-  - Footer with optional image
+  - Footer with optional @if (avalonia) { icon }@if (wpf) { image }
   - Checkbox
   - Expandable information with support for smooth animations
   - Pre-defined commonly used buttons
@@ -75,7 +77,7 @@ While [MessageBox](message-box.md) satisfies most prompting needs, [UserPromptCo
 
 The [builder pattern](builder-pattern.md) can be used to easily configure and show a fully-featured [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl).
 
-The following code demonstrates creating a [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl) with a header, message, **Yes** and **No** buttons, a **Question** status image, and a checkbox:
+The following code demonstrates creating a [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl) with a header, message, **Yes** and **No** buttons, a **Question** status @if (avalonia) { icon, }@if (wpf) { image, } and a checkbox:
 
 @if (avalonia) {
 ```csharp
@@ -83,7 +85,7 @@ var result = await UserPromptBuilder.Configure()
 	.WithHeaderContent("Overwrite existing file?")
 	.WithContent("The specified file already exists. Do you want to overwrite the file?")
 	.WithStandardButtons(MessageBoxButtons.YesNo)
-	.WithStatusImage(MessageBoxImage.Question)
+	.WithStatusIcon(MessageBoxImage.Question)
 	.WithCheckBoxContent("_Always overwrite files")
 	.Show();
 ```

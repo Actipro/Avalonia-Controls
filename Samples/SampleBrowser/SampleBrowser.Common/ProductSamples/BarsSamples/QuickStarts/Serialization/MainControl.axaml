@@ -1,0 +1,314 @@
+<UserControl
+	x:Name="sampleRootControl"
+	x:Class="ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.Serialization.MainControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Resources>
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+	</UserControl.Resources>
+
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Actipro Ribbon provides many options to customize the layout. By using the serialization features, it is easy to save the current layout and restore it later.">
+
+		<sampleBrowser:ControlExample
+			Header="Serialization"
+			Footer="Developers have full control over which settings are saved and restored during serialization."
+			>
+
+			<sampleBrowser:ControlExample.XamlContent>
+
+				<!-- XAML-based sample -->
+				<StackPanel Spacing="10" DataContext="{Binding #sampleRootControl}">
+					
+					<actipro:Ribbon x:Name="xamlRibbon" Margin="0"
+						IsApplicationButtonVisible="False"
+						QuickAccessToolBarMode="Visible"
+						QuickAccessToolBarLocation="Below">
+
+						<actipro:Ribbon.QuickAccessToolBarContent>
+							<actipro:RibbonQuickAccessToolBar>
+
+								<actipro:RibbonQuickAccessToolBar.CommonItems>
+									<actipro:BarButton Key="Cut" SmallIcon="/Images/Icons/Cut16.png" ToolBarItemVariantBehavior="All" ToolTip.Tip="Removes the selection and puts it on the Clipboard so you can paste it elsewhere." />
+									<actipro:BarButton Key="Copy" SmallIcon="/Images/Icons/Copy16.png" ToolBarItemVariantBehavior="All" ToolTip.Tip="Puts a copy of the selection on the Clipboard so you can paste it elsewhere." />
+									<actipro:BarButton Key="Paste" SmallIcon="/Images/Icons/Paste16.png" ToolBarItemVariantBehavior="All" ToolTip.Tip="Paste." />
+								</actipro:RibbonQuickAccessToolBar.CommonItems>
+
+								<actipro:BarButton Key="Cut" SmallIcon="/Images/Icons/Cut16.png" ToolBarItemVariantBehavior="All" ToolTip.Tip="Removes the selection and puts it on the Clipboard so you can paste it elsewhere." />
+								<actipro:BarButton Key="Copy" SmallIcon="/Images/Icons/Copy16.png" ToolBarItemVariantBehavior="All" ToolTip.Tip="Puts a copy of the selection on the Clipboard so you can paste it elsewhere." />
+								<actipro:BarButton Key="Paste" SmallIcon="/Images/Icons/Paste16.png" ToolBarItemVariantBehavior="All" ToolTip.Tip="Paste." />
+								
+							</actipro:RibbonQuickAccessToolBar>
+
+						</actipro:Ribbon.QuickAccessToolBarContent>
+						<actipro:RibbonTabItem Key="Home">
+							<actipro:RibbonGroup Key="Serialization">
+								<actipro:RibbonControlGroup ItemVariantBehavior="AlwaysLarge" SeparatorMode="Always">
+									<actipro:BarButton Key="SaveLayout" Command="{Binding XamlSaveLayoutCommand}" SmallIcon="/Images/Icons/Save16.png" LargeIcon="/Images/Icons/Save32.png" ToolBarItemVariantBehavior="All" ToolTip.Tip="Serializes the current Ribbon configuration to a string that can be restored later." />
+									<actipro:BarButton Key="RestoreLayout" Command="{Binding XamlRestoreLayoutCommand}" SmallIcon="/Images/Icons/Open16.png" LargeIcon="/Images/Icons/Open32.png" ToolBarItemVariantBehavior="All" ToolTip.Tip="Deserializes a previously saved configuration and applies it to the Ribbon." />
+								</actipro:RibbonControlGroup>
+								<actipro:BarButton Key="RestoreOriginal" KeyTipText="O" Command="{Binding XamlRestoreOriginalCommand}" SmallIcon="/Images/Icons/OpenMono16.png" LargeIcon="/Images/Icons/OpenMono32.png" ToolBarItemVariantBehavior="All" ToolTip.Tip="Deserializes the original configuration and applies it to the Ribbon." />
+							</actipro:RibbonGroup>
+						</actipro:RibbonTabItem>
+
+					</actipro:Ribbon>
+					
+					<TextBox x:Name="xamlEditor" MinLines="10" Watermark="Layout data" UseFloatingWatermark="True" />
+				</StackPanel>
+
+			</sampleBrowser:ControlExample.XamlContent>
+
+			<sampleBrowser:ControlExample.MvvmContent>
+
+				<!-- MVVM-based sample -->
+				<StackPanel Spacing="10" DataContext="{Binding #sampleRootControl}">
+
+					<actipro:Ribbon x:Name="mvvmRibbon" Margin="0"
+						DataContext="{Binding #sampleRootControl.RibbonViewModel}"
+						Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+						/>
+
+					<TextBox x:Name="mvvmEditor" MinLines="10" Watermark="Layout data" UseFloatingWatermark="True" />
+					
+				</StackPanel>
+
+			</sampleBrowser:ControlExample.MvvmContent>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10" DataContext="{Binding #sampleRootControl.OptionsModel}">
+					<TextBlock Classes="theme-form-control-label" Text="Serialization options" />
+					<CheckBox Content="Layout mode" IsChecked="{Binding LayoutMode}" />
+					<CheckBox Content="Minimized state" IsChecked="{Binding MinimizedState}" />
+					<CheckBox Content="QAT allow labels" IsChecked="{Binding QuickAccessToolBarAllowLabels}" />
+					<CheckBox Content="QAT location" IsChecked="{Binding QuickAccessToolBarLocation}" />
+					<CheckBox Content="QAT mode" IsChecked="{Binding QuickAccessToolBarMode}" />
+					<CheckBox Content="QAT items" IsChecked="{Binding QuickAccessToolBarItems}" />
+					<TextBlock Classes="theme-form-control-label" Text="QAT = Quick access toolbar" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample Kind="Xaml" xml:space="preserve">
+				<![CDATA[
+<actipro:Ribbon x:Name="ribbon" ... />
+				]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Xaml" Language="C#" xml:space="preserve">
+					<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Bars;
+
+public partial class SampleRootControl : UserControl {
+
+	// Define which aspects of the Ribbon will be serialized/deserialized
+	private RibbonSerializerOptions _options = $(RibbonSerializationOptions);
+	
+	/// <summary>
+	/// Tries to restore the specified layout data to the Ribbon.
+	/// </summary>
+	/// <param name="layout">The previously serialized layout data.</param>
+	/// <returns><c>true</c> if the layout was successfully restored; otherwise <c>false</c>.</returns>
+	private bool TryRestoreLayout(string layout) {
+		try {
+			// Deserialize the layout to the Ribbon
+			new RibbonSerializer().Deserialize(ribbon, layout, _options);
+
+			// Indicate success
+			return true;
+		}
+		catch (Exception ex) {
+			// Exception during the deserialization process
+			Debug.WriteLine(ex);
+
+			// Indicate failure
+			return false;
+		}
+	}
+	
+	/// <summary>
+	/// Tries to save the current Ribbon layout.
+	/// </summary>
+	/// <param name="layout">When successful, outputs the layout data.</param>
+	/// <returns><c>true</c> if the layout was successfully saved; otherwise <c>false</c>.</returns>
+	private bool TrySaveLayout(out string? layout) {
+		try {
+			// Serialize the layout from the Ribbon
+			layout = new RibbonSerializer().Serialize(ribbon, _options);
+
+			// Indicate success
+			return true;
+		}
+		catch (Exception ex) {
+			// Exception during the serialization process
+			Debug.WriteLine(ex);
+
+			// Indicate failure
+			layout = null;
+			return false;
+		}
+	}
+	
+}
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="RibbonSerializationOptions" Value="{Binding #sampleRootControl.OptionsModel.OptionsSampleCodeInitializer}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" xml:space="preserve">
+				<![CDATA[
+<!-- DataContext is bound to an instance of RibbonViewModel -->
+<actipro:Ribbon x:Name="ribbon"
+	DataContext="{Binding #sampleRootControl.RibbonViewModel}"
+	Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+	/>
+				]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" Language="C#" xml:space="preserve">
+					<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Bars;
+using ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm;
+
+public partial class SampleRootControl : UserControl {
+
+	private RibbonViewModel? _ribbonViewModel;
+	private readonly Dictionary<string, object> _mvvmControls = new(StringComparer.InvariantCultureIgnoreCase);
+
+	// Define which aspects of the Ribbon will be serialized/deserialized
+	private RibbonSerializerOptions _options = $(RibbonSerializationOptions);
+	
+	/// <summary>
+	/// Defines keys for controls used by the Ribbon.
+	/// </summary>
+	public static class BarControlKeys {
+		public const string Cut = nameof(Cut);
+		public const string Copy = nameof(Copy);
+		public const string Paste = nameof(Paste);
+		...
+	}
+	
+	public SampleRootControl() {
+		InitializeComponent();
+
+		// Listen for when items are being added to the QAT so the proper view model can be applied
+		ribbon.QuickAccessToolBarItemAdding += OnQuickAccessToolBarItemAdding;
+	}
+	
+	/// <summary>
+	/// Creates the ribbon view model.
+	/// </summary>
+	private static void CreateRibbonViewModel() {
+		// Initialize the controls to be used by the ribbon (alternatively, use a BarManager instance)
+		_mvvmControls[BarControlKeys.Cut] = new BarButtonViewModel(BarControlKeys.Cut) { SmallIcon = ImageLoader.GetIcon("Cut16.png") };
+		_mvvmControls[BarControlKeys.Copy] = new BarButtonViewModel(BarControlKeys.Copy) { SmallIcon = ImageLoader.GetIcon("Copy16.png") };
+		_mvvmControls[BarControlKeys.Paste] = new BarButtonViewModel(BarControlKeys.Paste) { SmallIcon = ImageLoader.GetIcon("Paste16.png") };
+		...
+
+		return new RibbonViewModel() {
+			QuickAccessToolBar = new RibbonQuickAccessToolBarViewModel() {
+				CommonItems = {
+					_mvvmControls[BarControlKeys.Cut],
+					_mvvmControls[BarControlKeys.Copy],
+					_mvvmControls[BarControlKeys.Paste],
+				},
+				Items = {
+					_mvvmControls[BarControlKeys.Cut],
+					_mvvmControls[BarControlKeys.Copy],
+					_mvvmControls[BarControlKeys.Paste],
+				},
+			},
+			
+			// Additional Ribbon configuration
+			...
+		};
+	}
+	
+	private void OnQuickAccessToolBarItemAdding(object? sender, RibbonQuickAccessToolBarItemAddingEventArgs e) {
+		// This event is raised when an item is being added to the Quick Access Toolbar.
+		// The event data defines the Key of the item being added and, if found, the Item
+		// that will be added. If the Ribbon is unable to automatically locate an item with
+		// the desired key, the Item property will be NULL. When this happens, you can manually
+		// assign an Item that corresponds to the given Key. If Item is NULL or Cancel is set
+		// to TRUE then nothing will be added.
+		//
+		// This event can also be used to notify a user if an attempt was made to add an item
+		// to the Quick Access Toolbar that might no longer be available.
+		if (!e.Cancel) {
+			// Attempt to resolve any unspecified items by looking up the control by the key.
+			// In more advanced scenarios, a BarManager instance might be used to managed all the controls.
+			if ((e.Item is null) && _mvvmControls.TryGetValue(e.Key, out var item)) {
+				e.Item = item;
+			}
+
+			if (e.Item is null) {
+				MessageBox.Show($"Unable to restore the Quick Access Toolbar item '{e.Key}' because the corresponding command could not be found.", "Command Not Found", MessageBoxButtons.OK, MessageBoxImage.Warning);
+			}
+		}
+	}
+
+	/// <summary>
+	/// Gets the view model to be bound to the Ribbon.
+	/// </summary>
+	public RibbonViewModel RibbonViewModel
+		=> _ribbonViewModel ??= CreateRibbonViewModel();
+	
+	/// <summary>
+	/// Tries to restore the specified layout data to the Ribbon.
+	/// </summary>
+	/// <param name="layout">The previously serialized layout data.</param>
+	/// <returns><c>true</c> if the layout was successfully restored; otherwise <c>false</c>.</returns>
+	private bool TryRestoreLayout(string layout) {
+		try {
+			// Deserialize the layout to the Ribbon
+			new RibbonSerializer().Deserialize(ribbon, layout, _options);
+
+			// Indicate success
+			return true;
+		}
+		catch (Exception ex) {
+			// Exception during the deserialization process
+			Debug.WriteLine(ex);
+
+			// Indicate failure
+			return false;
+		}
+	}
+	
+	/// <summary>
+	/// Tries to save the current Ribbon layout.
+	/// </summary>
+	/// <param name="layout">When successful, outputs the layout data.</param>
+	/// <returns><c>true</c> if the layout was successfully saved; otherwise <c>false</c>.</returns>
+	private bool TrySaveLayout(out string? layout) {
+		try {
+			// Serialize the layout from the Ribbon
+			layout = new RibbonSerializer().Serialize(ribbon, _options);
+
+			// Indicate success
+			return true;
+		}
+		catch (Exception ex) {
+			// Exception during the serialization process
+			Debug.WriteLine(ex);
+
+			// Indicate failure
+			layout = null;
+			return false;
+		}
+	}
+	
+}
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="RibbonSerializationOptions" Value="{Binding #sampleRootControl.OptionsModel.OptionsSampleCodeInitializer}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+
+</UserControl>

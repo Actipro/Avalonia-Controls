@@ -1,0 +1,409 @@
+<UserControl
+	x:Name="sampleRootControl"
+	x:Class="ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.Footer.MainControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:local="using:ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.Footer"
+	>
+	<UserControl.Resources>
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="A built-in footer is available for displaying additional content below the Ribbon.">
+
+		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+			<sampleBrowser:ControlExampleLinkItem Title="Info bar" Url="/ProductSamples/FundamentalsSamples/Controls/InfoBarIntro/MainControl" />
+		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+
+		<sampleBrowser:ControlExample
+			Header="Basic usage"
+			>
+
+			<sampleBrowser:ControlExample.XamlContent>
+				
+				<!-- XAML-based sample -->
+				<actipro:Ribbon x:Name="basicUsageRibbonXaml"
+					IsApplicationButtonVisible="False"
+					QuickAccessToolBarMode="Hidden"
+					QuickAccessToolBarLocation="Below">
+
+					<actipro:Ribbon.QuickAccessToolBarContent>
+						<actipro:RibbonQuickAccessToolBar IsCustomizeButtonVisible="False">
+							<actipro:BarButton Key="Save" IsEnabled="False" Label="Save Document" SmallIcon="/Images/Icons/Save16.png" LargeIcon="/Images/Icons/Save32.png" ToolBarItemVariantBehavior="All" />
+						</actipro:RibbonQuickAccessToolBar>
+					</actipro:Ribbon.QuickAccessToolBarContent>
+
+					<actipro:RibbonTabItem Key="Home">
+						<actipro:RibbonGroup Key="Documents">
+							<actipro:BarButton Key="Open" IsEnabled="False" Label="Open Document" SmallIcon="/Images/Icons/Open16.png" LargeIcon="/Images/Icons/Open32.png" ToolBarItemVariantBehavior="All" />
+							<actipro:BarButton Key="Save" IsEnabled="False" Label="Save Document" SmallIcon="/Images/Icons/Save16.png" LargeIcon="/Images/Icons/Save32.png" ToolBarItemVariantBehavior="All" />
+						</actipro:RibbonGroup>
+					</actipro:RibbonTabItem>
+
+					<actipro:Ribbon.FooterContent>
+						<actipro:RibbonFooterControl x:Name="footerXaml" Kind="{Binding #footerKindComboBox.SelectedItem}">
+							<DockPanel>
+								<actipro:DynamicImage DockPanel.Dock="Left" Width="16" Height="16" Margin="0,0,5,0"
+									Stretch="Uniform" StretchDirection="DownOnly" Source="/Images/Icons/InformationClear16.png"
+									HorizontalAlignment="Center" VerticalAlignment="Center" UseLayoutRounding="True" />
+								<TextBlock VerticalAlignment="Center" TextWrapping="Wrap" Text="The footer can be set to any content and is great for tips or notifications." />
+							</DockPanel>
+						</actipro:RibbonFooterControl>
+					</actipro:Ribbon.FooterContent>
+
+				</actipro:Ribbon>
+			</sampleBrowser:ControlExample.XamlContent>
+
+			<sampleBrowser:ControlExample.MvvmContent>
+
+				<!-- MVVM-based sample -->
+				<actipro:Ribbon x:Name="basicUsageRibbonMvvm"
+					Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+					/>
+
+			</sampleBrowser:ControlExample.MvvmContent>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10" DataContext="{Binding #sampleRootControl.BasicUsageOptions}">
+					<CheckBox x:Name="isFooterVisibleCheckBox" IsChecked="{Binding IsFooterVisible}">Is footer visible</CheckBox>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Footer kind" />
+						<ComboBox x:Name="footerKindComboBox" SelectedItem="{Binding FooterKind}" ItemsSource="{actipro:DelimitedArray Type={x:Type actipro:RibbonFooterKind}}" />
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample Kind="Xaml" xml:space="preserve">
+					<![CDATA[
+<actipro:Ribbon ... >
+
+	<actipro:RibbonTabItem Key="Home">
+		...
+	</actipro:RibbonTabItem>
+$(FooterContent)$(NoFooterContent)
+	...
+
+</actipro:Ribbon>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="FooterContent"
+															   IsEnabled="{Binding #sampleRootControl.BasicUsageOptions.IsFooterVisible}"
+															   AllowNestedSubstitution="True">
+							<sampleBrowser:CodeExampleSubstitution.Value><![CDATA[
+	<actipro:Ribbon.FooterContent>
+		<actipro:RibbonFooterControl$(FooterKindAttribute)>
+			<DockPanel>
+				<actipro:DynamicImage DockPanel.Dock="Left" Margin="0,0,5,0"
+					Width="16" Height="16"
+					Source="/Images/Icons/InformationClear16.png"
+					HorizontalAlignment="Center" VerticalAlignment="Center"
+					UseLayoutRounding="True" />
+				<TextBlock VerticalAlignment="Center"
+					TextWrapping="Wrap"
+					Text="The footer can be set to any content and is great for tips or notifications." />
+			</DockPanel>
+		</actipro:RibbonFooterControl>
+	</actipro:Ribbon.FooterContent>
+		]]></sampleBrowser:CodeExampleSubstitution.Value>
+						</sampleBrowser:CodeExampleSubstitution>
+						<sampleBrowser:CodeExampleSubstitution Key="FooterKindAttribute"
+															   IsEnabled="{Binding #sampleRootControl.BasicUsageOptions.FooterKind, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Default'}"
+															   Value="{Binding #sampleRootControl.BasicUsageOptions.FooterKind, StringFormat=' Kind=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="NoFooterContent"
+															   IsEnabled="{Binding !#sampleRootControl.BasicUsageOptions.IsFooterVisible}">
+							<sampleBrowser:CodeExampleSubstitution.Value><![CDATA[
+	<!--
+	A footer is only displayed when FooterContent is defined, so hide the
+	footer by leaving Ribbon.FooterContent undefined (or set to null)
+	-->
+		]]></sampleBrowser:CodeExampleSubstitution.Value>
+						</sampleBrowser:CodeExampleSubstitution>
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" xml:space="preserve">
+				<![CDATA[
+<!-- DataContext is bound to an instance of RibbonViewModel -->
+<actipro:Ribbon
+	DataContext="{Binding #sampleRootControl.BasicUsageRibbonViewModel}"
+	Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+	/>
+				]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" Language="C#" xml:space="preserve">
+					<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm;
+
+public partial class SampleRootControl : UserControl {
+	
+	/// <summary>
+	/// Creates the ribbon view model.
+	/// </summary>
+	private static void CreateBasicUsageRibbonViewModel() {
+		return new RibbonViewModel() {
+$(FooterContent)$(NoFooterContent)
+			Tabs = {
+			
+				new RibbonTabViewModel("Home") { ... },
+				...
+	
+			}
+			
+			...
+		};
+	}
+	
+	/// <summary>
+	/// Gets the view model to be bound to the ribbon.
+	/// </summary>
+	public RibbonViewModel BasicUsageRibbonViewModel { get; } = CreateBasicUsageRibbonViewModel();
+	
+}
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="FooterContent"
+															   IsEnabled="{Binding #sampleRootControl.BasicUsageOptions.IsFooterVisible}"
+															   AllowNestedSubstitution="True">
+							<sampleBrowser:CodeExampleSubstitution.Value><![CDATA[
+			Footer = new RibbonFooterViewModel() {
+				$(FooterKindSetter)
+				// The RibbonFooterSimpleContentViewModel can be used to define a common footer
+				// with an image to the left of a text message
+				Content = new RibbonFooterSimpleContentViewModel() {
+					Text = "The footer can be set to any content and is great for tips or notifications.",
+					Icon = ImageLoader.GetIcon("InformationClear16.png"),
+				},
+
+			};
+		]]></sampleBrowser:CodeExampleSubstitution.Value>
+						</sampleBrowser:CodeExampleSubstitution>
+						<sampleBrowser:CodeExampleSubstitution Key="FooterKindSetter"
+															   IsEnabled="{Binding #sampleRootControl.BasicUsageOptions.FooterKind, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Default'}"
+															   Value="{Binding #sampleRootControl.BasicUsageOptions.FooterKind, StringFormat='Kind = RibbonFooterKind.{0},&#xD;&#xD;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="NoFooterContent"
+															   IsEnabled="{Binding !#sampleRootControl.BasicUsageOptions.IsFooterVisible}">
+							<sampleBrowser:CodeExampleSubstitution.Value><![CDATA[
+			// A footer is only displayed when Footer is defined, so hide the
+			// footer by leaving RibbonViewModel.Footer undefined (or set to null)
+		]]></sampleBrowser:CodeExampleSubstitution.Value>
+						</sampleBrowser:CodeExampleSubstitution>
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+
+		</sampleBrowser:ControlExample>
+
+		<sampleBrowser:ControlExample
+			Header="Info bar usage"
+			Footer="Easily integrate the InfoBar control with the Ribbon footer."
+			>
+
+			<sampleBrowser:ControlExample.XamlContent>
+
+				<!-- XAML-based sample -->
+				<actipro:Ribbon x:Name="infoBarUsageRibbonXaml" 
+					IsApplicationButtonVisible="False"
+					QuickAccessToolBarMode="Hidden"
+					QuickAccessToolBarLocation="Below">
+
+					<actipro:Ribbon.Styles>
+
+						<!-- Configure implicit style for InfoBar displayed in a Ribbon footer -->
+						<Style Selector="actipro|InfoBar">
+
+							<!-- Footer has it's own border, so hide the InfoBar border -->
+							<Setter Property="BorderThickness" Value="0" />
+
+							<!-- Ribbon already animates the opening/closing of the footer, so disable the InfoBar animation -->
+							<Setter Property="IsAnimationEnabled" Value="False" />
+
+							<!-- By default, closing the InfoBar should clear the ribbon footer -->
+							<Setter Property="CloseButtonCommand" Value="{Binding $parent[actipro:Ribbon].ClearFooterCommand}" />
+
+							<Style Selector="^:information">
+								<!-- Allow the default footer background to display with the default severity -->
+								<Setter Property="Background" Value="Transparent" />
+							</Style>
+
+						</Style>
+					</actipro:Ribbon.Styles>
+
+					<actipro:Ribbon.QuickAccessToolBarContent>
+						<actipro:RibbonQuickAccessToolBar IsCustomizeButtonVisible="False">
+							<actipro:BarButton Key="Save" IsEnabled="False" Label="Save Document" SmallIcon="/Images/Icons/Save16.png" LargeIcon="/Images/Icons/Save32.png" />
+						</actipro:RibbonQuickAccessToolBar>
+					</actipro:Ribbon.QuickAccessToolBarContent>
+
+					<actipro:RibbonTabItem Key="Home">
+						<actipro:RibbonGroup Key="Documents">
+							<actipro:BarButton Key="Open" IsEnabled="False" Label="Open Document" SmallIcon="/Images/Icons/Open16.png" LargeIcon="/Images/Icons/Open32.png" />
+							<actipro:BarButton Key="Save" IsEnabled="False" Label="Save Document" SmallIcon="/Images/Icons/Save16.png" LargeIcon="/Images/Icons/Save32.png" />
+						</actipro:RibbonGroup>
+						<actipro:RibbonGroup Key="Sample">
+							<actipro:BarButton Key="ShowFooter" Command="{Binding #sampleRootControl.InfoBarUsageOptions.ShowFooterXamlCommand}" SmallIcon="/Images/Icons/QuickStart16.png" LargeIcon="/Images/Icons/QuickStart32.png" ToolBarItemVariantBehavior="All" />
+						</actipro:RibbonGroup>
+					</actipro:RibbonTabItem>
+
+					<actipro:Ribbon.FooterContent>
+						<actipro:RibbonFooterControl x:Name="infoBarFooterXaml" Padding="0">
+							<actipro:InfoBar x:Name="infoBar" DataContext="{Binding #sampleRootControl.InfoBarUsageOptions}"
+								CanClose="{Binding CanClose}"
+								IsIconVisible="{Binding IsIconVisible}"
+								Message="Use an info bar for essential app messages."
+								Padding="{Binding Padding}"
+								Severity="{Binding Severity}"
+								Title="InfoBar"
+								/>
+						</actipro:RibbonFooterControl>
+					</actipro:Ribbon.FooterContent>
+
+				</actipro:Ribbon>
+
+			</sampleBrowser:ControlExample.XamlContent>
+
+			<sampleBrowser:ControlExample.MvvmContent>
+
+				<!-- MVVM-based sample -->
+				<actipro:Ribbon x:Name="infoBarUsageRibbonMvvm"
+					Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+					/>
+
+			</sampleBrowser:ControlExample.MvvmContent>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10" DataContext="{Binding #sampleRootControl.InfoBarUsageOptions}">
+					<CheckBox x:Name="infoBarIsIconVisibleCheckBox" IsChecked="{Binding IsIconVisible}">Is icon visible</CheckBox>
+					<CheckBox x:Name="infoBarCanCloseCheckBox" IsChecked="{Binding CanClose}">Can close</CheckBox>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Severity" />
+						<ComboBox x:Name="infoBarSeverityComboBox" SelectedItem="{Binding Severity}" ItemsSource="{actipro:DelimitedArray Type={x:Type actipro:InfoBarSeverity}}" />
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample Kind="Xaml" xml:space="preserve">
+					<![CDATA[
+<actipro:Ribbon ... >
+	<actipro:Ribbon.Styles>
+
+		<!-- Configure implicit style for InfoBar displayed in a Ribbon footer -->
+		<Style Selector="actipro|InfoBar">
+
+			<!-- Footer has it's own border, so hide the InfoBar border -->
+			<Setter Property="BorderThickness" Value="0" />
+
+			<!-- Ribbon already animates the opening/closing of the footer, so disable the InfoBar animation -->
+			<Setter Property="IsAnimationEnabled" Value="False" />
+
+			<!-- By default, closing the InfoBar should clear the ribbon footer -->
+			<Setter Property="CloseButtonCommand" Value="{Binding $parent[actipro:Ribbon].ClearFooterCommand}" />
+
+			<Style Selector="^:information">
+				<!-- Allow the default footer background to display with the default severity -->
+				<Setter Property="Background" Value="Transparent" />
+			</Style>
+
+		</Style>
+	</actipro:Ribbon.Styles>
+
+	<actipro:Ribbon.FooterContent>
+
+		<actipro:RibbonFooterControl Padding="0">
+			<actipro:InfoBar
+				CanClose="$(CanClose)"
+				IsIconVisible="$(IsIconVisible)"
+				Message="Use an info bar for essential app messages."
+				Severity="$(Severity)"
+				Title="InfoBar"
+				/>
+		</actipro:RibbonFooterControl>
+
+	</actipro:Ribbon.FooterContent>
+
+	<actipro:RibbonTabItem Key="Home">
+		...
+	</actipro:RibbonTabItem>
+
+	...
+
+</actipro:Ribbon>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="CanClose" Value="{Binding #sampleRootControl.InfoBarUsageOptions.CanClose}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsIconVisible" Value="{Binding #sampleRootControl.InfoBarUsageOptions.IsIconVisible}" />
+						<sampleBrowser:CodeExampleSubstitution Key="Severity" Value="{Binding #sampleRootControl.InfoBarUsageOptions.Severity}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" xml:space="preserve">
+				<![CDATA[
+<!-- DataContext is bound to an instance of RibbonViewModel -->
+<actipro:Ribbon
+	DataContext="{Binding #sampleRootControl.InfoBarUsageRibbonViewModel}"
+	Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+	/>
+				]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" Language="C#" xml:space="preserve">
+					<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm;
+
+public partial class SampleRootControl : UserControl {
+	
+	/// <summary>
+	/// Creates the ribbon view model.
+	/// </summary>
+	private static void CreateInfoBarUsageRibbonViewModel() {
+		return new RibbonViewModel() {
+
+			Footer = new RibbonFooterViewModel() {
+			
+				// The RibbonFooterInfoBarContentViewModel can be used to define a footer
+				// with features supported by the InfoBar control
+				Content = new RibbonFooterInfoBarContentViewModel() {
+					CanClose = $(CanClose),
+					IsIconVisible = $(IsIconVisible),
+					Message = "Use an info bar for essential app messages",
+					Padding = new Thickness(10, 5),
+					Title = "InfoBar",
+					Severity = InfoBarUsageOptions.$(Severity),
+				},
+
+				// Footer must not have padding so InfoBar can display edge-to-edge
+				Padding = new Thickness(0),
+
+			};
+
+			Tabs = {
+			
+				new RibbonTabViewModel("Home") { ... },
+				...
+	
+			}
+			
+			...
+		};
+	}
+	
+	/// <summary>
+	/// Gets the view model to be bound to the ribbon.
+	/// </summary>
+	public RibbonViewModel InfoBarUsageRibbonViewModel { get; } = CreateInfoBarUsageRibbonViewModel();
+	
+}
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="CanClose" Value="{Binding #sampleRootControl.InfoBarUsageOptions.CanClose, Converter={x:Static actipro:StringConverters.ToLowerInvariant}}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsIconVisible" Value="{Binding #sampleRootControl.InfoBarUsageOptions.IsIconVisible, Converter={x:Static actipro:StringConverters.ToLowerInvariant}}" />
+						<sampleBrowser:CodeExampleSubstitution Key="Severity" Value="{Binding #sampleRootControl.InfoBarUsageOptions.Severity}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+
+		</sampleBrowser:ControlExample>
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+
+</UserControl>

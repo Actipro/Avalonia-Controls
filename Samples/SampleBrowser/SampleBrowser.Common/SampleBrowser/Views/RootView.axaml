@@ -69,7 +69,7 @@
 						<Button Theme="{actipro:ControlTheme TitleBarButton}"
 								ToolTip.Tip="View">
 							<Button.Flyout>
-								<MenuFlyout Placement="Bottom" Opening="OnViewMenuOpening">
+								<MenuFlyout Placement="Bottom" Opening="OnViewMenuOpening" OverlayDismissEventPassThrough="{OnFormFactor Default=False, Desktop=True}">
 									<MenuItem Classes="theme-menuitem-heading" Header="Avalonia Controls" />
 									<MenuItem Header="Release History" Command="{Binding NavigateViewToItemInfoCommand}" CommandParameter="{Binding ProductData.ReleaseHistory.FirstItem}" />
 									<MenuItem Header="Product Documentation" Command="{Binding OpenUrlCommand}" CommandParameter="{Binding PlatformDocumentationUrl}" />

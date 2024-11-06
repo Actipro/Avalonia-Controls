@@ -1,0 +1,399 @@
+<UserControl
+	x:Name="sampleRootControl"
+	x:Class="ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.RecentDocuments.MainControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:documents="using:ActiproSoftware.UI.Avalonia.DocumentManagement"
+	xmlns:local="using:ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.RecentDocuments"
+	>
+	<UserControl.Resources>
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+	</UserControl.Resources>
+
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="The RecentDocumentControl can be used to display a managed list of recent documents with support for pinning and grouping.">
+
+		<sampleBrowser:ControlExample
+			Header="Basic usage"
+			DataContext="{Binding #basicUsage}"
+			VerticalContentAlignment="Top"
+			>
+
+			<actipro:RecentDocumentControl x:Name="basicUsage" DataContext="{Binding #sampleRootControl}" MaxHeight="450"
+				BorderThickness="0" Background="Transparent"
+				ItemsSource="{Binding RecentDocuments}"
+				OpenCommand="{Binding OpenCommand}"
+				/>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<CheckBox Content="Allow grouping" IsChecked="{Binding AllowGrouping}" />
+					<CheckBox Content="Large size" IsChecked="{Binding UseLargeSize}" />
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="{Binding MaxDocumentCount, StringFormat='Max document count: {0}'}" />
+						<Slider Minimum="1" Maximum="30" Value="{Binding MaxDocumentCount}" TickFrequency="1" IsSnapToTickEnabled="True" SmallChange="1" LargeChange="5" />
+					</StackPanel>
+					<Button Command="{Binding #sampleRootControl.OpenCommand}">
+						<StackPanel Orientation="Horizontal" Spacing="{actipro:ScaledDouble 1}">
+							<actipro:DynamicImage Source="/Images/Icons/Open16.png" />
+							<AccessText Text="_Open Document" />
+						</StackPanel>
+					</Button>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<UserControl x:Name="sampleRootControl" ... >
+
+	<actipro:RecentDocumentControl DataContext="{Binding #sampleRootControl}" ...$(AllowGroupingAttribute)$(MaxDocumentCountAttribute)$(UseLargeSizeAttribute)
+		ItemsSource="{Binding RecentDocuments}"
+		OpenCommand="{Binding OpenCommand}"
+		/>
+
+</UserControl>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="AllowGroupingAttribute"
+															   IsEnabled="{Binding !AllowGrouping}"
+															   Value="&#xD;&#x9;&#x9;AllowGrouping=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="UseLargeSizeAttribute"
+															   IsEnabled="{Binding !UseLargeSize}"
+															   Value="&#xD;&#x9;&#x9;UseLargeSize=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="MaxDocumentCountAttribute"
+															   Value="{Binding MaxDocumentCount, StringFormat='&#xD;&#x9;&#x9;MaxDocumentCount=&quot;{0}&quot;'}">
+							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
+								<Binding Path="MaxDocumentCount" Converter="{StaticResource NotEqualToComparisonConverter}">
+									<Binding.ConverterParameter>
+										<x:Int32>16</x:Int32>
+									</Binding.ConverterParameter>
+								</Binding>
+							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
+						</sampleBrowser:CodeExampleSubstitution>
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Bars;
+
+public partial class SampleRootControl : UserControl {
+	
+	private ICommand? _openCommand;
+	
+	/// <summary>
+	/// Initialize a new instance of the class.
+	/// </summary>
+	public SampleRootControl() {
+		// Populate the collection of recent documents
+		var recentDocumentItem = new RecentDocumentItem() {
+			LargeIcon = ImageLoader.GetIcon("BlankPage32.png"),
+			SmallIcon = ImageLoader.GetIcon("BlankPage16.png"),
+			Location = new Uri(@"C:\Documents\Work\Software\Release Notes.rtf"),
+			...
+		};
+		this.RecentDocuments.Add(recentDocumentItem);
+	}
+	
+	/// <summary>
+	/// The command to be invoked when opening a recent document. If a <see cref="RecentDocumentItem"/>
+	/// is not passed as a parameter, the user will be prompted to pick a file.
+	/// </summary>
+	public ICommand OpenCommand
+		=> _openCommand ??= new DelegateCommand<object>(param => {
+			if (param is RecentDocumentItem recentDocumentItem)
+				OpenRecentDocument(recentDocumentItem);
+			else
+				OpenFilePicker();
+		});
+	
+	/// <summary>
+	/// The collection of recent documents.
+	/// </summary>
+	public ObservableCollection<RecentDocumentItem> RecentDocuments { get; } = new();
+
+	private async void OpenFilePicker() {
+		// Prompt the user for a file
+		var storageProvider = TopLevel.GetTopLevel(this)?.StorageProvider
+			?? throw new InvalidOperationException("Unable to resolve the storage provider.");
+			
+		var storageFileList = await storageProvider.OpenFilePickerAsync(new FilePickerOpenOptions() { AllowMultiple = false });
+		
+		if (storageFileList?.Count == 1) {
+			// Determine the location of the selected file
+			using var storageFile = storageFileList[0];
+			var location = storageFile.Path;
+
+			// Create a recent document entry for this file if it is not already in the list
+			var recentDocumentItem = RecentDocuments.FirstOrDefault(x => x.Location == location);
+			if (recentDocumentItem is null) {
+				recentDocumentItem = new RecentDocumentItem() {
+					LargeIcon = ImageLoader.GetIcon("BlankPage32.png"),
+					SmallIcon = ImageLoader.GetIcon("BlankPage16.png"),
+					Location = location;
+				};
+				RecentDocuments.Add(recentDocumentItem);
+			}
+			
+			// Open the recent document
+			OpenRecentDocument(recentDocumentItem);
+		}
+	}
+
+	private void OpenRecentDocument(RecentDocumentItem recentDocumentItem) {
+		// Update the timestamp for when the document was last opened
+		recentDocumentItem.LastOpenedDateTime = DateTime.Now;
+		
+		// Process opening a document from the recent document control
+		var location = recentDocumentItem.Location;
+		...
+	}
+
+}
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Backstage usage"
+			Footer="A common scenario is to show recent files on an Open tab of a Ribbon Backstage."
+			>
+
+			<StackPanel Spacing="20">
+
+				<actipro:InfoBar Message="Click the 'File' application button to display the Backstage with recent files." CanClose="False" />
+
+				<actipro:Ribbon Margin="0" QuickAccessToolBarMode="None" LayoutMode="Simplified">
+
+					<!-- Configure the Backstage -->
+					<actipro:Ribbon.BackstageContent>
+						<actipro:RibbonBackstage>
+							<actipro:RibbonBackstage.Styles>
+								<Style Selector="TextBlock.backstage-heading">
+									<Setter Property="FontSize" Value="{actipro:ThemeResource HeadingFontSizeLarge}" />
+									<Setter Property="FontFamily" Value="{actipro:ThemeResource HeadingFontFamily}" />
+									<Setter Property="FontWeight" Value="{actipro:ThemeResource HeadingFontWeightLarge}" />
+									<Setter Property="Margin" Value="{actipro:ScaledThickness '0,0,0,3+8'}" />
+									<Setter Property="TextWrapping" Value="Wrap" />
+								</Style>
+							</actipro:RibbonBackstage.Styles>
+
+							<!-- Open Tab -->
+							<actipro:RibbonBackstageTabItem Key="Open"
+								LargeIcon="/Images/Icons/OpenMono32.png"
+								SmallIcon="/Images/Icons/OpenMono16.png">
+
+								<Grid Margin="40,30" RowDefinitions="Auto,*">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="*" MaxWidth="800" />
+									</Grid.ColumnDefinitions>
+
+									<TextBlock Classes="backstage-heading" Text="Open" />
+
+									<actipro:RecentDocumentControl Grid.Row="1"
+										MaxWidth="800"
+										HorizontalAlignment="Left"
+										ItemsSource="{Binding #sampleRootControl.RecentDocumentsForBackstage}"
+										OpenCommand="{Binding #sampleRootControl.OpenCommand}"
+										/>
+
+								</Grid>
+
+							</actipro:RibbonBackstageTabItem>
+
+						</actipro:RibbonBackstage>
+					</actipro:Ribbon.BackstageContent>
+
+					<actipro:RibbonTabItem Key="Home">
+						<actipro:RibbonGroup Key="Documents">
+							<actipro:BarButton Key="Open" IsEnabled="False" Label="Open Document" SmallIcon="/Images/Icons/Open16.png" LargeIcon="/Images/Icons/Open32.png" ToolBarItemVariantBehavior="All" />
+							<actipro:BarButton Key="Save" IsEnabled="False" Label="Save Document" SmallIcon="/Images/Icons/Save16.png" LargeIcon="/Images/Icons/Save32.png" ToolBarItemVariantBehavior="All" />
+						</actipro:RibbonGroup>
+					</actipro:RibbonTabItem>
+
+				</actipro:Ribbon>
+
+			</StackPanel>
+
+		</sampleBrowser:ControlExample>
+
+		<sampleBrowser:ControlExample
+			Header="MVVM usage"
+			DataContext="{Binding #mvvmUsage}"
+			VerticalContentAlignment="Top"
+			>
+
+			<actipro:RecentDocumentControl x:Name="mvvmUsage" DataContext="{Binding #sampleRootControl}" MaxHeight="450"
+				Background="Transparent"
+				BorderThickness="0"
+				ItemsSource="{Binding RecentDocumentsForMvvm}"
+				OpenCommand="{Binding OpenCommandMvvm}"
+				>
+			</actipro:RecentDocumentControl>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<CheckBox Content="Allow grouping" IsChecked="{Binding AllowGrouping}" />
+					<CheckBox Content="Large size" IsChecked="{Binding UseLargeSize}" />
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="{Binding MaxDocumentCount, StringFormat='Max document count: {0}'}" />
+						<Slider Minimum="1" Maximum="30" Value="{Binding MaxDocumentCount}" TickFrequency="1" IsSnapToTickEnabled="True" SmallChange="1" LargeChange="5" />
+					</StackPanel>
+					<Button Command="{Binding #sampleRootControl.OpenCommandMvvm}">
+						<StackPanel Orientation="Horizontal" Spacing="{actipro:ScaledDouble 1}">
+							<actipro:DynamicImage Source="/Images/Icons/Open16.png" />
+							<AccessText Text="_Open Document" />
+						</StackPanel>
+					</Button>
+					<Button Command="{Binding #sampleRootControl.ClearCommandMvvm}">
+						<StackPanel Orientation="Horizontal" Spacing="{actipro:ScaledDouble 1}">
+							<actipro:DynamicImage Source="/Images/Icons/Delete16.png" />
+							<AccessText Text="_Clear Documents" />
+						</StackPanel>
+					</Button>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<UserControl x:Name="sampleRootControl" ... >
+
+	<actipro:RecentDocumentControl DataContext="{Binding #sampleRootControl}" ...$(AllowGroupingAttribute)$(MaxDocumentCountAttribute)$(UseLargeSizeAttribute)
+		ItemsSource="{Binding RecentDocumentItems}"
+		OpenCommand="{Binding OpenCommand}"
+		/>
+
+</UserControl>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="AllowGroupingAttribute"
+															   IsEnabled="{Binding !AllowGrouping}"
+															   Value="&#xD;&#x9;&#x9;AllowGrouping=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="UseLargeSizeAttribute"
+															   IsEnabled="{Binding !UseLargeSize}"
+															   Value="&#xD;&#x9;&#x9;UseLargeSize=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="MaxDocumentCountAttribute"
+															   Value="{Binding MaxDocumentCount, StringFormat='&#xD;&#x9;&#x9;MaxDocumentCount=&quot;{0}&quot;'}">
+							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
+								<Binding Path="MaxDocumentCount" Converter="{StaticResource NotEqualToComparisonConverter}">
+									<Binding.ConverterParameter>
+										<x:Int32>16</x:Int32>
+									</Binding.ConverterParameter>
+								</Binding>
+							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
+						</sampleBrowser:CodeExampleSubstitution>
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Bars;
+
+public partial class SampleRootControl : UserControl {
+	
+	private ICommand? _openCommand;
+	
+	/// <summary>
+	/// Initialize a new instance of the class.
+	/// </summary>
+	public SampleRootControl() {
+		// Populate the collection of recent document view models
+		// NOTE: See the source code of this sample for the definition of RecentDocumentViewModel class
+		var recentDocumentViewModel = new RecentDocumentViewModel() {
+			LargeIcon = ImageLoader.GetIcon("BlankPage32.png"),
+			SmallIcon = ImageLoader.GetIcon("BlankPage16.png"),
+			Location = new Uri(@"C:\Documents\Work\Software\Release Notes.rtf"),
+			...
+		};
+		this.RecentDocumentViewModels.Add(recentDocumentViewModel);
+		
+		// IMPORTANT NOTE:
+		//
+		// The RecentDocumentControl Items or ItemsSource **MUST** be populated with instances of
+		// RecentDocumentItem and cannot be initialized to a collection of view models.  This sample
+		// provides a collection that will wrap a collection of view models as instances of
+		// RecentDocumentItem and keep the two collections synchronized.  See the source code of this
+		// sample for the definition of RecentDocumentItemCollectionWrapper.
+		
+		this.RecentDocumentItems = new RecentDocumentItemCollectionWrapper(RecentDocumentViewModels);
+	}
+	
+	/// <summary>
+	/// The command to be invoked when opening a recent document. If a <see cref="RecentDocumentItem"/>
+	/// is not passed as a parameter, the user will be prompted to pick a file.
+	/// </summary>
+	public ICommand OpenCommand
+		=> _openCommand ??= new DelegateCommand<object>(param => {
+			if (param is RecentDocumentItem recentDocumentItem
+				&& recentDocumentItem.DataContext is RecentDocumentViewModel recentDocumentViewModel) {
+				
+				OpenRecentDocument(recentDocumentViewModel);
+			}
+			else
+				OpenFilePicker();
+		});
+	
+	/// <summary>
+	/// The collection of recent document items.
+	/// </summary>
+	public IEnumerable<RecentDocumentItem> RecentDocumentItems { get; }
+
+	/// <summary>
+	/// The collection of recent document view models.
+	/// </summary>
+	public ObservableCollection<RecentDocumentViewModel> RecentDocumentViewModels { get; } = new();
+
+	private async void OpenFilePicker() {
+		// Prompt the user for a file
+		var storageProvider = TopLevel.GetTopLevel(this)?.StorageProvider
+			?? throw new InvalidOperationException("Unable to resolve the storage provider.");
+			
+		var storageFileList = await storageProvider.OpenFilePickerAsync(new FilePickerOpenOptions() { AllowMultiple = false });
+		
+		if (storageFileList?.Count == 1) {
+			// Determine the location of the selected file
+			using var storageFile = storageFileList[0];
+			var location = storageFile.Path;
+
+			// Create a recent document entry for this file if it is not already in the list
+			var recentDocumentViewModel = RecentDocumentViewModels.FirstOrDefault(x => x.Location == location);
+			if (recentDocumentViewModel is null) {
+				recentDocumentViewModel = new RecentDocumentViewModel() {
+					LargeIcon = ImageLoader.GetIcon("BlankPage32.png"),
+					SmallIcon = ImageLoader.GetIcon("BlankPage16.png"),
+					Location = storageFile.Path;
+				};
+
+				// Add the view model to the collection
+				RecentDocumentViewModels.Add(recentDocumentViewModel);
+			}
+			
+			// Open the recent document
+			OpenRecentDocument(recentDocumentViewModel);
+		}
+	}
+
+	private void OpenRecentDocument(RecentDocumentViewModel recentDocumentViewModel) {
+		// Update the timestamp for when the document was last opened
+		recentDocumentViewModel.LastOpenedDateTime = DateTime.Now;
+		
+		// Process opening the document
+		var location = recentDocumentViewModel.Location;
+		...
+	}
+
+}
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+
+</UserControl>
