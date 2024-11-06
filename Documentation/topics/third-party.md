@@ -5,7 +5,7 @@ order: 55
 ---
 # Third-Party Software
 
-Actipro Avalonia UI controls are built specifically for the Avalonia UI framework and, as such, have a dependency on the following open source libraries:
+Actipro Avalonia controls are built specifically for the Avalonia framework and, as such, have a dependency on the following open source libraries:
 
 - [Avalonia](https://github.com/AvaloniaUI/Avalonia) - Provides the cross-platform UI framework.
 - [.NET](https://github.com/microsoft/dotnet) - Provides the cross-platform runtime framework.

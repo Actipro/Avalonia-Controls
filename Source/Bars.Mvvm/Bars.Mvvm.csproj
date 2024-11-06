@@ -1,0 +1,48 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+
+		<AssemblyName>ActiproSoftware.Avalonia.Bars.Mvvm</AssemblyName>
+		<Product>Bars.Mvvm</Product>
+		<Title>Actipro Bars MVVM (for Avalonia)</Title>
+		<Description>Common view models, templates, and other types used when implementing Bars controls with MVVM (Model-View-ViewModel) patterns.</Description>
+		<PackageTags>Actipro UI Controls Avalonia XAML MVVM Model View ViewModel Bars</PackageTags>
+
+		<AssemblyTitle>$(Title)</AssemblyTitle>
+
+		<GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+		<SignAssembly Condition="Exists('..\..\..\Source\Avalonia-Controls.snk')">true</SignAssembly>
+		<AssemblyOriginatorKeyFile Condition="Exists('..\..\..\Source\Avalonia-Controls.snk')">..\..\..\Source\Avalonia-Controls.snk</AssemblyOriginatorKeyFile>
+
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<OutputPath>..\..\..\Source\bin\Debug</OutputPath>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<OutputPath>..\..\..\Source\bin\Release</OutputPath>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\Source\Bars\Bars.csproj" />
+		<ProjectReference Include="..\..\..\Source\Fundamentals\Fundamentals.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Properties\Bars.Mvvm\Resources.Designer.cs">
+	    <DependentUpon>Resources.resx</DependentUpon>
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="Properties\Bars.Mvvm\Resources.resx">
+	    <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+	    <Generator>PublicResXFileCodeGenerator</Generator>
+	  </EmbeddedResource>
+	</ItemGroup>
+
+</Project>

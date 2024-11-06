@@ -1,3 +1,4 @@
+using ActiproSoftware.UI.Avalonia.Controls;
 using ActiproSoftware.UI.Avalonia.Input;
 using ActiproSoftware.UI.Avalonia.Themes;
 using Avalonia;
@@ -10,6 +11,7 @@ using Avalonia.Threading;
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.IO;
 using System.Windows.Input;
 
 namespace ActiproSoftware.SampleBrowser {
@@ -38,16 +40,19 @@ namespace ActiproSoftware.SampleBrowser {
 		private DelegateCommand<object>? _navigateViewToItemInfoCommand;
 		private DelegateCommand<object?>? _navigateViewToNextItemInfoCommand;
 		private DelegateCommand<object?>? _navigateViewToPreviousItemInfoCommand;
+		private DelegateCommand<object?>? _notImplementedCommand;
+		private DelegateCommand<object>? _openGitHubSampleFolderCommand;
 		private DelegateCommand<object>? _openUrlCommand;
 		private DelegateCommand<UserInterfaceDensity?>? _setUserInterfaceDensityCommand;
 		private DelegateCommand<object?>? _toggleDrawerOpenCommand;
+		private DelegateCommand<object?>? _toggleFlowDirectionCommand;
 		private DelegateCommand<object?>? _toggleShowPrivateItemsCommand;
 
 		public const string ProductDataResourceKey = "AppProductData";
 
 		private const string DefaultSampleUri = null;
-		//private const string DefaultSampleUri = "https://ActiproSoftware/SampleBrowser/Utilities/ColorPalette/ColorPaletteView";
-		//private const string DefaultSampleUri = "https://ActiproSoftware/ProductSamples/FundamentalsSamples/Controls/CircularProgressBarIntro/MainControl";
+		// private const string DefaultSampleUri = "https://ActiproSoftware/SampleBrowser/Utilities/ColorPalette/ColorPaletteView";
+		// private const string DefaultSampleUri = "https://ActiproSoftware/ProductSamples/BarsSamples/Demos/DocumentEditorMvvm/MainControl";
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 		// OBJECT
@@ -148,12 +153,27 @@ namespace ActiproSoftware.SampleBrowser {
 			return transitionForward;
 		}
 
-		public static void OpenExternalUri(Uri uri) {
-			var launcher = ResolveDefaultTopLevel()?.Launcher;
-			if (launcher is not null) {
-				Dispatcher.UIThread.Post(async () => {
-					_ = await launcher.LaunchUriAsync(uri);
-				});
+		/// <summary>
+		/// Opens an external sample window.
+		/// </summary>
+		/// <param name="fullName">The full name of the sample class to open.</param>
+		private void OpenExternalSampleCore(string fullName) {
+			if (!string.IsNullOrEmpty(fullName)) {
+				// Create the view control
+				try {
+					if (!AreExternalSamplesSupported)
+						throw new NotSupportedException("External samples are not supported on this platform.");
+
+					var newViewElement = CreateElement(fullName);
+					if (newViewElement is Window demoWindow)
+						demoWindow.Show();
+				}
+				catch (Exception ex) {
+					while (ex.InnerException is not null)
+						ex = ex.InnerException;
+
+					MessageService?.ShowError($"The sample '{fullName}' was unable to be loaded.", ex);
+				}
 			}
 		}
 
@@ -193,6 +213,12 @@ namespace ActiproSoftware.SampleBrowser {
 			=> "https://www.actiprosoftware.com/company/contact";
 
 		/// <summary>
+		/// The Actipro GitHub URL for the parent folder to the product samples source code.
+		/// </summary>
+		public string ActiproGitHubProductSamplesParentFolder { get; private set; }
+			= "https://github.com/Actipro/Avalonia-Controls/tree/develop/Samples/SampleBrowser/SampleBrowser.Common/";
+
+		/// <summary>
 		/// The Actipro third-party notices URL.
 		/// </summary>
 		public string ActiproThirdPartyNoticesUrl
@@ -209,6 +235,12 @@ namespace ActiproSoftware.SampleBrowser {
 		/// </summary>
 		public string ActiproWebSiteUrl
 			=> "https://www.actiprosoftware.com";
+
+		/// <summary>
+		/// Indicates if opening external samples is supported.
+		/// </summary>
+		public static bool AreExternalSamplesSupported
+			=> Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime;
 
 		/// <summary>
 		/// Indicates if private items are available to be displayed in the application.
@@ -426,6 +458,91 @@ namespace ActiproSoftware.SampleBrowser {
 				});
 			}
 		}
+		
+		/// <summary>
+		/// A special command associated with controls that are for demonstration purposes only and provide no implemented functionality.
+		/// </summary>
+		public ICommand NotImplementedCommand {
+			get {
+				return _notImplementedCommand ??= new DelegateCommand<object?>(
+					_ => {
+						MessageBox.Show(
+							"This control is for user interface demonstration purposes only and no application functionality has been implemented for it.",
+							"Not Implemented",
+							MessageBoxButtons.OK, MessageBoxImage.Information);
+					}
+				);
+			}
+		}
+
+		/// <summary>
+		/// Opens an external uri (e.g., browser link).
+		/// </summary>
+		/// <param name="uri">The uri to be opened.</param>
+		public static void OpenExternalUri(Uri uri) {
+			var launcher = ResolveDefaultTopLevel()?.Launcher;
+			if (launcher is not null) {
+				Dispatcher.UIThread.Post(async () => {
+					_ = await launcher.LaunchUriAsync(uri);
+				});
+			}
+		}
+
+		/// <summary>
+		/// Opens an external sample window.
+		/// </summary>
+		/// <param name="className">The AXAML class name.</param>
+		public void OpenExternalSample(string className) {
+			if (ViewItemInfo is not null) {
+				var fullName = ViewItemInfo.FolderPath + "/" + (className ?? "MainWindow");
+				this.OpenExternalSampleCore(fullName);
+			}
+		}
+
+		/// <summary>
+		/// The <see cref="ICommand"/> that opens the GitHub folder containing the current sample.
+		/// </summary>
+		public ICommand OpenGitHubSampleFolderCommand {
+			get {
+				if (_openGitHubSampleFolderCommand == null) {
+					_openGitHubSampleFolderCommand = new DelegateCommand<object>((param) => {
+						var path = ActiproGitHubProductSamplesParentFolder;
+						var sampleRelativePath = (param as string) ?? ViewItemInfo?.Path;
+
+						if ((path is not null) && (sampleRelativePath is not null)) {
+							var folderPath = sampleRelativePath;
+							if (folderPath.StartsWith(@"/"))
+								folderPath = folderPath[1..];
+
+							path = Path.Combine(path, folderPath);
+						}
+
+						if (path is null) {
+							MessageBox.Show(
+								$"Unable to open sample folder because the folder path could not be determined.",
+								"Folder Unknown",
+								image: MessageBoxImage.Error);
+						}
+						else {
+							try {
+								OpenExternalUri(new Uri(path));
+							}
+							catch (Exception ex) {
+								MessageBox.Show(
+									$"The folder '{path}' was unable to be opened.  The error message was: {ex.Message}",
+									"Folder Not Opened",
+									image: MessageBoxImage.Error);
+							}
+						}
+
+					}, (param) => {
+						return (ViewItemInfo is not null) && (!ViewItemInfo.IsProductOverview) && (!string.IsNullOrEmpty(ActiproGitHubProductSamplesParentFolder));
+					});
+				}
+
+				return _openGitHubSampleFolderCommand;
+			}
+		}
 
 		/// <summary>
 		/// The <see cref="ICommand"/> that opens a web URL.
@@ -437,11 +554,7 @@ namespace ActiproSoftware.SampleBrowser {
 						// For web URLs, navigate externally
 						if ((uriString.StartsWith("https://", StringComparison.OrdinalIgnoreCase)) || (uriString.StartsWith("http://", StringComparison.OrdinalIgnoreCase))) {
 							try {
-								// NOTE: Browser still requires IPlatformHelper due to issue with ILauncher no working on Avalonia 11.1.0.  Not expected to be fixed until at least 11.1.1.
-								if (this.PlatformHelper is { } platformHelper)
-									platformHelper.OpenExternalUri(new Uri(uriString));
-								else
-									OpenExternalUri(new Uri(uriString));
+								OpenExternalUri(new Uri(uriString));
 							}
 							catch {
 								MessageService?.ShowError($"Navigation to the URL '{uriString}' was unable to be completed.  This {Environment.OSVersion.Platform} platform may not support opening an external URI.");
@@ -470,11 +583,6 @@ namespace ActiproSoftware.SampleBrowser {
 		/// </summary>
 		public string PlatformPurchaseLicensesUrl
 			=> "https://www.actiprosoftware.com/purchase/pricing/controls/avalonia";
-
-		/// <summary>
-		/// The platform-specific helper class.
-		/// </summary>
-		public IPlatformHelper? PlatformHelper { get; set; }
 
 		/// <summary>
 		/// The <see cref="ProductData"/> model.
@@ -539,6 +647,15 @@ namespace ActiproSoftware.SampleBrowser {
 		public ICommand ToggleDrawerOpenCommand
 			=> _toggleDrawerOpenCommand ??= new DelegateCommand<object?>(_ => {
 				this.IsDrawerOpen = !this.IsDrawerOpen;
+			});
+
+		/// <summary>
+		/// The <see cref="ICommand"/> to toggle the flow direction of the application.
+		/// </summary>
+		public ICommand ToggleFlowDirectionCommand
+			=> _toggleFlowDirectionCommand ??= new DelegateCommand<object?>(_ => {
+				if (ResolveDefaultTopLevel() is { } topLevel)
+					topLevel.FlowDirection = (topLevel.FlowDirection == FlowDirection.LeftToRight ? FlowDirection.RightToLeft : FlowDirection.LeftToRight);
 			});
 
 		/// <summary>

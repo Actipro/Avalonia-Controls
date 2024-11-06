@@ -1,0 +1,219 @@
+<UserControl
+	x:Name="sampleRootControl"
+	x:Class="ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.ApplicationButton.MainControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Resources>
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+	</UserControl.Resources>
+
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="The Application Button (labeled &quot;File&quot; by default) is used to open a full screen backstage menu.">
+
+		<sampleBrowser:ControlExample
+			Header="Basic usage"
+			Footer="Customize the Label and KeyTipText properties or optionally hide the button completely."
+			>
+
+			<sampleBrowser:ControlExample.XamlContent>
+
+				<!-- XAML-based sample -->
+				<actipro:Ribbon x:Name="labelSampleRibbon"
+					IsApplicationButtonVisible="{Binding #basicUsageIsAppButtonVisibleCheckBox.IsChecked}"
+					QuickAccessToolBarMode="None">
+
+					<actipro:Ribbon.ApplicationButtonContent>
+						<actipro:RibbonApplicationButton x:Name="labelSampleAppButton"
+							Label="{Binding #basicUsageLabelTextBox.Text}"
+							KeyTipText="{Binding #basicUsageKeyTipTextBox.Text}"
+							/>
+					</actipro:Ribbon.ApplicationButtonContent>
+
+					<actipro:Ribbon.BackstageContent>
+						<actipro:RibbonBackstage>
+							<actipro:RibbonBackstageTabItem Key="Info" SmallIcon="/Images/Icons/HomeMono16.png">
+								<TextBlock Margin="20" VerticalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap">This Ribbon sample is only used to demonstrate using text labels as the Application Button content and does not define a backstage.</TextBlock>
+							</actipro:RibbonBackstageTabItem>
+						</actipro:RibbonBackstage>
+					</actipro:Ribbon.BackstageContent>
+
+					<actipro:RibbonTabItem Key="Home">
+						<actipro:RibbonGroup Key="Documents">
+							<actipro:BarButton Key="Open" IsEnabled="False" Label="Open Document" SmallIcon="/Images/Icons/Open16.png" LargeIcon="/Images/Icons/Open32.png" ToolBarItemVariantBehavior="All" />
+							<actipro:BarButton Key="Save" IsEnabled="False" Label="Save Document" SmallIcon="/Images/Icons/Save16.png" LargeIcon="/Images/Icons/Save32.png" ToolBarItemVariantBehavior="All" />
+						</actipro:RibbonGroup>
+					</actipro:RibbonTabItem>
+
+				</actipro:Ribbon>
+
+			</sampleBrowser:ControlExample.XamlContent>
+
+			<sampleBrowser:ControlExample.MvvmContent>
+
+				<!-- MVVM-based sample -->
+				<actipro:Ribbon
+					DataContext="{Binding #sampleRootControl.BasicUsageRibbonViewModel}"
+					Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+					/>
+
+			</sampleBrowser:ControlExample.MvvmContent>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10" DataContext="{Binding #sampleRootControl.BasicUsageRibbonViewModel}">
+					<CheckBox x:Name="basicUsageIsAppButtonVisibleCheckBox" Content="Is app button visible" IsChecked="{Binding IsApplicationButtonVisible}" />
+					<TextBox x:Name="basicUsageLabelTextBox" Text="{Binding ApplicationButton.Label}" Watermark="Label" UseFloatingWatermark="True" />
+					<TextBox x:Name="basicUsageKeyTipTextBox" Text="{Binding ApplicationButton.KeyTipText}" Watermark="Key tip text" UseFloatingWatermark="True" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample Kind="Xaml" xml:space="preserve">
+					<![CDATA[
+<actipro:Ribbon$(IsApplicationButtonVisibleAttribute) ... >
+
+	<actipro:Ribbon.ApplicationButtonContent>
+		<actipro:RibbonApplicationButton $(LabelAttribute)$(KeyTipTextAttribute)/>
+	</actipro:Ribbon.ApplicationButtonContent>
+
+	...
+
+</actipro:Ribbon>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="IsApplicationButtonVisibleAttribute"
+															   IsEnabled="{Binding !#labelSampleRibbon.IsApplicationButtonVisible}"
+															   Value=" IsApplicationButtonVisible=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="KeyTipTextAttribute"
+															   IsEnabled="{Binding #labelSampleAppButton.KeyTipText, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='F'}"
+															   Value="{Binding #labelSampleAppButton.KeyTipText, StringFormat='KeyTipText=&quot;{0}&quot; '}" />
+						<sampleBrowser:CodeExampleSubstitution Key="LabelAttribute"
+															   IsEnabled="{Binding #labelSampleAppButton.Label, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='File'}"
+															   Value="{Binding #labelSampleAppButton.Label, StringFormat='Label=&quot;{0}&quot; '}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" xml:space="preserve">
+				<![CDATA[
+<!-- DataContext is bound to an instance of RibbonViewModel -->
+<actipro:Ribbon
+	DataContext="{Binding #sampleRootControl.BasicUsageRibbonViewModel}"
+	Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+	/>
+				]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" Language="C#" xml:space="preserve">
+					<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm;
+
+public partial class SampleRootControl : UserControl {
+	
+	/// <summary>
+	/// Creates the ribbon view model.
+	/// </summary>
+	private static void CreateBasicUsageRibbonViewModel() {
+		return new RibbonViewModel() {$(IsApplicationButtonVisibleSetter)
+		
+			ApplicationButton = new RibbonApplicationButtonViewModel() {$(LabelSetter)$(KeyTipTextSetter)
+			},
+		
+			// Additional view model properties omitted that are unrelated to the sample
+			Tabs = { ... }
+		};
+	}
+	
+	/// <summary>
+	/// Gets the view model to be bound to the ribbon.
+	/// </summary>
+	public RibbonViewModel BasicUsageRibbonViewModel { get; } = CreateBasicUsageRibbonViewModel();
+	
+}
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="IsApplicationButtonVisibleSetter"
+															   IsEnabled="{Binding !#sampleRootControl.BasicUsageRibbonViewModel.IsApplicationButtonVisible}"
+															   Value="&#xD;&#x9;&#x9;&#x9;IsApplicationButtonVisible = false," />
+						<sampleBrowser:CodeExampleSubstitution Key="KeyTipTextSetter"
+															   IsEnabled="{Binding #sampleRootControl.BasicUsageRibbonViewModel.ApplicationButton.KeyTipText, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='F'}"
+															   Value="{Binding #sampleRootControl.BasicUsageRibbonViewModel.ApplicationButton.KeyTipText, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;KeyTipText = &quot;{0}&quot;,'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="LabelSetter"
+															   IsEnabled="{Binding #sampleRootControl.BasicUsageRibbonViewModel.ApplicationButton.Label, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='File'}"
+															   Value="{Binding #sampleRootControl.BasicUsageRibbonViewModel.ApplicationButton.Label, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;Label = &quot;{0}&quot;,'}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Image content"
+			Footer="Optionally customize the content of the application button like the image demonstrated in this sample."
+			>
+
+			<StackPanel>
+				<actipro:Ribbon QuickAccessToolBarMode="None">
+
+					<actipro:Ribbon.ApplicationButtonContent>
+						<actipro:RibbonApplicationButton>
+							<actipro:RibbonApplicationButton.Content>
+								<actipro:DynamicImage Width="16" Height="16"
+									VerticalAlignment="Center"
+									Stretch="Uniform"
+									StretchDirection="DownOnly"
+									Source="/Images/Icons/ApplicationButtonDefault16.png" />
+							</actipro:RibbonApplicationButton.Content>
+						</actipro:RibbonApplicationButton>
+					</actipro:Ribbon.ApplicationButtonContent>
+
+					<actipro:Ribbon.BackstageContent>
+						<actipro:RibbonBackstage>
+							<actipro:RibbonBackstageTabItem Key="Info" SmallIcon="/Images/Icons/HomeMono16.png">
+								<TextBlock Margin="20" VerticalAlignment="Center" TextAlignment="Center" TextWrapping="Wrap">This Ribbon sample is only used to demonstrate using images as the Application Button content and does not define a backstage.</TextBlock>
+							</actipro:RibbonBackstageTabItem>
+						</actipro:RibbonBackstage>
+					</actipro:Ribbon.BackstageContent>
+
+					<actipro:RibbonTabItem Key="Home">
+						<actipro:RibbonGroup Key="Documents">
+							<actipro:BarButton Key="Open" IsEnabled="False" Label="Open Document" SmallIcon="/Images/Icons/Open16.png" LargeIcon="/Images/Icons/Open32.png" ToolBarItemVariantBehavior="All" />
+							<actipro:BarButton Key="Save" IsEnabled="False" Label="Save Document" SmallIcon="/Images/Icons/Save16.png" LargeIcon="/Images/Icons/Save32.png" ToolBarItemVariantBehavior="All" />
+						</actipro:RibbonGroup>
+					</actipro:RibbonTabItem>
+
+				</actipro:Ribbon>
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+				<![CDATA[
+<actipro:Ribbon ... >
+
+	<actipro:Ribbon.ApplicationButtonContent>
+		<actipro:RibbonApplicationButton>
+
+			<!-- Define an Image as the Application Button content -->
+			<actipro:RibbonApplicationButton.Content>
+				<actipro:DynamicImage Width="16" Height="16"
+					VerticalAlignment="Center"
+					Stretch="Uniform"
+					StretchDirection="DownOnly"
+					Source="/Images/Icons/ApplicationButtonDefault16.png" />
+			</actipro:RibbonApplicationButton.Content>
+
+		</actipro:RibbonApplicationButton>
+	</actipro:Ribbon.ApplicationButtonContent>
+
+	...
+
+</actipro:Ribbon>
+				]]>
+			</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+
+</UserControl>

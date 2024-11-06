@@ -52,13 +52,13 @@
 		],
 		"dest": "wwwroot",
 		"globalMetadata": {
-			"_appTitle": "Actipro Avalonia UI Docs",
+			"_appTitle": "Actipro Avalonia Docs",
 			"_docsCompanyHref": "https://www.actiprosoftware.com/products/controls/avalonia",
 			"_docsCompanyName": "Actipro Software LLC",
 			"_docsCopyrightYears": "2021-2024",
 			"_docsProductHref": "https://www.actiprosoftware.com/products/controls/avalonia",
-			"_docsProductName": "Avalonia UI",
-			"_docsProductVersion": "24.2",
+			"_docsProductName": "Avalonia",
+			"_docsProductVersion": "25.1",
 			"_disableContribution": true,
 			"_enableNewTab": true,
 			"_gitContribute": {
@@ -70,8 +70,8 @@
 			"_conditionalFlags": "avalonia",
 			"_replaceTokens": {
 				"PlatformAssemblySuffix": "Avalonia",
-				"PlatformName": "Avalonia UI",
-				"PlatformTitle": "Avalonia UI"
+				"PlatformName": "Avalonia",
+				"PlatformTitle": "Avalonia"
 			},
 			"_rootNamespaceAliases": {
 				"ActiproUIRoot": "ActiproSoftware.UI.Avalonia",

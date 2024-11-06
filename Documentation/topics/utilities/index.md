@@ -23,6 +23,6 @@ See the [Theme Resource Browser](theme-resource-browser.md) topic for informatio
 
 ## String Resource Browser
 
-The **String Resource Browser** allows you to view all the string resources that are defined for the various Actipro Avalonia UI control products.  It can also generate code to customize or localize any of the string resources in our products.
+The **String Resource Browser** allows you to view all the string resources that are defined for the various Actipro Avalonia control products.  It can also generate code to customize or localize any of the string resources in our products.
 
 See the [String Resource Browser](string-resource-browser.md) topic for information on this utility.

@@ -1,0 +1,44 @@
+﻿<UserControl
+	x:Class="ActiproSoftware.ProductSamples.BarsSamples.Overview"
+	x:DataType="sampleBrowser:ApplicationViewModel"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:sampleData="using:ActiproSoftware.SampleBrowser.SampleData"
+	>
+
+	<ScrollViewer Classes="theme-scroll-overlay" HorizontalScrollBarVisibility="Disabled">
+		<StackPanel>
+
+			<sampleBrowser:ProductOverviewHeader>
+				Actipro Bars contains a comprehensive implementation of an Office-like ribbon user interface for Avalonia applications, including its modern fluent design and ability to create content-rich galleries.
+			</sampleBrowser:ProductOverviewHeader>
+
+			<actipro:Ribbon x:Name="ribbon"
+				IsApplicationButtonVisible="False"
+				IsMinimizable="False"
+				IsCollapsible="False"
+				Margin="{actipro:ScaledThickness '6,0'}"
+				Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+				/>
+			
+			<TextBox x:Name="textBox" IsVisible="False" />
+
+			<actipro:InfoBar Severity="Warning" CanClose="False" Margin="{actipro:ScaledThickness '6,6,6,0'}"
+				Message="Actipro Bars is being released as a public beta.  While the product is safe for use in production, there is a minor potential for breaking changes as the product is finalized.  Any breaking changes will be documented." />
+			
+			<TextBlock Classes="theme-text-body" Margin="{actipro:ScaledThickness 6}" Text="Dive into our individual samples linked below for many more detailed examples."
+					   FontStyle="Italic" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" TextAlignment="Center" />
+
+			<Border Background="{actipro:ThemeResource Container2BackgroundBrush}">
+				<StackPanel Classes="sample-layout-panel" Margin="{actipro:ScaledThickness '6,0'}">
+					<sampleBrowser:CategorizedSampleItemsControl ItemsSource="{Binding ViewItemInfo.ProductFamily.GroupedItems}" />
+				</StackPanel>
+			</Border>
+			
+		</StackPanel>
+	</ScrollViewer>
+
+</UserControl>

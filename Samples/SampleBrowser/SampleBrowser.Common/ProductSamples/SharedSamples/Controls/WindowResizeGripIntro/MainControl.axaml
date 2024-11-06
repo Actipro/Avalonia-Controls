@@ -30,7 +30,10 @@
 			>
 
 			<Border Background="{actipro:ThemeResource DefaultBackgroundBrush}" 
-					BorderBrush="{actipro:ThemeResource Container3BorderBrush}" BorderThickness="0,0,1,1" CornerRadius="0,0,10,0">
+					BorderBrush="{actipro:ThemeResource Container3BorderBrush}"
+					BorderThickness="0,0,1,1"
+					CornerRadius="0,0,10,0"
+					FlowDirection="LeftToRight">
 				<Border Margin="0,50,0,0" Background="{actipro:ThemeResource Container3BackgroundBrush}" actipro:BorderChildClipConverter.ClipToContainingBorder="True">
 					<Grid ColumnDefinitions="*,Auto">
 						<TextBlock Margin="0,4" Text="{Binding ProductData.ProductVersionAndDateSummaryText}" HorizontalAlignment="Right" />

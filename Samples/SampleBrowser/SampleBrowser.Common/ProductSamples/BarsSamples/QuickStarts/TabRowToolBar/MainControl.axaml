@@ -1,0 +1,123 @@
+<UserControl
+	x:Name="sampleRootControl"
+	x:Class="ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.TabRowToolBar.MainControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Resources>
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+	</UserControl.Resources>
+
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="The tab row toolbar can optionally be displayed on the far-right side of the ribbon, in the same row as the ribbon tabs.">
+
+		<sampleBrowser:ControlExample
+			Header="Basic usage"
+			Footer="Use tab row toolbar to show common controls that are always available, such as Sharing or Feedback buttons."
+			>
+
+			<sampleBrowser:ControlExample.XamlContent>
+
+				<!-- XAML-based sample -->
+				<actipro:Ribbon IsApplicationButtonVisible="False" QuickAccessToolBarMode="None">
+
+					<actipro:Ribbon.TabRowToolBarContent>
+						<actipro:RibbonTabRowToolBar>
+							<actipro:BarButton Key="Share" ToolBarItemVariantBehavior="AlwaysMedium" SmallIcon="/Images/Icons/Share16.png" Command="{Binding #sampleRootControl.NotImplementedCommand}" />
+						</actipro:RibbonTabRowToolBar>
+					</actipro:Ribbon.TabRowToolBarContent>
+					
+					<actipro:RibbonTabItem Key="Home">
+						<actipro:RibbonGroup Key="Documents">
+							<actipro:BarButton Key="Open" IsEnabled="False" Label="Open Document" SmallIcon="/Images/Icons/Open16.png" LargeIcon="/Images/Icons/Open32.png" ToolBarItemVariantBehavior="All" />
+							<actipro:BarButton Key="Save" IsEnabled="False" Label="Save Document" SmallIcon="/Images/Icons/Save16.png" LargeIcon="/Images/Icons/Save32.png" ToolBarItemVariantBehavior="All" />
+						</actipro:RibbonGroup>
+					</actipro:RibbonTabItem>
+
+				</actipro:Ribbon>
+
+			</sampleBrowser:ControlExample.XamlContent>
+
+			<sampleBrowser:ControlExample.MvvmContent>
+
+				<!-- MVVM-based sample -->
+				<actipro:Ribbon
+					DataContext="{Binding #sampleRootControl.BasicUsageRibbonViewModel}"
+					Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+					/>
+
+			</sampleBrowser:ControlExample.MvvmContent>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample Kind="Xaml" xml:space="preserve">
+					<![CDATA[
+<actipro:Ribbon ... >
+
+	<actipro:Ribbon.TabRowToolBarContent>
+		<actipro:RibbonTabRowToolBar>
+			<actipro:BarButton Key="Share" SmallIcon="/Images/Icons/Share16.png" />
+		</actipro:RibbonTabRowToolBar>
+	</actipro:Ribbon.TabRowToolBarContent>
+
+	<actipro:RibbonTabItem Key="Home">
+		...
+	</actipro:RibbonTabItem>
+
+	...
+
+</actipro:Ribbon>
+					]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" xml:space="preserve">
+				<![CDATA[
+<!-- DataContext is bound to an instance of RibbonViewModel -->
+<actipro:Ribbon
+	DataContext="{Binding #sampleRootControl.BasicUsageRibbonViewModel}"
+	Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+	/>
+				]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" Language="C#" xml:space="preserve">
+					<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm;
+
+public partial class SampleRootControl : UserControl {
+	
+	/// <summary>
+	/// Creates the ribbon view model.
+	/// </summary>
+	private static void CreateBasicUsageRibbonViewModel() {
+		return new RibbonViewModel() {
+		
+			TabRowToolBar = new RibbonTabRowToolBarViewModel() {
+				Items = {
+					new BarButtonViewModel("Share") {
+						SmallIcon = ImageLoader.GetIcon("Share16.png"),
+					},
+				}
+			},
+		
+			// Additional view model properties omitted that are unrelated to the sample
+			Tabs = { ... }
+		};
+	}
+	
+	/// <summary>
+	/// Gets the view model to be bound to the ribbon.
+	/// </summary>
+	public RibbonViewModel BasicUsageRibbonViewModel { get; } = CreateBasicUsageRibbonViewModel();
+	
+}
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+
+</UserControl>

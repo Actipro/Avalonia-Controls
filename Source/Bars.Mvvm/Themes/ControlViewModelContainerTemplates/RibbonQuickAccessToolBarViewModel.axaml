@@ -1,0 +1,16 @@
+<ResourceDictionary
+	x:ClassModifier="internal"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	>
+
+	<DataTemplate x:Key="{x:Static actipro:BarsMvvmResourceKeys.RibbonQuickAccessToolBarDefaultItemContainerTemplate}" DataType="actipro:RibbonQuickAccessToolBarViewModel">
+		<actipro:RibbonQuickAccessToolBar
+			CommonItems="{Binding CommonItems}"
+			IsCustomizeButtonVisible="{Binding IsCustomizeButtonVisible}"
+			ItemsSource="{Binding Items}"
+			/>
+	</DataTemplate>
+
+</ResourceDictionary>

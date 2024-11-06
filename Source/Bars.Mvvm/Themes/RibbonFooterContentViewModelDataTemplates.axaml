@@ -1,0 +1,45 @@
+<ResourceDictionary
+	x:ClassModifier="internal"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:controlsPrimitives="using:ActiproSoftware.UI.Avalonia.Controls.Primitives"
+	>
+
+	<DataTemplate x:Key="{x:Static actipro:BarsMvvmResourceKeys.RibbonFooterContentInfoBarDataTemplate}" DataType="actipro:RibbonFooterInfoBarContentViewModel">
+		<actipro:InfoBar
+			Action="{Binding Action}"
+			ActionTemplate="{Binding ActionTemplate}"
+			BorderThickness="0"
+			CanClose="{Binding CanClose}"
+			CloseButtonCommand="{Binding $parent[actipro:Ribbon].ClearFooterCommand}"
+			Content="{Binding Content}"
+			ContentTemplate="{Binding ContentTemplate}"
+			Icon="{Binding Icon}"
+			IsAnimationEnabled="False"
+			IsIconVisible="{Binding IsIconVisible}"
+			Message="{Binding Message}"
+			Padding="{Binding Padding}"
+			Severity="{Binding Severity}"
+			Title="{Binding Title}"
+			/>
+	</DataTemplate>
+
+	<DataTemplate x:Key="{x:Static actipro:BarsMvvmResourceKeys.RibbonFooterContentSimpleDataTemplate}" DataType="actipro:RibbonFooterSimpleContentViewModel">
+		<DockPanel>
+			<ContentControl
+				Classes="theme-icon-presenter"
+				DockPanel.Dock="Left"
+				Margin="0,0,5,0"
+				Width="16" Height="16"
+				HorizontalAlignment="Center"
+				VerticalAlignment="Center"
+				UseLayoutRounding="True"
+				Content="{Binding Icon}"
+				/>
+			<TextBlock VerticalAlignment="Center" TextWrapping="Wrap" Text="{Binding Text}"/>
+		</DockPanel>
+	</DataTemplate>
+
+
+</ResourceDictionary>

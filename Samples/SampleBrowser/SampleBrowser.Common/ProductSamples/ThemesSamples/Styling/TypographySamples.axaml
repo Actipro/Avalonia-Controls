@@ -117,9 +117,9 @@
 				<sampleBrowser:CodeExample xml:space="preserve">
 					<![CDATA[
 <StackPanel>
-	<TextBlock$(LabelClassesAttribute)/>
+	<TextBlock$(LabelClassesAttribute) Text="Enter password" />
 	<TextBox PasswordChar="{actipro:ThemeResource EditPasswordChar}" Text="passw" />
-	<TextBlock$(MessageClassesAttribute)/>
+	<TextBlock$(MessageClassesAttribute) Text="Passwords must be at least 6 characters" />
 </StackPanel>
 					]]>
 					<sampleBrowser:CodeExample.Substitutions>

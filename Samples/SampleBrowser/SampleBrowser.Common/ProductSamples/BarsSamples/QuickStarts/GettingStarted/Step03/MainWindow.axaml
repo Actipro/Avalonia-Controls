@@ -1,0 +1,79 @@
+<!--
+
+RIBBON GETTING STARTED SERIES - STEP 3
+
+STEP SUMMARY:
+
+	Before we can start adding controls to the Ribbon, we need to establish the supporting
+	classes.  This starts by defining unique keys that can be used to refer to each control.
+	Then we need need to define a view model that will represent each control.
+	
+	Refer to 'SampleBarControlKeys.cs' for more information on the string-based keys.
+	
+	Refer to 'SampleBarManager.cs' for more information on the class that will manage the
+	view models for each control.
+	
+CHANGES SINCE LAST STEP:
+
+	This XAML is fundamentally unchanged by this step.
+	
+	A new 'SampleBarControlKeys' class was added with a string-based key for the Help control.
+	
+	A new 'SampleBarManager' class was added. Large and small images were registered for the
+	Help control based on the control key. A view model was registered for the Help control
+	based on the control key.
+	
+	Prior sample comments were removed/condensed.
+	
+EXPECTED OPERATION:
+	
+	This step laid the groundwork for incorporating view models into the Ribbon, but the
+	expected operation (as perceived by the end user) has not changed. In the next step, the
+	"Help" button will be migrated to the Ribbon.
+	
+	When this sample window is opened, a Ribbon control with a default "File" button should be displayed
+	along with a "Help" button below the Ribbon. Clicking the "Help" button should display a message.
+	Clicking the "File" button should do nothing since a backstage is not currently defined.
+
+-->
+
+<actipro:RibbonWindow
+	x:Class="ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.Step03.MainWindow"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:gettingStartedCommon="using:ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.Common"
+	xmlns:local="using:ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.Step03"
+	Title="Actipro Ribbon Getting Started Series - Step 3"
+	Height="450" Width="800"
+	x:DataType="local:SampleWindowViewModel"
+	>
+
+	<actipro:RibbonContainerPanel>
+
+		<!-- Ribbon Control -->
+		<actipro:Ribbon
+			DataContext="{Binding Ribbon}"
+			Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+			/>
+
+
+		<!-- Window Content -->
+		<DockPanel>
+
+			<!-- Configure common StatusBar that is unrelated to this sample -->
+			<gettingStartedCommon:CommonStatusBar DockPanel.Dock="Bottom" SampleCodePath="/Step03/MainWindow.axaml" />
+
+			<!-- Temporary Button to test invocation of the Help command -->
+			<Button
+				Command="{Binding HelpCommand}"
+				Content="Help"
+				MinWidth="100" MinHeight="100"
+				HorizontalAlignment="Center" VerticalAlignment="Center"
+				/>
+
+		</DockPanel>
+
+	</actipro:RibbonContainerPanel>
+
+</actipro:RibbonWindow>

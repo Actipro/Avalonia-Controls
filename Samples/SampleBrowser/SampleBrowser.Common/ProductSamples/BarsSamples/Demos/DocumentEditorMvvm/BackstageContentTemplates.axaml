@@ -1,0 +1,248 @@
+<ResourceDictionary 
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:local="using:ActiproSoftware.ProductSamples.BarsSamples.Demos.DocumentEditorMvvm"
+	>
+
+	<!--
+		
+		THEMES (USED IN BACKSTAGE TAB CONTENT TEMPLATES BELOW)
+	
+	-->
+
+	<ControlTheme x:Key="BackstageHeadingTextBlockTheme" TargetType="TextBlock">
+		<Setter Property="FontSize" Value="{actipro:ThemeResource HeadingFontSizeLarge}" />
+		<Setter Property="FontFamily" Value="{actipro:ThemeResource HeadingFontFamily}" />
+		<Setter Property="FontWeight" Value="{actipro:ThemeResource HeadingFontWeightLarge}" />
+		<Setter Property="Margin" Value="0,0,0,30" />
+		<Setter Property="TextWrapping" Value="Wrap" />
+	</ControlTheme>
+
+	<ControlTheme x:Key="BackstageSubHeadingTextBlockTheme" TargetType="TextBlock">
+		<Setter Property="FontSize" Value="{actipro:ThemeResource HeadingFontSizeSmall}" />
+		<Setter Property="FontFamily" Value="{actipro:ThemeResource HeadingFontFamily}" />
+		<Setter Property="FontWeight" Value="{actipro:ThemeResource HeadingFontWeightSmall}" />
+		<Setter Property="Margin" Value="0,0,0,10" />
+		<Setter Property="TextWrapping" Value="Wrap" />
+	</ControlTheme>
+
+	<ControlTheme x:Key="PropertyNameTextBlockTheme" TargetType="TextBlock">
+		<Setter Property="Foreground" Value="{actipro:ThemeResource DefaultForegroundBrushSecondary}" />
+		<Setter Property="TextTrimming" Value="CharacterEllipsis" />
+	</ControlTheme>
+
+	<ControlTheme x:Key="PropertyValueTextBlockTheme" TargetType="TextBlock">
+		<Setter Property="Foreground" Value="{actipro:ThemeResource DefaultForegroundBrushTertiary}" />
+		<Setter Property="TextTrimming" Value="CharacterEllipsis" />
+	</ControlTheme>
+
+	<!--
+		
+		BACKSTAGE TAB CONTENT TEMPLATES
+	
+	-->
+	
+	<actipro:TypedDataTemplateSelector x:Key="BackstageContentTemplates">
+
+		<!-- Info Tab -->
+		<DataTemplate DataType="{x:Type local:InfoRibbonBackstageTabViewModel}">
+			<ScrollViewer>
+				<Grid Margin="40,30,0,30" RowDefinitions="Auto,Auto,30,Auto,30,Auto,*">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="*" MinWidth="200" MaxWidth="500" />
+						<ColumnDefinition Width="Auto" />
+					</Grid.ColumnDefinitions>
+
+					<TextBlock Grid.ColumnSpan="3" Theme="{StaticResource BackstageHeadingTextBlockTheme}" Text="Information" />
+
+					<actipro:BarButton Grid.Row="1" Margin="0,0,15,0"
+						Label="Protect Document" KeyTipText="P"
+						Command="{Binding NotImplementedCommand}"
+						LargeIcon="/Images/Icons/ProtectDocument32.png"
+						Theme="{actipro:ControlTheme RibbonBackstageBarButtonOutline}" />
+					
+					<StackPanel Grid.Row="1" Grid.Column="1">
+						<TextBlock Theme="{StaticResource BackstageSubHeadingTextBlockTheme}" Text="Permissions" />
+						<TextBlock TextWrapping="Wrap" Text="Control what types of changes people can make to this document." />
+					</StackPanel>
+
+					<actipro:BarButton Grid.Row="3" Margin="0,0,15,0"
+						Label="Check for Issues" KeyTipText="I"
+						Command="{Binding NotImplementedCommand}"
+						LargeIcon="/Images/Icons/CheckIssues32.png"
+						Theme="{actipro:ControlTheme RibbonBackstageBarButtonOutline}" />
+					<StackPanel Grid.Row="3" Grid.Column="1">
+						<TextBlock Theme="{StaticResource BackstageSubHeadingTextBlockTheme}" Text="Prepare for Sharing" />
+						<TextBlock TextWrapping="Wrap" Text="Check for issues prior to sharing." />
+					</StackPanel>
+
+
+					<actipro:BarPopupButton Grid.Row="5" Margin="0,0,15,0"
+						Label="Manage Document" KeyTipText="M"
+						LargeIcon="/Images/Icons/ManageVersions32.png"
+						Theme="{actipro:ControlTheme RibbonBackstageBarPopupButtonOutline}"
+						>
+						<actipro:BarMenuItem UseLargeSize="True" LargeIcon="/Images/Icons/RecoverUnsavedDocuments32.png" Label="Recover Unsaved Documents"
+											 Description="Browse recent copies of unsaved files." KeyTipText="B" 
+											 Command="{Binding NotImplementedCommand}" />
+						<actipro:BarMenuItem UseLargeSize="True" LargeIcon="/Images/Icons/DeleteUnsavedDocuments32.png" Label="Delete All Unsaved Documents"
+											 Description="Delete all recent copies of unsaved files." KeyTipText="D" 
+											 Command="{Binding NotImplementedCommand}" />
+					</actipro:BarPopupButton>
+					<StackPanel Grid.Row="5" Grid.Column="1">
+						<TextBlock Theme="{StaticResource BackstageSubHeadingTextBlockTheme}" Text="Manage Document" />
+						<TextBlock TextWrapping="Wrap" Text="There are no unsaved changes." />
+					</StackPanel>
+
+					<StackPanel Grid.Row="1" Grid.RowSpan="6" Grid.Column="2" Margin="40,0">
+						<TextBlock Theme="{StaticResource BackstageSubHeadingTextBlockTheme}" Text="Properties" />
+
+						<Grid RowDefinitions="Auto,7,Auto,7,Auto,7,Auto,7,Auto" ColumnDefinitions="Auto,15,*">
+
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="Size" Theme="{StaticResource PropertyNameTextBlockTheme}" />
+							<TextBlock Grid.Row="0" Grid.Column="2" Text="Not saved yet" Theme="{StaticResource PropertyValueTextBlockTheme}" />
+
+							<TextBlock Grid.Row="2" Grid.Column="0" Text="Pages" Theme="{StaticResource PropertyNameTextBlockTheme}" />
+							<TextBlock Grid.Row="2" Grid.Column="2" Text="3" Theme="{StaticResource PropertyValueTextBlockTheme}" />
+
+							<TextBlock Grid.Row="4" Grid.Column="0" Text="Words" Theme="{StaticResource PropertyNameTextBlockTheme}" />
+							<TextBlock Grid.Row="4" Grid.Column="2" Text="481" Theme="{StaticResource PropertyValueTextBlockTheme}" />
+
+							<TextBlock Grid.Row="6" Grid.Column="0" Text="Total Editing Time" Theme="{StaticResource PropertyNameTextBlockTheme}" />
+							<TextBlock Grid.Row="6" Grid.Column="2" Text="2 minutes" Theme="{StaticResource PropertyValueTextBlockTheme}" />
+
+							<TextBlock Grid.Row="8" Grid.Column="0" Text="Created" Theme="{StaticResource PropertyNameTextBlockTheme}" />
+							<TextBlock Grid.Row="8" Grid.Column="2" Text="Today, 1:18 PM" Theme="{StaticResource PropertyValueTextBlockTheme}" />
+						</Grid>
+					</StackPanel>
+				</Grid>
+			</ScrollViewer>
+		</DataTemplate>
+
+		<!-- New Tab -->
+		<DataTemplate DataType="{x:Type local:NewRibbonBackstageTabViewModel}">
+			<ScrollViewer>
+				<Grid Margin="40,30,0,30" RowDefinitions="Auto,Auto,30,Auto,30,Auto,*">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="*" MinWidth="200" MaxWidth="500" />
+					</Grid.ColumnDefinitions>
+
+					<TextBlock Grid.ColumnSpan="2" Theme="{StaticResource BackstageHeadingTextBlockTheme}" Text="New" />
+
+					<actipro:BarButton Grid.Row="1" Margin="0,0,15,0"
+						Label="Blank Document" KeyTipText="B"
+						Command="{Binding NewBlankDocumentCommand}"
+						LargeIcon="/Images/Icons/BlankPage32.png"
+					Theme="{actipro:ControlTheme RibbonBackstageBarButtonOutline}" />
+					<StackPanel Grid.Row="1" Grid.Column="1">
+						<TextBlock Theme="{StaticResource BackstageSubHeadingTextBlockTheme}" Text="No Content" />
+						<TextBlock TextWrapping="Wrap" Text="Create a document without any initial content." />
+					</StackPanel>
+
+					<actipro:BarButton Grid.Row="3" Margin="0,0,15,0"
+						Label="Default Document" KeyTipText="I"
+						Command="{Binding NewDefaultDocumentCommand}"
+						LargeIcon="/Images/Icons/RichTextDocument32.png"
+					Theme="{actipro:ControlTheme RibbonBackstageBarButtonOutline}" />
+					<StackPanel Grid.Row="3" Grid.Column="1">
+						<TextBlock Theme="{StaticResource BackstageSubHeadingTextBlockTheme}" Text="Default Content" />
+						<TextBlock TextWrapping="Wrap" Text="Create a document that has some default content." />
+					</StackPanel>
+				</Grid>
+			</ScrollViewer>
+		</DataTemplate>
+
+		<!-- Open Tab -->
+		<DataTemplate DataType="{x:Type local:OpenRibbonBackstageTabViewModel}">
+			<Grid Margin="40,30" RowDefinitions="Auto,*">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*" MaxWidth="800" />
+				</Grid.ColumnDefinitions>
+
+				<TextBlock Theme="{StaticResource BackstageHeadingTextBlockTheme}" Text="Open" />
+
+				<actipro:BarButton
+					Label="Browse..." KeyTipText="B"
+					Command="{Binding NotImplementedCommand}"
+					HorizontalAlignment="Right" VerticalAlignment="Top"
+					SmallIcon="/Images/Icons/Open16.png"
+					Theme="{actipro:ControlTheme RibbonBackstageBarButtonOutline}"
+					VariantSize="Medium"  />
+
+				<actipro:RecentDocumentControl Grid.Row="1"
+					MaxWidth="800"
+					HorizontalAlignment="Left"
+					ItemsSource="{Binding RecentDocuments}"
+					OpenCommand="{Binding NotImplementedCommand}" />
+
+			</Grid>
+		</DataTemplate>
+
+		<!-- Export Tab -->
+		<DataTemplate DataType="{x:Type local:ExportRibbonBackstageTabViewModel}">
+			<Grid Margin="40,30" RowDefinitions="Auto,*">
+				<TextBlock Theme="{StaticResource BackstageHeadingTextBlockTheme}" Text="Export" />
+
+				<actipro:TaskTabControl Grid.Row="1">
+					<actipro:TaskTabItem LargeIcon="/Images/Icons/PdfDocument32.png" Label="Create PDF Document" KeyTipText="P">
+						<ScrollViewer>
+							<Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
+
+								<TextBlock Grid.ColumnSpan="2" Theme="{StaticResource BackstageSubHeadingTextBlockTheme}" Text="Create a PDF Document" />
+
+								<TextBlock Grid.Row="1" Margin="7,0" Text="&#x25aa;" />
+								<TextBlock Grid.Row="1" Grid.Column="2" TextWrapping="Wrap" Text="Preserves layout, formatting, fonts, and images" />
+								<TextBlock Grid.Row="2" Margin="7,0" Text="&#x25aa;" />
+								<TextBlock Grid.Row="2" Grid.Column="2" TextWrapping="Wrap" Text="Content can't be easily changed" />
+								<TextBlock Grid.Row="3" Margin="7,0" Text="&#x25aa;" />
+								<TextBlock Grid.Row="3" Grid.Column="2" TextWrapping="Wrap" Text="Free viewers are available on the web" />
+
+								<actipro:BarButton Grid.Row="4" Grid.ColumnSpan="2"
+									Label="Create PDF" KeyTipText="A"
+									Command="{Binding NotImplementedCommand}"
+									LargeIcon="/Images/Icons/PdfDocument32.png"
+									Margin="0,40,0,0"
+									HorizontalAlignment="Left"
+									Theme="{actipro:ControlTheme RibbonBackstageBarButtonOutline}" />
+
+							</Grid>
+						</ScrollViewer>
+					</actipro:TaskTabItem>
+					<actipro:TaskTabItem LargeIcon="/Images/Icons/HtmlDocument32.png" Label="Create HTML Document" KeyTipText="H">
+						<ScrollViewer>
+							<Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
+
+								<TextBlock Grid.ColumnSpan="2" Theme="{StaticResource BackstageSubHeadingTextBlockTheme}" Text="Create a HTML Document" />
+
+								<TextBlock Grid.Row="1" Margin="7,0" Text="&#x25aa;" />
+								<TextBlock Grid.Row="1" Grid.Column="2" TextWrapping="Wrap" Text="Preserves layout, formatting, fonts, and images" />
+								<TextBlock Grid.Row="2" Margin="7,0" Text="&#x25aa;" />
+								<TextBlock Grid.Row="2" Grid.Column="2" TextWrapping="Wrap" Text="Content can't be changed" />
+								<TextBlock Grid.Row="3" Margin="7,0" Text="&#x25aa;" />
+								<TextBlock Grid.Row="3" Grid.Column="2" TextWrapping="Wrap" Text="Viewable in a web browser" />
+
+								<actipro:BarButton Grid.Row="4" Grid.ColumnSpan="2"
+									Label="Create HTML" KeyTipText="A"
+									Command="{Binding NotImplementedCommand}"
+									LargeIcon="/Images/Icons/HtmlDocument32.png"
+									Margin="0,40,0,0"
+									HorizontalAlignment="Left"
+									Theme="{actipro:ControlTheme RibbonBackstageBarButtonOutline}" />
+
+							</Grid>
+						</ScrollViewer>
+					</actipro:TaskTabItem>
+				</actipro:TaskTabControl>
+
+			
+		
+		</Grid>
+		</DataTemplate>
+
+	</actipro:TypedDataTemplateSelector>
+
+</ResourceDictionary>

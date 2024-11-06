@@ -29,7 +29,7 @@
 			DataContext="{Binding #sample}"
 			>
 
-			<TimePicker x:Name="sample" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
+			<TimePicker x:Name="sample" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True" UseSeconds="True"
 						Classes.theme-outline="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Outline'}"
 						Classes.theme-soft="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Soft'}"
 						Classes.accent="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Accent'}"
@@ -52,6 +52,7 @@
 						<TextBlock Classes="theme-form-control-label" Text="Clock identifier" />
 						<ComboBox SelectedIndex="0" ItemsSource="{actipro:DelimitedArray '12HourClock, 24HourClock'}" SelectedItem="{Binding ClockIdentifier}" />
 					</StackPanel>
+					<CheckBox IsChecked="{Binding UseSeconds}">Use seconds</CheckBox>
 					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
 				</StackPanel>
 			</sampleBrowser:ControlExample.Options>

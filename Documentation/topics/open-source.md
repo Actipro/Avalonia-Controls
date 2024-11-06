@@ -5,7 +5,7 @@ order: 51
 ---
 # GitHub Open-Source
 
-Actipro hosts an open-source Actipro Avalonia UI controls repository on GitHub:
+Actipro hosts an open-source Actipro Avalonia controls repository on GitHub:
 
 [https://github.com/Actipro/Avalonia-Controls](https://github.com/Actipro/Avalonia-Controls)
 

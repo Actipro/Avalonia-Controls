@@ -21,6 +21,18 @@ namespace ActiproSoftware.SampleBrowser {
 		#region Property Definitions
 
 		/// <summary>
+		/// Defines the <see cref="IsVisible"/> property.
+		/// </summary>
+		public static readonly StyledProperty<bool> IsVisibleProperty
+			= AvaloniaProperty.Register<CodeExample, bool>(nameof(IsVisible), defaultValue: true);
+
+		/// <summary>
+		/// Defines the <see cref="Kind"/> property.
+		/// </summary>
+		public static readonly StyledProperty<CodeExampleKind> KindProperty
+			= AvaloniaProperty.Register<CodeExample, CodeExampleKind>(nameof(Kind), defaultValue: CodeExampleKind.Unspecified);
+
+		/// <summary>
 		/// Defines the <see cref="Language"/> property.
 		/// </summary>
 		public static readonly StyledProperty<string?> LanguageProperty
@@ -88,23 +100,56 @@ namespace ActiproSoftware.SampleBrowser {
 		}
 
 		private void UpdateTextWithSubstitutions() {
-			var textWithSubstitutions = this.UnformattedText?.Trim() ?? string.Empty;
+			int nestLevel = 0;
+			string PerformReplacement(string? text) {
+				nestLevel++;
+				try {
+					if (string.IsNullOrEmpty(text))
+						return string.Empty;
 
-			textWithSubstitutions = SubstitutionPattern.Replace(textWithSubstitutions, match => {
-				var keyName = match.Groups[1].Value;
-				var substitution = Substitutions.FirstOrDefault(s => s?.Key == keyName);
-				if (substitution is not null)
-					return substitution.ValueAsString();
-				throw new KeyNotFoundException(keyName);
-			});
+					// Limit nested replacement to avoid potential infinite recursion
+					if (nestLevel > 10)
+						return text;
 
-			this.Text = textWithSubstitutions;
+					return SubstitutionPattern.Replace(text, match => {
+						var keyName = match.Groups[1].Value;
+						var substitution = Substitutions.FirstOrDefault(s => s?.Key == keyName)
+							?? throw new KeyNotFoundException(keyName);
+						var valueAsString = substitution.ValueAsString();
+						if (substitution.AllowNestedSubstitution)
+							valueAsString = PerformReplacement(valueAsString);
+						return valueAsString;
+					});
+				}
+				finally {
+					nestLevel--;
+				}
+			}
+
+			this.Text = PerformReplacement(this.UnformattedText?.Trim());
+
 			UpdateTextUsesActiproXamlNamespace();
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 		// PUBLIC PROCEDURES
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		/// <summary>
+		/// Indicates if the code example is visible.
+		/// </summary>
+		public bool IsVisible {
+			get => GetValue(IsVisibleProperty);
+			set => SetValue(IsVisibleProperty, value);
+		}
+
+		/// <summary>
+		/// The kind of code example.
+		/// </summary>
+		public CodeExampleKind Kind {
+			get => GetValue(KindProperty);
+			set => SetValue(KindProperty, value);
+		}
 
 		/// <summary>
 		/// The sample code's language (e.g., <c>XAML</c>, <c>XML</c>).

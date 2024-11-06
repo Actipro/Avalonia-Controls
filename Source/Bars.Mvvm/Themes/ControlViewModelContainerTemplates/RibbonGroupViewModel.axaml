@@ -1,0 +1,26 @@
+<ResourceDictionary
+	x:ClassModifier="internal"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	>
+
+	<DataTemplate x:Key="{x:Static actipro:BarsMvvmResourceKeys.RibbonGroupDefaultItemContainerTemplate}" DataType="actipro:RibbonGroupViewModel">
+		<actipro:RibbonGroup
+			CanAutoCollapse="{Binding CanAutoCollapse}"
+			CanCloneToRibbonQuickAccessToolBar="{Binding CanCloneToRibbonQuickAccessToolBar}"
+			ChildOverflowTarget="{Binding ChildOverflowTarget}"
+			CollapsedButtonKeyTipText="{Binding CollapsedButtonKeyTipText}"
+			CollapsedButtonToolTip="{Binding CollapsedButtonDescription}"
+			IsVisible="{Binding IsVisible}"
+			ItemsSource="{Binding Items}"
+			Key="{Binding Key}"
+			Label="{Binding Label}"
+			LargeIcon="{Binding LargeIcon}"
+			LauncherButtonContent="{Binding LauncherButton}"
+			SmallIcon="{Binding SmallIcon}"
+			Title="{Binding Title}"
+			/>
+	</DataTemplate>
+
+</ResourceDictionary>

@@ -1,0 +1,76 @@
+<!--
+
+RIBBON GETTING STARTED SERIES - STEP 9
+
+STEP SUMMARY:
+
+	Configure the Appliation Button to show a Backstage with additional commands.
+	
+CHANGES SINCE LAST STEP:
+	
+	This XAML is fundamentally unchanged by this step.
+	
+	A note was added about the importance of using RibbonContainerPanel when working with Backstage.
+	
+	See the SampleWindowViewModel class for details on configuring the Backstage.
+	
+EXPECTED OPERATION:
+	
+	When this sample window is opened, the "File" Application Button will be displayed next to the Ribbon Tabs.
+	Clicking the Application Button will reveal a RibbonBackstage that covers the entire application window. The
+	"Close" and "Print" buttons are displayed aligned to the top. The "Help" button is aligned to the bottom.
+	
+	Clicking any of these buttons will display a message and close the Backstage.
+
+-->
+
+<actipro:RibbonWindow
+	x:Class="ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.Step09.MainWindow"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:local="using:ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.Step09"
+	xmlns:gettingStartedCommon="using:ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.Common"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	Title="Actipro Ribbon Getting Started Series - Step 9"
+	Height="450" Width="800"
+	x:DataType="local:SampleWindowViewModel"
+	>
+
+	<actipro:RibbonContainerPanel>
+
+		<!-- Ribbon Control -->
+		<actipro:Ribbon
+			DataContext="{Binding Ribbon}"
+			Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+			/>
+
+
+		<!-- Window Content -->
+		<DockPanel>
+
+			<!-- Configure common StatusBar that is unrelated to this sample -->
+			<gettingStartedCommon:CommonStatusBar DockPanel.Dock="Bottom" SampleCodePath="/Step09/MainWindow.axaml" />
+
+			<!-- Editor Control -->
+			<ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Focusable="False">
+				<sampleBrowser:AdvancedTextBox x:Name="editor"
+					Margin="32,20"
+					AcceptsReturn="True"
+					AcceptsTab="True"
+					Text="Actipro Bars contains a comprehensive implementation of an Office-like ribbon user interface for Avalonia applications, including its modern fluent design and ability to create content-rich galleries."
+					TextWrapping="Wrap">
+					<TextBox.ContextFlyout>
+						<actipro:BarMenuFlyout
+							ItemsSource="{Binding EditorContextMenuItems}"
+							ItemContainerTemplateSelector="{Binding Ribbon.ItemContainerTemplateSelector}"
+							/>
+					</TextBox.ContextFlyout>
+				</sampleBrowser:AdvancedTextBox>
+			</ScrollViewer>
+
+		</DockPanel>
+
+	</actipro:RibbonContainerPanel>
+
+</actipro:RibbonWindow>

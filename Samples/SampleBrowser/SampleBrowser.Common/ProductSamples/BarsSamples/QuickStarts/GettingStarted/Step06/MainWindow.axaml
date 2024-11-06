@@ -1,0 +1,75 @@
+<!--
+
+RIBBON GETTING STARTED SERIES - STEP 6
+
+STEP SUMMARY:
+
+	The ribbon's editor commands (like clipboard operations) must have a command registered with
+	them that will be executed when the ribbon command is executed.  In this step, commands are
+	defined that encapsulate individual textbox operations which are then registered with the
+	composite commands on the ribbon.
+	
+CHANGES SINCE LAST STEP:
+	
+	This XAML file is fundamentally unchanged for this step.
+	
+	Prior sample comments were removed/condensed.
+	
+	
+EXPECTED OPERATION:
+	
+	When this sample window is opened, the Ribbon should display "Home" and "Help" tabs with
+	the "Home" tab selected. On the "Home" tab will be control groups for "Undo" and "Clipboard".
+	Since the "Undo" and "Clipboard" groups contain commands that are now property connected to
+	the editor, the Undo, Redo, Cut, Copy, and Paste controls should exhibit typical behavor
+	for an edit control.
+	
+	Since the "Paste Special" command is not implemented, attempting to select this command
+	will display a "Not Implemented" message.  This command was added in a previous step, but it
+	could not be accessed since the parent "Paste" command was disabled.
+
+-->
+
+<actipro:RibbonWindow
+	x:Class="ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.Step06.MainWindow"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:gettingStartedCommon="using:ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.Common"
+	xmlns:local="using:ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.Step06"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	Title="Actipro Ribbon Getting Started Series - Step 6"
+	Height="450" Width="800"
+	x:DataType="local:SampleWindowViewModel"
+	>
+
+	<actipro:RibbonContainerPanel>
+
+		<!-- Ribbon Control -->
+		<actipro:Ribbon
+			DataContext="{Binding Ribbon}"
+			Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+			/>
+
+
+		<!-- Window Content -->
+		<DockPanel>
+
+			<!-- Configure common StatusBar that is unrelated to this sample -->
+			<gettingStartedCommon:CommonStatusBar DockPanel.Dock="Bottom" SampleCodePath="/Step06/MainWindow.axaml" />
+
+			<!-- Editor Control -->
+			<ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Focusable="False">
+				<sampleBrowser:AdvancedTextBox x:Name="editor"
+					Margin="32,20"
+					AcceptsReturn="True"
+					AcceptsTab="True"
+					Text="Actipro Bars contains a comprehensive implementation of an Office-like ribbon user interface for Avalonia applications, including its modern fluent design and ability to create content-rich galleries."
+					TextWrapping="Wrap" />
+			</ScrollViewer>
+
+		</DockPanel>
+
+	</actipro:RibbonContainerPanel>
+
+</actipro:RibbonWindow>

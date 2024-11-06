@@ -1,0 +1,301 @@
+<UserControl
+	x:Name="sampleRootControl"
+	x:Class="ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.Backstage.MainControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="A full screen Backstage is used in many modern applications to provide a richer experience for the user than is typically available from a traditional menu.">
+
+		<sampleBrowser:ControlExample
+			Header="Basic usage"
+			>
+
+			<StackPanel Spacing="20">
+
+				<actipro:InfoBar Message="Click the 'File' application button to display the Backstage." CanClose="False" />
+				
+				<actipro:Ribbon x:Name="labelSampleRibbon" QuickAccessToolBarMode="None">
+
+					<!-- Configure the Backstage -->
+					<actipro:Ribbon.BackstageContent>
+						<actipro:RibbonBackstage DataContext="{Binding #sampleRootControl.BackstageOptions}"
+							CanClose="{Binding CanClose}"
+							CanSelectFirstTabOnOpen="{Binding CanSelectFirstTabOnOpen}"
+							IsOpen="{Binding IsBackstageOpen}"
+							MinHeaderWidth="{Binding BackstageMinHeaderWidth}"
+							MaxHeaderWidth="{Binding BackstageMaxHeaderWidth}"
+							PropertyChanged="OnBackstagePropertyChanged"
+							>
+							<actipro:RibbonBackstage.Styles>
+								<Style Selector="TextBlock.backstage-heading">
+									<Setter Property="FontSize" Value="{actipro:ThemeResource HeadingFontSizeLarge}" />
+									<Setter Property="FontFamily" Value="{actipro:ThemeResource HeadingFontFamily}" />
+									<Setter Property="FontWeight" Value="{actipro:ThemeResource HeadingFontWeightLarge}" />
+									<Setter Property="Margin" Value="{actipro:ScaledThickness '0,3+8'}" />
+									<Setter Property="TextWrapping" Value="Wrap" />
+								</Style>
+								<Style Selector="TextBlock.backstage-subheading">
+									<Setter Property="FontSize" Value="{actipro:ThemeResource HeadingFontSizeMedium}" />
+									<Setter Property="FontFamily" Value="{actipro:ThemeResource HeadingFontFamily}" />
+									<Setter Property="FontWeight" Value="{actipro:ThemeResource HeadingFontWeightLarge}" />
+									<Setter Property="Margin" Value="{actipro:ScaledThickness '0,2+2'}" />
+									<Setter Property="TextWrapping" Value="Wrap" />
+									<Style Selector="^:nth-child(1)">
+										<Setter Property="Margin" Value="{actipro:ScaledThickness '0,0,0,2+2'}" />
+									</Style>
+								</Style>
+							</actipro:RibbonBackstage.Styles>
+
+							<!-- Introduction Tab -->
+							<actipro:RibbonBackstageTabItem Key="Introduction"
+								LargeIcon="/Images/Icons/HomeMono32.png"
+								SmallIcon="/Images/Icons/HomeMono16.png"
+								VariantSize="{Binding PrimaryBackstageTabVariantSize}">
+
+								<ScrollViewer>
+									<StackPanel Margin="{actipro:ScaledThickness '6+16,0,6+16,3+8'}">
+										<TextBlock Classes="backstage-heading" Text="Introduction" Theme="{StaticResource BackstageHeadingTextBlockTheme}" />
+										<TextBlock TextWrapping="Wrap">
+											The Backstage is commonly used for file-based actions like New, Open, and Save. When opened, the Backstage takes over the entire
+											window. A subtle animation is used when opening/closing to help provide a smooth transition.
+											<LineBreak /><LineBreak />
+											This sample is configured to automatically display a more limited Backstage when initially opened. This initial view uses a large variant
+											for the most important tabs and hides buttons that might not be useful at first launch. Once the Backstage is closed and reopened, the
+											small variant will be used for all tabs and additional buttons will display. This initial Backstage view can also be toggled on or off
+											using a setting on the Options tab.
+										</TextBlock>
+										<TextBlock Classes="backstage-heading" Text="Tabs and Buttons" Theme="{StaticResource BackstageHeadingTextBlockTheme}" />
+										<TextBlock TextWrapping="Wrap">
+											The items on the left are a collection of Tabs, Buttons, and Separators.
+											Each item is aligned to the top by default, but can also be aligned to the bottom.
+											<LineBreak /><LineBreak />
+											A Tab (RibbonBackstageTabItem) can be used to display any content when
+											selected. An "Open" tab, for instance, might contain a button to browse for a file combined with
+											a list of recently-accessed files that can be opened quickly. This "Introduction" item is an
+											example of a Tab.
+											<LineBreak /><LineBreak />
+											A Button (RibbonBackstageHeaderButton) can be used for simple operations and is associated with
+											an ICommand that, when invoked, will close the Backstage. Use Buttons when additional content
+											is not necessary. For example, the file "Save" command would commonly be implemented as a Button.
+											<LineBreak /><LineBreak />
+											A Separator (RibbonBackstageHeaderSeparator) can be inserted between Tabs and/or Buttons to draw
+											a line separating the controls.
+										</TextBlock>
+									</StackPanel>
+								</ScrollViewer>
+
+							</actipro:RibbonBackstageTabItem>
+
+							<!-- Appearance Tab -->
+							<actipro:RibbonBackstageTabItem Key="Appearance" KeyTipText="P"
+								LargeIcon="/Images/Icons/ColorPicker32.png"
+								SmallIcon="/Images/Icons/ColorPicker16.png"
+								VariantSize="{Binding PrimaryBackstageTabVariantSize}">
+
+								<ScrollViewer Margin="{actipro:ScaledThickness '6+16,0'}">
+									<StackPanel>
+										<TextBlock Text="Images" Classes="backstage-heading" />
+										<TextBlock TextWrapping="Wrap">
+											Both Tabs and Buttons support images, but most modern applications only show an image on Tabs.
+										</TextBlock>
+										<TextBlock Text="Header Alignment" Classes="backstage-heading" />
+										<TextBlock TextWrapping="Wrap">
+											Each Tab, Button, or Separator is aligned to the top by default. By setting "HeaderAlignment=Bottom", each item
+											will be aligned to the bottom instead.
+										</TextBlock>
+									</StackPanel>
+								</ScrollViewer>
+
+							</actipro:RibbonBackstageTabItem>
+
+							<!-- Separator and Sample Buttons (which execute a default command) -->
+							<actipro:RibbonBackstageHeaderSeparator IsVisible="{Binding !IsFirstBackstage}" />
+							<actipro:RibbonBackstageHeaderButton Key="SampleButton1" 
+								Command="{Binding BackstageHeaderButtonCommand}"
+								IsVisible="{Binding !IsFirstBackstage}"
+								SmallIcon="{Binding SampleButtonImageSource}" />
+							<actipro:RibbonBackstageHeaderButton Key="SampleButton2" 
+								Command="{Binding BackstageHeaderButtonCommand}"
+								IsVisible="{Binding !IsFirstBackstage}"
+								SmallIcon="{Binding SampleButtonImageSource}" />
+
+							<!--
+							  The following items are aligned to the bottom
+							-->
+
+							<!-- A separator is commonly displayed before the bottom-aligned items -->
+							<actipro:RibbonBackstageHeaderSeparator HeaderAlignment="Bottom" />
+					
+							<!-- Backstage Controls Tab -->
+							<actipro:RibbonBackstageTabItem Key="BackstageControls" HeaderAlignment="Bottom">
+								<Grid Margin="{actipro:ScaledThickness '6+16,0'}">
+									<Grid.RowDefinitions>
+										<RowDefinition Height="Auto" />
+										<RowDefinition Height="*" />
+									</Grid.RowDefinitions>
+
+									<StackPanel Grid.Row="0">
+										<TextBlock Classes="backstage-heading" Text="Backstage Controls" />
+										<TextBlock TextWrapping="Wrap">
+											The TaskTabControl can be used on a backstage to further organize the content displayed
+											for the selected tab.  BarButton and BarPopupButton controls also have a special backstage style that can be applied
+											for a large button.
+										</TextBlock>
+									</StackPanel>
+
+									<actipro:TaskTabControl
+										Grid.Row="1"
+										Margin="{actipro:ScaledThickness '0,3+8,0,0'}"
+										TabStripPlacement="Left"
+										>
+										<actipro:TaskTabItem Label="TaskTabControl" KeyTipText="T" LargeIcon="/Images/Icons/New32.png">
+											<ScrollViewer>
+												<Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
+													<TextBlock Classes="backstage-subheading" Grid.ColumnSpan="2" Text="TaskTabControl" />
+
+													<TextBlock Grid.Row="1" Margin="7,0" Text="&#x25aa;" />
+													<TextBlock Grid.Row="1" Grid.Column="2" TextWrapping="Wrap" Text="TaskTabControl is a special tab control for backstage" />
+													<TextBlock Grid.Row="2" Margin="7,0" Text="&#x25aa;" />
+													<TextBlock Grid.Row="2" Grid.Column="2" TextWrapping="Wrap" Text="Use TaskTabItem for each tab" />
+													<TextBlock Grid.Row="3" Margin="7,0" Text="&#x25aa;" />
+													<TextBlock Grid.Row="3" Grid.Column="2" TextWrapping="Wrap" Text="Display any content for the selected tab" />
+
+												</Grid>
+											</ScrollViewer>
+
+										</actipro:TaskTabItem>
+
+										<actipro:TaskTabItem Label="Button Backstage Styles" KeyTipText="B" LargeIcon="/Images/Icons/Print32.png">
+										
+											<ScrollViewer>
+												<Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*">
+													<TextBlock Classes="backstage-subheading" Grid.ColumnSpan="2" Text="BarButton and BarPopupButton" />
+
+													<TextBlock Grid.Row="1" Margin="7,0" Text="&#x25aa;" />
+													<TextBlock Grid.Row="1" Grid.Column="2" TextWrapping="Wrap" Text="Large buttons are commonly used on backstage as shown below" />
+													<TextBlock Grid.Row="2" Margin="7,0" Text="&#x25aa;" />
+													<TextBlock Grid.Row="2" Grid.Column="2" TextWrapping="Wrap" Text="BarButton and BarToggleButton use {actipro:ControlTheme RibbonBackstageBarPopupButtonOutline}" />
+													<TextBlock Grid.Row="3" Margin="7,0" Text="&#x25aa;" />
+													<TextBlock Grid.Row="3" Grid.Column="2" TextWrapping="Wrap" Text="BarPopupButton uses {actipro:ControlTheme RibbonBackstageBarPopupButtonOutline}" />
+													<TextBlock Grid.Row="4" Margin="7,0" Text="&#x25aa;" />
+													<TextBlock Grid.Row="4" Grid.Column="2" TextWrapping="Wrap" Text="BarSplitButton and BarSplitToggleButton use {actipro:ControlTheme RibbonBackstageBarSplitButtonOutline}" />
+
+													<StackPanel Grid.Row="5" Grid.ColumnSpan="2" Margin="{actipro:ScaledThickness '0,3+8,0,0'}" Orientation="Horizontal" Spacing="10">
+														<actipro:BarButton Label="Create PDF" KeyTipText="A"
+															Theme="{actipro:ControlTheme RibbonBackstageBarButtonOutline}"
+															LargeIcon="/Images/Icons/PdfDocument32.png"
+															/>
+
+														<actipro:BarPopupButton Label="Manage Document" KeyTipText="M"
+															Theme="{actipro:ControlTheme RibbonBackstageBarPopupButtonOutline}"
+															LargeIcon="/Images/Icons/ManageVersions32.png">
+
+															<actipro:BarMenuItem UseLargeSize="True" LargeIcon="/Images/Icons/RecoverUnsavedDocuments32.png" Label="Recover Unsaved Documents"
+																				 Description="Browse recent copies of unsaved files." KeyTipText="B" />
+															<actipro:BarMenuItem UseLargeSize="True" LargeIcon="/Images/Icons/DeleteUnsavedDocuments32.png" Label="Delete All Unsaved Documents"
+																				 Description="Delete all recent copies of unsaved files." KeyTipText="D" />
+
+														</actipro:BarPopupButton>
+													</StackPanel>
+
+												</Grid>
+											</ScrollViewer>
+										</actipro:TaskTabItem>
+									</actipro:TaskTabControl>
+								</Grid>
+							</actipro:RibbonBackstageTabItem>
+
+							<!-- Options Tab -->
+							<actipro:RibbonBackstageTabItem Key="Options" HeaderAlignment="Bottom">
+								<actipro:RibbonBackstageTabItem.Styles>
+									<Style Selector="ToggleSwitch">
+										<Setter Property="actipro:ThemeProperties.ToggleSwitchHasFarAffinity" Value="True" />
+									</Style>
+								</actipro:RibbonBackstageTabItem.Styles>
+								<Grid RowDefinitions="Auto,*" Margin="{actipro:ScaledThickness '6+16,0,0,0'}">
+									<TextBlock Grid.Row="0" Classes="backstage-heading" Text="Options" Theme="{StaticResource BackstageHeadingTextBlockTheme}" />
+									<ScrollViewer Grid.Row="1" Padding="{actipro:ScaledThickness '0,0,6+16,0'}">
+										<StackPanel>
+											<actipro:SettingsGroup Header="Opening backstage" Description="These options affect the backstage when it is opened.">
+												<actipro:SettingsCard Header="Use initial backstage view" Description="This sample shows a more limited Backstage when initially opened and hides buttons that might not be useful at first launch.">
+													<ToggleSwitch IsChecked="{Binding IsFirstBackstage}" />
+												</actipro:SettingsCard>
+												<actipro:SettingsExpander Header="Select first tab" Description="Selects the first tab when opened. Disable to keep previous tab selected or manually select a tab.">
+													<actipro:SettingsExpander.Content>
+														<ToggleSwitch IsChecked="{Binding CanSelectFirstTabOnOpen}" />
+													</actipro:SettingsExpander.Content>
+													<actipro:SettingsCard Header="Manually select tab" Description="Manually select a specific tab when opening (requires disabling 'Can select first tab on open')." IsEnabled="{Binding !CanSelectFirstTabOnOpen}">
+														<ComboBox SelectedItem="{Binding SelectedTabKeyOnOpen}" ItemsSource="{actipro:DelimitedArray '(Previous Selection), Introduction, Appearance, BackstageControls, Options'}" />
+													</actipro:SettingsCard>
+												</actipro:SettingsExpander>
+											</actipro:SettingsGroup>
+											<actipro:SettingsGroup Header="General properties">
+												<actipro:SettingsCard Header="Can close" Description="Toggle the visibility of the close button.  The backstage can still close programmatically.">
+													<ToggleSwitch IsChecked="{Binding CanClose}" />
+												</actipro:SettingsCard>
+												<actipro:SettingsCard Header="Show images on sample buttons" Description="Toggle the visibility of small images on buttons which are not disabled by default.">
+													<ToggleSwitch IsChecked="{Binding UseSampleButtonImages}" />
+												</actipro:SettingsCard>
+												<actipro:SettingsExpander Header="Header width" Description="Adjust the width of the header where tabs and buttons are displayed.">
+													<actipro:SettingsCard Header="Minimum">
+														<StackPanel Orientation="Horizontal" Spacing="{actipro:ScaledDouble 2}" VerticalAlignment="Center" HorizontalAlignment="Right">
+															<TextBlock Text="{Binding BackstageMinHeaderWidth}" VerticalAlignment="Center" TextAlignment="Right" />
+															<Slider Width="100" Minimum="0" Maximum="400" Value="{Binding BackstageMinHeaderWidth}" />
+														</StackPanel>
+													</actipro:SettingsCard>
+													<actipro:SettingsCard Header="Maximum">
+														<StackPanel Orientation="Horizontal" Spacing="{actipro:ScaledDouble 2}" VerticalAlignment="Center" HorizontalAlignment="Right">
+															<TextBlock Text="{Binding BackstageMaxHeaderWidth}" VerticalAlignment="Center" TextAlignment="Right" />
+															<Slider Width="100" Minimum="0" Maximum="400" Value="{Binding BackstageMaxHeaderWidth}" />
+														</StackPanel>
+													</actipro:SettingsCard>
+												</actipro:SettingsExpander>
+											</actipro:SettingsGroup>
+											<actipro:SettingsGroup Header="Third Sample Button">
+												<actipro:SettingsCard Header="Closes backstage" Description="By default, clicking a button closes the backstage. Use this option to toggle the behavior of the third button.">
+													<ToggleSwitch IsChecked="{Binding SampleButton3CanCloseBackstage}" />
+												</actipro:SettingsCard>
+												<actipro:SettingsCard Header="Label" Description="Customize the label of the third sample button.">
+													<TextBox MinWidth="125" Text="{Binding SampleButton3Label}" HorizontalAlignment="Right" />
+												</actipro:SettingsCard>
+											</actipro:SettingsGroup>
+										</StackPanel>
+									</ScrollViewer>
+								</Grid>
+							</actipro:RibbonBackstageTabItem>
+
+							<!-- Another Sample Button (which executes a default command) -->
+							<actipro:RibbonBackstageHeaderButton Key="SampleButton3" Label="{Binding SampleButton3Label}" 
+								CanCloseBackstage="{Binding SampleButton3CanCloseBackstage}"
+								Command="{Binding BackstageHeaderButtonCommand}"
+								HeaderAlignment="Bottom"
+								SmallIcon="{Binding SampleButtonImageSource}" />
+
+
+						</actipro:RibbonBackstage>
+					</actipro:Ribbon.BackstageContent>
+
+					<actipro:RibbonTabItem Key="Home">
+						<actipro:RibbonGroup Key="Documents">
+							<actipro:BarButton Key="Open" IsEnabled="False" Label="Open Document" SmallIcon="/Images/Icons/Open16.png" LargeIcon="/Images/Icons/Open32.png" ToolBarItemVariantBehavior="All" />
+							<actipro:BarButton Key="Save" IsEnabled="False" Label="Save Document" SmallIcon="/Images/Icons/Save16.png" LargeIcon="/Images/Icons/Save32.png" ToolBarItemVariantBehavior="All" />
+						</actipro:RibbonGroup>
+					</actipro:RibbonTabItem>
+
+				</actipro:Ribbon>
+
+			</StackPanel>
+
+
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+
+</UserControl>

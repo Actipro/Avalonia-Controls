@@ -1,0 +1,39 @@
+<UserControl
+	x:Class="ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.Common.CommonStatusBar"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Resources>
+		<ControlTheme x:Key="ViewCodeStatusBarButtonStyle" TargetType="Button">
+			<Setter Property="AutomationProperties.Name" Value="View Source Code" />
+			<Setter Property="Background" Value="Transparent" />
+			<Setter Property="Foreground" Value="{actipro:ThemeResource StatusBarForegroundBrush}" />
+			<Setter Property="IsTabStop" Value="False" />
+			<Setter Property="Padding" Value="6,4" />
+			<Setter Property="ToolTip.Tip" Value="Click to view source code for this sample" />
+			<Setter Property="ContentTemplate" Value="{actipro:GlyphTemplate Code16}" />
+			<Style Selector="^:pointerover">
+				<Setter Property="Background" Value="{actipro:ThemeResource ButtonBackgroundBrushSubtlePointerOver}" />
+			</Style>
+			<Style Selector="^:pressed">
+				<Setter Property="Background" Value="{actipro:ThemeResource ButtonBackgroundBrushSubtlePressed}" />
+			</Style>
+		</ControlTheme>
+	</UserControl.Resources>
+
+	<Border
+		Background="{actipro:ThemeResource StatusBarBackgroundBrush}"
+		BorderBrush="{actipro:ThemeResource StatusBarBorderBrush}" BorderThickness="{actipro:ThemeResource StatusBarBorderThickness}"
+		TextElement.Foreground="{actipro:ThemeResource StatusBarForegroundBrush}">
+
+		<Grid Margin="0,0,0,1" ColumnDefinitions="*,Auto,Auto">
+			<TextBlock Margin="{actipro:ScaledThickness '2.5,0.5'}" Text="Click the 'View Source Code' button to open the folder of source files with details and comments about this sample." TextTrimming="CharacterEllipsis" />
+			<Button x:Name="viewCodeButton" Grid.Column="1" Theme="{StaticResource ViewCodeStatusBarButtonStyle}" />
+			<actipro:WindowResizeGrip Grid.Column="2" />
+		</Grid>
+
+	</Border>
+
+</UserControl>

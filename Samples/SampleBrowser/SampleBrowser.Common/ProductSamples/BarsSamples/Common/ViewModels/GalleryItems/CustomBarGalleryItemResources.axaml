@@ -1,0 +1,41 @@
+<Styles
+	x:Class="ActiproSoftware.ProductSamples.BarsSamples.Common.CustomBarGalleryItemResources"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+    xmlns:localCommon="using:ActiproSoftware.ProductSamples.BarsSamples.Common"
+	>
+	<Styles.Resources>
+
+		<DataTemplate x:Key="{x:Static localCommon:CustomBarGalleryItemTemplateSelector.BulletTemplateResourceKey}" DataType="localCommon:BulletBarGalleryItemViewModel">
+
+			<Border Margin="3" Background="{actipro:ThemeResource Container1BackgroundBrush}"
+					BorderThickness="1" BorderBrush="{actipro:ThemeResource Container3BorderBrush}">
+				<localCommon:BulletPresenter Width="40" Height="40" />
+			</Border>
+
+		</DataTemplate>
+
+		<DataTemplate x:Key="{x:Static localCommon:CustomBarGalleryItemTemplateSelector.NumberingTemplateResourceKey}" DataType="localCommon:NumberingBarGalleryItemViewModel">
+
+			<Border Margin="3" Background="{actipro:ThemeResource Container1BackgroundBrush}"
+					BorderThickness="1" BorderBrush="{actipro:ThemeResource Container3BorderBrush}">
+				<localCommon:NumberingPresenter LineBrush="{actipro:ThemeResource Container2BorderBrush}}" />
+			</Border>
+
+		</DataTemplate>
+
+		<DataTemplate x:Key="{x:Static localCommon:CustomBarGalleryItemTemplateSelector.ShapeTemplateResourceKey}" DataType="localCommon:ShapeBarGalleryItemViewModel">
+
+			<localCommon:ShapePresenter Width="30" Height="30" />
+
+		</DataTemplate>
+
+		<DataTemplate x:Key="{x:Static localCommon:CustomBarGalleryItemTemplateSelector.UnderlineTemplateResourceKey}" DataType="localCommon:UnderlineBarGalleryItemViewModel">
+
+			<localCommon:UnderlinePresenter Kind="{Binding Value}" />
+
+		</DataTemplate>
+
+	</Styles.Resources>
+</Styles>

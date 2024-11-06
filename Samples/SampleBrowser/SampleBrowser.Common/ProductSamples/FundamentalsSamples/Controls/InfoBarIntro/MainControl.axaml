@@ -24,12 +24,13 @@
 		Header="InfoBar can be used to display essential information to a user without disrupting the user flow.">
 
 		<sampleBrowser:ControlExampleItemsControl.Documentation>
-			<sampleBrowser:ControlExampleLinkItem Title="InfoBar" Url="https://www.actiprosoftware.com/docs/controls/avalonia/fundamentals/info-bar" />
+			<sampleBrowser:ControlExampleLinkItem Title="Info bar" Url="https://www.actiprosoftware.com/docs/controls/avalonia/fundamentals/controls/info-bar" />
 		</sampleBrowser:ControlExampleItemsControl.Documentation>
 
 		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
 			<sampleBrowser:ControlExampleLinkItem Title="MessageBox" Url="/ProductSamples/FundamentalsSamples/Controls/MessageBoxIntro/MainControl" />
 			<sampleBrowser:ControlExampleLinkItem Title="User prompt" Url="/ProductSamples/FundamentalsSamples/Controls/UserPromptIntro/MainControl" />
+			<sampleBrowser:ControlExampleLinkItem Title="Ribbon footer" Url="/ProductSamples/BarsSamples/QuickStarts/Footer/MainControl" />
 		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
 
 

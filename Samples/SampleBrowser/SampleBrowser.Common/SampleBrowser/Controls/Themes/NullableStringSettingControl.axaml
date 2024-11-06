@@ -1,0 +1,40 @@
+<ResourceDictionary 
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<Design.PreviewWith>
+		<StackPanel Margin="20" Spacing="20">
+			<sampleBrowser:NullableStringSettingControl Label="My Label" Text="Testing" IsNull="False" />
+		</StackPanel>
+	</Design.PreviewWith>
+
+	<ControlTheme x:Key="{x:Type sampleBrowser:NullableStringSettingControl}" TargetType="sampleBrowser:NullableStringSettingControl">
+		<Setter Property="Template">
+			<ControlTemplate>
+
+				<StackPanel>
+					<TextBlock Classes="theme-form-control-label"
+						Text="{TemplateBinding Label}"
+						IsVisible="{TemplateBinding Label, Converter={x:Static StringConverters.IsNotNullOrEmpty}}" />
+					<TextBox x:Name="textBox" Text="{TemplateBinding Text, Mode=TwoWay}" />
+					<CheckBox Margin="0,2,0,0" Classes="size-xs"
+						IsChecked="{TemplateBinding CoerceEmptyAsNull, Mode=TwoWay}"
+						IsVisible="{TemplateBinding IsCoerceCheckBoxVisible}"
+						Content="Treat empty as null" />
+				</StackPanel>
+
+			</ControlTemplate>
+		</Setter>
+
+		<Style Selector="^[IsWatermarkVisible=True][CoerceEmptyAsNull=True] /template/ TextBox#textBox">
+			<Setter Property="Watermark" Value="(Null)" />
+		</Style>
+		<Style Selector="^[IsWatermarkVisible=True][CoerceEmptyAsNull=False] /template/ TextBox#textBox">
+			<Setter Property="Watermark" Value="(Empty)" />
+		</Style>
+
+	</ControlTheme>
+	
+</ResourceDictionary>

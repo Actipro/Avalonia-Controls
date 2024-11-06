@@ -1,0 +1,62 @@
+<!--
+
+RIBBON GETTING STARTED SERIES - STEP 4
+
+STEP SUMMARY:
+
+	This step finally adds Tabs to the Ribbon. The RibbonViewModel definition is updated with a
+	collection of view models for each Tab.
+	
+CHANGES SINCE LAST STEP:
+
+	This XAML is unchanged by this step.
+	
+EXPECTED OPERATION:
+	
+	This step finally starts to populate the Ribbon. When this sample window is opened, the Ribbon
+	should display with a "Help" tab pre-selected. The tab should contain a "Resources" group
+	with a single "Help" button. Clicking the button should display the same message that has
+	been displayed by the stand-alone Button in the previous steps.
+
+-->
+
+<actipro:RibbonWindow
+	x:Class="ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.Step04.MainWindow"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:gettingStartedCommon="using:ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.Common"
+	xmlns:local="using:ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.Step04"
+	Title="Actipro Ribbon Getting Started Series - Step 4"
+	Height="450" Width="800"
+	x:DataType="local:SampleWindowViewModel"
+	>
+
+	<actipro:RibbonContainerPanel>
+
+		<!-- Ribbon Control -->
+		<actipro:Ribbon
+			DataContext="{Binding Ribbon}"
+			Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+			/>
+
+
+		<!-- Window Content -->
+		<DockPanel>
+
+			<!-- Configure common StatusBar that is unrelated to this sample -->
+			<gettingStartedCommon:CommonStatusBar DockPanel.Dock="Bottom" SampleCodePath="/Step04/MainWindow.axaml" />
+
+			<!-- Temporary Button to test invocation of the Help command -->
+			<Button
+				Command="{Binding HelpCommand}"
+				Content="Help"
+				MinWidth="100" MinHeight="100"
+				HorizontalAlignment="Center" VerticalAlignment="Center"
+				/>
+
+		</DockPanel>
+
+	</actipro:RibbonContainerPanel>
+
+</actipro:RibbonWindow>

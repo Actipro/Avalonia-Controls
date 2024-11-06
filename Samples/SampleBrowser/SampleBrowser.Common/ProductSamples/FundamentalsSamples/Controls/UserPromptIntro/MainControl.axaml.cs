@@ -185,7 +185,7 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 				.WithCheckBox("This checked state is reflected on the clipboard", isChecked: true)
 				.WithFooterContent("Click 'Show Sample as Dialog' button and then press copy shortcut")
 				.WithFooterClipboardText($"The '{nameof(UserPromptControl.Footer)}' property is auto-converted to clipboard text, but the footer of this instance is configured to use this custom text instead.")
-				.WithFooterImage(ImageProvider.Default.GetImageSource(SharedImageSourceKeys.Question))
+				.WithFooterIcon(SharedImageSourceKeys.Question)
 				.WithExpandedInformationHeaderText("Show more", "Show less")
 				.WithExpandedInformationContent($"Clipboard text can be customized for '{nameof(UserPromptControl.Header)}', '{nameof(UserPromptControl.Content)}', '{nameof(UserPromptControl.Footer)}', '{nameof(UserPromptControl.ButtonItems)}', '{nameof(UserPromptControl.ExpandedInformationContent)}', and '{nameof(UserPromptControl.CheckBoxContent)}'.")
 				.WithExpandedInformationContentClipboardText($"Use the '{nameof(UserPromptControl.HeaderClipboardText)}', '{nameof(UserPromptControl.ContentClipboardText)}', '{nameof(UserPromptControl.FooterClipboardText)}', '{nameof(UserPromptControl.ButtonItemsClipboardText)}', '{nameof(UserPromptControl.ExpandedInformationContentClipboardText)}', and '{nameof(UserPromptControl.CheckBoxContentClipboardText)}' properties to explicitly set clipboard text.")
@@ -221,9 +221,9 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 				.WithTitle("Custom Theme Prompt")
 				.WithHeaderContent($"Themed {image.ToString().ToLower()} message")
 				.WithContent($"The color scheme for this prompt has been adjusted to further emphasize the type of message based on the image used.")
-				.WithStatusImage(image)
+				.WithStatusIcon(image)
 				.WithStandardButtons(MessageBoxButtons.OKCancel)
-				.WithStatusImageTheme() // <-- Custom extension method to tint resources based on the status icon (e.g., error messages are red)
+				.WithStatusIconTheme() // <-- Custom extension method to tint resources based on the status icon (e.g., error messages are red)
 				.Show();
 		}
 
@@ -324,7 +324,7 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 						new Run(" for more information")
 					}
 				})
-				.WithFooterImage(ImageProvider.Default.GetImageSource(SharedImageSourceKeys.Question))
+				.WithFooterIcon(SharedImageSourceKeys.Question)
 				.WithButton(MessageBoxResult.OK)
 				.Show();
 		}
@@ -344,7 +344,7 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 						new GradientStop(UIColor.Parse("#066f5c"), 1),
 					}
 				})
-				.WithStatusImage(ImageLoader.GetIcon("Save32.png"))
+				.WithStatusIcon(ImageLoader.GetIcon("Save32.png"))
 				.WithStandardButtons(MessageBoxButtons.Cancel)
 				.WithContent(new StackPanel() {
 					Children = {
@@ -386,7 +386,7 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 
 			await ConfigureUserPrompt()
 				.WithHeaderContent("Display mode")
-				.WithStatusImage(MessageBoxImage.Information)
+				.WithStatusIcon(MessageBoxImage.Information)
 				.WithContent("The same prompt can be consistently shown on different platforms even when windows are not supported.")
 				.WithStandardButtons(MessageBoxButtons.YesNoCancel)
 				.WithDisplayMode((UserPromptDisplayMode)displayModeSelection.SelectedValue!)
@@ -425,7 +425,7 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 				.WithHeaderContent("Overwrite file?")
 				.WithStandardButtons(MessageBoxButtons.YesNoCancel)
 				.WithDefaultResult(MessageBoxResult.Cancel)
-				.WithStatusImage(MessageBoxImage.Question)
+				.WithStatusIcon(MessageBoxImage.Question)
 				.WithExpandedInformation("Show details", "Hide details", expandedContent: null)
 				.WithAutoSize(true)
 				.WithContent(instance => {

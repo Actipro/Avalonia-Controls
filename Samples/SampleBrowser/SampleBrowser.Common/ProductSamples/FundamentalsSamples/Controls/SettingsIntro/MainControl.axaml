@@ -72,7 +72,7 @@
 
 					<actipro:SettingsCard Header="App theme">
 						<actipro:SettingsCard.HeaderIcon>
-							<PathIcon Data="{StaticResource icon-fluent-mdl2-color}" />
+							<PathIcon Data="{StaticResource icon-fluent-mdl2-color}" FlowDirection="LeftToRight" />
 						</actipro:SettingsCard.HeaderIcon>
 						<actipro:SettingsCard.Description>
 							<actipro:HyperlinkTextBlock FontWeight="SemiBold" FontSize="{actipro:ThemeResource DefaultFontSizeSmall}"
@@ -93,7 +93,7 @@
 
 					<actipro:SettingsCard Header="System fonts" IsWrapped="True">
 						<actipro:SettingsCard.HeaderIcon>
-							<PathIcon Data="{StaticResource icon-fluent-mdl2-font}" />
+							<PathIcon Data="{StaticResource icon-fluent-mdl2-font}" FlowDirection="LeftToRight" />
 						</actipro:SettingsCard.HeaderIcon>
 						<CheckBox x:Name="galleryCustomizeSystemFonts" IsChecked="False" Content="Allow system fonts to be customized" />
 					</actipro:SettingsCard>
@@ -568,7 +568,7 @@
 			<actipro:SettingsGroup Header="Appearance &amp; behavior">
 				<actipro:SettingsCard Header="App theme">
 					<actipro:SettingsCard.HeaderIcon>
-						<PathIcon Data="{StaticResource icon-fluent-mdl2-color}" />
+						<PathIcon Data="{StaticResource icon-fluent-mdl2-color}" FlowDirection="LeftToRight" />
 					</actipro:SettingsCard.HeaderIcon>
 					<actipro:SettingsCard.Description>
 						<actipro:HyperlinkTextBlock
@@ -630,7 +630,7 @@
 										  Description="The application will restart automatically if needed"
 										  IsExpanded="True">
 					<actipro:SettingsExpander.HeaderIcon>
-						<PathIcon Data="{StaticResource icon-fluent-mdl2-update-restore}" />
+						<PathIcon Data="{StaticResource icon-fluent-mdl2-update-restore}" FlowDirection="LeftToRight" />
 					</actipro:SettingsExpander.HeaderIcon>
 					<actipro:SettingsExpander.Content>
 						<StackPanel Orientation="Horizontal" Spacing="5">

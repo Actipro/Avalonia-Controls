@@ -15,25 +15,32 @@ The following are Actipro's NuGet packages for @@PlatformName and each one's pac
 
 ### ActiproSoftware.Controls.Avalonia Package
 
-This package references most of the Actipro Avalonia UI Free product assemblies ([view on nuget.org](https://www.nuget.org/packages/ActiproSoftware.Controls.Avalonia)), which can be used at no cost.
+This package references most of the Actipro Avalonia Free product assemblies ([view on nuget.org](https://www.nuget.org/packages/ActiproSoftware.Controls.Avalonia)), which can be used at no cost.
 
 The free themes for the native `ColorPicker` and `DataGrid` controls require separate optional packages listed below.
 
 ### ActiproSoftware.Controls.Avalonia.Pro Package
 
-This package references all of the Actipro Avalonia UI Pro product assemblies ([view on nuget.org](https://www.nuget.org/packages/ActiproSoftware.Controls.Avalonia.Pro)), and is for customers who have licensed the Actipro Avalonia UI Pro controls.  Dependencies include:
+This package references all of the Actipro Avalonia Pro product assemblies ([view on nuget.org](https://www.nuget.org/packages/ActiproSoftware.Controls.Avalonia.Pro)), and is for customers who have licensed the Actipro Avalonia Pro controls.  Dependencies include:
 
 - `ActiproSoftware.Controls.Avalonia`
 
+### ActiproSoftware.Controls.Avalonia.Bars.Mvvm Package
+
+This package includes free classes and themes that support using the MVVM (Model-View-ViewModel) pattern with the Actipro Bars product ([view on nuget.org](https://www.nuget.org/packages/ActiproSoftware.Controls.Avalonia.Bars.Mvvm)), and is for customers who have licensed the Actipro Avalonia Pro controls.  Dependencies include:
+
+- `ActiproSoftware.Controls.Avalonia`
+- `ActiproSoftware.Controls.Avalonia.Pro`
+
 ### ActiproSoftware.Controls.Avalonia.Themes.ColorPicker Package
 
-This package includes free themes for the native Avalonia `ColorPicker` control that complement other Actipro Avalonia UI control themes ([view on nuget.org](https://www.nuget.org/packages/ActiproSoftware.Controls.Avalonia.Themes.ColorPicker)).  Dependencies include:
+This package includes free themes for the native Avalonia `ColorPicker` control that complement other Actipro Avalonia control themes ([view on nuget.org](https://www.nuget.org/packages/ActiproSoftware.Controls.Avalonia.Themes.ColorPicker)).  Dependencies include:
 
 - `ActiproSoftware.Controls.Avalonia`
 
 ### ActiproSoftware.Controls.Avalonia.Themes.DataGrid Package
 
-This package includes free themes for the native Avalonia `DataGrid` control that complement other Actipro Avalonia UI control themes ([view on nuget.org](https://www.nuget.org/packages/ActiproSoftware.Controls.Avalonia.Themes.DataGrid)).  Dependencies include:
+This package includes free themes for the native Avalonia `DataGrid` control that complement other Actipro Avalonia control themes ([view on nuget.org](https://www.nuget.org/packages/ActiproSoftware.Controls.Avalonia.Themes.DataGrid)).  Dependencies include:
 
 - `ActiproSoftware.Controls.Avalonia`
 

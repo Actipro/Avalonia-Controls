@@ -17,32 +17,32 @@
 		<Setter Property="Padding" Value="{actipro:ScaledThickness '0,0,-2.5,-2.5'}" />
 		<Setter Property="ItemTemplate">
 			<DataTemplate x:DataType="sampleBrowser:ProductFamilyInfo">
-				<actipro:Card Classes="theme-elevated" Margin="{actipro:ScaledThickness '0,0,2.5,2.5'}" Width="276" Focusable="True"
+				<actipro:Card Classes="theme-elevated" Margin="{actipro:ScaledThickness '0,0,2.5,2.5'}" Width="276" Padding="0" Focusable="True"
 					Command="{Binding NavigateViewToItemInfoCommand}" CommandParameter="{Binding OverviewItem}"
 					ToolTip.Tip="{Binding Title, StringFormat='Open the {0} product category overview'}" ToolTip.ShowDelay="1000"
 					Thumbnail="{Binding}" Title="{Binding Title, Mode=OneWay}" Content="{Binding}" Footer="{Binding}"
 					actipro:BadgeService.HorizontalAlignment="InsideOfTargetRightEdge"
 					actipro:BadgeService.VerticalAlignment="InsideOfTargetTopEdge"
-					actipro:BadgeService.VerticalOffset="20"
+					actipro:BadgeService.VerticalOffset="{actipro:ScaledDouble 3}"
 					>
-					
+
 					<actipro:BadgeService.Badge>
 						<actipro:Badge Template="{StaticResource BlurbBadgeTemplate}" IsHitTestVisible="False" IsActive="{Binding HasBlurbText}" Content="{Binding BlurbText}" />
 					</actipro:BadgeService.Badge>
 
 					<actipro:Card.ThumbnailTemplate>
 						<DataTemplate x:DataType="sampleBrowser:ProductFamilyInfo">
-							<Image DockPanel.Dock="Left" Width="32" Height="32" Source="{Binding LogoImageSource}">
+							<Image DockPanel.Dock="Left" Margin="{actipro:ScaledThickness '3,2,0,2'}" Width="32" Height="32" Source="{Binding LogoImageSource}">
 								<Image.Effect>
 									<DropShadowEffect OffsetX="0" OffsetY="2" BlurRadius="3" Opacity="{DynamicResource {actipro:ThemeResourceKey ShadowOpacity}}" />
 								</Image.Effect>
 							</Image>
 						</DataTemplate>
 					</actipro:Card.ThumbnailTemplate>
-					
+
 					<actipro:Card.ContentTemplate>
 						<DataTemplate x:DataType="sampleBrowser:ProductFamilyInfo">
-							<StackPanel>
+							<StackPanel Margin="{actipro:ScaledThickness '3,0'}">
 								<TextBlock Text="{Binding Summary, Mode=OneWay}" TextWrapping="Wrap" />
 
 								<ItemsControl Margin="0,3,0,0" ItemsSource="{Binding TeaserBulletItems}" IsTabStop="False">
@@ -59,14 +59,17 @@
 							</StackPanel>
 						</DataTemplate>
 					</actipro:Card.ContentTemplate>
-					
+
 					<actipro:Card.FooterTemplate>
 						<DataTemplate x:DataType="sampleBrowser:ProductFamilyInfo">
-							<TextBlock TextAlignment="Right" TextWrapping="Wrap"
-								Text="{Binding Items.Count, StringFormat='{}{0} samples'}"
+							<TextBlock 
+								Margin="{actipro:ScaledThickness '3,2'}"
 								FontSize="{actipro:ThemeResource DefaultFontSizeSmall}"
 								Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}"
-								 />
+								Text="{Binding Items.Count, StringFormat='{}{0} samples'}"
+								TextAlignment="Right" 
+								TextWrapping="Wrap"
+								/>
 						</DataTemplate>
 					</actipro:Card.FooterTemplate>
 				</actipro:Card>

@@ -1,0 +1,52 @@
+<ResourceDictionary
+	x:ClassModifier="internal"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	>
+
+	<DataTemplate x:Key="{x:Static actipro:BarsMvvmResourceKeys.BarToggleButtonDefaultItemContainerTemplate}" DataType="actipro:BarToggleButtonViewModel">
+		<actipro:BarToggleButton
+			CanCloneToRibbonQuickAccessToolBar="{Binding CanCloneToRibbonQuickAccessToolBar}"
+			Command="{Binding Command}"
+			CommandParameter="{Binding CommandParameter}"
+			InputGesture="{Binding InputGesture}"
+			IsChecked="{Binding IsChecked, Mode=TwoWay}"
+			IsInputGestureTextVisible="{Binding IsInputGestureTextVisible}"
+			IsVisible="{Binding IsVisible}"
+			Key="{Binding Key}"
+			KeyTipText="{Binding KeyTipText}"
+			Label="{Binding Label}"
+			LargeIcon="{Binding LargeIcon}"
+			MediumIcon="{Binding MediumIcon}"
+			SmallIcon="{Binding SmallIcon}"
+			Title="{Binding Title}"
+			ToolBarItemCollapseBehavior="{Binding ToolBarItemCollapseBehavior}"
+			ToolBarItemVariantBehavior="{Binding ToolBarItemVariantBehavior}"
+			ToolTip.Tip="{Binding Description}"
+			/>
+	</DataTemplate>
+
+	<DataTemplate x:Key="{x:Static actipro:BarsMvvmResourceKeys.BarToggleButtonMenuItemItemContainerTemplate}" DataType="actipro:BarToggleButtonViewModel">
+		<actipro:BarMenuItem
+			CanCloneToRibbonQuickAccessToolBar="{Binding CanCloneToRibbonQuickAccessToolBar}"
+			Command="{Binding Command}"
+			CommandParameter="{Binding CommandParameter}"
+			Description="{Binding Description}"
+			InputGesture="{Binding InputGesture}"
+			IsChecked="{Binding IsChecked, Mode=TwoWay}"
+			IsInputGestureTextVisible="{Binding IsInputGestureTextVisible}"
+			IsVisible="{Binding IsVisible}"
+			Key="{Binding Key}"
+			KeyTipText="{Binding KeyTipText}"
+			Label="{Binding Label}"
+			LargeIcon="{Binding LargeIcon}"
+			SmallIcon="{Binding SmallIcon}"
+			StaysOpenOnClick="{Binding StaysOpenOnClick}"
+			Title="{Binding Title}"
+			ToggleType="CheckBox"
+			UseLargeSize="{Binding UseLargeMenuItem}"
+			/>
+	</DataTemplate>
+
+</ResourceDictionary>

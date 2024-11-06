@@ -431,7 +431,7 @@
 				<TextBlock Margin="{actipro:ScaledThickness '0,1,0,0'}" FontSize="{actipro:ThemeResource DefaultFontSizeExtraLarge}" FontWeight="SemiBold" Text="Marina Carpenter" TextAlignment="Center" />
 				<TextBlock FontSize="{actipro:ThemeResource DefaultFontSizeLarge}" Foreground="{actipro:ThemeResource DefaultForegroundBrushSecondary}" Text="Account Manager" TextAlignment="Center" />
 
-				<TextBlock Margin="{actipro:ScaledThickness '0,3,0,0'}" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" Text="12 mutual contacts" TextAlignment="Center" />
+				<TextBlock Margin="{actipro:ScaledThickness '0,3,0,0'}" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" Text="12 mutual contacts" TextAlignment="Center" FlowDirection="LeftToRight" />
 				
 				<Button Margin="{actipro:ScaledThickness '0,3,0,0'}" Classes="theme-solid accent" Content="Follow" FontSize="{actipro:ThemeResource DefaultFontSizeLarge}" />
 			</StackPanel>
@@ -498,7 +498,7 @@
 					</actipro:AvatarGroup>
 				</Button>
 
-				<actipro:HyperlinkTextBlock Margin="{actipro:ScaledThickness '2,0,0,0'}" Text="+ 58 contributors" 
+				<actipro:HyperlinkTextBlock Margin="{actipro:ScaledThickness '2,0,0,0'}" Text="+ 58 contributors" FlowDirection="LeftToRight"
 											Command="{Binding #sampleRootControl.AvatarGroupClickedCommand}" VerticalAlignment="Center" />
 			</StackPanel>
 

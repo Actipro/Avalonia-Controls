@@ -1,0 +1,37 @@
+<ResourceDictionary
+	x:ClassModifier="internal"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	>
+	<ResourceDictionary.MergedDictionaries>
+
+		<MergeResourceInclude Source="avares://ActiproSoftware.Avalonia.Bars.Mvvm/Themes/ControlViewModelContainerTemplates/BarButtonViewModel.axaml" />
+		<MergeResourceInclude Source="avares://ActiproSoftware.Avalonia.Bars.Mvvm/Themes/ControlViewModelContainerTemplates/BarCheckBoxViewModel.axaml" />
+		<MergeResourceInclude Source="avares://ActiproSoftware.Avalonia.Bars.Mvvm/Themes/ControlViewModelContainerTemplates/BarComboBoxViewModel.axaml" />
+		<MergeResourceInclude Source="avares://ActiproSoftware.Avalonia.Bars.Mvvm/Themes/ControlViewModelContainerTemplates/BarGalleryViewModel.axaml" />
+		<MergeResourceInclude Source="avares://ActiproSoftware.Avalonia.Bars.Mvvm/Themes/ControlViewModelContainerTemplates/BarHeadingViewModel.axaml" />
+		<MergeResourceInclude Source="avares://ActiproSoftware.Avalonia.Bars.Mvvm/Themes/ControlViewModelContainerTemplates/BarPopupButtonViewModel.axaml" />
+		<MergeResourceInclude Source="avares://ActiproSoftware.Avalonia.Bars.Mvvm/Themes/ControlViewModelContainerTemplates/BarSeparatorViewModel.axaml" />
+		<MergeResourceInclude Source="avares://ActiproSoftware.Avalonia.Bars.Mvvm/Themes/ControlViewModelContainerTemplates/BarSizeSelectionMenuGalleryViewModel.axaml" />
+		<MergeResourceInclude Source="avares://ActiproSoftware.Avalonia.Bars.Mvvm/Themes/ControlViewModelContainerTemplates/BarSplitButtonViewModel.axaml" />
+		<MergeResourceInclude Source="avares://ActiproSoftware.Avalonia.Bars.Mvvm/Themes/ControlViewModelContainerTemplates/BarSplitToggleButtonViewModel.axaml" />
+		<MergeResourceInclude Source="avares://ActiproSoftware.Avalonia.Bars.Mvvm/Themes/ControlViewModelContainerTemplates/BarTextBoxViewModel.axaml" />
+		<MergeResourceInclude Source="avares://ActiproSoftware.Avalonia.Bars.Mvvm/Themes/ControlViewModelContainerTemplates/BarToggleButtonViewModel.axaml" />
+		<MergeResourceInclude Source="avares://ActiproSoftware.Avalonia.Bars.Mvvm/Themes/ControlViewModelContainerTemplates/IBarGalleryItemViewModel.axaml" />
+		<MergeResourceInclude Source="avares://ActiproSoftware.Avalonia.Bars.Mvvm/Themes/ControlViewModelContainerTemplates/RibbonApplicationButtonViewModel.axaml" />
+		<MergeResourceInclude Source="avares://ActiproSoftware.Avalonia.Bars.Mvvm/Themes/ControlViewModelContainerTemplates/RibbonBackstageHeaderButtonViewModel.axaml" />
+		<MergeResourceInclude Source="avares://ActiproSoftware.Avalonia.Bars.Mvvm/Themes/ControlViewModelContainerTemplates/RibbonBackstageHeaderSeparatorViewModel.axaml" />
+		<MergeResourceInclude Source="avares://ActiproSoftware.Avalonia.Bars.Mvvm/Themes/ControlViewModelContainerTemplates/RibbonBackstageTabViewModel.axaml" />
+		<MergeResourceInclude Source="avares://ActiproSoftware.Avalonia.Bars.Mvvm/Themes/ControlViewModelContainerTemplates/RibbonBackstageViewModel.axaml" />
+		<MergeResourceInclude Source="avares://ActiproSoftware.Avalonia.Bars.Mvvm/Themes/ControlViewModelContainerTemplates/RibbonContextualTabGroupViewModel.axaml" />
+		<MergeResourceInclude Source="avares://ActiproSoftware.Avalonia.Bars.Mvvm/Themes/ControlViewModelContainerTemplates/RibbonControlGroupViewModel.axaml" />
+		<MergeResourceInclude Source="avares://ActiproSoftware.Avalonia.Bars.Mvvm/Themes/ControlViewModelContainerTemplates/RibbonFooterViewModel.axaml" />
+		<MergeResourceInclude Source="avares://ActiproSoftware.Avalonia.Bars.Mvvm/Themes/ControlViewModelContainerTemplates/RibbonGroupLauncherButtonViewModel.axaml" />
+		<MergeResourceInclude Source="avares://ActiproSoftware.Avalonia.Bars.Mvvm/Themes/ControlViewModelContainerTemplates/RibbonGroupViewModel.axaml" />
+		<MergeResourceInclude Source="avares://ActiproSoftware.Avalonia.Bars.Mvvm/Themes/ControlViewModelContainerTemplates/RibbonMultiRowControlGroupViewModel.axaml" />
+		<MergeResourceInclude Source="avares://ActiproSoftware.Avalonia.Bars.Mvvm/Themes/ControlViewModelContainerTemplates/RibbonQuickAccessToolBarViewModel.axaml" />
+		<MergeResourceInclude Source="avares://ActiproSoftware.Avalonia.Bars.Mvvm/Themes/ControlViewModelContainerTemplates/RibbonTabRowToolBarViewModel.axaml" />
+		<MergeResourceInclude Source="avares://ActiproSoftware.Avalonia.Bars.Mvvm/Themes/ControlViewModelContainerTemplates/RibbonTabViewModel.axaml" />
+
+	</ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

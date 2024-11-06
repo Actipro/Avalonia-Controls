@@ -1,6 +1,109 @@
 items:
 - name: "Welcome"
   href: index.md
+- name: "Actipro Bars"
+  href: bars/index.md
+  items:
+  - name: "Overview"
+    href: bars/index.md
+  - name: "Getting Started"
+    href: bars/getting-started.md
+  - name: "XAML vs. MVVM Configuration"
+    href: bars/configuration.md
+  - name: "Controls"
+    href: bars/controls/index.md
+    items:
+    - name: "Overview"
+      href: bars/controls/index.md
+    - name: "Control Basics"
+      href: bars/controls/control-basics.md
+    - name: "Button"
+      href: bars/controls/button.md
+    - name: "Popup Button"
+      href: bars/controls/popup-button.md
+    - name: "Split Button"
+      href: bars/controls/split-button.md
+    - name: "Checkbox"
+      href: bars/controls/checkbox.md
+    - name: "Gallery"
+      href: bars/controls/gallery.md
+    - name: "Combobox"
+      href: bars/controls/combobox.md
+    - name: "Textbox"
+      href: bars/controls/textbox.md
+    - name: "Heading"
+      href: bars/controls/heading.md
+    - name: "Separator"
+      href: bars/controls/separator.md
+    - name: "Using Commands"
+      href: bars/controls/using-commands.md
+    - name: "Using Custom Controls"
+      href: bars/controls/using-custom-controls.md
+    - name: "Label and Key Tip Generation"
+      href: bars/controls/auto-generation.md
+  - name: "Ribbon Features"
+    href: bars/ribbon-features/index.md
+    items:
+    - name: "Overview"
+      href: bars/ribbon-features/index.md
+    - name: "Control Hierarchy"
+      href: bars/ribbon-features/control-hierarchy.md
+    - name: "Ribbon Window"
+      href: bars/ribbon-features/ribbon-window.md
+    - name: "Layout Modes and Density"
+      href: bars/ribbon-features/layout-and-density.md
+    - name: "Tabs, Groups, and Control Groups"
+      href: bars/ribbon-features/tabs-groups-controlgroups.md
+    - name: "Resizing and Variants"
+      href: bars/ribbon-features/resizing.md
+    - name: "Application Button"
+      href: bars/ribbon-features/application-button.md
+    - name: "Backstage"
+      href: bars/ribbon-features/backstage.md
+    - name: "Quick Access Toolbar"
+      href: bars/ribbon-features/quick-access-toolbar.md
+    - name: "Minimization"
+      href: bars/ribbon-features/minimization.md
+    - name: "Collapsing"
+      href: bars/ribbon-features/collapsing.md
+    - name: "Screen Tips"
+      href: bars/ribbon-features/screen-tips.md
+    - name: "Key Tips"
+      href: bars/ribbon-features/key-tips.md
+    - name: "Footer"
+      href: bars/ribbon-features/footer.md
+    - name: "Contextual Tabs"
+      href: bars/ribbon-features/contextual-tabs.md
+    - name: "Tab Row Toolbar"
+      href: bars/ribbon-features/tab-row-toolbar.md
+    - name: "Options Button"
+      href: bars/ribbon-features/options-button.md
+    - name: "Recent Documents"
+      href: bars/ribbon-features/recent-documents.md
+    - name: "Serialization"
+      href: bars/ribbon-features/serialization.md
+  - name: "Toolbar Features"
+    href: bars/toolbar-features/index.md
+    items:
+    - name: "Overview"
+      href: bars/toolbar-features/index.md
+    - name: "Standalone Toolbars"
+      href: bars/toolbar-features/standalone-toolbars.md
+  - name: "Menu Features"
+    href: bars/menu-features/index.md
+    items:
+    - name: "Overview"
+      href: bars/menu-features/index.md
+    - name: "Context Menus"
+      href: bars/menu-features/context-menus.md
+    - name: "Menu Customization"
+      href: bars/menu-features/menu-customization.md
+  - name: "MVVM Support"
+    href: bars/mvvm-support.md
+  - name: "Localization"
+    href: bars/localization.md
+  - name: "Troubleshooting"
+    href: bars/troubleshooting.md
 - name: "Actipro Fundamentals"
   href: fundamentals/index.md
   items:
@@ -90,6 +193,8 @@ items:
     href: themes/scrolling.md
   - name: "Image Provider"
     href: themes/image-provider.md
+  - name: "Icon Presenter"
+    href: themes/icon-presenter.md
 - name: "Actipro Shared Library"
   href: shared/index.md
   items:
@@ -172,6 +277,8 @@ items:
   items:
   - name: "Overview"
     href: conversion/index.md
+  - name: "Converting to v25.1"
+    href: conversion/converting-to-v25-1.md
   - name: "Converting to v24.2"
     href: conversion/converting-to-v24-2.md
   - name: "Converting to v24.1"

@@ -20,7 +20,7 @@
 		Header="SegmentedBar allows a user to select a single item with support for fluent animations when changing selection.">
 
 		<sampleBrowser:ControlExampleItemsControl.Documentation>
-			<sampleBrowser:ControlExampleLinkItem Title="SegmentedBar" Url="https://www.actiprosoftware.com/docs/controls/avalonia/fundamentals/segmented-bar" />
+			<sampleBrowser:ControlExampleLinkItem Title="SegmentedBar" Url="https://www.actiprosoftware.com/docs/controls/avalonia/fundamentals/controls/segmented-bar" />
 		</sampleBrowser:ControlExampleItemsControl.Documentation>
 
 		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>

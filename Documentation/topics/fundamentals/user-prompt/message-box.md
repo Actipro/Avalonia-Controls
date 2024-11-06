@@ -10,7 +10,7 @@ The [MessageBox](xref:@ActiproUIRoot.Controls.MessageBox) class is intentionally
 @if (avalonia) {
 ![Screenshot](../images/messagebox.png)
 
-*MessageBox dialog with optional status image*
+*MessageBox dialog with optional status icon*
 }
 @if (wpf) {
 ![Screenshot](../../images/messagebox.png)
@@ -79,6 +79,11 @@ result = ThemedMessageBox.Show(
 	MessageBoxImage.Question
 	MessageBoxResult.No);
 ```
+}
+
+@if (avalonia) {
+> [!WARNING]
+> The return value of [MessageBox](xref:@ActiproUIRoot.Controls.MessageBox).[Show](xref:@ActiproUIRoot.Controls.MessageBox.Show*) is a `Task<MessageBoxResult>` that must be awaited to prevent the calling thread from proceeding before the user responds.  Attempting to read the `Task.Result` without awaiting its completion can result in thread deadlock.
 }
 
 ## Owner

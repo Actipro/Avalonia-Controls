@@ -1,0 +1,761 @@
+<UserControl
+	x:Name="sampleRootControl"
+	x:Class="ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.ScreenTips.MainControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Resources>
+		<actipro:ComparisonConverter x:Key="MvvmComparisonConverter" Operator="EqualTo" CompareTo="Mvvm" />
+		<actipro:ComparisonConverter x:Key="XamlComparisonConverter" Operator="EqualTo" CompareTo="Xaml" />
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Screen tips are essentially tooltips that provide a more robust user interface capable of describing a control using text, images, and other content.">
+
+		<sampleBrowser:ControlExample
+			Header="Screen tip gallery"
+			Footer="Hover over the buttons in the Ribbon to see various configurations of screen tips.">
+
+			<actipro:Ribbon IsApplicationButtonVisible="False" QuickAccessToolBarMode="None">
+				<actipro:RibbonTabItem Key="SampleTab">
+
+					<actipro:RibbonGroup Key="Simple" CanAutoCollapse="False">
+
+						<actipro:BarButton Key="SimpleDescription"
+							LargeIcon="/Images/Icons/QuickStart32.png"
+							SmallIcon="/Images/Icons/QuickStart16.png"
+							ToolTip.Tip="A ScreenTip is automatically generated for Bar controls that assign a string to the ToolTip.Tip property."
+							/>
+
+					</actipro:RibbonGroup>
+
+					<actipro:RibbonGroup Key="HeadersAndFoooters" Label="Headers &amp; Footers" CanAutoCollapse="False">
+
+						<actipro:BarButton Key="Default" Title="Paste"
+							InputGesture="{x:Static TextBox.PasteGesture}"
+							LargeIcon="/Images/Icons/Paste32.png"
+							SmallIcon="/Images/Icons/Paste16.png"
+							ToolTip.Tip="Bar controls automatically generates a header from the Title property and input gesture (when available). If Title is not specified, the Label will be used instead." />
+
+						<actipro:RibbonControlGroup ItemVariantBehavior="AlwaysMedium">
+
+							<actipro:BarButton Key="AltHeader" Label="Alt. Header"
+								InputGesture="{x:Static TextBox.PasteGesture}"
+								LargeIcon="/Images/Icons/Paste32.png"
+								SmallIcon="/Images/Icons/Paste16.png"
+								ScreenTipHeader="Alternate Header"
+								ToolTip.Tip="This ScreenTip explicitly defines a header to override the default header." />
+
+							<actipro:BarButton Key="NoHeader" Label="No Header"
+								InputGesture="{x:Static TextBox.PasteGesture}"
+								LargeIcon="/Images/Icons/Paste32.png"
+								SmallIcon="/Images/Icons/Paste16.png"
+								ScreenTipHeader=""
+								ToolTip.Tip="Setting the ScreenTipHeader to an empty string will hide the default header."
+								ScreenTipFooter="If a footer is defined a standard ScreenTip is still used." />
+
+							<actipro:BarButton Key="NoHeaderOrFooter" Label="No Header/Footer"
+								InputGesture="{x:Static TextBox.PasteGesture}"
+								LargeIcon="/Images/Icons/Paste32.png"
+								SmallIcon="/Images/Icons/Paste16.png"
+								ScreenTipHeader=""
+								ToolTip.Tip="This ScreenTip with no header or footer looks like a normal ToolTip." />
+
+						</actipro:RibbonControlGroup>
+
+					</actipro:RibbonGroup>
+
+					<actipro:RibbonGroup Key="Custom" CanAutoCollapse="False">
+
+						<actipro:RibbonControlGroup ItemVariantBehavior="AlwaysMedium">
+
+							<actipro:BarButton Key="Advanced Footer"
+								LargeIcon="/Images/Icons/QuickStart32.png"
+								SmallIcon="/Images/Icons/QuickStart16.png"
+								ToolTip.Tip="The Header and Footer can be set to any content."
+								>
+								<actipro:BarButton.ScreenTipFooter>
+									<Grid Margin="0,4" ColumnDefinitions="Auto,*">
+										<Image Margin="0,0,8,0" Width="16" Height="16" Source="/Images/Icons/Help16.png" />
+										<TextBlock Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" Text="Press F1 for more help." />
+									</Grid>
+								</actipro:BarButton.ScreenTipFooter>
+							</actipro:BarButton>
+
+							<actipro:BarButton Key="Complex"
+								LargeIcon="/Images/Icons/QuickStart32.png"
+								SmallIcon="/Images/Icons/QuickStart16.png">
+								<ToolTip.Tip>
+									<actipro:ScreenTip ComplexContentWidth="350" Header="ScreenTip Customization">
+										<actipro:ScreenTip.Content>
+											<Grid Margin="8" ColumnDefinitions="Auto,*">
+												<Image Margin="0,0,8,0" StretchDirection="DownOnly" Source="/Images/Other/CoverPageScreenTip.png" />
+												<TextBlock Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Top">
+													This <Italic>ScreenTip</Italic> uses a custom layout for Content and Footer.
+												</TextBlock>
+											</Grid>
+										</actipro:ScreenTip.Content>
+										<actipro:ScreenTip.Footer>
+											<Grid Margin="0,8" ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto">
+
+												<Image Grid.Row="0" Grid.Column="0" Margin="0,0,8,0" Width="16" Height="16" Source="/Images/Icons/Help16.png" />
+												<TextBlock Grid.Row="0" Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" FontWeight="Bold" Text="Press F1 for more help."/>
+
+												<TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,8,0,0" TextWrapping="Wrap">Additional footer content can be placed here.</TextBlock>
+											</Grid>
+										</actipro:ScreenTip.Footer>
+									</actipro:ScreenTip>
+								</ToolTip.Tip>
+							</actipro:BarButton>
+
+							<actipro:BarButton Key="DynamicScreenTip" Label="Dynamic"
+								LargeIcon="/Images/Icons/QuickStart32.png"
+								SmallIcon="/Images/Icons/QuickStart16.png"
+								ToolTip.Tip="The footer of this screen tip will show the date/time it was displayed."
+								/>
+
+						</actipro:RibbonControlGroup>
+
+					</actipro:RibbonGroup>
+
+				</actipro:RibbonTabItem>
+			</actipro:Ribbon>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+				<![CDATA[
+<actipro:Ribbon ... >
+	<actipro:RibbonTabItem ... >
+
+		<actipro:RibbonGroup Key="Simple" ... >
+
+			<!-- Simple Description -->
+			<actipro:BarButton Key="SimpleDescription" ...
+				ToolTip.Tip="A ScreenTip is automatically generated for Bar controls that assign a string to the ToolTip.Tip property." />
+
+		</actipro:RibbonGroup>
+
+		<actipro:RibbonGroup Key="HeadersAndFoooters" ... >
+
+			<!-- Default Header from Title -->
+			<actipro:BarButton Key="Default" Title="Paste" ...
+				InputGesture="{x:Static TextBox.PasteGesture}"
+				ToolTip.Tip="Bar controls automatically generates a header from the Title property and input gesture (when available). If Title is not specified, the Label will be used instead." />
+
+			<actipro:RibbonControlGroup ItemVariantBehavior="AlwaysMedium">
+
+				<!-- Alternate Header -->
+				<actipro:BarButton Key="AltHeader" Label="Alt. Header" ...
+					InputGesture="{x:Static TextBox.PasteGesture}"
+					ScreenTipHeader="Alternate Header"
+					ToolTip.Tip="This ScreenTip explicitly defines a header to override the default header." />
+
+				<!-- No Header -->
+				<actipro:BarButton Key="NoHeader" Label="No Header" ...
+					InputGesture="{x:Static TextBox.PasteGesture}"
+					ScreenTipHeader=""
+					ToolTip.Tip="Setting the ScreenTipHeader to an empty string will hide the default header."
+					ScreenTipFooter="If a footer is defined a standard ScreenTip is still used." />
+
+				<!-- No Header/Header -->
+				<actipro:BarButton Key="NoHeaderOrFooter" Label="No Header/Footer" ...
+					InputGesture="{x:Static TextBox.PasteGesture}"
+					ScreenTipHeader=""
+					ToolTip.Tip="This ScreenTip with no header or footer looks like a normal ToolTip." />
+
+			</actipro:RibbonControlGroup>
+
+		</actipro:RibbonGroup>
+
+		<actipro:RibbonGroup Key="Custom" ... >
+
+			<actipro:RibbonControlGroup ItemVariantBehavior="AlwaysMedium">
+
+				<!-- Advanced Footer -->
+				<actipro:BarButton Key="Advanced Footer" ...
+					ToolTip.Tip="The Header and Footer can be set to any content.">
+					
+					<actipro:BarButton.ScreenTipFooter>
+						<Grid Margin="0,4" ColumnDefinitions="Auto,*">
+
+							<Image Margin="0,0,8,0"
+								Width="16" Height="16"
+								Source="/Images/Icons/Help16.png" />
+
+							<TextBlock Grid.Column="1"
+								Text="Press F1 for more help."
+								TextWrapping="Wrap"
+								VerticalAlignment="Center" />
+
+						</Grid>
+					</actipro:BarButton.ScreenTipFooter>
+
+				</actipro:BarButton>
+
+				<!-- Complex -->
+				<actipro:BarButton Key="Complex" ... >
+					<ToolTip.Tip>
+						<actipro:ScreenTip ComplexContentWidth="350" Header="ScreenTip Customization">
+
+							<actipro:ScreenTip.Content>
+								<Grid Margin="8" ColumnDefinitions="Auto,*">
+
+									<Image Margin="0,0,8,0" StretchDirection="DownOnly"
+										Source="/Images/Other/CoverPageScreenTip.png" />
+									
+									<TextBlock Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Top">
+										This <Italic>ScreenTip</Italic> uses a custom layout for Content and Footer.
+									</TextBlock>
+
+								</Grid>
+							</actipro:ScreenTip.Content>
+
+							<actipro:ScreenTip.Footer>
+								<Grid Margin="0,8" ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto">
+
+									<Image Grid.Row="0" Grid.Column="0" Margin="0,0,8,0"
+										Width="16" Height="16"
+										Source="/Images/Icons/Help16.png" />
+
+									<TextBlock Grid.Row="0" Grid.Column="1"
+										FontWeight="Bold"
+										Text="Press F1 for more help."
+										TextWrapping="Wrap"
+										VerticalAlignment="Center" />
+
+									<TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+										Margin="0,8,0,0"
+										Text="Additional footer content can be placed here."
+										TextWrapping="Wrap" />
+
+								</Grid>
+							</actipro:ScreenTip.Footer>
+
+						</actipro:ScreenTip>
+					</ToolTip.Tip>
+				</actipro:BarButton>
+
+				<!-- Dynamic (requires additional code-behind configuration) -->
+				<actipro:BarButton Key="DynamicScreenTip" Label="Dynamic" ...
+					ToolTip.Tip="The footer of this screen tip will show the date/time it was displayed."
+					/>
+				
+			</actipro:RibbonControlGroup>
+
+		</actipro:RibbonGroup>
+
+	</actipro:RibbonTabItem>
+</actipro:Ribbon>
+				]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+				<![CDATA[
+// NOTE: This code-behind logic is only necessary to support dynamically generated screen tip content
+
+using using ActiproSoftware.UI.Avalonia.Controls.Bars;
+...
+
+public partial class MainControl : UserControl {
+
+	public MainControl() {
+		InitializeComponent();
+
+		// Register an event handler for when screen tips are opening
+		ScreenTipService.Current.ScreenTipOpening += this.OnScreenTipOpening;
+	}
+
+	private void OnScreenTipOpening(object? sender, Avalonia.Interactivity.CancelRoutedEventArgs e) {
+		if ((sender is Control control) && (ToolTip.GetTip(control) is ScreenTip screenTip)) {
+			var key = BarControlService.GetKey(control);
+
+			// Customize the ScreenTip for specific controls
+			if (key == "DynamicScreenTip") {
+				// Dynamically include the time stamp in the footer
+				screenTip.Footer = $"Displayed at: {DateTime.Now}";
+			}
+		}
+	}
+
+}
+				]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Basic usage"
+			Footer="Screen tips are automatically generated from the tooltip, label, header, and footer properties.">
+			<sampleBrowser:ControlExample.Resources>
+				<actipro:ComparisonConverter x:Key="ScreenTipHeaderUndefinedAttributeConverter" TrueResult="" FalseResult="ScreenTipHeader=&quot;&quot;&#xD;&#x9;&#x9;&#x9;&#x9;" />
+				<actipro:ComparisonConverter x:Key="ScreenTipHeaderUndefinedSetterConverter" TrueResult="" FalseResult="&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Title = &quot;&quot;," />
+			</sampleBrowser:ControlExample.Resources>
+
+			<sampleBrowser:ControlExample.XamlContent>
+
+				<!-- XAML-based sample -->
+				<actipro:Ribbon IsApplicationButtonVisible="False" QuickAccessToolBarMode="None">
+					<actipro:RibbonTabItem Key="SampleTab">
+						<actipro:RibbonGroup Key="SampleGroup">
+
+							<actipro:BarButton Key="BasicUsage"
+								InputGesture="{x:Static TextBox.PasteGesture}"
+								IsInputGestureTextVisible="{Binding #basicUsageIsInputGestureTextVisibleCheckBox.IsChecked, Mode=OneWay}"
+								Label="{Binding #basicUsageLabel.Text, Mode=OneWay}"
+								ScreenTipHeader="{Binding #basicUsageHeader.Text, Mode=OneWay}"
+								ScreenTipFooter="{Binding #basicUsageFooter.Text, Mode=OneWay}"
+								ToolBarItemVariantBehavior="All"
+								ToolTip.Tip="{Binding #basicUsageToolTip.Text, Mode=OneWay}"
+								LargeIcon="/Images/Icons/QuickStart32.png"
+								SmallIcon="/Images/Icons/QuickStart16.png"
+								/>
+
+						</actipro:RibbonGroup>
+					</actipro:RibbonTabItem>
+				</actipro:Ribbon>
+
+			</sampleBrowser:ControlExample.XamlContent>
+
+			<sampleBrowser:ControlExample.MvvmContent>
+				
+				<!-- MVVM-based sample -->
+				<actipro:Ribbon
+					DataContext="{Binding #sampleRootControl.BasicUsageRibbonViewModel}"
+					Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+					/>
+
+			</sampleBrowser:ControlExample.MvvmContent>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10" DataContext="{Binding #sampleRootControl.BasicUsageBarButtonViewModel}">
+					<TextBox x:Name="basicUsageLabel" Watermark="Label" UseFloatingWatermark="True" Text="{Binding Label, Mode=TwoWay}" />
+					<CheckBox x:Name="basicUsageIsInputGestureTextVisibleCheckBox" Content="Is input gesture text visible" IsChecked="{Binding IsInputGestureTextVisible}" />
+					<sampleBrowser:NullableStringSettingControl x:Name="basicUsageHeader" Label="Header" Text="{Binding Title, Mode=TwoWay}" CoerceEmptyAsNull="True" />
+					<TextBox x:Name="basicUsageToolTip" Watermark="ToolTip" UseFloatingWatermark="True" Text="{Binding Description, Mode=TwoWay}" />
+					<StackPanel>
+						<sampleBrowser:NullableStringSettingControl x:Name="basicUsageFooter" Label="Footer" Text="The footer content is separated from the rest" CoerceEmptyAsNull="True" IsCoerceCheckBoxVisible="False" IsWatermarkVisible="False"
+							IsEnabled="{Binding $parent[sampleBrowser:ControlExample].SelectedCodeExampleKind, Converter={StaticResource XamlComparisonConverter}}" />
+						<TextBlock Classes="theme-form-control-message warning" Text="Not directly supported by default view models"
+							IsVisible="{Binding $parent[sampleBrowser:ControlExample].SelectedCodeExampleKind, Converter={StaticResource MvvmComparisonConverter}}" />
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample Kind="Xaml" xml:space="preserve">
+				<![CDATA[
+<actipro:Ribbon ... >
+	<actipro:RibbonTabItem ... >
+		<actipro:RibbonGroup ... >
+
+			<actipro:BarButton Key="BasicUsage" ...
+				InputGesture="{x:Static TextBox.PasteGesture}"
+				$(IsInputGestureTextVisibleAttribute)$(LabelAttribute)$(ScreenTipHeaderDefinedAttribute)$(ScreenTipHeaderUndefinedAttribute)ToolTip.Tip="$(ToolTip)"$(ScreenTipFooterAttribute)
+				/>
+
+		</actipro:RibbonGroup>
+	</actipro:RibbonTabItem>
+</actipro:Ribbon>
+				]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="LabelAttribute"
+															   IsEnabled="{Binding #basicUsageLabel.Text, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding #basicUsageLabel.Text, StringFormat='Label=&quot;{0}&quot;&#xD;&#x9;&#x9;&#x9;&#x9;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsInputGestureTextVisibleAttribute"
+															   IsEnabled="{Binding !#basicUsageIsInputGestureTextVisibleCheckBox.IsChecked}"
+															   Value="IsInputGestureTextVisible=&quot;False&quot;&#xD;&#x9;&#x9;&#x9;&#x9;" />
+						<sampleBrowser:CodeExampleSubstitution Key="ScreenTipFooterAttribute"
+															   IsEnabled="{Binding #basicUsageFooter.Text, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding #basicUsageFooter.Text, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;ScreenTipFooter=&quot;{0}&quot;'}}" />
+						<sampleBrowser:CodeExampleSubstitution Key="ScreenTipHeaderDefinedAttribute"
+															   IsEnabled="{Binding #basicUsageHeader.Text, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding #basicUsageHeader.Text, StringFormat='ScreenTipHeader=&quot;{0}&quot;&#xD;&#x9;&#x9;&#x9;&#x9;'}}" />
+						<sampleBrowser:CodeExampleSubstitution Key="ScreenTipHeaderUndefinedAttribute"
+															   IsEnabled="{Binding #basicUsageHeader.Text, Converter={x:Static StringConverters.IsNullOrEmpty}}"
+															   Value="{Binding #basicUsageHeader.CoerceEmptyAsNull, Converter={StaticResource ScreenTipHeaderUndefinedAttributeConverter}}" />
+						<sampleBrowser:CodeExampleSubstitution Key="ToolTip" Value="{Binding #basicUsageToolTip.Text}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" xml:space="preserve">
+				<![CDATA[
+<!-- DataContext is bound to an instance of RibbonViewModel -->
+<actipro:Ribbon
+	DataContext="{Binding #sampleRootControl.BasicUsageRibbonViewModel}"
+	Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+	/>
+				]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" Language="C#" xml:space="preserve">
+				<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm;
+...
+
+public partial class SampleRootControl : UserControl {
+	
+	/// <summary>
+	/// Creates the ribbon view model.
+	/// </summary>
+	private static void CreateBasicUsageRibbonViewModel() {
+		// Some view model properties omitted that are unrelated to the sample
+		return new RibbonViewModel() {
+			Tabs = {
+				new RibbonTabViewModel("SampleTab") {
+					Groups = {
+						new RibbonGroupViewModel("SampleGroup") {
+							Items = {
+
+								//
+								// This button is configured with the screen tip from the sample
+								//
+								new BarButtonViewModel("BasicUsage"$(LabelParameter)) {$(ScreenTipHeaderDefinedSetter)$(ScreenTipHeaderUndefinedSetter)
+									Description = "$(ToolTip)",
+									InputGesture = TextBox.PasteGesture,$(IsInputGestureTextDisplayedSetter)
+								},
+
+							},
+						},
+					}
+				},
+			}
+		};
+	}
+	
+	/// <summary>
+	/// Gets the view model to be bound to the ribbon.
+	/// </summary>
+	public RibbonViewModel BasicUsageRibbonViewModel { get; } = CreateBasicUsageRibbonViewModel();
+	
+}
+				]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="LabelParameter"
+															   IsEnabled="{Binding #basicUsageLabel.Text, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding #basicUsageLabel.Text, StringFormat=', &quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsInputGestureTextDisplayedSetter"
+															   IsEnabled="{Binding !#basicUsageIsInputGestureTextVisibleCheckBox.IsChecked}"
+															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;IsInputGestureTextDisplayed = false," />
+						<sampleBrowser:CodeExampleSubstitution Key="ScreenTipHeaderDefinedSetter"
+															   IsEnabled="{Binding #basicUsageHeader.Text, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding #basicUsageHeader.Text, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Title = &quot;{0}&quot;',}}" />
+						<sampleBrowser:CodeExampleSubstitution Key="ScreenTipHeaderUndefinedSetter"
+															   IsEnabled="{Binding #basicUsageHeader.Text, Converter={x:Static StringConverters.IsNullOrEmpty}}"
+															   Value="{Binding #basicUsageHeader.CoerceEmptyAsNull, Converter={StaticResource ScreenTipHeaderUndefinedSetterConverter}}" />
+						<sampleBrowser:CodeExampleSubstitution Key="ToolTip" Value="{Binding #basicUsageToolTip.Text}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Advanced footer or header"
+			Footer="Any content can be assigned to the footer or header.">
+
+			<actipro:Ribbon IsApplicationButtonVisible="False" LayoutMode="Simplified" QuickAccessToolBarMode="None">
+				<actipro:RibbonTabItem Key="SampleTab">
+					<actipro:RibbonGroup Key="SampleGroup">
+
+						<actipro:BarButton Key="AdvancedFooter"
+							LargeIcon="/Images/Icons/QuickStart32.png"
+							SmallIcon="/Images/Icons/QuickStart16.png"
+							ToolBarItemVariantBehavior="All"
+							ToolTip.Tip="The Header and Footer can be set to any content."
+							>
+							<actipro:BarButton.ScreenTipFooter>
+								<Grid ColumnDefinitions="Auto,*" Margin="0,4" >
+
+									<Image Margin="0,0,8,0"
+										Width="16" Height="16"
+										Source="/Images/Icons/Help16.png" />
+
+									<TextBlock Grid.Column="1"
+										Text="Press F1 for more help." 
+										TextWrapping="Wrap"
+										VerticalAlignment="Center" />
+
+								</Grid>
+							</actipro:BarButton.ScreenTipFooter>
+						</actipro:BarButton>
+
+					</actipro:RibbonGroup>
+				</actipro:RibbonTabItem>
+			</actipro:Ribbon>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+				<![CDATA[
+<actipro:Ribbon ... >
+	<actipro:RibbonTabItem ... >
+		<actipro:RibbonGroup ... >
+
+			<actipro:BarButton Key="AdvancedFooter" ...
+				ToolTip.Tip="The Header and Footer can be set to any content.">
+
+				<actipro:BarButton.ScreenTipFooter>
+					<Grid ColumnDefinitions="Auto,*" Margin="0,4" >
+
+						<Image Margin="0,0,8,0"
+							Width="16" Height="16"
+							Source="/Images/Icons/Help16.png" />
+
+						<TextBlock Grid.Column="1"
+							Text="Press F1 for more help." 
+							TextWrapping="Wrap"
+							VerticalAlignment="Center" />
+
+					</Grid>
+				</actipro:BarButton.ScreenTipFooter>
+
+			</actipro:BarButton>
+
+		</actipro:RibbonGroup>
+	</actipro:RibbonTabItem>
+</actipro:Ribbon>
+				]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Complex content"
+			Footer="Explicitly assign a ScreenTip as a control's ToolTip for full control over all the content area, including the content width."
+			DataContext="{Binding #complexContentScreenTip}">
+
+			<actipro:Ribbon IsApplicationButtonVisible="False" LayoutMode="Simplified" QuickAccessToolBarMode="None">
+				<actipro:RibbonTabItem Key="SampleTab">
+					<actipro:RibbonGroup Key="SampleGroup">
+
+						<actipro:BarButton Key="Complex"
+							LargeIcon="/Images/Icons/QuickStart32.png"
+							SmallIcon="/Images/Icons/QuickStart16.png"
+							ToolBarItemVariantBehavior="All">
+
+							<ToolTip.Tip>
+								<actipro:ScreenTip x:Name="complexContentScreenTip"
+									ComplexContentWidth="350"
+									Header="ScreenTip Customization">
+
+									<actipro:ScreenTip.Content>
+										<Grid Margin="8" ColumnDefinitions="Auto,*">
+
+											<Image Margin="0,0,8,0" StretchDirection="DownOnly"
+												Source="/Images/Other/CoverPageScreenTip.png" />
+
+											<TextBlock Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Top">
+												This <Italic>ScreenTip</Italic> uses a custom layout for Content and Footer.
+											</TextBlock>
+
+										</Grid>
+									</actipro:ScreenTip.Content>
+
+									<actipro:ScreenTip.Footer>
+										<Grid Margin="0,8" ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto">
+
+											<Image Grid.Row="0" Grid.Column="0" Margin="0,0,8,0"
+												Width="16" Height="16"
+												Source="/Images/Icons/Help16.png" />
+
+											<TextBlock Grid.Row="0" Grid.Column="1"
+												FontWeight="Bold"
+												Text="Press F1 for more help."
+												TextWrapping="Wrap"
+												VerticalAlignment="Center" />
+
+											<TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+												Margin="0,8,0,0"
+												Text="Additional footer content can be placed here."
+												TextWrapping="Wrap" />
+
+										</Grid>
+									</actipro:ScreenTip.Footer>
+
+								</actipro:ScreenTip>
+							</ToolTip.Tip>
+
+						</actipro:BarButton>
+
+					</actipro:RibbonGroup>
+				</actipro:RibbonTabItem>
+			</actipro:Ribbon>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="{Binding ComplexContentWidth, StringFormat='Complex content width: {0}'}" />
+						<Slider Minimum="200" Maximum="600" Value="{Binding ComplexContentWidth}" TickFrequency="10" IsSnapToTickEnabled="True" SmallChange="10" LargeChange="50" />
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+				<![CDATA[
+<actipro:Ribbon ... >
+	<actipro:RibbonTabItem ... >
+		<actipro:RibbonGroup ... >
+
+			<actipro:BarButton Key="Complex" ... >
+
+				<ToolTip.Tip>
+					<actipro:ScreenTip
+						ComplexContentWidth="$(ComplexContentWidth)"
+						Header="ScreenTip Customization">
+
+						<actipro:ScreenTip.Content>
+							<Grid Margin="8" ColumnDefinitions="Auto,*">
+
+								<Image Margin="0,0,8,0" StretchDirection="DownOnly"
+									Source="/Images/Other/CoverPageScreenTip.png" />
+
+								<TextBlock Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Top">
+									This <Italic>ScreenTip</Italic> uses a custom layout for Content and Footer.
+								</TextBlock>
+
+							</Grid>
+						</actipro:ScreenTip.Content>
+
+						<actipro:ScreenTip.Footer>
+							<Grid Margin="0,8" ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto">
+
+								<Image Grid.Row="0" Grid.Column="0" Margin="0,0,8,0"
+									Width="16" Height="16"
+									Source="/Images/Icons/Help16.png" />
+
+								<TextBlock Grid.Row="0" Grid.Column="1"
+									FontWeight="Bold"
+									Text="Press F1 for more help."
+									TextWrapping="Wrap"
+									VerticalAlignment="Center" />
+
+								<TextBlock Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
+									Margin="0,8,0,0"
+									Text="Additional footer content can be placed here."
+									TextWrapping="Wrap" />
+
+							</Grid>
+						</actipro:ScreenTip.Footer>
+
+					</actipro:ScreenTip>
+				</ToolTip.Tip>
+
+			</actipro:BarButton>
+
+		</actipro:RibbonGroup>
+	</actipro:RibbonTabItem>
+</actipro:Ribbon>
+				]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ComplexContentWidth" Value="{Binding ComplexContentWidth}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Dynamic content"
+			Footer="Use the ScreenTipOpening event to customize the content of a screen tip before it is displayed.">
+
+			<actipro:Ribbon IsApplicationButtonVisible="False" LayoutMode="Simplified" QuickAccessToolBarMode="None">
+				<actipro:RibbonTabItem Key="SampleTab">
+					<actipro:RibbonGroup Key="SampleGroup">
+
+						<actipro:BarButton Key="DynamicScreenTip" Label="Dynamic"
+							LargeIcon="/Images/Icons/QuickStart32.png"
+							SmallIcon="/Images/Icons/QuickStart16.png"
+							ToolBarItemVariantBehavior="All"
+							ToolTip.Tip="The footer of this screen tip will show the date/time it was displayed."
+							/>
+
+					</actipro:RibbonGroup>
+				</actipro:RibbonTabItem>
+			</actipro:Ribbon>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+				<![CDATA[
+<actipro:Ribbon ... >
+	<actipro:RibbonTabItem ... >
+		<actipro:RibbonGroup ... >
+
+			<!-- The Key will be used to identify this button in code-behind -->
+			<actipro:BarButton Key="DynamicScreenTip" Label="Dynamic"
+				LargeIcon="/Images/Icons/QuickStart32.png"
+				SmallIcon="/Images/Icons/QuickStart16.png"
+				ToolTip.Tip="The footer of this screen tip will show the date/time it was displayed."
+				/>
+
+		</actipro:RibbonGroup>
+	</actipro:RibbonTabItem>
+</actipro:Ribbon>
+				]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+				<![CDATA[
+using using ActiproSoftware.UI.Avalonia.Controls.Bars;
+...
+
+public partial class MainControl : UserControl {
+
+	public MainControl() {
+		InitializeComponent();
+
+		// Register an event handler for when screen tips are opening
+		ScreenTipService.Current.ScreenTipOpening += this.OnScreenTipOpening;
+	}
+
+	private void OnScreenTipOpening(object? sender, Avalonia.Interactivity.CancelRoutedEventArgs e) {
+		if ((sender is Control control) && (ToolTip.GetTip(control) is ScreenTip screenTip)) {
+			var key = BarControlService.GetKey(control);
+
+			// Customize the ScreenTip for specific controls
+			if (key == "DynamicScreenTip") {
+				// Dynamically include the time stamp in the footer
+				screenTip.Footer = $"Displayed at: {DateTime.Now}";
+			}
+		}
+	}
+
+}
+				]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Use with any control"
+			Footer="A ScreenTip instance can be assigned as the ToolTip.Tip property on any control.">
+
+			<TextBox Text="Hover over this TextBox to see how a ScreenTip can be shown for any control." TextWrapping="Wrap">
+				<ToolTip.Tip>
+					<actipro:ScreenTip Header="TextBox with screen tip">
+						Screen tips can be used with any control to enhance the user experience.
+					</actipro:ScreenTip>
+				</ToolTip.Tip>
+			</TextBox>
+
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+				<![CDATA[
+<TextBox ... >
+
+	<ToolTip.Tip>
+		<actipro:ScreenTip Header="TextBox with screen tip">
+			Screen tips can be used with any control to enhance the user experience.
+		</actipro:ScreenTip>
+	</ToolTip.Tip>
+
+</TextBox>
+				]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+
+</UserControl>

@@ -70,22 +70,24 @@ by using a binding which reads as "ComboBox.SelectedItem EqualTo 'Allow Clear'".
 	/>
 ```
 
-## ImageControlConverter
+## IconControlConverter
 
-The [ImageControlConverter](xref:@ActiproUIRoot.Controls.Converters.ImageControlConverter) value converter can create an `Image` control for a bound `IImage` source.  This is useful when data-binding a `MenuItem` control's `Icon` property to an `IImage` such as a bitmap, and the `MenuItem.Icon` must be a control.
+The [IconControlConverter](xref:@ActiproUIRoot.Controls.Converters.IconControlConverter) value converter can create a `Control` for a bound value that represents image data.  This is useful when data-binding a `MenuItem` control's `Icon` property to an image value like `IImage`, and the `MenuItem.Icon` must be a control.
 
-The following example demonstrates how to use the converter when binding to a view model's `ImageSource` property:
+The following example demonstrates how to use the converter when binding to a view model's `ImageSource` property (which is assumed to be a value of type `IImage`):
 
 ```xaml
 xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 ...
 <UserControl.Resources>
-	<actipro:ImageControlConverter x:Key="ImageControlConverter" />
+	<actipro:IconControlConverter x:Key="IconControlConverter" />
 </UserControl.Resources>
 ...
 
-<MenuItem Icon="{Binding ImageSource, Converter={StaticResource ImageControlConverter}}" ... />
+<MenuItem Icon="{Binding ImageSource, Converter={StaticResource IconControlConverter}}" ... />
 ```
+
+By default, the `IconControlConverter` creates a `ContentControl` whose template is configured to use an [IconPresenter](xref:@ActiproUIRoot.Controls.Primitives.IconPresenter) for displaying the bound value.  The [IconPresenter](xref:@ActiproUIRoot.Controls.Primitives.IconPresenter).[DefaultContentTemplate](xref:@ActiproUIRoot.Controls.Primitives.IconPresenter.DefaultContentTemplate) determines which `IDataTemplate` will be used for the bound value.  See the [Icon Presenter](../themes/icon-presenter.md) topic for additional details.
 
 ## ImageKeyToImageSourceConverter
 

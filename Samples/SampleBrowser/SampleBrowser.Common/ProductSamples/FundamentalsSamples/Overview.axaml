@@ -43,7 +43,7 @@
 						</StackPanel>
 
 						<actipro:Card.Footer>
-							<TextBlock Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" Text="@erik_lai" TextAlignment="Center" />
+							<TextBlock FlowDirection="LeftToRight" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" Text="@erik_lai" TextAlignment="Center" />
 						</actipro:Card.Footer>
 
 					</actipro:Card>
@@ -115,9 +115,9 @@
 				
 				<actipro:UserPromptControl ToolTip.Tip="UserPromptControl with Checkbox and Expanded Information"
 					Width="400"
-					Header="Actipro Avalonia UI Controls"
+					Header="Actipro Avalonia Controls"
 					StandardButtons="YesNo"
-					StandardStatusImage="Information"
+					StandardStatusIcon="Information"
 					Content="Easily build message box and task dialogs."
 					BorderThickness="1"
 					Elevation="0"

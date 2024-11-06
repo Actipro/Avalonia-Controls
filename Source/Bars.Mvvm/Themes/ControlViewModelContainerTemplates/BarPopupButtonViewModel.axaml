@@ -1,0 +1,48 @@
+<ResourceDictionary
+	x:ClassModifier="internal"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	>
+
+	<DataTemplate x:Key="{x:Static actipro:BarsMvvmResourceKeys.BarPopupButtonDefaultItemContainerTemplate}" DataType="actipro:BarPopupButtonViewModel">
+		<actipro:BarPopupButton
+			CanCloneToRibbonQuickAccessToolBar="{Binding CanCloneToRibbonQuickAccessToolBar}"
+			Command="{Binding Command}"
+			CommandParameter="{Binding CommandParameter}"
+			IsVisible="{Binding IsVisible}"
+			ItemsSource="{Binding MenuItems}"
+			Key="{Binding Key}"
+			KeyTipText="{Binding KeyTipText}"
+			Label="{Binding Label}"
+			LargeIcon="{Binding LargeIcon}"
+			MediumIcon="{Binding MediumIcon}"
+			PopupOpeningCommand="{Binding PopupOpeningCommand}"
+			SmallIcon="{Binding SmallIcon}"
+			Title="{Binding Title}"
+			ToolBarItemCollapseBehavior="{Binding ToolBarItemCollapseBehavior}"
+			ToolBarItemVariantBehavior="{Binding ToolBarItemVariantBehavior}"
+			ToolTip.Tip="{Binding Description}"
+			/>
+	</DataTemplate>
+
+	<DataTemplate x:Key="{x:Static actipro:BarsMvvmResourceKeys.BarPopupButtonMenuItemItemContainerTemplate}" DataType="actipro:BarPopupButtonViewModel">
+		<actipro:BarMenuItem
+			CanCloneToRibbonQuickAccessToolBar="{Binding CanCloneToRibbonQuickAccessToolBar}"
+			Command="{Binding Command}"
+			CommandParameter="{Binding CommandParameter}"
+			Description="{Binding Description}"
+			IsVisible="{Binding IsVisible}"
+			ItemsSource="{Binding MenuItems}"
+			Key="{Binding Key}"
+			KeyTipText="{Binding KeyTipText}"
+			Label="{Binding Label}"
+			LargeIcon="{Binding LargeIcon}"
+			PopupOpeningCommand="{Binding PopupOpeningCommand}"
+			SmallIcon="{Binding SmallIcon}"
+			Title="{Binding Title}"
+			UseLargeSize="{Binding UseLargeMenuItem}"
+			/>
+	</DataTemplate>
+
+</ResourceDictionary>

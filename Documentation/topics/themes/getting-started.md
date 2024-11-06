@@ -100,7 +100,7 @@ The following example shows how to load the free Actipro themes for most native 
 ```
 
 > [!NOTE]
-> See the "Includes Setting" section below for details on how to include themes for Actipro Avalonia UI Pro and optional native Avalonia controls.
+> See the "Includes Setting" section below for details on how to include themes for Actipro Avalonia Pro and optional native Avalonia controls.
 
 > [!IMPORTANT]
 > The order of entries in the `Application.Styles` is important.  For instance, if the Avalonia Fluent theme is also loaded in `Application.Styles` after the [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme) entry, its control themes will take precedence over Actipro's theme.

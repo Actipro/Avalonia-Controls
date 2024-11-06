@@ -1,0 +1,84 @@
+﻿<UserControl
+	x:Class="ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.MainControl"
+	x:DataType="sampleBrowser:ApplicationViewModel"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:sampleData="using:ActiproSoftware.SampleBrowser.SampleData"
+	xmlns:local="using:ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted"
+	Design.Width="800"
+	Background="{actipro:ThemeResource Container2BackgroundBrush}"
+	>
+
+	<ScrollViewer Classes="theme-scroll-overlay" HorizontalScrollBarVisibility="Disabled">
+		<StackPanel Margin="{actipro:ScaledThickness 6}" Spacing="{actipro:ScaledDouble 4}">
+
+			<TextBlock Classes="theme-text-heading" Text="Getting Started Series" />
+
+			<StackPanel Spacing="{actipro:ScaledDouble 2}">
+				
+				<TextBlock Classes="theme-text-body">
+					Use these samples to learn step-by-step how to get up and running with Actipro Ribbon.
+					The end result is a ribbon that includes the foundations for building applications with
+					the same look and feel as modern ribbon-based applications like Microsoft Word.
+				</TextBlock>
+				<TextBlock Classes="theme-text-body">
+					Run each step, one at a time.  Then after you see what each step adds,
+					open up the XAML source in the sample browser's project to see what was added for each step.
+					The documentation at the top of each code file explains the changes that are made from
+					one step to the next, with the most high-level comments included in MainControl.xaml.
+				</TextBlock>
+				<TextBlock Classes="theme-text-body">
+					Several of the early steps focus on building the code necessary to support the view
+					and will not have any obvious changes in the user interface.
+				</TextBlock>
+			</StackPanel>
+
+			<actipro:InfoBar x:Name="notSupportedInfoBar"
+				CanClose="False"
+				IsAnimationEnabled="False"
+				IsOpen="False"
+				Severity="Warning"
+				Title="External Windows Not Supported"
+				Message="The current platform or operating system does not support opening these samples as standalone windows.  Clicking any of the steps below will, however, open the relevant source code on GitHub along with a summary of each step and important notes in the code."
+				/>
+
+			<ScrollViewer>
+				<ItemsControl x:Name="itemsControl">
+					<ItemsControl.ItemTemplate>
+						<DataTemplate x:DataType="local:GettingStartedItemInfo">
+
+							<actipro:Card Classes="theme-elevated"
+								CornerRadius="4"
+								ClipToBounds="False"
+								Margin="{actipro:ScaledThickness 1}"
+								IsClickEnabled="True"
+								Click="OnLaunchButtonClick">
+
+								<DockPanel LastChildFill="True">
+									<ContentPresenter
+										DockPanel.Dock="Right"
+										ContentTemplate="{actipro:GlyphTemplate ExternalLink16}"
+										TextElement.Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}"
+										/>
+									
+									<TextBlock TextWrapping="Wrap">
+										<Run Text="Step " FontWeight="Bold" />
+										<Run Text="{Binding StepNumber, Mode=OneWay}" FontWeight="Bold" />
+										<Run Text="-" />
+										<Run Text="{Binding Summary, Mode=OneWay}" />
+									</TextBlock>
+								</DockPanel>
+							</actipro:Card>
+									
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
+			</ScrollViewer>
+			
+		</StackPanel>
+	</ScrollViewer>
+
+</UserControl>

@@ -102,9 +102,9 @@ xmlns:themes="http://schemas.actiprosoftware.com/winfx/xaml/themes"
 
 The [SettingsExpander](xref:@ActiproUIRoot.Controls.SettingsExpander) supports a [HeaderIcon](xref:@ActiproUIRoot.Controls.SettingsExpander.HeaderIcon).  This icon is displayed on the left side of the card with a default size of `24x24`.  This icon is typically related to the value(s) defined by the setting.  For example, a speaker icon might be used for a setting related to output sound volume.
 
-The following sample demonstrates using a @if (avalonia) { `PathIcon` }@if (wpf) { `Path`} for defining the icon, but any content supported by `ContentPresenter` can be used to define the icon (like `Image` or @if (avalonia) { [DynamicImage](../../shared/controls/dynamic-image.md) }@if (wpf) { [DynamicImage](../../shared/windows-controls/dynamicimage.md) } controls):
-
 @if (avalonia) {
+The following sample demonstrates using a `PathIcon` for defining the icon, but any content supported by [Icon Presenter](../../themes/icon-presenter.md) can be used to define the icon (like `IImage` data or [DynamicImage](../../shared/controls/dynamic-image.md) control):
+
 ```xaml
 xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 ...
@@ -121,6 +121,8 @@ xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 ```
 }
 @if (wpf) {
+The following sample demonstrates using a `Path` for defining the icon, but any content supported by `ContentPresenter` can be used to define the icon (like `Image` or [DynamicImage](../../shared/windows-controls/dynamicimage.md) controls):
+
 ```xaml
 xmlns:views="http://schemas.actiprosoftware.com/winfx/xaml/views"
 ...

@@ -1,0 +1,846 @@
+<UserControl
+	x:Name="sampleRootControl"
+	x:Class="ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GalleryInRibbon.MainControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GalleryInRibbon"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Resources>
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+
+		<local:TextForegroundColorConverter x:Key="TextForegroundColorConverter" />
+
+		<!--
+
+		DataTemplates
+
+		A gallery displayed in a Ribbon will automatically select a 1, 2, or 3-row layout based on the
+		height of the items being displayed. The following DataTemplate definitions are pre-configured
+		to use a height that would typically result in one of the 3 desired row layouts. Since this sample
+		also demonstrates the ability to customize the spacing between items, increasing or decreasing the
+		ItemSpacing could result in the layout using more or fewer rows than originally intended.
+
+		-->
+
+		<!-- Custom DataTemplate used to display large-sized items (typically using 1-row layout) -->
+		<DataTemplate x:Key="LargeItemDataTemplate" DataType="actipro:ColorBarGalleryItemViewModel">
+			<Border
+				BorderBrush="{actipro:ThemeResource Container3BorderBrush}"
+				BorderThickness="1"
+				Width="60" Height="44">
+				<Border.Background>
+					<SolidColorBrush Color="{Binding Value}" />
+				</Border.Background>
+
+				<TextBlock
+					FontSize="9"
+					Foreground="{Binding Converter={StaticResource TextForegroundColorConverter}}"
+					Text="{Binding Value, Converter={x:Static actipro:StringConverters.ToUpperInvariant}}"
+					VerticalAlignment="Bottom" HorizontalAlignment="Center"
+					/>
+
+			</Border>
+		</DataTemplate>
+
+		<!-- Custom DataTemplate used to display medium-sized items (typically using 2-row layout) -->
+		<DataTemplate x:Key="MediumItemDataTemplate" DataType="actipro:ColorBarGalleryItemViewModel">
+			<DockPanel Width="75" Height="22">
+
+				<Border DockPanel.Dock="Left"
+					Margin="2,0"
+					BorderBrush="{actipro:ThemeResource Container3BorderBrush}"
+					BorderThickness="1"
+					Width="16" Height="16">
+					<Border.Background>
+						<SolidColorBrush Color="{Binding Value}" />
+					</Border.Background>
+				</Border>
+				
+				<TextBlock
+					FontSize="10"
+					Text="{Binding Value, Converter={x:Static actipro:StringConverters.ToUpperInvariant}}"
+					VerticalAlignment="Center" HorizontalAlignment="Left"
+					/>
+
+			</DockPanel>
+		</DataTemplate>
+
+		<!-- Custom DataTemplate used to display small-sized items (typically using 3-row layout) -->
+		<DataTemplate x:Key="SmallItemDataTemplate" DataType="actipro:ColorBarGalleryItemViewModel">
+			<Border
+				BorderBrush="{actipro:ThemeResource Container3BorderBrush}"
+				BorderThickness="1"
+				Width="32" Height="16">
+				<Border.Background>
+					<SolidColorBrush Color="{Binding Value}" />
+				</Border.Background>
+			</Border>
+		</DataTemplate>
+
+		<!--
+		
+		Icons
+		
+		-->
+
+		<DrawingImage x:Key="OneRowLayoutSmallIcon">
+			<DrawingImage.Drawing>
+				<DrawingGroup>
+					<GeometryDrawing Brush="#000000" Geometry="F1 M 0.5,4.5 l 6,0 l 0,6 l -6,0 z"/>
+					<GeometryDrawing Brush="#000000" Geometry="F1 M 8.5,4.5 l 6,0 l 0,6 l -6,0 z"/>
+				</DrawingGroup>
+			</DrawingImage.Drawing>
+		</DrawingImage>
+
+		<DrawingImage x:Key="OneRowLayoutLargeIcon">
+			<DrawingImage.Drawing>
+				<DrawingGroup>
+					<GeometryDrawing Brush="#000000" Geometry="F1 M 1.5,8.5 l 12,0 l 0,12 l -12,0 z"/>
+					<GeometryDrawing Brush="#000000" Geometry="F1 M 18.5,8.5 l 12,0 l 0,12 l -12,0 z"/>
+				</DrawingGroup>
+			</DrawingImage.Drawing>
+		</DrawingImage>
+
+		<DrawingImage x:Key="TwoRowLayoutSmallIcon">
+			<DrawingImage.Drawing>
+				<DrawingGroup>
+					<GeometryDrawing Brush="#000000" Geometry="F1 M 0.5,4.5 l 6,0 l 0,4 l -6,0 z"/>
+					<GeometryDrawing Brush="#000000" Geometry="F1 M 8.5,4.5 l 6,0 l 0,4 l -6,0 z"/>
+					<GeometryDrawing Brush="#000000" Geometry="F1 M 0.5,11.5 l 6,0 l 0,4 l -6,0 z"/>
+					<GeometryDrawing Brush="#000000" Geometry="F1 M 8.5,11.5 l 6,0 l 0,4 l -6,0 z"/>
+				</DrawingGroup>
+			</DrawingImage.Drawing>
+		</DrawingImage>
+
+		<DrawingImage x:Key="TwoRowLayoutLargeIcon">
+			<DrawingImage.Drawing>
+				<DrawingGroup>
+					<GeometryDrawing Brush="#000000" Geometry="F1 M 1.5,6.5 l 12,0 l 0,8 l -12,0 z"/>
+					<GeometryDrawing Brush="#000000" Geometry="F1 M 18.5,6.5 l 12,0 l 0,8 l -12,0 z"/>
+					<GeometryDrawing Brush="#000000" Geometry="F1 M 1.5,18.5 l 12,0 l 0,8 l -12,0 z"/>
+					<GeometryDrawing Brush="#000000" Geometry="F1 M 18.5,18.5 l 12,0 l 0,8 l -12,0 z"/>
+				</DrawingGroup>
+			</DrawingImage.Drawing>
+		</DrawingImage>
+
+		<DrawingImage x:Key="ThreeRowLayoutSmallIcon">
+			<DrawingImage.Drawing>
+				<DrawingGroup>
+					<GeometryDrawing Brush="#000000" Geometry="F1 M 0.5,2.5 l 2,0 l 0,2 l -2,0 z"/>
+					<GeometryDrawing Brush="#000000" Geometry="F1 M 4.5,2.5 l 2,0 l 0,2 l -2,0 z"/>
+					<GeometryDrawing Brush="#000000" Geometry="F1 M 8.5,2.5 l 2,0 l 0,2 l -2,0 z"/>
+					<GeometryDrawing Brush="#000000" Geometry="F1 M 12.5,2.5 l 2,0 l 0,2 l -2,0 z"/>
+					<GeometryDrawing Brush="#000000" Geometry="F1 M 0.5,5.5 l 2,0 l 0,2 l -2,0 z"/>
+					<GeometryDrawing Brush="#000000" Geometry="F1 M 4.5,5.5 l 2,0 l 0,2 l -2,0 z"/>
+					<GeometryDrawing Brush="#000000" Geometry="F1 M 8.5,5.5 l 2,0 l 0,2 l -2,0 z"/>
+					<GeometryDrawing Brush="#000000" Geometry="F1 M 12.5,5.5 l 2,0 l 0,2 l -2,0 z"/>
+					<GeometryDrawing Brush="#000000" Geometry="F1 M 0.5,8.5 l 2,0 l 0,2 l -2,0 z"/>
+					<GeometryDrawing Brush="#000000" Geometry="F1 M 4.5,8.5 l 2,0 l 0,2 l -2,0 z"/>
+					<GeometryDrawing Brush="#000000" Geometry="F1 M 8.5,8.5 l 2,0 l 0,2 l -2,0 z"/>
+					<GeometryDrawing Brush="#000000" Geometry="F1 M 12.5,8.5 l 2,0 l 0,2 l -2,0 z"/>
+				</DrawingGroup>
+			</DrawingImage.Drawing>
+		</DrawingImage>
+
+		<DrawingImage x:Key="ThreeRowLayoutLargeIcon">
+			<DrawingImage.Drawing>
+				<DrawingGroup>
+					<GeometryDrawing Brush="#000000" Geometry="F1 M 1.5,7.5 l 4,0 l 0,4 l -4,0 z"/>
+					<GeometryDrawing Brush="#000000" Geometry="F1 M 9.5,7.5 l 4,0 l 0,4 l -4,0 z"/>
+					<GeometryDrawing Brush="#000000" Geometry="F1 M 17.5,7.5 l 4,0 l 0,4 l -4,0 z"/>
+					<GeometryDrawing Brush="#000000" Geometry="F1 M 25.5,7.5 l 4,0 l 0,4 l -4,0 z"/>
+					<GeometryDrawing Brush="#000000" Geometry="F1 M 1.5,14.5 l 4,0 l 0,4 l -4,0 z"/>
+					<GeometryDrawing Brush="#000000" Geometry="F1 M 9.5,14.5 l 4,0 l 0,4 l -4,0 z"/>
+					<GeometryDrawing Brush="#000000" Geometry="F1 M 17.5,14.5 l 4,0 l 0,4 l -4,0 z"/>
+					<GeometryDrawing Brush="#000000" Geometry="F1 M 25.5,14.5 l 4,0 l 0,4 l -4,0 z"/>
+					<GeometryDrawing Brush="#000000" Geometry="F1 M 1.5,21.5 l 4,0 l 0,4 l -4,0 z"/>
+					<GeometryDrawing Brush="#000000" Geometry="F1 M 9.5,21.5 l 4,0 l 0,4 l -4,0 z"/>
+					<GeometryDrawing Brush="#000000" Geometry="F1 M 17.5,21.5 l 4,0 l 0,4 l -4,0 z"/>
+					<GeometryDrawing Brush="#000000" Geometry="F1 M 25.5,21.5 l 4,0 l 0,4 l -4,0 z"/>
+				</DrawingGroup>
+			</DrawingImage.Drawing>
+		</DrawingImage>
+
+	</UserControl.Resources>
+
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="A ribbon gallery can support multiple rows of items and will adjust the number of visible columns based on the variant size and available width.  When expanded, items are displayed using a menu gallery.">
+
+		<sampleBrowser:ControlExample
+			Header="Basic usage"
+			Footer="In the Classic ribbon layout, medium and large variant sizes are available. The Simplified layout will always show a small variant size."
+			>
+
+			<sampleBrowser:ControlExample.XamlContent>
+
+				<!-- XAML-based sample -->
+				<actipro:Ribbon
+					IsApplicationButtonVisible="False"
+					IsCollapsible="False"
+					IsMinimizable="False"
+					QuickAccessToolBarMode="Hidden"
+					>
+					<actipro:Ribbon.FooterContent>
+						<actipro:RibbonFooterControl>
+							<TextBlock>
+								<Run FontWeight="SemiBold" Text="Current gallery variant size: " />
+								<Run Text="{Binding #basicUsageRibbonGallery.VariantSize}" />
+							</TextBlock>
+						</actipro:RibbonFooterControl>
+					</actipro:Ribbon.FooterContent>
+
+
+					<actipro:RibbonTabItem Key="SampleTab">
+
+						<actipro:RibbonGroup Key="RibbonGallery" SmallIcon="/Images/Icons/ColorPicker16.png">
+
+							<!-- Define a Gallery that is hosted directly in the Ribbon -->
+							<actipro:RibbonGallery x:Name="basicUsageRibbonGallery" Key="ColorPicker" DataContext="{Binding #sampleRootControl}"
+								CanCategorizeOnMenu="{Binding Options.CanCategorizeOnMenu}"
+								CanFilterOnMenu="{Binding Options.CanFilterOnMenu}"
+								Command="{Binding SetColorCommand}"
+								ItemSpacing="{Binding Options.ItemSpacing}"
+								ItemsSource="{Binding ColorItems}"
+								ItemTemplate="{Binding Options.ItemTemplate}"
+								LargeIcon="/Images/Icons/ColorPicker32.png"
+								SmallIcon="/Images/Icons/ColorPicker16.png"
+								MaxColumnCount="{Binding Options.MaxRibbonColumnCount}"
+								MaxMenuColumnCount="{Binding Options.MaxMenuColumnCount}"
+								MenuResizeMode="{Binding Options.MenuResizeMode}"
+								MinLargeColumnCount="{Binding Options.MinLargeRibbonColumnCount}"
+								MinMediumColumnCount="{Binding Options.MinMediumRibbonColumnCount}"
+								MinMenuColumnCount="{Binding Options.MinMenuColumnCount}"
+								UseAccentedItemBorder="{Binding Options.UseAccentedItemBorder}"
+								>
+								<actipro:RibbonGallery.ItemContainerTheme>
+									<ControlTheme TargetType="actipro:BarGalleryItem" x:DataType="actipro:ColorBarGalleryItemViewModel" BasedOn="{actipro:ControlTheme BarGalleryItem}">
+										<Setter Property="LayoutBehavior" Value="{Binding LayoutBehavior}" />
+										<Setter Property="Label" Value="{Binding Label}" />
+										<Setter Property="ToolTip.Tip" Value="{Binding Description}" />
+									</ControlTheme>
+								</actipro:RibbonGallery.ItemContainerTheme>
+
+								<!-- Define additional menu items to be included when the gallery is displayed in a menu -->
+								<actipro:RibbonGallery.BelowMenuItems>
+									<actipro:BarMenuItem Key="OneRowLayout" Label="1-Row Layout" Command="{Binding ConfigureOneRowLayoutCommand}" SmallIcon="{StaticResource OneRowLayoutSmallIcon}" ToolTip.Tip="Configures the gallery with a layout that will typically display as 1 row."/>
+									<actipro:BarMenuItem Key="TwoRowLayout" Label="2-Row Layout" Command="{Binding ConfigureTwoRowLayoutCommand}" SmallIcon="{StaticResource TwoRowLayoutSmallIcon}" ToolTip.Tip="Configures the gallery with a layout that will typically display as 2 rows."/>
+									<actipro:BarMenuItem Key="ThreeRowLayout" Label="3-Row Layout" Command="{Binding ConfigureThreeRowLayoutCommand}" SmallIcon="{StaticResource ThreeRowLayoutSmallIcon}" ToolTip.Tip="Configures the gallery with a layout that will typically display as 3 rows."/>
+								</actipro:RibbonGallery.BelowMenuItems>
+
+							</actipro:RibbonGallery>
+						</actipro:RibbonGroup>
+
+						<actipro:RibbonGroup Key="Layout" CanAutoCollapse="False" DataContext="{Binding #sampleRootControl}">
+
+							<!-- Define buttons for changing the 1-, 2-, and 3-row layouts -->
+							<actipro:RibbonControlGroup>
+								<actipro:BarButton Key="OneRowLayout" Label="1-Row Layout" Command="{Binding ConfigureOneRowLayoutCommand}" LargeIcon="{StaticResource OneRowLayoutLargeIcon}" SmallIcon="{StaticResource OneRowLayoutSmallIcon}" ToolTip.Tip="Configures the gallery with a layout that will typically display as 1 row."/>
+								<actipro:BarButton Key="TwoRowLayout" Label="2-Row Layout" Command="{Binding ConfigureTwoRowLayoutCommand}" LargeIcon="{StaticResource TwoRowLayoutLargeIcon}" SmallIcon="{StaticResource TwoRowLayoutSmallIcon}" ToolTip.Tip="Configures the gallery with a layout that will typically display as 2 rows."/>
+								<actipro:BarButton Key="ThreeRowLayout" Label="3-Row Layout" Command="{Binding ConfigureThreeRowLayoutCommand}" LargeIcon="{StaticResource ThreeRowLayoutLargeIcon}" SmallIcon="{StaticResource ThreeRowLayoutSmallIcon}" ToolTip.Tip="Configures the gallery with a layout that will typically display as 3 rows."/>
+							</actipro:RibbonControlGroup>
+
+						</actipro:RibbonGroup>
+
+					</actipro:RibbonTabItem>
+
+				</actipro:Ribbon>
+
+			</sampleBrowser:ControlExample.XamlContent>
+
+			<sampleBrowser:ControlExample.MvvmContent>
+
+				<actipro:Ribbon x:Name="basicUsageRibbonMvvm"
+					Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+					/>
+
+			</sampleBrowser:ControlExample.MvvmContent>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10" DataContext="{Binding #sampleRootControl.Options}">
+					<CheckBox Content="Use accented item border" IsChecked="{Binding UseAccentedItemBorder}" />
+					<CheckBox Content="Gallery command enabled" IsChecked="{Binding IsSetColorCommandEnabled}" />
+					<CheckBox Content="Can categorize" IsChecked="{Binding CanCategorizeOnMenu}" />
+					<CheckBox Content="Can filter" IsChecked="{Binding CanFilterOnMenu}" />
+
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Item spacing" />
+						<NumericUpDown Value="{Binding ItemSpacing}" Minimum="3" Maximum="6" FormatString="0" />
+					</StackPanel>
+
+					<!-- Ribbon -->
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Ribbon" Margin="0,10,0,5" />
+						<Grid Margin="10,0,0,0" RowDefinitions="Auto,5,Auto,5,Auto" ColumnDefinitions="Auto,5,*">
+							<TextBlock Grid.Row="0" Grid.Column="0" Classes="theme-form-control-label" Text="Min columns (medium):" />
+							<NumericUpDown Grid.Row="0" Grid.Column="2" Value="{Binding MinMediumRibbonColumnCount}" Minimum="1" Maximum="50" FormatString="0" />
+
+							<TextBlock Grid.Row="2" Grid.Column="0" Classes="theme-form-control-label" Text="Min columns (large):" />
+							<NumericUpDown Grid.Row="2" Grid.Column="2" Value="{Binding MinLargeRibbonColumnCount}" Minimum="1" Maximum="50" FormatString="0" />
+
+							<TextBlock Grid.Row="4" Grid.Column="0" Classes="theme-form-control-label" Text="Max columns:" />
+							<NumericUpDown Grid.Row="4" Grid.Column="2" Value="{Binding MaxRibbonColumnCount}" Minimum="1" Maximum="100" FormatString="0" />
+						</Grid>
+					</StackPanel>
+
+					<!-- Menu -->
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Menu" Margin="0,10,0,5" />
+						<Grid Margin="10,0,0,0" RowDefinitions="Auto,5,Auto,5,Auto" ColumnDefinitions="Auto,5,*">
+							<TextBlock Grid.Row="0" Grid.Column="0" Classes="theme-form-control-label" Text="Min columns:" />
+							<NumericUpDown Grid.Row="0" Grid.Column="2" Value="{Binding MinMenuColumnCount}" Minimum="1" Maximum="50" FormatString="0" />
+
+							<TextBlock Grid.Row="2" Grid.Column="0" Classes="theme-form-control-label" Text="Max columns:" />
+							<NumericUpDown Grid.Row="2" Grid.Column="2" Value="{Binding MaxMenuColumnCount}" Minimum="1" Maximum="100" FormatString="0" />
+
+							<TextBlock Grid.Row="4" Grid.Column="0" Classes="theme-form-control-label" Text="Resize mode:" />
+							<ComboBox Grid.Row="4" Grid.Column="2" ItemsSource="{actipro:DelimitedArray Type=actipro:ControlResizeMode}" SelectedItem="{Binding MenuResizeMode}" />
+						</Grid>
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample Kind="Xaml" xml:space="preserve">
+					<![CDATA[
+<actipro:Ribbon ... >
+	<actipro:Ribbon.Resources>
+		<!--
+		A gallery displayed in a Ribbon will automatically select a 1, 2, or 3-row layout based on the
+		height of the items being displayed. The DataTemplate definition is pre-configured to use a
+		height that would typically result in the desired row layout, but changes in other values like
+		ItemSpacing could result in the layout using more or fewer rows than originally intended.
+		-->
+$(OneRowLayoutResources)$(TwoRowLayoutResources)$(ThreeRowLayoutResources)
+	</actipro:Ribbon.Resources>
+
+	<actipro:RibbonTabItem Key="SampleTab" ... >
+		<actipro:RibbonGroup Key="RibbonGallery" ... >
+
+			<actipro:RibbonGallery Key="ColorPicker"$(CanCategorizeOnMenuAttribute)$(CanFilterOnMenuAttribute)
+				Command="{Binding SetColorCommand}"
+				ItemSpacing="$(ItemSpacing)"
+				ItemsSource="{Binding ColorItems}"
+				ItemTemplate="{StaticResource $(OneRowLayoutResourceKey)$(TwoRowLayoutResourceKey)$(ThreeRowLayoutResourceKey)}"
+				LargeIcon="/Images/Icons/ColorPicker32.png"
+				SmallIcon="/Images/Icons/ColorPicker16.png"$(MaxColumnCountAttribute)$(MinMenuColumnCountAttribute)
+				MaxMenuColumnCount="$(MaxMenuColumnCount)"$(MinMediumColumnCountAttribute)$(MinLargeColumnCountAttribute)$(MenuResizeModeAttribute)$(UseAccentedItemBorderAttribute)
+				>
+				<actipro:RibbonGallery.ItemContainerTheme>
+					<ControlTheme TargetType="actipro:BarGalleryItem" x:DataType="actipro:ColorBarGalleryItemViewModel" BasedOn="{actipro:ControlTheme BarGalleryItem}">
+						<Setter Property="LayoutBehavior" Value="{Binding LayoutBehavior}" />
+						<Setter Property="Label" Value="{Binding Label}" />
+						<Setter Property="ToolTip.Tip" Value="{Binding Description}" />
+					</ControlTheme>
+				</actipro:RibbonGallery.ItemContainerTheme>
+
+				<!-- Define additional menu items to be included when the gallery is displayed in a menu -->
+				<actipro:RibbonGallery.BelowMenuItems>
+					<actipro:BarMenuItem Key="OneRowLayout" ... />
+					...
+				</actipro:RibbonGallery.BelowMenuItems>
+
+			</actipro:RibbonGallery>
+
+		</actipro:RibbonGroup>
+	</actipro:RibbonTabItem>
+	...
+
+</actipro:Ribbon>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="UseAccentedItemBorderAttribute"
+															   IsEnabled="{Binding #sampleRootControl.Options.UseAccentedItemBorder}"
+															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;UseAccentedItemBorder=&quot;True&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="CanCategorizeOnMenuAttribute"
+															   IsEnabled="{Binding !#sampleRootControl.Options.CanCategorizeOnMenu}"
+															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;CanCategorizeOnMenu=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="CanFilterOnMenuAttribute"
+															   IsEnabled="{Binding #sampleRootControl.Options.CanFilterOnMenu}"
+															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;CanFilterOnMenu=&quot;True&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="ItemSpacing" Value="{Binding #sampleRootControl.Options.ItemSpacing}" />
+						<sampleBrowser:CodeExampleSubstitution Key="MaxColumnCountAttribute"
+															   Value="{Binding #sampleRootControl.Options.MaxRibbonColumnCount, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;MaxColumnCount=&quot;{0}&quot;'}">
+							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
+								<Binding Path="#sampleRootControl.Options.MaxRibbonColumnCount" Converter="{StaticResource NotEqualToComparisonConverter}">
+									<Binding.ConverterParameter>
+										<x:Int32>15</x:Int32>
+									</Binding.ConverterParameter>
+								</Binding>
+							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
+						</sampleBrowser:CodeExampleSubstitution>
+						<sampleBrowser:CodeExampleSubstitution Key="MinMediumColumnCountAttribute"
+															   Value="{Binding #sampleRootControl.Options.MinMediumRibbonColumnCount, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;MinMediumColumnCount=&quot;{0}&quot;'}">
+							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
+								<Binding Path="#sampleRootControl.Options.MinMediumRibbonColumnCount" Converter="{StaticResource NotEqualToComparisonConverter}">
+									<Binding.ConverterParameter>
+										<x:Int32>3</x:Int32>
+									</Binding.ConverterParameter>
+								</Binding>
+							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
+						</sampleBrowser:CodeExampleSubstitution>
+						<sampleBrowser:CodeExampleSubstitution Key="MinLargeColumnCountAttribute"
+															   Value="{Binding #sampleRootControl.Options.MinLargeRibbonColumnCount, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;MinLargeColumnCount=&quot;{0}&quot;'}">
+							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
+								<Binding Path="#sampleRootControl.Options.MinLargeRibbonColumnCount" Converter="{StaticResource NotEqualToComparisonConverter}">
+									<Binding.ConverterParameter>
+										<x:Int32>5</x:Int32>
+									</Binding.ConverterParameter>
+								</Binding>
+							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
+						</sampleBrowser:CodeExampleSubstitution>
+						<sampleBrowser:CodeExampleSubstitution Key="MaxMenuColumnCount" Value="{Binding #sampleRootControl.Options.MaxMenuColumnCount}" />
+						<sampleBrowser:CodeExampleSubstitution Key="MinMenuColumnCountAttribute"
+															   Value="{Binding #sampleRootControl.Options.MinMenuColumnCount, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;MinMenuColumnCount=&quot;{0}&quot;'}">
+							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
+								<Binding Path="#sampleRootControl.Options.MinMenuColumnCount" Converter="{StaticResource NotEqualToComparisonConverter}">
+									<Binding.ConverterParameter>
+										<x:Int32>1</x:Int32>
+									</Binding.ConverterParameter>
+								</Binding>
+							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
+						</sampleBrowser:CodeExampleSubstitution>
+						<sampleBrowser:CodeExampleSubstitution Key="MenuResizeModeAttribute"
+															   Value="{Binding #sampleRootControl.Options.MenuResizeMode, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;MenuResizeMode=&quot;{0}&quot;'}">
+							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
+								<Binding Path="#sampleRootControl.Options.MenuResizeMode" Converter="{StaticResource NotEqualToComparisonConverter}">
+									<Binding.ConverterParameter>
+										<actipro:ControlResizeMode>None</actipro:ControlResizeMode>
+									</Binding.ConverterParameter>
+								</Binding>
+							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
+						</sampleBrowser:CodeExampleSubstitution>
+						<sampleBrowser:CodeExampleSubstitution Key="OneRowLayoutResourceKey"
+															   IsEnabled="{Binding #sampleRootControl.Options.IsUsingOneRowLayout}"
+															   Value="LargeItemDataTemplate" />
+						<sampleBrowser:CodeExampleSubstitution Key="OneRowLayoutResources"
+															   IsEnabled="{Binding #sampleRootControl.Options.IsUsingOneRowLayout}">
+							<sampleBrowser:CodeExampleSubstitution.Value>
+								<![CDATA[
+		<!-- See source code for converter that adapts the foreground color based on the background color -->
+		<local:TextForegroundColorConverter x:Key="TextForegroundColorConverter" />
+		
+		<!-- Custom DataTemplate used to display large-sized items (typically using 1-row layout) -->
+		<DataTemplate x:Key="LargeItemDataTemplate" DataType="actipro:ColorBarGalleryItemViewModel">
+			<Border
+				BorderBrush="{actipro:ThemeResource Container3BorderBrush}"
+				BorderThickness="1"
+				Width="60" Height="44">
+				<Border.Background>
+					<SolidColorBrush Color="{Binding Value}" />
+				</Border.Background>
+
+				<TextBlock
+					FontSize="9"
+					Foreground="{Binding Converter={StaticResource TextForegroundColorConverter}}"
+					Text="{Binding Value, Converter={x:Static actipro:StringConverters.ToUpperInvariant}}"
+					VerticalAlignment="Bottom" HorizontalAlignment="Center"
+					/>
+
+			</Border>
+		</DataTemplate>
+								]]>
+							</sampleBrowser:CodeExampleSubstitution.Value>
+						</sampleBrowser:CodeExampleSubstitution>
+						<sampleBrowser:CodeExampleSubstitution Key="TwoRowLayoutResourceKey"
+															   IsEnabled="{Binding #sampleRootControl.Options.IsUsingTwoRowLayout}"
+															   Value="MediumItemDataTemplate" />
+						<sampleBrowser:CodeExampleSubstitution Key="TwoRowLayoutResources"
+															   IsEnabled="{Binding #sampleRootControl.Options.IsUsingTwoRowLayout}">
+							<sampleBrowser:CodeExampleSubstitution.Value>
+								<![CDATA[
+		<!-- Custom DataTemplate used to display medium-sized items (typically using 2-row layout) -->
+		<DataTemplate x:Key="MediumItemDataTemplate" DataType="actipro:ColorBarGalleryItemViewModel">
+			<DockPanel Width="75" Height="22">
+
+				<Border DockPanel.Dock="Left"
+					Margin="2,0"
+					BorderBrush="{actipro:ThemeResource Container3BorderBrush}"
+					BorderThickness="1"
+					Width="16" Height="16">
+					<Border.Background>
+						<SolidColorBrush Color="{Binding Value}" />
+					</Border.Background>
+				</Border>
+				
+				<TextBlock
+					FontSize="10"
+					Text="{Binding Value, Converter={x:Static actipro:StringConverters.ToUpperInvariant}}"
+					VerticalAlignment="Center" HorizontalAlignment="Left"
+					/>
+
+			</DockPanel>
+		</DataTemplate>
+								]]>
+							</sampleBrowser:CodeExampleSubstitution.Value>
+						</sampleBrowser:CodeExampleSubstitution>
+						<sampleBrowser:CodeExampleSubstitution Key="ThreeRowLayoutResourceKey"
+															   IsEnabled="{Binding #sampleRootControl.Options.IsUsingThreeRowLayout}"
+															   Value="SmallItemDataTemplate" />
+						<sampleBrowser:CodeExampleSubstitution Key="ThreeRowLayoutResources"
+															   IsEnabled="{Binding #sampleRootControl.Options.IsUsingThreeRowLayout}">
+							<sampleBrowser:CodeExampleSubstitution.Value>
+								<![CDATA[
+		<!-- Custom DataTemplate used to display small-sized items (typically using 3-row layout) -->
+		<DataTemplate x:Key="SmallItemDataTemplate" DataType="actipro:ColorBarGalleryItemViewModel">
+			<Border
+				BorderBrush="{actipro:ThemeResource Container3BorderBrush}"
+				BorderThickness="1"
+				Width="32" Height="16">
+				<Border.Background>
+					<SolidColorBrush Color="{Binding Value}" />
+				</Border.Background>
+			</Border>
+		</DataTemplate>
+								]]>
+							</sampleBrowser:CodeExampleSubstitution.Value>
+						</sampleBrowser:CodeExampleSubstitution>
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Xaml" Language="C#" xml:space="preserve">
+				<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Bars;
+using ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm;
+...
+
+public partial class SampleRootControl : UserControl {
+
+	private ICollectionView? _colorItems;
+	private DelegateCommand<ColorBarGalleryItemViewModel>? _setColorCommand;
+
+	/// <summary>
+	/// The collection of color items to be displayed in the gallery.
+	/// </summary>
+	public ICollectionView ColorItems
+		=> _colorItems ??= CreateColorItems();
+
+	/// <summary>
+	/// The command to be invoked when a color gallery item is selected.
+	/// </summary>
+	public DelegateCommand<ColorBarGalleryItemViewModel> SetColorCommand
+		=> _setColorCommand ??= new DelegateCommand<ColorBarGalleryItemViewModel>(
+			executeAction: param => {
+				if (param is not null) {
+					ApplicationViewModel.Instance.MessageService?.ShowMessage(
+						$"This is where you would apply the following selected color:\r\n\r\n{param.Value} {param.Label}",
+						"Set Color",
+						Avalonia.Controls.Notifications.NotificationType.Information);
+				}
+			},
+			canExecuteFunc: _ => $(IsSetColorCommandEnabled)
+		);
+
+	/// <summary>
+	/// Creates a collection of gallery item view models.
+	/// </summary>
+	private static ICollectionView CreateColorItems() {
+		var warmColorsCategory = "Warm Colors";
+		var coolColorsCategory = "Cool Colors";
+		var neutralColorsCategory = "Neutral Colors";
+
+		// Wrap the collection in an ICollectionView to support categories
+		return BarGalleryViewModel.CreateCollectionView(new[] {
+			new ColorBarGalleryItemViewModel(UIColor.Parse("#eeece1"), neutralColorsCategory, "Tan"),
+			new ColorBarGalleryItemViewModel(UIColor.Parse("#ddd9c3"), neutralColorsCategory, "Tan, Darker 10%"),
+			...
+
+			new ColorBarGalleryItemViewModel(UIColor.Parse("#4f81bd"), coolColorsCategory, "Blue"),
+			new ColorBarGalleryItemViewModel(UIColor.Parse("#dbe5f1"), coolColorsCategory, "Blue, Lighter 80%"),
+			...
+
+			new ColorBarGalleryItemViewModel(UIColor.Parse("#c0504d"), warmColorsCategory, "Red"),
+			new ColorBarGalleryItemViewModel(UIColor.Parse("#f2dbdb"), warmColorsCategory, "Red, Lighter 80%"),
+			...
+
+		}, categorize: true);
+	}
+
+}
+				]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="IsSetColorCommandEnabled" Value="{Binding #sampleRootControl.Options.IsSetColorCommandEnabled, Converter={x:Static actipro:StringConverters.ToLowerInvariant}}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" xml:space="preserve">
+				<![CDATA[
+<actipro:Ribbon x:Name="basicUsageRibbonMvvm"
+	Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}">
+
+	<actipro:Ribbon.Resources>
+		<!--
+		A gallery displayed in a Ribbon will automatically select a 1, 2, or 3-row layout based on the
+		height of the items being displayed. The DataTemplate definition is pre-configured to use a
+		height that would typically result in the desired row layout, but changes in other values like
+		ItemSpacing could result in the layout using more or fewer rows than originally intended.
+		-->
+$(OneRowLayoutResources)$(TwoRowLayoutResources)$(ThreeRowLayoutResources)
+	</actipro:Ribbon.Resources>
+
+</actipro:Ribbon>
+				]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="OneRowLayoutResources"
+															   IsEnabled="{Binding #sampleRootControl.Options.IsUsingOneRowLayout}">
+							<sampleBrowser:CodeExampleSubstitution.Value>
+								<![CDATA[
+		<!-- See source code for converter that adapts the foreground color based on the background color -->
+		<local:TextForegroundColorConverter x:Key="TextForegroundColorConverter" />
+		
+		<!-- Custom DataTemplate used to display large-sized items (typically using 1-row layout) -->
+		<DataTemplate x:Key="LargeItemDataTemplate" DataType="actipro:ColorBarGalleryItemViewModel">
+			<Border
+				BorderBrush="{actipro:ThemeResource Container3BorderBrush}"
+				BorderThickness="1"
+				Width="60" Height="44">
+				<Border.Background>
+					<SolidColorBrush Color="{Binding Value}" />
+				</Border.Background>
+
+				<TextBlock
+					FontSize="9"
+					Foreground="{Binding Converter={StaticResource TextForegroundColorConverter}}"
+					Text="{Binding Value, Converter={x:Static actipro:StringConverters.ToUpperInvariant}}"
+					VerticalAlignment="Bottom" HorizontalAlignment="Center"
+					/>
+
+			</Border>
+		</DataTemplate>
+								]]>
+							</sampleBrowser:CodeExampleSubstitution.Value>
+						</sampleBrowser:CodeExampleSubstitution>
+						<sampleBrowser:CodeExampleSubstitution Key="TwoRowLayoutResources"
+															   IsEnabled="{Binding #sampleRootControl.Options.IsUsingTwoRowLayout}">
+							<sampleBrowser:CodeExampleSubstitution.Value>
+								<![CDATA[
+		<!-- Custom DataTemplate used to display medium-sized items (typically using 2-row layout) -->
+		<DataTemplate x:Key="MediumItemDataTemplate" DataType="actipro:ColorBarGalleryItemViewModel">
+			<DockPanel Width="75" Height="22">
+
+				<Border DockPanel.Dock="Left"
+					Margin="2,0"
+					BorderBrush="{actipro:ThemeResource Container3BorderBrush}"
+					BorderThickness="1"
+					Width="16" Height="16">
+					<Border.Background>
+						<SolidColorBrush Color="{Binding Value}" />
+					</Border.Background>
+				</Border>
+				
+				<TextBlock
+					FontSize="10"
+					Text="{Binding Value, Converter={x:Static actipro:StringConverters.ToUpperInvariant}}"
+					VerticalAlignment="Center" HorizontalAlignment="Left"
+					/>
+
+			</DockPanel>
+		</DataTemplate>
+								]]>
+							</sampleBrowser:CodeExampleSubstitution.Value>
+						</sampleBrowser:CodeExampleSubstitution>
+						<sampleBrowser:CodeExampleSubstitution Key="ThreeRowLayoutResources"
+															   IsEnabled="{Binding #sampleRootControl.Options.IsUsingThreeRowLayout}">
+							<sampleBrowser:CodeExampleSubstitution.Value>
+								<![CDATA[
+		<!-- Custom DataTemplate used to display small-sized items (typically using 3-row layout) -->
+		<DataTemplate x:Key="SmallItemDataTemplate" DataType="actipro:ColorBarGalleryItemViewModel">
+			<Border
+				BorderBrush="{actipro:ThemeResource Container3BorderBrush}"
+				BorderThickness="1"
+				Width="32" Height="16">
+				<Border.Background>
+					<SolidColorBrush Color="{Binding Value}" />
+				</Border.Background>
+			</Border>
+		</DataTemplate>
+								]]>
+							</sampleBrowser:CodeExampleSubstitution.Value>
+						</sampleBrowser:CodeExampleSubstitution>
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" Language="C#" xml:space="preserve">
+				<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Bars;
+using ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm;
+...
+
+public partial class SampleRootControl : UserControl {
+
+	private ICollectionView? _colorItems;
+	private DelegateCommand<ColorBarGalleryItemViewModel>? _setColorCommand;
+
+	public SampleRootControl() {
+		InitializeComponent();
+
+		BasicUsageRibbonViewModel = CreateBasicUsageRibbonViewModel();
+		basicUsageRibbonMvvm.DataContext = BasicUsageRibbonViewModel;
+	}
+	
+	/// <summary>
+	/// The ribbon view model for the "Basic usage" MVVM-based sample.
+	/// </summary>
+	public RibbonViewModel BasicUsageRibbonViewModel { get; }
+
+	/// <summary>
+	/// The collection of color items to be displayed in the gallery.
+	/// </summary>
+	public ICollectionView ColorItems
+		=> _colorItems ??= CreateColorItems();
+
+	/// <summary>
+	/// The command to be invoked when a color gallery item is selected.
+	/// </summary>
+	public DelegateCommand<ColorBarGalleryItemViewModel> SetColorCommand
+		=> _setColorCommand ??= new DelegateCommand<ColorBarGalleryItemViewModel>(
+			executeAction: param => {
+				if (param is not null) {
+					ApplicationViewModel.Instance.MessageService?.ShowMessage(
+						$"This is where you would apply the following selected color:\r\n\r\n{param.Value} {param.Label}",
+						"Set Color",
+						Avalonia.Controls.Notifications.NotificationType.Information);
+				}
+			},
+			canExecuteFunc: _ => $(IsSetColorCommandEnabled)
+		);
+
+	/// <summary>
+	/// Creates the ribbon view model for the "Basic usage" MVVM-based sample.
+	/// </summary>
+	private RibbonViewModel CreateBasicUsageRibbonViewModel() {
+		return new RibbonViewModel() {
+			Tabs = {
+				new RibbonTabViewModel("SampleTab") {
+					Groups = {
+						new RibbonGroupViewModel("RibbonGallery") {
+							SmallIcon = ImageLoader.GetIcon("ColorPicker16.png"),
+							Items = {
+								new BarGalleryViewModel("ColorPicker", "Color Picker", SetColorCommand, ColorItems) {
+									LargeIcon = ImageLoader.GetIcon("ColorPicker32.png"),
+									SmallIcon = ImageLoader.GetIcon("ColorPicker16.png"),
+									ItemSpacing = $(ItemSpacing),
+									ItemTemplate = (this.FindResource("$(OneRowLayoutResourceKey)$(TwoRowLayoutResourceKey)$(ThreeRowLayoutResourceKey)") as IDataTemplate),$(UseAccentedItemBorderSetter)$(MinMediumRibbonColumnCountSetter)$(MinLargeRibbonColumnCountSetter)$(MaxRibbonColumnCountSetter)$(CanCategorizeOnMenuSetter)$(CanFilterOnMenuSetter)$(MenuResizeModeSetter)$(MinMenuColumnCountSetter)
+									MaxMenuColumnCount = $(MaxMenuColumnCount),
+									BelowMenuItems = {
+										new BarButtonViewModel(...),
+										...
+									}
+								};
+							},
+						},
+						...
+					}
+				},
+			}
+			...
+		};
+	}
+
+	/// <summary>
+	/// Creates a collection of gallery item view models.
+	/// </summary>
+	private static ICollectionView CreateColorItems() {
+		var warmColorsCategory = "Warm Colors";
+		var coolColorsCategory = "Cool Colors";
+		var neutralColorsCategory = "Neutral Colors";
+
+		// Wrap the collection in an ICollectionView to support categories
+		return BarGalleryViewModel.CreateCollectionView(new[] {
+			new ColorBarGalleryItemViewModel(UIColor.Parse("#eeece1"), neutralColorsCategory, "Tan"),
+			new ColorBarGalleryItemViewModel(UIColor.Parse("#ddd9c3"), neutralColorsCategory, "Tan, Darker 10%"),
+			...
+
+			new ColorBarGalleryItemViewModel(UIColor.Parse("#4f81bd"), coolColorsCategory, "Blue"),
+			new ColorBarGalleryItemViewModel(UIColor.Parse("#dbe5f1"), coolColorsCategory, "Blue, Lighter 80%"),
+			...
+
+			new ColorBarGalleryItemViewModel(UIColor.Parse("#c0504d"), warmColorsCategory, "Red"),
+			new ColorBarGalleryItemViewModel(UIColor.Parse("#f2dbdb"), warmColorsCategory, "Red, Lighter 80%"),
+			...
+
+		}, categorize: true);
+	}
+
+}
+				]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="UseAccentedItemBorderSetter"
+															   IsEnabled="{Binding #sampleRootControl.Options.UseAccentedItemBorder}"
+															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;UseAccentedItemBorder = true," />
+						<sampleBrowser:CodeExampleSubstitution Key="CanCategorizeOnMenuSetter"
+															   IsEnabled="{Binding !#sampleRootControl.Options.CanCategorizeOnMenu}"
+															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;CanCategorizeOnMenu = false," />
+						<sampleBrowser:CodeExampleSubstitution Key="CanFilterOnMenuSetter"
+															   IsEnabled="{Binding #sampleRootControl.Options.CanFilterOnMenu}"
+															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;CanFilterOnMenu = true," />
+						<sampleBrowser:CodeExampleSubstitution Key="ItemSpacing" Value="{Binding #sampleRootControl.Options.ItemSpacing}" />
+						<sampleBrowser:CodeExampleSubstitution Key="MaxRibbonColumnCountSetter"
+															   Value="{Binding #sampleRootControl.Options.MaxRibbonColumnCount, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;MaxRibbonColumnCount = {0},'}">
+							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
+								<Binding Path="#sampleRootControl.Options.MaxRibbonColumnCount" Converter="{StaticResource NotEqualToComparisonConverter}">
+									<Binding.ConverterParameter>
+										<x:Int32>15</x:Int32>
+									</Binding.ConverterParameter>
+								</Binding>
+							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
+						</sampleBrowser:CodeExampleSubstitution>
+						<sampleBrowser:CodeExampleSubstitution Key="MinMediumRibbonColumnCountSetter"
+															   Value="{Binding #sampleRootControl.Options.MinMediumRibbonColumnCount, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;MinMediumRibbonColumnCount = {0},'}">
+							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
+								<Binding Path="#sampleRootControl.Options.MinMediumRibbonColumnCount" Converter="{StaticResource NotEqualToComparisonConverter}">
+									<Binding.ConverterParameter>
+										<x:Int32>3</x:Int32>
+									</Binding.ConverterParameter>
+								</Binding>
+							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
+						</sampleBrowser:CodeExampleSubstitution>
+						<sampleBrowser:CodeExampleSubstitution Key="MinLargeRibbonColumnCountSetter"
+															   Value="{Binding #sampleRootControl.Options.MinLargeRibbonColumnCount, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;MinLargeRibbonColumnCount = {0},'}">
+							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
+								<Binding Path="#sampleRootControl.Options.MinLargeRibbonColumnCount" Converter="{StaticResource NotEqualToComparisonConverter}">
+									<Binding.ConverterParameter>
+										<x:Int32>5</x:Int32>
+									</Binding.ConverterParameter>
+								</Binding>
+							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
+						</sampleBrowser:CodeExampleSubstitution>
+						<sampleBrowser:CodeExampleSubstitution Key="MaxMenuColumnCount" Value="{Binding #sampleRootControl.Options.MaxMenuColumnCount}" />
+						<sampleBrowser:CodeExampleSubstitution Key="MinMenuColumnCountSetter"
+															   Value="{Binding #sampleRootControl.Options.MinMenuColumnCount, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;MinMenuColumnCount = {0},'}">
+							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
+								<Binding Path="#sampleRootControl.Options.MinMenuColumnCount" Converter="{StaticResource NotEqualToComparisonConverter}">
+									<Binding.ConverterParameter>
+										<x:Int32>1</x:Int32>
+									</Binding.ConverterParameter>
+								</Binding>
+							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
+						</sampleBrowser:CodeExampleSubstitution>
+						<sampleBrowser:CodeExampleSubstitution Key="MenuResizeModeSetter"
+															   Value="{Binding #sampleRootControl.Options.MenuResizeMode, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;MenuResizeMode = ControlResizeMode.{0},'}">
+							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
+								<Binding Path="#sampleRootControl.Options.MenuResizeMode" Converter="{StaticResource NotEqualToComparisonConverter}">
+									<Binding.ConverterParameter>
+										<actipro:ControlResizeMode>None</actipro:ControlResizeMode>
+									</Binding.ConverterParameter>
+								</Binding>
+							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
+						</sampleBrowser:CodeExampleSubstitution>
+						<sampleBrowser:CodeExampleSubstitution Key="IsSetColorCommandEnabled" Value="{Binding #sampleRootControl.Options.IsSetColorCommandEnabled, Converter={x:Static actipro:StringConverters.ToLowerInvariant}}" />
+						<sampleBrowser:CodeExampleSubstitution Key="OneRowLayoutResourceKey"
+															   IsEnabled="{Binding #sampleRootControl.Options.IsUsingOneRowLayout}"
+															   Value="LargeItemDataTemplate" />
+						<sampleBrowser:CodeExampleSubstitution Key="TwoRowLayoutResourceKey"
+															   IsEnabled="{Binding #sampleRootControl.Options.IsUsingTwoRowLayout}"
+															   Value="MediumItemDataTemplate" />
+						<sampleBrowser:CodeExampleSubstitution Key="ThreeRowLayoutResourceKey"
+															   IsEnabled="{Binding #sampleRootControl.Options.IsUsingThreeRowLayout}"
+															   Value="SmallItemDataTemplate" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+
+</UserControl>

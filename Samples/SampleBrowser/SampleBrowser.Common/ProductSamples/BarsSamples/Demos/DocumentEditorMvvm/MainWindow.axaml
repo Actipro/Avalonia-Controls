@@ -1,0 +1,34 @@
+<actipro:RibbonWindow
+	x:Class="ActiproSoftware.ProductSamples.BarsSamples.Demos.DocumentEditorMvvm.MainWindow"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:actiproPrims="using:ActiproSoftware.UI.Avalonia.Controls.Primitives"
+	xmlns:barsPrims="using:ActiproSoftware.UI.Avalonia.Controls.Bars.Primitives"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:local="using:ActiproSoftware.ProductSamples.BarsSamples.Demos.DocumentEditorMvvm"
+	Title="Document1 - Actipro Bars"
+	Icon="/Images/Icons/Actipro.ico"
+	>
+
+	<Grid RowDefinitions="*,Auto">
+
+		<!-- Client Area -->
+		<local:MainControl x:Name="mainControl" Grid.Row="0" IsExternalSampleOptionVisible="False" />
+
+		<!-- Status Bar -->
+		<Border Grid.Row="1"
+			Background="{actipro:ThemeResource StatusBarBackgroundBrush}"
+			BorderBrush="{actipro:ThemeResource StatusBarBorderBrush}" BorderThickness="{actipro:ThemeResource StatusBarBorderThickness}"
+			TextElement.Foreground="{actipro:ThemeResource StatusBarForegroundBrush}">
+			
+			<Grid Margin="0,0,0,1" ColumnDefinitions="*,Auto">
+				<TextBlock Margin="{actipro:ScaledThickness '2.5,0.5'}" Text="Ready" />
+				<actipro:WindowResizeGrip Grid.Column="1" />
+			</Grid>
+
+		</Border>
+
+	</Grid>
+
+</actipro:RibbonWindow>

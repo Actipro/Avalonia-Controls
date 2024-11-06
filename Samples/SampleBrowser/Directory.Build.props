@@ -3,17 +3,17 @@
 
 	<PropertyGroup>
 
-		<TargetFramework>net6.0</TargetFramework>
+		<TargetFramework>net8.0</TargetFramework>
 		<Nullable>enable</Nullable>
 		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
 
-		<Version>24.2.0.0</Version>
-		<InformationalVersion>24.2.0.0 - 20240723</InformationalVersion>
+		<Version>25.1.0.0</Version>
+		<InformationalVersion>25.1.0.0 - 20241106</InformationalVersion>
 
-		<Product>Actipro Avalonia UI Controls Sample Browser</Product>
+		<Product>Actipro Avalonia Controls Sample Browser</Product>
 		<Title>$(Product)</Title>
 		<AssemblyTitle>$(Product)</AssemblyTitle>
-		<Description>Sample application to demo features of Actipro Avalonia UI controls.</Description>
+		<Description>Sample application to demo features of Actipro Avalonia controls.</Description>
 
 		<RootNamespace>ActiproSoftware</RootNamespace>
 		<Authors>Actipro Software LLC</Authors>

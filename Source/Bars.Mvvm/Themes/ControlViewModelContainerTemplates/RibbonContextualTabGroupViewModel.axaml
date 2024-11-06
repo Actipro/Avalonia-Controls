@@ -1,0 +1,16 @@
+<ResourceDictionary
+	x:ClassModifier="internal"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	>
+
+	<DataTemplate x:Key="{x:Static actipro:BarsMvvmResourceKeys.RibbonContextualTabGroupDefaultItemContainerTemplate}" DataType="actipro:RibbonContextualTabGroupViewModel">
+		<actipro:RibbonContextualTabGroup
+			Key="{Binding Key}"
+			Label="{Binding Label}"
+			IsVisible="{Binding IsActive}"
+			/>
+	</DataTemplate>
+
+</ResourceDictionary>

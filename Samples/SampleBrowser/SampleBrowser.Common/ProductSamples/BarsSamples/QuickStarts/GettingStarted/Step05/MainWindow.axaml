@@ -1,0 +1,95 @@
+<!--
+
+RIBBON GETTING STARTED SERIES - STEP 5
+
+STEP SUMMARY:
+
+	This step is a big advancement over the previous steps. Until now, only small
+	concepts have been introduced with each step. This step will build upon all of those
+	smaller concepts to populate more tabs and controls in the Ribbon. The stand-alone
+	Help button is replaced by an editor that will better showcase the new commands that
+	are added in this step and future steps.
+	
+CHANGES SINCE LAST STEP:
+	
+	The stand-alone "Help" button was removed and replaced with an instance of a
+	TextBox editor control that will receive focus when the window is opened.
+	
+	See the "SampleWindowViewModel.cs" file for details on a new "Home" tab with "Undo"
+	and "Clipboard" control groups. The following guidelines apply to adding support for
+	new Ribbon configurations:
+	
+		For every new Ribbon Tab...
+			- Add to the Tabs collection in SampleWindowViewModel.
+	
+		For every new Ribbon Group...
+			- Add key to SampleBarControlKeys.
+			- Optionally configure collapsed image using SampleBarManager.RegisterImages.
+			- Add to the appropriate Ribbon Tab view model in SampleRibbonViewModel.
+	
+		For every new Ribbon Control...
+			- Add key to SampleBarControlKeys.
+			- Configure large and/or small images using SampleBarManager.RegisterImages.
+			- Configure view model using SampleBarManager.RegisterControlViewModels.
+			- Add to the appropriate Ribbon Group in SampleRibbonViewModel.
+
+	Prior sample comments were removed/condensed.
+	
+EXPECTED OPERATION:
+	
+	When this sample window is opened, the Ribbon should display "Home" and "Help" tabs with
+	the "Home" tab selected. On the "Home" tab will be control groups for "Undo" and "Clipboard".
+	Since the "Undo" and "Clipboard" groups contain commands based on CompositeCommand, these
+	commands will currently all be disabled until a future step associates these commands with
+	the TextBox.
+
+-->
+
+<actipro:RibbonWindow
+	x:Class="ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.Step05.MainWindow"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:gettingStartedCommon="using:ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.Common"
+	xmlns:local="using:ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.Step05"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	Title="Actipro Ribbon Getting Started Series - Step 5"
+	Height="450" Width="800"
+	x:DataType="local:SampleWindowViewModel"
+	>
+
+	<actipro:RibbonContainerPanel>
+
+		<!-- Ribbon Control -->
+		<actipro:Ribbon
+			DataContext="{Binding Ribbon}"
+			Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
+			/>
+
+
+		<!-- Window Content -->
+		<DockPanel>
+
+			<!-- Configure common StatusBar that is unrelated to this sample -->
+			<gettingStartedCommon:CommonStatusBar DockPanel.Dock="Bottom" SampleCodePath="/Step05/MainWindow.axaml" />
+
+			<!--
+			SAMPLE NOTE 5.1:
+				The stand-alone Button used in earlier steps is being replaced with an instance of
+				a TextBox that provides a great target for various commands that will be placed in
+				the Ribbon.
+			-->
+			<ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Focusable="False">
+				<sampleBrowser:AdvancedTextBox x:Name="editor"
+					Margin="32,20"
+					AcceptsReturn="True"
+					AcceptsTab="True"
+					Text="Actipro Bars contains a comprehensive implementation of an Office-like ribbon user interface for Avalonia applications, including its modern fluent design and ability to create content-rich galleries."
+					TextWrapping="Wrap" />
+			</ScrollViewer>
+
+		</DockPanel>
+
+	</actipro:RibbonContainerPanel>
+
+</actipro:RibbonWindow>

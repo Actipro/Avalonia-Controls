@@ -60,6 +60,20 @@ xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 	Width="Auto" SharedSizeGroup="MenuItemIconColumnGroup" />
 ```
 
+### Defining Resources Based on Actipro Resources
+
+While Actipro provides full themes for all native Avalonia controls, third-party controls often define their own resources, such as brushes.  For example, assume a third-party `SomeControl` is being used in the application, and it defines a brush resource with key `SomeControlBackgroundBrush`.  It is ideal to reuse Actipro's theme resources so that the entire application has a cohesive appearance, especially when switching between light and dark themes.
+
+This example shows how the `SomeControlBackgroundBrush` brush resource can be defined in `Application.Resources` to be based on an appropriate related Actipro theme background brush.  The `SomeControlBackgroundBrush` brush value will dynamically change as the referenced Actipro brush changes.
+
+```xaml
+xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+...
+<Application.Resources>
+    <DynamicResource x:Key="SomeControlBackgroundBrush" ResourceKey="{actipro:ThemeResourceKey Container3BackgroundBrush}" />
+</Application.Resources>
+```
+
 ## Reusing Control Themes
 
 All Actipro's control themes are identified by a value in the [ControlThemeKind](xref:@ActiproUIRoot.Themes.ControlThemeKind) enumeration.

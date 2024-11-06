@@ -1,0 +1,85 @@
+<!--
+
+RIBBON GETTING STARTED SERIES - STEP 1
+
+STEP SUMMARY:
+
+	A full Ribbon configuration can be complex, so this Getting Started series is designed as a
+	sequence of smaller steps to introduce you to the Ribbon control and its features.
+	
+	This first step establishes the core control structure for hosting a Ribbon control and defining
+	window content.
+	
+	Notes similar to these will also be reflected in the C# code files that accompany each step.
+	
+CHANGES SINCE LAST STEP:
+
+	This is the first step. In subsequent steps, check here for notes about what changed since the
+	previous step.
+	
+EXPECTED OPERATION:
+	
+	When this sample window is opened, a Ribbon control with a default "File" button should be displayed
+	along with the message "Future window content" below the Ribbon. Clicking the "File" button should do
+	nothing since a backstage is not currently defined.
+
+-->
+
+<!--
+SAMPLE NOTE 1.1:
+	Hosting a Ribbon in a RibbonWindow (instead of a standard Window) will provide a themed experience
+	consistent with popular modern applications that typically use a ribbon interface
+-->
+<actipro:RibbonWindow
+	x:Class="ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.Step01.MainWindow"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:gettingStartedCommon="using:ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.Common"
+	Title="Actipro Ribbon Getting Started Series - Step 1"
+	Height="450" Width="800"
+	DataContext="{Binding $self}"
+	>
+
+	<!--
+	SAMPLE NOTE 1.2:
+		Placing a RibbonContainerPanel around ar Ribbon will enable animation effects when toggling the
+		minimized state as well as additional logic for when a backstage is displayed (which will be
+		discussed in a later step)
+	
+	SAMPLE NOTE 1.3:
+		RibbonContainerPanel will automatically locate the child Ribbon control and properly arrange
+		it within the panel. All other children will fill the remaining space, similar to how native Grid
+		arranges children.
+	-->
+	<actipro:RibbonContainerPanel>
+
+
+		<!-- Ribbon Control -->
+		<!--
+		SAMPLE NOTE 1.4:
+			Ribbon.QuickAccessToolBarMode is currently set to "None" so that UI related to the Quick Access Toolbar
+			will not be displayed. The Quick Access Toolbar will be discussed in a later step.
+		-->
+		<actipro:Ribbon QuickAccessToolBarMode="None" />
+
+
+		<!-- Window Content -->
+		<DockPanel>
+
+			<!--
+			SAMPLE NOTE 1.5:
+				This common StatusBar is used by all samples and is unrelated to the use and configuration
+				of Ribbon or the Getting Started series.
+			-->
+			<gettingStartedCommon:CommonStatusBar DockPanel.Dock="Bottom" SampleCodePath="/Step01/MainWindow.axaml" />
+
+			<TextBlock
+				HorizontalAlignment="Center" VerticalAlignment="Center"
+				Text="Future window content" />
+
+		</DockPanel>
+
+	</actipro:RibbonContainerPanel>
+
+</actipro:RibbonWindow>

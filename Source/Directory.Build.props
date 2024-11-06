@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+
+PUBLIC\SOURCE BUILD PROPERTIES
+
+-->
+<Project>
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<LangVersion>latest</LangVersion>
+		<Nullable>enable</Nullable>
+		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+
+		<Version>25.1.0.0</Version>
+
+		<RootNamespace>ActiproSoftware</RootNamespace>
+		<Authors>Actipro Software LLC</Authors>
+		<Copyright>Copyright (c) 2021-2024 Actipro Software LLC.  All rights reserved.</Copyright>
+
+		<DefineConstants>CODE_ANALYSIS;AVALONIA</DefineConstants>
+
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+		<PackageProjectUrl>https://www.actiprosoftware.com/products/controls/avalonia</PackageProjectUrl>
+
+		<IsTrimmable>true</IsTrimmable>
+		<EnableTrimAnalyzer>true</EnableTrimAnalyzer>
+		<EnableAotAnalyzer>true</EnableAotAnalyzer>
+
+	</PropertyGroup>
+
+</Project>

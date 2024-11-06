@@ -5,9 +5,9 @@ order: 98
 ---
 # Converting to v24.2
 
-## Avalonia UI Dependency
+## Avalonia Dependency
 
-Updated the minimum Avalonia UI dependency from v11.0.7 to v11.1.0.
+Updated the minimum Avalonia dependency from v11.0.7 to v11.1.0.
 
 ## MenuItem Toggle Support
 

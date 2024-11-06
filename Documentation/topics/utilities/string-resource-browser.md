@@ -5,7 +5,7 @@ order: 4
 ---
 # String Resource Browser
 
-The **String Resource Browser** allows you to view all the string resources that are defined for the various Actipro Avalonia UI control products.  It can also generate code to customize or localize any of the string resources in our products.
+The **String Resource Browser** allows you to view all the string resources that are defined for the various Actipro Avalonia control products.  It can also generate code to customize or localize any of the string resources in our products.
 
 It is available from the **View** menu within the **Sample Browser**'s title bar.
 

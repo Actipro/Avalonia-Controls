@@ -9,12 +9,14 @@ To build a user prompt, you can create a new instance of [UserPromptControl](xre
 
 @if (avalonia) {
 ![Screenshot](../images/user-prompt.png)
+
+*UserPromptControl with optional content areas labeled, OK/Cancel buttons, Information status icon, and optional footer icon*
 }
 @if (wpf) {
 ![Screenshot](../../images/user-prompt.png)
-}
 
 *UserPromptControl with optional content areas labeled, OK/Cancel buttons, Information status image, and optional footer image*
+}
 
 ## Content
 
@@ -135,17 +137,20 @@ The `Footer` property can be defined to display content at the bottom of the pro
 Any `TextBlock` controls used within `Footer` will wrap text by default.
 
 @if (avalonia) {
-Use the [FooterImageSource](xref:@ActiproUIRoot.Controls.UserPromptControl.FooterImageSource) property to optionally display a 16x16 image next to the `Footer` content. Any `IImage` is supported.
+Use the [FooterIcon](xref:@ActiproUIRoot.Controls.UserPromptControl.FooterIcon) property to optionally display a 16x16 icon next to the `Footer` content. Any `object` supported by [Icon Presenter](../../themes/icon-presenter.md) is supported.
 
-When using the [builder pattern](builder-pattern.md), the [WithFooterContent](xref:@ActiproUIRoot.Controls.UserPromptBuilder.WithFooterContent*) method is used to configure the [UserPromptBuilder](xref:@ActiproUIRoot.Controls.UserPromptControl.Footer) property and the [WithFooterImage](xref:@ActiproUIRoot.Controls.UserPromptBuilder.WithFooterImage*) method configures the [FooterImageSource](xref:@ActiproUIRoot.Controls.UserPromptControl.FooterImageSource) property.
+When using the [builder pattern](builder-pattern.md), the [WithFooterContent](xref:@ActiproUIRoot.Controls.UserPromptBuilder.WithFooterContent*) method is used to configure the [UserPromptBuilder](xref:@ActiproUIRoot.Controls.UserPromptControl.Footer) property and the [WithFooterIcon](xref:@ActiproUIRoot.Controls.UserPromptBuilder.WithFooterIcon*) method configures the [FooterIcon](xref:@ActiproUIRoot.Controls.UserPromptControl.FooterIcon) and [FooterIconTemplate](xref:@ActiproUIRoot.Controls.UserPromptControl.FooterIconTemplate) properties.
 
 ```csharp
 await UserPromptBuilder.Configure()
 	// ... other configuration options here
 	.WithFooterContent("Click 'Help' button for more information")
-	.WithFooterImage(GetImage("/Images/Icons/Help16.png"))
+	.WithFooterIcon(GetImage("/Images/Icons/Help16.png"))
 	.Show();
 ```
+
+See the [Icon Presenter](../../themes/icon-presenter.md) topic for additional details on working with custom icon value types.
+
 }
 @if (wpf) {
 Use the [FooterImageSource](xref:@ActiproUIRoot.Controls.UserPromptControl.FooterImageSource) property to optionally display a 16x16 image next to the `Footer` content. Any `ImageSource` is supported.
@@ -255,28 +260,32 @@ UserPromptBuilder.Configure()
 ```
 }
 
-## Status Image
-
-An image can be used to visually communicate the status or classification of the prompt displayed. Users can quickly differentiate an error from a warning based on the image displayed with the prompt.
-
 @if (avalonia) {
-The [StatusImageSource](xref:@ActiproUIRoot.Controls.UserPromptControl.StatusImageSource) property can be set to any 32x32 `IImage`.
+## Status Icon
 
-Several common images, like those for an error or warning, are defined by the [MessageBoxImage](xref:@ActiproUIRoot.Controls.MessageBoxImage) enumeration.  Instead of populating the [StatusImageSource](xref:@ActiproUIRoot.Controls.UserPromptControl.StatusImageSource) property, set the [StandardStatusImage](xref:@ActiproUIRoot.Controls.UserPromptControl.StandardStatusImage) property to one of the [MessageBoxImage](xref:@ActiproUIRoot.Controls.MessageBoxImage) values.
+An icon can be used to visually communicate the status or classification of the prompt displayed. Users can quickly differentiate an error from a warning based on the icon displayed with the prompt.
+
+The [StatusIcon](xref:@ActiproUIRoot.Controls.UserPromptControl.StatusIcon) property can be set to any object supported by [Icon Presenter](../../themes/icon-presenter.md), and is typically a 32x32 `IImage`.
+
+Several common icons, like those for an error or warning, are defined by the [MessageBoxImage](xref:@ActiproUIRoot.Controls.MessageBoxImage) enumeration.  Instead of populating the [StatusIcon](xref:@ActiproUIRoot.Controls.UserPromptControl.StatusIcon) property, set the [StandardStatusIcon](xref:@ActiproUIRoot.Controls.UserPromptControl.StandardStatusIcon) property to one of the [MessageBoxImage](xref:@ActiproUIRoot.Controls.MessageBoxImage) values.
 
 > [!WARNING]
-> The [StandardStatusImage](xref:@ActiproUIRoot.Controls.UserPromptControl.StandardStatusImage) property is ignored if the [StatusImageSource](xref:@ActiproUIRoot.Controls.UserPromptControl.StatusImageSource) property is explicitly populated.
+> The [StandardStatusIcon](xref:@ActiproUIRoot.Controls.UserPromptControl.StandardStatusIcon) property is ignored if the [StatusIcon](xref:@ActiproUIRoot.Controls.UserPromptControl.StatusIcon) property is explicitly populated.
 
-When using the [builder pattern](builder-pattern.md), the [WithStatusImage](xref:@ActiproUIRoot.Controls.UserPromptBuilder.WithStatusImage*) has one overload that accepts a custom `IImage` and another for a standard [MessageBoxImage](xref:@ActiproUIRoot.Controls.MessageBoxImage):
+When using the [builder pattern](builder-pattern.md), the [WithStatusIcon](xref:@ActiproUIRoot.Controls.UserPromptBuilder.WithStatusIcon*) has one overload that accepts a custom `object` and another for a standard [MessageBoxImage](xref:@ActiproUIRoot.Controls.MessageBoxImage):
 
 ```csharp
 var result = await UserPromptBuilder.Configure()
 	// ... other configuration options here
-	.WithStatusImage(MessageBoxImage.Information)
+	.WithStatusIcon(MessageBoxImage.Information)
 	.Show();
 ```
 }
 @if (wpf) {
+## Status Image
+
+An image can be used to visually communicate the status or classification of the prompt displayed. Users can quickly differentiate an error from a warning based on the image displayed with the prompt.
+
 The [StatusImageSource](xref:@ActiproUIRoot.Controls.UserPromptControl.StatusImageSource) property can be set to any 32x32 `ImageSource`.
 
 Several common images, like those for an error or warning, are defined by the [UserPromptStandardImage](xref:@ActiproUIRoot.Controls.UserPromptStandardImage) enumeration.  Instead of populating the [StatusImageSource](xref:@ActiproUIRoot.Controls.UserPromptControl.StatusImageSource) property, set the [StandardStatusImage](xref:@ActiproUIRoot.Controls.UserPromptControl.StandardStatusImage) property to one of the [UserPromptStandardImage](xref:@ActiproUIRoot.Controls.UserPromptStandardImage) values.

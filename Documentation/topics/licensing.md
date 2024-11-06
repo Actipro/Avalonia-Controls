@@ -14,11 +14,11 @@ The [Actipro Themes](themes/index.md), [Actipro Shared Library](shared/index.md)
 For simplicity, no license registration calls need to be made in applications that only use free Actipro products.
 
 > [!TIP]
-> Even customers who only use the free products can still pay for Actipro Avalonia UI Pro to gain access to the XAML source of all control styles/templates in those products and priority support.
+> Even customers who only use the free products can still pay for Actipro Avalonia Pro to gain access to the XAML source of all control styles/templates in those products and priority support.
 
 ## Paid License Types
 
-Actipro Avalonia UI Pro is available for purchase with several license types.
+Actipro Avalonia Pro is available for purchase with several license types.
 
 ### Evaluation License
 
@@ -52,7 +52,7 @@ Blueprint licenses enable access to product source code.  The term of Blueprint 
 
 ## Free Subscriptions and Free New Products
 
-All of the non-evaluation licenses described above for our paid Avalonia UI products include **one full year** of free upgrades to any new versions that are released within that timeframe.
+All of the non-evaluation licenses described above for our paid Avalonia products include **one full year** of free upgrades to any new versions that are released within that timeframe.
 
 In addition, customers with active subscriptions will receive any new products added to the suite for free while the subscription is active.
 
@@ -95,7 +95,7 @@ public static AppBuilder BuildAvaloniaApp() {
 
 ## Open-Source Project Licensing Considerations
 
-Product licenses may be purchased for developers working with Actipro Avalonia UI Pro in open-source projects.  However, this introduces some issues that must be handled with care.  Namely, ensuring that "Licensee" and "License Key" values are not committed in any way to an open-source code repository, and that the proper number of developer licenses are purchased.
+Product licenses may be purchased for developers working with Actipro Avalonia Pro in open-source projects.  However, this introduces some issues that must be handled with care.  Namely, ensuring that "Licensee" and "License Key" values are not committed in any way to an open-source code repository, and that the proper number of developer licenses are purchased.
 
 ### Developers of Open-Source Projects
 
