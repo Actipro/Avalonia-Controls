@@ -49,7 +49,7 @@ namespace ActiproSoftware.Properties.Bars.Mvvm {
 			=> Instance.GetCustomStringCore(name.ToString());
 
 		/// <inheritdoc cref="SRBase.GetStringCore"/>
-		public static string? GetString(SRName name, params object[] args)
+		public static string? GetString(SRName name, params object?[] args)
 			=> Instance.GetStringCore(name.ToString(), args);
 
 		/// <inheritdoc cref="SRBase.RemoveCustomStringCore"/>

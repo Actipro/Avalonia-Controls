@@ -14,6 +14,10 @@
 	<sampleBrowser:ControlExampleItemsControl
 		Header="The tab row toolbar can optionally be displayed on the far-right side of the ribbon, in the same row as the ribbon tabs.">
 
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Tab row toolbar" Url="https://www.actiprosoftware.com/docs/controls/avalonia/bars/ribbon-features/tab-row-toolbar" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
 		<sampleBrowser:ControlExample
 			Header="Basic usage"
 			Footer="Use tab row toolbar to show common controls that are always available, such as Sharing or Feedback buttons."

@@ -12,11 +12,11 @@ PUBLIC\SOURCE BUILD PROPERTIES
 		<Nullable>enable</Nullable>
 		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
 
-		<Version>25.1.0.0</Version>
+		<Version>25.1.1.0</Version>
 
 		<RootNamespace>ActiproSoftware</RootNamespace>
 		<Authors>Actipro Software LLC</Authors>
-		<Copyright>Copyright (c) 2021-2024 Actipro Software LLC.  All rights reserved.</Copyright>
+		<Copyright>Copyright (c) 2021-2025 Actipro Software LLC.  All rights reserved.</Copyright>
 
 		<DefineConstants>CODE_ANALYSIS;AVALONIA</DefineConstants>
 
@@ -24,9 +24,7 @@ PUBLIC\SOURCE BUILD PROPERTIES
 		<PackageProjectUrl>https://www.actiprosoftware.com/products/controls/avalonia</PackageProjectUrl>
 
 		<IsTrimmable>true</IsTrimmable>
-		<EnableTrimAnalyzer>true</EnableTrimAnalyzer>
-		<EnableAotAnalyzer>true</EnableAotAnalyzer>
-
+		<IsAotCompatible Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))">true</IsAotCompatible>
 	</PropertyGroup>
 
 </Project>

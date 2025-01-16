@@ -12,6 +12,11 @@
 	<sampleBrowser:ControlExampleItemsControl
 		Header="Easily create and/or change a popup menu before the menu is displayed.">
 
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Context menus" Url="https://www.actiprosoftware.com/docs/controls/avalonia/bars/menu-features/context-menus" />
+			<sampleBrowser:ControlExampleLinkItem Title="Menu customization" Url="https://www.actiprosoftware.com/docs/controls/avalonia/bars/menu-features/menu-customization" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
 		<sampleBrowser:ControlExample
 			Header="Dynamic popup menus"
 			Footer="The menus displayed in this sample are dynamically generated in the code-behind."

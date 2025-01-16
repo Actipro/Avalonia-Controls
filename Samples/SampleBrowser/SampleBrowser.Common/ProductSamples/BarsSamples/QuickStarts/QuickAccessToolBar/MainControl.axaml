@@ -22,6 +22,10 @@
 	<sampleBrowser:ControlExampleItemsControl
 		Header="The quick access toolbar provides access to the most commonly used commands in an application.">
 
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Quick access toolbar" Url="https://www.actiprosoftware.com/docs/controls/avalonia/bars/ribbon-features/quick-access-toolbar" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
 		<sampleBrowser:ControlExample
 			Header="Basic usage"
 			>

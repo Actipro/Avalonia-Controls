@@ -36,6 +36,10 @@
 	<sampleBrowser:ControlExampleItemsControl
 		Header="The BarMenuGallery control can be configured to provide an advanced color picker similar to those in popular office applications.">
 
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Gallery control" Url="https://www.actiprosoftware.com/docs/controls/avalonia/bars/controls/gallery" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
 		<sampleBrowser:ControlExample
 			Header="Color picker showcase"
 			Footer="See the individual samples below for details on how to build the color pickers highlighted by this sample."

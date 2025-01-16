@@ -21,7 +21,7 @@
 					<ComboBox ItemsSource="{actipro:DelimitedArray Type={x:Type resourceBrowser:ThemeResourceReferenceTextKind}}" SelectedItem="{Binding ResourceReferenceTextKind}">
 						<ComboBox.ItemTemplate>
 							<DataTemplate x:DataType="{x:Type resourceBrowser:ThemeResourceReferenceTextKind}">
-								<TextBlock Text="{Binding, Converter={StaticResource ThemeResourceReferenceTextKindDescriptionConverter}}" />
+								<TextBlock Text="{Binding Converter={StaticResource ThemeResourceReferenceTextKindDescriptionConverter}}" />
 							</DataTemplate>
 						</ComboBox.ItemTemplate>
 					</ComboBox>

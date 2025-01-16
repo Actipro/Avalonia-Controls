@@ -25,6 +25,7 @@ namespace ActiproSoftware.SampleBrowser {
 		private bool _isDrawerOpen = true;
 		private readonly NavigationService _navigationService = new();
 		private ProductData? _productData;
+		private double _scaleFactor = 1.0d;
 		private bool _showPrivateItems = false;
 		private string? _statusMessage;
 		private Visual? _viewElement;
@@ -43,6 +44,7 @@ namespace ActiproSoftware.SampleBrowser {
 		private DelegateCommand<object?>? _notImplementedCommand;
 		private DelegateCommand<object>? _openGitHubSampleFolderCommand;
 		private DelegateCommand<object>? _openUrlCommand;
+		private DelegateCommand<object>? _setScaleFactorCommand;
 		private DelegateCommand<UserInterfaceDensity?>? _setUserInterfaceDensityCommand;
 		private DelegateCommand<object?>? _toggleDrawerOpenCommand;
 		private DelegateCommand<object?>? _toggleFlowDirectionCommand;
@@ -597,6 +599,25 @@ namespace ActiproSoftware.SampleBrowser {
 				}
 			}
 		}
+
+		/// <summary>
+		/// Indicates the scale factor of the primary application window.
+		/// </summary>
+		/// <remarks>
+		/// The default value is <c>1.0</c>.
+		/// </remarks>
+		public double ScaleFactor {
+			get => _scaleFactor;
+			set => SetProperty(ref _scaleFactor, value);
+		}
+
+		/// <summary>
+		/// The <see cref="ICommand"/> to set the current <see cref="ScaleFactor"/>.
+		/// </summary>
+		public ICommand SetScaleFactorCommand
+			=> _setScaleFactorCommand ??= new DelegateCommand<object>(param => {
+				ScaleFactor = Convert.ToDouble(param);
+			});
 
 		/// <summary>
 		/// The <see cref="ICommand"/> to set the user interface density.

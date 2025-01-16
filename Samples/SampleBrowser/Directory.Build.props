@@ -7,8 +7,8 @@
 		<Nullable>enable</Nullable>
 		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
 
-		<Version>25.1.0.0</Version>
-		<InformationalVersion>25.1.0.0 - 20241106</InformationalVersion>
+		<Version>25.1.1.0</Version>
+		<InformationalVersion>25.1.1.0 - 20250116</InformationalVersion>
 
 		<Product>Actipro Avalonia Controls Sample Browser</Product>
 		<Title>$(Product)</Title>
@@ -17,7 +17,7 @@
 
 		<RootNamespace>ActiproSoftware</RootNamespace>
 		<Authors>Actipro Software LLC</Authors>
-		<Copyright>Copyright (c) 2022-2024 Actipro Software LLC.  All rights reserved.</Copyright>
+		<Copyright>Copyright (c) 2022-2025 Actipro Software LLC.  All rights reserved.</Copyright>
 
 		<DefineConstants>AVALONIA</DefineConstants>
 		<GenerateAssemblyInfo>true</GenerateAssemblyInfo>

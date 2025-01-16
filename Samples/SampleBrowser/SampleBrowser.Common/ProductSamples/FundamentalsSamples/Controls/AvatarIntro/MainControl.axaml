@@ -65,6 +65,14 @@
 						<TextBlock Classes="theme-form-control-label" Text="{Binding ItemLength, StringFormat='Item length: {0}'}" />
 						<Slider Value="{Binding ItemLength}" Minimum="16" Maximum="100" IsSnapToTickEnabled="True" TickFrequency="2" />
 					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Orientation" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type=Orientation}" SelectedValue="{Binding Orientation}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Overflow orientation" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type=Orientation}" SelectedValue="{Binding OverflowOrientation}" />
+					</StackPanel>
 				</StackPanel>
 			</sampleBrowser:ControlExample.Options>
 			<sampleBrowser:ControlExample.CodeExamples>
@@ -75,6 +83,8 @@
 	ItemLength="$(ItemLength)"
 	MaxInlineCount="$(MaxInlineCount)"
 	OverlapPercentage="$(OverlapPercentage)"
+	Orientation="$(Orientation)"
+	OverflowOrientation="$(OverflowOrientation)"
 	>
 	
 	<!-- Use a ControlTheme to configure Avatar controls -->
@@ -99,6 +109,8 @@
 						<sampleBrowser:CodeExampleSubstitution Key="ItemLength" Value="{Binding ItemLength}" />
 						<sampleBrowser:CodeExampleSubstitution Key="MaxInlineCount" Value="{Binding MaxInlineCount}" />
 						<sampleBrowser:CodeExampleSubstitution Key="OverlapPercentage" Value="{Binding OverlapPercentage}" />
+						<sampleBrowser:CodeExampleSubstitution Key="Orientation" Value="{Binding Orientation}" />
+						<sampleBrowser:CodeExampleSubstitution Key="OverflowOrientation" Value="{Binding OverflowOrientation}" />
 					</sampleBrowser:CodeExample.Substitutions>
 				</sampleBrowser:CodeExample>
 			</sampleBrowser:ControlExample.CodeExamples>

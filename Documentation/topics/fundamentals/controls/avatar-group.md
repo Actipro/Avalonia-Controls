@@ -17,6 +17,8 @@ Use the [ItemLength](xref:@ActiproUIRoot.Controls.AvatarGroup.ItemLength) proper
 
 By default, each avatar will slightly overlap with the avatar that appears before it.  Use the [OverlapPercentage](xref:@ActiproUIRoot.Controls.AvatarGroup.OverlapPercentage) property to define the extent of the overlap.  The default value is `0.2` for a 20% overlap.
 
+The [Orientation](xref:@ActiproUIRoot.Controls.AvatarGroup.Orientation) property determines if the non-overflowed avatars are arranged horizontally or vertically.  The default is `Horizontal`.
+
 ## Overflow
 
 Individual [Avatar](avatar.md) controls can optionally be overflowed when there is not enough room to display them all inline.  When overflow is necessary, a button is added at the end of the group that, when clicked, will display the additional items in a popup.
@@ -26,6 +28,8 @@ Overflow is set to [Popup](xref:@ActiproUIRoot.Controls.AvatarGroupOverflowKind.
 By default, the group will display as many avatars as possible in the space available, but the [MaxInlineCount](xref:@ActiproUIRoot.Controls.AvatarGroup.MaxInlineCount) property can be set to limit how many are displayed before overflowing.
 
 The overflow button indicates the number of overflowed items.  Use the [OverflowStringFormat](xref:@ActiproUIRoot.Controls.AvatarGroup.OverflowStringFormat) property to customize how the count is formatted. The default is `"+{0}"`, where `{0}` is the placeholder for the current value of [OverflowedItemCount](xref:@ActiproUIRoot.Controls.AvatarGroup.OverflowedItemCount) (e.g., `"+9"`).
+
+The [OverflowOrientation](xref:@ActiproUIRoot.Controls.AvatarGroup.OverflowOrientation) property determines if the overflowed avatars are arranged horizontally or vertically, and is configured separately from the [Orientation](xref:@ActiproUIRoot.Controls.AvatarGroup.Orientation) property.  The default is `Horizontal`.
 
 ## Configuring Avatar Items
 

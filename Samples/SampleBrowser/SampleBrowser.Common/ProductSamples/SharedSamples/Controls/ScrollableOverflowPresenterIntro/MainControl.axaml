@@ -10,7 +10,7 @@
 		Header="The ScrollableOverflowPresenter control displays scroll buttons when its content overflows the available space.  Tap the buttons to scroll through the content or hold down a button to scroll quickly.">
 
 		<sampleBrowser:ControlExampleItemsControl.Documentation>
-			<sampleBrowser:ControlExampleLinkItem Title="Scrollable Overflow Presenter" Url="https://www.actiprosoftware.com/docs/controls/avalonia/shared/controls/scrollable-overflow-presenter" />
+			<sampleBrowser:ControlExampleLinkItem Title="Scrollable overflow presenter" Url="https://www.actiprosoftware.com/docs/controls/avalonia/shared/controls/scrollable-overflow-presenter" />
 		</sampleBrowser:ControlExampleItemsControl.Documentation>
 
 

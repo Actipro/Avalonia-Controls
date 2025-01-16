@@ -38,6 +38,10 @@
 	<sampleBrowser:ControlExampleItemsControl
 		Header="Popup and context menus can be defined using MVVM or XAML and are capable of supporting a complex layout of items.">
 
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Context menus" Url="https://www.actiprosoftware.com/docs/controls/avalonia/bars/menu-features/context-menus" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
 		<sampleBrowser:ControlExample
 			Header="Popup menu"
 			Footer="Click the Popup Menu button to see various menu controls configured based on the available options.">

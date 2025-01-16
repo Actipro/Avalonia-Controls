@@ -3,7 +3,6 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 	xmlns:converters="using:Avalonia.Markup.Xaml.Converters"
-	xmlns:sample="using:ActiproSoftware.ProductSamples.SharedSamples.Shapes.RingSliceIntro"
 	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
 	>
 	<UserControl.Resources>

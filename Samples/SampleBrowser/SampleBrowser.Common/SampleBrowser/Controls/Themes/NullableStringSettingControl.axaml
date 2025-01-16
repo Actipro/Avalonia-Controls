@@ -6,7 +6,7 @@
 	>
 	<Design.PreviewWith>
 		<StackPanel Margin="20" Spacing="20">
-			<sampleBrowser:NullableStringSettingControl Label="My Label" Text="Testing" IsNull="False" />
+			<sampleBrowser:NullableStringSettingControl Label="My Label" Text="Testing" />
 		</StackPanel>
 	</Design.PreviewWith>
 
