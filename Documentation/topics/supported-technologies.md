@@ -45,7 +45,6 @@ The assemblies have dependencies on the Avalonia framework as follows:
 
 - Avalonia v11.1.0 or later
 - Native themes compatible up to Avalonia v11.1.0
-- *Minor updates to Avalonia are expected to be supported and will be verified as they are released*
 
 </td>
 </tr>

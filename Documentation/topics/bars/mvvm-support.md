@@ -270,7 +270,7 @@ The following table shows various bar control view model types defined in the MV
 | [BarSplitToggleButtonViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarSplitToggleButtonViewModel) | Toggle [split button](controls/split-button.md) control. |
 | [BarTextBoxViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarTextBoxViewModel) | [Textbox](controls/textbox.md) control. |
 | [BarToggleButtonViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarToggleButtonViewModel) | Toggle [button](controls/button.md) control. |
-| [RibbonApplicationButton](xref:@ActiproUIRoot.Controls.Bars.RibbonApplicationButton) | [Application button](ribbon-features/application-button.md) control. |
+| [RibbonApplicationButtonViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.RibbonApplicationButtonViewModel) | [Application button](ribbon-features/application-button.md) control. |
 | [RibbonBackstageHeaderButtonViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.RibbonBackstageHeaderButtonViewModel) | [Backstage](ribbon-features/backstage.md) header button control. |
 | [RibbonBackstageHeaderSeparatorViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.RibbonBackstageHeaderSeparatorViewModel) | [Backstage](ribbon-features/backstage.md) header separator control. |
 | [RibbonBackstageTabViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.RibbonBackstageTabViewModel) | [Backstage](ribbon-features/backstage.md) tab control. |
@@ -303,7 +303,7 @@ The following table shows various bar control view model types defined in the MV
 | [BarTextBoxViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarTextBoxViewModel) | [Textbox](controls/textbox.md) control. |
 | [BarToggleButtonViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarToggleButtonViewModel) | Toggle [button](controls/button.md) control. |
 | [MiniToolBarViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.MiniToolBarViewModel) | [Mini-toolbar](toolbar-features/mini-toolbars.md) control. |
-| [RibbonApplicationButton](xref:@ActiproUIRoot.Controls.Bars.RibbonApplicationButton) | [Application button](ribbon-features/application-button.md) control. |
+| [RibbonApplicationButtonViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.RibbonApplicationButtonViewModel) | [Application button](ribbon-features/application-button.md) control. |
 | [RibbonBackstageHeaderButtonViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.RibbonBackstageHeaderButtonViewModel) | [Backstage](ribbon-features/backstage.md) header button control. |
 | [RibbonBackstageHeaderSeparatorViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.RibbonBackstageHeaderSeparatorViewModel) | [Backstage](ribbon-features/backstage.md) header separator control. |
 | [RibbonBackstageTabViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.RibbonBackstageTabViewModel) | [Backstage](ribbon-features/backstage.md) tab control. |

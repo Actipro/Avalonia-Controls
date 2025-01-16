@@ -169,6 +169,10 @@
 	<sampleBrowser:ControlExampleItemsControl
 		Header="A ribbon gallery can support multiple rows of items and will adjust the number of visible columns based on the variant size and available width.  When expanded, items are displayed using a menu gallery.">
 
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Gallery control" Url="https://www.actiprosoftware.com/docs/controls/avalonia/bars/controls/gallery" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
 		<sampleBrowser:ControlExample
 			Header="Basic usage"
 			Footer="In the Classic ribbon layout, medium and large variant sizes are available. The Simplified layout will always show a small variant size."
@@ -204,7 +208,7 @@
 								Command="{Binding SetColorCommand}"
 								ItemSpacing="{Binding Options.ItemSpacing}"
 								ItemsSource="{Binding ColorItems}"
-								ItemTemplate="{Binding Options.ItemTemplate}"
+								ItemTemplate="{Binding #sampleRootControl.Options.ItemTemplate}"
 								LargeIcon="/Images/Icons/ColorPicker32.png"
 								SmallIcon="/Images/Icons/ColorPicker16.png"
 								MaxColumnCount="{Binding Options.MaxRibbonColumnCount}"

@@ -19,6 +19,11 @@
 	<sampleBrowser:ControlExampleItemsControl
 		Header="Actipro Ribbon supports two different layout modes: Classic and Simplified. The user can switch between layouts at run-time without any changes in configuration.">
 
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Ribbon layout modes and density" Url="https://www.actiprosoftware.com/docs/controls/avalonia/bars/ribbon-features/layout-and-density" />
+			<sampleBrowser:ControlExampleLinkItem Title="Theme user interface density" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/user-interface-density" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
 		<sampleBrowser:ControlExample
 			Header="Layout modes"
 			Footer="Both ribbons in this sample use the same configuration. Try resizing the window and watch as each ribbon adjusts the layout to accomodate the available space."
@@ -91,7 +96,7 @@
 															   IsEnabled="{Binding !#minimalRibbon.AreTabsVisible}"
 															   Value=" AreTabsVisible=&quot;False&quot;" />
 						<sampleBrowser:CodeExampleSubstitution Key="GroupLabelModeAttribute"
-															   IsEnabled="{Binding #minimalRibbon.GroupLabelMode}, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Default'}"
+															   IsEnabled="{Binding #minimalRibbon.GroupLabelMode, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Default'}"
 															   Value="{Binding #minimalRibbon.GroupLabelMode, StringFormat=' GroupLabelMode=&quot;{0}&quot;'}" />
 					</sampleBrowser:CodeExample.Substitutions>
 				</sampleBrowser:CodeExample>
@@ -110,7 +115,7 @@ var ribbon = new RibbonViewModel() {$(AreTabsVisibleSetter)$(GroupLabelModeSette
 															   IsEnabled="{Binding !#minimalRibbon.AreTabsVisible}"
 															   Value="&#xD;&#x9;AreTabsVisible = false," />
 						<sampleBrowser:CodeExampleSubstitution Key="GroupLabelModeSetter"
-															   IsEnabled="{Binding #minimalRibbon.GroupLabelMode}, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Default'}"
+															   IsEnabled="{Binding #minimalRibbon.GroupLabelMode, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Default'}"
 															   Value="{Binding #minimalRibbon.GroupLabelMode, StringFormat='&#xD;&#x9;GroupLabelMode = RibbonGroupLabelMode.{0},'}" />
 					</sampleBrowser:CodeExample.Substitutions>
 				</sampleBrowser:CodeExample>

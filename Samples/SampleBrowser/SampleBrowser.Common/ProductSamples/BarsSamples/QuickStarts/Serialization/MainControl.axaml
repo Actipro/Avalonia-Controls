@@ -14,6 +14,10 @@
 	<sampleBrowser:ControlExampleItemsControl
 		Header="Actipro Ribbon provides many options to customize the layout. By using the serialization features, it is easy to save the current layout and restore it later.">
 
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Serialization" Url="https://www.actiprosoftware.com/docs/controls/avalonia/bars/ribbon-features/serialization" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
 		<sampleBrowser:ControlExample
 			Header="Serialization"
 			Footer="Developers have full control over which settings are saved and restored during serialization."

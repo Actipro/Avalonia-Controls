@@ -11,6 +11,10 @@
 	<sampleBrowser:ControlExampleItemsControl
 		Header="A full screen Backstage is used in many modern applications to provide a richer experience for the user than is typically available from a traditional menu.">
 
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Backstage" Url="https://www.actiprosoftware.com/docs/controls/avalonia/bars/ribbon-features/backstage" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+		
 		<sampleBrowser:ControlExample
 			Header="Basic usage"
 			>

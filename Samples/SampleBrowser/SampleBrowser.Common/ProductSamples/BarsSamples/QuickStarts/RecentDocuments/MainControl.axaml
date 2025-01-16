@@ -5,7 +5,6 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
-	xmlns:documents="using:ActiproSoftware.UI.Avalonia.DocumentManagement"
 	xmlns:local="using:ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.RecentDocuments"
 	>
 	<UserControl.Resources>
@@ -15,6 +14,10 @@
 
 	<sampleBrowser:ControlExampleItemsControl
 		Header="The RecentDocumentControl can be used to display a managed list of recent documents with support for pinning and grouping.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Recent documents" Url="https://www.actiprosoftware.com/docs/controls/avalonia/bars/ribbon-features/recent-documents" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
 
 		<sampleBrowser:ControlExample
 			Header="Basic usage"

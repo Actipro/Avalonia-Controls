@@ -20,7 +20,7 @@
 
 			<Border Margin="3" Background="{actipro:ThemeResource Container1BackgroundBrush}"
 					BorderThickness="1" BorderBrush="{actipro:ThemeResource Container3BorderBrush}">
-				<localCommon:NumberingPresenter LineBrush="{actipro:ThemeResource Container2BorderBrush}}" />
+				<localCommon:NumberingPresenter LineBrush="{actipro:ThemeResource Container2BorderBrush}" />
 			</Border>
 
 		</DataTemplate>

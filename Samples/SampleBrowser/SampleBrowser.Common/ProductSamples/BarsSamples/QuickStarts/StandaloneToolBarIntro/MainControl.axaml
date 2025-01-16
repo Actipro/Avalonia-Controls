@@ -14,6 +14,10 @@
 	<sampleBrowser:ControlExampleItemsControl
 		Header="The StandaloneToolBar control can be used in scenarios where you wish to provide a modern toolbar UI, but there aren't enough commands to justify a full-blown Ribbon implementation.  The toolbar supports many of the controls that can appear in a Ribbon hierarchy, such as split buttons that contain menu galleries.">
 		
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Standalone toolbars" Url="https://www.actiprosoftware.com/docs/controls/avalonia/bars/toolbar-features/standalone-toolbars" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
 		<sampleBrowser:ControlExample
 			Header="Basic usage"
 			Footer="A standalone toolbar using controls that can also be placed within a ribbon."

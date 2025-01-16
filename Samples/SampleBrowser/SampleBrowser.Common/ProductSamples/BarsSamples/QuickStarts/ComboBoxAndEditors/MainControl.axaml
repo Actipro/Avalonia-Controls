@@ -125,6 +125,11 @@
 	<sampleBrowser:ControlExampleItemsControl
 		Header="BarComboBox is a control that can be used to provide combobox-like functionality. Its popup content is presented as a menu where the traditional combobox items are managed by a BarMenuGallery.  Other editors are also supported.">
 
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Combobox" Url="https://www.actiprosoftware.com/docs/controls/avalonia/bars/controls/combobox" />
+			<sampleBrowser:ControlExampleLinkItem Title="Using custom controls" Url="https://www.actiprosoftware.com/docs/controls/avalonia/bars/controls/using-custom-controls" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
 		<sampleBrowser:ControlExample
 			Header="Basic combobox usage"
 			>

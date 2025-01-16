@@ -14,6 +14,10 @@
 	<sampleBrowser:ControlExampleItemsControl
 		Header="The Application Button (labeled &quot;File&quot; by default) is used to open a full screen backstage menu.">
 
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Application button" Url="https://www.actiprosoftware.com/docs/controls/avalonia/bars/ribbon-features/application-button" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+		
 		<sampleBrowser:ControlExample
 			Header="Basic usage"
 			Footer="Customize the Label and KeyTipText properties or optionally hide the button completely."

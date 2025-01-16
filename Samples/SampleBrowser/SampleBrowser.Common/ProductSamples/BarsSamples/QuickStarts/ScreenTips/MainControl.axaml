@@ -14,6 +14,10 @@
 	<sampleBrowser:ControlExampleItemsControl
 		Header="Screen tips are essentially tooltips that provide a more robust user interface capable of describing a control using text, images, and other content.">
 
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Screen tips" Url="https://www.actiprosoftware.com/docs/controls/avalonia/bars/ribbon-features/screen-tips" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
 		<sampleBrowser:ControlExample
 			Header="Screen tip gallery"
 			Footer="Hover over the buttons in the Ribbon to see various configurations of screen tips.">
@@ -367,10 +371,10 @@ public partial class MainControl : UserControl {
 															   Value="IsInputGestureTextVisible=&quot;False&quot;&#xD;&#x9;&#x9;&#x9;&#x9;" />
 						<sampleBrowser:CodeExampleSubstitution Key="ScreenTipFooterAttribute"
 															   IsEnabled="{Binding #basicUsageFooter.Text, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
-															   Value="{Binding #basicUsageFooter.Text, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;ScreenTipFooter=&quot;{0}&quot;'}}" />
+															   Value="{Binding #basicUsageFooter.Text, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;ScreenTipFooter=&quot;{0}&quot;'}" />
 						<sampleBrowser:CodeExampleSubstitution Key="ScreenTipHeaderDefinedAttribute"
 															   IsEnabled="{Binding #basicUsageHeader.Text, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
-															   Value="{Binding #basicUsageHeader.Text, StringFormat='ScreenTipHeader=&quot;{0}&quot;&#xD;&#x9;&#x9;&#x9;&#x9;'}}" />
+															   Value="{Binding #basicUsageHeader.Text, StringFormat='ScreenTipHeader=&quot;{0}&quot;&#xD;&#x9;&#x9;&#x9;&#x9;'}" />
 						<sampleBrowser:CodeExampleSubstitution Key="ScreenTipHeaderUndefinedAttribute"
 															   IsEnabled="{Binding #basicUsageHeader.Text, Converter={x:Static StringConverters.IsNullOrEmpty}}"
 															   Value="{Binding #basicUsageHeader.CoerceEmptyAsNull, Converter={StaticResource ScreenTipHeaderUndefinedAttributeConverter}}" />
@@ -437,7 +441,7 @@ public partial class SampleRootControl : UserControl {
 															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;IsInputGestureTextDisplayed = false," />
 						<sampleBrowser:CodeExampleSubstitution Key="ScreenTipHeaderDefinedSetter"
 															   IsEnabled="{Binding #basicUsageHeader.Text, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
-															   Value="{Binding #basicUsageHeader.Text, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Title = &quot;{0}&quot;',}}" />
+															   Value="{Binding #basicUsageHeader.Text, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;Title = &quot;{0}&quot;'}" />
 						<sampleBrowser:CodeExampleSubstitution Key="ScreenTipHeaderUndefinedSetter"
 															   IsEnabled="{Binding #basicUsageHeader.Text, Converter={x:Static StringConverters.IsNullOrEmpty}}"
 															   Value="{Binding #basicUsageHeader.CoerceEmptyAsNull, Converter={StaticResource ScreenTipHeaderUndefinedSetterConverter}}" />

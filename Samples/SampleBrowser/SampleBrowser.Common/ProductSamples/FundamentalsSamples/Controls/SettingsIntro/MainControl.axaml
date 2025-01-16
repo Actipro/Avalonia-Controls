@@ -52,9 +52,9 @@
 		Header="Use SettingsCard, SettingsExpander, and SettingsGroup to organize and present configurable settings">
 
 		<sampleBrowser:ControlExampleItemsControl.Documentation>
-			<sampleBrowser:ControlExampleLinkItem Title="Settings Card" Url="https://www.actiprosoftware.com/docs/controls/avalonia/fundamentals/controls/settings-card" />
-			<sampleBrowser:ControlExampleLinkItem Title="Settings Expander" Url="https://www.actiprosoftware.com/docs/controls/avalonia/fundamentals/controls/settings-expander" />
-			<sampleBrowser:ControlExampleLinkItem Title="Settings Group" Url="https://www.actiprosoftware.com/docs/controls/avalonia/fundamentals/controls/settings-group" />
+			<sampleBrowser:ControlExampleLinkItem Title="Settings card" Url="https://www.actiprosoftware.com/docs/controls/avalonia/fundamentals/controls/settings-card" />
+			<sampleBrowser:ControlExampleLinkItem Title="Settings expander" Url="https://www.actiprosoftware.com/docs/controls/avalonia/fundamentals/controls/settings-expander" />
+			<sampleBrowser:ControlExampleLinkItem Title="Settings group" Url="https://www.actiprosoftware.com/docs/controls/avalonia/fundamentals/controls/settings-group" />
 		</sampleBrowser:ControlExampleItemsControl.Documentation>
 
 		<sampleBrowser:ControlExample

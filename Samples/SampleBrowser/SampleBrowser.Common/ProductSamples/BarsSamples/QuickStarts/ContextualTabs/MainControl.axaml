@@ -15,6 +15,10 @@
 	<sampleBrowser:ControlExampleItemsControl
 		Header="Contextual tabs are only visible when the application is in a specific state.  One or more tabs can be associated with a contextual tab group, and the associated tabs will only be visible when that tab group is active.">
 
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Contextual tabs" Url="https://www.actiprosoftware.com/docs/controls/avalonia/bars/ribbon-features/contextual-tabs" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
 		<sampleBrowser:ControlExample
 			Header="Basic usage"
 			Footer="The Picture Tools group contains one tab, and the Table Tools group contains two tabs."

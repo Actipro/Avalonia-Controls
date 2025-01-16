@@ -8,153 +8,161 @@
 	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
 	>
 
-	<DockPanel>
-		<!-- Title Bar -->
-		<actipro:ChromedTitleBar DockPanel.Dock="Top" BorderThickness="0,0,0,1">
+	<LayoutTransformControl>
+		<LayoutTransformControl.LayoutTransform>
+			<ScaleTransform ScaleX="{Binding ScaleFactor}" ScaleY="{Binding ScaleFactor}" />
+		</LayoutTransformControl.LayoutTransform>
+
+		<DockPanel>
+
+			<!-- Title Bar -->
+			<actipro:ChromedTitleBar DockPanel.Dock="Top" BorderThickness="0,0,0,1">
 			
-			<actipro:ChromedTitleBar.Resources>
-				<actipro:ComparisonConverter x:Key="RightContentMarginConverter">
-					<actipro:ComparisonConverter.TrueResult>
-						<Thickness>0,0,20,0</Thickness>
-					</actipro:ComparisonConverter.TrueResult>
-					<actipro:ComparisonConverter.FalseResult>
-						<Thickness>0,0,0,0</Thickness>
-					</actipro:ComparisonConverter.FalseResult>
-				</actipro:ComparisonConverter>
-			</actipro:ChromedTitleBar.Resources>
+				<actipro:ChromedTitleBar.Resources>
+					<actipro:ComparisonConverter x:Key="RightContentMarginConverter">
+						<actipro:ComparisonConverter.TrueResult>
+							<Thickness>0,0,20,0</Thickness>
+						</actipro:ComparisonConverter.TrueResult>
+						<actipro:ComparisonConverter.FalseResult>
+							<Thickness>0,0,0,0</Thickness>
+						</actipro:ComparisonConverter.FalseResult>
+					</actipro:ComparisonConverter>
+				</actipro:ChromedTitleBar.Resources>
 			
-			<actipro:ChromedTitleBar.LeftContent>
-				<actiproPrims:OverlayInputFilter>
-					<StackPanel Orientation="Horizontal">
-						<Button x:Name="applicationButton" Margin="0,0,20,0" Command="{Binding ToggleDrawerOpenCommand}"
-								ContentTemplate="{actipro:GlyphTemplate Menu16}"
-								Theme="{actipro:ControlTheme TitleBarButton}"
-								ToolTip.Tip="Toggle Sidebar" />
+				<actipro:ChromedTitleBar.LeftContent>
+					<actiproPrims:OverlayInputFilter>
+						<StackPanel Orientation="Horizontal">
+							<Button x:Name="applicationButton" Margin="0,0,20,0" Command="{Binding ToggleDrawerOpenCommand}"
+									ContentTemplate="{actipro:GlyphTemplate Menu16}"
+									Theme="{actipro:ControlTheme TitleBarButton}"
+									ToolTip.Tip="Toggle Sidebar" />
 					
-						<Image x:Name="viewImage" DockPanel.Dock="Left" Width="24" Height="24" Source="{Binding ViewImageSource}" VerticalAlignment="Center" IsHitTestVisible="False">
-							<Image.Effect>
-								<DropShadowEffect OffsetX="0" OffsetY="1" BlurRadius="3" Opacity="{DynamicResource {actipro:ThemeResourceKey ShadowOpacity}}" />
-							</Image.Effect>
-						</Image>
+							<Image x:Name="viewImage" DockPanel.Dock="Left" Width="24" Height="24" Source="{Binding ViewImageSource}" VerticalAlignment="Center" IsHitTestVisible="False">
+								<Image.Effect>
+									<DropShadowEffect OffsetX="0" OffsetY="1" BlurRadius="3" Opacity="{DynamicResource {actipro:ThemeResourceKey ShadowOpacity}}" />
+								</Image.Effect>
+							</Image>
 
-						<StackPanel Margin="10,7,0,7" VerticalAlignment="Center" IsHitTestVisible="False">
-							<TextBlock Text="{Binding ViewSubTitle}" FontSize="12" TextTrimming="CharacterEllipsis" Opacity="0.85" />
-							<TextBlock Margin="0,-2,0,0" Text="{Binding ViewTitle}" FontSize="18" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
-						</StackPanel>
-					</StackPanel>
-				</actiproPrims:OverlayInputFilter>
-			</actipro:ChromedTitleBar.LeftContent>
-
-			<actipro:ChromedTitleBar.RightContent>
-				<actiproPrims:OverlayInputFilter>
-					<StackPanel Margin="{Binding $parent[actipro:ChromedTitleBar].HasCaptionButtons, Converter={StaticResource RightContentMarginConverter}}" Orientation="Horizontal">
-						<Button ContentTemplate="{actipro:GlyphTemplate Home16}"
-								Command="{Binding NavigateViewToHomeCommand}"
-								IsVisible="{Binding !ViewIsHome}"
-								Theme="{actipro:ControlTheme TitleBarButton}"
-								ToolTip.Tip="Home" />
-						<Button Command="{Binding NavigateViewToPreviousItemInfoCommand}"
-								ContentTemplate="{actipro:GlyphTemplate Previous16}"
-								IsVisible="{Binding !ViewUsesHomeDrawer}"
-								Theme="{actipro:ControlTheme TitleBarButton}"
-								ToolTip.Tip="Previous" />
-						<Button Command="{Binding NavigateViewToNextItemInfoCommand}"
-								ContentTemplate="{actipro:GlyphTemplate Next16}"
-								IsVisible="{Binding !ViewUsesHomeDrawer}"
-								Theme="{actipro:ControlTheme TitleBarButton}"
-								ToolTip.Tip="Next" />
-						<actipro:ToggleThemeButton 
-								Theme="{actipro:ControlTheme TitleBarToggleThemeButton}"
-								ToolTip.Tip="Toggle Theme" />
-						<Button Theme="{actipro:ControlTheme TitleBarButton}"
-								ToolTip.Tip="View">
-							<Button.Flyout>
-								<MenuFlyout Placement="Bottom" Opening="OnViewMenuOpening" OverlayDismissEventPassThrough="{OnFormFactor Default=False, Desktop=True}">
-									<MenuItem Classes="theme-menuitem-heading" Header="Avalonia Controls" />
-									<MenuItem Header="Release History" Command="{Binding NavigateViewToItemInfoCommand}" CommandParameter="{Binding ProductData.ReleaseHistory.FirstItem}" />
-									<MenuItem Header="Product Documentation" Command="{Binding OpenUrlCommand}" CommandParameter="{Binding PlatformDocumentationUrl}" />
-									<Separator />
-									<MenuItem Header="Purchase Licenses" Command="{Binding OpenUrlCommand}" CommandParameter="{Binding PlatformPurchaseLicensesUrl}" />
-									<Separator />
-									<MenuItem Classes="theme-menuitem-heading" Header="Utilities" />
-									<MenuItem Header="Color Palette" Command="{Binding NavigateViewToItemInfoCommand}" CommandParameter="https://ActiproSoftware/SampleBrowser/Utilities/ColorPalette/ColorPaletteView" />
-									<MenuItem Header="Theme Resource Browser" Command="{Binding NavigateViewToItemInfoCommand}" CommandParameter="https://ActiproSoftware/SampleBrowser/Utilities/ThemeResourceBrowser/ThemeResourceBrowserView" />
-									<MenuItem Header="String Resource Browser" Command="{Binding NavigateViewToItemInfoCommand}" CommandParameter="https://ActiproSoftware/SampleBrowser/Utilities/StringResourceBrowser/StringResourceBrowserView" />
-									<Separator />
-									<MenuItem Classes="theme-menuitem-heading" Header="Actipro Software" />
-									<MenuItem Header="Actipro Web Site" Command="{Binding OpenUrlCommand}" CommandParameter="{Binding PlatformProductsUrl}" />
-									<MenuItem Header="The Actipro Blog" Command="{Binding OpenUrlCommand}" CommandParameter="{Binding ActiproBlogUrl}" />
-									<MenuItem Header="@Actipro" Command="{Binding OpenUrlCommand}" CommandParameter="{Binding ActiproTwitterUrl}" />
-									<Separator />
-									<MenuItem Header="Contact Us" Command="{Binding OpenUrlCommand}" CommandParameter="{Binding ActiproContactUrl}" />
-									<Separator />
-									<MenuItem Classes="theme-menuitem-heading" Header="Theme Configuration" />
-									<MenuItem Header="User Interface Density">
-										<MenuItem x:Name="compactDensityMenuItem" Header="Compact" Command="{Binding SetUserInterfaceDensityCommand}">
-											<MenuItem.CommandParameter>
-												<actipro:UserInterfaceDensity>Compact</actipro:UserInterfaceDensity>
-											</MenuItem.CommandParameter>
-										</MenuItem>
-										<MenuItem x:Name="normalDensityMenuItem" Header="Normal" Command="{Binding SetUserInterfaceDensityCommand}">
-											<MenuItem.CommandParameter>
-												<actipro:UserInterfaceDensity>Normal</actipro:UserInterfaceDensity>
-											</MenuItem.CommandParameter>
-										</MenuItem>
-										<MenuItem x:Name="spaciousDensityMenuItem" Header="Spacious" Command="{Binding SetUserInterfaceDensityCommand}">
-											<MenuItem.CommandParameter>
-												<actipro:UserInterfaceDensity>Spacious</actipro:UserInterfaceDensity>
-											</MenuItem.CommandParameter>
-										</MenuItem>
-									</MenuItem>
-									
-								</MenuFlyout>
-							</Button.Flyout>
-							<StackPanel Orientation="Horizontal">
-								<ContentPresenter ContentTemplate="{actipro:GlyphTemplate Views16}" />
-								<ContentPresenter Margin="0,0,-3,0" ContentTemplate="{actipro:GlyphTemplate DropDownArrow12}" VerticalAlignment="Center" />
+							<StackPanel Margin="10,7,0,7" VerticalAlignment="Center" IsHitTestVisible="False">
+								<TextBlock Text="{Binding ViewSubTitle}" FontSize="12" TextTrimming="CharacterEllipsis" Opacity="0.85" />
+								<TextBlock Margin="0,-2,0,0" Text="{Binding ViewTitle}" FontSize="18" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
 							</StackPanel>
-						</Button>
-					</StackPanel>
-				</actiproPrims:OverlayInputFilter>
-			</actipro:ChromedTitleBar.RightContent>
+						</StackPanel>
+					</actiproPrims:OverlayInputFilter>
+				</actipro:ChromedTitleBar.LeftContent>
 
-		</actipro:ChromedTitleBar>
+				<actipro:ChromedTitleBar.RightContent>
+					<actiproPrims:OverlayInputFilter>
+						<StackPanel Margin="{Binding $parent[actipro:ChromedTitleBar].HasCaptionButtons, Converter={StaticResource RightContentMarginConverter}}" Orientation="Horizontal">
+							<Button ContentTemplate="{actipro:GlyphTemplate Home16}"
+									Command="{Binding NavigateViewToHomeCommand}"
+									IsVisible="{Binding !ViewIsHome}"
+									Theme="{actipro:ControlTheme TitleBarButton}"
+									ToolTip.Tip="Home" />
+							<Button Command="{Binding NavigateViewToPreviousItemInfoCommand}"
+									ContentTemplate="{actipro:GlyphTemplate Previous16}"
+									IsVisible="{Binding !ViewUsesHomeDrawer}"
+									Theme="{actipro:ControlTheme TitleBarButton}"
+									ToolTip.Tip="Previous" />
+							<Button Command="{Binding NavigateViewToNextItemInfoCommand}"
+									ContentTemplate="{actipro:GlyphTemplate Next16}"
+									IsVisible="{Binding !ViewUsesHomeDrawer}"
+									Theme="{actipro:ControlTheme TitleBarButton}"
+									ToolTip.Tip="Next" />
+							<actipro:ToggleThemeButton 
+									Theme="{actipro:ControlTheme TitleBarToggleThemeButton}"
+									ToolTip.Tip="Toggle Theme" />
+							<Button Theme="{actipro:ControlTheme TitleBarButton}"
+									ToolTip.Tip="View">
+								<Button.Flyout>
+									<MenuFlyout Placement="Bottom" Opening="OnViewMenuOpening" OverlayDismissEventPassThrough="{OnFormFactor Default=False, Desktop=True}">
+										<MenuItem Classes="theme-menuitem-heading" Header="Avalonia Controls" />
+										<MenuItem Header="Release History" Command="{Binding NavigateViewToItemInfoCommand}" CommandParameter="{Binding ProductData.ReleaseHistory.FirstItem}" />
+										<MenuItem Header="Product Documentation" Command="{Binding OpenUrlCommand}" CommandParameter="{Binding PlatformDocumentationUrl}" />
+										<Separator />
+										<MenuItem Header="Purchase Licenses" Command="{Binding OpenUrlCommand}" CommandParameter="{Binding PlatformPurchaseLicensesUrl}" />
+										<Separator />
+										<MenuItem Classes="theme-menuitem-heading" Header="Utilities" />
+										<MenuItem Header="Color Palette" Command="{Binding NavigateViewToItemInfoCommand}" CommandParameter="https://ActiproSoftware/SampleBrowser/Utilities/ColorPalette/ColorPaletteView" />
+										<MenuItem Header="Theme Resource Browser" Command="{Binding NavigateViewToItemInfoCommand}" CommandParameter="https://ActiproSoftware/SampleBrowser/Utilities/ThemeResourceBrowser/ThemeResourceBrowserView" />
+										<MenuItem Header="String Resource Browser" Command="{Binding NavigateViewToItemInfoCommand}" CommandParameter="https://ActiproSoftware/SampleBrowser/Utilities/StringResourceBrowser/StringResourceBrowserView" />
+										<Separator />
+										<MenuItem Classes="theme-menuitem-heading" Header="Actipro Software" />
+										<MenuItem Header="Actipro Web Site" Command="{Binding OpenUrlCommand}" CommandParameter="{Binding PlatformProductsUrl}" />
+										<MenuItem Header="The Actipro Blog" Command="{Binding OpenUrlCommand}" CommandParameter="{Binding ActiproBlogUrl}" />
+										<MenuItem Header="@Actipro" Command="{Binding OpenUrlCommand}" CommandParameter="{Binding ActiproTwitterUrl}" />
+										<Separator />
+										<MenuItem Header="Contact Us" Command="{Binding OpenUrlCommand}" CommandParameter="{Binding ActiproContactUrl}" />
+										<Separator />
+										<MenuItem Classes="theme-menuitem-heading" Header="Theme Configuration" />
+										<MenuItem Header="User Interface Density">
+											<MenuItem x:Name="compactDensityMenuItem" Header="Compact" Command="{Binding SetUserInterfaceDensityCommand}">
+												<MenuItem.CommandParameter>
+													<actipro:UserInterfaceDensity>Compact</actipro:UserInterfaceDensity>
+												</MenuItem.CommandParameter>
+											</MenuItem>
+											<MenuItem x:Name="normalDensityMenuItem" Header="Normal" Command="{Binding SetUserInterfaceDensityCommand}">
+												<MenuItem.CommandParameter>
+													<actipro:UserInterfaceDensity>Normal</actipro:UserInterfaceDensity>
+												</MenuItem.CommandParameter>
+											</MenuItem>
+											<MenuItem x:Name="spaciousDensityMenuItem" Header="Spacious" Command="{Binding SetUserInterfaceDensityCommand}">
+												<MenuItem.CommandParameter>
+													<actipro:UserInterfaceDensity>Spacious</actipro:UserInterfaceDensity>
+												</MenuItem.CommandParameter>
+											</MenuItem>
+										</MenuItem>
+										
+									</MenuFlyout>
+								</Button.Flyout>
+								<StackPanel Orientation="Horizontal">
+									<ContentPresenter ContentTemplate="{actipro:GlyphTemplate Views16}" />
+									<ContentPresenter Margin="0,0,-3,0" ContentTemplate="{actipro:GlyphTemplate DropDownArrow12}" VerticalAlignment="Center" />
+								</StackPanel>
+							</Button>
+						</StackPanel>
+					</actiproPrims:OverlayInputFilter>
+				</actipro:ChromedTitleBar.RightContent>
 
-		<!-- Status Bar -->
-		<actiproPrims:OverlayInputFilter DockPanel.Dock="Bottom">
-			<Border Background="{actipro:ThemeResource StatusBarBackgroundBrush}"
-					BorderBrush="{actipro:ThemeResource StatusBarBorderBrush}" BorderThickness="{actipro:ThemeResource StatusBarBorderThickness}"
-					TextElement.Foreground="{actipro:ThemeResource StatusBarForegroundBrush}">
-				<Grid Margin="0,0,0,1" ColumnDefinitions="*,Auto,Auto" IsVisible="{Binding !ViewHasCustomStatusBar}">
-					<TextBlock Margin="{actipro:ScaledThickness '2.5,0.5'}" Text="{Binding StatusMessage}" />
-					<TextBlock Grid.Column="1" Margin="{actipro:ScaledThickness '0,0.5'}" Text="{Binding ProductData.ProductVersionAndDateSummaryText}" />
-					<actipro:WindowResizeGrip Grid.Column="2" />
-				</Grid>
-			</Border>
-		</actiproPrims:OverlayInputFilter>
+			</actipro:ChromedTitleBar>
 
-		<!-- Client Area -->
-		<actiproPrims:OverlayInputFilter>
-			<Border Background="Transparent">
-				<SplitView x:Name="splitView" DisplayMode="Inline" IsPaneOpen="{Binding IsDrawerOpen}" OpenPaneLength="236" PanePlacement="Left">
-					<SplitView.Pane>
-						<sampleBrowser:ApplicationDrawerView Width="{Binding #splitView.OpenPaneLength}" />
-					</SplitView.Pane>
+			<!-- Status Bar -->
+			<actiproPrims:OverlayInputFilter DockPanel.Dock="Bottom">
+				<Border Background="{actipro:ThemeResource StatusBarBackgroundBrush}"
+						BorderBrush="{actipro:ThemeResource StatusBarBorderBrush}" BorderThickness="{actipro:ThemeResource StatusBarBorderThickness}"
+						TextElement.Foreground="{actipro:ThemeResource StatusBarForegroundBrush}">
+					<Grid Margin="0,0,0,1" ColumnDefinitions="*,Auto,Auto" IsVisible="{Binding !ViewHasCustomStatusBar}">
+						<TextBlock Margin="{actipro:ScaledThickness '2.5,0.5'}" Text="{Binding StatusMessage}" />
+						<TextBlock Grid.Column="1" Margin="{actipro:ScaledThickness '0,0.5'}" Text="{Binding ProductData.ProductVersionAndDateSummaryText}" />
+						<actipro:WindowResizeGrip Grid.Column="2" />
+					</Grid>
+				</Border>
+			</actiproPrims:OverlayInputFilter>
 
-					<!-- NOTE: Remove custom transition class and switch back to PageSlide once TransitioningContentControl has a direction property that can be bound to ViewTransitionForward -->
-					<TransitioningContentControl x:Name="transitionControl" Content="{Binding ViewElement}">
-						<TransitioningContentControl.PageTransition>
-							<sampleBrowser:DirectionalPageSlide
-								Orientation="Horizontal"
-								Duration="{actipro:AnimationSetting EmphasizedMoveDuration}"
-								SlideInEasing="{actipro:AnimationSetting EmphasizedMoveEasing}"
-								SlideOutEasing="{actipro:AnimationSetting EmphasizedMoveEasing}" />
-						</TransitioningContentControl.PageTransition>
-					</TransitioningContentControl>
-				</SplitView>
-			</Border>
-		</actiproPrims:OverlayInputFilter>
+			<!-- Client Area -->
+			<actiproPrims:OverlayInputFilter>
+				<Border Background="Transparent">
+					<SplitView x:Name="splitView" DisplayMode="Inline" IsPaneOpen="{Binding IsDrawerOpen}" OpenPaneLength="236" PanePlacement="Left">
+						<SplitView.Pane>
+							<sampleBrowser:ApplicationDrawerView Width="{Binding #splitView.OpenPaneLength}" />
+						</SplitView.Pane>
 
-	</DockPanel>
+						<!-- NOTE: Remove custom transition class and switch back to PageSlide once TransitioningContentControl has a direction property that can be bound to ViewTransitionForward -->
+						<TransitioningContentControl x:Name="transitionControl" Content="{Binding ViewElement}">
+							<TransitioningContentControl.PageTransition>
+								<sampleBrowser:DirectionalPageSlide
+									Orientation="Horizontal"
+									Duration="{actipro:AnimationSetting EmphasizedMoveDuration}"
+									SlideInEasing="{actipro:AnimationSetting EmphasizedMoveEasing}"
+									SlideOutEasing="{actipro:AnimationSetting EmphasizedMoveEasing}" />
+							</TransitioningContentControl.PageTransition>
+						</TransitioningContentControl>
+					</SplitView>
+				</Border>
+			</actiproPrims:OverlayInputFilter>
+
+		</DockPanel>
+
+	</LayoutTransformControl>
 
 </UserControl>

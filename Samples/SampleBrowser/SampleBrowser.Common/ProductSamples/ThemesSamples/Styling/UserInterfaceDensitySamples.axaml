@@ -12,7 +12,7 @@
 		Header="User interface density describes how tightly controls are packed together. A simple setting on a theme definition sets the application-wide user interface density, which can adjust appearance features such as Margin, Padding, CornerRadius, Width, Height, and Spacing.">
 
 		<sampleBrowser:ControlExampleItemsControl.Documentation>
-			<sampleBrowser:ControlExampleLinkItem Title="User Interface Density" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/user-interface-density" />
+			<sampleBrowser:ControlExampleLinkItem Title="User interface density" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/user-interface-density" />
 		</sampleBrowser:ControlExampleItemsControl.Documentation>
 
 

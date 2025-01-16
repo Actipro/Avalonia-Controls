@@ -21,6 +21,10 @@
 	<sampleBrowser:ControlExampleItemsControl
 		Header="Actipro Ribbon supports multiple sizes for controls and is designed to automatically adjust the layout of controls based on the available width.">
 
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Resizing and variants" Url="https://www.actiprosoftware.com/docs/controls/avalonia/bars/ribbon-features/resizing" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
 		<sampleBrowser:ControlExample
 			Header="Overflow (Simplified layout)"
 			Footer="By default buttons overflow starting at the far side of the Ribbon. The Clipboard group has its own overflow menu.">

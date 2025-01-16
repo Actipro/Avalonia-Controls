@@ -15,6 +15,10 @@
 	<sampleBrowser:ControlExampleItemsControl
 		Header="Bar button controls can also be used outside of a ribbon or toolbar while maintaining themes that are consistent with ribbon usage.">
 
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Button control" Url="https://www.actiprosoftware.com/docs/controls/avalonia/bars/controls/button" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
 		<sampleBrowser:ControlExample
 			Header="Standalone usage"
 			Footer="Multiple button types are available in small, medium, and large variants.">

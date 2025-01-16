@@ -10,6 +10,11 @@
 	<sampleBrowser:ControlExampleItemsControl
 		Header="Use the MenuOpening event to examine built-in menus and optionally customize the menu items.">
 
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Context menus" Url="https://www.actiprosoftware.com/docs/controls/avalonia/bars/menu-features/context-menus" />
+			<sampleBrowser:ControlExampleLinkItem Title="Menu customization" Url="https://www.actiprosoftware.com/docs/controls/avalonia/bars/menu-features/menu-customization" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
 		<sampleBrowser:ControlExample
 			Header="Customize built-in menus"
 			Footer="Built-in menus like the Ribbon Options and QAT Customize buttons demonstrate customizing a menu."
