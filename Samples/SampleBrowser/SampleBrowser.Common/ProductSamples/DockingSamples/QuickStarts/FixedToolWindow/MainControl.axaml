@@ -1,0 +1,98 @@
+<UserControl 
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+	<sampleBrowser:ControlExampleItemsControl UseImmersiveView="True">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Fixed tool windows" Url="https://www.actiprosoftware.com/docs/controls/avalonia/docking/docking-window-features/fixed-tool-windows" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExample UseImmersiveView="True">
+
+			<actipro:DockSite x:Name="dockSite"
+				FloatingWindowIcon="/Images/Icons/Actipro.ico"
+				FloatingWindowTitle="Docking/MDI Demo">
+				<actipro:DockSite.AutoHideLeftContainers>
+					<actipro:ToolWindowContainer>
+						<actipro:ToolWindow Title="Tool Window 3" />
+						<actipro:ToolWindow Title="Tool Window 4" />
+					</actipro:ToolWindowContainer>
+				</actipro:DockSite.AutoHideLeftContainers>
+
+				<actipro:SplitContainer>
+					<actipro:SplitContainer Orientation="Vertical">
+						<actipro:SplitContainer>
+
+							<actipro:Workspace>
+								<actipro:TabbedMdiHost>
+									<actipro:TabbedMdiContainer>
+										<actipro:DocumentWindow Title="Document1.txt">
+											<TextBox BorderThickness="0" Text="Move other tool windows around the 'fixed' tool window." TextWrapping="Wrap" />
+										</actipro:DocumentWindow>
+									</actipro:TabbedMdiContainer>
+								</actipro:TabbedMdiHost>
+							</actipro:Workspace>
+
+							<actipro:ToolWindowContainer>
+								<actipro:ToolWindow Title="Fixed" CanAttach="False" CanDragTab="False" HasTitleBar="False">
+									<TextBlock Margin="10" Text="This tool window is 'fixed' and cannot be dragged or moved.  Other tool windows may not be attached to it, however they may be docked around it." TextWrapping="Wrap" TextTrimming="WordEllipsis" />
+								</actipro:ToolWindow>
+							</actipro:ToolWindowContainer>
+						</actipro:SplitContainer>
+
+						<actipro:ToolWindowContainer>
+							<actipro:ToolWindow Title="Tool Window 5" />
+							<actipro:ToolWindow Title="Tool Window 6" />
+						</actipro:ToolWindowContainer>
+					</actipro:SplitContainer>
+
+					<actipro:ToolWindowContainer>
+						<actipro:ToolWindow Title="Tool Window 1" />
+						<actipro:ToolWindow Title="Tool Window 2" />
+					</actipro:ToolWindowContainer>
+
+				</actipro:SplitContainer>
+			</actipro:DockSite>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:DockSite ... >
+	<actipro:SplitContainer>
+
+		<actipro:ToolWindowContainer>
+
+			<!--
+			This tool window is 'fixed' and cannot be dragged or moved.
+			Other tool windows may not be attached to it, however
+			they may be docked around it.
+			-->
+			<actipro:ToolWindow ...
+				CanAttach="False"
+				CanDragTab="False"
+				HasTitleBar="False">
+				...
+			</actipro:ToolWindow>
+
+		</actipro:ToolWindowContainer>
+
+		<actipro:Workspace>...</actipro:Workspace>
+
+	</actipro:SplitContainer>
+
+	...
+
+</actipro:DockSite>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+
+		</sampleBrowser:ControlExample>
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

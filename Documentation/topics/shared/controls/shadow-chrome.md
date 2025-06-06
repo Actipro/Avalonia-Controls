@@ -11,6 +11,9 @@ order: 40
 
 *A ShadowChrome providing a soft shadow around a contact card*
 
+> [!IMPORTANT]
+> See the [Getting Started](../getting-started.md) topic for details on configuring themes for this control.
+
 ## Elevation
 
 The [Elevation](xref:@ActiproUIRoot.Controls.ShadowChrome.Elevation) property determines how large of a shadow to render.  The elevation value can be from `0` (no shadow) to `24`, and defaults to `4`.  A larger-than-zero value must be specified for a shadow to be rendered.

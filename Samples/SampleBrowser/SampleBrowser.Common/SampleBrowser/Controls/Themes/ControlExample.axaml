@@ -165,14 +165,168 @@
 		<Style Selector="^:options:wide /template/ ContentPresenter#contentPresenter">
 			<Setter Property="Grid.ColumnSpan" Value="1" />
 		</Style>
-		<Style Selector="^:options:wide /template/ Border#optionsBorder">
+		<Style Selector="^:options:wide:not(:immersive) /template/ Border#optionsBorder">
 			<Setter Property="Grid.Row" Value="0" />
 			<Setter Property="Grid.Column" Value="1" />
-			<Setter Property="Margin" Value="{actipro:ScaledThickness '0,1,1,1'}" />
 			<Setter Property="MaxWidth" Value="300" />
+			<Setter Property="Margin" Value="{actipro:ScaledThickness '0,1,1,1'}" />
+		</Style>
+		<Style Selector="^:options:wide:immersive /template/ Border#optionsBorder">
+			<Setter Property="Grid.Row" Value="0" />
+			<Setter Property="Grid.Column" Value="1" />
+			<Setter Property="MaxWidth" Value="300" />
+			<Setter Property="Margin" Value="0" />
+			<Setter Property="BorderThickness" Value="1,0,0,0" />
 		</Style>
 		<Style Selector="^[IsCodeExampleKindSelectorVisible=True]">
 			<Setter Property="Padding" Value="{actipro:ScaledThickness '7.5,8.5,7.5,5.0'}" />
+		</Style>
+
+		<Style Selector="^:immersive">
+			<Setter Property="Padding" Value="0" />
+			<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+			<Setter Property="VerticalContentAlignment" Value="Stretch" />
+
+			<Setter Property="Template">
+				<ControlTemplate>
+					<Grid RowDefinitions="*,Auto,Auto,Auto,Auto" ColumnDefinitions="*,Auto"
+						Background="{TemplateBinding Background}"
+						actipro:BorderChildClipConverter.ClipToContainingBorder="True">
+
+						<ContentPresenter x:Name="contentPresenter" Grid.RowSpan="2" Grid.ColumnSpan="2"
+							Margin="{TemplateBinding Padding}" 
+							Content="{TemplateBinding Content}"
+							ContentTemplate="{TemplateBinding ContentTemplate}"
+							HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+							VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+							/>
+
+						<Border x:Name="optionsBorder" Grid.Row="2" Grid.ColumnSpan="2"
+								MinWidth="150"
+								Margin="0"
+								Padding="{actipro:ScaledThickness 2.5}"
+								Background="{actipro:ThemeResource Container3BackgroundBrush}"
+								BorderBrush="{actipro:ThemeResource Container2BorderBrush}"
+								BorderThickness="0,1,0,0"
+								IsVisible="{TemplateBinding Options, Converter={x:Static ObjectConverters.IsNotNull}}">
+							<ContentPresenter
+								ContentTemplate="{TemplateBinding OptionsTemplate}"
+								Content="{TemplateBinding Options}"
+								VerticalAlignment="Top">
+								<ContentPresenter.Styles>
+									<Styles>
+										<Style Selector="CheckBox:nth-child(n+1)">
+											<Setter Property="Margin" Value="0,3,0,0" />
+										</Style>
+									</Styles>
+								</ContentPresenter.Styles>
+							</ContentPresenter>
+						</Border>
+
+						<Border Grid.Row="3" Grid.ColumnSpan="2"
+								Background="{actipro:ThemeResource Container3BackgroundBrush}"
+								BorderBrush="{actipro:ThemeResource Container2BorderBrush}"
+								BorderThickness="0,1,0,0"
+								>
+							<Border.IsVisible>
+								<MultiBinding Converter="{x:Static BoolConverters.Or}">
+									<TemplateBinding Property="Footer" Converter="{x:Static ObjectConverters.IsNotNull}" />
+									<TemplateBinding Property="HasCode" />
+									<TemplateBinding Property="IsCodeExampleKindSelectorVisible" />
+								</MultiBinding>
+							</Border.IsVisible>
+							
+							<Grid ColumnDefinitions="*,Auto,Auto">
+								<ContentPresenter Margin="{actipro:ScaledThickness '2.5,1,1,1'}"
+									VerticalAlignment="Center"
+									Content="{TemplateBinding Footer}" 
+									ContentTemplate="{TemplateBinding FooterTemplate}"
+									/>
+
+								<actipro:SegmentedBar Grid.Column="1"
+									HorizontalAlignment="Right" VerticalAlignment="Center"
+									IsVisible="{TemplateBinding IsCodeExampleKindSelectorVisible}"
+									Margin="{actipro:ScaledThickness '4,1,1,1'}"
+									SelectedItem="{TemplateBinding SelectedCodeExampleKind, Mode=TwoWay}">
+									<ToolTip.Tip>
+										<actipro:ScreenTip ComplexContentWidth="350" Header="XAML or MVVM Samples">
+											This sample has both pure XAML and MVVM (Model-View-ViewModel) samples. Use this control to toggle between the two samples.
+										</actipro:ScreenTip>
+									</ToolTip.Tip>
+									<actipro:SegmentedBar.Items>
+										<sampleBrowser:CodeExampleKind>Xaml</sampleBrowser:CodeExampleKind>
+										<sampleBrowser:CodeExampleKind>Mvvm</sampleBrowser:CodeExampleKind>
+									</actipro:SegmentedBar.Items>
+									<actipro:SegmentedBar.ItemTemplate>
+										<DataTemplate DataType="sampleBrowser:CodeExampleKind">
+											<TextBlock Text="{Binding Converter={x:Static actipro:StringConverters.ToUpperInvariant}, Mode=OneWay}" />
+										</DataTemplate>
+									</actipro:SegmentedBar.ItemTemplate>
+								</actipro:SegmentedBar>
+
+								<ToggleButton Grid.Column="2"
+									Margin="{actipro:ScaledThickness '4,1,1,1'}" 
+									HorizontalAlignment="Right" VerticalAlignment="Center"
+									ToolTip.Tip="View Sample Code"
+									ContentTemplate="{actipro:GlyphTemplate Code16}"
+									IsChecked="{TemplateBinding IsCodeExpanded, Mode=TwoWay}"
+									IsVisible="{TemplateBinding HasCode}" />
+							</Grid>
+						</Border>
+
+						<Panel x:Name="PART_CodeExamplePanel" Grid.Row="4" Grid.ColumnSpan="2" MaxHeight="300">
+							<actipro:AnimatedExpanderDecorator IsExpanded="{TemplateBinding IsCodeExpanded}">
+								<ScrollViewer>
+									<ItemsControl IsTabStop="False" ItemsSource="{TemplateBinding CodeExamples}">
+										<ItemsControl.ItemTemplate>
+											<DataTemplate x:DataType="sampleBrowser:CodeExample">
+												<Border
+													Background="{actipro:ThemeResource Container1BackgroundBrush}"
+													BorderBrush="{actipro:ThemeResource Container1BorderBrush}"
+													BorderThickness="0,1,0,0"
+													IsVisible="{Binding IsVisible}"
+													>
+													<Grid RowDefinitions="Auto,Auto">
+															
+														<StackPanel Margin="{actipro:ScaledThickness '0,1,0,0'}" Orientation="Horizontal">
+															<TextBlock Margin="{actipro:ScaledThickness '2.5,0,1,0'}" Text="{Binding Language}" FontWeight="SemiBold" VerticalAlignment="Center" />
+															<StackPanel Orientation="Horizontal" VerticalAlignment="Center"
+																		IsVisible="{Binding TextUsesActiproXamlNamespace}">
+																<TextBlock Text="(" VerticalAlignment="Center" />
+																<actipro:CopyButton Classes="theme-link accent" Padding="0" VerticalAlignment="Center"
+																					CopyText="xmlns:actipro=&quot;http://schemas.actiprosoftware.com/avaloniaui&quot;"
+																					FeedbackKind="Popup"
+																					ToolTip.Tip="Copy required namespace declaration to the clipboard.">
+																	<actipro:CopyButton.ContentTemplate>
+																		<DataTemplate>
+																			<TextBlock TextDecorations="Underline" Text="xmlns:actipro"  />
+																		</DataTemplate>
+																	</actipro:CopyButton.ContentTemplate>
+																</actipro:CopyButton>
+																<TextBlock Text=")" VerticalAlignment="Center" />
+															</StackPanel>
+														</StackPanel>
+														<ScrollViewer Grid.Row="1" Margin="{actipro:ScaledThickness '2.5,1'}" HorizontalScrollBarVisibility="Auto">
+															<SelectableTextBlock Classes="theme-text-code" 
+																					sampleBrowser:CodeTextBlockProperties.CodeLanguage="{Binding Language}"
+																					FlowDirection="LeftToRight"
+																					Text="{Binding Text, Mode=OneWay}"
+																					TextWrapping="Wrap" />
+														</ScrollViewer>
+														<actipro:CopyButton Grid.RowSpan="2" Margin="{actipro:ScaledThickness 1}" CopyText="{Binding Text}"
+																			ToolTip.Tip="Copy Sample Code" HorizontalAlignment="Right" VerticalAlignment="Top" />
+													</Grid>
+												</Border>
+											</DataTemplate>
+										</ItemsControl.ItemTemplate>
+									</ItemsControl>
+								</ScrollViewer>
+							</actipro:AnimatedExpanderDecorator>
+						</Panel>
+					</Grid>
+				</ControlTemplate>
+			</Setter>
+		
 		</Style>
 	</ControlTheme>
 

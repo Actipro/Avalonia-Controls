@@ -142,7 +142,7 @@ Use the [BarMenuSeparator](xref:@ActiproUIRoot.Controls.Bars.BarMenuSeparator) c
 ```xaml
 xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 ...
-<actipro:BarContextMenu>
+<actipro:BarMenuFlyout>
 	<actipro:BarMenuItem Key="Undo" />
 	<actipro:BarMenuItem Key="Redo" />
 	<actipro:BarSeparator />
@@ -150,7 +150,7 @@ xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 	<actipro:BarMenuItem Key="Copy" />
 	<actipro:BarMenuItem Key="Paste" />
 	...
-</actipro:BarContextMenu>
+</actipro:BarMenuFlyout>
 ```
 }
 @if (wpf) {

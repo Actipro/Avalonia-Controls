@@ -1,0 +1,85 @@
+<actipro:ToolWindow
+	x:Class="ActiproSoftware.ProductSamples.DockingSamples.Common.ClassViewToolWindow"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	Icon="/Images/Icons/ClassView16.png"
+	SerializationId="ClassView"
+	Title="Class View"
+	>
+
+	<TreeView BorderThickness="0">
+		<TreeView.Styles>
+			<Style Selector="actipro|DynamicImage">
+				<Setter Property="Height" Value="16" />
+				<Setter Property="Width" Value="16" />
+				<Setter Property="Margin" Value="{actipro:ScaledThickness '0,0,1,0'}" />
+			</Style>
+			<Style Selector="TreeViewItem">
+				<!--
+					See Web Assembly comment in OnLoaded override of code behind for reason why IsExpanded=False on Browser
+				-->
+				<Setter Property="IsExpanded" Value="{OnPlatform 'True', Browser='False', x:TypeArguments=x:Boolean}" />
+			</Style>
+		</TreeView.Styles>
+		
+		<TreeViewItem>
+			<TreeViewItem.Header>
+				<StackPanel Orientation="Horizontal">
+					<actipro:DynamicImage Source="/Images/Icons/ProjectCSharp16.png" />
+					<TextBlock Text="ControlsSample" />
+				</StackPanel>
+			</TreeViewItem.Header>
+			<TreeViewItem>
+				<TreeViewItem.Header>
+					<StackPanel Orientation="Horizontal">
+						<actipro:DynamicImage Source="/Images/Icons/FolderClosed16.png" />
+						<TextBlock Text="Project References" />
+					</StackPanel>
+				</TreeViewItem.Header>
+			</TreeViewItem>
+			<TreeViewItem>
+				<TreeViewItem.Header>
+					<StackPanel Orientation="Horizontal">
+						<actipro:DynamicImage Source="/Images/Icons/VSObjectNamespace16.png" />
+						<TextBlock Text="ActiproSoftware.ProductSamples.DockingSamples" />
+					</StackPanel>
+				</TreeViewItem.Header>
+			</TreeViewItem>
+			<TreeViewItem>
+				<TreeViewItem.Header>
+					<StackPanel Orientation="Horizontal">
+						<actipro:DynamicImage Source="/Images/Icons/VSObjectNamespace16.png" />
+						<TextBlock Text="ActiproSoftware.ProductSamples.FundamentalsSamples" />
+					</StackPanel>
+				</TreeViewItem.Header>
+			</TreeViewItem>
+			<TreeViewItem>
+				<TreeViewItem.Header>
+					<StackPanel Orientation="Horizontal">
+						<actipro:DynamicImage Source="/Images/Icons/VSObjectNamespace16.png" />
+						<TextBlock Text="ActiproSoftware.ProductSamples.SharedSamples" />
+					</StackPanel>
+				</TreeViewItem.Header>
+			</TreeViewItem>
+				<TreeViewItem>
+					<TreeViewItem.Header>
+					<StackPanel Orientation="Horizontal">
+						<actipro:DynamicImage Source="/Images/Icons/VSObjectNamespace16.png" />
+						<TextBlock Text="ActiproSoftware.ProductSamples.ThemesSamples" />
+					</StackPanel>
+				</TreeViewItem.Header>
+			</TreeViewItem>
+			<TreeViewItem>
+				<TreeViewItem.Header>
+					<StackPanel Orientation="Horizontal">
+						<actipro:DynamicImage Source="/Images/Icons/VSObjectNamespace16.png" />
+						<TextBlock Text="ActiproSoftware.SampleBrowser" />
+					</StackPanel>
+				</TreeViewItem.Header>
+			</TreeViewItem>
+		</TreeViewItem>
+	</TreeView>
+
+</actipro:ToolWindow>

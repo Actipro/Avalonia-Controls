@@ -26,17 +26,6 @@ The toolbar's `Background`, `BorderBrush`, `BorderThickness`, `CornerRadius`, [H
 The toolbar's `Background`, `BorderBrush`, `BorderThickness`, [CornerRadius](xref:@ActiproUIRoot.Controls.Bars.StandaloneToolBar.CornerRadius), [HasShadow](xref:@ActiproUIRoot.Controls.Bars.StandaloneToolBar.HasShadow), `ItemSpacing`, `Padding`, and [UserInterfaceDensity](xref:@ActiproUIRoot.Controls.Bars.StandaloneToolBar.UserInterfaceDensity) properties can be set to achieve an appearance like above.
 }
 
-@if (avalonia) {
-### Secondary Toolbar
-
-[StandaloneToolBar](xref:@ActiproUIRoot.Controls.Bars.StandaloneToolBar) also works great out-of-the-box as a toolbar that can be placed in another container, such as within a panel.
-
-![Screenshot](../images/standalone-toolbar-toolwindow.png)
-
-*A standalone toolbar in a panel*
-}
-
-@if (wpf) {
 ### Tool Window Toolbar
 
 [StandaloneToolBar](xref:@ActiproUIRoot.Controls.Bars.StandaloneToolBar) also works great out-of-the-box as a toolbar that can be placed in another container, such as within a tool window from the [Actipro Docking/MDI product](../../docking/index.md).
@@ -44,7 +33,6 @@ The toolbar's `Background`, `BorderBrush`, `BorderThickness`, [CornerRadius](xre
 ![Screenshot](../images/standalone-toolbar-toolwindow.png)
 
 *A standalone toolbar in a tool window*
-}
 
 In this usage scenario, it's generally better to use the default appearance that is more compact.
 

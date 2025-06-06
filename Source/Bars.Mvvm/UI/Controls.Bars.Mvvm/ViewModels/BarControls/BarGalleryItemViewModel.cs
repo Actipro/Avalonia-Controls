@@ -19,6 +19,7 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		private string? _label;
 		private BarGalleryItemLayoutBehavior _layoutBehavior = BarGalleryItemLayoutBehavior.Default;
 		private object? _icon;
+		private object? _tag;
 		private TValue? _value;
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -231,6 +232,12 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 			this.OnPropertyChanged(nameof(Label));
 		}
 		
+		/// <inheritdoc cref="IHasTag.Tag"/>
+		public object? Tag {
+			get => _tag;
+			set => SetProperty(ref _tag, value);
+		}
+
 		/// <inheritdoc/>
 		public override string ToString() {
 			// The label is coerced from the value when label is not explicitly defined,

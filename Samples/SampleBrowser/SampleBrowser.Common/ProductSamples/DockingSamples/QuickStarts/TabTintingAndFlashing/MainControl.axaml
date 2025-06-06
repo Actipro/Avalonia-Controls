@@ -1,0 +1,180 @@
+<UserControl 
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Docking window tabs can easily be tinted to a custom color, which allows the default color intensity and gradients used by default to be preserved while still providing a custom look.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Tinting tabs" Url="https://www.actiprosoftware.com/docs/controls/avalonia/docking/docking-window-features/docking-window-capabilities#tinting-tabs" />
+			<sampleBrowser:ControlExampleLinkItem Title="Flashing tabs" Url="https://www.actiprosoftware.com/docs/controls/avalonia/docking/docking-window-features/docking-window-capabilities#flashing-tabs" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExample
+			Header="Tinting"
+			>
+
+			<actipro:DockSite MinHeight="200"
+				FloatingWindowIcon="/Images/Icons/Actipro.ico"
+				FloatingWindowTitle="Docking/MDI Demo">
+
+				<actipro:DockSite.AutoHideRightContainers>
+					<actipro:ToolWindowContainer>
+						<actipro:ToolWindow Title="Blue Tab" TabTintColor="#2a8ae9">
+							<TextBox BorderThickness="0" TextWrapping="Wrap">This tool window has a blue tab.</TextBox>
+						</actipro:ToolWindow>
+						<actipro:ToolWindow Title="Red Tab" TabTintColor="#e43e3e">
+							<TextBox BorderThickness="0" TextWrapping="Wrap">This tool window has a yellow tab.</TextBox>
+						</actipro:ToolWindow>
+					</actipro:ToolWindowContainer>
+
+				</actipro:DockSite.AutoHideRightContainers>
+
+				<actipro:SplitContainer>
+
+					<actipro:ToolWindowContainer>
+						<actipro:ToolWindow Title="Blue Tab" TabTintColor="#2a8ae9">
+							<TextBox BorderThickness="0" TextWrapping="Wrap">This tool window has a blue tab.</TextBox>
+						</actipro:ToolWindow>
+						<actipro:ToolWindow Title="Red Tab" TabTintColor="#e43e3e">
+							<TextBox BorderThickness="0" TextWrapping="Wrap">This tool window has a yellow tab.</TextBox>
+						</actipro:ToolWindow>
+					</actipro:ToolWindowContainer>
+
+					<actipro:Workspace>
+						<actipro:TabbedMdiHost>
+							<actipro:TabbedMdiContainer>
+
+								<actipro:DocumentWindow Title="Blue Tab" TabTintColor="#2a8ae9">
+									<TextBox BorderThickness="0" TextWrapping="Wrap">This document has a blue tab.</TextBox>
+								</actipro:DocumentWindow>
+
+								<actipro:DocumentWindow Title="Red Tab" TabTintColor="#e43e3e">
+									<TextBox BorderThickness="0" TextWrapping="Wrap">This document has a red tab.</TextBox>
+								</actipro:DocumentWindow>
+
+								<actipro:DocumentWindow Title="Green Tab" TabTintColor="#31cb60">
+									<TextBox BorderThickness="0" TextWrapping="Wrap">This document has a green tab.</TextBox>
+								</actipro:DocumentWindow>
+
+								<actipro:DocumentWindow Title="Yellow Tab" TabTintColor="#e7ad09">
+									<TextBox BorderThickness="0" TextWrapping="Wrap">This document has a yellow tab.</TextBox>
+								</actipro:DocumentWindow>
+
+							</actipro:TabbedMdiContainer>
+						</actipro:TabbedMdiHost>
+					</actipro:Workspace>
+
+				</actipro:SplitContainer>
+
+			</actipro:DockSite>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<!-- Tool Window -->
+<actipro:ToolWindow ... TabTintColor="Blue">
+	...
+</actipro:ToolWindow>
+
+<!-- Document Window -->
+<actipro:DocumentWindow ... TabTintColor="Red">
+	...
+</actipro:DocumentWindow>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Flashing"
+			>
+
+			<actipro:DockSite MinHeight="150"
+				FloatingWindowIcon="/Images/Icons/Actipro.ico"
+				FloatingWindowTitle="Docking/MDI Demo">
+
+				<actipro:DockSite.AutoHideRightContainers>
+					<actipro:ToolWindowContainer>
+						<actipro:ToolWindow Title="Normal Tab">
+							<TextBox BorderThickness="0" TextWrapping="Wrap">This tool window tab does not flash.</TextBox>
+						</actipro:ToolWindow>
+						<actipro:ToolWindow Title="Flashing Tab" TabFlashMode="{Binding #flashModeComboBox.SelectedItem}" TabFlashColor="{Binding #flashColorPicker.Color}">
+							<TextBox BorderThickness="0" TextWrapping="Wrap">This tool window tab flashes based on the selected flash mode.</TextBox>
+						</actipro:ToolWindow>
+					</actipro:ToolWindowContainer>
+
+				</actipro:DockSite.AutoHideRightContainers>
+
+				<actipro:SplitContainer>
+
+					<actipro:ToolWindowContainer>
+						<actipro:ToolWindow Title="Normal Tab">
+							<TextBox BorderThickness="0" TextWrapping="Wrap">This tool window tab does not flash.</TextBox>
+						</actipro:ToolWindow>
+						<actipro:ToolWindow Title="Flashing Tab" TabFlashMode="{Binding #flashModeComboBox.SelectedItem}" TabFlashColor="{Binding #flashColorPicker.Color}">
+							<TextBox BorderThickness="0" TextWrapping="Wrap">This tool window tab flashes based on the selected flash mode.</TextBox>
+						</actipro:ToolWindow>
+					</actipro:ToolWindowContainer>
+
+					<actipro:Workspace>
+						<actipro:TabbedMdiHost>
+							<actipro:TabbedMdiContainer>
+
+								<actipro:DocumentWindow Title="Normal Tab">
+									<TextBox BorderThickness="0" TextWrapping="Wrap">This document tab does not flash.</TextBox>
+								</actipro:DocumentWindow>
+
+								<actipro:DocumentWindow Title="Flashing Tab" TabFlashMode="{Binding #flashModeComboBox.SelectedItem}" TabFlashColor="{Binding #flashColorPicker.Color}">
+									<TextBox BorderThickness="0" TextWrapping="Wrap">This document tab flashes based on the selected flash mode.</TextBox>
+								</actipro:DocumentWindow>
+
+							</actipro:TabbedMdiContainer>
+						</actipro:TabbedMdiHost>
+					</actipro:Workspace>
+					
+				</actipro:SplitContainer>
+			</actipro:DockSite>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10" MinWidth="150">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Flash mode" />
+						<ComboBox x:Name="flashModeComboBox" SelectedIndex="1" ItemsSource="{actipro:DelimitedArray 'Blink, Smooth', Type={x:Type actipro:TabFlashMode}}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Flash color" />
+						<ColorPicker x:Name="flashColorPicker" Classes="has-value-text" Color="#80ffa000" HexInputAlphaPosition="Leading" />
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<!-- Tool Window -->
+<actipro:ToolWindow ... TabFlashMode="$(TabFlashMode)" TabFlashColor="$(TabFlashColor)">
+	...
+</actipro:ToolWindow>
+
+<!-- Document Window -->
+<actipro:DocumentWindow ... TabFlashMode="$(TabFlashMode)" TabFlashColor="$(TabFlashColor)">
+	...
+</actipro:DocumentWindow>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="TabFlashColor" Value="{Binding #flashColorPicker.Color}" />
+						<sampleBrowser:CodeExampleSubstitution Key="TabFlashMode" Value="{Binding #flashModeComboBox.SelectedItem}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

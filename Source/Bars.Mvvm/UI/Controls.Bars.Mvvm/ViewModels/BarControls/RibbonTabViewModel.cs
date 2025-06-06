@@ -11,6 +11,7 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		private VariantCollection? _controlVariants;
 		private string? _description;
 		private VariantCollection? _groupVariants;
+		private bool _isEnabled = true;
 		private bool _isVisible = true;
 		private string? _keyTipText;
 		private string? _label;
@@ -76,6 +77,14 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		public VariantCollection? GroupVariants {
 			get => _groupVariants;
 			set => SetProperty(ref _groupVariants, value);
+		}
+
+		/// <summary>
+		/// Indicates if the tab is enabled.
+		/// </summary>
+		public bool IsEnabled {
+			get => _isEnabled;
+			set => SetProperty(ref _isEnabled, value);
 		}
 
 		/// <inheritdoc cref="BarButtonViewModel.IsVisible"/>

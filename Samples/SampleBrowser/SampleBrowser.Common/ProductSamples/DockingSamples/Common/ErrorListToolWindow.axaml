@@ -1,0 +1,59 @@
+<actipro:ToolWindow
+	x:Name="errorListToolWindow"
+	x:Class="ActiproSoftware.ProductSamples.DockingSamples.Common.ErrorListToolWindow"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:controlsPrimitives="using:ActiproSoftware.UI.Avalonia.Controls.Primitives"	
+	xmlns:sampleCommon="using:ActiproSoftware.ProductSamples.DockingSamples.Common"
+	Icon="/Images/Icons/ErrorList16.png"
+	SerializationId="ErrorList"
+	Title="Error List"
+	Description="Sample tool window showing simulated errors"
+	>
+
+	<Grid RowDefinitions="Auto,*">
+
+		<DataGrid Grid.Row="1"
+			Margin="-1,0,0,0"
+			BorderThickness="0"
+			CanUserResizeColumns="True"
+			CornerRadius="0"
+			GridLinesVisibility="None"
+			HeadersVisibility="All"
+			IsReadOnly="True"
+			ItemsSource="{Binding #errorListToolWindow.Items}"
+			x:DataType="sampleCommon:ErrorListItem">
+			<DataGrid.Columns>
+				<DataGridTemplateColumn Header="" Width="16">
+					<DataGridTemplateColumn.CellTemplate>
+						<DataTemplate DataType="sampleCommon:ErrorListItem">
+							<ContentControl Width="16" Height="16" Classes="theme-icon-presenter" Content="{Binding IconKey}" />
+						</DataTemplate>
+					</DataGridTemplateColumn.CellTemplate>
+				</DataGridTemplateColumn>
+				<DataGridTextColumn Header="Description" Width="300" Binding="{Binding Description}" />
+				<DataGridTextColumn Header="Project" Width="100" Binding="{Binding Project}" />
+				<DataGridTextColumn Header="File" Width="100" Binding="{Binding FileName}" />
+				<DataGridTextColumn Header="Line" Width="70" Binding="{Binding Line}" />
+			</DataGrid.Columns>
+		</DataGrid>
+
+		<actipro:StandaloneToolBar Grid.Row="0"
+			Background="{actipro:ThemeResource Container2BackgroundBrush}"
+			BorderBrush="{actipro:ThemeResource Container2BorderBrush}"
+			BorderThickness="0,0,0,1"
+			CornerRadius="0">
+			<actipro:BarComboBox Text="Entire Solution" RequestedWidth="150" />
+			<actipro:BarSeparator />
+			<actipro:BarToggleButton Label="2 Errors" IsChecked="True" SmallIcon="{x:Static actipro:SharedImageSourceKeys.Error}" ToolBarItemVariantBehavior="AlwaysMedium" />
+			<actipro:BarSeparator />
+			<actipro:BarToggleButton Label="0 of 2 Warnings" IsChecked="False" SmallIcon="{x:Static actipro:SharedImageSourceKeys.Warning}" ToolBarItemVariantBehavior="AlwaysMedium" />
+			<actipro:BarSeparator />
+			<actipro:BarToggleButton Label="1 Message" IsChecked="True" SmallIcon="{x:Static actipro:SharedImageSourceKeys.Information}" ToolBarItemVariantBehavior="AlwaysMedium" />
+		</actipro:StandaloneToolBar>
+
+	</Grid>
+
+</actipro:ToolWindow>

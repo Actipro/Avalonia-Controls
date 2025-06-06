@@ -99,6 +99,78 @@
 			</ControlTemplate>
 		</Setter>
 
+		<Style Selector="^:immersive">
+			<Setter Property="HeaderTemplate">
+				<DataTemplate>
+					<TextBlock Classes="theme-text-body size-sm" Text="{ReflectionBinding}" />
+				</DataTemplate>
+			</Setter>
+			<Setter Property="ItemsPanel">
+				<ItemsPanelTemplate>
+					<Panel />
+				</ItemsPanelTemplate>
+			</Setter>
+			<Setter Property="Template">
+				<ControlTemplate>
+
+					<Grid ColumnDefinitions="*,Auto">
+						<ItemsPresenter
+							x:Name="PART_ItemsPresenter"
+							Margin="0"
+							ItemsPanel="{TemplateBinding ItemsPanel}"
+							KeyboardNavigation.TabNavigation="{TemplateBinding KeyboardNavigation.TabNavigation}"
+							/>
+
+						<actipro:AnimatedExpanderDecorator x:Name="sidebar" Grid.Column="1" ExpandDirection="Left">
+							<Border Width="250"
+									Background="{actipro:ThemeResource Container2BackgroundBrush}"
+									BorderBrush="{actipro:ThemeResource Container2BorderBrush}" BorderThickness="1,0,0,0">
+								<ScrollViewer HorizontalScrollBarVisibility="Disabled">
+									<StackPanel Margin="{actipro:ScaledThickness '2.5,6'}" Spacing="{actipro:ScaledDouble 4}">
+										<StackPanel IsVisible="{Binding HasDocumentation, RelativeSource={RelativeSource TemplatedParent}}">
+											<TextBlock Classes="theme-text-heading size-sm" Text="Documentation" />
+											<ItemsControl Margin="0,5,0,0" IsTabStop="False"
+														  ItemsSource="{Binding Documentation, RelativeSource={RelativeSource TemplatedParent}}">
+												<ItemsControl.ItemTemplate>
+													<DataTemplate x:DataType="sampleBrowser:ControlExampleLinkItem">
+														<Grid Margin="0,5,0,0" ColumnDefinitions="Auto,*">
+															<Rectangle Width="4" Height="4" Margin="5,0" Fill="{actipro:ThemeResource ActiproBrandBrush}" />
+															<actipro:HyperlinkTextBlock Grid.Column="1" Text="{Binding Title}" TextWrapping="Wrap"
+																						Command="{Binding Open}"/>
+														</Grid>
+													</DataTemplate>
+												</ItemsControl.ItemTemplate>
+											</ItemsControl>
+										</StackPanel>
+										<StackPanel IsVisible="{Binding HasRelatedSamples, RelativeSource={RelativeSource TemplatedParent}}">
+											<TextBlock Classes="theme-text-heading size-sm" Text="Related Samples" />
+											<ItemsControl Margin="0,5,0,0" IsTabStop="False"
+														  ItemsSource="{Binding RelatedSamples, RelativeSource={RelativeSource TemplatedParent}}">
+												<ItemsControl.ItemTemplate>
+													<DataTemplate x:DataType="sampleBrowser:ControlExampleLinkItem">
+														<Grid Margin="0,5,0,0" ColumnDefinitions="Auto,*">
+															<Rectangle Width="4" Height="4" Margin="5,0" Fill="{actipro:ThemeResource ActiproBrandBrush}" />
+															<actipro:HyperlinkTextBlock Grid.Column="1" Text="{Binding Title}" TextWrapping="Wrap"
+																						Command="{Binding Open}"/>
+														</Grid>
+													</DataTemplate>
+												</ItemsControl.ItemTemplate>
+											</ItemsControl>
+										</StackPanel>
+										<StackPanel IsVisible="{TemplateBinding Header, Converter={x:Static ObjectConverters.IsNotNull}}">
+											<TextBlock Classes="theme-text-heading size-sm" Text="Description" />
+											<ContentPresenter Margin="0,5,0,0" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" />
+										</StackPanel>
+									</StackPanel>
+								</ScrollViewer>
+							</Border>
+						</actipro:AnimatedExpanderDecorator>
+					</Grid>
+
+				</ControlTemplate>
+			</Setter>
+		</Style>
+
 		<Style Selector="^:wide /template/ actipro|AnimatedExpanderDecorator#sidebar">
 			<Setter Property="IsExpanded" Value="True" />
 		</Style>

@@ -1,0 +1,203 @@
+<UserControl 
+	xmlns="https://github.com/avaloniaui"
+	x:Class="ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.TabbedMdiOnly.MainControl"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:dockingPrims="using:ActiproSoftware.UI.Avalonia.Controls.Docking.Primitives"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+	<sampleBrowser:ControlExampleItemsControl UseImmersiveView="True">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Tabbed MDI" Url="https://www.actiprosoftware.com/docs/controls/avalonia/docking/workspace-mdi-features/tabbed-mdi" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+			<sampleBrowser:ControlExampleLinkItem Title="Standard MDI-only" Url="/ProductSamples/DockingSamples/QuickStarts/StandardMdiOnly/MainControl" />
+		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+
+		<sampleBrowser:ControlExampleItemsControl.Header>
+			<x:String xml:space="preserve">This QuickStart shows how you can use a DockSite with a contained Workspace and TabbedMdiHost to implement a tabbed MDI (multiple document interface) for an application. While this particular sample is focused on MDI only and doesn't include any tool windows, tool windows could easily be added and docked into the layout.
+
+Tabbed documents have a TabbedMdiLayoutKind property that determines whether they are presented as Normal, Pinned, or Preview (right-aligned) tabs.
+
+Full support for floating MDI areas is included.  Drag a document's tab to float it.
+
+Command-based window cascade and tile functionality is included out-of-the-box.
+
+The TabbedMdiHostEmptyContentTemplate property can be set to a DataTemplate that displays when all documents are closed.  Close all the documents to see an example of it.</x:String>
+		</sampleBrowser:ControlExampleItemsControl.Header>
+
+		<sampleBrowser:ControlExample UseImmersiveView="True" Footer="Use the File/New menu item to add more documents, and try out the various other menu items to change capabilities and adjust document layouts.">
+			<Grid RowDefinitions="Auto,*">
+
+				<!-- DockSite -->
+				<actipro:DockSite x:Name="dockSite" Grid.Row="1" Background="Transparent"
+					CanDocumentWindowsFloat="True"
+					FloatingWindowIcon="/Images/Icons/Actipro.ico"
+					FloatingWindowTitle="Docking/MDI Demo">
+					<actipro:DockSite.Switcher>
+						<actipro:StandardSwitcher AreToolWindowsVisible="False" />
+					</actipro:DockSite.Switcher>
+
+					<!-- Workspace -->
+					<actipro:Workspace>
+						<actipro:TabbedMdiHost x:Name="tabbedMdiHost">
+							<actipro:TabbedMdiHost.EmptyContentTemplate>
+								<DataTemplate>
+									<TextBlock Margin="30" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" FontStyle="Italic" TextAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center">
+										This is an example of using the TabbedMdiHost.EmptyContentTemplate property.  Create or open a document to see it in this MDI area.
+									</TextBlock>
+								</DataTemplate>
+							</actipro:TabbedMdiHost.EmptyContentTemplate>
+
+							<actipro:TabbedMdiContainer>
+								<actipro:DocumentWindow Title="Document1.txt" Description="Text document" FileName="Document1.txt"
+														Icon="/Images/Icons/TextDocument16.png" TabbedMdiLayoutKind="Pinned">
+									<TextBox BorderThickness="0" Text="The first document, which is initially a 'pinned' tab." TextWrapping="Wrap" />
+								</actipro:DocumentWindow>
+
+								<actipro:DocumentWindow Title="Document2.txt" Description="Text document" FileName="Document2.txt"
+														Icon="/Images/Icons/TextDocument16.png">
+									<TextBox BorderThickness="0" Text="The second document." TextWrapping="Wrap" />
+								</actipro:DocumentWindow>
+
+								<actipro:DocumentWindow x:Name="document3DocumentWindow" IsReadOnly="True"
+														Title="Document3.txt" Description="Text document" FileName="Document3.txt"
+														Icon="/Images/Icons/TextDocument16.png">
+									<Grid>
+										<Grid.RowDefinitions>
+											<RowDefinition Height="Auto" />
+											<RowDefinition Height="*" />
+										</Grid.RowDefinitions>
+
+										<CheckBox Margin="5" Content="Is read-only" IsChecked="{Binding ElementName=document3DocumentWindow, Path=IsReadOnly, Mode=TwoWay}" />
+										<TextBox x:Name="document1TextBox" Grid.Row="1" BorderThickness="0" Text="This textbox can be made read-only by checking the box above." TextWrapping="Wrap"
+												 IsReadOnly="{Binding ElementName=document3DocumentWindow, Path=IsReadOnly}" />
+									</Grid>
+								</actipro:DocumentWindow>
+
+								<actipro:DocumentWindow Title="Document4.txt" Description="Text document" FileName="Document4.txt"
+														Icon="/Images/Icons/TextDocument16.png" TabbedMdiLayoutKind="Preview">
+									<TextBox BorderThickness="0" Text="The fourth document, which is initially a 'preview' tab." TextWrapping="Wrap" />
+								</actipro:DocumentWindow>
+							</actipro:TabbedMdiContainer>
+						</actipro:TabbedMdiHost>
+					</actipro:Workspace>
+
+				</actipro:DockSite>
+
+				<!-- Menu -->
+				<Menu Background="Transparent">
+					<MenuItem Header="_File">
+						<MenuItem Header="New" Click="OnNewDocumentMenuItemClick" />
+						<MenuItem Header="Open..." Click="OnOpenDocumentMenuItemClick" />
+					</MenuItem>
+					<MenuItem Header="_Options">
+						<MenuItem Header="Can Document Windows Close" ToggleType="CheckBox" IsChecked="{Binding #dockSite.CanDocumentWindowsClose, Mode=TwoWay}" />
+						<MenuItem Header="Can Document Windows Float" ToggleType="CheckBox" IsChecked="{Binding #dockSite.CanDocumentWindowsFloat, Mode=TwoWay}" />
+						<MenuItem Header="New Tabs Inserted Before Existing Tabs" ToggleType="CheckBox" IsChecked="{Binding #dockSite.AreNewTabsInsertedBeforeExistingTabs, Mode=TwoWay}" />
+						<Separator />
+						<MenuItem Header="Can Documents Attach" ToggleType="CheckBox" IsChecked="{Binding #tabbedMdiHost.CanDocumentsAttach, Mode=TwoWay}" />
+						<MenuItem Header="Can Documents Close on Middle Click" ToggleType="CheckBox" IsChecked="{Binding #tabbedMdiHost.CanDocumentsCloseOnMiddleClick, Mode=TwoWay}" />
+						<MenuItem Header="Can Documents Dock" ToggleType="CheckBox" IsChecked="{Binding #tabbedMdiHost.CanDocumentsDock, Mode=TwoWay}" />
+						<MenuItem Header="Can Document Tabs Drag" ToggleType="CheckBox" IsChecked="{Binding #tabbedMdiHost.CanDocumentTabsDrag, Mode=TwoWay}" />
+						<MenuItem Header="Has Tab Close Buttons" ToggleType="CheckBox" IsChecked="{Binding #tabbedMdiHost.HasTabCloseButtons, Mode=TwoWay}" />
+						<MenuItem Header="Has Tab Pin Buttons" ToggleType="CheckBox" IsChecked="{Binding #tabbedMdiHost.HasTabPinButtons, Mode=TwoWay}" />
+						<MenuItem Header="Has Tab Promote Buttons" ToggleType="CheckBox" IsChecked="{Binding #tabbedMdiHost.HasTabPromoteButtons, Mode=TwoWay}" />
+					</MenuItem>
+					<MenuItem Header="_Window">
+						<MenuItem Header="Close All Documents" Command="{Binding #dockSite.CloseAllDocumentsCommand}" />
+						<Separator />
+						<MenuItem Header="Cascade" Command="{Binding #dockSite.CascadeDocumentsCommand}" />
+						<MenuItem Header="Tile Horizontally" Command="{Binding #dockSite.TileDocumentsHorizontallyCommand}" />
+						<MenuItem Header="Tile Vertically" Command="{Binding #dockSite.TileDocumentsVerticallyCommand}" />
+					</MenuItem>
+				</Menu>
+
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<!-- Any non-default options configured in the sample are shown below -->
+
+<!-- DockSite -->
+<actipro:DockSite ... $(AreNewTabsInsertedBeforeExistingTabsAttribute)$(CanDocumentWindowsCloseAttribute)$(CanDocumentWindowsFloatAttribute)>
+
+	<!-- Workspace -->
+	<actipro:Workspace>
+		<actipro:TabbedMdiHost ... $(CanDocumentsAttachAttribute)$(CanDocumentsCloseOnMiddleClickAttribute)$(CanDocumentsDockAttribute)$(CanDocumentTabsDragAttribute)$(HasTabCloseButtonsAttribute)$(HasTabPinButtonsAttribute)$(HasTabPromoteButtonsAttribute)>
+			
+			<!-- EmptyContentTemplate -->
+			<actipro:TabbedMdiHost.EmptyContentTemplate>
+				<DataTemplate>
+					<TextBlock Margin="30" TextAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center">
+						This is an example of using the TabbedMdiHost.EmptyContentTemplate property.
+					</TextBlock>
+				</DataTemplate>
+			</actipro:TabbedMdiHost.EmptyContentTemplate>
+
+			<!-- Initially Pinned Document -->
+			<actipro:DocumentWindow Title="Document1.txt" TabbedMdiLayoutKind="Pinned" ... />
+
+			<!-- Normal Document -->
+			<actipro:DocumentWindow Title="Document2.txt" ... />
+
+			<!-- Read-Only Indicator Document -->
+			<actipro:DocumentWindow Title="Document3.txt" IsReadOnly="True" ... />
+
+			<!-- Initially Preview Document -->
+			<actipro:DocumentWindow Title="Document4.txt" TabbedMdiLayoutKind="Preview" ... />
+
+		</actipro:TabbedMdiHost>
+	</actipro:Workspace>
+
+</actipro:DockSite>
+					]]>
+						<sampleBrowser:CodeExample.Substitutions>
+							
+							<!-- DockSite Options -->
+							<sampleBrowser:CodeExampleSubstitution Key="CanDocumentWindowsCloseAttribute"
+														   IsEnabled="{Binding !#dockSite.CanDocumentWindowsClose}"
+														   Value="&#xD;&#x9;CanDocumentWindowsClose=&quot;False&quot;" />
+							<sampleBrowser:CodeExampleSubstitution Key="CanDocumentWindowsFloatAttribute"
+														   IsEnabled="{Binding #dockSite.CanDocumentWindowsFloat}"
+														   Value="&#xD;&#x9;CanDocumentWindowsFloat=&quot;True&quot;" />
+							<sampleBrowser:CodeExampleSubstitution Key="AreNewTabsInsertedBeforeExistingTabsAttribute"
+														   IsEnabled="{Binding !#dockSite.AreNewTabsInsertedBeforeExistingTabs}"
+														   Value="&#xD;&#x9;AreNewTabsInsertedBeforeExistingTabs=&quot;False&quot;" />
+
+							<!-- TabbedMdiHost Options -->
+							<sampleBrowser:CodeExampleSubstitution Key="CanDocumentsAttachAttribute"
+														   IsEnabled="{Binding !#tabbedMdiHost.CanDocumentsAttach}"
+														   Value="&#xD;&#x9;&#x9;&#x9;CanDocumentsAttach=&quot;False&quot;" />
+							<sampleBrowser:CodeExampleSubstitution Key="CanDocumentsCloseOnMiddleClickAttribute"
+														   IsEnabled="{Binding !#tabbedMdiHost.CanDocumentsCloseOnMiddleClick}"
+														   Value="&#xD;&#x9;&#x9;&#x9;CanDocumentsCloseOnMiddleClick=&quot;False&quot;" />
+							<sampleBrowser:CodeExampleSubstitution Key="CanDocumentsDockAttribute"
+														   IsEnabled="{Binding !#tabbedMdiHost.CanDocumentsDock}"
+														   Value="&#xD;&#x9;&#x9;&#x9;CanDocumentsDock=&quot;False&quot;" />
+							<sampleBrowser:CodeExampleSubstitution Key="CanDocumentTabsDragAttribute"
+														   IsEnabled="{Binding !#tabbedMdiHost.CanDocumentTabsDrag}"
+														   Value="&#xD;&#x9;&#x9;&#x9;CanDocumentTabsDrag=&quot;False&quot;" />
+							<sampleBrowser:CodeExampleSubstitution Key="HasTabCloseButtonsAttribute"
+														   IsEnabled="{Binding !#tabbedMdiHost.HasTabCloseButtons}"
+														   Value="&#xD;&#x9;&#x9;&#x9;HasTabCloseButtons=&quot;False&quot;" />
+							<sampleBrowser:CodeExampleSubstitution Key="HasTabPinButtonsAttribute"
+														   IsEnabled="{Binding #tabbedMdiHost.HasTabPinButtons}"
+														   Value="&#xD;&#x9;&#x9;&#x9;HasTabPinButtons=&quot;True&quot;" />
+							<sampleBrowser:CodeExampleSubstitution Key="HasTabPromoteButtonsAttribute"
+														   IsEnabled="{Binding !#tabbedMdiHost.HasTabPromoteButtons}"
+														   Value="&#xD;&#x9;&#x9;&#x9;HasTabPromoteButtons=&quot;False&quot;" />
+
+						</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+
+		</sampleBrowser:ControlExample>
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

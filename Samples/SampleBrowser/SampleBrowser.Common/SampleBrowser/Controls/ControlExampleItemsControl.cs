@@ -12,6 +12,7 @@ namespace ActiproSoftware.SampleBrowser {
 	/// <summary>
 	/// Displays one or more <see cref="ControlExample"/> instances.
 	/// </summary>
+	[PseudoClasses(pcImmersive)]
 	[PseudoClasses(pcWide)]
 	public class ControlExampleItemsControl : HeaderedItemsControl {
 
@@ -33,13 +34,23 @@ namespace ActiproSoftware.SampleBrowser {
 		public static readonly DirectProperty<ControlExampleItemsControl, bool> HasRelatedSamplesProperty
 			= AvaloniaProperty.RegisterDirect<ControlExampleItemsControl, bool>(nameof(HasRelatedSamples), getter: b => b.HasRelatedSamples);
 
+		/// <summary>
+		/// Defines the <see cref="UseImmersiveView"/> property.
+		/// </summary>
+		public static readonly StyledProperty<bool> UseImmersiveViewProperty
+			= AvaloniaProperty.Register<ControlExampleItemsControl, bool>(nameof(UseImmersiveView));
 
 		// Pseudo classes
+		private const string pcImmersive = ":immersive";
 		private const string pcWide = ":wide";
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 		// OBJECT
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		static ControlExampleItemsControl() {
+			UseImmersiveViewProperty.Changed.AddClassHandler<ControlExampleItemsControl>((x, _) => x.UpdatePseudoClasses());
+		}
 
 		public ControlExampleItemsControl() {
 			this.Documentation.CollectionChanged += (_, _) => UpdateHasDocumentation();
@@ -72,8 +83,10 @@ namespace ActiproSoftware.SampleBrowser {
 		private void UpdateHasRelatedSamples()
 			=> HasRelatedSamples = (this.RelatedSamples.Any(x => x is not null));
 
-		private void UpdatePseudoClasses()
-			=> PseudoClasses.Set(pcWide, _isWideMeasure);
+		private void UpdatePseudoClasses() {
+			PseudoClasses.Set(pcImmersive, UseImmersiveView);
+			PseudoClasses.Set(pcWide, _isWideMeasure);
+		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 		// PUBLIC PROCEDURES
@@ -117,6 +130,14 @@ namespace ActiproSoftware.SampleBrowser {
 		/// The table of contents.
 		/// </summary>
 		public ObservableCollection<ControlExampleTocItem> Toc { get; } = new();
+
+		/// <summary>
+		/// Whether to use immersive view.
+		/// </summary>
+		public bool UseImmersiveView {
+			get => GetValue(UseImmersiveViewProperty);
+			set => SetValue(UseImmersiveViewProperty, value);
+		}
 
 	}
 

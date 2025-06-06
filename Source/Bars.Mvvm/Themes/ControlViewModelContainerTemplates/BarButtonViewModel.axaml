@@ -19,6 +19,7 @@
 			LargeIcon="{Binding LargeIcon}"
 			MediumIcon="{Binding MediumIcon}"
 			SmallIcon="{Binding SmallIcon}"
+			Tag="{Binding Tag}"
 			Title="{Binding Title}"
 			ToolBarItemCollapseBehavior="{Binding ToolBarItemCollapseBehavior}"
 			ToolBarItemVariantBehavior="{Binding ToolBarItemVariantBehavior}"
@@ -41,6 +42,7 @@
 			LargeIcon="{Binding LargeIcon}"
 			SmallIcon="{Binding SmallIcon}"
 			StaysOpenOnClick="{Binding StaysOpenOnClick}"
+			Tag="{Binding Tag}"
 			Title="{Binding Title}"
 			UseLargeSize="{Binding UseLargeMenuItem}"
 			/>

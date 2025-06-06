@@ -5,10 +5,11 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 	/// <summary>
 	/// Represents a view model for an application button control within a ribbon.
 	/// </summary>
-	public class RibbonApplicationButtonViewModel : ObservableObjectBase {
+	public class RibbonApplicationButtonViewModel : ObservableObjectBase, IHasTag {
 
 		private string? _keyTipText;
 		private string? _label;
+		private object? _tag;
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 		// OBJECT
@@ -52,7 +53,13 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 			get => _label;
 			set => SetProperty(ref _label, value);
 		}
-		
+
+		/// <inheritdoc cref="IHasTag.Tag"/>
+		public object? Tag {
+			get => _tag;
+			set => SetProperty(ref _tag, value);
+		}
+
 		/// <inheritdoc/>
 		public override string ToString()
 			=> $"{this.GetType().FullName}[Label='{this.Label}']";

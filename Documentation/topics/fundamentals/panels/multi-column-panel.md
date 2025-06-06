@@ -11,6 +11,11 @@ order: 10
 
 *MultiColumnPanel showing layout change from four columns to three*
 
+@if (avalonia) {
+> [!IMPORTANT]
+> See the [Getting Started](../getting-started.md) topic for details on configuring themes for this control.
+}
+
 ## Overview
 
 Items are stacked vertically within columns.  When the panel is wide enough to support an additional column, items in the collection will be wrapped from the bottom of the previous column to the top of the next column.

@@ -18,7 +18,7 @@ For additional information on NuGet packages, please refer to the [NuGet Package
 Controls available in the Fundamentals product rely on Actipro's themes.
 
 > [!IMPORTANT]
-> If the proper theme is not configured, Actipro controls may be empty or completely invisible in the application!
+> If the proper theme is not configured, Actipro controls may be empty, be completely invisible in the application, or raise exceptions about missing template parts!
 
 Actipro's themes can be integrated by adding a special [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme) class, which inherits Avalonia's `Styles` class, to an application's `Application.Styles` collection.
 

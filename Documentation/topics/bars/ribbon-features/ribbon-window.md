@@ -33,23 +33,23 @@ While a [RibbonWindow](xref:@ActiproUIRoot.Controls.Bars.RibbonWindow) can be us
 
 ## ChromedTitleBar Usage
 
-Each [RibbonWindow](xref:@ActiproUIRoot.Controls.Bars.RibbonWindow) has a default [ChromedTitleBar](../../shared/controls/chromed-title-bar.md) as part of the control template whose [LeftContent](xref:@ActiproUIRoot.Controls.ChromedTitleBar.LeftContent) is configured to host the ribbon [Quick Access Toolbar](quick-access-toolbar.md) when it is shown above the ribbon.
+Each [RibbonWindow](xref:@ActiproUIRoot.Controls.Bars.RibbonWindow) has a default [WindowTitleBar](../../shared/controls/chromed-title-bar.md) as part of the control template whose [LeftContent](xref:@ActiproUIRoot.Controls.Primitives.ChromedTitleBar.LeftContent) is configured to host the ribbon [Quick Access Toolbar](quick-access-toolbar.md) when it is shown above the ribbon.
 
 ### Customizing the Title Bar
 
 The title bar can be customized by applying a `ControlTheme` to the [TitleBarTheme](xref:@ActiproUIRoot.Controls.Bars.RibbonWindow.TitleBarTheme) property.
 
 > [!IMPORTANT]
-> Any `ControlTheme` must be based on the default `ControlTheme` or the [LeftContent](xref:@ActiproUIRoot.Controls.ChromedTitleBar.LeftContent) will no longer be configured to host the [Quick Access Toolbar](quick-access-toolbar.md).
+> Any `ControlTheme` must be based on the default `ControlTheme` or the [LeftContent](xref:@ActiproUIRoot.Controls.Primitives.ChromedTitleBar.LeftContent) will no longer be configured to host the [Quick Access Toolbar](quick-access-toolbar.md).
 
-The following example demonstrates using a `ControlTheme` to allow the **Full Screen** caption button and place additional content in the [RightContent](xref:@ActiproUIRoot.Controls.ChromedTitleBar.RightContent).
+The following example demonstrates using a `ControlTheme` to allow the **Full Screen** caption button and place additional content in the [RightContent](xref:@ActiproUIRoot.Controls.Primitives.ChromedTitleBar.RightContent).
 
 ```xaml
 <actipro:RibbonWindow ...
 	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui">
 
 	<actipro:RibbonWindow.TitleBarTheme>
-		<ControlTheme TargetType="actipro:ChromedTitleBar" BasedOn="{actipro:ControlTheme RibbonWindowTitleBar}">
+		<ControlTheme TargetType="actipro:WindowTitleBar" BasedOn="{actipro:ControlTheme RibbonWindowTitleBar}">
 			<Setter Property="IsFullScreenButtonAllowed" Value="True" />
 			<Setter Property="RightContentTemplate">
 				<DataTemplate>

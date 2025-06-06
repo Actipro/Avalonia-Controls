@@ -11,6 +11,11 @@ The [Card](xref:@ActiproUIRoot.Controls.Card) control is typically used to prese
 
 *Card control with optional cover, footer, thumbnail, and default header*
 
+@if (avalonia) {
+> [!IMPORTANT]
+> See the [Getting Started](../getting-started.md) topic for details on configuring themes for this control.
+}
+
 ## Content Areas
 
 The [Card](xref:@ActiproUIRoot.Controls.Card) control is defined by multiple content areas:

@@ -11,6 +11,11 @@ Progress spinners are used when some form of processing is occurring to tell the
 
 *A large RingSpinner control*
 
+@if (avalonia) {
+> [!IMPORTANT]
+> See the [Getting Started](../getting-started.md) topic for details on configuring themes for these controls.
+}
+
 ## RingSpinner
 
 The [RingSpinner](xref:@ActiproUIRoot.Controls.RingSpinner) control renders an animated ring where the two ring segment ends chase each other around the circle.

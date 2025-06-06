@@ -6,12 +6,13 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 	/// <summary>
 	/// Represents a view model for a control group control within a ribbon group.
 	/// </summary>
-	public class RibbonControlGroupViewModel : ObservableObjectBase {
+	public class RibbonControlGroupViewModel : ObservableObjectBase, IHasTag {
 
 		private HorizontalAlignment _horizontalContentAlignment = HorizontalAlignment.Left;
 		private bool _isVisible = true;
 		private ItemVariantBehavior _itemVariantBehavior = ItemVariantBehavior.All;
 		private RibbonControlGroupSeparatorMode _separatorMode = RibbonControlGroupSeparatorMode.Default;
+		private object? _tag;
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 		// PUBLIC PROCEDURES
@@ -60,6 +61,12 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		public RibbonControlGroupSeparatorMode SeparatorMode {
 			get => _separatorMode;
 			set => SetProperty(ref _separatorMode, value);
+		}
+
+		/// <inheritdoc cref="IHasTag.Tag"/>
+		public object? Tag {
+			get => _tag;
+			set => SetProperty(ref _tag, value);
 		}
 
 		/// <inheritdoc/>

@@ -1,6 +1,5 @@
-using ActiproSoftware.UI.Avalonia.Themes;
+using ActiproSoftware.UI.Avalonia.Controls.Templates;
 using ActiproSoftware.UI.Avalonia.Themes.Bars.Mvvm;
-using ActiproSoftware.UI.Controls.Templates;
 using Avalonia.Controls.Templates;
 
 namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {

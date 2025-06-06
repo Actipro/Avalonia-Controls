@@ -11,6 +11,9 @@ A [SegmentedBar](xref:@ActiproUIRoot.Controls.SegmentedBar) allows a user to sel
 
 *SegmentedBar with elevated theme and accent semantic color variant*
 
+> [!IMPORTANT]
+> See the [Getting Started](../getting-started.md) topic for details on configuring themes for this control.
+
 ## Important Members
 
 The [SegmentedBar](xref:@ActiproUIRoot.Controls.SegmentedBar) class has these important members:
@@ -26,7 +29,6 @@ The [SegmentedBar](xref:@ActiproUIRoot.Controls.SegmentedBar) is a `SelectingIte
 
 Individual instances of [SegmentedBarItem](xref:@ActiproUIRoot.Controls.SegmentedBarItem) can be directly defined as the `ItemsSource` as shown below:
 
-@if (avalonia) {
 ```xaml
 xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 ...
@@ -40,7 +42,6 @@ xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 	...
 </actipro:SegmentedBar>
 ```
-}
 
 The `ItemsSource` can also be defined as non-[SegmentedBarItem](xref:@ActiproUIRoot.Controls.SegmentedBarItem) items.  In this scenario, each item is automatically wrapped in a [SegmentedBarItem](xref:@ActiproUIRoot.Controls.SegmentedBarItem) container with the original item as the `DataContext`.
 

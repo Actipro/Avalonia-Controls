@@ -1,5 +1,4 @@
 ﻿using ActiproSoftware.UI.Avalonia.Input;
-using Avalonia.Controls.Templates;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 
@@ -8,7 +7,7 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 	/// <summary>
 	/// Represents a view model for a ribbon control.
 	/// </summary>
-	public class RibbonViewModel : ObservableObjectBase {
+	public class RibbonViewModel : ObservableObjectBase, IHasTag {
 
 		private bool _allowLabelsOnQuickAccessToolBar;
 		private RibbonApplicationButtonViewModel? _applicationButton;
@@ -21,12 +20,14 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		private bool _isApplicationButtonVisible = true;
 		private bool _isCollapsible = true;
 		private bool _isMinimizable = true;
+		private bool _isOptionsButtonVisible = true;
 		private BarControlTemplateSelector _itemContainerTemplateSelector = new();
 		private RibbonLayoutMode _layoutMode = RibbonLayoutMode.Classic;
 		private RibbonQuickAccessToolBarViewModel? _quickAccessToolBar;
 		private RibbonQuickAccessToolBarLocation _quickAccessToolBarLocation = RibbonQuickAccessToolBarLocation.Above;
 		private RibbonQuickAccessToolBarMode _quickAccessToolBarMode = RibbonQuickAccessToolBarMode.Visible;
 		private RibbonTabRowToolBarViewModel? _tabRowToolBar;
+		private object? _tag;
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 		// OBJECT
@@ -72,7 +73,7 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 			get => _applicationButton;
 			set => SetProperty(ref _applicationButton, value);
 		}
-		
+
 		/// <summary>
 		/// Whether tabs are visible above the ribbon's main content area.
 		/// </summary>
@@ -118,7 +119,7 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		/// The collection of optional contextual tab groups within the ribbon.
 		/// </summary>
 		public ObservableCollection<RibbonContextualTabGroupViewModel> ContextualTabGroups { get; } = new();
-		
+
 		/// <summary>
 		/// A <see cref="RibbonFooterViewModel"/> for the optional footer.
 		/// </summary>
@@ -126,7 +127,7 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 			get => _footer;
 			set => SetProperty(ref _footer, value);
 		}
-		
+
 		/// <summary>
 		/// The <see cref="RibbonGroupLabelMode"/> that specifies when a <see cref="RibbonGroup"/> is labeled.
 		/// </summary>
@@ -148,7 +149,7 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 			get => _isApplicationButtonVisible;
 			set => SetProperty(ref _isApplicationButtonVisible, value);
 		}
-		
+
 		/// <summary>
 		/// Indicates whether the ribbon collapses when it becomes smaller than a minimum threshold width/height.
 		/// </summary>
@@ -159,7 +160,7 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 			get => _isCollapsible;
 			set => SetProperty(ref _isCollapsible, value);
 		}
-		
+
 		/// <summary>
 		/// Indicates whether the ribbon is minimizable.
 		/// </summary>
@@ -169,6 +170,17 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		public bool IsMinimizable {
 			get => _isMinimizable;
 			set => SetProperty(ref _isMinimizable, value);
+		}
+
+		/// <summary>
+		/// Indicates whether the options button is visible.
+		/// </summary>
+		/// <value>
+		/// The default value is <c>true</c>.
+		/// </value>
+		public bool IsOptionsButtonVisible  {
+			get => _isOptionsButtonVisible;
+			set => SetProperty(ref _isOptionsButtonVisible, value);
 		}
 
 		/// <summary>
@@ -219,7 +231,7 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 			get => _quickAccessToolBarMode;
 			set => SetProperty(ref _quickAccessToolBarMode, value);
 		}
-		
+
 		/// <summary>
 		/// A <see cref="RibbonTabRowToolBarViewModel"/> for the tab row toolbar that optionally appears to the right of the tabs.
 		/// </summary>
@@ -232,6 +244,12 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		/// The collection of tabs within the ribbon.
 		/// </summary>
 		public ObservableCollection<RibbonTabViewModel> Tabs { get; } = new();
+
+		/// <inheritdoc cref="IHasTag.Tag"/>
+		public object? Tag {
+			get => _tag;
+			set => SetProperty(ref _tag, value);
+		}
 
 		/// <inheritdoc/>
 		public override string ToString()

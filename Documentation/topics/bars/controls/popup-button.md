@@ -150,7 +150,7 @@ Use the [BarMenuItem](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem) control to 
 ```xaml
 xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 ...
-<actipro:BarContextMenu>
+<actipro:BarMenuFlyout>
 	<!-- Label is auto-generated from Key -->
 	<actipro:BarMenuItem
 		Key="Shapes"
@@ -162,7 +162,7 @@ xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 			/>
 	</actipro:BarMenuItem>
 	...
-</actipro:BarContextMenu>
+</actipro:BarMenuFlyout>
 ```
 }
 @if (wpf) {

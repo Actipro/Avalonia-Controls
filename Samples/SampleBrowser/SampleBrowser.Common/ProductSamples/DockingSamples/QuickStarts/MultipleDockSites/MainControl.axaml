@@ -1,0 +1,420 @@
+<UserControl 
+	x:Name="sample"
+	x:Class="ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.MultipleDockSites.MainControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="By default, dock sites are completely self-contained and can even be nested.  This means that you can have two DockSite controls in the same element hierarchy and docking windows belonging to one can't be moved into another.  Optionally link two dock sites to allow moving windows between them.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Nested dock sites" Url="https://www.actiprosoftware.com/docs/controls/avalonia/docking/layout-features/nested-dock-sites" />
+			<sampleBrowser:ControlExampleLinkItem Title="Side-by-side dock sites" Url="https://www.actiprosoftware.com/docs/controls/avalonia/docking/layout-features/side-by-side-dock-sites" />
+			<sampleBrowser:ControlExampleLinkItem Title="Linked dock sites" Url="https://www.actiprosoftware.com/docs/controls/avalonia/docking/layout-features/linked-dock-sites" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExample
+			Header="Nested dock sites"
+			Footer="These nested dock sites are self-contained and dragged windows will be restricted to the ancestor dock site.  Floating windows of a nested dock site automatically close when selecting a different document and reopen when re-selecting the original document."
+			>
+
+			<!-- Outer DockSite -->
+			<actipro:DockSite Height="400"
+				FloatingWindowIcon="/Images/Icons/Actipro.ico"
+				FloatingWindowTitle="Docking/MDI Demo">
+				<actipro:SplitContainer>
+					<actipro:Workspace>
+						<actipro:TabbedMdiHost>
+							<actipro:TabbedMdiContainer>
+
+								<actipro:DocumentWindow Title="Outer Document 1">
+									<!-- Inner DockSite 1 -->
+									<actipro:DockSite
+										FloatingWindowIcon="/Images/Icons/Actipro.ico"
+										FloatingWindowTitle="Docking/MDI Demo">
+										<actipro:ToolWindowContainer>
+											<actipro:ToolWindow Title="Inner DockSite 1-1">
+												<TextBox BorderThickness="0" AcceptsReturn="True" TextWrapping="Wrap">
+													Try floating this tool window and then switch to &quot;Outer Document 2&quot;. Notice how the floating tool window automatically closes.  Switch back to &quot;Outer Document 1&quot; and the floating window automatically reappears.
+												</TextBox>
+											</actipro:ToolWindow>
+											<actipro:ToolWindow Title="Inner DockSite 1-2">
+												<TextBox BorderThickness="0" AcceptsReturn="True" TextWrapping="Wrap">
+													Try dragging this tool window around and notice how it remains self-contained within the Outer Document 1's inner dock site.
+												</TextBox>
+											</actipro:ToolWindow>
+										</actipro:ToolWindowContainer>
+									</actipro:DockSite>
+								</actipro:DocumentWindow>
+
+								<actipro:DocumentWindow Title="Outer Document 2">
+									<!-- Inner DockSite 2 -->
+									<actipro:DockSite
+										FloatingWindowIcon="/Images/Icons/Actipro.ico"
+										FloatingWindowTitle="Docking/MDI Demo">
+										<actipro:SplitContainer>
+											<actipro:ToolWindowContainer>
+												<actipro:ToolWindow Title="Inner DockSite 2-1">
+													<TextBox BorderThickness="0" AcceptsReturn="True" TextWrapping="Wrap">
+														Try dragging this tool window around and notice how it remains self-contained within the Outer Document 2's inner dock site.
+													</TextBox>
+												</actipro:ToolWindow>
+												<actipro:ToolWindow Title="Inner DockSite 2-2">
+													<TextBox BorderThickness="0" AcceptsReturn="True" TextWrapping="Wrap">
+														Try dragging this tool window around and notice how it remains self-contained within the Outer Document 2's inner dock site.
+													</TextBox>
+												</actipro:ToolWindow>
+											</actipro:ToolWindowContainer>
+
+											<actipro:Workspace>
+												<actipro:TabbedMdiHost>
+													<actipro:TabbedMdiContainer>
+														<actipro:DocumentWindow Title="Inner Document 1">
+															<TextBox BorderThickness="0" AcceptsReturn="True" TextWrapping="Wrap">
+																Try dragging this document window around and notice how it remains self-contained within the Outer Document 2's MDI area.
+															</TextBox>
+														</actipro:DocumentWindow>
+														<actipro:DocumentWindow Title="Inner Document 2">
+															<TextBox BorderThickness="0" AcceptsReturn="True" TextWrapping="Wrap">
+																Try dragging this document window around and notice how it remains self-contained within the Outer Document 2's MDI area.
+															</TextBox>
+														</actipro:DocumentWindow>
+													</actipro:TabbedMdiContainer>
+												</actipro:TabbedMdiHost>
+											</actipro:Workspace>
+										</actipro:SplitContainer>
+									</actipro:DockSite>
+								</actipro:DocumentWindow>
+
+							</actipro:TabbedMdiContainer>
+						</actipro:TabbedMdiHost>
+					</actipro:Workspace>
+
+					<actipro:ToolWindowContainer>
+						<actipro:ToolWindow Title="Outer DockSite 1">
+							<TextBox BorderThickness="0" AcceptsReturn="True" TextWrapping="Wrap">
+								Try dragging this tool window around and notice how it remains self-contained within the outer dock site.
+							</TextBox>
+						</actipro:ToolWindow>
+						<actipro:ToolWindow Title="Outer DockSite 2">
+							<TextBox BorderThickness="0" AcceptsReturn="True" TextWrapping="Wrap">
+								Try dragging this tool window around and notice how it remains self-contained within the outer dock site.
+							</TextBox>
+						</actipro:ToolWindow>
+					</actipro:ToolWindowContainer>
+				</actipro:SplitContainer>
+			</actipro:DockSite>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<!-- Outer DockSite -->
+<actipro:DockSite>
+	<actipro:SplitContainer>
+		<actipro:Workspace>
+			<actipro:TabbedMdiHost>
+				<actipro:TabbedMdiContainer>
+
+					<actipro:DocumentWindow Title="Outer Document 1">
+
+						<!-- Inner DockSite 1 -->
+						<actipro:DockSite>
+							<actipro:ToolWindowContainer>
+								<actipro:ToolWindow Title="Inner DockSite 1-1" />
+								<actipro:ToolWindow Title="Inner DockSite 1-2" />
+							</actipro:ToolWindowContainer>
+						</actipro:DockSite>
+
+					</actipro:DocumentWindow>
+
+					<actipro:DocumentWindow Title="Outer Document 2">
+
+						<!-- Inner DockSite 2 -->
+						<actipro:DockSite>
+							<actipro:SplitContainer>
+								<actipro:ToolWindowContainer>
+									<actipro:ToolWindow Title="Inner DockSite 2-1" />
+									<actipro:ToolWindow Title="Inner DockSite 2-2" />
+								</actipro:ToolWindowContainer>
+
+								<actipro:Workspace>
+									<actipro:TabbedMdiHost>
+										<actipro:TabbedMdiContainer>
+											<actipro:DocumentWindow Title="Inner Document 1" />
+											<actipro:DocumentWindow Title="Inner Document 2" />
+										</actipro:TabbedMdiContainer>
+									</actipro:TabbedMdiHost>
+								</actipro:Workspace>
+							</actipro:SplitContainer>
+						</actipro:DockSite>
+
+					</actipro:DocumentWindow>
+
+				</actipro:TabbedMdiContainer>
+			</actipro:TabbedMdiHost>
+		</actipro:Workspace>
+
+		<actipro:ToolWindowContainer>
+			<actipro:ToolWindow Title="Outer DockSite 1" />
+			<actipro:ToolWindow Title="Outer DockSite 2" />
+		</actipro:ToolWindowContainer>
+
+	</actipro:SplitContainer>
+</actipro:DockSite>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Side-by-side (default)"
+			Footer="These dock sites are not linked, so windows cannot be dragged from one DockSite to the other."
+			>
+
+			<Grid ColumnDefinitions="*,20,*">
+
+				<StackPanel Grid.Column="0">
+					<Border Background="{actipro:ThemeResource Container1BackgroundBrush}"
+							BorderBrush="{actipro:ThemeResource Container2BorderBrush}"
+							BorderThickness="1">
+						<TextBlock TextAlignment="Center">DockSite #1</TextBlock>
+					</Border>
+
+					<!-- DockSite #1 -->
+					<actipro:DockSite Height="300"
+						FloatingWindowIcon="/Images/Icons/Actipro.ico"
+						FloatingWindowTitle="Docking/MDI Demo">
+
+						<actipro:DockSite.AutoHideLeftContainers>
+							<actipro:ToolWindowContainer>
+								<actipro:ToolWindow Title="DockSite 1-3" />
+								<actipro:ToolWindow Title="DockSite 1-4" />
+							</actipro:ToolWindowContainer>
+						</actipro:DockSite.AutoHideLeftContainers>
+
+						<actipro:SplitContainer>
+						
+							<actipro:Workspace />
+
+							<actipro:ToolWindowContainer>
+								<actipro:ToolWindow Title="DockSite 1-1" />
+								<actipro:ToolWindow Title="DockSite 1-2" />
+							</actipro:ToolWindowContainer>
+
+						</actipro:SplitContainer>
+
+					</actipro:DockSite>
+				</StackPanel>
+
+				<StackPanel Grid.Column="2">
+					<Border Background="{actipro:ThemeResource Container1BackgroundBrush}"
+							BorderBrush="{actipro:ThemeResource Container2BorderBrush}"
+							BorderThickness="1">
+						<TextBlock TextAlignment="Center">DockSite #2</TextBlock>
+					</Border>
+					
+					<!-- DockSite #2 -->
+					<actipro:DockSite Height="300"
+						FloatingWindowIcon="/Images/Icons/Actipro.ico"
+						FloatingWindowTitle="Docking/MDI Demo">
+
+						<actipro:DockSite.AutoHideRightContainers>
+							<actipro:ToolWindowContainer>
+								<actipro:ToolWindow Title="DockSite 2-3" />
+								<actipro:ToolWindow Title="DockSite 2-4" />
+							</actipro:ToolWindowContainer>
+						</actipro:DockSite.AutoHideRightContainers>
+
+						<actipro:SplitContainer>
+
+
+							<actipro:ToolWindowContainer>
+								<actipro:ToolWindow Title="DockSite 2-1" />
+								<actipro:ToolWindow Title="DockSite 2-2" />
+							</actipro:ToolWindowContainer>
+
+							<actipro:Workspace />
+
+						</actipro:SplitContainer>
+
+					</actipro:DockSite>
+				</StackPanel>
+
+			</Grid>
+
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Linked"
+			Footer="These dock sites are linked, so windows can be dragged from one DockSite to the other."
+			>
+
+			<Grid ColumnDefinitions="*,20,*">
+
+				<StackPanel Grid.Column="0">
+					<Border Background="{actipro:ThemeResource Container1BackgroundBrush}"
+							BorderBrush="{actipro:ThemeResource Container2BorderBrush}"
+							BorderThickness="1">
+						<TextBlock TextAlignment="Center">DockSite #1</TextBlock>
+					</Border>
+
+					<!-- DockSite #1 -->
+					<actipro:DockSite x:Name="linkedDockSite1" Height="400"
+						FloatingWindowIcon="/Images/Icons/Actipro.ico"
+						FloatingWindowTitle="Docking/MDI Demo">
+
+						<actipro:DockSite.AutoHideLeftContainers>
+							<actipro:ToolWindowContainer>
+								<actipro:ToolWindow Title="DockSite 1-3" />
+								<actipro:ToolWindow Title="DockSite 1-4" />
+							</actipro:ToolWindowContainer>
+						</actipro:DockSite.AutoHideLeftContainers>
+
+						<actipro:SplitContainer>
+
+							<actipro:Workspace />
+
+							<actipro:ToolWindowContainer>
+								<actipro:ToolWindow Title="DockSite 1-1">
+									<Grid RowDefinitions="Auto,*">
+										<TextBlock Margin="10,7" Text="These tool windows are registered with DockSite #1:" TextWrapping="Wrap" />
+										<ListBox Grid.Row="1" BorderBrush="{actipro:ThemeResource Container2BorderBrush}"
+												 ItemsSource="{Binding #sample.LinkedDockSite1ToolWindowNames}" BorderThickness="0,1,0,0" />
+									</Grid>
+								</actipro:ToolWindow>
+								<actipro:ToolWindow x:Name="linkedToolWindow12" Title="DockSite 1-2">
+									<ScrollViewer VerticalScrollBarVisibility="Auto">
+										<StackPanel Margin="20">
+											<TextBlock Text="Can tool windows drag to linked dock sites?" TextWrapping="Wrap" />
+											<CheckBox Margin="0,10,0,0" IsChecked="{Binding #linkedDockSite1.CanToolWindowsDragToLinkedDockSites, Mode=TwoWay}">
+												<TextBlock Text="DockSite #1's global option" TextWrapping="Wrap" />
+											</CheckBox>
+											<CheckBox Margin="0,10,0,0" IsChecked="{Binding #linkedToolWindow12.CanDragToLinkedDockSites, Mode=TwoWay}" IsThreeState="True">
+												<TextBlock Text="This tool window's instance option" TextWrapping="Wrap" />
+											</CheckBox>
+											<CheckBox Margin="0,10,0,0" IsChecked="{Binding #linkedToolWindow12.CanDragToLinkedDockSitesResolved, Mode=OneWay}" IsEnabled="False">
+												<TextBlock Text="This tool window's resolved setting" TextWrapping="Wrap" />
+											</CheckBox>
+										</StackPanel>
+									</ScrollViewer>
+								</actipro:ToolWindow>
+							</actipro:ToolWindowContainer>
+
+						</actipro:SplitContainer>
+
+					</actipro:DockSite>
+				</StackPanel>
+
+				<StackPanel Grid.Column="2">
+					<Border Background="{actipro:ThemeResource Container1BackgroundBrush}"
+							BorderBrush="{actipro:ThemeResource Container2BorderBrush}"
+							BorderThickness="1">
+						<TextBlock TextAlignment="Center">DockSite #2</TextBlock>
+					</Border>
+
+					<!-- DockSite #2 -->
+					<actipro:DockSite x:Name="linkedDockSite2" Height="400"
+						FloatingWindowIcon="/Images/Icons/Actipro.ico"
+						FloatingWindowTitle="Docking/MDI Demo">
+
+						<actipro:DockSite.AutoHideRightContainers>
+							<actipro:ToolWindowContainer>
+								<actipro:ToolWindow Title="DockSite 2-3" />
+								<actipro:ToolWindow Title="DockSite 2-4" />
+							</actipro:ToolWindowContainer>
+						</actipro:DockSite.AutoHideRightContainers>
+
+						<actipro:SplitContainer>
+
+
+							<actipro:ToolWindowContainer>
+								<actipro:ToolWindow Title="DockSite 2-1">
+									<Grid RowDefinitions="Auto,*">
+										<TextBlock Margin="10,7" Text="These tool windows are registered with DockSite #2:" TextWrapping="Wrap" />
+										<ListBox Grid.Row="1" BorderBrush="{actipro:ThemeResource Container2BorderBrush}"
+												 ItemsSource="{Binding #sample.LinkedDockSite2ToolWindowNames}" BorderThickness="0,1,0,0" />										
+									</Grid>
+								</actipro:ToolWindow>
+								<actipro:ToolWindow x:Name="linkedToolWindow22" Title="DockSite 2-2">
+									<ScrollViewer VerticalScrollBarVisibility="Auto">
+										<StackPanel Margin="20">
+											<TextBlock Text="Can tool windows drag to linked dock sites?" TextWrapping="Wrap" />
+											<CheckBox Margin="0,10,0,0" IsChecked="{Binding #linkedDockSite2.CanToolWindowsDragToLinkedDockSites, Mode=TwoWay}">
+												<TextBlock Text="DockSite #2's global option" TextWrapping="Wrap" />
+											</CheckBox>
+											<CheckBox Margin="0,10,0,0" IsChecked="{Binding #linkedToolWindow22.CanDragToLinkedDockSites, Mode=TwoWay}" IsThreeState="True">
+												<TextBlock Text="This tool window's instance option" TextWrapping="Wrap" />
+											</CheckBox>
+											<CheckBox Margin="0,10,0,0" IsChecked="{Binding #linkedToolWindow22.CanDragToLinkedDockSitesResolved, Mode=OneWay}" IsEnabled="False">
+												<TextBlock Text="This tool window's resolved setting" TextWrapping="Wrap" />
+											</CheckBox>
+										</StackPanel>
+									</ScrollViewer>
+								</actipro:ToolWindow>
+							</actipro:ToolWindowContainer>
+
+							<actipro:Workspace />
+
+						</actipro:SplitContainer>
+
+					</actipro:DockSite>
+				</StackPanel>
+
+			</Grid>
+
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:DockSite x:Name="dockSite1"$(CanToolWindowsDragToLinkedDockSites1Attribute) ... >
+	<actipro:ToolWindowContainer>
+		<actipro:ToolWindow Title="DockSite 1-1" ... >
+		<actipro:ToolWindow Title="DockSite 1-2"$(CanDragToLinkedDockSites12Attribute) ... >
+		...
+	</actipro:ToolWindowContainer>
+	...
+</actipro:DockSite>
+
+<actipro:DockSite x:Name="dockSite2"$(CanToolWindowsDragToLinkedDockSites2Attribute) ... >
+	<actipro:ToolWindowContainer>
+		<actipro:ToolWindow Title="DockSite 2-1" ... >
+		<actipro:ToolWindow Title="DockSite 2-2"$(CanDragToLinkedDockSites22Attribute) ... >
+		...
+	</actipro:ToolWindowContainer>
+	...
+</actipro:DockSite>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="CanToolWindowsDragToLinkedDockSites1Attribute"
+															   IsEnabled="{Binding !#linkedDockSite1.CanToolWindowsDragToLinkedDockSites}"
+															   Value=" CanToolWindowsDragToLinkedDockSites=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="CanToolWindowsDragToLinkedDockSites2Attribute"
+															   IsEnabled="{Binding !#linkedDockSite2.CanToolWindowsDragToLinkedDockSites}"
+															   Value=" CanToolWindowsDragToLinkedDockSites=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="CanDragToLinkedDockSites12Attribute"
+															   IsEnabled="{Binding #linkedToolWindow12.CanDragToLinkedDockSites, Converter={x:Static ObjectConverters.IsNotNull}}"
+															   Value="{Binding #linkedToolWindow12.CanDragToLinkedDockSites, StringFormat=' CanDragToLinkedDockSites&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="CanDragToLinkedDockSites22Attribute"
+															   IsEnabled="{Binding #linkedToolWindow22.CanDragToLinkedDockSites, Converter={x:Static ObjectConverters.IsNotNull}}"
+															   Value="{Binding #linkedToolWindow22.CanDragToLinkedDockSites, StringFormat=' CanDragToLinkedDockSites&quot;{0}&quot;'}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+// Link the two dock sites together
+dockSite1.LinkDockSite(dockSite2);
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

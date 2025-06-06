@@ -13,6 +13,9 @@ By default, the [CopyButton](xref:@ActiproUIRoot.Controls.CopyButton) control th
 
 Set the [CopyText](xref:@ActiproUIRoot.Controls.CopyButton.CopyText) property to the text that should be copied to the clipboard when the button is invoked.
 
+> [!IMPORTANT]
+> See the [Getting Started](../getting-started.md) topic for details on configuring themes for this control.
+
 ## Feedback
 
 When the button is invoked, feedback can be used to let the end user know the clipboard text was set. Otherwise, the end user might not realize any action was performed.  The following types of feedback are available:

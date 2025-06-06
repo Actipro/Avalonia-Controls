@@ -1,0 +1,70 @@
+<actipro:ToolWindow
+	x:Class="ActiproSoftware.ProductSamples.DockingSamples.Common.SolutionExplorerToolWindow"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	Icon="/Images/Icons/SolutionExplorer16.png"
+	SerializationId="SolutionExplorer"
+	Title="Solution Explorer"
+	Description="Displays the current project"
+	>
+
+	<TreeView BorderThickness="0">
+		<TreeView.Styles>
+			<Style Selector="actipro|DynamicImage">
+				<Setter Property="Height" Value="16" />
+				<Setter Property="Width" Value="16" />
+				<Setter Property="Margin" Value="{actipro:ScaledThickness '0,-1,1,-1'}" />
+			</Style>
+			<Style Selector="TreeViewItem">
+				<!--
+					See Web Assembly comment in OnLoaded override of code behind for reason why IsExpanded=False on Browser
+				-->
+				<Setter Property="IsExpanded" Value="{OnPlatform 'True', Browser='False', x:TypeArguments=x:Boolean}" />
+			</Style>
+		</TreeView.Styles>
+
+		<TreeViewItem>
+			<TreeViewItem.Header>
+				<StackPanel Orientation="Horizontal">
+					<actipro:DynamicImage Source="/Images/Icons/Solution16.png" />
+					<TextBlock Text="Solution 'Actipro Controls'" />
+				</StackPanel>
+			</TreeViewItem.Header>
+			<TreeViewItem>
+				<TreeViewItem.Header>
+					<StackPanel Orientation="Horizontal">
+						<actipro:DynamicImage Source="/Images/Icons/ProjectCSharp16.png" />
+						<TextBlock Text="ControlsSample" />
+					</StackPanel>
+				</TreeViewItem.Header>
+				<TreeViewItem>
+					<TreeViewItem.Header>
+						<StackPanel Orientation="Horizontal">
+							<actipro:DynamicImage Source="/Images/Icons/Wrench16.png" />
+							<TextBlock Text="Properties" />
+						</StackPanel>
+					</TreeViewItem.Header>
+				</TreeViewItem>
+				<TreeViewItem>
+					<TreeViewItem.Header>
+						<StackPanel Orientation="Horizontal">
+							<actipro:DynamicImage Source="/Images/Icons/Reference16.png" />
+							<TextBlock Text="References" />
+						</StackPanel>
+					</TreeViewItem.Header>
+				</TreeViewItem>
+				<TreeViewItem>
+					<TreeViewItem.Header>
+						<StackPanel Orientation="Horizontal">
+							<actipro:DynamicImage Source="/Images/Icons/TextDocument16.png" />
+							<TextBlock Text="About.txt" />
+						</StackPanel>
+					</TreeViewItem.Header>
+				</TreeViewItem>
+			</TreeViewItem>
+		</TreeViewItem>
+	</TreeView>
+
+</actipro:ToolWindow>

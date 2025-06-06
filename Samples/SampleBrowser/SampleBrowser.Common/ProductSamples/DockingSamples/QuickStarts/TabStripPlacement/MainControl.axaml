@@ -1,0 +1,104 @@
+<UserControl 
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:actiproAvalonia="using:ActiproSoftware.UI.Avalonia"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="The tab strip placement within tabbed MDI containers and tool window containers can be configured to any side.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Tabbed MDI tab strip placement" Url="https://www.actiprosoftware.com/docs/controls/avalonia/docking/workspace-mdi-features/tabbed-mdi#tab-strip-placement" />
+			<sampleBrowser:ControlExampleLinkItem Title="Tool window tab strip placement" Url="https://www.actiprosoftware.com/docs/controls/avalonia/docking/docking-window-features/docked-tool-windows#tab-strip-placement" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExample
+			Header="Tab strip placement"
+			>
+
+			<actipro:DockSite x:Name="dockSite" MinHeight="300"
+				FloatingWindowIcon="/Images/Icons/Actipro.ico"
+				FloatingWindowTitle="Docking/MDI Demo">
+				<actipro:SplitContainer>
+
+					<actipro:Workspace>
+						<actipro:TabbedMdiHost x:Name="tabbedMdiHost">
+							<actipro:TabbedMdiContainer>
+								<actipro:DocumentWindow Title="Document1.txt" Description="Text document" FileName="Document1.txt"
+														Icon="/Images/Icons/TextDocument16.png">
+									<TextBox BorderThickness="0" Text="The first document." TextWrapping="Wrap" />
+								</actipro:DocumentWindow>
+								<actipro:DocumentWindow Title="Document2.txt" Description="Text document" FileName="Document2.txt"
+														Icon="/Images/Icons/TextDocument16.png">
+									<TextBox BorderThickness="0" Text="The second document." TextWrapping="Wrap" />
+								</actipro:DocumentWindow>
+								<actipro:DocumentWindow Title="Document3.txt" Description="Text document" FileName="Document3.txt"
+														Icon="/Images/Icons/TextDocument16.png">
+									<TextBox BorderThickness="0" Text="The third document." TextWrapping="Wrap" />
+								</actipro:DocumentWindow>
+							</actipro:TabbedMdiContainer>
+						</actipro:TabbedMdiHost>
+					</actipro:Workspace>
+
+					<actipro:ToolWindowContainer>
+						<actipro:ToolWindow Title="Tool Window" Icon="/Images/Icons/Properties16.png">
+							<TextBox BorderThickness="0" Text="The first tool window." TextWrapping="Wrap" />
+						</actipro:ToolWindow>
+						<actipro:ToolWindow Title="Tool Window" Icon="/Images/Icons/Properties16.png">
+							<TextBox BorderThickness="0" Text="The second tool window." TextWrapping="Wrap" />
+						</actipro:ToolWindow>
+					</actipro:ToolWindowContainer>
+				</actipro:SplitContainer>
+			</actipro:DockSite>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10" Width="150">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Document tabs" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type={x:Type Dock}}" SelectedValue="{Binding #tabbedMdiHost.TabStripPlacement, Mode=TwoWay}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Tool window tabs" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type={x:Type Dock}}" SelectedValue="{Binding #dockSite.ToolWindowsTabStripPlacement, Mode=TwoWay}" />
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:DockSite ToolWindowsTabStripPlacement="$(ToolWindowsTabStripPlacement)" ... >
+	<actipro:SplitContainer>
+
+		<actipro:Workspace>
+			<actipro:TabbedMdiHost TabStripPlacement="$(DocumentWindowsTabStripPlacement)" ... >
+				<actipro:TabbedMdiContainer>
+					<actipro:DocumentWindow ... />
+					<actipro:DocumentWindow ... />
+				</actipro:TabbedMdiContainer>
+			</actipro:TabbedMdiHost>
+		</actipro:Workspace>
+
+		<actipro:ToolWindowContainer>
+			<actipro:ToolWindow ... />
+			<actipro:ToolWindow ... />
+		</actipro:ToolWindowContainer>
+
+	</actipro:SplitContainer>
+</actipro:DockSite>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="DocumentWindowsTabStripPlacement" Value="{Binding #tabbedMdiHost.TabStripPlacement}" />
+						<sampleBrowser:CodeExampleSubstitution Key="ToolWindowsTabStripPlacement" Value="{Binding #dockSite.ToolWindowsTabStripPlacement}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

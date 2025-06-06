@@ -1,0 +1,144 @@
+<UserControl
+	x:Name="sampleRootControl"
+	x:Class="ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.MainMenu.MainControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="The BarMainMenu control is meant to be a replacement for a native Menu control.  Its main benefit over a native Menu control is that it can be fully configured via MVVM.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Main menu" Url="https://www.actiprosoftware.com/docs/controls/avalonia/bars/menu-features/main-menu" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+		
+		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+			<sampleBrowser:ControlExampleLinkItem Title="Standalone toolbar" Url="/ProductSamples/BarsSamples/QuickStarts/StandaloneToolBarIntro/MainControl" />
+		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+
+		<sampleBrowser:ControlExample
+			Header="Basic usage"
+			Footer="Key tips are fully supported."
+			>
+
+			<sampleBrowser:ControlExample.XamlContent>
+
+				<!-- XAML-based sample -->
+				<actipro:BarMainMenu>
+					<actipro:BarMenuItem Key="File">
+						<actipro:BarMenuItem Key="New" SmallIcon="/Images/Icons/New16.png" Command="{Binding #sampleRootControl.NotImplementedCommand}" />
+						<actipro:BarMenuItem Key="Open" SmallIcon="/Images/Icons/Open16.png" Command="{Binding #sampleRootControl.NotImplementedCommand}" />
+						<actipro:BarMenuItem Key="Save" SmallIcon="/Images/Icons/Save16.png" Command="{Binding #sampleRootControl.NotImplementedCommand}" />
+						<actipro:BarSeparator />
+						<actipro:BarMenuItem Key="Exit" KeyTipText="X" Command="{Binding #sampleRootControl.NotImplementedCommand}" />
+					</actipro:BarMenuItem>
+					<actipro:BarMenuItem Key="Edit">
+						<actipro:BarMenuItem Key="Cut" KeyTipText="X" SmallIcon="/Images/Icons/Cut16.png" Command="{Binding #sampleRootControl.NotImplementedCommand}" />
+						<actipro:BarMenuItem Key="Copy" KeyTipText="C" SmallIcon="/Images/Icons/Copy16.png" Command="{Binding #sampleRootControl.NotImplementedCommand}" />
+						<actipro:BarMenuItem Key="Paste" KeyTipText="V" SmallIcon="/Images/Icons/Paste16.png" Command="{Binding #sampleRootControl.NotImplementedCommand}" />
+						<actipro:BarSeparator />
+						<actipro:BarMenuItem Key="SelectAll" SmallIcon="/Images/Icons/SelectAll16.png" Command="{Binding #sampleRootControl.NotImplementedCommand}" />
+					</actipro:BarMenuItem>
+					<actipro:BarMenuItem Key="Format" KeyTipText="M">
+						<actipro:BarMenuItem Key="Bold" SmallIcon="/Images/Icons/Bold16.png" Command="{Binding #sampleRootControl.NotImplementedCommand}" />
+						<actipro:BarMenuItem Key="Italic" SmallIcon="/Images/Icons/Italic16.png" Command="{Binding #sampleRootControl.NotImplementedCommand}" />
+						<actipro:BarMenuItem Key="Underline" SmallIcon="/Images/Icons/Underline16.png" Command="{Binding #sampleRootControl.NotImplementedCommand}" />
+						<actipro:BarSeparator />
+						<actipro:BarMenuItem Key="IncreaseFontSize" KeyTipText="SI" SmallIcon="/Images/Icons/GrowFont16.png" Command="{Binding #sampleRootControl.NotImplementedCommand}" />
+						<actipro:BarMenuItem Key="DecreaseFontSize" KeyTipText="SD" SmallIcon="/Images/Icons/ShrinkFont16.png" Command="{Binding #sampleRootControl.NotImplementedCommand}" />
+						<actipro:BarMenuItem Key="Subscript" KeyTipText="SB" SmallIcon="/Images/Icons/Subscript16.png" Command="{Binding #sampleRootControl.NotImplementedCommand}" />
+						<actipro:BarMenuItem Key="Superscript" KeyTipText="SP" SmallIcon="/Images/Icons/Superscript16.png" Command="{Binding #sampleRootControl.NotImplementedCommand}" />
+					</actipro:BarMenuItem>
+				</actipro:BarMainMenu>
+
+			</sampleBrowser:ControlExample.XamlContent>
+
+			<sampleBrowser:ControlExample.MvvmContent>
+
+				<!-- MVVM-based sample -->
+				<actipro:BarMainMenu x:Name="basicUsageMainMenuMvvm"
+					Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.BarMainMenuControlTheme}}"
+					/>
+
+			</sampleBrowser:ControlExample.MvvmContent>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample Kind="Xaml" xml:space="preserve">
+				<![CDATA[
+<actipro:BarMainMenu>
+	<actipro:BarMenuItem Key="File">
+		<actipro:BarMenuItem Key="New" SmallIcon="/Images/Icons/New16.png" />
+		<actipro:BarMenuItem Key="Open" SmallIcon="/Images/Icons/Open16.png" />
+		<actipro:BarMenuItem Key="Save" SmallIcon="/Images/Icons/Save16.png" />
+		<actipro:BarSeparator />
+		<actipro:BarMenuItem Key="Exit" KeyTipText="X" />
+	</actipro:BarMenuItem>
+	<actipro:BarMenuItem Key="Edit">
+		...
+	</actipro:BarMenuItem>
+	<actipro:BarMenuItem Key="Format">
+		...
+	</actipro:BarMenuItem>
+</actipro:BarMainMenu>
+				]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" xml:space="preserve">
+				<![CDATA[
+<!-- DataContext is bound to an instance of BarMainMenuViewModel -->
+<actipro:BarMainMenu
+	DataContext="{Binding #sampleRootControl.BasicUsageBarMainMenuViewModel}"
+	Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.BarMainMenuControlTheme}}"
+	/>	
+				]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Kind="Mvvm" Language="C#" xml:space="preserve">
+					<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm;
+
+public partial class SampleRootControl : UserControl {
+
+	/// <summary>
+	/// Creates the main menu view model.
+	/// </summary>
+	private static BarMainMenuViewModel CreateBasicUsageBarMainMenuViewModel() {
+		return new BarMainMenuViewModel() {
+			Items = {
+				new BarPopupButtonViewModel("File") {
+					MenuItems = {
+						new BarButtonViewModel("New") { SmallIcon = ImageLoader.GetIcon("New16.png") },
+						new BarButtonViewModel("Open") { SmallIcon = ImageLoader.GetIcon("Open16.png") },
+						new BarButtonViewModel("Save") { SmallIcon = ImageLoader.GetIcon("Save16.png") },
+						new BarSeparatorViewModel(),
+						new BarButtonViewModel("Exit") { KeyTipText = "X"},
+					}
+				},
+				new BarPopupButtonViewModel("Edit") {
+					MenuItems = { ... }
+				},
+				new BarPopupButtonViewModel("Format") {
+					MenuItems = { ... }
+				},
+			}
+		};
+	}
+
+	/// <summary>
+	/// Gets the view model to be bound to the main menu.
+	/// </summary>
+	public BarMainMenuViewModel BasicUsageBarMainMenuViewModel { get; }
+		= CreateBasicUsageBarMainMenuViewModel();
+
+}
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+
+</UserControl>

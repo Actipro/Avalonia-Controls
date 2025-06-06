@@ -20,6 +20,7 @@
 			PopupOpeningCommand="{Binding PopupOpeningCommand}"
 			SmallIcon="{Binding SmallIcon}"
 			Title="{Binding Title}"
+			Tag="{Binding Tag}"
 			ToolBarItemCollapseBehavior="{Binding ToolBarItemCollapseBehavior}"
 			ToolBarItemVariantBehavior="{Binding ToolBarItemVariantBehavior}"
 			ToolTip.Tip="{Binding Description}"
@@ -40,6 +41,7 @@
 			LargeIcon="{Binding LargeIcon}"
 			PopupOpeningCommand="{Binding PopupOpeningCommand}"
 			SmallIcon="{Binding SmallIcon}"
+			Tag="{Binding Tag}"
 			Title="{Binding Title}"
 			UseLargeSize="{Binding UseLargeMenuItem}"
 			/>

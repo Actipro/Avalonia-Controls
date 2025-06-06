@@ -17,6 +17,11 @@ A [SettingsExpander](xref:@ActiproUIRoot.Controls.SettingsExpander) has function
 
 *SettingsExpander with header, description, header icon, and ToggleSwitch content in the expanded state with two SettingsCard children*
 
+@if (avalonia) {
+> [!IMPORTANT]
+> See the [Getting Started](../getting-started.md) topic for details on configuring themes for this control.
+}
+
 ## Primary Content Areas
 
 The [SettingsExpander](xref:@ActiproUIRoot.Controls.SettingsExpander) control is defined by multiple content areas:

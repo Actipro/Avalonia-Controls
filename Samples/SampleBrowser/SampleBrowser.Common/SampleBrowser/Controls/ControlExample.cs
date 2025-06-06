@@ -15,6 +15,7 @@ namespace ActiproSoftware.SampleBrowser {
 	/// Displays a sample with a header and optional footer and code sections.
 	/// </summary>
 	[TemplatePart(CodeExamplePanelPartName, typeof(Panel))]
+	[PseudoClasses(pcImmersive)]
 	[PseudoClasses(pcOptions)]
 	[PseudoClasses(pcWide)]
 	public class ControlExample : HeaderedContentControl {
@@ -87,6 +88,12 @@ namespace ActiproSoftware.SampleBrowser {
 			= AvaloniaProperty.Register<ControlExample, CodeExampleKind>(nameof(SelectedCodeExampleKind), defaultValue: CodeExampleKind.Unspecified, coerce: CoerceSelectedCodeExampleKindProperty);
 
 		/// <summary>
+		/// Defines the <see cref="UseImmersiveView"/> property.
+		/// </summary>
+		public static readonly StyledProperty<bool> UseImmersiveViewProperty
+			= AvaloniaProperty.Register<ControlExample, bool>(nameof(UseImmersiveView));
+
+		/// <summary>
 		/// Defines the <see cref="WideThreshold"/> property.
 		/// </summary>
 		public static readonly StyledProperty<double> WideThresholdProperty
@@ -104,6 +111,7 @@ namespace ActiproSoftware.SampleBrowser {
 		private const string CodeExamplePanelPartName = "PART_CodeExamplePanel";
 
 		// Pseudo classes
+		private const string pcImmersive = ":immersive";
 		private const string pcOptions = ":options";
 		private const string pcWide = ":wide";
 
@@ -117,6 +125,7 @@ namespace ActiproSoftware.SampleBrowser {
 			MvvmContentProperty.Changed.AddClassHandler<ControlExample>((x, _) => x.CoerceValue(ContentProperty));
 			OptionsProperty.Changed.AddClassHandler<ControlExample>((x, _) => x.UpdatePseudoClasses());
 			SelectedCodeExampleKindProperty.Changed.AddClassHandler<ControlExample>((x, _) => x.OnSelectedCodeExampleKindPropertyValueChanged());
+			UseImmersiveViewProperty.Changed.AddClassHandler<ControlExample>((x, _) => x.UpdatePseudoClasses());
 			XamlContentProperty.Changed.AddClassHandler<ControlExample>((x, _) => x.CoerceValue(ContentProperty));
 		}
 
@@ -223,6 +232,7 @@ namespace ActiproSoftware.SampleBrowser {
 			=> HasCode = this.CodeExamples.Any(x => x?.IsVisible == true);
 
 		private void UpdatePseudoClasses() {
+			PseudoClasses.Set(pcImmersive, UseImmersiveView);
 			PseudoClasses.Set(pcOptions, Options is not null);
 			PseudoClasses.Set(pcWide, _isWideMeasure);
 		}
@@ -328,6 +338,14 @@ namespace ActiproSoftware.SampleBrowser {
 		public CodeExampleKind SelectedCodeExampleKind {
 			get => GetValue(SelectedCodeExampleKindProperty);
 			set => SetValue(SelectedCodeExampleKindProperty, value);
+		}
+
+		/// <summary>
+		/// Whether to use immersive view.
+		/// </summary>
+		public bool UseImmersiveView {
+			get => GetValue(UseImmersiveViewProperty);
+			set => SetValue(UseImmersiveViewProperty, value);
 		}
 
 		/// <summary>

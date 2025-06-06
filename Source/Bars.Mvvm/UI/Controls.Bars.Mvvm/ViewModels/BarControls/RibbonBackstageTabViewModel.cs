@@ -11,6 +11,7 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		private IDataTemplate? _contentTemplate;
 		private string? _description;
 		private RibbonBackstageHeaderAlignment _headerAlignment = RibbonBackstageHeaderAlignment.Top;
+		private bool _isEnabled = true;
 		private bool _isVisible = true;
 		private string? _keyTipText;
 		private string? _label;
@@ -85,6 +86,14 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		public RibbonBackstageHeaderAlignment HeaderAlignment {
 			get => _headerAlignment;
 			set => SetProperty(ref _headerAlignment, value);
+		}
+
+		/// <summary>
+		/// Indicates if the tab is enabled.
+		/// </summary>
+		public bool IsEnabled {
+			get => _isEnabled;
+			set => SetProperty(ref _isEnabled, value);
 		}
 
 		/// <inheritdoc cref="BarButtonViewModel.IsVisible"/>

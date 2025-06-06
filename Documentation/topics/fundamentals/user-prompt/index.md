@@ -18,6 +18,11 @@ order: 1
 *UserPromptControl with optional content areas labeled, OK/Cancel buttons, Information status image, and optional footer image*
 }
 
+@if (avalonia) {
+> [!IMPORTANT]
+> See the [Getting Started](../getting-started.md) topic for details on configuring themes for this control.
+}
+
 ## Features
 
 Key features of User Prompt include:

@@ -5,19 +5,20 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 	/// <summary>
 	/// Represents a view model for a quick-access toolbar control within a ribbon.
 	/// </summary>
-	public class RibbonQuickAccessToolBarViewModel : ObservableObjectBase {
+	public class RibbonQuickAccessToolBarViewModel : ObservableObjectBase, IHasTag {
 
 		private bool _isCustomizeButtonVisible = true;
+		private object? _tag;
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 		// PUBLIC PROCEDURES
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
-		
+
 		/// <summary>
 		/// The collection of common items that should appear in the QAT's Customize menu, from which they can be toggled into and out of <see cref="Items"/>.
 		/// </summary>
 		public ObservableCollection<object> CommonItems { get; } = [];
-		
+
 		/// <summary>
 		/// Indicates whether the customize button is visible.
 		/// </summary>
@@ -33,7 +34,13 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		/// The collection of items in the control.
 		/// </summary>
 		public ObservableCollection<object> Items { get; } = [];
-		
+
+		/// <inheritdoc cref="IHasTag.Tag"/>
+		public object? Tag {
+			get => _tag;
+			set => SetProperty(ref _tag, value);
+		}
+
 		/// <inheritdoc/>
 		public override string ToString()
 			=> $"{this.GetType().FullName}[{this.Items.Count} items]";

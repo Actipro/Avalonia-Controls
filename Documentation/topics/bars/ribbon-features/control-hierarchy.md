@@ -40,7 +40,7 @@ The following sample demonstrates how a `ContentControl` might be configured wit
 	</actipro:RibbonContainerPanel>
 
 </actipro:RibbonWindow>
- ```
+```
 }
 @if (wpf) {
 ```xaml
@@ -57,8 +57,8 @@ The following sample demonstrates how a `ContentControl` might be configured wit
 	</bars:RibbonContainerPanel>
 
 </bars:RibbonWindow>
- ```
- }
+```
+}
 
 In the code-behind, the `ribbonContent.Content` should be assigned an instance of `Ribbon`.
 

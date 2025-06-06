@@ -1,0 +1,166 @@
+<UserControl 
+	xmlns="https://github.com/avaloniaui"
+	x:Class="ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.PrimaryDocumentTracking.MainControl"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+	<UserControl.Resources>
+		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="The primary document is the last docking window in an MDI host that was selected.  Even with floating document windows or when the focus is moved away from the MDI host, such as into a tool window, the primary document is tracked within the entire dock site hierarchy.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Primary document" Url="https://www.actiprosoftware.com/docs/controls/avalonia/docking/workspace-mdi-features/working-with-documents#primary-document" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExample Header="Primary document tracking">
+			<sampleBrowser:ControlExample.FooterTemplate>
+				<DataTemplate>
+					<ContentPresenter x:DataType="x:Object" Content="{Binding}" />
+				</DataTemplate>
+			</sampleBrowser:ControlExample.FooterTemplate>
+			<sampleBrowser:ControlExample.Footer>
+				<Grid ColumnDefinitions="*,*">
+					<StackPanel Grid.Column="0" Orientation="Horizontal" Spacing="10">
+						<TextBlock Text="Primary document:" Opacity="0.75" />
+						<TextBlock x:Name="primaryDocumentTextBlock" Text="(none)" />
+					</StackPanel>
+					<StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="10">
+						<TextBlock Text="Active window:" Opacity="0.75" />
+						<TextBlock x:Name="activeWindowTextBlock" Text="(none)" />
+					</StackPanel>
+				</Grid>
+			</sampleBrowser:ControlExample.Footer>
+
+			<Grid RowDefinitions="Auto,*">
+
+				<!-- DockSite -->
+				<actipro:DockSite x:Name="dockSite" Grid.Row="1" Height="300"
+					CanDocumentWindowsFloat="True"
+					FloatingWindowTitle="Docking/MDI Demo"
+					FloatingWindowIcon="/Images/Icons/Actipro.ico"
+					PrimaryDocumentChanged="OnDockSitePrimaryDocumentChanged"
+					WindowActivated="OnDockSiteWindowActivatedOrDeactivated"
+					WindowDeactivated="OnDockSiteWindowActivatedOrDeactivated"
+					>
+
+					<actipro:SplitContainer>
+
+						<actipro:Workspace>
+							<actipro:TabbedMdiHost>
+								<actipro:TabbedMdiContainer>
+									<actipro:DocumentWindow Title="Document1.txt" Description="Text document" FileName="Description.txt" Icon="/Images/Icons/TextDocument16.png">
+										<TextBox BorderThickness="0" Text="The first document." TextWrapping="Wrap" />
+									</actipro:DocumentWindow>
+									<actipro:DocumentWindow Title="Document2.txt" Description="Text document" FileName="Document2.txt" Icon="/Images/Icons/TextDocument16.png">
+										<TextBox BorderThickness="0" Text="The second document." TextWrapping="Wrap" />
+									</actipro:DocumentWindow>
+									<actipro:DocumentWindow Title="Document3.txt" Description="Text document" FileName="Document3.txt" Icon="/Images/Icons/TextDocument16.png">
+										<TextBox BorderThickness="0" Text="The third document." TextWrapping="Wrap" />
+									</actipro:DocumentWindow>
+								</actipro:TabbedMdiContainer>
+							</actipro:TabbedMdiHost>
+						</actipro:Workspace>
+
+						<actipro:ToolWindowContainer>
+							<actipro:ToolWindow Title="Tool Window" Icon="/Images/Icons/Properties16.png">
+								<TextBox BorderThickness="0" Text="Moving focus to this tool window does not change the primary document unless it is docked in the MDI area." TextWrapping="Wrap" />
+							</actipro:ToolWindow>
+						</actipro:ToolWindowContainer>
+					</actipro:SplitContainer>
+				</actipro:DockSite>
+
+				<!-- Menu -->
+				<Menu Grid.Row="0" Background="Transparent">
+					<MenuItem Header="_File">
+						<MenuItem Header="New" Click="OnNewDocumentMenuItemClick" />
+						<MenuItem Header="Open..." Click="OnOpenDocumentMenuItemClick" />
+					</MenuItem>
+					<MenuItem Header="_Window">
+						<MenuItem Header="Close All Documents" Command="{Binding #dockSite.CloseAllDocumentsCommand}" />
+						<Separator />
+						<MenuItem Header="Tabbed MDI" Command="{Binding #dockSite.SetMdiKindCommand}" ToggleType="Radio" IsChecked="{Binding #dockSite.MdiKind, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Tabbed'}">
+							<MenuItem.CommandParameter>
+								<actipro:MdiKind>Tabbed</actipro:MdiKind>
+							</MenuItem.CommandParameter>
+						</MenuItem>
+						<MenuItem Header="Standard MDI" Command="{Binding #dockSite.SetMdiKindCommand}" ToggleType="Radio" IsChecked="{Binding #dockSite.MdiKind, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Standard'}">
+							<MenuItem.CommandParameter>
+								<actipro:MdiKind>Standard</actipro:MdiKind>
+							</MenuItem.CommandParameter>
+						</MenuItem>
+						<Separator />
+						<MenuItem Header="Cascade" Command="{Binding #dockSite.CascadeDocumentsCommand}" />
+						<MenuItem Header="Tile Horizontally" Command="{Binding #dockSite.TileDocumentsHorizontallyCommand}" />
+						<MenuItem Header="Tile Vertically" Command="{Binding #dockSite.TileDocumentsVerticallyCommand}" />
+						<Separator />
+						<MenuItem Header="Use Hosted Floating Windows" ToggleType="CheckBox" IsChecked="{Binding #dockSite.UseHostedFloatingWindows, Mode=TwoWay}" />
+					</MenuItem>
+				</Menu>
+
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:DockSite x:Name="dockSite" ... >
+	...
+</actipro:DockSite>
+					]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Docking;
+...
+public partial class MainControl : UserControl {
+
+	public MainControl() {
+		InitializeComponent();
+		
+		// Listen for changes in the primary document
+		dockSite.PrimaryDocumentChanged += OnDockSitePrimaryDocumentChanged;
+		
+		// Listen for changes in the active window (not necessary if only tracking primary document)
+		dockSite.WindowActivated += OnDockSiteWindowActivatedOrDeactivated;
+		dockSite.WindowDeactivated += OnDockSiteWindowActivatedOrDeactivated;
+	}
+
+	/// <summary>
+	/// Occurs when the primary document is changed.
+	/// </summary>
+	private void OnDockSitePrimaryDocumentChanged(object? sender, DockingWindowEventArgs e) {
+		// This event handler is used for tracking the primary document
+		UpdateStatusBar();
+	}
+
+	/// <summary>
+	/// Occurs when any docking window is activated or deactivated.
+	/// </summary>
+	private void OnDockSiteWindowActivatedOrDeactivated(object? sender, DockingWindowEventArgs e) {
+		// This event handler is only used for tracking the active window
+		UpdateStatusBar();
+	}
+
+	/// <summary>
+	/// Updates the status bar.
+	/// </summary>
+	private void UpdateStatusBar() {
+		string primaryDocument = (dockSite.PrimaryDocument is not null ? dockSite.PrimaryDocument.Title : "(none)");
+		string activeWindow = (dockSite.ActiveWindow is not null ? dockSite.ActiveWindow.Title : "(none)");
+		...
+	}
+
+}
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+
+		</sampleBrowser:ControlExample>
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

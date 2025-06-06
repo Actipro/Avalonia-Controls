@@ -1,4 +1,4 @@
-﻿using ActiproSoftware.UI.Controls.Templates;
+﻿using ActiproSoftware.UI.Avalonia.Controls.Templates;
 using Avalonia.Controls.Templates;
 using Avalonia.Styling;
 using System.Windows.Input;

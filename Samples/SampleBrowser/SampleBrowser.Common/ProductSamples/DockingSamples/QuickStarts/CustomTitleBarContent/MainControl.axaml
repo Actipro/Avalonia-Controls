@@ -1,0 +1,401 @@
+<UserControl 
+	xmlns="https://github.com/avaloniaui"
+	x:Class="ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.CustomTitleBarContent.MainControl"
+	x:Name="rootSampleControl"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Tool window containers support custom content in the title bar.  The content template can be anything from indicators, to additional buttons, to status messages.  The template's data context is the same as that of the tool window.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Contextual content" Url="https://www.actiprosoftware.com/docs/controls/avalonia/docking/docking-window-features/contextual-content" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+			<sampleBrowser:ControlExampleLinkItem Title="Custom context content" Url="/ProductSamples/DockingSamples/QuickStarts/CustomContextContent/MainControl" />
+		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+
+		<sampleBrowser:ControlExample
+			Header="Search button"
+			Footer="The DataContext of the &quot;Search Button&quot; tool window in this sample is set to a boolean true or false value."
+			DataContext="{Binding #searchButtonDockSite}"
+			>
+
+			<actipro:DockSite x:Name="searchButtonDockSite" Height="200"
+				FloatingWindowIcon="/Images/Icons/Actipro.ico"
+				FloatingWindowTitle="Docking/MDI Demo">
+
+				<actipro:SplitContainer Orientation="Horizontal">
+
+					<actipro:Workspace>
+						<actipro:StandardMdiHost />
+					</actipro:Workspace>
+
+					<actipro:ToolWindowContainer>
+						<actipro:ToolWindow x:Name="searchButtonToolWindow" Title="Search Button" ContainerDockedSize="300,200">
+							<!-- The DataContext of this sample controls the visibility of the button in the template -->
+							<actipro:ToolWindow.DataContext>
+								<x:True />
+							</actipro:ToolWindow.DataContext>
+
+							<actipro:ToolWindow.ToolWindowContainerTitleBarContextContentTemplate>
+								<DataTemplate>
+									<Button Padding="3" x:DataType="x:Object"
+										Command="{Binding #rootSampleControl.SearchCommand}"
+										IsVisible="{Binding}"
+										Theme="{actipro:ControlTheme DockingEmbeddedButton}"
+										VerticalAlignment="Center"
+										>
+										<Button.ContentTemplate>
+											<DataTemplate>
+												<Canvas Width="10" Height="10">
+													<Path Width="10" Height="10" StrokeThickness="1"
+														Stroke="{Binding RelativeSource={RelativeSource Self}, Path=(TextElement.Foreground)}"
+														Data="M 0.5,3.5 A 3,3 90 0 1 3.5,0.5 A 3,3 90 0 1 6.5,3.5 A 3,3 90 0 1 3.5,6.5 A 3,3 90 0 1 0.5,3  M 5.5,6 L 9,9.5 L 9.5,9 L 6,5.5 Z"
+														/>
+												</Canvas>
+											</DataTemplate>
+										</Button.ContentTemplate>
+									</Button>
+								</DataTemplate>
+							</actipro:ToolWindow.ToolWindowContainerTitleBarContextContentTemplate>
+
+							<Grid Margin="10" RowDefinitions="Auto,*">
+								<CheckBox Grid.Row="0" Content="Is search button visible" IsChecked="{Binding #searchButtonToolWindow.DataContext, Mode=TwoWay}" />
+								<TextBlock Grid.Row="1" Margin="0,10,0,0" Focusable="True"
+									Text="This tool window contains a custom search button in the title bar whose visibilty is controlled by the DataContext."
+									TextWrapping="Wrap" TextTrimming="WordEllipsis"
+									/>
+							</Grid>
+						</actipro:ToolWindow>
+						<actipro:ToolWindow Title="Normal" ContainerDockedSize="300,200">
+							<TextBlock Margin="10" Focusable="True"
+								Text="This is a normal tool window with no special tab UI. Notice how the title bar only shows the context content of the selected tool window."
+								TextWrapping="Wrap" TextTrimming="WordEllipsis"
+								/>
+						</actipro:ToolWindow>
+					</actipro:ToolWindowContainer>
+
+				</actipro:SplitContainer>
+
+			</actipro:DockSite>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Context alignment" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type={x:Type actipro:ContextContentAlignment}}" SelectedValue="{Binding ToolWindowsTitleBarContextContentAlignment}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Tool window data context" />
+						<ComboBox SelectedItem="{Binding #searchButtonToolWindow.DataContext, Mode=TwoWay}">
+							<x:True />
+							<x:False />
+						</ComboBox>
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<UserControl x:Name="rootSampleControl" ... >
+	<actipro:DockSite ToolWindowsTitleBarContextContentAlignment="$(ToolWindowsTitleBarContextContentAlignment)" ... >
+		<actipro:ToolWindowContainer>
+
+			<actipro:ToolWindow x:Name="searchButtonToolWindow" Title="Search Button">
+
+				<!-- The DataContext of this sample controls the visibility of the button in the template -->
+				<actipro:ToolWindow.DataContext>
+					<x:$(DataContext) />
+				</actipro:ToolWindow.DataContext>
+
+				<actipro:ToolWindow.ToolWindowContainerTitleBarContextContentTemplate>
+					<DataTemplate>
+						<Button Padding="3"
+							Command="{Binding #rootSampleControl.SearchCommand}"
+							IsVisible="{Binding}"
+							Theme="{actipro:ControlTheme DockingEmbeddedButton}"
+							VerticalAlignment="Center"
+							>
+							<Button.ContentTemplate>
+								<DataTemplate>
+									<Canvas Width="10" Height="10">
+										<Path Width="10" Height="10" StrokeThickness="1"
+											Stroke="{Binding RelativeSource={RelativeSource Self}, Path=(TextElement.Foreground)}"
+											Data="M 0.5,3.5 A 3,3 90 0 1 3.5,0.5 A 3,3 90 0 1 6.5,3.5 A 3,3 90 0 1 3.5,6.5 A 3,3 90 0 1 0.5,3  M 5.5,6 L 9,9.5 L 9.5,9 L 6,5.5 Z"
+											/>
+									</Canvas>
+								</DataTemplate>
+							</Button.ContentTemplate>
+						</Button>
+					</DataTemplate>
+				</actipro:ToolWindow.ToolWindowContainerTitleBarContextContentTemplate>
+
+				<TextBlock ... />
+
+			</actipro:ToolWindow>
+
+		<actipro:ToolWindowContainer>
+		...
+	</actipro:DockSite>
+</UserControl>
+
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="DataContext" Value="{Binding #searchButtonToolWindow.DataContext}" />
+						<sampleBrowser:CodeExampleSubstitution Key="ToolWindowsTitleBarContextContentAlignment" Value="{Binding ToolWindowsTitleBarContextContentAlignment}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+						<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls;
+using ActiproSoftware.UI.Avalonia.Input;
+...
+public partial class MainControl : UserControl {
+
+	private DelegateCommand<object?>? _searchCommand;
+
+	public ICommand SearchCommand
+		=> _searchCommand ??= new DelegateCommand<object?>(_ => {
+			MessageBox.Show("Search button clicked.");
+		});
+
+}
+]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Status indicator"
+			Footer="The DataContext of the &quot;Status&quot; tool window in this sample is set to a boolean true or false value."
+			DataContext="{Binding #indicatorDockSite}"
+			>
+
+			<actipro:DockSite x:Name="indicatorDockSite" Height="200"
+				FloatingWindowIcon="/Images/Icons/Actipro.ico"
+				FloatingWindowTitle="Docking/MDI Demo">
+				<actipro:DockSite.Resources>
+					<actipro:ComparisonConverter x:Key="StatusLightComparisonConverter">
+						<actipro:ComparisonConverter.TrueResult>
+							<SolidColorBrush Color="#5cd404" />
+						</actipro:ComparisonConverter.TrueResult>
+						<actipro:ComparisonConverter.FalseResult>
+							<SolidColorBrush Color="#d40404" />
+						</actipro:ComparisonConverter.FalseResult>
+					</actipro:ComparisonConverter>
+				</actipro:DockSite.Resources>
+
+				<actipro:SplitContainer Orientation="Horizontal">
+
+					<actipro:Workspace>
+						<actipro:StandardMdiHost />
+					</actipro:Workspace>
+
+					<actipro:ToolWindowContainer>
+						<actipro:ToolWindow x:Name="statusToolWindow" Title="Status" ContainerDockedSize="300,200">
+							<!-- The DataContext of this sample controls the color of the indictor using a conditional converter -->
+							<actipro:ToolWindow.DataContext>
+								<x:False />
+							</actipro:ToolWindow.DataContext>
+							<actipro:ToolWindow.ToolWindowContainerTitleBarContextContentTemplate>
+								<DataTemplate>
+									<Ellipse x:DataType="x:Object" Margin="2" Width="12" Height="12" StrokeThickness="1" Stroke="#ffffff"
+										HorizontalAlignment="Center" VerticalAlignment="Center"
+										Fill="{Binding Converter={StaticResource StatusLightComparisonConverter}}"
+										/>
+								</DataTemplate>
+							</actipro:ToolWindow.ToolWindowContainerTitleBarContextContentTemplate>
+
+							<Grid Margin="10" RowDefinitions="Auto,*">
+								<CheckBox Content="Is approved" IsChecked="{Binding #statusToolWindow.DataContext, Mode=TwoWay}" />
+								<TextBlock Grid.Row="1" Margin="0,10,0,0" Focusable="True"
+									Text="This tool window contains a custom indicator in the title bar that is controlled by the DataContext."
+									TextWrapping="Wrap" TextTrimming="WordEllipsis" />
+							</Grid>
+						</actipro:ToolWindow>
+						<actipro:ToolWindow Title="Normal" ContainerDockedSize="300,200">
+							<TextBlock Margin="10"
+								Text="This is a normal tool window with no special tab UI. Notice how the title bar only shows the context content of the selected tool window."
+								TextWrapping="Wrap"
+								/>
+						</actipro:ToolWindow>
+					</actipro:ToolWindowContainer>
+
+				</actipro:SplitContainer>
+
+			</actipro:DockSite>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Context alignment" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type={x:Type actipro:ContextContentAlignment}}" SelectedValue="{Binding ToolWindowsTitleBarContextContentAlignment}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Tool window data context" />
+						<ComboBox SelectedItem="{Binding #statusToolWindow.DataContext, Mode=TwoWay}">
+							<x:True />
+							<x:False />
+						</ComboBox>
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:DockSite ToolWindowsTitleBarContextContentAlignment="$(ToolWindowsTitleBarContextContentAlignment)" ... >
+	<actipro:DockSite.Resources>
+		<actipro:ComparisonConverter x:Key="StatusLightComparisonConverter">
+			<actipro:ComparisonConverter.TrueResult>
+				<SolidColorBrush Color="#5cd404" />
+			</actipro:ComparisonConverter.TrueResult>
+			<actipro:ComparisonConverter.FalseResult>
+				<SolidColorBrush Color="#d40404" />
+			</actipro:ComparisonConverter.FalseResult>
+		</actipro:ComparisonConverter>
+	</actipro:DockSite.Resources>
+	
+	<actipro:ToolWindowContainer>
+
+		<actipro:ToolWindow x:Name="statusToolWindow" Title="Status">
+
+			<!-- The DataContext of this sample controls the color of the indictor using a conditional converter -->
+			<actipro:ToolWindow.DataContext>
+				<x:$(DataContext) />
+			</actipro:ToolWindow.DataContext>
+				
+			<actipro:ToolWindow.ToolWindowContainerTitleBarContextContentTemplate>
+				<DataTemplate>
+					<Ellipse Margin="2" Width="12" Height="12" StrokeThickness="1" Stroke="#ffffff"
+						HorizontalAlignment="Center" VerticalAlignment="Center"
+						Fill="{Binding Converter={StaticResource StatusLightComparisonConverter}}"
+						/>
+				</DataTemplate>
+			</actipro:ToolWindow.ToolWindowContainerTitleBarContextContentTemplate>
+
+			<TextBlock ... />
+
+		</actipro:ToolWindow>
+
+	<actipro:ToolWindowContainer>
+	...
+</actipro:DockSite>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="DataContext" Value="{Binding #statusToolWindow.DataContext}" />
+						<sampleBrowser:CodeExampleSubstitution Key="ToolWindowsTitleBarContextContentAlignment" Value="{Binding ToolWindowsTitleBarContextContentAlignment}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Status label"
+			Footer="The DataContext of the &quot;Label&quot; tool window in this sample is set to a string value."
+			DataContext="{Binding #labelDockSite}"
+			>
+
+			<actipro:DockSite x:Name="labelDockSite" Height="200"
+				FloatingWindowIcon="/Images/Icons/Actipro.ico"
+				FloatingWindowTitle="Docking/MDI Demo">
+				<actipro:SplitContainer Orientation="Horizontal">
+
+					<actipro:Workspace>
+						<actipro:StandardMdiHost />
+					</actipro:Workspace>
+
+					<actipro:ToolWindowContainer>
+						<actipro:ToolWindow x:Name="labelToolWindow" Title="Label" ContainerDockedSize="300,200">
+							<!-- The DataContext of this sample controls the text of the title bar label -->
+							<actipro:ToolWindow.DataContext>
+								<x:String>Approved</x:String>
+							</actipro:ToolWindow.DataContext>
+							<actipro:ToolWindow.ToolWindowContainerTitleBarContextContentTemplate>
+								<DataTemplate>
+									<TextBlock Margin="10,0" x:DataType="x:Object" Text="{Binding}" FontSize="10" FontStyle="Italic" VerticalAlignment="Center" />
+								</DataTemplate>
+							</actipro:ToolWindow.ToolWindowContainerTitleBarContextContentTemplate>
+
+							<TextBlock Margin="10" Focusable="True"
+								Text="This tool window contains a custom status label in the title bar that is controlled by the DataContext."
+								TextWrapping="Wrap" TextTrimming="WordEllipsis"
+								/>
+						</actipro:ToolWindow>
+						<actipro:ToolWindow Title="Normal" ContainerDockedSize="300,200">
+							<TextBlock Margin="10"
+								Text="This is a normal tool window with no special tab UI. Notice how the title bar only shows the context content of the selected tool window."
+								TextWrapping="Wrap"
+								/>
+						</actipro:ToolWindow>
+					</actipro:ToolWindowContainer>
+
+				</actipro:SplitContainer>
+
+			</actipro:DockSite>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Context alignment" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type={x:Type actipro:ContextContentAlignment}}" SelectedValue="{Binding ToolWindowsTitleBarContextContentAlignment}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Tool window data context" />
+						<ComboBox SelectedItem="{Binding #labelToolWindow.DataContext, Mode=TwoWay}">
+							<x:String>Approved</x:String>
+							<x:String>Rejected</x:String>
+						</ComboBox>
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:DockSite ToolWindowsTitleBarContextContentAlignment="$(ToolWindowsTitleBarContextContentAlignment)" ... >
+	<actipro:ToolWindowContainer>
+
+		<actipro:ToolWindow x:Name="labelToolWindow" Title="Label">
+
+			<!-- The DataContext of this sample controls the text of the title bar label -->
+			<actipro:ToolWindow.DataContext>
+				<x:String>$(DataContext)</x:String>
+			</actipro:ToolWindow.DataContext>
+				
+			<actipro:ToolWindow.ToolWindowContainerTitleBarContextContentTemplate>
+				<DataTemplate>
+					<TextBlock Margin="10,0"
+						FontSize="10"
+						FontStyle="Italic"
+						Text="{Binding}"
+						VerticalAlignment="Center"
+						/>
+				</DataTemplate>
+			</actipro:ToolWindow.ToolWindowContainerTitleBarContextContentTemplate>
+
+			<TextBlock ... />
+
+		</actipro:ToolWindow>
+
+	<actipro:ToolWindowContainer>
+	...
+</actipro:DockSite>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="DataContext" Value="{Binding #labelToolWindow.DataContext}" />
+						<sampleBrowser:CodeExampleSubstitution Key="ToolWindowsTitleBarContextContentAlignment" Value="{Binding ToolWindowsTitleBarContextContentAlignment}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

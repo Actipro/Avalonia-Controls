@@ -1,0 +1,19 @@
+<actipro:ToolWindow
+	x:Class="ActiproSoftware.ProductSamples.DockingSamples.Common.OutputToolWindow"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	Icon="/Images/Icons/Output16.png"
+	SerializationId="Output"
+	Title="Output"
+	Description="Display application output"
+	>
+
+	<TextBox
+		BorderThickness="0"
+		IsReadOnly="True"
+		Text="(no output)"
+		/>
+
+</actipro:ToolWindow>

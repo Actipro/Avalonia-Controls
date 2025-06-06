@@ -62,13 +62,13 @@ Use the [BarMenuHeading](xref:@ActiproUIRoot.Controls.Bars.BarMenuHeading) contr
 ```xaml
 xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 ...
-<actipro:BarContextMenu>
+<actipro:BarMenuFlyout>
 	<actipro:BarMenuHeading Label="Clipboard Operations" />
 	<actipro:BarMenuItem Key="Cut" />
 	<actipro:BarMenuItem Key="Copy" />
 	<actipro:BarMenuItem Key="Paste" />
 	...
-</actipro:BarContextMenu>
+</actipro:BarMenuFlyout>
 ```
 }
 @if (wpf) {

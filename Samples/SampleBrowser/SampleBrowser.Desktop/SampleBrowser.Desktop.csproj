@@ -9,8 +9,14 @@
 
 	<Import Project="..\References\ActiproSoftware.References.props" />
 	<Import Project="..\References\Avalonia.References.props" />
+	
 	<ItemGroup>
 		<ProjectReference Include="..\SampleBrowser.Common\SampleBrowser.Common.csproj" />
+	</ItemGroup>
+
+	<!-- AvaloniaUI Developer Tools -->
+	<ItemGroup>
+		<PackageReference Include="AvaloniaUI.DiagnosticsSupport" Version="2.0.1-*" Condition="$([System.Text.RegularExpressions.Regex]::IsMatch($(DefineConstants), '^(.*;)*USE_DEV_TOOLS(;.*)*$'))" />
 	</ItemGroup>
 
 </Project>

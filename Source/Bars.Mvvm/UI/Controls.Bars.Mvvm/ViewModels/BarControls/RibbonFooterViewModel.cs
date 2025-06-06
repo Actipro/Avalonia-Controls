@@ -1,4 +1,4 @@
-﻿using ActiproSoftware.UI.Controls.Templates;
+﻿using ActiproSoftware.UI.Avalonia.Controls.Templates;
 using Avalonia.Controls.Templates;
 
 namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
@@ -6,18 +6,19 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 	/// <summary>
 	/// Represents a view model for a footer within a ribbon.
 	/// </summary>
-	public class RibbonFooterViewModel : ObservableObjectBase {
+	public class RibbonFooterViewModel : ObservableObjectBase, IHasTag {
 
 		private object? _content;
 		private IDataTemplate? _contentTemplate;
 		private IDataTemplateSelector? _contentTemplateSelector = new RibbonFooterContentTemplateSelector();
 		private RibbonFooterKind _kind;
 		private Thickness _padding = new (10, 5);
+		private object? _tag;
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 		// PUBLIC PROCEDURES
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
-		
+
 		/// <summary>
 		/// The content to display within the ribbon footer.
 		/// </summary>
@@ -28,7 +29,7 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 					OnPropertyChanged(nameof(ContentTemplate));
 			} 
 		}
-		
+
 		/// <summary>
 		/// The <see cref="IDataTemplate"/> used to display the content.
 		/// </summary>
@@ -55,7 +56,7 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 			get => _kind;
 			set => SetProperty(ref _kind, value);
 		}
-		
+
 		/// <summary>
 		/// The padding inside the control.
 		/// </summary>
@@ -66,7 +67,13 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 			get => _padding;
 			set => SetProperty(ref _padding, value);
 		}
-		
+
+		/// <inheritdoc cref="IHasTag.Tag"/>
+		public object? Tag {
+			get => _tag;
+			set => SetProperty(ref _tag, value);
+		}
+
 		/// <inheritdoc/>
 		public override string ToString()
 			=> $"{this.GetType().FullName}[Content='{this.Content}']";

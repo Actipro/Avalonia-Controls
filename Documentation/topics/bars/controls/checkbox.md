@@ -127,7 +127,7 @@ Use the [BarMenuItem](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem) control to 
 ```xaml
 xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 ...
-<actipro:BarContextMenu>
+<actipro:BarMenuFlyout>
 	<!-- Label is auto-generated from Key -->
 	<actipro:BarMenuItem
 		Key="ShowWhitespace"
@@ -135,7 +135,7 @@ xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 		Command="{Binding UndoCommand}"
 		/>
 	...
-</actipro:BarContextMenu>
+</actipro:BarMenuFlyout>
 ```
 }
 @if (wpf) {

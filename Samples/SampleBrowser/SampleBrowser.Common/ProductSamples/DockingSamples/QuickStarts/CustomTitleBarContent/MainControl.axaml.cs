@@ -1,0 +1,31 @@
+﻿using ActiproSoftware.UI.Avalonia.Controls;
+using ActiproSoftware.UI.Avalonia.Input;
+using Avalonia.Controls;
+using System.Windows.Input;
+
+namespace ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.CustomTitleBarContent {
+
+	public partial class MainControl : UserControl {
+
+		private DelegateCommand<object?>? _searchCommand;
+
+		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// OBJECT
+		/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		public MainControl() {
+			InitializeComponent();
+		}
+
+		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// PUBLIC PROCEDURES
+		/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		public ICommand SearchCommand
+			=> _searchCommand ??= new DelegateCommand<object?>(_ => {
+				MessageBox.Show("Search button clicked.");
+			});
+
+	}
+
+}

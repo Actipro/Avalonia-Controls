@@ -9,6 +9,7 @@
 		<actipro:RibbonMultiRowControlGroup
 			IsVisible="{Binding IsVisible}"
 			ItemsSource="{Binding Items}"
+			Tag="{Binding Tag}"
 			ThreeRowItemSortOrder="{Binding ThreeRowItemSortOrder}"
 			/>
 	</DataTemplate>

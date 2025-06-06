@@ -26,9 +26,6 @@
 			
 			<TextBox x:Name="textBox" IsVisible="False" />
 
-			<actipro:InfoBar Severity="Warning" CanClose="False" Margin="{actipro:ScaledThickness '6,6,6,0'}"
-				Message="Actipro Bars is being released as a public beta.  While the product is safe for use in production, there is a minor potential for breaking changes as the product is finalized.  Any breaking changes will be documented." />
-			
 			<TextBlock Classes="theme-text-body" Margin="{actipro:ScaledThickness 6}" Text="Dive into our individual samples linked below for many more detailed examples."
 					   FontStyle="Italic" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" TextAlignment="Center" />
 

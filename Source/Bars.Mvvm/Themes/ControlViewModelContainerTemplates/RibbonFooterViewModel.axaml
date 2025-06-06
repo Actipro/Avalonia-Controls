@@ -11,6 +11,7 @@
 			ContentTemplate="{Binding ContentTemplate}"
 			Kind="{Binding Kind}"
 			Padding="{Binding Padding}"
+			Tag="{Binding Tag}"
 			/>
 	</DataTemplate>
 

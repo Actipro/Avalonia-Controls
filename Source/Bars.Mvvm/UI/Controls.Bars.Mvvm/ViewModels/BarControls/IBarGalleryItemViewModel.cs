@@ -3,7 +3,7 @@
 	/// <summary>
 	/// Represents a view model for a gallery item within a bar gallery control.
 	/// </summary>
-	public interface IBarGalleryItemViewModel : INotifyPropertyChanged, IEquatable<IBarGalleryItemViewModel> {
+	public interface IBarGalleryItemViewModel : INotifyPropertyChanged, IEquatable<IBarGalleryItemViewModel>, IHasTag {
 
 		/// <summary>
 		/// The item's category.

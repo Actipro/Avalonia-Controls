@@ -1,0 +1,166 @@
+<UserControl 
+	xmlns="https://github.com/avaloniaui"
+	x:Class="ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.DefaultLocations.MainControl"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:actiproPrimitives="using:ActiproSoftware.UI.Avalonia.Controls.Primitives"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="When a tool window has already been in the dock site layout and then is closed, it leaves a breadcrumb behind so that it knows exactly where to appear when reopened later. For tool windows that are being opened for the first time and don't yet have a breadcrumb available, default location information is requested.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Default locations" Url="https://www.actiprosoftware.com/docs/controls/avalonia/docking/docking-window-features/lifecycle-and-docking-management#default-locations" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExample
+			Header="Default locations"
+			Footer="Refer to the notes in each window for additional details."
+			>
+			
+			<actipro:DockSite x:Name="dockSite" Height="500"
+				FloatingWindowIcon="/Images/Icons/Actipro.ico"
+				FloatingWindowTitle="Docking/MDI Demo"
+				WindowDefaultLocationRequested="OnDockSiteWindowDefaultLocationRequested">
+				<actipro:Workspace>
+					<actipro:TabbedMdiHost>
+						<actipro:TabbedMdiContainer>
+							<actipro:DocumentWindow Title="Notes">
+								<ScrollViewer>
+									<TextBlock Margin="5" TextWrapping="Wrap">
+										The DockingWindow.WindowGroupName property can be set on tool windows that have an affinity.
+										Each window in a 'group' should have the same property value.
+										A window being opened for the first time will look for other open members of the group in the same state so that it can attach to them.
+										<LineBreak /><LineBreak />
+										DockingWindow also has a DefaultLocationRequestAction property that can be set to a lambda
+										that is passed a DockingWindowDefaultLocationEventArgs instance.
+										The event args allows you to programmatically designate a dock target (such as a dock host or other tool window) and optional side upon which to dock.
+										Then the DockSite.WindowDefaultLocationRequested event fires and allows for the similar logic to be applied.
+										<LineBreak /><LineBreak />
+										If no dock target is designated by the action or event, then the window will dock against the primary dock host
+										using the side specified by the window's DefaultDockSide property.
+									</TextBlock>
+								</ScrollViewer>
+							</actipro:DocumentWindow>
+						</actipro:TabbedMdiContainer>
+					</actipro:TabbedMdiHost>
+				</actipro:Workspace>
+			</actipro:DockSite>
+
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+						<![CDATA[
+<!--
+This sample creates a number of tool windows in code behind.  It shows off the various
+ways, everything from simple properties to events, to provide default location
+information when a tool window is told to open without being passed specific location
+information. This concept is especially important in MVVM scenarios.
+-->
+<actipro:DockSite x:Name="dockSite" ... >
+
+	...
+
+</actipro:DockSite>
+						]]>
+					</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+						<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Docking;
+...
+public partial class MainControl : UserControl {
+
+	public MainControl() {
+		InitializeComponent();
+		
+		// Respond to general requests for a default window location
+		dockSite.WindowDefaultLocationRequested += OnDockSiteWindowDefaultLocationRequested;
+	}
+
+	protected override void OnLoaded(RoutedEventArgs e) {
+		base.OnLoaded(e);
+
+		// Initialize tool windows when the control is first loaded
+		if (dockSite.ToolWindows.Count == 0)
+			OpenToolWindows();
+	}
+
+	/// <summary>
+	/// Opens the tool windows for this sample.
+	/// </summary>
+	private void OpenToolWindows() {
+		// This first tool window has no default dock side set, and will fall back to
+		// docking on the right side of the primary dock host.
+		var toolWindow = new ToolWindow(dockSite, "right1", "Tool Window 1", icon: null, content: "...");
+		toolWindow.WindowGroupName = "Right Group";
+		toolWindow.Activate(focus: false);
+
+		// This second tool window has DefaultDockSide = Bottom and will default to
+		// open at the bottom of the primary dock host.
+		toolWindow = new ToolWindow(dockSite, "bottom1", "Tool Window 2", icon: null, content: "...");
+		toolWindow.DefaultDockSide = Side.Bottom;
+		toolWindow.WindowGroupName = "Bottom Group";
+		toolWindow.Activate(focus: false);
+
+		// This third tool window has no default dock side set, but is in the same
+		// WindowGroupName as "Tool Window 2", and will default to attach to it.
+		toolWindow = new ToolWindow(dockSite, "bottom2", "Tool Window 3", icon: null, content: "...");
+		toolWindow.WindowGroupName = "Bottom Group";
+		toolWindow.Activate(focus: false);
+
+		// This fourth tool window has DefaultDockSide = Bottom, but is in the same
+		// WindowGroupName as "Tool Window 1", and will default to attach to it
+		// because that takes priority over DefaultDockSide.
+		toolWindow = new ToolWindow(dockSite, "right2", "Tool Window 4", icon: null, content: "...");
+		toolWindow.DefaultDockSide = Side.Bottom;
+		toolWindow.WindowGroupName = "Right Group"; // An existing WindowGroup overrides DefaultDockSide
+		toolWindow.Activate(focus: false);
+
+		// This fifth tool window specifies the same parameters as "Tool Window 4"
+		// but also has a DefaultLocationRequested event handler that overrides
+		// everything by forcing a left side dock.
+		toolWindow = new ToolWindow(dockSite, "left1", "Tool Window 5", icon: null, content: "...");
+		toolWindow.DefaultDockSide = Side.Bottom; // Overridden by event handler
+		toolWindow.WindowGroupName = "Right Group"; // Overridden by event handler
+		toolWindow.DefaultLocationRequested += (sender, e) => {
+			if (e.State == DockingWindowState.Docked) {
+				// Force a left side dock
+				e.Target = null;
+				e.Side = Side.Left;
+			}
+		};
+		toolWindow.Activate(focus: false);
+
+		// This sixth tool window's default location is set in a generalized
+		// DockSite.WindowDefaultLocationRequested event handler.
+		toolWindow = new ToolWindow(dockSite, "bottomLeft1", "Tool Window 6", icon: null, content: "...");
+		toolWindow.Activate(focus: false);
+	}
+
+	private void OnDockSiteWindowDefaultLocationRequested(object? sender, DockingWindowDefaultLocationEventArgs e) {
+		// This event handler is used to programmatically define the default location
+		// for a specific tool window identified as "bottomLeft1" (i.e., "Tool Window 6")
+		if (e.Window?.SerializationId == "bottomLeft1") {
+			if (e.State == DockingWindowState.Docked) {
+				// Dock in hierarchy under the left tool window (i.e., "Tool Window 5")
+				var targetToolWindow = dockSite.ToolWindows.FirstOrDefault(x => x.SerializationId == "left1");
+				if (targetToolWindow?.IsOpen == true) {
+					e.Target = targetToolWindow;
+					e.Side = Side.Bottom;
+				}
+			}
+		}
+	}
+
+}
+]]>
+					</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

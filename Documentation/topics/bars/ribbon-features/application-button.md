@@ -134,9 +134,12 @@ xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 		<actipro:Ribbon.ApplicationButtonContent>
 			<actipro:RibbonApplicationButton>
 				<actipro:RibbonApplicationButton.Content>
-					<actipro:DynamicImage Width="16" Height="16" VerticalAlignment="Center"
-					                      Stretch="Uniform" StretchDirection="DownOnly"
-					                      Source="/Images/SomeImage.png" />
+					<actipro:DynamicImage
+						Width="16" Height="16"
+						VerticalAlignment="Center"
+						Stretch="Uniform" StretchDirection="DownOnly"
+						Source="/Images/SomeImage.png"
+						/>
 				</actipro:RibbonApplicationButton.Content>
 			</actipro:RibbonApplicationButton>
 		</actipro:Ribbon.ApplicationButtonContent>
@@ -156,9 +159,13 @@ xmlns:shared="http://schemas.actiprosoftware.com/winfx/xaml/shared"
 		<bars:Ribbon.ApplicationButtonContent>
 			<bars:RibbonApplicationButton>
 				<bars:RibbonApplicationButton.Content>
-					<shared:DynamicImage Width="16" Height="16" VerticalAlignment="Center"
-					                     Stretch="Uniform" StretchDirection="DownOnly"
-					                     Source="/Images/SomeImage.png" SnapsToDevicePixels="True" />
+					<shared:DynamicImage
+						Width="16" Height="16"
+						Source="/Images/SomeImage.png"
+						SnapsToDevicePixels="True"
+						Stretch="Uniform" StretchDirection="DownOnly"
+						VerticalAlignment="Center"
+						/>
 				</bars:RibbonApplicationButton.Content>
 			</bars:RibbonApplicationButton>
 		</bars:Ribbon.ApplicationButtonContent>

@@ -1,9 +1,7 @@
 ﻿using ActiproSoftware.ProductSamples.FundamentalsSamples.Common;
-using ActiproSoftware.SampleBrowser;
 using ActiproSoftware.UI.Avalonia.Controls;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
-using System;
 using System.ComponentModel;
 using System.Text;
 
@@ -19,6 +17,7 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.MessageBox
 		private MessageBoxButtons _buttons = MessageBoxButtons.OK;
 		private string _caption = string.Empty;
 		private MessageBoxResult _defaultResult = MessageBoxResult.None;
+		private ChromedDecorations _dialogChromedDecorations = ChromedDecorations.TitleBarOnlyPreferred;
 		private UserPromptDisplayMode _displayMode = UserPromptDisplayMode.DialogPreferred;
 		private MessageBoxImage _image = MessageBoxImage.Information;
 		private MessageBoxResult _result = MessageBoxResult.None;
@@ -56,7 +55,7 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.MessageBox
 				.AppendLine(indent + FormatAsString(ResolveCaption()) + ",")
 				.Append(indent + nameof(MessageBoxButtons) + "." + Buttons);
 
-			var requiresBuilder = (hasHelpButton || (DisplayMode == UserPromptDisplayMode.Overlay));
+			var requiresBuilder = (hasHelpButton || (DisplayMode == UserPromptDisplayMode.Overlay) || (DialogChromedDecorations != ChromedDecorations.TitleBarOnlyPreferred));
 			if (hasImage || hasDefaultResult || requiresBuilder) {
 				sample.AppendLine(",")
 					.Append(indent + nameof(MessageBoxImage) + "." + Image);
@@ -66,10 +65,12 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.MessageBox
 					if (requiresBuilder) {
 						sample.AppendLine(",")
 							.AppendLine(indent + "(builder) => builder");
+						if (DialogChromedDecorations != ChromedDecorations.TitleBarOnlyPreferred)
+							sample.AppendLine(indent + indent + $".{nameof(UserPromptBuilder.WithDialogChromedDecorations)}({nameof(ChromedDecorations)}.{DialogChromedDecorations})");
 						if (DisplayMode == UserPromptDisplayMode.Overlay)
-							sample.AppendLine(indent + indent + $".WithDisplayMode({nameof(UserPromptDisplayMode)}.{nameof(UserPromptDisplayMode.Overlay)})");
+							sample.AppendLine(indent + indent + $".{nameof(UserPromptBuilder.WithDisplayMode)}({nameof(UserPromptDisplayMode)}.{nameof(UserPromptDisplayMode.Overlay)})");
 						if (hasHelpButton) {
-							sample.AppendLine(indent + indent + ".WithHelpCommand(() => {")
+							sample.AppendLine(indent + indent + $".{nameof(UserPromptBuilder.WithHelpCommand)}(() => {{")
 								.AppendLine(indent + indent + indent + "// Define action to be invoked when Help is clicked")
 								.Append(indent + indent + "}");
 						}
@@ -132,6 +133,11 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.MessageBox
 			set => SetProperty(ref _defaultResult, value);
 		}
 
+		public ChromedDecorations DialogChromedDecorations {
+			get => _dialogChromedDecorations;
+			set => SetProperty(ref _dialogChromedDecorations, value);
+		}
+
 		public UserPromptDisplayMode DisplayMode {
 			get => _displayMode;
 			set => SetProperty(ref _displayMode, value);
@@ -174,7 +180,9 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.MessageBox
 			}
 
 			Result = await MessageBox.Show(Text, ResolveCaption(), Buttons, Image, DefaultResult, (builder) => {
-				builder.WithDisplayMode(DisplayMode);
+				builder
+					.WithDialogChromedDecorations(DialogChromedDecorations)
+					.WithDisplayMode(DisplayMode);
 				if (AddHelpButton)
 					builder.WithHelpCommand(() => MessageBox.Show("Here is where you would show contextual help.", "Help"));
 			});

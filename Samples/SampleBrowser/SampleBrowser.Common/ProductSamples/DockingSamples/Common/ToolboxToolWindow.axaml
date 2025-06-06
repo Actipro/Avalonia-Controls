@@ -1,0 +1,22 @@
+<actipro:ToolWindow
+	x:Class="ActiproSoftware.ProductSamples.DockingSamples.Common.ToolboxToolWindow"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	Icon="/Images/Icons/Toolbox16.png"
+	SerializationId="Toolbox"
+	Title="Toolbox"
+	Description="Displays available controls"
+	>
+
+	<TextBlock
+		Margin="{actipro:ScaledThickness 2}"
+		Focusable="True"
+		HorizontalAlignment="Center"
+		Text="There are no usable controls in the toolbox."
+		TextAlignment="Center"
+		TextWrapping="Wrap"
+		/>
+
+</actipro:ToolWindow>

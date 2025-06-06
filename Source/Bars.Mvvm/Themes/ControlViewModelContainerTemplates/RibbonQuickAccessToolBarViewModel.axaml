@@ -10,6 +10,7 @@
 			CommonItems="{Binding CommonItems}"
 			IsCustomizeButtonVisible="{Binding IsCustomizeButtonVisible}"
 			ItemsSource="{Binding Items}"
+			Tag="{Binding Tag}"
 			/>
 	</DataTemplate>
 

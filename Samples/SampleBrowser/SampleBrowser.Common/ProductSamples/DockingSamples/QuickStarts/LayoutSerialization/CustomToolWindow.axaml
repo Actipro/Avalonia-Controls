@@ -1,0 +1,15 @@
+<actipro:ToolWindow
+	x:Class="ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.LayoutSerialization.CustomToolWindow"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	Title="Programmatic ToolWindow 2"
+	Icon="/Images/Icons/Properties16.png"
+	>
+
+	<TextBox BorderThickness="0" TextWrapping="Wrap" IsReadOnly="True">
+		This is a custom ToolWindow class whose UI was created in its own XAML file.
+	</TextBox>
+
+</actipro:ToolWindow>

@@ -7,10 +7,13 @@
 
 	<DataTemplate x:Key="{x:Static actipro:BarsMvvmResourceKeys.RibbonBackstageDefaultItemContainerTemplate}" DataType="actipro:RibbonBackstageViewModel">
 		<actipro:RibbonBackstage
+			CanClose="{Binding CanClose, Mode=TwoWay}"
+			CanSelectFirstTabOnOpen="{Binding CanSelectFirstTabOnOpen}"
 			ContentTemplate="{Binding ContentTemplate}"
 			IsOpen="{Binding IsOpen, Mode=TwoWay}"
 			ItemsSource="{Binding Items}"
 			SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+			Tag="{Binding Tag}"
 			/>
 	</DataTemplate>
 

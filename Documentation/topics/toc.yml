@@ -94,6 +94,8 @@ items:
     items:
     - name: "Overview"
       href: bars/menu-features/index.md
+    - name: "Main Menu"
+      href: bars/menu-features/main-menu.md
     - name: "Context Menus"
       href: bars/menu-features/context-menus.md
     - name: "Menu Customization"
@@ -104,6 +106,86 @@ items:
     href: bars/localization.md
   - name: "Troubleshooting"
     href: bars/troubleshooting.md
+- name: "Actipro Docking & MDI"
+  href: docking/index.md
+  items:
+  - name: "Overview"
+    href: docking/index.md
+  - name: "Getting Started"
+    href: docking/getting-started.md
+  - name: "Term Definitions"
+    href: docking/term-definitions.md
+  - name: "Control Hierarchy"
+    href: docking/control-hierarchy.md
+  - name: "Docking Window Features"
+    href: docking/docking-window-features/index.md
+    items:
+    - name: "Overview"
+      href: docking/docking-window-features/index.md
+    - name: "Docking Window States"
+      href: docking/docking-window-features/docking-window-states.md
+    - name: "Lifecycle and Docking Management"
+      href: docking/docking-window-features/lifecycle-and-docking-management.md
+    - name: "Docking Window Capabilities"
+      href: docking/docking-window-features/docking-window-capabilities.md
+    - name: "Docking Window Events"
+      href: docking/docking-window-features/docking-window-events.md
+    - name: "Docked Tool Windows"
+      href: docking/docking-window-features/docked-tool-windows.md
+    - name: "Auto-Hidden Tool Windows"
+      href: docking/docking-window-features/auto-hidden-tool-windows.md
+    - name: "Floating Dock Hosts"
+      href: docking/docking-window-features/floating-dock-hosts.md
+    - name: "Contextual Content"
+      href: docking/docking-window-features/contextual-content.md
+    - name: "Fixed Tool Windows"
+      href: docking/docking-window-features/fixed-tool-windows.md
+    - name: "Menu Customization"
+      href: docking/docking-window-features/menu-customization.md
+    - name: "Switchers"
+      href: docking/docking-window-features/switchers.md
+  - name: "Workspace and MDI Features"
+    href: docking/workspace-mdi-features/index.md
+    items:
+    - name: "Overview"
+      href: docking/workspace-mdi-features/index.md
+    - name: "Workspace"
+      href: docking/workspace-mdi-features/workspace.md
+    - name: "Tabbed MDI"
+      href: docking/workspace-mdi-features/tabbed-mdi.md
+    - name: "Standard MDI"
+      href: docking/workspace-mdi-features/standard-mdi.md
+    - name: "Working with Documents"
+      href: docking/workspace-mdi-features/working-with-documents.md
+  - name: "Layout, Globalization, and Accessibility Features"
+    href: docking/layout-features/index.md
+    items:
+    - name: "Overview"
+      href: docking/layout-features/index.md
+    - name: "Layout Serialization"
+      href: docking/layout-features/layout-serialization.md
+    - name: "Nested Dock Sites"
+      href: docking/layout-features/nested-dock-sites.md
+    - name: "Side-by-Side Dock Sites"
+      href: docking/layout-features/side-by-side-dock-sites.md
+    - name: "Linked Dock Sites"
+      href: docking/layout-features/linked-dock-sites.md
+    - name: "Tool Window Inner-Fill"
+      href: docking/layout-features/tool-window-inner-fill.md
+    - name: "Programmatic Layout"
+      href: docking/layout-features/programmatic-layout.md
+    - name: "Flow Direction"
+      href: docking/layout-features/flow-direction.md
+    - name: "Localization"
+      href: docking/layout-features/localization.md
+  - name: "MVVM Features"
+    href: docking/mvvm-features.md
+  - name: "Interop Compatibility"
+    href: docking/interop-compatibility.md
+  - name: "AdvancedTabControl"
+    href: docking/advanced-tab-control.md
+  - name: "Troubleshooting"
+    href: docking/troubleshooting.md
 - name: "Actipro Fundamentals"
   href: fundamentals/index.md
   items:
@@ -159,6 +241,8 @@ items:
       href: fundamentals/controls/settings-expander.md
     - name: "Settings Group"
       href: fundamentals/controls/settings-group.md
+    - name: "Window Control"
+      href: fundamentals/controls/window-control.md
     - name: "Progress Spinners"
       href: fundamentals/controls/progress-spinners.md
   - name: "Panels"
@@ -238,6 +322,8 @@ items:
       href: shared/shapes/ring-slice.md
   - name: "Media"
     href: shared/media.md
+  - name: "Serialization"
+    href: shared/windows-serialization.md
   - name: "Extension Methods"
     href: shared/extension-methods.md
   - name: "Value Converters"
@@ -277,6 +363,8 @@ items:
   items:
   - name: "Overview"
     href: conversion/index.md
+  - name: "Converting to v25.2"
+    href: conversion/converting-to-v25-2.md
   - name: "Converting to v25.1"
     href: conversion/converting-to-v25-1.md
   - name: "Converting to v24.2"

@@ -1,0 +1,165 @@
+<UserControl 
+	xmlns="https://github.com/avaloniaui"
+	x:Class="ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.CustomContextMenu.MainControl"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:actiproPrimitives="using:ActiproSoftware.UI.Avalonia.Controls.Primitives"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="The DockSite.MenuOpening event fires before a docking-related menu is opened. It allows for the menu to be completely replaced or altered prior to end user display. The event arguments pass the Kind of event and the target Window (if any).">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Menu customization" Url="https://www.actiprosoftware.com/docs/controls/avalonia/docking/docking-window-features/menu-customization" />
+			<sampleBrowser:ControlExampleLinkItem Title="Actipro Bars context menu" Url="https://www.actiprosoftware.com/docs/controls/avalonia/bars/menu-features/context-menus" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+			<sampleBrowser:ControlExampleLinkItem Title="Actipro Bars context and popup menus" Url="/ProductSamples/BarsSamples/QuickStarts/PopupAndContextMenus/MainControl" />
+		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+
+		<sampleBrowser:ControlExample
+			Header="Custom context menu"
+			Footer="The Output tool window shows the history of all menu-related events."
+			>
+
+			<actipro:DockSite x:Name="dockSite" Height="400"
+				FloatingWindowIcon="/Images/Icons/Actipro.ico"
+				FloatingWindowTitle="Docking/MDI Demo"
+				MenuOpening="OnDockSiteMenuOpening">
+
+				<actipro:SplitContainer Orientation="Vertical">
+					<actipro:SplitContainer>
+
+						<actipro:Workspace>
+							<actipro:TabbedMdiHost>
+								<actipro:TabbedMdiContainer>
+									<actipro:ToolWindow x:Name="customizedDocumentWindow" Title="Context Menu Altered">
+										<TextBox BorderThickness="0" Text="This document window has altered its context menu.  Show the tab's context menu to see a custom menu item added to the end." TextWrapping="Wrap" />
+									</actipro:ToolWindow>
+								</actipro:TabbedMdiContainer>
+							</actipro:TabbedMdiHost>
+						</actipro:Workspace>
+
+						<actipro:ToolWindowContainer>
+							<actipro:ToolWindow x:Name="customizedToolWindow" Title="Context Menu Replaced">
+								<TextBox BorderThickness="0" Text="This tool window has had its context menu completely replaced." TextWrapping="Wrap" />
+							</actipro:ToolWindow>
+						</actipro:ToolWindowContainer>
+
+					</actipro:SplitContainer>
+
+					<actipro:ToolWindowContainer>
+						<actipro:ToolWindow x:Name="outputToolWindow" Title="Output">
+							<ListBox x:Name="eventsListBox" BorderThickness="0" />
+						</actipro:ToolWindow>
+					</actipro:ToolWindowContainer>
+
+				</actipro:SplitContainer>
+
+			</actipro:DockSite>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+						<![CDATA[
+<actipro:DockSite x:Name="dockSite" ... >
+
+	<actipro:SplitContainer Orientation="Vertical">
+		<actipro:SplitContainer>
+
+			<actipro:Workspace>
+				<actipro:TabbedMdiHost>
+					<actipro:TabbedMdiContainer>
+						<actipro:ToolWindow x:Name="customizedDocumentWindow" Title="Context Menu Altered" ... />
+					</actipro:TabbedMdiContainer>
+				</actipro:TabbedMdiHost>
+			</actipro:Workspace>
+
+			<actipro:ToolWindowContainer>
+				<actipro:ToolWindow x:Name="customizedToolWindow" Title="Context Menu Replaced" ... />
+			</actipro:ToolWindowContainer>
+
+		</actipro:SplitContainer>
+
+		<actipro:ToolWindowContainer>
+			<actipro:ToolWindow Title="Output" ... />
+		</actipro:ToolWindowContainer>
+
+	</actipro:SplitContainer>
+	...
+
+</actipro:DockSite>
+						]]>
+					</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+						<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Docking;
+...
+public partial class MainControl : UserControl {
+
+	public MainControl() {
+		InitializeComponent();
+		
+		// Listen for when a menu is opening
+		dockSite.MenuOpening += OnDockSiteMenuOpening;
+	}
+
+	/// <summary>
+	/// Occurs when a docking-related context menu is opening, allowing for customization before it is displayed.
+	/// </summary>
+	/// <param name="sender">The sender of the event.</param>
+	/// <param name="e">The <c>DockingMenuEventArgs</c> that contains data related to this event.</param>
+	private void OnDockSiteMenuOpening(object? sender, DockingMenuEventArgs e) {
+		var message = new StringBuilder($"WindowContextMenu: Kind={e.Kind}");
+
+		if ((e.Window is not null) && (e.Menu is not null)) {
+			message.Append($", Title={e.Window.Title} ");
+
+			if (e.Window == customizedDocumentWindow) {
+				// The "Context Menu Altered" document window's context menu is altered
+				// to include a custom menu item at its end.
+
+				e.Menu.Items.Add(new Separator());
+
+				var menuItem = new MenuItem() { Header = $"Custom Menu Item Added at {DateTime.Now.ToShortTimeString()}" };
+				e.Menu.Items.Add(menuItem);
+			}
+			else if (e.Window == customizedToolWindow) {
+				// The "Context Menu Replaced" tool window has its context menu completely
+				// replaced by a new menu based on the Actipro Bars product.
+
+				var barMenu = new BarMenuFlyout();
+				barMenu.Items.Add(new BarMenuItem() {
+					Label = "Custom Menu",
+					LargeIcon = new ActiproSoftware.UI.Avalonia.Images.BarsLogo48(),
+					Description = "This menu is based on the Actipro Bars product",
+					UseLargeSize = true,
+				});
+				barMenu.Items.Add(new BarSeparator());
+				barMenu.Items.Add(new BarMenuItem($"Custom Menu Item Added at {DateTime.Now.ToShortTimeString()}"));
+
+				e.Menu = barMenu;
+			}
+		}
+
+		AppendMessage(message.ToString());
+	}
+
+	/// <summary>
+	/// Appends a message to the events <see cref="ListBox"/>.
+	/// </summary>
+	/// <param name="text">The text to append.</param>
+	private void AppendMessage(string text) { ... }
+
+}
+]]>
+					</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

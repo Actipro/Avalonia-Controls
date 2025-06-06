@@ -167,7 +167,7 @@ The @if (avalonia) { [BarMenuControlWrapper](xref:@ActiproUIRoot.Controls.Bars.P
 ```xaml
 xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 ...
-<actipro:BarContextMenu>
+<actipro:BarMenuFlyout>
 	<NumericUpDown
 		actipro:BarControlService.HasExternalHeader="True"
 		actipro:BarControlService.Key="Minimum"
@@ -178,7 +178,7 @@ xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 		Value="{Binding MinimumValue, Mode=TwoWay}"
 		/>
 	...
-</actipro:BarContextMenu>
+</actipro:BarMenuFlyout>
 ```
 }
 @if (wpf) {
@@ -194,7 +194,7 @@ xmlns:editors="http://schemas.actiprosoftware.com/winfx/xaml/editors"
 		bars:BarControlService.PanelSpacingSuggestion="Both"
 		bars:BarControlService.SmallImageSource="/Images/Minimum16.png"
 		Width="60" MinHeight="24" MaxHeight="30"
-		UsageContext="ToolBar"
+		UsageContext="Menu"
 		themes:ThemeProperties.CornerRadius="3"
 		Value="{Binding MinimumValue, Mode=TwoWay}"
 		/>

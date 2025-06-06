@@ -12,7 +12,6 @@ using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Styling;
 using System;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPromptIntro {
@@ -46,6 +45,8 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 			// Indicate if dialogs are allowed on the platform
 			_isDialogAllowed = (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime);
 			displayModeWarning.IsVisible = !_isDialogAllowed;
+			dialogChromedDecorationsWarning.IsVisible = !_isDialogAllowed;
+			dialogChromedDecorationsShowHostedSampleButton.IsEnabled = _isDialogAllowed;
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -370,6 +371,26 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 					}
 				})
 				.WithWindowStartupLocation(WindowStartupLocation.CenterOwner)
+				.Show();
+		}
+
+		private async void OnSampleShowDialogChromedDecorationsClick(object? sender, RoutedEventArgs e) {
+			//
+			// SAMPLE: Dialog chromed decorations
+			//
+
+			// Prevent exception on unsupported platforms
+			if (!_isDialogAllowed) {
+				await UserPromptBuilder.Configure().ForDialogDisplayModeNotSupportedNotice().Show();
+				return;
+			}
+
+			await ConfigureUserPrompt()
+				.WithHeaderContent("Dialog chromed decorations")
+				.WithStatusIcon(MessageBoxImage.Information)
+				.WithContent("Apply custom chrome to all or part of a dialog to match the desired application theme.")
+				.WithStandardButtons(MessageBoxButtons.YesNoCancel)
+				.WithDialogChromedDecorations((ChromedDecorations)dialogChromedDecorationsSelection.SelectedValue!)
 				.Show();
 		}
 

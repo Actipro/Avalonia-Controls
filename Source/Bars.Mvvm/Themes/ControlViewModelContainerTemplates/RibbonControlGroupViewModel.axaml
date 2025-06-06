@@ -12,6 +12,7 @@
 			ItemVariantBehavior="{Binding ItemVariantBehavior}"
 			ItemsSource="{Binding Items}"
 			SeparatorMode="{Binding SeparatorMode}"
+			Tag="{Binding Tag}"
 			/>
 	</DataTemplate>
 

@@ -11,6 +11,11 @@ Avatar controls are used to represent people or objects.  They can render a full
 
 *Avatars with generic profile glyph, text initials, and image*
 
+@if (avalonia) {
+> [!IMPORTANT]
+> See the [Getting Started](../getting-started.md) topic for details on configuring themes for this control.
+}
+
 ## Description
 
 The [Description](xref:@ActiproUIRoot.Controls.Avatar.Description) property should be set to a short description of the data represented by the avatar (e.g., a person's full name).  In many scenarios, this may be the only property that needs to be populated because the [Description](xref:@ActiproUIRoot.Controls.Avatar.Description) will define the tooltip and will also auto-generate shorter text to be displayed as the [Avatar](xref:@ActiproUIRoot.Controls.Avatar) `Content`.

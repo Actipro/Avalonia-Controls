@@ -190,6 +190,44 @@ var result = await UserPromptBuilder.Configure()
 
 
 		<sampleBrowser:ControlExample
+			Header="Dialog chromed decorations"
+			Footer="A chromed titlebar provides a custom appearance on all platforms, but can be disabled to match the system appearance."
+			DataContext="{Binding #userPromptDialogChromedDecorations}"
+			>
+			<actipro:UserPromptControl x:Name="userPromptDialogChromedDecorations" Classes="inline-sample"
+									   Header="Dialog chromed decorations"
+									   StandardStatusIcon="Information"
+									   Content="Apply custom chrome to all or part of a dialog to match the desired application theme."
+									   StandardButtons="Yes,No,Cancel"
+									   Responding="OnUserPromptControlRespondingShowFeedback" />
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Dialog chromed decorations" />
+						<ComboBox x:Name="dialogChromedDecorationsSelection" ItemsSource="{actipro:DelimitedArray Type=actipro:ChromedDecorations}" SelectedIndex="2" />
+					</StackPanel>
+					<Button x:Name="dialogChromedDecorationsShowHostedSampleButton" Classes="show-dialog theme-solid accent" Click="OnSampleShowDialogChromedDecorationsClick" />
+					<TextBlock x:Name="dialogChromedDecorationsWarning" Classes="theme-form-control-message warning" Text="Dialog not availailable on this platform" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+var result = await UserPromptBuilder.Configure()
+	// Other common settings here
+	.WithDialogChromedDecorations($(DialogChromedDecorations))
+	.Show();
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="DialogChromedDecorations" Value="{Binding #dialogChromedDecorationsSelection.SelectedItem}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
 			Header="Default button"
 			Footer="See the Button Native Control sample (Themes Product) for additional information on built-in button themes."
 			DataContext="{Binding #userPromptDefaultButton}"

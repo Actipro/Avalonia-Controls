@@ -1,0 +1,105 @@
+<UserControl 
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:actiproAvalonia="using:ActiproSoftware.UI.Avalonia"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:sampleCommon="using:ActiproSoftware.ProductSamples.DockingSamples.Common"
+	>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="The tool window and tabbed MDI tabs both support optional icons.  Tool windows can also optionally display their icon in their container's title bar.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Icons on tabs option" Url="https://www.actiprosoftware.com/docs/controls/avalonia/docking/docking-window-features/docking-window-capabilities#images-on-tabs-option" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExample
+			Header="Tab icons"
+			>
+
+			<actipro:DockSite x:Name="dockSite" Height="300"
+				FloatingWindowIcon="/Images/Icons/Actipro.ico"
+				FloatingWindowTitle="Docking/MDI Demo"
+				ToolWindowsHaveTabIcons="True">
+				<actipro:SplitContainer>
+
+					<actipro:Workspace>
+						<actipro:TabbedMdiHost x:Name="tabbedMdiHost" HasTabIcons="True">
+							<actipro:TabbedMdiContainer>
+
+								<actipro:DocumentWindow Title="Document1.txt" Description="Document1"
+										FileName="C:\Users\Actipro\My Documents\Document1.txt"
+										Icon="/Images/Icons/TextDocument16.png">
+									<TextBox BorderThickness="0" Text="The first document." TextWrapping="Wrap" />
+								</actipro:DocumentWindow>
+
+								<actipro:DocumentWindow Title="Document2.txt" Description="Document2"
+										FileName="C:\Users\Actipro\My Documents\Document2.txt"
+										Icon="/Images/Icons/TextDocument16.png">
+									<TextBox BorderThickness="0" Text="The second document." TextWrapping="Wrap" />
+								</actipro:DocumentWindow>
+
+							</actipro:TabbedMdiContainer>
+						</actipro:TabbedMdiHost>
+					</actipro:Workspace>
+
+					<actipro:ToolWindowContainer>
+						<sampleCommon:SolutionExplorerToolWindow x:Name="solutionExplorerToolWindow" />
+						<sampleCommon:ClassViewToolWindow x:Name="classViewToolWindow" />
+					</actipro:ToolWindowContainer>
+				</actipro:SplitContainer>
+
+			</actipro:DockSite>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10" Width="250">
+					<CheckBox IsChecked="{Binding #tabbedMdiHost.HasTabIcons}" Content="Icons on document tabs" />
+					<CheckBox IsChecked="{Binding #dockSite.ToolWindowsHaveTabIcons}" Content="Icons on tool window tabs" />
+					<CheckBox IsChecked="{Binding #dockSite.ToolWindowsHaveTitleBarIcons}" Content="Icons on tool window title bars" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:DockSite ...
+	ToolWindowsHaveTabIcons="$(ToolWindowsHaveTabIcons)"
+	ToolWindowsHaveTitleBarIcons="$(ToolWindowsHaveTitleBarIcons)">
+
+	<actipro:SplitContainer>
+
+		<actipro:Workspace>
+			<actipro:TabbedMdiHost HasTabIcons="$(DocumentWindowsHaveTabIcons)">
+				<actipro:TabbedMdiContainer>
+
+					<actipro:DocumentWindow ... Icon="/Images/Icons/TextDocument16.png" />
+					<actipro:DocumentWindow ... Icon="/Images/Icons/TextDocument16.png" />
+
+				</actipro:TabbedMdiContainer>
+			</actipro:TabbedMdiHost>
+		</actipro:Workspace>
+
+		<actipro:ToolWindowContainer>
+			<actipro:ToolWindow ... Icon="/Images/Icons/SolutionExplorer16.png" />
+			<actipro:ToolWindow ... Icon="/Images/Icons/ClassView16.png" />
+		</actipro:ToolWindowContainer>
+
+	</actipro:SplitContainer>
+
+</actipro:DockSite>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="DocumentWindowsHaveTabIcons" Value="{Binding #tabbedMdiHost.HasTabIcons}" />
+						<sampleBrowser:CodeExampleSubstitution Key="ToolWindowsHaveTabIcons" Value="{Binding #dockSite.ToolWindowsHaveTabIcons}" />
+						<sampleBrowser:CodeExampleSubstitution Key="ToolWindowsHaveTitleBarIcons" Value="{Binding #dockSite.ToolWindowsHaveTitleBarIcons}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

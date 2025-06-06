@@ -11,6 +11,11 @@ Use an [AvatarGroup](xref:@ActiproUIRoot.Controls.AvatarGroup) to render multipl
 
 *AvatarGroup with image-based avatars and some items overflowed*
 
+@if (avalonia) {
+> [!IMPORTANT]
+> See the [Getting Started](../getting-started.md) topic for details on configuring themes for this control.
+}
+
 ## Presentation
 
 Use the [ItemLength](xref:@ActiproUIRoot.Controls.AvatarGroup.ItemLength) property to define the width and height of each [Avatar](avatar.md) in the group.

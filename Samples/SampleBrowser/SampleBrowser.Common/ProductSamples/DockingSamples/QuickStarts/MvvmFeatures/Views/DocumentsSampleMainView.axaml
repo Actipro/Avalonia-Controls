@@ -1,0 +1,105 @@
+<UserControl 
+	xmlns="https://github.com/avaloniaui"
+	x:Class="ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.MvvmFeatures.Views.DocumentsSampleMainView"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:views="using:ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.MvvmFeatures.Views"
+	xmlns:viewmodels="using:ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.MvvmFeatures.ViewModels"
+	x:DataType="viewmodels:DocumentsSampleMainViewModel"
+	>
+
+	<UserControl.Resources>
+
+		<!-- NOTE: Use a ControlTheme to bind DockingWindow properties to view models -->
+		<ControlTheme x:Key="DocumentWindowTheme" x:DataType="viewmodels:DocumentItemViewModel" TargetType="actipro:DocumentWindow" BasedOn="{StaticResource {x:Type actipro:DocumentWindow}}">
+
+			<!-- DockingWindow (BaseType) -->
+			<Setter Property="Description" Value="{Binding Description, Mode=TwoWay}" />
+			<Setter Property="Icon" Value="{Binding Icon, Mode=TwoWay}" />
+			<Setter Property="IsFloating" Value="{Binding IsFloating, Mode=TwoWay}" />
+			<Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+			<Setter Property="SerializationId" Value="{Binding SerializationId, Mode=TwoWay}" />
+			<Setter Property="Title" Value="{Binding Title, Mode=TwoWay}" />
+			<Setter Property="WindowGroupName" Value="{Binding WindowGroupName, Mode=TwoWay}" />
+
+			<!-- DocumentWindow -->
+			<Setter Property="FileName" Value="{Binding FileName, Mode=TwoWay}" />
+			<Setter Property="IsReadOnly" Value="{Binding IsReadOnly, Mode=TwoWay}" />
+
+			<!-- IMPORTANT: These properties should be configured last so that other bindings are applied before the window opens -->
+			<Setter Property="IsActive" Value="{Binding IsActive, Mode=TwoWay}" />
+			<Setter Property="IsOpen" Value="{Binding IsOpen, Mode=TwoWay}" />
+
+		</ControlTheme>
+
+	</UserControl.Resources>
+
+	<!-- NOTE: The implicit DataTemplates defined here should normally be placed in Application.Resources so that they will be found by floating windows -->
+	<UserControl.DataTemplates>
+
+		<DataTemplate DataType="{x:Type viewmodels:ImageDocumentItemViewModel}">
+			<views:ImageDocumentItemView />
+		</DataTemplate>
+
+		<DataTemplate DataType="{x:Type viewmodels:TextDocumentItemViewModel}">
+			<views:TextDocumentItemView />
+		</DataTemplate>
+		
+	</UserControl.DataTemplates>
+
+	<Grid RowDefinitions="Auto,*">
+
+		<!-- DockSite -->
+		<actipro:DockSite x:Name="dockSite" Grid.Row="1" Height="450"
+			DocumentItemsSource="{Binding DocumentItems}"
+			DocumentItemContainerTheme="{StaticResource DocumentWindowTheme}"
+			FloatingWindowIcon="/Images/Icons/Actipro.ico"
+			FloatingWindowTitle="Docking/MDI Demo">
+
+			<actipro:SplitContainer Orientation="Vertical">
+				<actipro:Workspace>
+					<actipro:TabbedMdiHost />
+				</actipro:Workspace>
+
+				<actipro:ToolWindowContainer>
+					<actipro:ToolWindow Title="Documents List" Icon="/Images/Icons/DocumentOutline16.png" ContainerDockedSize="200, 200">
+						<DataGrid
+							BorderThickness="0"
+							SelectedIndex="0"
+							ItemsSource="{Binding #dockSite.DocumentItemsSource}"
+							>
+							<DataGrid.Columns>
+								<DataGridTextColumn x:DataType="viewmodels:DocumentItemViewModel" Header="Title" Binding="{Binding Title}" />
+								<DataGridCheckBoxColumn x:DataType="viewmodels:DocumentItemViewModel" Header="Is Open" Binding="{Binding IsOpen}" />
+								<DataGridCheckBoxColumn x:DataType="viewmodels:DocumentItemViewModel" Header="Is Selected" Binding="{Binding IsSelected}" />
+								<DataGridCheckBoxColumn x:DataType="viewmodels:DocumentItemViewModel" Header="Is Active" Binding="{Binding IsActive}" />
+							</DataGrid.Columns>
+						</DataGrid>
+					</actipro:ToolWindow>
+				</actipro:ToolWindowContainer>
+			</actipro:SplitContainer>
+
+		</actipro:DockSite>
+
+		<!-- Menu -->
+		<Menu>
+			<MenuItem Header="_File">
+				<MenuItem Header="New Text Document" Command="{Binding CreateNewTextDocumentCommand}" />
+				<MenuItem Header="New Image Document" Command="{Binding CreateNewImageDocumentCommand}" />
+				<Separator />
+				<MenuItem Header="Close" Command="{Binding CloseActiveDocumentCommand}" />
+			</MenuItem>
+			<MenuItem Header="_Window">
+				<MenuItem Header="Select the First Document" Command="{Binding SelectFirstDocumentCommand}" />
+				<MenuItem Header="Activate the Next Document" Command="{Binding ActivateNextDocumentCommand}" />
+				<Separator />
+				<MenuItem Header="Cascade" Command="{Binding #dockSite.CascadeDocumentsCommand}" />
+				<MenuItem Header="Tile Horizontally" Command="{Binding #dockSite.TileDocumentsHorizontallyCommand}" />
+				<MenuItem Header="Tile Vertically" Command="{Binding #dockSite.TileDocumentsVerticallyCommand}" />
+			</MenuItem>
+		</Menu>
+
+	</Grid>
+
+</UserControl>

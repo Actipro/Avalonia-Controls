@@ -11,6 +11,11 @@ The [Badge](xref:@ActiproUIRoot.Controls.Badge) and [NumericBadge](xref:@Actipro
 
 *Badge and NumericBadge controls displayed as adorners to an element*
 
+@if (avalonia) {
+> [!IMPORTANT]
+> See the [Getting Started](../getting-started.md) topic for details on configuring themes for this control.
+}
+
 ## Content
 
 The `Content` of [Badge](xref:@ActiproUIRoot.Controls.Badge) can be set to any value supported by `ContentPresenter`.
@@ -235,9 +240,9 @@ xmlns:shared="http://schemas.actiprosoftware.com/winfx/xaml/shared"
 > [!WARNING]
 > The Avalonia adorner system may not properly clip adornments when the adornment is outside the bounds of the adorned element.
 
-The Avalonia adorner system (last tested on v11.0.7) may not properly clip adornments based on the clip regions of ancestors of the adorned element.  This is an issue we are working with the Avalonia team to solve.  A symptom of this issue can sometimes be seen when a badge adornment is used on an adorned element, that adorned element is scrolled out of view within a `ScrollViewer`, and the badge adornment remains visible.
+The Avalonia adorner system may not properly clip adornments based on the clip regions of ancestors of the adorned element.  A symptom of this issue can sometimes be seen when a badge adornment is used on an adorned element, that adorned element is scrolled out of view within a `ScrollViewer`, and the badge adornment remains visible.
 
-We believe our badge implementation has worked around this issue in most scenarios.  If this scenario is still encountered, one workaround is to position the adornment within the bounds of the adorned element so clipping can be enabled.  Another option is to not use [BadgeService](xref:@ActiproUIRoot.Controls.BadgeService), thereby avoiding use of the Avalonia adorner system.  Place the adorned element and the badge element in a `Panel` instead and apply the `HorizontalAlignment`, `VerticalAlignment`, and `RenderTransform` properties on the badge to position it.
+We believe that current releases of Avalonia (starting with v11.3) have resolved this issue in most scenarios.  If this scenario is still encountered, one workaround is to position the adornment within the bounds of the adorned element so clipping can be enabled.  Another option is to not use [BadgeService](xref:@ActiproUIRoot.Controls.BadgeService), thereby avoiding use of the Avalonia adorner system.  Place the adorned element and the badge element in a `Panel` instead and apply the `HorizontalAlignment`, `VerticalAlignment`, and `RenderTransform` properties on the badge to position it.
 
 ```xaml
 <Panel>

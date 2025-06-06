@@ -1,0 +1,207 @@
+<UserControl 
+	xmlns="https://github.com/avaloniaui"
+	x:Class="ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.ProgrammaticSizing.MainControl"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="This QuickStart shows how to programmatically resize elements in a DockSite.  Using the SplitContainer.ResizeSlots method, the elements in a DockSite can be sized evenly or via specified ratios.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Programmatic layout" Url="https://www.actiprosoftware.com/docs/controls/avalonia/docking/layout-features/programmatic-layout" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExample
+			Header="Programmatic sizing"
+			Footer="Open the Layout menu to invoke pre-defined samples of programmatically altering the layout."
+			>
+
+			<Grid RowDefinitions="Auto,*">
+
+				<!-- DockSite -->
+				<actipro:DockSite x:Name="dockSite" Grid.Row="1" Height="450"
+					FloatingWindowIcon="/Images/Icons/Actipro.ico"
+					FloatingWindowTitle="Docking/MDI Demo">
+					<actipro:SplitContainer Orientation="Horizontal">
+						<actipro:SplitContainer Orientation="Vertical">
+							<actipro:Workspace>
+								<actipro:TabbedMdiHost>
+									<actipro:SplitContainer Orientation="Vertical">
+										<actipro:SplitContainer Orientation="Horizontal">
+											<actipro:TabbedMdiContainer>
+												<actipro:DocumentWindow Title="Upper-1" Icon="/Images/Icons/TextDocument16.png">
+													<TextBox TextWrapping="Wrap" BorderThickness="0" Text="A document window in the upper-left corner of the tabbed MDI area." />
+												</actipro:DocumentWindow>
+											</actipro:TabbedMdiContainer>
+											<actipro:TabbedMdiContainer>
+												<actipro:DocumentWindow Title="Upper-2" Icon="/Images/Icons/TextDocument16.png">
+													<TextBox TextWrapping="Wrap" BorderThickness="0" Text="A document window in the upper-right corner of the tabbed MDI area." />
+												</actipro:DocumentWindow>
+											</actipro:TabbedMdiContainer>
+										</actipro:SplitContainer>
+										<actipro:TabbedMdiContainer>
+											<actipro:DocumentWindow Title="Lower" Icon="/Images/Icons/TextDocument16.png">
+												<TextBox TextWrapping="Wrap" BorderThickness="0" Text="A document window in the lower part of the tabbed MDI area." />
+											</actipro:DocumentWindow>
+										</actipro:TabbedMdiContainer>
+									</actipro:SplitContainer>
+								</actipro:TabbedMdiHost>
+							</actipro:Workspace>
+							<actipro:ToolWindowContainer>
+								<actipro:ToolWindow Title="DockedBottom" Icon="/Images/Icons/TextDocument16.png">
+									<TextBox TextWrapping="Wrap" BorderThickness="0" Text="A tool window docked below the tabbed MDI area." />
+								</actipro:ToolWindow>
+							</actipro:ToolWindowContainer>
+						</actipro:SplitContainer>
+						<actipro:SplitContainer Orientation="Vertical">
+							<actipro:ToolWindowContainer>
+								<actipro:ToolWindow Title="DockedRight-1" Icon="/Images/Icons/TextDocument16.png">
+									<TextBox TextWrapping="Wrap" BorderThickness="0" Text="A tool window docked to the upper-right of the tabbed MDI area." />
+								</actipro:ToolWindow>
+							</actipro:ToolWindowContainer>
+							<actipro:ToolWindowContainer>
+								<actipro:ToolWindow Title="DockedRight-2" Icon="/Images/Icons/TextDocument16.png">
+									<TextBox TextWrapping="Wrap" BorderThickness="0" Text="A tool window docked to the lower-right of the tabbed MDI area." />
+								</actipro:ToolWindow>
+							</actipro:ToolWindowContainer>
+						</actipro:SplitContainer>
+					</actipro:SplitContainer>
+				</actipro:DockSite>
+
+				<!-- Menu -->
+				<Menu Background="Transparent">
+					<MenuItem Header="_Layout">
+						<MenuItem Header="Randomly Distribute" Click="OnLayoutRandomlyDistributeMenuItemClick" />
+						<MenuItem Header="Evenly Distribute" Click="OnLayoutEvenlyDistributeMenuItemClick" />
+						<Separator />
+						<MenuItem Header="Evenly Distribute (Favor Workspace)" Click="OnLayoutEvenlyDistributeFavorWorkspaceMenuItemClick" />
+						<MenuItem Header="Evenly Distribute (Favor Focused)" Click="OnLayoutEvenlyDistributeFavorFocusedMenuItemClick" />
+						<Separator />
+						<MenuItem Header="Evenly Distribute (Documents Only)" Click="OnLayoutEvenlyDistributeDocumentsOnlyMenuItemClick" />
+						<MenuItem Header="Evenly Distribute (Tools Only)" Click="OnLayoutEvenlyDistributeToolsOnlyMenuItemClick" />
+						<Separator />
+						<MenuItem Header="Reverse All" Click="OnLayoutReverseAllMenuItemClick" />
+					</MenuItem>
+				</Menu>
+
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+						<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Docking;
+using Avalonia.VisualTree;
+...
+public partial class MainControl : UserControl {
+
+	// NOTE: This sample assumes a DockSite named 'dockSite' is defined in XAML
+
+	// Evenly distribute all split containers
+	private void EvenlyDistributeAll() {
+		var descendants = dockSite.GetVisualDescendants().OfType<SplitContainer>();
+		foreach (var splitContainer in descendants)
+			splitContainer.ResizeSlots();
+	}
+
+	// Evenly distribute all split containers in the primary workspace
+	private void EvenlyDistributeDocumentsOnly() {
+		if (dockSite.PrimaryDockHost?.Workspace is { } workspace) {
+			var descendants = workspace.GetVisualDescendants().OfType<SplitContainer>();
+			foreach (var splitContainer in descendants)
+				splitContainer.ResizeSlots();
+		}
+	}
+
+	// Evenly distribute all split containers for tool windows
+	private void EvenlyDistributeToolsOnly(object? sender, RoutedEventArgs e) {
+		var descendants = dockSite.GetVisualDescendants().OfType<SplitContainer>();
+		foreach (var splitContainer in descendants) {
+			bool isForTools = splitContainer.FindAncestorOfType<Workspace>() is null;
+			if (isForTools)
+				splitContainer.ResizeSlots();
+		}
+	}
+
+	// Evenly distribute most split containers, but increase the ratios for containers with focus
+	private void EvenlyDistributeFavorFocused() {
+		var descendants = dockSite.GetVisualDescendants().OfType<SplitContainer>();
+		foreach (var splitContainer in descendants) {
+			// Look for SplitContainers that contain the focused element, and increase the ratios for that slot
+			var visualCount = splitContainer.Children.Count;
+			var desiredRatios = new double[visualCount];
+			for (int i = 0, visibleChildCount = 0; i < visualCount; i++) {
+				// Default ratio, must also ensure that we don't pass a ratio that is less than or equal to 0
+				desiredRatios[i] = 1;
+
+				// Get the child and verify that it is visible
+				var child = splitContainer.Children[i] as Visual;
+				if (child?.IsVisible == true) {
+					// If the child has the keyboard focus, then increase it's ratio
+					if ((child is IInputElement inputElement) && inputElement.IsKeyboardFocusWithin)
+						desiredRatios[visibleChildCount] = 3;
+					visibleChildCount++;
+				}
+			}
+
+			splitContainer.ResizeSlots(desiredRatios);
+		}
+	}
+
+	// Evenly distribute most split containers, but increase the ratios for workspace containers
+	private void EvenlyDistributeFavorWorkspace() {
+		var descendants = dockSite.GetVisualDescendants().OfType<SplitContainer>();
+		foreach (var splitContainer in descendants) {
+			// Look for SplitContainers that contain the Workspace, and increase the ratios for that slot
+			var visualCount = splitContainer.Children.Count;
+			var desiredRatios = new double[visualCount];
+			for (int i = 0, visibleChildCount = 0; i < visualCount; i++) {
+				// Default ratio, must also ensure that we don't pass a ratio that is less than or equal to 0
+				desiredRatios[i] = 1;
+
+				// Get the child and verify that it is visible
+				var child = splitContainer.Children[i] as Visual;
+				if (child?.IsVisible == true) {
+					// If the child is a Workspace (or contains the Workspace) then increase it's ratio
+					if (child.FindDescendantOfType<Workspace>(includeSelf: true) is not null)
+						desiredRatios[visibleChildCount] = 3;
+					visibleChildCount++;
+				}
+			}
+
+			splitContainer.ResizeSlots(desiredRatios);
+		}
+	}
+
+	// Randomly resizes the slots of all split containers
+	private void RandomlyDistribute() {
+		var descendants = dockSite.GetVisualDescendants().OfType<SplitContainer>();
+		var random = new Random();
+		foreach (var splitContainer in descendants) {
+			splitContainer.ResizeSlots(
+				random.NextDouble() * 8 + 1,
+				random.NextDouble() * 6 + 1,
+				random.NextDouble() * 4 + 1,
+				random.NextDouble() * 2 + 1);
+		}
+	}
+
+	// Reverse the children of all split containers
+	private void ReverseAll() {
+		var descendants = dockSite.GetVisualDescendants().OfType<SplitContainer>();
+		foreach (var splitContainer in descendants)
+			splitContainer.ReverseSlots();
+	}
+
+}
+]]>
+					</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

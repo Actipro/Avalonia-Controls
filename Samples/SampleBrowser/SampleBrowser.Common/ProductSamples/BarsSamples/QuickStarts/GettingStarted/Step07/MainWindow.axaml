@@ -10,7 +10,7 @@ STEP SUMMARY:
 	
 CHANGES SINCE LAST STEP:
 	
-	Assigned the TextBox.ContextMenu property an instance of BarsContextMenu
+	Assigned the TextBox.ContextFlyout property an instance of BarMenuFlyout
 	whose items are bound to the sample window view model.
 	
 EXPECTED OPERATION:

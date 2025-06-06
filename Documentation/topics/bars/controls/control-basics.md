@@ -288,9 +288,9 @@ Use of the attached properties can sometimes make property retrieval much more e
 ```csharp
 string label = null;
 if (control is BarButton barButton)
-    label = barButton.Label;
+	label = barButton.Label;
 else if (control is BarMenuItem barMenuItem)
-    label = barMenuItem.Label;
+	label = barMenuItem.Label;
 else if ...  // More tests
 ```
 

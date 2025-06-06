@@ -1,0 +1,135 @@
+<UserControl 
+	xmlns="https://github.com/avaloniaui"
+	x:Class="ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.HostedFloatingWindowFade.MainControl"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:actiproPrimitives="using:ActiproSoftware.UI.Avalonia.Controls.Primitives"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="This sample shows a floating tool window that is hosted within the dock site, meaning it can't be dragged in an external window.  These floating windows support a feature to auto-fade when they don't contain focus.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Hosted floating window inactivity animations" Url="https://www.actiprosoftware.com/docs/controls/avalonia/docking/docking-window-features/floating-dock-hosts#hosted-floating-window-inactivity-animations" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExample
+			Header="Hosted floating window fade"
+			Footer="The fade delay and duration are sped up in this sample to better demonstrate the feature."
+			DataContext="{Binding #dockSite}"
+			>
+
+			<actipro:DockSite x:Name="dockSite"
+				MinHeight="400"
+				UseHostedFloatingWindows="True"
+				FloatingWindowIcon="/Images/Icons/Actipro.ico"
+				FloatingWindowTitle="Docking/MDI Demo"
+				InactiveFloatingWindowFadeDelay="3000"
+				InactiveFloatingWindowFadeDuration="5000">
+
+				<actipro:Workspace>
+					<actipro:TabbedMdiHost>
+						<actipro:TabbedMdiContainer>
+
+							<actipro:DocumentWindow Title="Fade Example">
+								<Panel>
+									<actiproPrimitives:Checkerboard Opacity="0.7" />
+									<TextBox BorderThickness="0" TextWrapping="Wrap" Text="Focus this document window to have the floating tool window slowly fade out." Background="Transparent" />
+								</Panel>
+							</actipro:DocumentWindow>
+
+						</actipro:TabbedMdiContainer>
+					</actipro:TabbedMdiHost>
+				</actipro:Workspace>
+
+			</actipro:DockSite>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10" Width="150">
+					<CheckBox IsChecked="{Binding IsInactiveFloatingWindowFadeEnabled}">Is fade enabled</CheckBox>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="{Binding InactiveFloatingWindowFadeDelay, StringFormat='Fade delay: {0}ms'}" />
+						<Slider Value="{Binding InactiveFloatingWindowFadeDelay}" Minimum="0" Maximum="20000" IsSnapToTickEnabled="True" TickFrequency="500" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="{Binding InactiveFloatingWindowFadeDuration, StringFormat='Fade duration: {0}ms'}" />
+						<Slider Value="{Binding InactiveFloatingWindowFadeDuration}" Minimum="0" Maximum="20000" IsSnapToTickEnabled="True" TickFrequency="500" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="{Binding InactiveFloatingWindowFadeOpacity, StringFormat='Fade opacity: {0:P0}'}" />
+						<Slider Value="{Binding InactiveFloatingWindowFadeOpacity}" Minimum="0.10" Maximum="0.90" IsSnapToTickEnabled="True" TickFrequency="0.05" />
+					</StackPanel>
+					<TextBlock
+						Margin="0,20,0,0"
+						Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}"
+						Text="Changing opacity or enabled state will fully reset the fade animation"
+						TextWrapping="Wrap"
+						/>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+						<![CDATA[
+<actipro:DockSite ...
+	UseHostedFloatingWindows="True"$(IsInactiveFloatingWindowFadeEnabledAttribute)$(IsInactiveFloatingWindowFadeEnabledSupportingAttributes)
+	>
+
+	...
+
+</actipro:DockSite>
+						]]>
+						<sampleBrowser:CodeExample.Substitutions>
+							<sampleBrowser:CodeExampleSubstitution Key="IsInactiveFloatingWindowFadeEnabledAttribute"
+																   IsEnabled="{Binding !IsInactiveFloatingWindowFadeEnabled}"
+																   Value="&#xD;&#x9;IsInactiveFloatingWindowFadeEnabled=&quot;False&quot;" />
+							<sampleBrowser:CodeExampleSubstitution Key="IsInactiveFloatingWindowFadeEnabledSupportingAttributes"
+																   IsEnabled="{Binding IsInactiveFloatingWindowFadeEnabled}"
+																   AllowNestedSubstitution="True"
+																   Value="$(InactiveFloatingWindowFadeDelayAttribute)$(InactiveFloatingWindowFadeDurationAttribute)$(InactiveFloatingWindowFadeOpacityAttribute)" />
+							<sampleBrowser:CodeExampleSubstitution Key="InactiveFloatingWindowFadeDelayAttribute"
+																   Value="{Binding InactiveFloatingWindowFadeDelay, StringFormat='&#xD;&#x9;InactiveFloatingWindowFadeDelay=&quot;{0}&quot;'}">
+								<sampleBrowser:CodeExampleSubstitution.IsEnabled>
+									<Binding Path="InactiveFloatingWindowFadeDelay" Converter="{StaticResource NotEqualToComparisonConverter}">
+										<Binding.ConverterParameter>
+											<x:Double>20000</x:Double>
+										</Binding.ConverterParameter>
+									</Binding>
+								</sampleBrowser:CodeExampleSubstitution.IsEnabled>
+							</sampleBrowser:CodeExampleSubstitution>
+							<sampleBrowser:CodeExampleSubstitution Key="InactiveFloatingWindowFadeDurationAttribute"
+																   Value="{Binding InactiveFloatingWindowFadeDuration, StringFormat='&#xD;&#x9;InactiveFloatingWindowFadeDuration=&quot;{0}&quot;'}">
+								<sampleBrowser:CodeExampleSubstitution.IsEnabled>
+									<Binding Path="InactiveFloatingWindowFadeDuration" Converter="{StaticResource NotEqualToComparisonConverter}">
+										<Binding.ConverterParameter>
+											<x:Double>20000</x:Double>
+										</Binding.ConverterParameter>
+									</Binding>
+								</sampleBrowser:CodeExampleSubstitution.IsEnabled>
+							</sampleBrowser:CodeExampleSubstitution>
+							<sampleBrowser:CodeExampleSubstitution Key="InactiveFloatingWindowFadeOpacityAttribute"
+																   Value="{Binding InactiveFloatingWindowFadeOpacity, StringFormat='&#xD;&#x9;InactiveFloatingWindowFadeOpacity=&quot;{0:0.00}&quot;'}">
+								<sampleBrowser:CodeExampleSubstitution.IsEnabled>
+									<Binding Path="InactiveFloatingWindowFadeOpacity" Converter="{StaticResource NotEqualToComparisonConverter}">
+										<Binding.ConverterParameter>
+											<x:Double>0.25</x:Double>
+										</Binding.ConverterParameter>
+									</Binding>
+								</sampleBrowser:CodeExampleSubstitution.IsEnabled>
+							</sampleBrowser:CodeExampleSubstitution>
+						</sampleBrowser:CodeExample.Substitutions>
+					</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

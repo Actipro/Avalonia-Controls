@@ -7,11 +7,6 @@ order: 1
 
 Bars comes packed with everything you need to implement advanced ribbons, toolbars, and menus in your applications.
 
-@if (avalonia) {
-> [!IMPORTANT]
-> Actipro Bars is being released as a public beta.  While the product is safe for use in production, there is a minor potential for breaking changes as the product is finalized.  Any breaking changes will be documented.
-}
-
 ## Ribbon
 
 Ribbon implements an Office-like user interface, complete with dynamic variant sizing, modern themes, fluent animations, and extensive customization capabilities.  Ribbon consolidates all user interface commands into a single location, which is easy to use and scales up and down well, thereby providing fast access to all commands, regardless of window size.
@@ -37,6 +32,20 @@ A standalone toolbar with built-in overflow support can be used as a window's ma
 
 See the [Standalone Toolbars](toolbar-features/standalone-toolbars.md) topic for additional information on working with a standalone toolbar.
 
+@if (wpf) {
+## Dockable Toolbars
+
+Each dockable toolbar within a dockable toolbar host is a toolbar that can be dragged to any side of the host, or even floated.  Dockable toolbars are very common in IDE applications and can be used in complex line of business applications as well, in scenarios where a ribbon may not be appropriate.
+
+![Screenshot](images/dockable-toolbars.png)
+
+*Multiple dockable toolbars in various placements around their host*
+
+Any toolbar controls, including popup buttons with galleries, can be used on a dockable toolbar.  Variant sizes from medium (showing label) to small (no label) to collapsed (moved to overflow popup) are all supported for each control within the toolbar.  The entire host and its toolbars can be configured via MVVM.
+
+See the [Dockable Toolbars](toolbar-features/dockable-toolbars.md) topic for more information.
+}
+
 ## Controls
 
 An enormous set of controls intended for use within ribbons, toolbars, and menus is included as well: everything from popup and split buttons to comboboxes and graphically-rich galleries.
@@ -52,5 +61,3 @@ See the [Controls Overview](controls/index.md) topic for additional information 
 The Bars product has been built from the ground up to support MVVM creation of the entire user interface if desired.  An open source companion MVVM library is available that provides a full set of view models and related UI bindings to easily configure and manage your ribbons, toolbars, and menus.
 
 See the [MVVM Support](mvvm-support.md) topic for additional information on using MVVM with Bars controls.
-
-*This product is written in 100% pure C#, and includes detailed documentation and samples.*

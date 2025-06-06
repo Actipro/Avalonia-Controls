@@ -42,6 +42,7 @@
 			PopupOpeningCommand="{Binding PopupOpeningCommand}"
 			SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
 			SmallIcon="{Binding SmallIcon}"
+			Tag="{Binding Tag}"
 			Title="{Binding Title}"
 			ToolBarItemCollapseBehavior="{Binding ToolBarItemCollapseBehavior}"
 			ToolBarItemVariantBehavior="{Binding ToolBarItemVariantBehavior}"
@@ -77,6 +78,7 @@
 			ResizeMode="{Binding MenuResizeMode}"
 			SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
 			SmallIcon="{Binding SmallIcon}"
+			Tag="{Binding Tag}"
 			Title="{Binding Title}"
 			UseAccentedItemBorder="{Binding UseAccentedItemBorder}"
 			UseMenuItemAppearance="{Binding UseMenuItemAppearance}"
@@ -91,6 +93,7 @@
 			Label="{Binding Label}"
 			PopupOpeningCommand="{Binding PopupOpeningCommand}"
 			SmallIcon="{Binding SmallIcon}"
+			Tag="{Binding Tag}"
 			>
 			<actipro:BarMenuItem.ItemsSource>
 				<barsPrimitives:OverflowMenuItemCollection

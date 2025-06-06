@@ -7,13 +7,20 @@ order: 45
 
 This topic provides several tips on common questions or issues that you may encounter while using Actipro Avalonia controls.
 
-## Actipro Controls are Blank, Transparent or Missing Content
+## Actipro Controls are Blank, Transparent, or Missing Content
 
 If a control does not appear the way it should (especially if it is blank), this can be caused by missing themes.  Actipro Avalonia controls require the [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme) to be loaded for control templates and resources to be available for the controls.
 
 If [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme) is loaded but controls from the `ActiproSoftware.Controls.Avalonia.Pro` NuGet package are still not rendering properly (like the [Fundamentals](fundamentals/index.md) product controls), make sure [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme).[Includes](xref:@ActiproUIRoot.Themes.ModernTheme.Includes) property includes the [Pro](xref:@ActiproUIRoot.Themes.ThemeStyleIncludes.Pro) controls.
 
 See the "Using Actipro Themes" section of the [Themes Getting Started](themes/getting-started.md) topic for more details on loading the theme, including sample code.
+
+## Exception: Could not find control 'PART_SomeControl'
+
+Some controls require specific parts to be defined in the control theme, and this exception may be raised if a required part cannot be found.  The most common reasons for this exception are:
+
+1. A control template is missing.  See the "Actipro Controls are Blank, Transparent, or Missing Content" topic above for more details on configuring Actipro's themes.
+1. An incomplete custom control template has been applied.  Make sure any custom templates have defined all the required parts for the control.  Review the original template for details on part usage.  Keep in mind that a previously working template may still fail if a new update is released and the control requires additional parts.  Review [conversion notes](conversion/index.md) for any breaking changes.
 
 ## Native Avalonia Controls Missing Actipro Themes
 
@@ -88,4 +95,4 @@ Avalonia supports running in the browser with WebAssembly. As of v11.0, the Aval
 
 ## Badge Adornments Aren't Clipped Properly
 
-The Avalonia adorner system (last tested on v11.0.7) may not properly clip adornments based on the clip regions of ancestors of the adorned element.  This can lead to possible scenarios where an adorned element might be scrolled out of view, but the badge adornment is still visible.  The [Badge](fundamentals/controls/badge.md) topic has additional detail on this issue and offers a workaround if the problem is encountered.
+The Avalonia adorner system may not properly clip adornments based on the clip regions of ancestors of the adorned element.  This can lead to possible scenarios where an adorned element might be scrolled out of view, but the badge adornment is still visible.  The [Badge](fundamentals/controls/badge.md) topic has additional detail on this issue and offers a workaround if the problem is encountered.

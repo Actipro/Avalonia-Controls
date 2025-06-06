@@ -1,0 +1,161 @@
+<UserControl 
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:local="using:ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.CustomDockingWindows"
+	>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="This QuickStart shows how you can create classes that inherit DocumentWindow or ToolWindow and use those within a DockSite.  To create custom classes, simply inherit the DocumentWindow or ToolWindow class.  You can even define the contents of your custom classes in XAML.">
+
+		<sampleBrowser:ControlExample
+			Header="Custom docking windows"
+			Footer="See the sample code of this QuickStart for examples of how define custom document and tool windows in XAML."
+			DataContext="{Binding #dockSite}"
+			>
+
+			<actipro:DockSite x:Name="dockSite" Height="200"
+				FloatingWindowIcon="/Images/Icons/Actipro.ico"
+				FloatingWindowTitle="Docking/MDI Demo">
+
+				<actipro:SplitContainer Orientation="Horizontal">
+					<actipro:ToolWindowContainer>
+						<local:CustomToolWindow Title="Custom Tool Window 1" />
+						<local:CustomToolWindow Title="Custom Tool Window 2" />
+					</actipro:ToolWindowContainer>
+
+					<actipro:Workspace>
+						<actipro:TabbedMdiHost x:Name="tabbedMdiHost">
+							<actipro:TabbedMdiContainer>
+								<local:CustomDocumentWindow Title="Custom DocumentWindow 1" />
+								<local:CustomDocumentWindow Title="Custom DocumentWindow 2" />
+								<local:CustomToolWindow Title="Custom Tool Window 3" />
+							</actipro:TabbedMdiContainer>
+						</actipro:TabbedMdiHost>
+					</actipro:Workspace>
+				</actipro:SplitContainer>
+
+			</actipro:DockSite>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10" Width="150">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="MDI Kind" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray DelimitedText='Tabbed,Standard', Type={x:Type actipro:MdiKind}}" SelectedValue="{Binding MdiKind, Mode=TwoWay}" />
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+xmlns:local="using:ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.CustomDockingWindows"
+...
+
+<!-- Dock Site -->
+<actipro:DockSite ... >
+
+	<actipro:SplitContainer Orientation="Horizontal">
+		<actipro:ToolWindowContainer>
+			<local:CustomToolWindow Title="Custom Tool Window 1" />
+			<local:CustomToolWindow Title="Custom Tool Window 2" />
+		</actipro:ToolWindowContainer>
+
+		<actipro:Workspace>
+			<actipro:TabbedMdiHost x:Name="tabbedMdiHost">
+				<actipro:TabbedMdiContainer>
+					<local:CustomDocumentWindow Title="Custom DocumentWindow 1" />
+					<local:CustomDocumentWindow Title="Custom DocumentWindow 2" />
+					<local:CustomToolWindow Title="Custom Tool Window 3" />
+				</actipro:TabbedMdiContainer>
+			</actipro:TabbedMdiHost>
+		</actipro:Workspace>
+	</actipro:SplitContainer>
+
+</actipro:DockSite>
+					]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<!-- Custom Tool Window -->
+<actipro:ToolWindow
+	x:Class="ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.CustomDockingWindows.CustomToolWindow"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	...
+	Icon="/Images/Icons/Properties16.png"
+	>
+
+	<TextBox BorderThickness="0" TextWrapping="Wrap">
+		This is a custom ToolWindow class whose UI was created in its own XAML file.
+	</TextBox>
+
+</actipro:ToolWindow>
+					]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+// Custom Tool Window
+using ActiproSoftware.UI.Avalonia.Controls.Docking;
+
+namespace ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.CustomDockingWindows {
+
+	public partial class CustomToolWindow : ToolWindow {
+
+		public CustomToolWindow() {
+			InitializeComponent();
+		}
+
+		// Ensure ToolWindow implicit styles are applied to the derived class
+		protected override Type StyleKeyOverride => typeof(ToolWindow);
+
+	}
+
+}
+					]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<!-- Custom Document Window -->
+<actipro:DocumentWindow
+	x:Class="ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.CustomDockingWindows.CustomDocumentWindow"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	...
+	Icon="/Images/Icons/TextDocument16.png"
+	>
+
+	<TextBox BorderThickness="0" TextWrapping="Wrap">
+		This is a custom DocumentWindow class whose UI was created in its own XAML file.
+	</TextBox>
+
+</actipro:ToolWindow>
+					]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+// Custom Document Window
+using ActiproSoftware.UI.Avalonia.Controls.Docking;
+
+namespace ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.CustomDockingWindows {
+
+	public partial class CustomDocumentWindow : DocumentWindow {
+
+		public CustomDocumentWindow() {
+			InitializeComponent();
+		}
+
+		// Ensure DocumentWindow implicit styles are applied to the derived class
+		protected override Type StyleKeyOverride => typeof(DocumentWindow);
+
+	}
+
+}
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>
