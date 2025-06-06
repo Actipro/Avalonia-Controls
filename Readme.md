@@ -34,6 +34,10 @@ Elevate your application by licensing professionally designed commercial control
 
 [Actipro Bars](https://www.actiprosoftware.com/docs/controls/avalonia/bars/index) contains everything you need to implement advanced Office-like ribbon, toolbar, and menu functionality in your Avalonia applications.  Multiple ribbon layout modes, variant sizing, content-rich galleries, screen tips, key tips, backstage, and MVVM support are all included.
 
+![Docking/MDI](.github/image-content/docking-welcome.png)
+
+[Actipro Docking &amp; MDI](https://www.actiprosoftware.com/docs/controls/avalonia/docking/index) is a complete solution for easily adding a docking tool window and/or multiple document interface to your applications, with many features found in popular IDEs.
+
 ![Fundamentals](.github/image-content/fundamentals-welcome.png)
 
 [Actipro Fundamentals](https://www.actiprosoftware.com/docs/controls/avalonia/fundamentals/index) provides a collection of advanced controls that are useful for many different types of applications, including settings configuration controls, user prompts, message boxes, info bars, avatars, badges, segmented bars, progress spinners, and more.
