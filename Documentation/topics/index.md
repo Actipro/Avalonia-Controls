@@ -19,6 +19,12 @@ Elevate your application by [licensing](licensing.md) professionally designed co
 
 [Actipro Bars](bars/index.md) contains everything you need to implement advanced Office-like ribbon, toolbar, and menu functionality in your Avalonia applications. Multiple ribbon layout modes, variant sizing, content-rich galleries, screen tips, key tips, backstage, and MVVM support are all included.
 
+### Docking & MDI
+
+![Screenshot](docking/images/docking.png)
+
+[Actipro Docking & MDI](docking/index.md) is a complete solution for easily adding a docking tool window and/or multiple document interface to your applications.
+
 ### Fundamentals
 
 ![Screenshot](fundamentals/images/overview.png)

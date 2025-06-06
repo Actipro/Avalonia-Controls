@@ -47,6 +47,7 @@ The following assemblies may be redistributed when you own a license for Actipro
 - *ActiproSoftware.Avalonia.Shared.dll* - via `ActiproSoftware.Controls.Avalonia` NuGet package.
 - *ActiproSoftware.Avalonia.Fundamentals.dll* - via `ActiproSoftware.Controls.Avalonia.Pro` NuGet package.
 - *ActiproSoftware.Avalonia.Bars.dll* - via `ActiproSoftware.Controls.Avalonia.Pro` NuGet package.
+- *ActiproSoftware.Avalonia.Docking.dll* - via `ActiproSoftware.Controls.Avalonia.Pro` NuGet package.
 
 Optional free additional supplemental libraries:
 - *ActiproSoftware.Avalonia.Bars.Mvvm.dll* - via `ActiproSoftware.Controls.Avalonia.Bars.Mvvm` NuGet package.
