@@ -1,0 +1,108 @@
+<UserControl 
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:actiproPrimitives="using:ActiproSoftware.UI.Avalonia.Controls.Primitives"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:sampleCommon="using:ActiproSoftware.ProductSamples.DockingSamples.Common"
+	>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="When magnetism is active, any floating windows or standard MDI documents that are dragged or resized will attempt to &quot;snap&quot; their corners or edges to other nearby windows.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Docking window magnetism" Url="https://www.actiprosoftware.com/docs/controls/avalonia/docking/docking-window-features/docking-window-capabilities#magnetism" />
+			<sampleBrowser:ControlExampleLinkItem Title="Standard MDI magnetism" Url="https://www.actiprosoftware.com/docs/controls/avalonia/docking/workspace-mdi-features/standard-mdi#magnetism" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExample
+			Header="Magnetism"
+			Footer="Try moving and resizing document windows or floating tool windows to see them snap together."
+			DataContext="{Binding #dockSite}"
+			>
+
+			<StackPanel Spacing="10">
+
+				<actipro:DockSite x:Name="dockSite" Height="500" Padding="0"
+					CanDocumentWindowsClose="False"
+					CanToolWindowsClose="False"
+					FloatingWindowIcon="/Images/Icons/Actipro.ico"
+					FloatingWindowTitle="Docking/MDI Demo">
+					<actipro:SplitContainer Orientation="Vertical">
+
+						<actipro:Workspace>
+							<actipro:StandardMdiHost>
+								<actipro:DocumentWindow Title="Document3.txt" Description="Document3" FileName="C:\Users\Actipro\My Documents\Document3.txt" Icon="/Images/Icons/TextDocument16.png">
+									<TextBox BorderThickness="0" Text="This is the third of several documents." TextWrapping="Wrap" />
+								</actipro:DocumentWindow>
+								<actipro:DocumentWindow Title="Document2.txt" Description="Document2" FileName="C:\Users\Actipro\My Documents\Document2.txt" Icon="/Images/Icons/TextDocument16.png">
+									<TextBox BorderThickness="0" Text="This is the second of several documents." TextWrapping="Wrap" />
+								</actipro:DocumentWindow>
+								<actipro:DocumentWindow Title="Document1.txt" Description="Document1" FileName="C:\Users\Actipro\My Documents\Document1.txt" Icon="/Images/Icons/TextDocument16.png">
+									<TextBox BorderThickness="0" Text="This is the first of several documents." TextWrapping="Wrap" />
+								</actipro:DocumentWindow>
+							</actipro:StandardMdiHost>
+						</actipro:Workspace>
+
+						<actipro:ToolWindowContainer>
+							<sampleCommon:OutputToolWindow />
+							<sampleCommon:FindResultsToolWindow />
+							<sampleCommon:ErrorListToolWindow />
+						</actipro:ToolWindowContainer>
+
+					</actipro:SplitContainer>
+				</actipro:DockSite>
+
+				<!--
+				Non-hosted floating windows (which are native windows) support magnetism during drag-to-move,
+				but only Windows OS supports magnetism during drag-to-resize.
+				-->
+				<actipro:InfoBar Severity="Warning" Title="Limited Snap Support"
+					Message="The current platform does not support snap resizing of non-hosted (native) floating windows."
+					IsOpen="{OnPlatform Default='True', Windows='False', Browser='False'}"
+					/>
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel Background="Transparent">
+						<ToolTip.Tip>
+							<actipro:ScreenTip Header="Snap Distance" Content="The distance at which magnetism begins to snap windows being dragged or resized.  Set to 0 to disable magnetism." />
+						</ToolTip.Tip>
+						<TextBlock Classes="theme-form-control-label" Text="{Binding MagnetismSnapDistance, StringFormat='Snap distance: {0}'}" />
+						<Slider Value="{Binding MagnetismSnapDistance}" Minimum="0" Maximum="100" IsSnapToTickEnabled="True" TickFrequency="1" />
+					</StackPanel>
+					<StackPanel Background="Transparent">
+						<ToolTip.Tip>
+							<actipro:ScreenTip Header="Gap Distance" Content="The distance between windows that are snapped together via magnetism." />
+						</ToolTip.Tip>
+						<TextBlock Classes="theme-form-control-label" Text="{Binding MagnetismGapDistance, StringFormat='Gap distance: {0}'}" />
+						<Slider Value="{Binding MagnetismGapDistance}" Minimum="0" Maximum="100" IsSnapToTickEnabled="True" TickFrequency="1" />
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+						<![CDATA[
+<actipro:DockSite ...
+	MagnetismGapDistance="$(MagnetismGapDistance)"
+	MagnetismSnapDistance="$(MagnetismSnapDistance)"
+	>
+
+	...
+
+</actipro:DockSite>
+						]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="MagnetismGapDistance" Value="{Binding MagnetismGapDistance}" />
+						<sampleBrowser:CodeExampleSubstitution Key="MagnetismSnapDistance" Value="{Binding MagnetismSnapDistance}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

@@ -9,6 +9,7 @@
 		<actipro:RibbonBackstageHeaderSeparator
 			HeaderAlignment="{Binding HeaderAlignment}"
 			IsVisible="{Binding IsVisible}"
+			Tag="{Binding Tag}"
 			/>
 	</DataTemplate>
 

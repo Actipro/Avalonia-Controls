@@ -149,7 +149,7 @@ The [BarSplitMenuItem](xref:@ActiproUIRoot.Controls.Bars.BarSplitMenuItem) class
 ```xaml
 xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 ...
-<actipro:BarContextMenu>
+<actipro:BarMenuFlyout>
 	<!-- Label is auto-generated from Key -->
 	<actipro:BarSplitMenuItem
 		Key="Shapes"
@@ -162,7 +162,7 @@ xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 			/>
 	</actipro:BarSplitMenuItem>
 	...
-</actipro:BarContextMenu>
+</actipro:BarMenuFlyout>
 ```
 }
 @if (wpf) {

@@ -14,6 +14,7 @@
 	<DataTemplate x:Key="{x:Static actipro:BarsMvvmResourceKeys.BarSeparatorMenuItemItemContainerTemplate}" DataType="actipro:BarSeparatorViewModel">
 		<actipro:BarMenuSeparator
 			IsVisible="{Binding IsVisible}"
+			Tag="{Binding Tag}"
 			/>
 	</DataTemplate>
 

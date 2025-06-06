@@ -1,0 +1,167 @@
+<UserControl 
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:actiproPrimitives="using:ActiproSoftware.UI.Avalonia.Controls.Primitives"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="All docking windows have several properties that provide control over their size restrictions and also supply an initial ideal size.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Default initial size" Url="https://www.actiprosoftware.com/docs/controls/avalonia/docking/docking-window-features/lifecycle-and-docking-management#default-initial-size" />
+			<sampleBrowser:ControlExampleLinkItem Title="Minimum and maximum size" Url="https://www.actiprosoftware.com/docs/controls/avalonia/docking/docking-window-features/lifecycle-and-docking-management#minimum-and-maximum-size" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExample
+			Header="Container size restrictions"
+			Footer="Use the ContainerMinSize, ContainerMaxSize, ContainerDockedSize, and ContainerAutoHideSize properties to restrict the size of windows."
+			>
+
+			<actipro:DockSite x:Name="dockSite" Height="500"
+				CanDocumentWindowsFloat="True"
+				FloatingWindowIcon="/Images/Icons/Actipro.ico"
+				FloatingWindowTitle="Docking/MDI Demo">
+				<actipro:DockSite.AutoHideLeftContainers>
+					<actipro:ToolWindowContainer>
+						<actipro:ToolWindow Title="Auto-Hide Default Width" ContainerAutoHideSize="350,200">
+							<TextBox BorderThickness="0" Text="This tool window has a default auto-hide popup width of 350 specified." TextWrapping="Wrap" />
+						</actipro:ToolWindow>
+					</actipro:ToolWindowContainer>
+				</actipro:DockSite.AutoHideLeftContainers>
+
+				<actipro:SplitContainer Orientation="Vertical">
+					<actipro:SplitContainer>
+						<actipro:Workspace>
+							<actipro:TabbedMdiHost>
+								<actipro:TabbedMdiContainer>
+									<actipro:DocumentWindow Title="Document1.txt" ContainerMinSize="200,100">
+										<TextBox BorderThickness="0" Text="This document window has a minimum size of 200,100 specified.  Try to resize its width smaller via splitters." TextWrapping="Wrap" />
+									</actipro:DocumentWindow>
+									<actipro:DocumentWindow Title="Document2.txt">
+										<TextBox BorderThickness="0" Text="This document window has no restrictions.  It can be resized to any width/height as long as it's not affecting nearby docking windows' size restrictions." TextWrapping="Wrap" />
+									</actipro:DocumentWindow>
+								</actipro:TabbedMdiContainer>
+							</actipro:TabbedMdiHost>
+						</actipro:Workspace>
+
+						<actipro:SplitContainer Orientation="Vertical">
+							<actipro:ToolWindowContainer>
+								<actipro:ToolWindow Title="Has Minimum Width" ContainerMinSize="170,50" ContainerDockedSize="250,200">
+									<TextBox BorderThickness="0" Text="This tool window has a minimum width of 170 specified.  Try to resize its width smaller via splitters." TextWrapping="Wrap" />
+								</actipro:ToolWindow>
+								<actipro:ToolWindow Title="Normal">
+									<TextBox BorderThickness="0" Text="This tool window has no restrictions.  It can be resized to any width/height as long as it's not affecting nearby docking windows' size restrictions." TextWrapping="Wrap" />
+								</actipro:ToolWindow>
+							</actipro:ToolWindowContainer>
+							<actipro:ToolWindowContainer>
+								<actipro:ToolWindow Title="Fixed Height" ContainerMinSize="50,125" ContainerMaxSize="10000,125">
+									<TextBox BorderThickness="0" Text="This tool window has a fixed height of 125 by setting both the minimum and maximum height to that value." TextWrapping="Wrap" />
+								</actipro:ToolWindow>
+							</actipro:ToolWindowContainer>
+						</actipro:SplitContainer>
+					</actipro:SplitContainer>
+
+					<actipro:SplitContainer>
+						<actipro:ToolWindowContainer>
+							<actipro:ToolWindow Title="Thinner" ContainerDockedSize="300,150">
+								<TextBox BorderThickness="0" Text="This tool window defaults to half the width of the one to the right, and also has a default height of 150." TextWrapping="Wrap" />
+							</actipro:ToolWindow>
+						</actipro:ToolWindowContainer>
+						<actipro:ToolWindowContainer>
+							<actipro:ToolWindow Title="Wider" ContainerDockedSize="600,150">
+								<TextBox BorderThickness="0" Text="This tool window defaults to twice the width of the one to the left, and also has a default height of 150." TextWrapping="Wrap" />
+							</actipro:ToolWindow>
+						</actipro:ToolWindowContainer>
+					</actipro:SplitContainer>
+				</actipro:SplitContainer>
+			</actipro:DockSite>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+						<![CDATA[
+<!-- 
+With the ContainerMinSize and ContainerMaxSize properties, you can define the size range over
+which the docking window can be resized.  Set these values as the same to define a fixed size window.
+
+With the DockedSize property, you can indicate the size that the docking window ideally uses in
+docked tool window and tabbed MDI containers.
+
+The AutoHideSize property indicates the size of the popup that displays when the related auto-hide
+tab is tapped.
+-->
+<actipro:DockSite CanDocumentWindowsFloat="True" ... >
+	<actipro:DockSite.AutoHideLeftContainers>
+
+		<actipro:ToolWindowContainer>
+			<actipro:ToolWindow Title="Auto-Hide Default Width" ContainerAutoHideSize="350,200">
+				<TextBox Text="This tool window has a default auto-hide popup width of 350 specified." ... />
+			</actipro:ToolWindow>
+		</actipro:ToolWindowContainer>
+
+	</actipro:DockSite.AutoHideLeftContainers>
+
+	<actipro:SplitContainer Orientation="Vertical">
+		<actipro:SplitContainer>
+
+			<actipro:Workspace>
+				<actipro:TabbedMdiHost>
+					<actipro:TabbedMdiContainer>
+						<actipro:DocumentWindow Title="Document1.txt" ContainerMinSize="200,100">
+							<TextBox Text="This document window has a minimum size of 200,100 specified.  Try to resize its width smaller via splitters." ... />
+						</actipro:DocumentWindow>
+						<actipro:DocumentWindow Title="Document2.txt">
+							<TextBox Text="This document window has no restrictions.  It can be resized to any width/height as long as it's not affecting nearby docking windows' size restrictions." ... />
+						</actipro:DocumentWindow>
+					</actipro:TabbedMdiContainer>
+				</actipro:TabbedMdiHost>
+			</actipro:Workspace>
+
+			<actipro:SplitContainer Orientation="Vertical">
+
+				<actipro:ToolWindowContainer>
+					<actipro:ToolWindow Title="Has Minimum Width" ContainerMinSize="170,50" ContainerDockedSize="250,200">
+						<TextBox Text="This tool window has a minimum width of 170 specified.  Try to resize its width smaller via splitters." ... />
+					</actipro:ToolWindow>
+					<actipro:ToolWindow Title="Normal">
+						<TextBox Text="This tool window has no restrictions.  It can be resized to any width/height as long as it's not affecting nearby docking windows' size restrictions." ... />
+					</actipro:ToolWindow>
+				</actipro:ToolWindowContainer>
+
+				<actipro:ToolWindowContainer>
+					<actipro:ToolWindow Title="Fixed Height" ContainerMinSize="50,125" ContainerMaxSize="10000,125">
+						<TextBox Text="This tool window has a fixed height of 125 by setting both the minimum and maximum height to that value." ... />
+					</actipro:ToolWindow>
+				</actipro:ToolWindowContainer>
+
+			</actipro:SplitContainer>
+		</actipro:SplitContainer>
+
+		<actipro:SplitContainer>
+
+			<actipro:ToolWindowContainer>
+				<actipro:ToolWindow Title="Thinner" ContainerDockedSize="300,150">
+					<TextBox Text="This tool window defaults to half the width of the one to the right, and also has a default height of 150." ... />
+				</actipro:ToolWindow>
+			</actipro:ToolWindowContainer>
+
+			<actipro:ToolWindowContainer>
+				<actipro:ToolWindow Title="Wider" ContainerDockedSize="600,150">
+					<TextBox Text="This tool window defaults to twice the width of the one to the left, and also has a default height of 150." ... />
+				</actipro:ToolWindow>
+			</actipro:ToolWindowContainer>
+
+		</actipro:SplitContainer>
+	</actipro:SplitContainer>
+</actipro:DockSite>
+						]]>
+					</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

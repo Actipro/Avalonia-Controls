@@ -38,12 +38,12 @@ xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 ...
 <StackPanel>
 
-    <Image Source="/Images/Icons/Save32.png" Width="32" Height="32" />
+	<Image Source="/Images/Icons/Save32.png" Width="32" Height="32" />
 
-    <!-- The TextBlock will always measure to an even integer width -->
-    <actipro:MeasureAdjuster HorizontalRoundMode="CeilingToEven">
-        <TextBlock Text="Save Current File" />
-    </actipro:MeasureAdjuster>
+	<!-- The TextBlock will always measure to an even integer width -->
+	<actipro:MeasureAdjuster HorizontalRoundMode="CeilingToEven">
+		<TextBlock Text="Save Current File" />
+	</actipro:MeasureAdjuster>
 
 </StackPanel>
 ```

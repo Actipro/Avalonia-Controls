@@ -1,0 +1,46 @@
+<actipro:ToolWindow
+	x:Class="ActiproSoftware.ProductSamples.DockingSamples.Common.DocumentPropertiesToolWindow"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	Icon="/Images/Icons/Properties16.png"
+	TabText="Properties"
+	Title="Document Properties"
+	Description="Displays the properties of the primary document"
+	x:DataType="x:Object"
+	Padding="{actipro:ScaledThickness 2}"
+	>
+
+	<ScrollViewer>
+		<ContentControl Content="{Binding}">
+			<ContentControl.ContentTemplate>
+				<actipro:TypedDataTemplateSelector>
+
+					<DataTemplate DataType="actipro:DocumentWindow">
+						<StackPanel Spacing="{actipro:ScaledDouble 1}">
+							<TextBox IsReadOnly="True" Text="{Binding FileName}" Watermark="File name" UseFloatingWatermark="True" />
+							<TextBox IsReadOnly="True" Text="{Binding Description}" Watermark="Description" UseFloatingWatermark="True" />
+							<CheckBox IsChecked="{Binding IsReadOnly}" Content="Is read-only" />
+						</StackPanel>
+					</DataTemplate>
+
+					<actipro:TypedDataTemplateSelector.DefaultTemplate>
+						<DataTemplate>
+							<TextBlock
+								FontStyle="Italic"
+								Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}"
+								Text="Select a document to see properties"
+								TextAlignment="Center"
+								TextWrapping="Wrap"
+								VerticalAlignment="Center"
+								/>
+						</DataTemplate>
+					</actipro:TypedDataTemplateSelector.DefaultTemplate>
+
+				</actipro:TypedDataTemplateSelector>
+			</ContentControl.ContentTemplate>
+		</ContentControl>
+	</ScrollViewer>
+
+</actipro:ToolWindow>

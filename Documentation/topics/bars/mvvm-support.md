@@ -17,14 +17,14 @@ Before getting into the contents of the MVVM library itself, let's examine the o
 
 ### Items Controls
 
-Many Bars controls, especially those in the ribbon hierarchy, inherit the native `ItemsControl` class.  This is key to the principle of supporting MVVM because it allows you to bind a collection of items (generally view models) to a control's `ItemsSource`.  The control's item container generator will then examine each item and if it is not an allowed "container" element for the `ItemsControl`, it will ask for a "container" element to be generated.  This is where @if (avalonia) { classes that implement [IItemContainerTemplateSelector](xref:ActiproSoftware.UI.Controls.Templates.IItemContainerTemplateSelector) }@if (wpf) { `ItemContainerTemplateSelector` classes } come into play.
+Many Bars controls, especially those in the ribbon hierarchy, inherit the native `ItemsControl` class.  This is key to the principle of supporting MVVM because it allows you to bind a collection of items (generally view models) to a control's `ItemsSource`.  The control's item container generator will then examine each item and if it is not an allowed "container" element for the `ItemsControl`, it will ask for a "container" element to be generated.  This is where @if (avalonia) { classes that implement [IItemContainerTemplateSelector](xref:@ActiproUIRoot.Controls.Templates.IItemContainerTemplateSelector) }@if (wpf) { `ItemContainerTemplateSelector` classes } come into play.
 
 ### Item Container Template Selectors
 
 @if (avalonia) {
-Bars controls that derive from `ItemsControl` make heavy use of classes that implement [IItemContainerTemplateSelector](xref:ActiproSoftware.UI.Controls.Templates.IItemContainerTemplateSelector).  This interface is designed so that an item, usually a view model, is passed into a [SelectTemplate](xref:ActiproSoftware.UI.Controls.Templates.IItemContainerTemplateSelector.SelectTemplate*) method along with a reference to the owner `ItemsControl`, and the method will return an `IDataTemplate` to be used for that item.
+Bars controls that derive from `ItemsControl` make heavy use of classes that implement [IItemContainerTemplateSelector](xref:@ActiproUIRoot.Controls.Templates.IItemContainerTemplateSelector).  This interface is designed so that an item, usually a view model, is passed into a [SelectTemplate](xref:@ActiproUIRoot.Controls.Templates.IItemContainerTemplateSelector.SelectTemplate*) method along with a reference to the owner `ItemsControl`, and the method will return an `IDataTemplate` to be used for that item.
 
-The point of an [IItemContainerTemplateSelector](xref:ActiproSoftware.UI.Controls.Templates.IItemContainerTemplateSelector) is to generate a "container" element for an `ItemsControl`'s item.  The [SelectTemplate](xref:ActiproSoftware.UI.Controls.Templates.IItemContainerTemplateSelector.SelectTemplate*) method returns an `IDataTemplate` that contains the element hierarchy to generate.  The root element generated from that `IDataTemplate` will be used as the "container" for the item, and the item will be set as that "container" element's `DataContext`.
+The point of an [IItemContainerTemplateSelector](xref:@ActiproUIRoot.Controls.Templates.IItemContainerTemplateSelector) is to generate a "container" element for an `ItemsControl`'s item.  The [SelectTemplate](xref:@ActiproUIRoot.Controls.Templates.IItemContainerTemplateSelector.SelectTemplate*) method returns an `IDataTemplate` that contains the element hierarchy to generate.  The root element generated from that `IDataTemplate` will be used as the "container" for the item, and the item will be set as that "container" element's `DataContext`.
 }
 @if (wpf) {
 Bars controls that derive from `ItemsControl` make heavy use of `ItemContainerTemplateSelector` classes.  This lesser-known class type works similarly to the `DataTemplateSelector` class, where an item (usually a view model) is passed into a `SelectTemplate` method, along with a control reference.  The `DataTemplateSelector.SelectTemplate` method passes in the container control instance as the control reference, whereas the `ItemContainerTemplateSelector.SelectTemplate` method passes in the owner `ItemsControl` as the control reference.
@@ -39,14 +39,14 @@ As an example to the above process, let's consider the [Ribbon](xref:@ActiproUIR
 Now say that a custom ribbon tab view model class (call it `RibbonTabViewModel`) is the type of item bound to the ribbon's `ItemsSource`, and there is one instance of the class for each tab in the ribbon.
 
 @if (avalonia) {
-It's the responsibility of the [SelectTemplate](xref:ActiproSoftware.UI.Controls.Templates.IItemContainerTemplateSelector.SelectTemplate*) method in the [IItemContainerTemplateSelector](xref:ActiproSoftware.UI.Controls.Templates.IItemContainerTemplateSelector) assigned to [Ribbon](xref:@ActiproUIRoot.Controls.Bars.Ribbon).[ItemContainerTemplateSelector](xref:@ActiproUIRoot.Controls.Bars.Ribbon.ItemContainerTemplateSelector) to look at the `RibbonTabViewModel` and return an `IDataTemplate` that contains a [RibbonTabItem](xref:@ActiproUIRoot.Controls.Bars.RibbonTabItem) control at its root.  The [RibbonTabItem](xref:@ActiproUIRoot.Controls.Bars.RibbonTabItem) XAML in the `IDataTemplate` should have bindings configured from the view model to the control.
+It's the responsibility of the [SelectTemplate](xref:@ActiproUIRoot.Controls.Templates.IItemContainerTemplateSelector.SelectTemplate*) method in the [IItemContainerTemplateSelector](xref:@ActiproUIRoot.Controls.Templates.IItemContainerTemplateSelector) assigned to [Ribbon](xref:@ActiproUIRoot.Controls.Bars.Ribbon).[ItemContainerTemplateSelector](xref:@ActiproUIRoot.Controls.Bars.Ribbon.ItemContainerTemplateSelector) to look at the `RibbonTabViewModel` and return an `IDataTemplate` that contains a [RibbonTabItem](xref:@ActiproUIRoot.Controls.Bars.RibbonTabItem) control at its root.  The [RibbonTabItem](xref:@ActiproUIRoot.Controls.Bars.RibbonTabItem) XAML in the `IDataTemplate` should have bindings configured from the view model to the control.
 }
 @if (wpf) {
 It's the responsibility of the `SelectTemplate` method in the `ItemContainerTemplateSelector` assigned to [Ribbon](xref:@ActiproUIRoot.Controls.Bars.Ribbon).[ItemContainerTemplateSelector](xref:@ActiproUIRoot.Controls.Bars.Ribbon.ItemContainerTemplateSelector) to look at the `RibbonTabViewModel` and return an `ItemContainerTemplate` that contains a [RibbonTabItem](xref:@ActiproUIRoot.Controls.Bars.RibbonTabItem) control at its root.  The [RibbonTabItem](xref:@ActiproUIRoot.Controls.Bars.RibbonTabItem) XAML in the `ItemContainerTemplate` should have bindings configured from the view model to the control.
 }
 
 > [!NOTE]
-> Bars controls are set up to pass an @if (avalonia) { [IItemContainerTemplateSelector](xref:ActiproSoftware.UI.Controls.Templates.IItemContainerTemplateSelector) }@if (wpf) { `ItemContainerTemplateSelector` } that is assigned down to any child controls.  For instance, setting the [Ribbon](xref:@ActiproUIRoot.Controls.Bars.Ribbon).[ItemContainerTemplateSelector](xref:@ActiproUIRoot.Controls.Bars.Ribbon.ItemContainerTemplateSelector) property will pass that @if (avalonia) { [IItemContainerTemplateSelector](xref:ActiproSoftware.UI.Controls.Templates.IItemContainerTemplateSelector) }@if (wpf) { `ItemContainerTemplateSelector` } down through tabs, groups, and even into popup menus.  In this way, the same template selector instance can be reused throughout the control hierarchy.
+> Bars controls are set up to pass an @if (avalonia) { [IItemContainerTemplateSelector](xref:@ActiproUIRoot.Controls.Templates.IItemContainerTemplateSelector) }@if (wpf) { `ItemContainerTemplateSelector` } that is assigned down to any child controls.  For instance, setting the [Ribbon](xref:@ActiproUIRoot.Controls.Bars.Ribbon).[ItemContainerTemplateSelector](xref:@ActiproUIRoot.Controls.Bars.Ribbon.ItemContainerTemplateSelector) property will pass that @if (avalonia) { [IItemContainerTemplateSelector](xref:@ActiproUIRoot.Controls.Templates.IItemContainerTemplateSelector) }@if (wpf) { `ItemContainerTemplateSelector` } down through tabs, groups, and even into popup menus.  In this way, the same template selector instance can be reused throughout the control hierarchy.
 
 With all of that in place, when a [Ribbon](xref:@ActiproUIRoot.Controls.Bars.Ribbon) sees a `RibbonTabViewModel` item in its `ItemsSource`, it will generate a [RibbonTabItem](xref:@ActiproUIRoot.Controls.Bars.RibbonTabItem) "container" that will have its `DataContext` set as the `RibbonTabViewModel` instance, and the tab will appear in the ribbon UI.
 
@@ -59,7 +59,7 @@ Properties on the `RibbonTabViewModel` may be modified, and as long as `INotifyP
 
 [RibbonGallery](xref:@ActiproUIRoot.Controls.Bars.RibbonGallery) and [BarMenuGallery](xref:@ActiproUIRoot.Controls.Bars.BarMenuGallery) are graphically-rich list controls that support selection of anything from colors to text styles.  Even when a ribbon hierarchy is constructed in pure XAML, gallery controls must still use MVVM for their items.
 
-While galleries can use logic like above with an @if (avalonia) { [IItemContainerTemplateSelector](xref:ActiproSoftware.UI.Controls.Templates.IItemContainerTemplateSelector) }@if (wpf) { `ItemContainerTemplateSelector` } to generate [BarGalleryItem](xref:@ActiproUIRoot.Controls.Bars.BarGalleryItem) "container" elements for their items, the actual items should always be some sort of view model.  The visual content within a displayed gallery item is selected by a custom @if (avalonia) { [IDataTemplateSelector](xref:ActiproSoftware.UI.Controls.Templates.IDataTemplateSelector) }@if (wpf) { `DataTemplateSelector` } instance set to the gallery's `ItemTemplateSelector` property.  The @if (avalonia) { [IDataTemplateSelector](xref:ActiproSoftware.UI.Controls.Templates.IDataTemplateSelector).[SelectTemplate](xref:ActiproSoftware.UI.Controls.Templates.IDataTemplateSelector.SelectTemplate*) }@if (wpf) { `DataTemplateSelector.SelectTemplate` } method is passed the view model item and returns @if (avalonia) { an `IDataTemplate` }@if (wpf) { a `DataTemplate` } to use as the UI for the gallery item.
+While galleries can use logic like above with an @if (avalonia) { [IItemContainerTemplateSelector](xref:@ActiproUIRoot.Controls.Templates.IItemContainerTemplateSelector) }@if (wpf) { `ItemContainerTemplateSelector` } to generate [BarGalleryItem](xref:@ActiproUIRoot.Controls.Bars.BarGalleryItem) "container" elements for their items, the actual items should always be some sort of view model.  The visual content within a displayed gallery item is selected by a custom @if (avalonia) { [IDataTemplateSelector](xref:@ActiproUIRoot.Controls.Templates.IDataTemplateSelector) }@if (wpf) { `DataTemplateSelector` } instance set to the gallery's `ItemTemplateSelector` property.  The @if (avalonia) { [IDataTemplateSelector](xref:@ActiproUIRoot.Controls.Templates.IDataTemplateSelector).[SelectTemplate](xref:@ActiproUIRoot.Controls.Templates.IDataTemplateSelector.SelectTemplate*) }@if (wpf) { `DataTemplateSelector.SelectTemplate` } method is passed the view model item and returns @if (avalonia) { an `IDataTemplate` }@if (wpf) { a `DataTemplate` } to use as the UI for the gallery item.
 
 The @if (avalonia) { `IDataTemplate` }@if (wpf) { `DataTemplate` } may contain the complete UI for the gallery item, or it may include a custom element that knows how to measure and render itself in code-behind.  The `DataContext` for the elements in the @if (avalonia) { `IDataTemplate` }@if (wpf) { `DataTemplate` } will be the gallery item view model, allowing for the view model's properties to be bound into any elements within the @if (avalonia) { `IDataTemplate`. }@if (wpf) { `DataTemplate`. }
 
@@ -123,7 +123,7 @@ public partial class RootWindow : RibbonWindow {
 		}
 	}
 
-    ...
+	...
 }
 ```
 
@@ -162,11 +162,12 @@ See the [Footer](ribbon-features/footer.md) topic for more information on ribbon
 
 ### Container Element Summary
 
-This table summarizes most of the `ItemsControl`-based controls in Bars and which "container" elements they expect to be generated from an @if (avalonia) { [IItemContainerTemplateSelector](xref:ActiproSoftware.UI.Controls.Templates.IItemContainerTemplateSelector): }@if (wpf) { `ItemContainerTemplateSelector`: }
+This table summarizes most of the `ItemsControl`-based controls in Bars and which "container" elements they expect to be generated from an @if (avalonia) { [IItemContainerTemplateSelector](xref:@ActiproUIRoot.Controls.Templates.IItemContainerTemplateSelector): }@if (wpf) { `ItemContainerTemplateSelector`: }
 
 @if (avalonia) {
 | ItemsControl | Expected Container Element(s) |
 |-----|-----|
+| [BarMainMenu](xref:@ActiproUIRoot.Controls.Bars.BarMainMenu) | [BarMenuItem](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem). |
 | [BarMenuFlyout](xref:@ActiproUIRoot.Controls.Bars.BarMenuFlyout) | Various [Bars controls](controls/index.md) for menu context. |
 | [BarMenuGallery](xref:@ActiproUIRoot.Controls.Bars.BarMenuGallery) | [BarGalleryItem](xref:@ActiproUIRoot.Controls.Bars.BarGalleryItem). |
 | [BarMenuItem](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem) | Various [Bars controls](controls/index.md) for menu context. |
@@ -191,12 +192,15 @@ This table summarizes most of the `ItemsControl`-based controls in Bars and whic
 | ItemsControl | Expected Container Element(s) |
 |-----|-----|
 | [BarContextMenu](xref:@ActiproUIRoot.Controls.Bars.BarContextMenu) | Various [Bars controls](controls/index.md) for menu context. |
+| [BarMainMenu](xref:@ActiproUIRoot.Controls.Bars.BarMainMenu) | [BarMenuItem](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem). |
 | [BarMenuGallery](xref:@ActiproUIRoot.Controls.Bars.BarMenuGallery) | [BarGalleryItem](xref:@ActiproUIRoot.Controls.Bars.BarGalleryItem). |
 | [BarMenuItem](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem) | Various [Bars controls](controls/index.md) for menu context. |
 | [BarPopupButton](xref:@ActiproUIRoot.Controls.Bars.BarPopupButton) | Various [Bars controls](controls/index.md) for menu context. |
 | [BarSplitButton](xref:@ActiproUIRoot.Controls.Bars.BarSplitButton) | Various [Bars controls](controls/index.md) for menu context. |
 | [BarSplitMenuItem](xref:@ActiproUIRoot.Controls.Bars.BarSplitMenuItem) | Various [Bars controls](controls/index.md) for menu context. |
 | [BarSplitToggleButton](xref:@ActiproUIRoot.Controls.Bars.BarSplitToggleButton) | Various [Bars controls](controls/index.md) for menu context. |
+| [DockableToolBar](xref:@ActiproUIRoot.Controls.Bars.DockableToolBar) | Various [Bars controls](controls/index.md) for toolbar context. |
+| [DockableToolBarHost](xref:@ActiproUIRoot.Controls.Bars.DockableToolBarHost) | [DockableToolBar](xref:@ActiproUIRoot.Controls.Bars.DockableToolBar). |
 | [MiniToolBar](xref:@ActiproUIRoot.Controls.Bars.MiniToolBar) | Various [Bars controls](controls/index.md) for toolbar context. |
 | [Ribbon](xref:@ActiproUIRoot.Controls.Bars.Ribbon) | [RibbonTabItem](xref:@ActiproUIRoot.Controls.Bars.RibbonTabItem). |
 | [RibbonBackstage](xref:@ActiproUIRoot.Controls.Bars.RibbonBackstage) | [RibbonBackstageTabItem](xref:@ActiproUIRoot.Controls.Bars.RibbonBackstageTabItem), [RibbonBackstageHeaderButton](xref:@ActiproUIRoot.Controls.Bars.RibbonBackstageHeaderButton), or [RibbonBackstageHeaderSeparator](xref:@ActiproUIRoot.Controls.Bars.RibbonBackstageHeaderSeparator). |
@@ -230,21 +234,26 @@ The MVVM library contains many types and templates to assist in managing Bars co
 
 ### Template Selectors
 
-As described earlier in this topic, the Bars product has been designed to make use of @if (avalonia) { [IItemContainerTemplateSelector](xref:ActiproSoftware.UI.Controls.Templates.IItemContainerTemplateSelector) and [IDataTemplateSelector](xref:ActiproSoftware.UI.Controls.Templates.IDataTemplateSelector) }@if (wpf) { `ItemContainerTemplateSelector` and `DataTemplateSelector` } instances to associate view models with related view templates.  The MVVM library includes numerous view model types and offers several template selectors classes that map the view models to predefined view templates.
+As described earlier in this topic, the Bars product has been designed to make use of @if (avalonia) { [IItemContainerTemplateSelector](xref:@ActiproUIRoot.Controls.Templates.IItemContainerTemplateSelector) and [IDataTemplateSelector](xref:@ActiproUIRoot.Controls.Templates.IDataTemplateSelector) }@if (wpf) { `ItemContainerTemplateSelector` and `DataTemplateSelector` } instances to associate view models with related view templates.  The MVVM library includes numerous view model types and offers several template selectors classes that map the view models to predefined view templates.
 
 #### For Bar Controls
 
-The [BarControlTemplateSelector](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarControlTemplateSelector) class @if (avalonia) { implements [IItemContainerTemplateSelector](xref:ActiproSoftware.UI.Controls.Templates.IItemContainerTemplateSelector) }@if (wpf) { inherits `ItemContainerTemplateSelector` } and helps generate "container" elements for all of the bar control view models described later in this topic.
+The [BarControlTemplateSelector](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarControlTemplateSelector) class @if (avalonia) { implements [IItemContainerTemplateSelector](xref:@ActiproUIRoot.Controls.Templates.IItemContainerTemplateSelector) }@if (wpf) { inherits `ItemContainerTemplateSelector` } and helps generate "container" elements for all of the bar control view models described later in this topic.
 
-When using the MVVM library with Bars controls, an instance of [BarControlTemplateSelector](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarControlTemplateSelector) should be set to the root bar control's `ItemContainerTemplateSelector` property, such as [Ribbon](xref:@ActiproUIRoot.Controls.Bars.Ribbon).[ItemContainerTemplateSelector](xref:@ActiproUIRoot.Controls.Bars.Ribbon.ItemContainerTemplateSelector) or [StandaloneToolBar](xref:@ActiproUIRoot.Controls.Bars.StandaloneToolBar).[ItemContainerTemplateSelector](xref:@ActiproUIRoot.Controls.Bars.StandaloneToolBar.ItemContainerTemplateSelector).  The template selector will propagate down the hierarchy of bar controls automatically.
+@if (avalonia) {
+When using the MVVM library with Bars controls, an instance of [BarControlTemplateSelector](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarControlTemplateSelector) should be set to the root bar control's `ItemContainerTemplateSelector` property, such as [Ribbon](xref:@ActiproUIRoot.Controls.Bars.Ribbon).[ItemContainerTemplateSelector](xref:@ActiproUIRoot.Controls.Bars.Ribbon.ItemContainerTemplateSelector), [BarMainMenu](xref:@ActiproUIRoot.Controls.Bars.BarMainMenu).[ItemContainerTemplateSelector](xref:@ActiproUIRoot.Controls.Bars.BarMainMenu.ItemContainerTemplateSelector), or [StandaloneToolBar](xref:@ActiproUIRoot.Controls.Bars.StandaloneToolBar).[ItemContainerTemplateSelector](xref:@ActiproUIRoot.Controls.Bars.StandaloneToolBar.ItemContainerTemplateSelector).  The template selector will propagate down the hierarchy of bar controls automatically.
+}
+@if (wpf) {
+When using the MVVM library with Bars controls, an instance of [BarControlTemplateSelector](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarControlTemplateSelector) should be set to the root bar control's `ItemContainerTemplateSelector` property, such as [Ribbon](xref:@ActiproUIRoot.Controls.Bars.Ribbon).[ItemContainerTemplateSelector](xref:@ActiproUIRoot.Controls.Bars.Ribbon.ItemContainerTemplateSelector), [DockableToolBarHost](xref:@ActiproUIRoot.Controls.Bars.DockableToolBarHost).[ItemContainerTemplateSelector](xref:@ActiproUIRoot.Controls.Bars.DockableToolBarHost.ItemContainerTemplateSelector), [BarMainMenu](xref:@ActiproUIRoot.Controls.Bars.BarMainMenu).`ItemContainerTemplateSelector`, or [StandaloneToolBar](xref:@ActiproUIRoot.Controls.Bars.StandaloneToolBar).[ItemContainerTemplateSelector](xref:@ActiproUIRoot.Controls.Bars.StandaloneToolBar.ItemContainerTemplateSelector).  The template selector will propagate down the hierarchy of bar controls automatically.
+}
 
 #### For Ribbon Footer Content
 
-The [RibbonFooterContentTemplateSelector](xref:@ActiproUIRoot.Controls.Bars.Mvvm.RibbonFooterContentTemplateSelector) class @if (avalonia) { implements [IDataTemplateSelector](xref:ActiproSoftware.UI.Controls.Templates.IDataTemplateSelector) }@if (wpf) { inherits `DataTemplateSelector` } and provides the view @if (avalonia) { `IDataTemplate` }@if (wpf) { `DataTemplate` } to use for ribbon footer content view models described later in this topic that are passed into the [RibbonFooterViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.RibbonFooterViewModel).[Content](xref:@ActiproUIRoot.Controls.Bars.Mvvm.RibbonFooterViewModel.Content) property.  An instance of the template selector class is automatically assigned to the [RibbonFooterViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.RibbonFooterViewModel).[ContentTemplateSelector](xref:@ActiproUIRoot.Controls.Bars.Mvvm.RibbonFooterViewModel.ContentTemplateSelector) property.
+The [RibbonFooterContentTemplateSelector](xref:@ActiproUIRoot.Controls.Bars.Mvvm.RibbonFooterContentTemplateSelector) class @if (avalonia) { implements [IDataTemplateSelector](xref:@ActiproUIRoot.Controls.Templates.IDataTemplateSelector) }@if (wpf) { inherits `DataTemplateSelector` } and provides the view @if (avalonia) { `IDataTemplate` }@if (wpf) { `DataTemplate` } to use for ribbon footer content view models described later in this topic that are passed into the [RibbonFooterViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.RibbonFooterViewModel).[Content](xref:@ActiproUIRoot.Controls.Bars.Mvvm.RibbonFooterViewModel.Content) property.  An instance of the template selector class is automatically assigned to the [RibbonFooterViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.RibbonFooterViewModel).[ContentTemplateSelector](xref:@ActiproUIRoot.Controls.Bars.Mvvm.RibbonFooterViewModel.ContentTemplateSelector) property.
 
 #### For Gallery Items
 
-The [BarGalleryItemTemplateSelector](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarGalleryItemTemplateSelector) class @if (avalonia) { implements [IDataTemplateSelector](xref:ActiproSoftware.UI.Controls.Templates.IDataTemplateSelector) }@if (wpf) { inherits `DataTemplateSelector` } and provides the view @if (avalonia) { `IDataTemplate` }@if (wpf) { `DataTemplate` } to use for gallery item view models described later in this topic.  An instance of the template selector needs to be assigned to each gallery control, which can be done through the [BarGalleryViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarGalleryViewModel).[ItemTemplateSelector](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarGalleryViewModelBase.ItemTemplateSelector) property.
+The [BarGalleryItemTemplateSelector](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarGalleryItemTemplateSelector) class @if (avalonia) { implements [IDataTemplateSelector](xref:@ActiproUIRoot.Controls.Templates.IDataTemplateSelector) }@if (wpf) { inherits `DataTemplateSelector` } and provides the view @if (avalonia) { `IDataTemplate` }@if (wpf) { `DataTemplate` } to use for gallery item view models described later in this topic.  An instance of the template selector needs to be assigned to each gallery control, which can be done through the [BarGalleryViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarGalleryViewModel).[ItemTemplateSelector](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarGalleryViewModelBase.ItemTemplateSelector) property.
 
 ### View Models
 
@@ -263,6 +272,7 @@ The following table shows various bar control view model types defined in the MV
 | [BarGalleryViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarGalleryViewModel) | [Gallery](controls/gallery.md) control. |
 | [BarHeadingViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarHeadingViewModel) | [Heading](controls/heading.md) control. |
 | [BarKeyedObjectViewModelBase](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarKeyedObjectViewModelBase) | Abstract base class for a [control with a string keys](controls/control-basics.md). |
+| [BarMainMenuViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarMainMenuViewModel) | [Main Menu](menu-features/main-menu.md) control. |
 | [BarPopupButtonViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarPopupButtonViewModel) | [Popup button](controls/popup-button.md) control. |
 | [BarSeparatorViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarSeparatorViewModel) | [Separator](controls/separator.md) control. |
 | [BarSizeSelectionMenuGalleryViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarSizeSelectionMenuGalleryViewModel) | Size-selection [gallery](controls/gallery.md) control. |
@@ -295,6 +305,7 @@ The following table shows various bar control view model types defined in the MV
 | [BarGalleryViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarGalleryViewModel) | [Gallery](controls/gallery.md) control. |
 | [BarHeadingViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarHeadingViewModel) | [Heading](controls/heading.md) control. |
 | [BarKeyedObjectViewModelBase](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarKeyedObjectViewModelBase) | Abstract base class for a [control with a string keys](controls/control-basics.md). |
+| [BarMainMenuViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarMainMenuViewModel) | [Main Menu](menu-features/main-menu.md) control. |
 | [BarPopupButtonViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarPopupButtonViewModel) | [Popup button](controls/popup-button.md) control. |
 | [BarSeparatorViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarSeparatorViewModel) | [Separator](controls/separator.md) control. |
 | [BarSizeSelectionMenuGalleryViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarSizeSelectionMenuGalleryViewModel) | Size-selection [gallery](controls/gallery.md) control. |
@@ -302,6 +313,8 @@ The following table shows various bar control view model types defined in the MV
 | [BarSplitToggleButtonViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarSplitToggleButtonViewModel) | Toggle [split button](controls/split-button.md) control. |
 | [BarTextBoxViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarTextBoxViewModel) | [Textbox](controls/textbox.md) control. |
 | [BarToggleButtonViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarToggleButtonViewModel) | Toggle [button](controls/button.md) control. |
+| [DockableToolBarHostViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.DockableToolBarHostViewModel) | [Dockable Toolbar](toolbar-features/dockable-toolbars.md) host control. |
+| [DockableToolBarViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.DockableToolBarViewModel) | [Dockable Toolbar](toolbar-features/dockable-toolbars.md) control. |
 | [MiniToolBarViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.MiniToolBarViewModel) | [Mini-toolbar](toolbar-features/mini-toolbars.md) control. |
 | [RibbonApplicationButtonViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.RibbonApplicationButtonViewModel) | [Application button](ribbon-features/application-button.md) control. |
 | [RibbonBackstageHeaderButtonViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.RibbonBackstageHeaderButtonViewModel) | [Backstage](ribbon-features/backstage.md) header button control. |
@@ -378,6 +391,7 @@ The [BarsMvvmResourceKeys](xref:@ActiproUIRoot.Themes.Bars.Mvvm.BarsMvvmResource
 | Property Name | Description |
 |-----|-----|
 | [RibbonControlTheme](xref:@ActiproUIRoot.Themes.Bars.Mvvm.BarsMvvmResourceKeys.RibbonControlTheme) | Sets up bindings on a [Ribbon](xref:@ActiproUIRoot.Controls.Bars.Ribbon) control to a [RibbonViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.RibbonViewModel) instance. |
+| [BarMainMenuControlTheme](xref:@ActiproUIRoot.Themes.Bars.Mvvm.BarsMvvmResourceKeys.BarMainMenuControlTheme) | Sets up bindings on a [BarMainMenu](xref:@ActiproUIRoot.Controls.Bars.BarMainMenu) control to a [BarMainMenuViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarMainMenuViewModel) instance. |
 | [StandaloneToolBarControlTheme](xref:@ActiproUIRoot.Themes.Bars.Mvvm.BarsMvvmResourceKeys.StandaloneToolBarControlTheme) | Sets up bindings on a [StandaloneToolBar](xref:@ActiproUIRoot.Controls.Bars.StandaloneToolBar) control to a [StandaloneToolBarViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.StandaloneToolBarViewModel) instance. |
 
 > [!TIP]
@@ -403,6 +417,8 @@ The [BarsMvvmResourceKeys](xref:@ActiproUIRoot.Themes.BarsMvvmResourceKeys) clas
 | Property Name | Description |
 |-----|-----|
 | [RibbonStyle](xref:@ActiproUIRoot.Themes.BarsMvvmResourceKeys.RibbonStyle) | Sets up bindings on a [Ribbon](xref:@ActiproUIRoot.Controls.Bars.Ribbon) control to a [RibbonViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.RibbonViewModel) instance. |
+| [BarMainMenuStyle](xref:@ActiproUIRoot.Themes.BarsMvvmResourceKeys.BarMainMenuStyle) | Sets up bindings on a [BarMainMenu](xref:@ActiproUIRoot.Controls.Bars.BarMainMenu) control to a [BarMainMenuViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarMainMenuViewModel) instance. |
+| [DockableToolBarHostStyle](xref:@ActiproUIRoot.Themes.BarsMvvmResourceKeys.DockableToolBarHostStyle) | Sets up bindings on a [DockableToolBarHost](xref:@ActiproUIRoot.Controls.Bars.DockableToolBarHost) control to a [DockableToolBarHostViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.DockableToolBarHostViewModel) instance. |
 | [StandaloneToolBarStyle](xref:@ActiproUIRoot.Themes.BarsMvvmResourceKeys.StandaloneToolBarStyle) | Sets up bindings on a [StandaloneToolBar](xref:@ActiproUIRoot.Controls.Bars.StandaloneToolBar) control to a [StandaloneToolBarViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.StandaloneToolBarViewModel) instance. |
 
 > [!TIP]
@@ -450,7 +466,10 @@ Any of the template selectors described above can be augmented in case the built
 
 ### Adding a View Model Property
 
-For instance, say the [BarButtonViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarButtonViewModel) class is missing a `Tag` property that you wish to set to carry other custom data.  Create a class that inherits [BarButtonViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarButtonViewModel) and adds a `Tag` property.  Update the [BarControlTemplateSelector](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarControlTemplateSelector).[BarButtonDefaultTemplate](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarControlTemplateSelector.BarButtonDefaultTemplate) property to point to a `DataTemplate` that is a clone of the default `DataTemplate`, but also adds a binding of the [BarButton](xref:@ActiproUIRoot.Controls.Bars.BarButton).`Tag` property to the view model's `Tag` property.
+For instance, say the [BarButtonViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarButtonViewModel) class is missing a `Cursor` property that you wish to set to alter the default button cursor.  Create a class that inherits [BarButtonViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarButtonViewModel) and adds a `Cursor` property.  Update the [BarControlTemplateSelector](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarControlTemplateSelector).[BarButtonDefaultTemplate](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarControlTemplateSelector.BarButtonDefaultTemplate) property to point to a `DataTemplate` that is a clone of the default `DataTemplate`, but also adds a binding of the [BarButton](xref:@ActiproUIRoot.Controls.Bars.BarButton).`Cursor` property to the view model's `Cursor` property.
+
+> [!TIP]
+> Each view model also has a [Tag](xref:@ActiproUIRoot.Controls.Bars.Mvvm.IHasTag.Tag) property that can be used to store user-defined custom data.
 
 ### Third-Party Control Support
 

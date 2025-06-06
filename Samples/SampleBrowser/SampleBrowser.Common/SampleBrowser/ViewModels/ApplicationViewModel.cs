@@ -53,8 +53,8 @@ namespace ActiproSoftware.SampleBrowser {
 		public const string ProductDataResourceKey = "AppProductData";
 
 		private const string DefaultSampleUri = null;
-		// private const string DefaultSampleUri = "https://ActiproSoftware/SampleBrowser/Utilities/ColorPalette/ColorPaletteView";
-		// private const string DefaultSampleUri = "https://ActiproSoftware/ProductSamples/BarsSamples/Demos/DocumentEditorMvvm/MainControl";
+		//private const string DefaultSampleUri = "https://ActiproSoftware/SampleBrowser/Utilities/ColorPalette/ColorPaletteView";
+		//private const string DefaultSampleUri = "https://ActiproSoftware/ProductSamples/FundamentalsSamples/Controls/CircularProgressBarIntro/MainControl";
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 		// OBJECT

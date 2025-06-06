@@ -13,7 +13,7 @@
 
 	<Grid RowDefinitions="Auto,*">
 		<Border Padding="{actipro:ScaledThickness 1.5}" BorderBrush="{Binding #drawer.BorderBrush}" BorderThickness="0,0,0,1">
-			<ComboBox x:Name="drawerSectionComboBox">
+			<ComboBox x:Name="drawerSectionComboBox" MaxDropDownHeight="400">
 				<ComboBox.Styles>
 					<!-- NOTE: Necessary until ComboBox supports an alternate template: https://github.com/AvaloniaUI/Avalonia/pull/9689 -->
 					<Style Selector="#content Image#logoImage">
@@ -40,7 +40,7 @@
 			</StackPanel>
 		</ScrollViewer>
 
-		<ListBox x:Name="itemListBox" Grid.Row="1" Background="Transparent" BorderThickness="0" IsVisible="{Binding !ViewUsesHomeDrawer}">
+		<ListBox x:Name="itemListBox" Grid.Row="1" Background="Transparent" BorderThickness="0" IsVisible="{Binding !ViewUsesHomeDrawer}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
 			<ListBox.ItemContainerTheme>
 				<ControlTheme TargetType="ListBoxItem" BasedOn="{actipro:ControlTheme ListBoxItem}">
 					<Setter Property="Padding" Value="{actipro:ScaledThickness '0.5+8,1-1'}" />
@@ -62,7 +62,7 @@
 										   Background="{actipro:ThemeResource ControlBackgroundBrushEmphasizedAccent}" BorderThickness="0"
 										   VerticalAlignment="Center" IsVisible="{Binding HasBlurbText, FallbackValue=False}"
 										   ToolTip.Tip="{Binding BlurbText}" />
-							<TextBlock Classes.indent="{Binding IsGroupedByCategory}" Text="{Binding Title}" />
+							<TextBlock Classes.indent="{Binding IsGroupedByCategory}" Text="{Binding Title}" TextTrimming="CharacterEllipsis" TextWrapping="NoWrap" />
 						</DockPanel>
 					</DataTemplate>
 				</actipro:TypedDataTemplateSelector>

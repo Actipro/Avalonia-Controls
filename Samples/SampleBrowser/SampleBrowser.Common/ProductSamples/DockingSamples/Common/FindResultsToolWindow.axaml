@@ -1,0 +1,19 @@
+<actipro:ToolWindow
+	x:Class="ActiproSoftware.ProductSamples.DockingSamples.Common.FindResultsToolWindow"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	Icon="/Images/Icons/FindResults16.png"
+	SerializationId="FindResults"
+	Title="Find Results"
+	Description="Displays the results of a Find or Replace operation"
+	>
+
+	<TextBox
+		BorderThickness="0"
+		IsReadOnly="True"
+		Text="(no results)"
+		/>
+
+</actipro:ToolWindow>

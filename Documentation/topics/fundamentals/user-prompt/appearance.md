@@ -115,6 +115,47 @@ ThemedMessageBox.Show(
 ```
 }
 
+@if (avalonia) {
+## Dialog Chromed Decorations
+
+When displayed as a dialog, parts of the [UserPromptWindow](xref:@ActiproUIRoot.Controls.UserPromptWindow) can be styled with custom chromed elements.  The following options are available:
+
+| Value | Description |
+| ----- | ----- |
+| [None](xref:@ActiproUIRoot.Controls.ChromedDecorations.None) | No custom chrome is applied, and the window will appear like a native system window. |
+| [TitleBarOnly](xref:@ActiproUIRoot.Controls.ChromedDecorations.TitleBarOnly) | Custom chrome is applied only to the title bar. |
+| [TitleBarOnlyPreferred](xref:@ActiproUIRoot.Controls.ChromedDecorations.TitleBarOnlyPreferred) | (Default) Uses [TitleBarOnly](xref:@ActiproUIRoot.Controls.ChromedDecorations.TitleBarOnly) on supported platforms; otherwise, [Full](xref:@ActiproUIRoot.Controls.ChromedDecorations.Full) will be used. |
+| [Full](xref:@ActiproUIRoot.Controls.ChromedDecorations.Full) | No system decorations are used, and the entire window (title bar and borders) will use a custom appearance. |
+
+> [!IMPORTANT]
+> Avalonia on Linux either requires all system decorations or none.  It is not possible to hide just the title bar and still keep the borders, so [ChromedDecorations](xref:@ActiproUIRoot.Controls.ChromedDecorations).[TitleBarOnly](xref:@ActiproUIRoot.Controls.ChromedDecorations.TitleBarOnly) is not supported on Linux.
+
+The change the global default value for [ChromedDecorations](xref:@ActiproUIRoot.Controls.ChromedDecorations), set [UserPromptBuilder](xref:@ActiproUIRoot.Controls.UserPromptBuilder).[DefaultDialogChromedDecorations](xref:@ActiproUIRoot.Controls.UserPromptBuilder.DefaultDialogChromedDecorations) to the desired value.
+
+```csharp
+UserPromptBuilder.DefaultDialogChromedDecorations = ChromedDecorations.Full;
+```
+
+The [builder pattern](builder-pattern.md) exposes a per-prompt option using the [UserPromptBuilder](xref:@ActiproUIRoot.Controls.UserPromptBuilder).[WithDialogChromedDecorations](xref:@ActiproUIRoot.Controls.UserPromptBuilder.WithDialogChromedDecorations*) method as shown in the following example:
+
+```csharp
+await UserPromptBuilder.Configure()
+	// ... other configuration options here
+	.WithDialogChromedDecorations(ChromedDecorations.None)
+	.Show();
+```
+
+An advanced configuration of [MessageBox](message-box.md) also allows access to the [builder pattern](builder-pattern.md) as shown below:
+
+```csharp
+await MessageBox.Show(
+	"Use the optional 'configure' parameter to access the UserPromptBuilder."
+	configure: builder => builder
+		.WithDialogChromedDecorations(ChromedDecorations.None)
+	);
+```
+}
+
 @if (wpf) {
 ## Theme Assets
 

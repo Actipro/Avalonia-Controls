@@ -265,6 +265,7 @@ namespace ActiproSoftware.SampleBrowser {
 				"is",
 				"long",
 				"nameof",
+				"namespace",
 				"new",
 				"not",
 				"null",

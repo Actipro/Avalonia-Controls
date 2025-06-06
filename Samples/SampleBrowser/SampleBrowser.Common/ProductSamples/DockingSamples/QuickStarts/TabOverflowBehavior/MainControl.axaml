@@ -1,0 +1,114 @@
+<UserControl 
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:actiproAvalonia="using:ActiproSoftware.UI.Avalonia"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:sampleCommon="using:ActiproSoftware.ProductSamples.DockingSamples.Common"
+	>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="The tool window and tabbed MDI tabs both support various behaviors when the tabs will not fit in the available space. By default, tool window tabs will shrink to fit and tabbed MDI tabs are hidden, but are still accessible via a drop-down menu.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Tabbed MDI tab overflow behavior" Url="https://www.actiprosoftware.com/docs/controls/avalonia/docking/workspace-mdi-features/tabbed-mdi#tab-overflow-behavior" />
+			<sampleBrowser:ControlExampleLinkItem Title="Tool window tab overflow behavior" Url="https://www.actiprosoftware.com/docs/controls/avalonia/docking/docking-window-features/docked-tool-windows#tab-overflow-behavior" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExample
+			Header="Tab overflow behavior"
+			Footer="The size of this dock site has been restricted to a small size to force overflow behavior."
+			>
+
+			<actipro:DockSite x:Name="dockSite" MaxWidth="501" Height="300"
+				FloatingWindowIcon="/Images/Icons/Actipro.ico"
+				FloatingWindowTitle="Docking/MDI Demo">
+				<actipro:SplitContainer>
+
+					<actipro:Workspace>
+						<actipro:TabbedMdiHost x:Name="tabbedMdiHost">
+							<actipro:TabbedMdiContainer>
+
+								<actipro:DocumentWindow Title="FirstDocument.txt" Description="Text Document"
+										FileName="C:\Users\Actipro\My Documents\FirstDocument.txt"
+										Icon="/Images/Icons/TextDocument16.png">
+									<TextBox BorderThickness="0" Text="The first document." TextWrapping="Wrap" />
+								</actipro:DocumentWindow>
+
+								<actipro:DocumentWindow Title="AnotherDocument.txt" Description="Text Document"
+										FileName="C:\Users\Actipro\My Documents\AnotherDocument.txt"
+										Icon="/Images/Icons/TextDocument16.png">
+									<TextBox BorderThickness="0" Text="The second document." TextWrapping="Wrap" />
+								</actipro:DocumentWindow>
+
+								<actipro:DocumentWindow Title="YetAThirdDocument.txt" Description="Text Document"
+										FileName="C:\Users\Actipro\My Documents\YetAThirdDocument.txt"
+										Icon="/Images/Icons/TextDocument16.png">
+									<TextBox BorderThickness="0" Text="The third document." TextWrapping="Wrap" />
+								</actipro:DocumentWindow>
+
+							</actipro:TabbedMdiContainer>
+						</actipro:TabbedMdiHost>
+					</actipro:Workspace>
+
+					<actipro:ToolWindowContainer>
+						<sampleCommon:SolutionExplorerToolWindow ContainerDockedSize="150,200" />
+						<sampleCommon:ClassViewToolWindow ContainerDockedSize="150,200" />
+					</actipro:ToolWindowContainer>
+				</actipro:SplitContainer>
+
+			</actipro:DockSite>
+
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10" Width="150">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Document tabs" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type={x:Type actipro:TabOverflowBehavior}}" SelectedValue="{Binding #tabbedMdiHost.TabOverflowBehavior, Mode=TwoWay}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Tool window tabs" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type={x:Type actipro:TabOverflowBehavior}}" SelectedValue="{Binding #dockSite.ToolWindowsTabOverflowBehavior, Mode=TwoWay}" />
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:DockSite ToolWindowsTabOverflowBehavior="$(ToolWindowsTabOverflowBehavior)" ... >
+	<actipro:SplitContainer>
+
+		<actipro:Workspace>
+			<actipro:TabbedMdiHost TabOverflowBehavior="$(DocumentWindowsTabOverflowBehavior)" ... >
+				<actipro:TabbedMdiContainer>
+
+					<actipro:DocumentWindow Title="FirstDocument.txt" ... />
+					<actipro:DocumentWindow Title="AnotherDocument.txt" ... />
+					<actipro:DocumentWindow Title="YetAThirdDocument.txt" ... />
+
+				</actipro:TabbedMdiContainer>
+			</actipro:TabbedMdiHost>
+		</actipro:Workspace>
+
+		<actipro:ToolWindowContainer>
+			<actipro:ToolWindow Title="Solution Explorer" ... />
+			<actipro:ToolWindow Title="Class View" ... />
+		</actipro:ToolWindowContainer>
+
+	</actipro:SplitContainer>
+</actipro:DockSite>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="DocumentWindowsTabOverflowBehavior" Value="{Binding #tabbedMdiHost.TabOverflowBehavior}" />
+						<sampleBrowser:CodeExampleSubstitution Key="ToolWindowsTabOverflowBehavior" Value="{Binding #dockSite.ToolWindowsTabOverflowBehavior}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

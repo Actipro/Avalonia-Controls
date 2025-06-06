@@ -1,0 +1,17 @@
+<UserControl 
+	xmlns="https://github.com/avaloniaui"
+	x:Class="ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.MvvmFeatures.Views.ImageDocumentItemView"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actiproPrimitives="using:ActiproSoftware.UI.Avalonia.Controls.Primitives"
+	xmlns:viewmodels="using:ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.MvvmFeatures.ViewModels"
+	x:DataType="viewmodels:ImageDocumentItemViewModel"
+	>
+
+	<Panel>
+		<actiproPrimitives:Checkerboard />
+		<Image Source="{Binding Image}" Stretch="None" />
+	</Panel>
+
+
+</UserControl>

@@ -11,6 +11,9 @@ The [ScrollableOverflowPresenter](xref:@ActiproUIRoot.Controls.ScrollableOverflo
 
 No scroll buttons will be visible when the child control fits completely within the viewport bounds of the presenter along its primary axis, as set by the [Orientation](xref:@ActiproUIRoot.Controls.ScrollableOverflowPresenter.Orientation) property.
 
+> [!IMPORTANT]
+> See the [Getting Started](../getting-started.md) topic for details on configuring themes for this control.
+
 ## Important Members
 
 The [ScrollableOverflowPresenter](xref:@ActiproUIRoot.Controls.ScrollableOverflowPresenter) class has these important members:

@@ -1,0 +1,88 @@
+<UserControl 
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:actiproImages="using:ActiproSoftware.UI.Avalonia.Images"
+	xmlns:actiproAvalonia="using:ActiproSoftware.UI.Avalonia"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:sampleCommon="using:ActiproSoftware.ProductSamples.DockingSamples.Common"
+	>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="While a common use of the Actipro Docking &amp; MDI package is to have tool windows that surround an MDI (Multiple Document Interface) area, in many cases you may not wish to have documents in your application. In these cases you may wish to just place some sort of arbitrary content in the &quot;workspace&quot; area of your application with tool windows surrounding it.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Workspace with custom content" Url="https://www.actiprosoftware.com/docs/controls/avalonia/docking/workspace-mdi-features/workspace#workspace-with-custom-content" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExample
+			Header="Workspace content"
+			>
+
+			<Border BorderBrush="{actipro:ThemeResource Container3BorderBrush}" BorderThickness="1">
+				<actipro:DockSite Height="400"
+					FloatingWindowIcon="/Images/Icons/Actipro.ico"
+					FloatingWindowTitle="Docking/MDI Demo">
+					<actipro:DockSite.AutoHideLeftContainers>
+						<actipro:ToolWindowContainer>
+							<sampleCommon:ToolboxToolWindow />
+						</actipro:ToolWindowContainer>
+					</actipro:DockSite.AutoHideLeftContainers>
+
+					<actipro:SplitContainer Orientation="Vertical">
+
+						<actipro:Workspace>
+							<actipro:Card Margin="20" CoverDock="Left" CornerRadius="20" Title="Custom Workspace Content" MaxWidth="600">
+								<actipro:Card.Cover>
+									<Image>
+										<Image.Source>
+											<actiproImages:ActiproLogo48 />
+										</Image.Source>
+									</Image>
+								</actipro:Card.Cover>
+
+								<ScrollViewer>
+									<TextBlock>
+										This QuickStart shows how to place tool windows around a Workspace that contains any sort of content you wish.
+										In this sample, we've used an Actipro Card control, but any UI such as a ScrollViewer with large-sized content could be used instead.
+									</TextBlock>
+								</ScrollViewer>
+							</actipro:Card>
+						</actipro:Workspace>
+
+						<actipro:ToolWindowContainer>
+							<sampleCommon:OutputToolWindow ContainerDockedSize="200,150" />
+							<sampleCommon:FindResultsToolWindow ContainerDockedSize="200,150" />
+						</actipro:ToolWindowContainer>
+
+					</actipro:SplitContainer>
+				</actipro:DockSite>
+			</Border>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:DockSite ... >
+	<actipro:SplitContainer Orientation="Vertical">
+
+		<actipro:Workspace>
+			<!-- Add workspace content here -->
+		</actipro:Workspace>
+
+		<actipro:ToolWindowContainer>
+			<actipro:ToolWindow Title="Output" ... />
+			<actipro:ToolWindow Title="Find Results" ... />
+		</actipro:ToolWindowContainer>
+
+	</actipro:SplitContainer>
+</actipro:DockSite>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

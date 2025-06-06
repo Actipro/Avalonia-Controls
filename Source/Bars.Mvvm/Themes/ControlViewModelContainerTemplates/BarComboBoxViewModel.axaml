@@ -48,6 +48,7 @@
 			RequestedWidth="{Binding RequestedWidth}"
 			SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
 			SmallIcon="{Binding SmallIcon}"
+			Tag="{Binding Tag}"
 			Text="{Binding Text, Mode=TwoWay}"
 			TextMemberBinding="{Binding Label, x:DataType=actipro:IBarGalleryItemViewModel}"
 			Title="{Binding Title}"

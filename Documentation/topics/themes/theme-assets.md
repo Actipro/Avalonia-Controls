@@ -70,7 +70,7 @@ This example shows how the `SomeControlBackgroundBrush` brush resource can be de
 xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 ...
 <Application.Resources>
-    <DynamicResource x:Key="SomeControlBackgroundBrush" ResourceKey="{actipro:ThemeResourceKey Container3BackgroundBrush}" />
+	<DynamicResource x:Key="SomeControlBackgroundBrush" ResourceKey="{actipro:ThemeResourceKey Container3BackgroundBrush}" />
 </Application.Resources>
 ```
 

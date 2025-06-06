@@ -11,6 +11,11 @@ An [InfoBar](xref:@ActiproUIRoot.Controls.InfoBar) can be used to display essent
 
 *InfoBar with default severity showing a title and message*
 
+@if (avalonia) {
+> [!IMPORTANT]
+> See the [Getting Started](../getting-started.md) topic for details on configuring themes for this control.
+}
+
 ## Title and Message
 
 The [Title](xref:@ActiproUIRoot.Controls.InfoBar.Title) property is typically set to short text that categorizes the message being displayed while the [Message](xref:@ActiproUIRoot.Controls.InfoBar.Message) property is set to text that provides additional detail.
@@ -77,7 +82,7 @@ xmlns:shared="http://schemas.actiprosoftware.com/winfx/xaml/shared"
 
 By default, info bar will display an icon that corresponds to the value of the [Severity](xref:@ActiproUIRoot.Controls.InfoBar.Severity) property.  To hide the icon, set the [IsIconVisible](xref:@ActiproUIRoot.Controls.InfoBar.IsIconVisible) property to `false`.
 
-To customize the icon, assign the desired control to the [Icon](xref:@ActiproUIRoot.Controls.InfoBar.Icon) property.
+To customize the icon, assign the desired object to the [Icon](xref:@ActiproUIRoot.Controls.InfoBar.Icon) property.
 
 @if (avalonia) {
 The following sample demonstrates using an `Image` for the icon, but any content supported by [Icon Presenter](../../themes/icon-presenter.md) can be used (like `IImage` data, `PathIcon` control, or [DynamicImage](../../shared/controls/dynamic-image.md) control):

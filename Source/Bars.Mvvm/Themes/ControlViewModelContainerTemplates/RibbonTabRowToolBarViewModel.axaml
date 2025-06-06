@@ -9,6 +9,7 @@
 		<actipro:RibbonTabRowToolBar
 			IsVisible="{Binding IsVisible}"
 			ItemsSource="{Binding Items}"
+			Tag="{Binding Tag}"
 			/>
 	</DataTemplate>
 

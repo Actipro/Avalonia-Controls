@@ -9,6 +9,7 @@
 		<actipro:BarMenuHeading
 			IsVisible="{Binding IsVisible}"
 			Label="{Binding Label}"
+			Tag="{Binding Tag}"
 			/>
 	</DataTemplate>
 

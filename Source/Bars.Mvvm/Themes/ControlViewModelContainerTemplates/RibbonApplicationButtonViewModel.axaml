@@ -9,6 +9,7 @@
 		<actipro:RibbonApplicationButton
 			KeyTipText="{Binding KeyTipText}"
 			Label="{Binding Label}"
+			Tag="{Binding Tag}"
 			/>
 	</DataTemplate>
 

@@ -1,0 +1,161 @@
+<UserControl 
+	xmlns="https://github.com/avaloniaui"
+	x:Class="ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.PromptOnClose.MainControl"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+	<UserControl.Resources>
+		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="This QuickStart shows how you can use the WindowsClosing event on the DockSite to confirm that a window should be closed (and optionally cancel it).">
+
+		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+			<sampleBrowser:ControlExampleLinkItem Title="MessageBox" Url="/ProductSamples/FundamentalsSamples/Controls/MessageBoxIntro/MainControl" />
+		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+
+		<sampleBrowser:ControlExample
+			Header="Prompt on close"
+			Footer="Close a document window or select &quot;Window > Close All Documents&quot; menu to see the prompt. This sample ignores closing tool windows."
+			>
+
+			<Grid RowDefinitions="Auto,*">
+
+				<!-- DockSite -->
+				<actipro:DockSite x:Name="dockSite" Height="300" Grid.Row="1"
+					CanDocumentWindowsFloat="True"
+					FloatingWindowIcon="/Images/Icons/Actipro.ico"
+					FloatingWindowTitle="Docking/MDI Demo"
+					WindowsClosing="OnDockSiteWindowsClosing">
+
+					<actipro:SplitContainer>
+
+						<actipro:Workspace>
+							<actipro:TabbedMdiHost>
+								<actipro:TabbedMdiContainer>
+									<actipro:DocumentWindow Title="Document1.txt" Description="Text document" FileName="Document1.txt" Icon="/Images/Icons/TextDocument16.png">
+										<TextBox BorderThickness="0" Text="The first document." TextWrapping="Wrap" />
+									</actipro:DocumentWindow>
+									<actipro:DocumentWindow Title="Document2.txt" Description="Text document" FileName="Document2.txt" Icon="/Images/Icons/TextDocument16.png">
+										<TextBox BorderThickness="0" Text="The second document." TextWrapping="Wrap" />
+									</actipro:DocumentWindow>
+									<actipro:DocumentWindow Title="Document3.txt" Description="Text document" FileName="Document3.txt" Icon="/Images/Icons/TextDocument16.png">
+										<TextBox BorderThickness="0" Text="The third document." TextWrapping="Wrap" />
+									</actipro:DocumentWindow>
+								</actipro:TabbedMdiContainer>
+							</actipro:TabbedMdiHost>
+						</actipro:Workspace>
+
+						<actipro:ToolWindowContainer>
+							<actipro:ToolWindow Title="Tool Window" Icon="/Images/Icons/Properties16.png">
+								<TextBox BorderThickness="0" Text="This is a tool window." TextWrapping="Wrap" />
+							</actipro:ToolWindow>
+						</actipro:ToolWindowContainer>
+					</actipro:SplitContainer>
+				</actipro:DockSite>
+
+				<!-- Menu -->
+				<Menu Grid.Row="0" Background="Transparent">
+					<MenuItem Header="_File">
+						<MenuItem Header="New" Click="OnNewDocumentMenuItemClick" />
+						<MenuItem Header="Open..." Click="OnOpenDocumentMenuItemClick" />
+					</MenuItem>
+					<MenuItem Header="_Window">
+						<MenuItem Header="Close All Documents" Command="{Binding #dockSite.CloseAllDocumentsCommand}" />
+						<Separator />
+						<MenuItem Header="Tabbed MDI" Command="{Binding #dockSite.SetMdiKindCommand}" ToggleType="Radio" IsChecked="{Binding #dockSite.MdiKind, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Tabbed'}">
+							<MenuItem.CommandParameter>
+								<actipro:MdiKind>Tabbed</actipro:MdiKind>
+							</MenuItem.CommandParameter>
+						</MenuItem>
+						<MenuItem Header="Standard MDI" Command="{Binding #dockSite.SetMdiKindCommand}" ToggleType="Radio" IsChecked="{Binding #dockSite.MdiKind, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Standard'}">
+							<MenuItem.CommandParameter>
+								<actipro:MdiKind>Standard</actipro:MdiKind>
+							</MenuItem.CommandParameter>
+						</MenuItem>
+						<Separator />
+						<MenuItem Header="Cascade" Command="{Binding #dockSite.CascadeDocumentsCommand}" />
+						<MenuItem Header="Tile Horizontally" Command="{Binding #dockSite.TileDocumentsHorizontallyCommand}" />
+						<MenuItem Header="Tile Vertically" Command="{Binding #dockSite.TileDocumentsVerticallyCommand}" />
+					</MenuItem>
+				</Menu>
+
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Docking;
+...
+public partial class MainControl : UserControl {
+
+	// NOTE: This sample assumes a DockSite named 'dockSite' is defined in XAML
+
+	public MainControl() {
+		InitializeComponent();
+		
+		// Listen for when one or more windows are closing
+		dockSite.WindowsClosing += OnDockSiteWindowsClosing;
+	}
+
+	/// <summary>
+	/// Occurs before one or more docking windows are closed, allowing for cancellation of the close.
+	/// </summary>
+	/// <param name="sender">The sender of the event.</param>
+	/// <param name="e">The <c>DockingWindowsEventArgs</c> that contains data related to this event.</param>
+	private async void OnDockSiteWindowsClosing(object sender, DockingWindowsEventArgs e) {
+		// Prevent re-entry
+		if (_ignorePromptOnClose)
+			return;
+
+		// This sample only prompts for closing document windows (not tool windows)
+		var documents = e.Windows.OfType<DocumentWindow>().ToArray();
+		if (documents.Length > 0) {
+			var message = new StringBuilder("Are you sure you want to close the following:\r\n");
+			foreach (var document in documents)
+				message.Append($"\r\n  - {document.FileName}");
+
+			// IMPORTANT NOTE: The following prompt is displayed asynchronously, so the WindowsClosing event
+			// must be canceled and handled *before* showing the prompt since control will return to the
+			// calling routine before waiting on a response to the prompt
+			e.Cancel = true;
+			e.Handled = true;
+
+			// Use Actipro UserPrompt to confirm if the documents should be closed
+			var result = await MessageBox.Show(
+				message.ToString(),
+				"Confirm Close",
+				MessageBoxButtons.YesNo,
+				MessageBoxImage.Question,
+				MessageBoxResult.Yes);
+			if (result == MessageBoxResult.Yes) {
+				// Since the original WindowClosing even was canceled, programmatically close each
+				// document now that the user has confirmed
+				try {
+					// Ignore the WindowsClosing event that will be re-raised when programmatically closing
+					_ignorePromptOnClose = true;
+
+					// Programmatically close each document
+					foreach (var document in documents)
+						document.Close();
+				}
+				finally {
+					_ignorePromptOnClose = false;
+				}
+			}
+		}
+	}
+
+}
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+
+		</sampleBrowser:ControlExample>
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

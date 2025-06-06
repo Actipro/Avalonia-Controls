@@ -11,6 +11,11 @@ order: 15
 
 *Circular progressbars can be an integral part of a dashboard display*
 
+@if (avalonia) {
+> [!IMPORTANT]
+> See the [Getting Started](../getting-started.md) topic for details on configuring themes for this control.
+}
+
 ## Values
 
 The [CircularProgressBar](xref:@ActiproUIRoot.Controls.CircularProgressBar) control inherits `RangeBase`, which provides these essential properties:

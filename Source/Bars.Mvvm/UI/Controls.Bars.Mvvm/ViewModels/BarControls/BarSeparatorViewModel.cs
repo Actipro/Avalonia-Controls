@@ -3,9 +3,10 @@
 	/// <summary>
 	/// Represents a view model for a separator control within a bar control.
 	/// </summary>
-	public class BarSeparatorViewModel : ObservableObjectBase {
+	public class BarSeparatorViewModel : ObservableObjectBase, IHasTag {
 
 		private bool _isVisible = true;
+		private object? _tag;
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 		// PUBLIC PROCEDURES
@@ -17,6 +18,11 @@
 			set => SetProperty(ref _isVisible, value);
 		}
 
+		/// <inheritdoc cref="IHasTag.Tag"/>
+		public object? Tag {
+			get => _tag;
+			set => SetProperty(ref _tag, value);
+		}
 	}
 
 }

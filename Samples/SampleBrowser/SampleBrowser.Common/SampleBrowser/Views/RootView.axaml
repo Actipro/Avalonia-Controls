@@ -16,44 +16,49 @@
 		<DockPanel>
 
 			<!-- Title Bar -->
-			<actipro:ChromedTitleBar DockPanel.Dock="Top" BorderThickness="0,0,0,1">
-			
-				<actipro:ChromedTitleBar.Resources>
+			<actipro:WindowTitleBar DockPanel.Dock="Top" BorderThickness="0,0,0,1" Padding="0">
+
+				<actipro:WindowTitleBar.Resources>
 					<actipro:ComparisonConverter x:Key="RightContentMarginConverter">
 						<actipro:ComparisonConverter.TrueResult>
-							<Thickness>0,0,20,0</Thickness>
+							<OnPlatform>
+								<OnPlatform.macOS>
+									<Thickness>0,0,0,0</Thickness>
+								</OnPlatform.macOS>
+								<OnPlatform.Default>
+									<Thickness>0,0,20,0</Thickness>
+								</OnPlatform.Default>
+							</OnPlatform>
 						</actipro:ComparisonConverter.TrueResult>
 						<actipro:ComparisonConverter.FalseResult>
 							<Thickness>0,0,0,0</Thickness>
 						</actipro:ComparisonConverter.FalseResult>
 					</actipro:ComparisonConverter>
-				</actipro:ChromedTitleBar.Resources>
-			
-				<actipro:ChromedTitleBar.LeftContent>
-					<actiproPrims:OverlayInputFilter>
-						<StackPanel Orientation="Horizontal">
-							<Button x:Name="applicationButton" Margin="0,0,20,0" Command="{Binding ToggleDrawerOpenCommand}"
-									ContentTemplate="{actipro:GlyphTemplate Menu16}"
-									Theme="{actipro:ControlTheme TitleBarButton}"
-									ToolTip.Tip="Toggle Sidebar" />
-					
-							<Image x:Name="viewImage" DockPanel.Dock="Left" Width="24" Height="24" Source="{Binding ViewImageSource}" VerticalAlignment="Center" IsHitTestVisible="False">
-								<Image.Effect>
-									<DropShadowEffect OffsetX="0" OffsetY="1" BlurRadius="3" Opacity="{DynamicResource {actipro:ThemeResourceKey ShadowOpacity}}" />
-								</Image.Effect>
-							</Image>
+				</actipro:WindowTitleBar.Resources>
 
-							<StackPanel Margin="10,7,0,7" VerticalAlignment="Center" IsHitTestVisible="False">
-								<TextBlock Text="{Binding ViewSubTitle}" FontSize="12" TextTrimming="CharacterEllipsis" Opacity="0.85" />
-								<TextBlock Margin="0,-2,0,0" Text="{Binding ViewTitle}" FontSize="18" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
-							</StackPanel>
+				<actiproPrims:OverlayInputFilter>
+					<StackPanel Orientation="Horizontal">
+						<Button x:Name="applicationButton" Margin="0,0,20,0" Command="{Binding ToggleDrawerOpenCommand}"
+								ContentTemplate="{actipro:GlyphTemplate Menu16}"
+								Theme="{actipro:ControlTheme TitleBarButton}"
+								ToolTip.Tip="Toggle Sidebar" />
+
+						<Image x:Name="viewImage" DockPanel.Dock="Left" Width="24" Height="24" Source="{Binding ViewImageSource}" VerticalAlignment="Center" IsHitTestVisible="False">
+							<Image.Effect>
+								<DropShadowEffect OffsetX="0" OffsetY="1" BlurRadius="3" Opacity="{DynamicResource {actipro:ThemeResourceKey ShadowOpacity}}" />
+							</Image.Effect>
+						</Image>
+
+						<StackPanel Margin="10,7,0,7" VerticalAlignment="Center" IsHitTestVisible="False">
+							<TextBlock Text="{Binding ViewSubTitle}" FontSize="12" TextTrimming="CharacterEllipsis" Opacity="0.85" />
+							<TextBlock Margin="0,-2,0,0" Text="{Binding ViewTitle}" FontSize="18" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
 						</StackPanel>
-					</actiproPrims:OverlayInputFilter>
-				</actipro:ChromedTitleBar.LeftContent>
+					</StackPanel>
+				</actiproPrims:OverlayInputFilter>
 
-				<actipro:ChromedTitleBar.RightContent>
+				<actipro:WindowTitleBar.RightContent>
 					<actiproPrims:OverlayInputFilter>
-						<StackPanel Margin="{Binding $parent[actipro:ChromedTitleBar].HasCaptionButtons, Converter={StaticResource RightContentMarginConverter}}" Orientation="Horizontal">
+						<StackPanel Margin="{Binding $parent[actipro:WindowTitleBar].HasCaptionButtons, Converter={StaticResource RightContentMarginConverter}}" Orientation="Horizontal">
 							<Button ContentTemplate="{actipro:GlyphTemplate Home16}"
 									Command="{Binding NavigateViewToHomeCommand}"
 									IsVisible="{Binding !ViewIsHome}"
@@ -69,7 +74,7 @@
 									IsVisible="{Binding !ViewUsesHomeDrawer}"
 									Theme="{actipro:ControlTheme TitleBarButton}"
 									ToolTip.Tip="Next" />
-							<actipro:ToggleThemeButton 
+							<actipro:ToggleThemeButton
 									Theme="{actipro:ControlTheme TitleBarToggleThemeButton}"
 									ToolTip.Tip="Toggle Theme" />
 							<Button Theme="{actipro:ControlTheme TitleBarButton}"
@@ -112,7 +117,6 @@
 												</MenuItem.CommandParameter>
 											</MenuItem>
 										</MenuItem>
-										
 									</MenuFlyout>
 								</Button.Flyout>
 								<StackPanel Orientation="Horizontal">
@@ -122,9 +126,9 @@
 							</Button>
 						</StackPanel>
 					</actiproPrims:OverlayInputFilter>
-				</actipro:ChromedTitleBar.RightContent>
+				</actipro:WindowTitleBar.RightContent>
 
-			</actipro:ChromedTitleBar>
+			</actipro:WindowTitleBar>
 
 			<!-- Status Bar -->
 			<actiproPrims:OverlayInputFilter DockPanel.Dock="Bottom">

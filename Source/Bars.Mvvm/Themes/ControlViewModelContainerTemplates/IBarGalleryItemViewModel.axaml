@@ -14,6 +14,7 @@
 			KeyTipText="{Binding KeyTipText}"
 			Label="{Binding Label}"
 			LayoutBehavior="{Binding LayoutBehavior}"
+			Tag="{Binding Tag}"
 			ToolTip.Tip="{Binding Description}"
 			/>
 	</DataTemplate>

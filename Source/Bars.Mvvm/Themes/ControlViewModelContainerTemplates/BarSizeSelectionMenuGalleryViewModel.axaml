@@ -24,6 +24,7 @@
 			RowCount="{Binding MenuRowCount}"
 			SizeHeadingTextFormat="{Binding SizeHeadingTextFormat}"
 			SmallIcon="{Binding SmallIcon}"
+			Tag="{Binding Tag}"
 			Title="{Binding Title}"
 			/>
 	</DataTemplate>

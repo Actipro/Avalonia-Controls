@@ -3,10 +3,11 @@
 	/// <summary>
 	/// Represents a view model for a separator control within a ribbon backstage header.
 	/// </summary>
-	public class RibbonBackstageHeaderSeparatorViewModel : ObservableObjectBase {
+	public class RibbonBackstageHeaderSeparatorViewModel : ObservableObjectBase, IHasTag {
 
 		private RibbonBackstageHeaderAlignment _headerAlignment = RibbonBackstageHeaderAlignment.Top;
 		private bool _isVisible = true;
+		private object? _tag;
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 		// OBJECT
@@ -45,6 +46,12 @@
 		public bool IsVisible {
 			get => _isVisible;
 			set => SetProperty(ref _isVisible, value);
+		}
+
+		/// <inheritdoc cref="IHasTag.Tag"/>
+		public object? Tag {
+			get => _tag;
+			set => SetProperty(ref _tag, value);
 		}
 
 	}

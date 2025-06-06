@@ -17,6 +17,11 @@ A [SettingsCard](xref:@ActiproUIRoot.Controls.SettingsCard) is typically used to
 
 *SettingsCard with header, description, header icon, and ToggleSwitch content*
 
+@if (avalonia) {
+> [!IMPORTANT]
+> See the [Getting Started](../getting-started.md) topic for details on configuring themes for this control.
+}
+
 ## Content Areas
 
 The [SettingsCard](xref:@ActiproUIRoot.Controls.SettingsCard) control is defined by multiple content areas:

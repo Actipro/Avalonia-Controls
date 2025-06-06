@@ -3,9 +3,10 @@
 	/// <summary>
 	/// Represents an abstract view model base for an observable object that is identified by a unique string key.
 	/// </summary>
-	public abstract class BarKeyedObjectViewModelBase : ObservableObjectBase, IHasKey {
+	public abstract class BarKeyedObjectViewModelBase : ObservableObjectBase, IHasKey, IHasTag {
 
 		private string? _key;
+		private object? _tag;
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 		// OBJECT
@@ -40,6 +41,12 @@
 					this.SetProperty(ref _key, value);
 				}
 			}
+		}
+
+		/// <inheritdoc cref="IHasTag.Tag"/>
+		public object? Tag {
+			get => _tag;
+			set => this.SetProperty(ref _tag, value);
 		}
 		
 		/// <inheritdoc/>

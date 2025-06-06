@@ -15,6 +15,8 @@
 
 		/// <summary>An identifier for the <c>BarGalleryItem</c> control theme.</summary>
 		public static readonly string BarGalleryItemControlTheme = nameof(BarGalleryItemControlTheme);
+		/// <summary>An identifier for the <c>BarMainMenu</c> control theme.</summary>
+		public static readonly string BarMainMenuControlTheme = nameof(BarMainMenuControlTheme);
 		/// <summary>An identifier for the <c>Ribbon</c> control theme.</summary>
 		public static readonly string RibbonControlTheme = nameof(RibbonControlTheme);
 		/// <summary>An identifier for the <c>StandaloneToolBar</c> control theme.</summary>

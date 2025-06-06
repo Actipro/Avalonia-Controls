@@ -1,0 +1,204 @@
+<UserControl 
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sample="using:ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.CustomContextContent"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="The &quot;Status&quot; tool window in this sample shows the different ways a context DataTemplate can be assigned to a tool window.  The template contains a circular indicator that reflects a boolean approval status.  The same template is used in all supported areas.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Contextual content" Url="https://www.actiprosoftware.com/docs/controls/avalonia/docking/docking-window-features/contextual-content" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+			<sampleBrowser:ControlExampleLinkItem Title="Custom title bar content" Url="/ProductSamples/DockingSamples/QuickStarts/CustomTitleBarContent/MainControl" />
+		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+
+		<sampleBrowser:ControlExample
+			Header="Custom context content"
+			Footer="While this sample shows a simple indicator in the template, the template could just as easily contain text or buttons."
+			>
+
+			<actipro:DockSite x:Name="dockSite" Height="400"
+				FloatingWindowIcon="/Images/Icons/Actipro.ico"
+				FloatingWindowTitle="Docking/MDI Demo">
+				<actipro:DockSite.Resources>
+
+					<actipro:ComparisonConverter x:Key="StatusLightComparisonConverter">
+						<actipro:ComparisonConverter.TrueResult>
+							<SolidColorBrush Color="#5cd404" />
+						</actipro:ComparisonConverter.TrueResult>
+						<actipro:ComparisonConverter.FalseResult>
+							<SolidColorBrush Color="#d40404" />
+						</actipro:ComparisonConverter.FalseResult>
+					</actipro:ComparisonConverter>
+
+					<!-- This DataTemplate is applied to the ToolWindow.DataContext, which is a view model in this sample -->
+					<DataTemplate x:Key="StatusIconDataTemplate" x:DataType="sample:ContextViewModel">
+						<Ellipse Margin="2"
+							Width="12" Height="12"
+							HorizontalAlignment="Center" VerticalAlignment="Center"
+							StrokeThickness="1" Stroke="#ffffff"
+							Fill="{Binding IsApproved, Converter={StaticResource StatusLightComparisonConverter}}"
+							/>
+					</DataTemplate>
+
+				</actipro:DockSite.Resources>
+
+				<actipro:SplitContainer Orientation="Vertical">
+
+					<actipro:Workspace>
+						<actipro:TabbedMdiHost>
+							<actipro:TabbedMdiContainer>
+								<actipro:DocumentWindow Title="Document" Icon="/Images/Icons/TextDocument16.png">
+									<TextBlock Margin="10" Text="Dock the &quot;Status&quot; tool window in the MDI area to see the indicator in the document tab (Tabbed MDI) or title bar (Standard MDI)." TextWrapping="Wrap" TextTrimming="WordEllipsis" />
+								</actipro:DocumentWindow>
+							</actipro:TabbedMdiContainer>
+						</actipro:TabbedMdiHost>
+					</actipro:Workspace>
+
+					<actipro:ToolWindowContainer>
+
+						<actipro:ToolWindow x:Name="statusToolWindow"
+							Title="Status"
+							Icon="/Images/Icons/Properties16.png"
+							AutoHideTabContextContentTemplate="{StaticResource StatusIconDataTemplate}"
+							StandardMdiTitleBarContextContentTemplate="{StaticResource StatusIconDataTemplate}"
+							TabbedMdiTabContextContentTemplate="{StaticResource StatusIconDataTemplate}"
+							ToolWindowContainerTabContextContentTemplate="{StaticResource StatusIconDataTemplate}"
+							ToolWindowContainerTitleBarContextContentTemplate="{StaticResource StatusIconDataTemplate}"
+							>
+							<!-- The corresponding *ContextContentTemplate properties will be applied to this DataContext -->
+							<actipro:ToolWindow.DataContext>
+								<sample:ContextViewModel />
+							</actipro:ToolWindow.DataContext>
+
+							<TextBox Margin="10" BorderThickness="0" Padding="0" IsReadOnly="True" Text="This tool window contains a custom indicator that shows up in tool window tabs, tool window container title bars, auto-hide tabs, standard MDI title bars, and tabbed MDI tabs.  The approval indicator's state is controlled by the boolean value in the view-model.  Use the CheckBox in the Sample Options to change the approval indicator's state." TextWrapping="Wrap" />
+						</actipro:ToolWindow>
+
+						<actipro:ToolWindow Title="Normal" Icon="/Images/Icons/Properties16.png">
+							<TextBlock Margin="10" Focusable="True" Text="This is a normal tool window with no special tab UI." TextWrapping="Wrap" TextTrimming="WordEllipsis" />
+						</actipro:ToolWindow>
+
+					</actipro:ToolWindowContainer>
+
+				</actipro:SplitContainer>
+
+			</actipro:DockSite>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="MDI Kind" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray DelimitedText='Tabbed,Standard', Type={x:Type actipro:MdiKind}}" SelectedValue="{Binding #dockSite.MdiKind, Mode=TwoWay}" />
+					</StackPanel>
+					<CheckBox Content="Is approved" x:DataType="sample:ContextViewModel" DataContext="{Binding #statusToolWindow.DataContext}" IsChecked="{Binding IsApproved}" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+xmlns:sample="using:ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.CustomContextContent"
+...
+
+<actipro:DockSite x:Name="dockSite" MdiKind="$(MdiKind)" ... >
+	<actipro:DockSite.Resources>
+
+		<actipro:ComparisonConverter x:Key="StatusLightComparisonConverter">
+			<actipro:ComparisonConverter.TrueResult>
+				<SolidColorBrush Color="#5cd404" />
+			</actipro:ComparisonConverter.TrueResult>
+			<actipro:ComparisonConverter.FalseResult>
+				<SolidColorBrush Color="#d40404" />
+			</actipro:ComparisonConverter.FalseResult>
+		</actipro:ComparisonConverter>
+
+		<!-- This DataTemplate is applied to the ToolWindow.DataContext, which is a view model in this sample -->
+		<DataTemplate x:Key="StatusIconDataTemplate" x:DataType="sample:ContextViewModel">
+			<Ellipse Margin="2"
+				Width="12" Height="12"
+				HorizontalAlignment="Center" VerticalAlignment="Center"
+				StrokeThickness="1" Stroke="#ffffff"
+				Fill="{Binding IsApproved, Converter={StaticResource StatusLightComparisonConverter}}"
+				/>
+		</DataTemplate>
+
+	</actipro:DockSite.Resources>
+
+	<actipro:SplitContainer Orientation="Vertical">
+
+		<actipro:Workspace>
+			<actipro:TabbedMdiHost>
+				<actipro:TabbedMdiContainer>
+					<actipro:DocumentWindow Title="Document" ... />
+				</actipro:TabbedMdiContainer>
+			</actipro:TabbedMdiHost>
+		</actipro:Workspace>
+
+		<actipro:ToolWindowContainer>
+			<actipro:ToolWindow Title="Status" ...
+				AutoHideTabContextContentTemplate="{StaticResource StatusIconDataTemplate}"
+				StandardMdiTitleBarContextContentTemplate="{StaticResource StatusIconDataTemplate}"
+				TabbedMdiTabContextContentTemplate="{StaticResource StatusIconDataTemplate}"
+				ToolWindowContainerTabContextContentTemplate="{StaticResource StatusIconDataTemplate}"
+				ToolWindowContainerTitleBarContextContentTemplate="{StaticResource StatusIconDataTemplate}"
+				>
+
+				<!-- The corresponding *ContextContentTemplate properties will be applied to this DataContext -->
+				<actipro:ToolWindow.DataContext>
+					<sample:ContextViewModel />
+				</actipro:ToolWindow.DataContext>
+
+				<TextBox ... />
+			</actipro:ToolWindow>
+			...
+		</actipro:ToolWindowContainer>
+
+	</actipro:SplitContainer>
+</actipro:DockSite>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="MdiKind" Value="{Binding #dockSite.MdiKind}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+namespace ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.CustomContextContent {
+
+	/// <summary>
+	/// Represents the context view-model.
+	/// </summary>
+	public class ContextViewModel : ObservableObjectBase {
+
+		private bool _isApproved;
+
+		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// PUBLIC PROCEDURES
+		/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		/// <summary>
+		/// Whether the data is approved.
+		/// </summary>
+		/// <value>
+		/// <c>true</c> if the data is approved; otherwise, <c>false</c>.
+		/// </value>
+		public bool IsApproved {
+			get => _isApproved;
+			set => SetProperty(ref _isApproved, value);
+		}
+
+	}
+
+}					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

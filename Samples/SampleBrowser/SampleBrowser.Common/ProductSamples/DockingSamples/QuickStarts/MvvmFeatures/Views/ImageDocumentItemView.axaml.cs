@@ -1,0 +1,17 @@
+﻿using Avalonia.Controls;
+
+namespace ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.MvvmFeatures.Views {
+
+	public partial class ImageDocumentItemView : UserControl {
+
+		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// OBJECT
+		/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		public ImageDocumentItemView() {
+			InitializeComponent();
+		}
+
+	}
+
+}

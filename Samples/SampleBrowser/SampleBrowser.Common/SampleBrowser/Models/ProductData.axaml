@@ -9,7 +9,7 @@
 	<sampleBrowser:ProductData x:Key="{x:Static sampleBrowser:ApplicationViewModel.ProductDataResourceKey}">
 
 		<sampleBrowser:ProductData.FeaturedSamples>
-			<sampleBrowser:ListItemInfo BlurbText="BETA!" Title="Ribbon" ImageUri="avares://SampleBrowser/Images/Screenshots/Bars-Ribbon-200x150.png" TargetUri="https://ActiproSoftware/ProductSamples/BarsSamples/Demos/DocumentEditorMvvm/MainControl" />
+			<sampleBrowser:ListItemInfo Title="Ribbon" ImageUri="avares://SampleBrowser/Images/Screenshots/Bars-Ribbon-200x150.png" TargetUri="https://ActiproSoftware/ProductSamples/BarsSamples/Demos/DocumentEditorMvvm/MainControl" />
 			<sampleBrowser:ListItemInfo Title="Shadow Chrome" ImageUri="avares://SampleBrowser/Images/Screenshots/Shared-ShadowChrome-200x150.png" TargetUri="https://ActiproSoftware/ProductSamples/SharedSamples/Controls/ShadowChromeIntro/MainControl" />
 			<sampleBrowser:ListItemInfo Title="User Prompt" ImageUri="avares://SampleBrowser/Images/Screenshots/Fundamentals-UserPrompt-200x150.png" TargetUri="https://ActiproSoftware/ProductSamples/FundamentalsSamples/Controls/UserPromptIntro/MainControl" />
 			<sampleBrowser:ListItemInfo Title="Avatar" ImageUri="avares://SampleBrowser/Images/Screenshots/Fundamentals-Avatar-200x150.png" TargetUri="https://ActiproSoftware/ProductSamples/FundamentalsSamples/Controls/AvatarIntro/MainControl" />
@@ -21,6 +21,7 @@
 					<actiproImages:ReleaseHistoryLogo48 />
 				</sampleBrowser:ProductFamilyInfo.LogoImageSource>
 
+				<sampleBrowser:ProductItemInfo Category="Versions" Title="v25.2" Path="/SampleBrowser/Documents/ReleaseHistories/v25.2.md" />
 				<sampleBrowser:ProductItemInfo Category="Versions" Title="v25.1" Path="/SampleBrowser/Documents/ReleaseHistories/v25.1.md" />
 				<sampleBrowser:ProductItemInfo Category="Versions" Title="v24.2" Path="/SampleBrowser/Documents/ReleaseHistories/v24.2.md" />
 				<sampleBrowser:ProductItemInfo Category="Versions" Title="v24.1" Path="/SampleBrowser/Documents/ReleaseHistories/v24.1.md" />
@@ -44,17 +45,13 @@
 		<!--
 			Bars
 		-->
-		<sampleBrowser:ProductFamilyInfo BlurbText="BETA!" IsPro="True" ShortTitle="Bars" Title="Bars" Summary="Ribbon, toolbar, menu, and related controls">
+		<sampleBrowser:ProductFamilyInfo IsPro="True" ShortTitle="Bars" Title="Bars" Summary="Ribbon, toolbar, menu, and related controls">
 			<sampleBrowser:ProductFamilyInfo.LogoImageSource>
 				<actiproImages:BarsLogo48 />
 			</sampleBrowser:ProductFamilyInfo.LogoImageSource>
 
 			<sampleBrowser:ProductFamilyInfo.News>
-				<sampleBrowser:ListItemInfo Title="Ribbon control for displaying buttons, galleries, editors, and menus in way that supports dynamic resizing" />
-				<sampleBrowser:ListItemInfo Title="Classic (3-row) and Simplified (single row) layout modes" />
-				<sampleBrowser:ListItemInfo Title="Ribbon backstage for application-level commands and settings" />
-				<sampleBrowser:ListItemInfo Title="Standalone toolbar that can be used for simpler scenarios" />
-				<sampleBrowser:ListItemInfo Title="Full MVVM support" />
+				<sampleBrowser:ListItemInfo Title="BarMainMenu control that can replace native Menu control" />
 			</sampleBrowser:ProductFamilyInfo.News>
 
 			<sampleBrowser:ProductFamilyInfo.TeaserBulletItems>
@@ -91,9 +88,80 @@
 			<sampleBrowser:ProductItemInfo Category="Ribbon QuickStarts" Title="Tab Row Toolbar" Path="/ProductSamples/BarsSamples/QuickStarts/TabRowToolBar/MainControl"/>
 			<sampleBrowser:ProductItemInfo Category="Ribbon QuickStarts" Title="Variant Sizing" Path="/ProductSamples/BarsSamples/QuickStarts/VariantSizing/MainControl"/>
 
-			<sampleBrowser:ProductItemInfo Category="Toolbar QuickStarts" Title="Standalone Toolbar" Path="/ProductSamples/BarsSamples/QuickStarts/StandaloneToolBarIntro/MainControl"/>
+			<sampleBrowser:ProductItemInfo BlurbText="NEW!" Category="Menu &amp; Toolbar QuickStarts" Title="Main Menu" Path="/ProductSamples/BarsSamples/QuickStarts/MainMenu/MainControl"/>
+			<sampleBrowser:ProductItemInfo Category="Menu &amp; Toolbar QuickStarts" Title="Standalone Toolbar" Path="/ProductSamples/BarsSamples/QuickStarts/StandaloneToolBarIntro/MainControl"/>
 
 			
+			
+			
+			
+			
+			
+			
+
+		</sampleBrowser:ProductFamilyInfo>
+
+		<!--
+			Docking/MDI
+		-->
+		<sampleBrowser:ProductFamilyInfo BlurbText="NEW!" IsPro="True" ShortTitle="Docking" Title="Docking/MDI" Summary="A docking tool window and multiple document interface solution">
+			<sampleBrowser:ProductFamilyInfo.LogoImageSource>
+				<actiproImages:DockingLogo48 />
+			</sampleBrowser:ProductFamilyInfo.LogoImageSource>
+
+			<sampleBrowser:ProductFamilyInfo.News>
+				<sampleBrowser:ListItemInfo Title="Visual Studio-like UI for window dragging, MDI, auto-tab tabs, and more" />
+				<sampleBrowser:ListItemInfo Title="Windows can be docked, attached, floated, auto-hidden, or moved to MDI area" />
+				<sampleBrowser:ListItemInfo Title="Tabbed and standard MDI available" />
+				<sampleBrowser:ListItemInfo Title="Full MVVM support" />
+				<sampleBrowser:ListItemInfo Title="Nested and linked dock sites" />
+			</sampleBrowser:ProductFamilyInfo.News>
+
+			<sampleBrowser:ProductFamilyInfo.TeaserBulletItems>
+				<x:String>Visual Studio-like UI</x:String>
+				<x:String>Dock, attach, and float windows</x:String>
+				<x:String>Tabbed and standard MDI</x:String>
+				<x:String>MVVM support</x:String>
+				<x:String>Nested and linked dock sites</x:String>
+				<x:String>Advanced tab control</x:String>
+			</sampleBrowser:ProductFamilyInfo.TeaserBulletItems>
+
+			<sampleBrowser:ProductFamilyInfo.OverviewItem>
+				<sampleBrowser:ProductItemInfo Title="Overview" Path="/ProductSamples/DockingSamples/Overview" />
+			</sampleBrowser:ProductFamilyInfo.OverviewItem>
+
+			<sampleBrowser:ProductItemInfo Category="Demos" Title="Simple IDE" Path="/ProductSamples/DockingSamples/Demos/SimpleIde/MainControl"/>
+
+			<sampleBrowser:ProductItemInfo Category="Controls" Title="Advanced Tab Control" Path="/ProductSamples/DockingSamples/Controls/AdvancedTabControlIntro/MainControl"/>
+
+			<sampleBrowser:ProductItemInfo Category="QuickStarts" Title="Capabilities" Path="/ProductSamples/DockingSamples/QuickStarts/Capabilities/MainControl"/>
+			<sampleBrowser:ProductItemInfo Category="QuickStarts" Title="Container Size Restrictions" Path="/ProductSamples/DockingSamples/QuickStarts/ContainerSizeRestrictions/MainControl"/>
+			<sampleBrowser:ProductItemInfo Category="QuickStarts" Title="Custom Context Content" Path="/ProductSamples/DockingSamples/QuickStarts/CustomContextContent/MainControl"/>
+			<sampleBrowser:ProductItemInfo Category="QuickStarts" Title="Custom Context Menu" Path="/ProductSamples/DockingSamples/QuickStarts/CustomContextMenu/MainControl"/>
+			<sampleBrowser:ProductItemInfo Category="QuickStarts" Title="Custom Docking Windows" Path="/ProductSamples/DockingSamples/QuickStarts/CustomDockingWindows/MainControl"/>
+			<sampleBrowser:ProductItemInfo Category="QuickStarts" Title="Custom Title Bar Content" Path="/ProductSamples/DockingSamples/QuickStarts/CustomTitleBarContent/MainControl"/>
+			<sampleBrowser:ProductItemInfo Category="QuickStarts" Title="Default Locations" Path="/ProductSamples/DockingSamples/QuickStarts/DefaultLocations/MainControl"/>
+			<sampleBrowser:ProductItemInfo Category="QuickStarts" Title="Fixed Tool Window" Path="/ProductSamples/DockingSamples/QuickStarts/FixedToolWindow/MainControl"/>
+			<sampleBrowser:ProductItemInfo Category="QuickStarts" Title="Hosted Floating Window Fade" Path="/ProductSamples/DockingSamples/QuickStarts/HostedFloatingWindowFade/MainControl"/>
+			<sampleBrowser:ProductItemInfo Category="QuickStarts" Title="Layout Serialization" Path="/ProductSamples/DockingSamples/QuickStarts/LayoutSerialization/MainControl"/>
+			<sampleBrowser:ProductItemInfo Category="QuickStarts" Title="Magnetism" Path="/ProductSamples/DockingSamples/QuickStarts/Magnetism/MainControl"/>
+			<sampleBrowser:ProductItemInfo Category="QuickStarts" Title="Multiple Dock Sites" Path="/ProductSamples/DockingSamples/QuickStarts/MultipleDockSites/MainControl"/>
+			<sampleBrowser:ProductItemInfo Category="QuickStarts" Title="MVVM Features" Path="/ProductSamples/DockingSamples/QuickStarts/MvvmFeatures/MainControl"/>
+			<sampleBrowser:ProductItemInfo Category="QuickStarts" Title="Primary Document Tracking" Path="/ProductSamples/DockingSamples/QuickStarts/PrimaryDocumentTracking/MainControl"/>
+			<sampleBrowser:ProductItemInfo Category="QuickStarts" Title="Programmatic Layout" Path="/ProductSamples/DockingSamples/QuickStarts/ProgrammaticLayout/MainControl"/>
+			<sampleBrowser:ProductItemInfo Category="QuickStarts" Title="Programmatic Sizing" Path="/ProductSamples/DockingSamples/QuickStarts/ProgrammaticSizing/MainControl"/>
+			<sampleBrowser:ProductItemInfo Category="QuickStarts" Title="Prompt on Close" Path="/ProductSamples/DockingSamples/QuickStarts/PromptOnClose/MainControl"/>
+			<sampleBrowser:ProductItemInfo Category="QuickStarts" Title="Standard MDI-Only" Path="/ProductSamples/DockingSamples/QuickStarts/StandardMdiOnly/MainControl"/>
+			<sampleBrowser:ProductItemInfo Category="QuickStarts" Title="Switchers" Path="/ProductSamples/DockingSamples/QuickStarts/Switchers/MainControl"/>
+			<sampleBrowser:ProductItemInfo Category="QuickStarts" Title="Tab Icons" Path="/ProductSamples/DockingSamples/QuickStarts/TabIcons/MainControl"/>
+			<sampleBrowser:ProductItemInfo Category="QuickStarts" Title="Tab Overflow Behavior" Path="/ProductSamples/DockingSamples/QuickStarts/TabOverflowBehavior/MainControl"/>
+			<sampleBrowser:ProductItemInfo Category="QuickStarts" Title="Tab Strip Placement" Path="/ProductSamples/DockingSamples/QuickStarts/TabStripPlacement/MainControl"/>
+			<sampleBrowser:ProductItemInfo Category="QuickStarts" Title="Tab Tinting and Flashing" Path="/ProductSamples/DockingSamples/QuickStarts/TabTintingAndFlashing/MainControl"/>
+			<sampleBrowser:ProductItemInfo Category="QuickStarts" Title="Tabbed MDI-Only" Path="/ProductSamples/DockingSamples/QuickStarts/TabbedMdiOnly/MainControl"/>
+			<sampleBrowser:ProductItemInfo Category="QuickStarts" Title="Tabbed MDI New Tab Button" Path="/ProductSamples/DockingSamples/QuickStarts/TabbedMdiNewTabButton/MainControl"/>
+			<sampleBrowser:ProductItemInfo Category="QuickStarts" Title="Tool Window Inner-Fill" Path="/ProductSamples/DockingSamples/QuickStarts/ToolWindowInnerFill/MainControl"/>
+			<sampleBrowser:ProductItemInfo Category="QuickStarts" Title="Workspace Content" Path="/ProductSamples/DockingSamples/QuickStarts/WorkspaceContent/MainControl"/>
+
 			
 			
 			
@@ -111,9 +179,8 @@
 			</sampleBrowser:ProductFamilyInfo.LogoImageSource>
 
 			<sampleBrowser:ProductFamilyInfo.News>
-				<sampleBrowser:ListItemInfo Title="Settings card and other controls for organizing and presenting configurable settings" />
-				<sampleBrowser:ListItemInfo Title="InfoBar that displays messages without breaking user flow" />
-				<sampleBrowser:ListItemInfo Title="SegmentedBar for fluent selection of an individual item" />
+				<sampleBrowser:ListItemInfo Title="WindowControl for simulating the look and feel of a Window" />
+				<sampleBrowser:ListItemInfo Title="Improved control for User Prompt window decorations" />
 			</sampleBrowser:ProductFamilyInfo.News>
 
 			<sampleBrowser:ProductFamilyInfo.TeaserBulletItems>
@@ -123,7 +190,7 @@
 			</sampleBrowser:ProductFamilyInfo.TeaserBulletItems>
 
 			<sampleBrowser:ProductFamilyInfo.OverviewItem>
-				<sampleBrowser:ProductItemInfo Title="Overview" Path="/ProductSamples/FundamentalsSamples/OVerview" />
+				<sampleBrowser:ProductItemInfo Title="Overview" Path="/ProductSamples/FundamentalsSamples/Overview" />
 			</sampleBrowser:ProductFamilyInfo.OverviewItem>
 
 			<sampleBrowser:ProductItemInfo Category="Controls" Title="Avatar" Path="/ProductSamples/FundamentalsSamples/Controls/AvatarIntro/MainControl"/>
@@ -131,11 +198,13 @@
 			<sampleBrowser:ProductItemInfo Category="Controls" Title="Card" Path="/ProductSamples/FundamentalsSamples/Controls/CardIntro/MainControl"/>
 			<sampleBrowser:ProductItemInfo Category="Controls" Title="Circular Progressbar" Path="/ProductSamples/FundamentalsSamples/Controls/CircularProgressBarIntro/MainControl"/>
 			<sampleBrowser:ProductItemInfo Category="Controls" Title="Info Bar" Path="/ProductSamples/FundamentalsSamples/Controls/InfoBarIntro/MainControl"/>
-			<sampleBrowser:ProductItemInfo Category="Controls" Title="MessageBox" Path="/ProductSamples/FundamentalsSamples/Controls/MessageBoxIntro/MainControl"/>
+			<sampleBrowser:ProductItemInfo BlurbText="UPDATED!" Category="Controls" Title="MessageBox" Path="/ProductSamples/FundamentalsSamples/Controls/MessageBoxIntro/MainControl"/>
 			<sampleBrowser:ProductItemInfo Category="Controls" Title="Progress Spinners" Path="/ProductSamples/FundamentalsSamples/Controls/ProgressSpinners/MainControl"/>
 			<sampleBrowser:ProductItemInfo Category="Controls" Title="Segmented Bar" Path="/ProductSamples/FundamentalsSamples/Controls/SegmentedBarIntro/MainControl"/>
 			<sampleBrowser:ProductItemInfo Category="Controls" Title="Settings" Path="/ProductSamples/FundamentalsSamples/Controls/SettingsIntro/MainControl"/>
-			<sampleBrowser:ProductItemInfo Category="Controls" Title="User Prompt" Path="/ProductSamples/FundamentalsSamples/Controls/UserPromptIntro/MainControl"/>
+			<sampleBrowser:ProductItemInfo BlurbText="UPDATED!" Category="Controls" Title="User Prompt" Path="/ProductSamples/FundamentalsSamples/Controls/UserPromptIntro/MainControl"/>
+			<sampleBrowser:ProductItemInfo BlurbText="NEW!" Category="Controls" Title="Window Control" Path="/ProductSamples/FundamentalsSamples/Controls/WindowControlIntro/MainControl"/>
+			
 			
 
 			<sampleBrowser:ProductItemInfo Category="Panels" Title="Multi-Column Panel" Path="/ProductSamples/FundamentalsSamples/Panels/MultiColumnPanelIntro/MainControl"/>
@@ -151,8 +220,7 @@
 			</sampleBrowser:ProductFamilyInfo.LogoImageSource>
 
 			<sampleBrowser:ProductFamilyInfo.News>
-				<sampleBrowser:ListItemInfo Title="Native templates updated through Avalonia v11.2.0" />
-				<sampleBrowser:ListItemInfo Title="Customizable theme generator" />
+				<sampleBrowser:ListItemInfo Title="Native templates updated through Avalonia v11.3.0" />
 			</sampleBrowser:ProductFamilyInfo.News>
 
 			<sampleBrowser:ProductFamilyInfo.TeaserBulletItems>
@@ -215,6 +283,10 @@
 			<sampleBrowser:ProductFamilyInfo.LogoImageSource>
 				<actiproImages:SharedLogo48 />
 			</sampleBrowser:ProductFamilyInfo.LogoImageSource>
+
+			<sampleBrowser:ProductFamilyInfo.News>
+				<sampleBrowser:ListItemInfo Title="ChromedTitleBar has native-like appearance on Linux and macOS" />
+			</sampleBrowser:ProductFamilyInfo.News>
 
 			<sampleBrowser:ProductFamilyInfo.TeaserBulletItems>
 				<x:String>Dynamic image</x:String>

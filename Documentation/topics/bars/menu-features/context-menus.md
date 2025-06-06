@@ -29,7 +29,7 @@ Since the [BarContextMenu](xref:@ActiproUIRoot.Controls.Bars.BarContextMenu) cla
 
 ## Defining a Context Menu
 
-A context menu is most often assigned to a control via its `ContextFlyout` property.  The control will automatically show the context menu when it is right-clicked or the keyboard's context menu key is pressed.
+A context menu is most often assigned to a control via its @if (avalonia) { `ContextFlyout` }@if (wpf) { `ContextMenu` } property.  The control will automatically show the context menu when it is right-clicked or the keyboard's context menu key is pressed.
 
 This sample code shows how to define a context menu for a `TextBox`:
 
@@ -122,7 +122,7 @@ xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 ...
 <TextBox>
 	<TextBox.ContextFlyout>
-		<actipro:BarContextMenu
+		<actipro:BarMenuFlyout
 			ItemContainerTemplateSelector="{Binding ItemContainerTemplateSelector}"
 			ItemsSource="{Binding ContextMenuItems}" />
 	</TextBox.ContextFlyout>

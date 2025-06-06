@@ -18,6 +18,10 @@
 			<sampleBrowser:ControlExampleLinkItem Title="Standalone toolbars" Url="https://www.actiprosoftware.com/docs/controls/avalonia/bars/toolbar-features/standalone-toolbars" />
 		</sampleBrowser:ControlExampleItemsControl.Documentation>
 
+		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+			<sampleBrowser:ControlExampleLinkItem Title="Main menu" Url="/ProductSamples/BarsSamples/QuickStarts/MainMenu/MainControl" />
+		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+
 		<sampleBrowser:ControlExample
 			Header="Basic usage"
 			Footer="A standalone toolbar using controls that can also be placed within a ribbon."
@@ -155,7 +159,7 @@ public partial class SampleRootControl : UserControl {
 	/// <summary>
 	/// Creates the toolbar view model.
 	/// </summary>
-	private static void CreateBasicUsageStandaloneToolBarViewModel() {
+	private static StandaloneToolBarViewModel CreateBasicUsageStandaloneToolBarViewModel() {
 		return new StandaloneToolBarViewModel() {
 			Items = {
 				new BarButtonViewModel("Undo") { KeyTipText = "AZ", SmallIcon = ImageLoader.GetIcon("Undo16.png") },
@@ -173,7 +177,7 @@ public partial class SampleRootControl : UserControl {
 	/// <summary>
 	/// Gets the view model to be bound to the toolbar.
 	/// </summary>
-	public RibbonViewModel BasicUsageStandaloneToolBarViewModel { get; }
+	public StandaloneToolBarViewModel BasicUsageStandaloneToolBarViewModel { get; }
 		= CreateBasicUsageStandaloneToolBarViewModel();
 
 }

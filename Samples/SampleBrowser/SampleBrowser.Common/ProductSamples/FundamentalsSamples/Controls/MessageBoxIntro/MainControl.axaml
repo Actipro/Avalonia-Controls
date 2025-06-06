@@ -90,6 +90,10 @@
 						<ComboBox ItemsSource="{actipro:DelimitedArray Type=actipro:MessageBoxResult}" SelectedValue="{Binding DefaultResult}" />
 					</StackPanel>
 					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Dialog chromed decorations" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type=actipro:ChromedDecorations}" SelectedValue="{Binding DialogChromedDecorations}" />
+					</StackPanel>
+					<StackPanel>
 						<TextBlock Classes="theme-form-control-label" Text="Display mode" />
 						<ComboBox ItemsSource="{actipro:DelimitedArray Type=actipro:UserPromptDisplayMode}" SelectedValue="{Binding DisplayMode}" />
 						<TextBlock Classes="theme-form-control-message warning" Text="Dialog not availailable on this platform" IsVisible="{Binding !IsDialogAllowed}" />

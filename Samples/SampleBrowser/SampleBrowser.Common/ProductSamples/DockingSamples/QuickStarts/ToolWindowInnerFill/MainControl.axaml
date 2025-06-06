@@ -1,0 +1,99 @@
+<UserControl 
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:actiproAvalonia="using:ActiproSoftware.UI.Avalonia"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="By choosing to not place a Workspace within a DockSite hierarchy, you achieve a tool window inner-fill mode. In this mode, all tool windows fill the entire content area of the ancestor DockSite.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Tool window inner-fill" Url="https://www.actiprosoftware.com/docs/controls/avalonia/docking/layout-features/tool-window-inner-fill" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExample
+			Header="Tool window inner-fill"
+			>
+
+			<actipro:DockSite MinHeight="400"
+				FloatingWindowIcon="/Images/Icons/Actipro.ico"
+				FloatingWindowTitle="Docking/MDI Demo">
+				<actipro:DockSite.AutoHideLeftContainers>
+					<actipro:ToolWindowContainer>
+						<actipro:ToolWindow Title="Tool Window 8" />
+						<actipro:ToolWindow Title="Tool Window 9" />
+					</actipro:ToolWindowContainer>
+				</actipro:DockSite.AutoHideLeftContainers>
+				<actipro:DockSite.AutoHideBottomContainers>
+					<actipro:ToolWindowContainer>
+						<actipro:ToolWindow Title="Tool Window 10" />
+						<actipro:ToolWindow Title="Tool Window 11" />
+					</actipro:ToolWindowContainer>
+				</actipro:DockSite.AutoHideBottomContainers>
+
+				<actipro:SplitContainer>
+					<actipro:SplitContainer Orientation="Vertical">
+						<actipro:ToolWindowContainer>
+							<actipro:ToolWindow Title="Tool Window 1" ContainerDockedSize="600,200" />
+							<actipro:ToolWindow Title="Tool Window 2" />
+						</actipro:ToolWindowContainer>
+
+						<actipro:ToolWindowContainer>
+							<actipro:ToolWindow Title="Tool Window 3" />
+							<actipro:ToolWindow Title="Tool Window 4" />
+							<actipro:ToolWindow Title="Tool Window 5" />
+						</actipro:ToolWindowContainer>
+					</actipro:SplitContainer>
+
+					<actipro:ToolWindowContainer>
+						<actipro:ToolWindow Title="Tool Window 6" />
+						<actipro:ToolWindow Title="Tool Window 7" />
+					</actipro:ToolWindowContainer>
+				</actipro:SplitContainer>
+			</actipro:DockSite>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:DockSite>
+	<!--
+	No Workspace is defined, so all tool windows fill
+	the entire content area of the ancestor DockSite
+	-->
+
+	<actipro:SplitContainer>
+		<actipro:SplitContainer Orientation="Vertical">
+
+			<actipro:ToolWindowContainer>
+				<actipro:ToolWindow ... />
+				<actipro:ToolWindow ... />
+			</actipro:ToolWindowContainer>
+
+			<actipro:ToolWindowContainer>
+				<actipro:ToolWindow ... />
+				<actipro:ToolWindow ... />
+			</actipro:ToolWindowContainer>
+
+		</actipro:SplitContainer>
+
+		<actipro:ToolWindowContainer>
+			<actipro:ToolWindow ... />
+			<actipro:ToolWindow ... />
+		</actipro:ToolWindowContainer>
+
+	</actipro:SplitContainer>
+
+</actipro:DockSite>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

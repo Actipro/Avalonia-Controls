@@ -238,9 +238,7 @@
 					</actipro:TaskTabItem>
 				</actipro:TaskTabControl>
 
-			
-		
-		</Grid>
+			</Grid>
 		</DataTemplate>
 
 	</actipro:TypedDataTemplateSelector>

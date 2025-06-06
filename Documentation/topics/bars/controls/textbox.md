@@ -99,14 +99,14 @@ Since [BarTextBox](xref:@ActiproUIRoot.Controls.Bars.BarTextBox) is not flagged 
 ```xaml
 xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 ...
-<actipro:BarContextMenu>
+<actipro:BarMenuFlyout>
 	<!-- Label is auto-generated from Key -->
 	<actipro:BarTextBox
 		Key="Search"
 		Command="{Binding SearchCommand}"
 		/>
 	...
-</actipro:BarContextMenu>
+</actipro:BarMenuFlyout>
 ```
 }
 @if (wpf) {

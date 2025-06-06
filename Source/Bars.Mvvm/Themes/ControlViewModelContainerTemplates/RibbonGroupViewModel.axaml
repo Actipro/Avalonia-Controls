@@ -19,6 +19,7 @@
 			LargeIcon="{Binding LargeIcon}"
 			LauncherButtonContent="{Binding LauncherButton}"
 			SmallIcon="{Binding SmallIcon}"
+			Tag="{Binding Tag}"
 			Title="{Binding Title}"
 			/>
 	</DataTemplate>

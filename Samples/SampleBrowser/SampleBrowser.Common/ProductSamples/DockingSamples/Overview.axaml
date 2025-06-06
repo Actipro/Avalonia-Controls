@@ -1,0 +1,97 @@
+﻿<UserControl
+	x:DataType="sampleBrowser:ApplicationViewModel"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:sampleData="using:ActiproSoftware.SampleBrowser.SampleData"
+	xmlns:sampleCommon="using:ActiproSoftware.ProductSamples.DockingSamples.Common"	
+	>
+
+	<ScrollViewer Classes="theme-scroll-overlay" HorizontalScrollBarVisibility="Disabled">
+		<StackPanel>
+
+			<sampleBrowser:ProductOverviewHeader>
+				End users can drag and dock windows wherever they please, and persist their layout customizations. The product contains docking window and MDI capabilities found in populare IDEs, and extended functionality that you won't find anywhere else. It's designed to fully support data-binding and use in MVVM applications. 
+			</sampleBrowser:ProductOverviewHeader>
+
+			<actipro:DockSite Margin="{actipro:ScaledThickness '6,0'}" HorizontalAlignment="Stretch" Height="275"
+				CanDocumentWindowsFloat="True"
+				FloatingWindowTitle="Docking/MDI Demo"
+				FloatingWindowIcon="/Images/Icons/Actipro.ico"
+				ToolWindowsHaveTabIcons="True"
+				>
+				<actipro:DockSite.AutoHideLeftContainers>
+					<actipro:ToolWindowContainer>
+						<sampleCommon:FindAndReplaceToolWindow ContainerAutoHideSize="250,300" ContainerDockedSize="250,300" />
+						<sampleCommon:ToolboxToolWindow ContainerAutoHideSize="250,300" ContainerDockedSize="250,300" />
+					</actipro:ToolWindowContainer>
+				</actipro:DockSite.AutoHideLeftContainers>
+
+				<actipro:SplitContainer Orientation="Horizontal">
+					<actipro:SplitContainer Orientation="Vertical">
+
+						<actipro:Workspace>
+							<actipro:TabbedMdiHost HasTabIcons="True">
+								<actipro:TabbedMdiHost.EmptyContentTemplate>
+									<DataTemplate>
+										<TextBlock
+											FontStyle="Italic"
+											Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}"
+											HorizontalAlignment="Center"
+											VerticalAlignment="Center"
+											Text="No open documents"
+											/>
+									</DataTemplate>
+								</actipro:TabbedMdiHost.EmptyContentTemplate>
+
+								<actipro:TabbedMdiContainer>
+									<actipro:DocumentWindow Title="Pinned.txt" Icon="/Images/Icons/TextDocument16.png" CanClose="False" TabbedMdiLayoutKind="Pinned" >
+										<TextBox IsReadOnly="True" TextWrapping="Wrap" BorderThickness="0"
+											Text="This document was originally pinned." />
+									</actipro:DocumentWindow>
+									<actipro:DocumentWindow Title="Document1.txt" Icon="/Images/Icons/TextDocument16.png" CanClose="False">
+										<TextBox IsReadOnly="True" TextWrapping="Wrap" BorderThickness="0"
+											Text="This is a normal document." />
+									</actipro:DocumentWindow>
+									<actipro:DocumentWindow Title="Document2.txt" Icon="/Images/Icons/TextDocument16.png" CanClose="False">
+										<TextBox IsReadOnly="True" TextWrapping="Wrap" BorderThickness="0"
+											Text="This is a normal document." />
+									</actipro:DocumentWindow>
+									<actipro:DocumentWindow Title="Preview.txt" Icon="/Images/Icons/TextDocument16.png" CanClose="False" TabbedMdiLayoutKind="Preview" >
+										<TextBox IsReadOnly="True" TextWrapping="Wrap" BorderThickness="0"
+											Text="This document was originally in a preview state." />
+									</actipro:DocumentWindow>
+								</actipro:TabbedMdiContainer>
+
+							</actipro:TabbedMdiHost>
+						</actipro:Workspace>
+
+						<actipro:ToolWindowContainer>
+							<sampleCommon:FindResultsToolWindow ContainerDockedSize="200, 150" />
+							<sampleCommon:ErrorListToolWindow ContainerDockedSize="200, 150" />
+						</actipro:ToolWindowContainer>
+						
+					</actipro:SplitContainer>
+
+					<actipro:ToolWindowContainer>
+						<sampleCommon:SolutionExplorerToolWindow ContainerDockedSize="225, 150" />
+					</actipro:ToolWindowContainer>
+					
+				</actipro:SplitContainer>
+			</actipro:DockSite>
+
+			<TextBlock Classes="theme-text-body" Margin="{actipro:ScaledThickness 6}" Text="Dive into our individual samples linked below for many more detailed examples."
+				FontStyle="Italic" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" TextAlignment="Center" />
+
+			<Border Background="{actipro:ThemeResource Container2BackgroundBrush}">
+				<StackPanel Classes="sample-layout-panel" Margin="{actipro:ScaledThickness '6,0'}">
+					<sampleBrowser:CategorizedSampleItemsControl ItemsSource="{Binding ViewItemInfo.ProductFamily.GroupedItems}" />
+				</StackPanel>
+			</Border>
+
+		</StackPanel>
+	</ScrollViewer>
+
+</UserControl>

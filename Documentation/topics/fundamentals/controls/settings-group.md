@@ -17,6 +17,11 @@ A [SettingsGroup](xref:@ActiproUIRoot.Controls.SettingsGroup) is used to organiz
 
 *SettingsGroup with optional header and description displaying a SettingsCard and SettingsExpander as child settings*
 
+@if (avalonia) {
+> [!IMPORTANT]
+> See the [Getting Started](../getting-started.md) topic for details on configuring themes for this control.
+}
+
 ## Primary Content Areas
 
 The [SettingsGroup](xref:@ActiproUIRoot.Controls.SettingsGroup) control is defined by multiple content areas:

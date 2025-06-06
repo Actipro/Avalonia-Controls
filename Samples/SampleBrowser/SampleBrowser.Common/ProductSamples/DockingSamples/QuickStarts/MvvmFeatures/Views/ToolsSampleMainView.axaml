@@ -1,0 +1,85 @@
+<UserControl 
+	xmlns="https://github.com/avaloniaui"
+	x:Class="ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.MvvmFeatures.Views.ToolsSampleMainView"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sample="using:ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.MvvmFeatures"
+	xmlns:views="using:ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.MvvmFeatures.Views"
+	xmlns:viewmodels="using:ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.MvvmFeatures.ViewModels"
+	x:DataType="viewmodels:ToolsSampleMainViewModel"
+	>
+
+	<UserControl.Resources>
+
+		<sample:ToolItemStateConverter x:Key="ToolItemStateConverter" />
+
+		<!-- NOTE: Use a ControlTheme to bind DockingWindow properties to view models -->
+		<ControlTheme x:Key="ToolWindowTheme" x:DataType="viewmodels:ToolItemViewModel" TargetType="actipro:ToolWindow" BasedOn="{StaticResource {x:Type actipro:ToolWindow}}">
+
+			<!-- DockingWindow (BaseType) -->
+			<Setter Property="Description" Value="{Binding Description, Mode=TwoWay}" />
+			<Setter Property="Icon" Value="{Binding Icon, Mode=TwoWay}" />
+			<Setter Property="IsFloating" Value="{Binding IsFloating, Mode=TwoWay}" />
+			<Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+			<Setter Property="SerializationId" Value="{Binding SerializationId, Mode=TwoWay}" />
+			<Setter Property="Title" Value="{Binding Title, Mode=TwoWay}" />
+			<Setter Property="WindowGroupName" Value="{Binding WindowGroupName, Mode=TwoWay}" />
+
+			<!-- ToolWindow -->
+			<Setter Property="DefaultDockSide" Value="{Binding DefaultDockSide, Mode=TwoWay}" />
+			<Setter Property="State" Value="{Binding State, Mode=TwoWay, Converter={StaticResource ToolItemStateConverter}}" />
+
+			<!-- IMPORTANT: These properties should be configured last so that other bindings are applied before the window options -->
+			<Setter Property="IsActive" Value="{Binding IsActive, Mode=TwoWay}" />
+			<Setter Property="IsOpen" Value="{Binding IsOpen, Mode=TwoWay}" />
+
+		</ControlTheme>
+		
+		<!-- NOTE: Use a DataTemplateSelector to associate each ViewModel with a View -->
+		<actipro:TypedDataTemplateSelector x:Key="ToolItemTemplateSelector">
+			<DataTemplate x:DataType="viewmodels:ToolItem1ViewModel">
+				<views:ToolItem1View />
+			</DataTemplate>
+			<DataTemplate x:DataType="viewmodels:ToolItem2ViewModel">
+				<views:ToolItem2View />
+			</DataTemplate>
+			<DataTemplate x:DataType="viewmodels:ToolItem3ViewModel">
+				<views:ToolItem3View />
+			</DataTemplate>
+		</actipro:TypedDataTemplateSelector>
+		
+	</UserControl.Resources>
+
+
+	<actipro:DockSite x:Name="dockSite" Height="300"
+		ToolItemContainerTheme="{StaticResource ToolWindowTheme}"
+		ToolItemTemplate="{StaticResource ToolItemTemplateSelector}"
+		ToolItemsSource="{Binding ToolItems}"
+		>
+
+		<actipro:Workspace>
+			<actipro:TabbedMdiHost>
+				<actipro:TabbedMdiContainer>
+					<actipro:DocumentWindow Title="Tools List" Icon="/Images/Icons/DocumentOutline16.png">
+						<DataGrid
+							BorderThickness="0"
+							SelectedIndex="0"
+							ItemsSource="{Binding #dockSite.ToolItemsSource}"
+							>
+							<DataGrid.Columns>
+								<DataGridTextColumn x:DataType="viewmodels:ToolItemViewModel" Header="Title" Binding="{Binding Title}" />
+								<DataGridCheckBoxColumn x:DataType="viewmodels:ToolItemViewModel" Header="Is Open" Binding="{Binding IsOpen}" />
+								<DataGridCheckBoxColumn x:DataType="viewmodels:ToolItemViewModel" Header="Is Selected" Binding="{Binding IsSelected}" />
+								<DataGridCheckBoxColumn x:DataType="viewmodels:ToolItemViewModel" Header="Is Active" Binding="{Binding IsActive}" />
+								<DataGridCheckBoxColumn x:DataType="viewmodels:ToolItemViewModel" Header="Is Floating" Binding="{Binding IsFloating}" />
+							</DataGrid.Columns>
+						</DataGrid>
+					</actipro:DocumentWindow>
+				</actipro:TabbedMdiContainer>
+			</actipro:TabbedMdiHost>
+		</actipro:Workspace>
+
+	</actipro:DockSite>
+
+</UserControl>

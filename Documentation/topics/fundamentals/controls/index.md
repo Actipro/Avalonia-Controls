@@ -55,6 +55,12 @@ The Fundamentals product contains various using interface controls that may be u
 
 The [SettingsCard](settings-card.md), [SettingsExpander](settings-expander.md), and [SettingsGroup](settings-group.md) controls are used together to organize and present configurable settings.
 
+## Window Control
+
+![Screenshot](../images/window-control.png)
+
+[Window Control](window-control.md) is a control that looks and acts like a `Window`, but can be used anywhere a `Control` can be used.  This is especially useful when developing single-page applications that need `Window`-like capabilities.
+
 ## Progress Spinners
 
 ![Screenshot](../images/ring-spinner-examples.png)

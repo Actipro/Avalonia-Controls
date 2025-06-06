@@ -1,0 +1,257 @@
+<UserControl 
+	x:Name="sampleRootControl"
+	x:Class="ActiproSoftware.ProductSamples.DockingSamples.Demos.SimpleIde.MainControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:sampleCommon="using:ActiproSoftware.ProductSamples.DockingSamples.Common"
+	Background="{actipro:ThemeResource Container2BackgroundBrush}"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
+
+	</UserControl.Resources>
+
+	<Grid Margin="0" RowDefinitions="Auto,*,Auto">
+
+		<!-- DockSite -->
+		<actipro:DockSite x:Name="dockSite" Grid.Row="1"
+			CanDocumentWindowsFloat="True"
+			FloatingWindowTitle="Docking/MDI Demo"
+			FloatingWindowIcon="/Images/Icons/Actipro.ico"
+			FloatingWindowOpening="OnDockSiteFloatingWindowOpening"
+			MdiKindChanged="OnDockSiteMdiKindChanged"
+			MenuOpening="OnDockSiteMenuOpening"
+			NewWindowRequested="OnDockSiteNewWindowRequested"
+			PrimaryDocumentChanged="OnDockSitePrimaryDocumentChanged"
+			WindowActivated="OnDockSiteWindowActivated"
+			WindowAutoHidePopupClosed="OnDockSiteWindowAutoHidePopupClosed"
+			WindowAutoHidePopupOpened="OnDockSiteWindowAutoHidePopupOpened"
+			WindowDeactivated="OnDockSiteWindowDeactivated"
+			WindowRegistered="OnDockSiteWindowRegistered"
+			WindowsAutoHiding="OnDockSiteWindowsAutoHiding"
+			WindowsClosed="OnDockSiteWindowsClosed"
+			WindowsClosing="OnDockSiteWindowsClosing"
+			WindowsDragged="OnDockSiteWindowsDragged"
+			WindowsDragging="OnDockSiteWindowsDragging"
+			WindowsDragOver="OnDockSiteWindowsDragOver"
+			WindowsOpened="OnDockSiteWindowsOpened"
+			WindowsOpening="OnDockSiteWindowsOpening"
+			WindowsStateChanged="OnDockSiteWindowsStateChanged"
+			WindowUnregistered="OnDockSiteWindowUnregistered"
+			>
+			<actipro:DockSite.AutoHideLeftContainers>
+				<actipro:ToolWindowContainer>
+
+					<sampleCommon:FindAndReplaceToolWindow x:Name="findReplaceToolWindow"
+						ContainerAutoHideSize="250,300"
+						ContainerDockedSize="250,300"
+						/>
+
+					<sampleCommon:ToolboxToolWindow x:Name="toolboxToolWindow"
+						ContainerAutoHideSize="250,300"
+						ContainerDockedSize="250,300"
+						/>
+
+				</actipro:ToolWindowContainer>
+			</actipro:DockSite.AutoHideLeftContainers>
+
+			<actipro:SplitContainer Orientation="Vertical">
+				<actipro:SplitContainer>
+
+					<!-- Workspace -->
+					<actipro:Workspace>
+						<actipro:TabbedMdiHost x:Name="tabbedMdiHost">
+
+							<actipro:TabbedMdiHost.EmptyContentTemplate>
+								<DataTemplate>
+									<TextBlock
+										FontStyle="Italic"
+										Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}"
+										HorizontalAlignment="Center"
+										VerticalAlignment="Center"
+										Text="No open documents"
+										/>
+								</DataTemplate>
+							</actipro:TabbedMdiHost.EmptyContentTemplate>
+
+						</actipro:TabbedMdiHost>
+					</actipro:Workspace>
+					
+					<actipro:SplitContainer Orientation="Vertical">
+						<actipro:ToolWindowContainer>
+
+							<sampleCommon:SolutionExplorerToolWindow x:Name="solutionExplorerToolWindow" />
+
+							<actipro:ToolWindow x:Name="documentOutlineToolWindow" Title="Document Outline"
+								Description="Displays the primary document's document outline"
+								Icon="/Images/Icons/ClassView16.png">
+
+								<TextBox x:Name="documentOutlineTextBox"
+										 Grid.Row="1"
+										 BorderThickness="0"
+										 Text="(none)"
+										 AcceptsReturn="True"
+										 IsReadOnly="True" />
+
+							</actipro:ToolWindow>
+
+						</actipro:ToolWindowContainer>
+						<actipro:ToolWindowContainer>
+
+							<sampleCommon:DocumentPropertiesToolWindow x:Name="propertiesToolWindow"
+								ContainerDockedSize="200, 150"
+								DataContext="{Binding #dockSite.PrimaryDocument}"/>
+
+						</actipro:ToolWindowContainer>
+					</actipro:SplitContainer>
+
+				</actipro:SplitContainer>
+
+				<actipro:ToolWindowContainer>
+
+					<actipro:ToolWindow x:Name="outputToolWindow" Title="Output"
+						ContainerDockedSize="300, 200"
+						Description="Displays docking-related events"
+						Icon="/Images/Icons/Output16.png">
+						<ListBox x:Name="eventsListBox" BorderThickness="0" />
+					</actipro:ToolWindow>
+					
+					<sampleCommon:ErrorListToolWindow x:Name="errorListToolWindow"
+						ContainerDockedSize="300, 200" />
+
+					<actipro:ToolWindow x:Name="toolWindowsToolWindow" Title="Tool Windows"
+						ContainerDockedSize="300, 200"
+						Description="Allows for modification of all registered tool windows"
+						Icon="/Images/Icons/Properties16.png">
+
+						<Grid RowDefinitions="Auto,*">
+
+							<DataGrid x:Name="toolWindowsDataGrid"
+								Grid.Row="1"
+								BorderThickness="0"
+								ItemsSource="{Binding #dockSite.ToolWindows}"
+								SelectedIndex="0"
+								x:DataType="actipro:ToolWindow"
+								>
+								<DataGrid.Columns>
+									<DataGridTemplateColumn Header="Title">
+										<DataGridTemplateColumn.CellTemplate>
+											<DataTemplate>
+												<Grid ColumnDefinitions="Auto,*">
+													<ContentControl Classes="theme-icon-presenter"
+														Width="16"
+														Height="16"
+														Margin="4,0"
+														Content="{Binding Icon}"
+														ContentTemplate="{Binding IconTemplate}"
+														VerticalAlignment="Center" />
+													<TextBlock Grid.Column="1" Text="{Binding Title}" TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
+												</Grid>
+											</DataTemplate>
+										</DataGridTemplateColumn.CellTemplate>
+									</DataGridTemplateColumn>
+									<DataGridTextColumn Header="State" Binding="{Binding State}" />
+									<DataGridCheckBoxColumn Header="Is Open" Binding="{Binding IsOpen}" />
+									<DataGridCheckBoxColumn Header="Is Selected" Binding="{Binding IsSelected}" />
+									<DataGridCheckBoxColumn Header="Is Active" Binding="{Binding IsActive}" />
+									<DataGridCheckBoxColumn Header="Is Floating" Binding="{Binding IsFloating}" />
+								</DataGrid.Columns>
+							</DataGrid>
+
+							<actipro:StandaloneToolBar
+								Background="{actipro:ThemeResource Container2BackgroundBrush}"
+								BorderBrush="{actipro:ThemeResource Container2BorderBrush}"
+								BorderThickness="0,0,0,1"
+								CornerRadius="0"
+								ItemSpacing="0">
+
+								<actipro:BarButton Label="Activate" Command="{ReflectionBinding #toolWindowsDataGrid.SelectedItem.ActivateCommand}" />
+								<actipro:BarButton Label="Open" Command="{ReflectionBinding #toolWindowsDataGrid.SelectedItem.OpenCommand}" />
+								<actipro:BarButton Label="Close" Command="{ReflectionBinding #toolWindowsDataGrid.SelectedItem.CloseCommand}" />
+								<actipro:BarButton Label="Destroy" Command="{ReflectionBinding #toolWindowsDataGrid.SelectedItem.DestroyCommand}" />
+								<actipro:BarSeparator />
+								<actipro:BarButton Label="Dock" Command="{ReflectionBinding #toolWindowsDataGrid.SelectedItem.DockCommand}" />
+								<actipro:BarButton Label="Move to MDI" Command="{ReflectionBinding #toolWindowsDataGrid.SelectedItem.MoveToMdiCommand}" />
+								<actipro:BarButton Label="Auto-Hide" Command="{ReflectionBinding #toolWindowsDataGrid.SelectedItem.AutoHideCommand}" />
+								<actipro:BarButton Label="Float" Command="{ReflectionBinding #toolWindowsDataGrid.SelectedItem.FloatCommand}" />
+
+							</actipro:StandaloneToolBar>
+
+						</Grid>
+					</actipro:ToolWindow>
+				</actipro:ToolWindowContainer>
+
+			</actipro:SplitContainer>
+			
+		</actipro:DockSite>
+
+		<Menu Background="Transparent">
+			<MenuItem Header="_File">
+				<MenuItem Header="New _Text File" Click="OnNewDocumentMenuItemClick" Tag=".txt" />
+			</MenuItem>
+			<MenuItem Header="_View">
+				<actipro:BarMenuItem Label="Document Out_line" SmallIcon="{Binding #documentOutlineToolWindow.Icon}" Command="{Binding #documentOutlineToolWindow.ActivateCommand}" />
+				<actipro:BarMenuItem Label="Document _Properties" SmallIcon="{Binding #propertiesToolWindow.Icon}" Command="{Binding #propertiesToolWindow.ActivateCommand}" />
+				<actipro:BarMenuItem Label="_Error List" SmallIcon="{Binding #errorListToolWindow.Icon}" Command="{Binding #errorListToolWindow.ActivateCommand}" />
+				<actipro:BarMenuItem Label="_Find &amp; Replace" SmallIcon="{Binding #findReplaceToolWindow.Icon}" Command="{Binding #findReplaceToolWindow.ActivateCommand}" />
+				<actipro:BarMenuItem Label="_Output" SmallIcon="{Binding #outputToolWindow.Icon}" Command="{Binding #outputToolWindow.ActivateCommand}" />
+				<actipro:BarMenuItem Label="_Solution Explorer" SmallIcon="{Binding #solutionExplorerToolWindow.Icon}" Command="{Binding #solutionExplorerToolWindow.ActivateCommand}" />
+				<actipro:BarMenuItem Label="_Toolbox" SmallIcon="{Binding #toolboxToolWindow.Icon}" Command="{Binding #toolWindowsToolWindow.ActivateCommand}" />
+				<actipro:BarMenuItem Label="Tool _Windows" SmallIcon="{Binding #toolWindowsToolWindow.Icon}" Command="{Binding #toolWindowsToolWindow.ActivateCommand}" />
+			</MenuItem>
+			<MenuItem Header="_Options">
+				<MenuItem Header="New Tabs Inserted _Before Existing Tabs" IsChecked="{Binding #dockSite.AreNewTabsInsertedBeforeExistingTabs, Mode=TwoWay}" ToggleType="CheckBox" />
+				<MenuItem x:Name="forceAutoHideToBottomMenuItem" Header="_Force Auto-Hide to Bottom" ToggleType="CheckBox" />
+				<MenuItem x:Name="limitFloatingWindowInitialSizeMenuItem" Header="_Limit Floating Window Initial Sizes" ToggleType="CheckBox" />
+				<MenuItem x:Name="restrictDraggedWindowsMenuItem" Header="_Restrict Dragged Windows (Limit Dock Guides)" ToggleType="CheckBox" />
+				<Separator />
+				<MenuItem Header="_Tool Window Tab Icons" IsChecked="{Binding #dockSite.ToolWindowsHaveTabIcons, Mode=TwoWay}" ToggleType="CheckBox" />
+				<MenuItem Header="_Document Tab Icons" IsChecked="{Binding #tabbedMdiHost.HasTabIcons, Mode=TwoWay}" ToggleType="CheckBox" />
+				<Separator />
+				<MenuItem Header="Can Document Windows Fl_oat" IsChecked="{Binding #dockSite.CanDocumentWindowsFloat, Mode=TwoWay}" ToggleType="CheckBox" />
+				<MenuItem Header="Can Tool Windows Flo_at" IsChecked="{Binding #dockSite.CanToolWindowsFloat, Mode=TwoWay}" ToggleType="CheckBox" />
+				<MenuItem Header="Can Tool Windows Drag to Floating _MDI" IsChecked="{Binding #dockSite.CanToolWindowsDragToFloatingDockHostsWithWorkspaces, Mode=TwoWay}" ToggleType="CheckBox" />
+				<Separator />
+				<MenuItem Header="Is Live _Splitting Enabled" IsChecked="{Binding #dockSite.IsLiveSplittingEnabled, Mode=TwoWay}" ToggleType="CheckBox" />
+				<MenuItem Header="Use Drag Float Pre_views" IsChecked="{Binding #dockSite.UseDragFloatPreviews, Mode=TwoWay}" ToggleType="CheckBox" />
+				<MenuItem Header="Use Hosted Floating _Windows" IsVisible="{OnPlatform 'True', Browser='False', x:TypeArguments=x:Boolean}" IsChecked="{Binding #dockSite.UseHostedFloatingWindows, Mode=TwoWay}" ToggleType="CheckBox" />
+				<MenuItem Header="Use Hosted _Popups" IsVisible="{OnPlatform 'True', Browser='False', x:TypeArguments=x:Boolean}" IsChecked="{Binding #dockSite.UseHostedPopups, Mode=TwoWay}" ToggleType="CheckBox" />
+			</MenuItem>
+			<MenuItem Header="_Window">
+				<MenuItem Header="Close _All Documents" Command="{Binding #dockSite.CloseAllDocumentsCommand}" />
+				<Separator />
+				<MenuItem Header="_Tabbed MDI" Command="{Binding #dockSite.SetMdiKindCommand}" ToggleType="Radio" IsChecked="{Binding #dockSite.MdiKind, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Tabbed'}">
+					<MenuItem.CommandParameter>
+						<actipro:MdiKind>Tabbed</actipro:MdiKind>
+					</MenuItem.CommandParameter>
+				</MenuItem>
+				<MenuItem Header="_Standard MDI" Command="{Binding #dockSite.SetMdiKindCommand}" ToggleType="Radio" IsChecked="{Binding #dockSite.MdiKind, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Standard'}">
+					<MenuItem.CommandParameter>
+						<actipro:MdiKind>Standard</actipro:MdiKind>
+					</MenuItem.CommandParameter>
+				</MenuItem>
+				<Separator />
+				<MenuItem Header="_Cascade" Command="{Binding #dockSite.CascadeDocumentsCommand}" />
+				<MenuItem Header="Tile _Horizontally" Command="{Binding #dockSite.TileDocumentsHorizontallyCommand}" />
+				<MenuItem Header="Tile _Vertically" Command="{Binding #dockSite.TileDocumentsVerticallyCommand}" />
+			</MenuItem>
+		</Menu>
+
+		<actipro:InfoBar Grid.Row="2" Margin="{actipro:ScaledThickness '1+4,0,1+4,1+4'}"
+			Title="External Window"
+			Message="This demo is also available as a stand-alone window."
+			CanClose="False"
+			IsVisible="{Binding #sampleRootControl.IsExternalSampleOptionVisible}"
+			>
+			<actipro:InfoBar.Action>
+				<actipro:HyperlinkTextBlock Command="{Binding #sampleRootControl.OpenExternalWindowCommand}">Open window</actipro:HyperlinkTextBlock>
+			</actipro:InfoBar.Action>
+		</actipro:InfoBar>
+		
+	</Grid>
+
+</UserControl>

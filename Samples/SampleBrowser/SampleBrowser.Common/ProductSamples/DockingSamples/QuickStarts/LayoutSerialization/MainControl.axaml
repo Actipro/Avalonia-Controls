@@ -1,0 +1,208 @@
+<UserControl 
+	x:Name="rootSampleControl"
+	xmlns="https://github.com/avaloniaui"
+	x:Class="ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.LayoutSerialization.MainControl"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:serialization="using:ActiproSoftware.UI.Avalonia.Controls.Docking.Serialization"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:sampleCommon="using:ActiproSoftware.ProductSamples.DockingSamples.Common"
+	>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="This QuickStart shows how you can persist the layout of docking windows.  Layout data is typically saved when an application is closed and then restored when the application is reopened, but can also be used to restore a default layout.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Layout serialization" Url="https://www.actiprosoftware.com/docs/controls/avalonia/docking/layout-features/layout-serialization" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExample
+			Header="Layout serialization"
+			Footer="See the &quot;Instructions&quot; tool window for details on working with this sample.">
+
+			<Grid RowDefinitions="Auto,*">
+
+				<!-- DockSite -->
+				<actipro:DockSite x:Name="dockSite" Grid.Row="1" Height="450"
+					FloatingWindowIcon="/Images/Icons/Actipro.ico"
+					FloatingWindowTitle="Docking/MDI Demo">
+					<actipro:DockSite.AutoHideLeftContainers>
+						<actipro:ToolWindowContainer>
+							<sampleCommon:ToolboxToolWindow x:Name="toolboxToolWindow" />
+						</actipro:ToolWindowContainer>
+					</actipro:DockSite.AutoHideLeftContainers>
+
+					<actipro:SplitContainer>
+
+						<!-- Workspace -->
+						<actipro:Workspace>
+							<actipro:TabbedMdiHost x:Name="tabbedMdiHost">
+								<actipro:TabbedMdiContainer>
+									<actipro:DocumentWindow SerializationId="LayoutDataDocument" Title="Saved Layout XML" Icon="/Images/Icons/TextDocument16.png" CanClose="False">
+										<ScrollViewer Margin="4" HorizontalScrollBarVisibility="Auto">
+											<SelectableTextBlock x:Name="layoutXmlTextBlock" Classes="theme-text-code size-xs" sampleBrowser:CodeTextBlockProperties.CodeLanguage="Xml" />
+										</ScrollViewer>
+									</actipro:DocumentWindow>
+								</actipro:TabbedMdiContainer>
+							</actipro:TabbedMdiHost>
+						</actipro:Workspace>
+
+						<actipro:ToolWindowContainer>
+							<actipro:ToolWindow x:Name="instructionsToolWindow" SerializationId="Instructions" Title="Instructions" Icon="/Images/Icons/Help16.png" ContainerDockedSize="300,200">
+								<ScrollViewer Margin="10">
+									<StackPanel>
+										<TextBlock Classes="theme-text-heading size-xs" Margin="0,0,0,5">Introduction</TextBlock>
+										<TextBlock Classes="theme-text-body size-sm" TextWrapping="Wrap">
+											In this particular sample, the layout data is maintained in a static member variable.
+											Change the layout by dragging tool windows to other locations.
+											Then switch to another sample and switch back to this sample.
+											You should see the same tool window layout as when you last left the sample.
+										</TextBlock>
+										<TextBlock Classes="theme-text-heading size-xs" Margin="0,10,0,5">Serialization Behavior</TextBlock>
+										<TextBlock Classes="theme-text-body size-sm" TextWrapping="Wrap">
+											By default, only the layout of the tool windows is retained, but this can be changed via a serializer option.
+											By unchecking the &quot;Only Save ToolWindow Layout&quot; menu item, the entire layout, including documents and the MDI, can be saved and restored.
+										</TextBlock>
+										<TextBlock Classes="theme-text-heading size-xs" Margin="0,10,0,5">CanSerialize Property</TextBlock>
+										<TextBlock Classes="theme-text-body size-sm" TextWrapping="Wrap">
+											Each docking window has a CanSerialize property that can be set to false to prevent it from being included in the layout data.
+											By unchecking the &quot;Can Serialize Class View" menu item, the &quot;Class View&quot; tool window will be excluded.
+										</TextBlock>
+										<TextBlock Classes="theme-text-heading size-xs" Margin="0,10,0,5">Deserialization Behavior</TextBlock>
+										<TextBlock Classes="theme-text-body size-sm" TextWrapping="Wrap">
+											There are also three &quot;Layout&quot; menu items that determine how unknown windows in a layout are handled.
+											This situation occurs in this sample when a programmatic tool window is added, then the sample is switched, and reopened.
+											In that scenario, the programmatic tool window isn't known to the DockSite, but it has layout data in the XML.
+											The layout data can be discarded (default), auto-created, or lazy loaded.
+										</TextBlock>
+										<TextBlock Classes="theme-text-heading size-xs" Margin="0,10,0,5">Application Session Persistance</TextBlock>
+										<TextBlock Classes="theme-text-body size-sm" TextWrapping="Wrap">
+											Since the layout data of this sample is saved in a static member variable,
+											changes are not maintained if the entire Sample Browser application is closed.
+											That behavior can easily be updated to save the layout to a file instead, and
+											the DockSiteLayoutSerializer has several overloaded methods for working directly
+											with files or stream.
+										</TextBlock>
+									</StackPanel>
+								</ScrollViewer>
+							</actipro:ToolWindow>
+
+							<sampleCommon:SolutionExplorerToolWindow x:Name="solutionExplorerToolWindow" ContainerDockedSize="300,200" />
+
+							<sampleCommon:ClassViewToolWindow x:Name="classViewToolWindow" ContainerDockedSize="300,200" />
+							
+						</actipro:ToolWindowContainer>
+					</actipro:SplitContainer>
+				</actipro:DockSite>
+
+				<!-- Menu -->
+				<Menu Background="Transparent">
+					<MenuItem Header="_Layout">
+						<MenuItem x:Name="saveToolWindowLayoutOnlyMenuItem" Header="Only Save ToolWindow Layout" ToggleType="CheckBox" IsChecked="True" Click="OnDockSiteSerializationOptionMenuItemClick" />
+						<MenuItem Header="Can Serialize Class View" ToggleType="CheckBox" IsChecked="{Binding #classViewToolWindow.CanSerialize, Mode=TwoWay}" />
+						<Separator />
+						<MenuItem x:Name="discardMenuItem" Header="Discard Unknown Windows" ToggleType="Radio" GroupName="WindowDeserializationOption" IsChecked="True" Click="OnWindowDeserializationOptionMenuItemClick" />
+						<MenuItem x:Name="autoCreateMenuItem" Header="Auto-Create Unknown Windows" ToggleType="Radio" GroupName="WindowDeserializationOption" Click="OnWindowDeserializationOptionMenuItemClick" />
+						<MenuItem x:Name="lazyLoadMenuItem" Header="Lazy Load Unknown Windows" ToggleType="Radio" GroupName="WindowDeserializationOption" Click="OnWindowDeserializationOptionMenuItemClick" />
+						<Separator />
+						<MenuItem Header="Reload Default Layout" Click="OnLoadDefaultLayoutMenuItemClick" />
+						<Separator />
+						<MenuItem Header="Load Layout" Click="OnLoadLayoutMenuItemClick" />
+						<MenuItem Header="Save Layout" Click="OnSaveLayoutMenuItemClick" />
+					</MenuItem>
+					<MenuItem Header="_Activate">
+						<actipro:BarMenuItem x:Name="activeProgrammaticToolWindow1" Label="Create Programmatic ToolWindow 1" SmallIcon="/Images/Icons/Properties16.png"
+							Click="OnActivateProgrammaticToolWindow1Click" />
+						<actipro:BarMenuItem x:Name="activeProgrammaticToolWindow2" Label="Create Programmatic ToolWindow 2" SmallIcon="/Images/Icons/Properties16.png"
+							Click="OnActivateProgrammaticToolWindow2Click" />
+						<Separator />
+						<actipro:BarMenuItem Label="Activate Class View" SmallIcon="/Images/Icons/ClassView16.png"
+							Command="{Binding #classViewToolWindow.ActivateCommand}" />
+						<actipro:BarMenuItem Label="Activate Instructions" SmallIcon="/Images/Icons/Help16.png"
+							Command="{Binding #instructionsToolWindow.ActivateCommand}" />
+						<actipro:BarMenuItem Label="Activate Solution Explorer" SmallIcon="/Images/Icons/SolutionExplorer16.png"
+							Command="{Binding #solutionExplorerToolWindow.ActivateCommand}" />
+						<actipro:BarMenuItem Label="Activate Toolbox" SmallIcon="/Images/Icons/Toolbox16.png"
+							Command="{Binding #toolboxToolWindow.ActivateCommand}" />
+					</MenuItem>
+				</Menu>
+
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:DockSite x:Name="dockSite" ... >
+	<actipro:SplitContainer>
+		<actipro:Workspace ... />
+		<actipro:ToolWindowContainer>
+			<actipro:ToolWindow Title="Class View" CanSerialize="$(ClassViewCanSerialize)" ... />
+			...
+		</actipro:ToolWindowContainer>
+		
+	</actipro:SplitContainer>
+	...
+	
+</actipro:DockSite>
+
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ClassViewCanSerialize" Value="{Binding #classViewToolWindow.CanSerialize}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Docking;
+using ActiproSoftware.UI.Avalonia.Controls.Docking.Serialization;
+...
+public partial class MainControl : UserControl {
+
+	private readonly string? _defaultLayoutData;
+	private string? _layoutData;
+	private readonly DockSiteLayoutSerializer _layoutSerializer;
+	
+	public MainControl() {
+		// Configure layout serializer
+		_layoutSerializer = new DockSiteLayoutSerializer() {
+			SerializationBehavior = DockSiteSerializationBehavior.$(DockSiteSerializationBehavior);
+			DocumentWindowDeserializationBehavior = DockingWindowDeserializationBehavior.$(DockingWindowDeserializationBehavior);
+			ToolWindowDeserializationBehavior = DockingWindowDeserializationBehavior.$(DockingWindowDeserializationBehavior);
+		};
+		
+		this.Loaded += (s, e) => {
+			// Cache the initial layout so it can be restored later
+			_defaultLayoutData = _layoutSerializer.SaveToString(dockSite);
+		};
+	}
+	
+	private void LoadLayout() {
+		// Load the layout (other overloads exist for saving to files or streams)
+		if (!string.IsNullOrEmpty(_layoutData)
+			_layoutSerializer.LoadFromString(_layoutDayout, dockSite);
+	}
+	
+	private void SaveLayout() {
+		// Save the layout (other overloads exist for saving to files or streams)
+		_layoutData = _layoutSerializer.SaveToString(dockSite);
+	}
+
+	private void RestoreDefaultLayout() {
+		if (!string.IsNullOrEmpty(_defaultLayoutData)
+			_layoutSerializer.LoadFromString(_defaultLayoutData, dockSite);
+	}
+
+}
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="DockingWindowDeserializationBehavior" Value="{Binding #rootSampleControl.DockingWindowDeserializationBehavior}" />
+						<sampleBrowser:CodeExampleSubstitution Key="DockSiteSerializationBehavior" Value="{Binding #rootSampleControl.DockSiteSerializationBehavior}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

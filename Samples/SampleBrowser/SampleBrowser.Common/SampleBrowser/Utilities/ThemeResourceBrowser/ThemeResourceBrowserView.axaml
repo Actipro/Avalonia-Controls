@@ -59,7 +59,7 @@
 										</Border>
 									</DataTemplate>
 									
-									<DataTemplate x:DataType="Brush">
+									<DataTemplate x:DataType="IBrush">
 										<Border Width="60" Height="40" CornerRadius="5"
 												Background="{actipro:ThemeResource Container1BackgroundBrush}"
 												BorderBrush="{actipro:ThemeResource Container3BorderBrush}" BorderThickness="1">

@@ -86,12 +86,30 @@ public static AppBuilder BuildAvaloniaApp() {
 	return AppBuilder.Configure<App>()
 		// NOTE: Set "licensee" and "licenseKey" variables to your license information
 		.RegisterActiproLicense(licensee, licenseKey)
-        ;
+		;
 }
 ```
 
 > [!WARNING]
 > It is important to protect your licensee and license key combination from decompilers.  We highly recommend using some form of string encryption on the `licensee` and `licenseKey` values passed into the `AppBuilder.RegisterActiproLicense` extension method.  Many obfuscators include string encryption as an option, or you can use other custom logic to scramble/descramble the strings.
+
+### Notes on Unit Tests
+
+If your application build job runs any unit tests that create Actipro UI controls, the `ActiproLicenseManager.RegisterLicense` method must be called before the Actipro UI controls are created to avoid any licensing-related prompts or exceptions.  `ActiproLicenseManager.RegisterLicense` is the core method invoked by the `AppBuilder.RegisterActiproLicense` extension method.
+
+```csharp
+using ActiproSoftware.Licensing;
+...
+public void OnTestActiproControl() {
+	// NOTE: Set "licensee" and "licenseKey" variables to your license information
+	ActiproLicenseManager.RegisterLicense(licensee, licenseKey);
+
+	// Unit test logic here that creates an Actipro control
+	...
+}
+```
+
+The license registration could alternatively be placed in a more centralized location, such as in the unit test class constructor.  The important thing is that it is called before Actipro UI controls are created.
 
 ## Open-Source Project Licensing Considerations
 

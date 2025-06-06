@@ -1,0 +1,389 @@
+<UserControl 
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:actiproPrimitives="using:ActiproSoftware.UI.Avalonia.Controls.Primitives"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="One of the best features of Actipro Docking/MDI is the number of options that are available to you as a developer.  Many options control the behaviors and capabilities of the docking windows and can be set at a global level as well as at a docking window instance level.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Docking window capabilities" Url="https://www.actiprosoftware.com/docs/controls/avalonia/docking/docking-window-features/docking-window-capabilities" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExample
+			Header="Document options"
+			Footer="Configure global or instance options using the two document windows."
+			DataContext="{Binding #documentOptionsDockSite}"
+			>
+
+			<actipro:DockSite x:Name="documentOptionsDockSite"
+				CanDocumentWindowsFloat="True"
+				FloatingWindowIcon="/Images/Icons/Actipro.ico"
+				FloatingWindowTitle="Docking/MDI QuickStart"
+				Height="400"
+				>
+
+				<actipro:Workspace>
+					<actipro:TabbedMdiHost x:Name="documentOptionsTabbedMdiHost">
+						<actipro:TabbedMdiContainer>
+
+							<actipro:DocumentWindow x:Name="documentWindow" Title="Document Instance Options" Icon="/Images/Icons/TextDocument16.png">
+								<ScrollViewer>
+									<StackPanel DataContext="{Binding #documentWindow}" Margin="10">
+										<TextBlock Margin="0,0,0,5" TextWrapping="Wrap">These options only affect this particular document window instance:</TextBlock>
+										<StackPanel Margin="10,0,0,0" Spacing="3">
+											<CheckBox Content="CanAttach" IsThreeState="True" IsChecked="{Binding CanAttach, Mode=TwoWay}" />
+											<CheckBox Content="CanClose" IsThreeState="True" IsChecked="{Binding CanClose, Mode=TwoWay}" />
+											<CheckBox Content="CanDock" IsThreeState="True" IsChecked="{Binding CanDock, Mode=TwoWay}" />
+											<CheckBox Content="CanDragTab" IsThreeState="True" IsChecked="{Binding CanDragTab, Mode=TwoWay}" />
+											<CheckBox Content="CanFloat" IsThreeState="True" IsChecked="{Binding CanFloat, Mode=TwoWay}" />
+											<CheckBox Content="IsReadOnly" IsChecked="{Binding IsReadOnly, Mode=TwoWay}" />
+										</StackPanel>
+										<TextBlock Margin="0,10,0,5" TextWrapping="Wrap">These options are also available but aren't demonstrated in this sample:</TextBlock>
+										<StackPanel Margin="10,0,0,0" Spacing="3">
+											<CheckBox Content="CanDragToLinkedDockSites" IsThreeState="True" IsChecked="{Binding CanDragToLinkedDockSites, Mode=TwoWay}" />
+											<CheckBox Content="CanStandardMdiMaximize" IsThreeState="True" IsChecked="{Binding CanStandardMdiMaximize, Mode=TwoWay}" />
+											<CheckBox Content="CanStandardMdiMinimize" IsThreeState="True" IsChecked="{Binding CanStandardMdiMinimize, Mode=TwoWay}" />
+										</StackPanel>
+									</StackPanel>
+								</ScrollViewer>
+							</actipro:DocumentWindow>
+
+							<actipro:DocumentWindow Title="Document Global Options" Icon="/Images/Icons/TextDocument16.png">
+								<ScrollViewer>
+									<StackPanel Margin="10">
+										<TextBlock Margin="0,0,0,5" TextWrapping="Wrap">These options provide the global defaults for all documents, which may be overridden by instance settings:</TextBlock>
+										<StackPanel Margin="10,0,0,0" Spacing="3">
+											<CheckBox Content="CanDocumentsAttach" IsChecked="{Binding #documentOptionsTabbedMdiHost.CanDocumentsAttach, Mode=TwoWay}" />
+											<CheckBox Content="CanDocumentsCloseOnMiddleClick" IsChecked="{Binding #documentOptionsTabbedMdiHost.CanDocumentsCloseOnMiddleClick, Mode=TwoWay}" />
+											<CheckBox Content="CanDocumentsDock" IsChecked="{Binding #documentOptionsTabbedMdiHost.CanDocumentsDock, Mode=TwoWay}" />
+											<CheckBox Content="CanDocumentTabsDrag" IsChecked="{Binding #documentOptionsTabbedMdiHost.CanDocumentTabsDrag, Mode=TwoWay}" />
+											<CheckBox Content="CanDocumentWindowsClose" IsChecked="{Binding #documentOptionsDockSite.CanDocumentWindowsClose, Mode=TwoWay}" />
+											<CheckBox Content="CanDocumentWindowsFloat" IsChecked="{Binding #documentOptionsDockSite.CanDocumentWindowsFloat, Mode=TwoWay}" />
+											<CheckBox Content="ContainersHaveNewTabButtons" IsChecked="{Binding #documentOptionsTabbedMdiHost.ContainersHaveNewTabButtons, Mode=TwoWay}" />
+											<CheckBox Content="HasTabCloseButtons" IsChecked="{Binding #documentOptionsTabbedMdiHost.HasTabCloseButtons, Mode=TwoWay}" />
+											<CheckBox Content="HasTabIcon" IsChecked="{Binding #documentOptionsTabbedMdiHost.HasTabIcons, Mode=TwoWay}" />
+										</StackPanel>
+										<TextBlock Margin="0,10,0,5" TextWrapping="Wrap">These options are also available but aren't demonstrated in this sample:</TextBlock>
+										<StackPanel Margin="10,0,0,0" Spacing="3">
+											<CheckBox Content="CanDocumentWindowsDragToLinkedDockSites" IsChecked="{Binding #documentOptionsDockSite.CanDocumentWindowsDragToLinkedDockSites, Mode=TwoWay}" />
+											<CheckBox Content="CanFloatingDockHostsHideOnDockSiteUnload" IsChecked="{Binding #documentOptionsDockSite.CanFloatingDockHostsHideOnDockSiteUnload, Mode=TwoWay}" />
+										</StackPanel>
+									</StackPanel>
+								</ScrollViewer>
+							</actipro:DocumentWindow>
+							
+						</actipro:TabbedMdiContainer>
+					</actipro:TabbedMdiHost>
+				</actipro:Workspace>
+
+			</actipro:DockSite>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+						<![CDATA[
+<!-- Any non-default options configured in the sample are shown below -->
+<actipro:DockSite ... $(CanDocumentWindowsCloseAttribute)$(CanDocumentWindowsDragToLinkedDockSitesAttribute)$(CanDocumentWindowsFloatAttribute)$(CanFloatingDockHostsHideOnDockSiteUnloadAttribute)>
+
+	<actipro:Workspace>
+
+		<actipro:TabbedMdiHost ... $(CanDocumentsAttachAttribute)$(CanDocumentsCloseOnMiddleClickAttribute)$(CanDocumentsDockAttribute)$(CanDocumentTabsDragAttribute)$(ContainersHaveNewTabButtonsAttribute)$(HasTabCloseButtonsAttribute)$(HasTabIconsAttribute)>
+
+			<actipro:TabbedMdiContainer>
+
+				<actipro:DocumentWindow ... $(CanAttachAttribute)$(CanCloseAttribute)$(CanDockAttribute)$(CanDragTabAttribute)$(CanDragToLinkedDockSitesAttribute)$(CanFloatAttribute)$(CanStandardMdiMaximizeAttribute)$(CanStandardMdiMinimizeAttribute)$(IsReadOnlyAttribute)>
+
+					...
+
+				</actipro:DocumentWindow>
+
+			</actipro:TabbedMdiContainer>
+
+		</actipro:TabbedMdiHost>
+
+	</actipro:Workspace>
+
+	...
+
+</actipro:DockSite>]]>
+						<sampleBrowser:CodeExample.Substitutions>
+							<!-- DockSite Options -->
+							<sampleBrowser:CodeExampleSubstitution Key="CanDocumentWindowsCloseAttribute"
+																   IsEnabled="{Binding !#documentOptionsDockSite.CanDocumentWindowsClose}"
+																   Value="&#xD;&#x9;CanDocumentWindowsClose=&quot;False&quot;" />
+							<sampleBrowser:CodeExampleSubstitution Key="CanDocumentWindowsDragToLinkedDockSitesAttribute"
+																   IsEnabled="{Binding !#documentOptionsDockSite.CanDocumentWindowsDragToLinkedDockSites}"
+																   Value="&#xD;&#x9;CanDocumentWindowsDragToLinkedDockSites=&quot;False&quot;" />
+							<sampleBrowser:CodeExampleSubstitution Key="CanDocumentWindowsFloatAttribute"
+																   IsEnabled="{Binding #documentOptionsDockSite.CanDocumentWindowsFloat}"
+																   Value="&#xD;&#x9;CanDocumentWindowsFloat=&quot;True&quot;" />
+							<sampleBrowser:CodeExampleSubstitution Key="CanFloatingDockHostsHideOnDockSiteUnloadAttribute"
+																   IsEnabled="{Binding !#documentOptionsDockSite.CanFloatingDockHostsHideOnDockSiteUnload}"
+																   Value="&#xD;&#x9;CanFloatingDockHostsHideOnDockSiteUnload=&quot;False&quot;" />
+							
+							<!-- TabbedMdiHost Options -->
+							<sampleBrowser:CodeExampleSubstitution Key="CanDocumentsAttachAttribute"
+																   IsEnabled="{Binding !#documentOptionsTabbedMdiHost.CanDocumentsAttach}"
+																   Value="&#xD;&#x9;&#x9;&#x9;CanDocumentsAttach=&quot;False&quot;" />
+							<sampleBrowser:CodeExampleSubstitution Key="CanDocumentsCloseOnMiddleClickAttribute"
+																   IsEnabled="{Binding !#documentOptionsTabbedMdiHost.CanDocumentsCloseOnMiddleClick}"
+																   Value="&#xD;&#x9;&#x9;&#x9;CanDocumentsCloseOnMiddleClick=&quot;False&quot;" />
+							<sampleBrowser:CodeExampleSubstitution Key="CanDocumentsDockAttribute"
+																   IsEnabled="{Binding !#documentOptionsTabbedMdiHost.CanDocumentsDock}"
+																   Value="&#xD;&#x9;&#x9;&#x9;CanDocumentsDock=&quot;False&quot;" />
+							<sampleBrowser:CodeExampleSubstitution Key="CanDocumentTabsDragAttribute"
+																   IsEnabled="{Binding !#documentOptionsTabbedMdiHost.CanDocumentTabsDrag}"
+																   Value="&#xD;&#x9;&#x9;&#x9;CanDocumentTabsDrag=&quot;False&quot;" />
+							<sampleBrowser:CodeExampleSubstitution Key="ContainersHaveNewTabButtonsAttribute"
+																   IsEnabled="{Binding #documentOptionsTabbedMdiHost.ContainersHaveNewTabButtons}"
+																   Value="&#xD;&#x9;&#x9;&#x9;ContainersHaveNewTabButtons=&quot;True&quot;" />
+							<sampleBrowser:CodeExampleSubstitution Key="HasTabCloseButtonsAttribute"
+																   IsEnabled="{Binding !#documentOptionsTabbedMdiHost.HasTabCloseButtons}"
+																   Value="&#xD;&#x9;&#x9;&#x9;HasTabCloseButtons=&quot;False&quot;" />
+							<sampleBrowser:CodeExampleSubstitution Key="HasTabIconsAttribute"
+																   IsEnabled="{Binding #documentOptionsTabbedMdiHost.HasTabIcons}"
+																   Value="&#xD;&#x9;&#x9;&#x9;HasTabIcons=&quot;True&quot;" />
+							
+							<!-- Document Instance Options -->
+							<sampleBrowser:CodeExampleSubstitution Key="CanAttachAttribute"
+																   IsEnabled="{Binding #documentWindow.CanAttach, Converter={x:Static ObjectConverters.IsNotNull}}"
+																   Value="{Binding #documentWindow.CanAttach, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;CanAttach=&quot;{0}&quot;'}" />
+							<sampleBrowser:CodeExampleSubstitution Key="CanCloseAttribute"
+																   IsEnabled="{Binding #documentWindow.CanClose, Converter={x:Static ObjectConverters.IsNotNull}}"
+																   Value="{Binding #documentWindow.CanClose, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;CanClose=&quot;{0}&quot;'}" />
+							<sampleBrowser:CodeExampleSubstitution Key="CanDockAttribute"
+																   IsEnabled="{Binding #documentWindow.CanDock, Converter={x:Static ObjectConverters.IsNotNull}}"
+																   Value="{Binding #documentWindow.CanDock, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;CanDock=&quot;{0}&quot;'}" />
+							<sampleBrowser:CodeExampleSubstitution Key="CanDragTabAttribute"
+																   IsEnabled="{Binding #documentWindow.CanDragTab, Converter={x:Static ObjectConverters.IsNotNull}}"
+																   Value="{Binding #documentWindow.CanDragTab, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;CanDragTab=&quot;{0}&quot;'}" />
+							<sampleBrowser:CodeExampleSubstitution Key="CanDragToLinkedDockSitesAttribute"
+																   IsEnabled="{Binding #documentWindow.CanDragToLinkedDockSites, Converter={x:Static ObjectConverters.IsNotNull}}"
+																   Value="{Binding #documentWindow.CanDragToLinkedDockSites, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;CanDragToLinkedDockSites=&quot;{0}&quot;'}" />
+							<sampleBrowser:CodeExampleSubstitution Key="CanFloatAttribute"
+																   IsEnabled="{Binding #documentWindow.CanFloat, Converter={x:Static ObjectConverters.IsNotNull}}"
+																   Value="{Binding #documentWindow.CanFloat, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;CanFloat=&quot;{0}&quot;'}" />
+							<sampleBrowser:CodeExampleSubstitution Key="CanStandardMdiMaximizeAttribute"
+																   IsEnabled="{Binding #documentWindow.CanStandardMdiMaximize, Converter={x:Static ObjectConverters.IsNotNull}}"
+																   Value="{Binding #documentWindow.CanStandardMdiMaximize, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;CanStandardMdiMaximize=&quot;{0}&quot;'}" />
+							<sampleBrowser:CodeExampleSubstitution Key="CanStandardMdiMinimizeAttribute"
+																   IsEnabled="{Binding #documentWindow.CanStandardMdiMinimize, Converter={x:Static ObjectConverters.IsNotNull}}"
+																   Value="{Binding #documentWindow.CanStandardMdiMinimize, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;CanStandardMdiMinimize=&quot;{0}&quot;'}" />
+							<sampleBrowser:CodeExampleSubstitution Key="IsReadOnlyAttribute"
+																   IsEnabled="{Binding #documentWindow.IsReadOnly}"
+																   Value="&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;IsReadOnly=&quot;True&quot;" />
+						</sampleBrowser:CodeExample.Substitutions>
+					</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Tool options"
+			Footer="Configure global or instance options using the two tool windows."
+			DataContext="{Binding #toolOptionsDockSite}"
+			>
+
+			<actipro:DockSite x:Name="toolOptionsDockSite"
+				CanDocumentWindowsFloat="True"
+				FloatingWindowIcon="/Images/Icons/Actipro.ico"
+				FloatingWindowTitle="Docking/MDI Demo"
+				Height="600"
+				>
+
+				<actipro:SplitContainer>
+					
+					<actipro:Workspace>
+						<actipro:TabbedMdiHost>
+							<actipro:TabbedMdiContainer>
+								<actipro:DocumentWindow Title="Document Placeholder" CanClose="False">
+									<TextBlock Margin="10" FontStyle="Italic" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" TextAlignment="Center" VerticalAlignment="Center" TextWrapping="Wrap">This document window is unused by this sample</TextBlock>
+								</actipro:DocumentWindow>
+							</actipro:TabbedMdiContainer>
+						</actipro:TabbedMdiHost>
+					</actipro:Workspace>
+
+					<actipro:ToolWindowContainer>
+						<actipro:ToolWindow x:Name="toolWindow" Title="Tool Instance Options" ContainerDockedSize="400,200" Icon="/Images/Icons/Properties16.png">
+							<ScrollViewer>
+								<StackPanel Margin="10" DataContext="{Binding #toolWindow}">
+									<TextBlock Margin="0,0,0,5" Text="These options only affect this particular tool window instance:" TextWrapping="Wrap" />
+									<StackPanel Margin="10,0,0,0" Spacing="3">
+										<CheckBox Content="CanAttach" IsThreeState="True" IsChecked="{Binding CanAttach, Mode=TwoWay}" />
+										<CheckBox Content="CanAutoHide" IsThreeState="True" IsChecked="{Binding CanAutoHide, Mode=TwoWay}" />
+										<CheckBox Content="CanBecomeDocument" IsThreeState="True" IsChecked="{Binding CanBecomeDocument, Mode=TwoWay}" />
+										<CheckBox Content="CanClose" IsThreeState="True" IsChecked="{Binding CanClose, Mode=TwoWay}" />
+										<CheckBox Content="CanDock" IsThreeState="True" IsChecked="{Binding CanDock, Mode=TwoWay}" />
+										<CheckBox Content="CanDragTab" IsThreeState="True" IsChecked="{Binding CanDragTab, Mode=TwoWay}" />
+										<CheckBox Content="CanFloat" IsThreeState="True" IsChecked="{Binding CanFloat, Mode=TwoWay}" />
+										<CheckBox Content="HasOptionsButton" IsThreeState="True" IsChecked="{Binding HasOptionsButton, Mode=TwoWay}" />
+										<CheckBox Content="HasTitleBar" IsThreeState="True" IsChecked="{Binding HasTitleBar, Mode=TwoWay}" />
+									</StackPanel>
+
+									<TextBlock Margin="0,10,0,5" Text="These options are also available but aren't demonstrated in this sample:" TextWrapping="Wrap" />
+									<StackPanel Margin="10,0,0,0" Spacing="3">
+										<CheckBox Content="CanDragToLinkedDockSites" IsThreeState="True" IsChecked="{Binding CanDragToLinkedDockSites, Mode=TwoWay}" />
+										<CheckBox Content="CanStandardMdiMaximize" IsThreeState="True" IsChecked="{Binding CanStandardMdiMaximize, Mode=TwoWay}" />
+										<CheckBox Content="CanStandardMdiMinimize" IsThreeState="True" IsChecked="{Binding CanStandardMdiMinimize, Mode=TwoWay}" />
+									</StackPanel>
+								</StackPanel>
+							</ScrollViewer>
+						</actipro:ToolWindow>
+						<actipro:ToolWindow Title="Tool Global Options"  ContainerDockedSize="400,200" Icon="/Images/Icons/Properties16.png">
+							<ScrollViewer>
+								<StackPanel Margin="10" DataContext="{Binding #toolOptionsDockSite}">
+									<TextBlock Margin="0,0,0,5" Text="These options provide the global defaults for all tool windows, which may be overridden by instance settings." TextWrapping="Wrap" />
+									<StackPanel Margin="10,0,0,0" Spacing="3">
+										<CheckBox Content="CanToolWindowsAttach" IsChecked="{Binding CanToolWindowsAttach, Mode=TwoWay}" />
+										<CheckBox Content="CanToolWindowsBecomeDocuments" IsChecked="{Binding CanToolWindowsBecomeDocuments, Mode=TwoWay}" />
+										<CheckBox Content="CanToolWindowsClose" IsChecked="{Binding CanToolWindowsClose, Mode=TwoWay}" />
+										<CheckBox Content="CanToolWindowsCloseOnMiddleClick" IsChecked="{Binding CanToolWindowsCloseOnMiddleClick, Mode=TwoWay}" />
+										<CheckBox Content="CanToolWindowsDock" IsChecked="{Binding CanToolWindowsDock, Mode=TwoWay}" />
+										<CheckBox Content="CanToolWindowsFloat" IsChecked="{Binding CanToolWindowsFloat, Mode=TwoWay}" />
+										<CheckBox Content="CanToolWindowTabsDrag" IsChecked="{Binding CanToolWindowTabsDrag, Mode=TwoWay}" />
+										<CheckBox Content="FloatingToolWindowContainersHaveMaximizeButtons" IsChecked="{Binding FloatingToolWindowContainersHaveMaximizeButtons, Mode=TwoWay}" />
+										<CheckBox Content="FloatingToolWindowContainersHaveMinimizeButtons" IsChecked="{Binding FloatingToolWindowContainersHaveMinimizeButtons, Mode=TwoWay}" />
+										<CheckBox Content="ToolWindowsHaveCloseButtons" IsChecked="{Binding ToolWindowsHaveCloseButtons, Mode=TwoWay}" />
+										<CheckBox Content="ToolWindowsHaveOptionsButtons" IsChecked="{Binding ToolWindowsHaveOptionsButtons, Mode=TwoWay}" />
+										<CheckBox Content="ToolWindowsHaveTabIcons" IsChecked="{Binding ToolWindowsHaveTabIcons, Mode=TwoWay}" />
+										<CheckBox Content="ToolWindowsHaveTitleBarIcons" IsChecked="{Binding ToolWindowsHaveTitleBarIcons, Mode=TwoWay}" />
+										<CheckBox Content="ToolWindowsHaveTitleBars" IsChecked="{Binding ToolWindowsHaveTitleBars, Mode=TwoWay}" />
+										<CheckBox Content="ToolWindowsHaveToggleAutoHideButtons" IsChecked="{Binding ToolWindowsHaveToggleAutoHideButtons, Mode=TwoWay}" />
+									</StackPanel>
+
+									<TextBlock Margin="0,10,0,5" Text="These options are also available but aren't demonstrated in this sample:" TextWrapping="Wrap" />
+									<StackPanel Margin="10,0,0,0" Spacing="3">
+										<CheckBox Content="CanToolWindowsDragToLinkedDockSites" IsChecked="{Binding CanToolWindowsDragToLinkedDockSites, Mode=TwoWay}" />
+									</StackPanel>
+								</StackPanel>
+							</ScrollViewer>
+						</actipro:ToolWindow>
+					</actipro:ToolWindowContainer>
+				</actipro:SplitContainer>
+
+			</actipro:DockSite>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+						<![CDATA[
+<!-- Any non-default options configured in the sample are shown below -->
+<actipro:DockSite ... $(CanToolWindowsAttachAttribute)$(CanToolWindowsBecomeDocumentsAttribute)$(CanToolWindowsCloseAttribute)$(CanToolWindowsCloseOnMiddleClickAttribute)$(CanToolWindowsDockAttribute)$(CanToolWindowsDragToLinkedDockSitesAttribute)$(CanToolWindowsFloatAttribute)$(CanToolWindowTabsDragAttribute)$(FloatingToolWindowContainersHaveMaximizeButtonsAttribute)$(FloatingToolWindowContainersHaveMinimizeButtonsAttribute)$(ToolWindowsHaveCloseButtonsAttribute)$(ToolWindowsHaveOptionsButtonsAttribute)$(ToolWindowsHaveTabIconsAttribute)$(ToolWindowsHaveTitleBarIconsAttribute)$(ToolWindowsHaveTitleBarsAttribute)$(ToolWindowsHaveToggleAutoHideButtonsAttribute)>
+
+	<actipro:SplitContainer>
+
+		<actipro:Workspace ... />
+
+		<actipro:ToolWindowContainer>
+
+			<actipro:ToolWindow ... $(CanAttachAttribute)$(CanAutoHideAttribute)$(CanBecomeDocumentAttribute)$(CanCloseAttribute)$(CanDockAttribute)$(CanDragTabAttribute)$(CanDragToLinkedDockSitesAttribute)$(CanFloatAttribute)$(CanStandardMdiMaximizeAttribute)$(CanStandardMdiMinimizeAttribute)$(HasOptionsButtonAttribute)$(HasTitleBarAttribute)>
+
+				...
+
+			</actipro:ToolWindow>
+
+		</actipro:ToolWindowContainer>
+
+	</actipro:SplitContainer>
+
+</actipro:DockSite>]]>
+						<sampleBrowser:CodeExample.Substitutions>
+							<!-- DockSite Options -->
+							<sampleBrowser:CodeExampleSubstitution Key="CanToolWindowsAttachAttribute"
+															   IsEnabled="{Binding !#toolOptionsDockSite.CanToolWindowsAttach}"
+															   Value="&#xD;&#x9;CanToolWindowsAttach=&quot;False&quot;" />
+							<sampleBrowser:CodeExampleSubstitution Key="CanToolWindowsBecomeDocumentsAttribute"
+															   IsEnabled="{Binding !#toolOptionsDockSite.CanToolWindowsBecomeDocuments}"
+															   Value="&#xD;&#x9;CanToolWindowsBecomeDocuments=&quot;False&quot;" />
+							<sampleBrowser:CodeExampleSubstitution Key="CanToolWindowsCloseAttribute"
+															   IsEnabled="{Binding !#toolOptionsDockSite.CanToolWindowsClose}"
+															   Value="&#xD;&#x9;CanToolWindowsClose=&quot;False&quot;" />
+							<sampleBrowser:CodeExampleSubstitution Key="CanToolWindowsCloseOnMiddleClickAttribute"
+															   IsEnabled="{Binding !#toolOptionsDockSite.CanToolWindowsCloseOnMiddleClick}"
+															   Value="&#xD;&#x9;CanToolWindowsCloseOnMiddleClick=&quot;False&quot;" />
+							<sampleBrowser:CodeExampleSubstitution Key="CanToolWindowsDockAttribute"
+															   IsEnabled="{Binding !#toolOptionsDockSite.CanToolWindowsDock}"
+															   Value="&#xD;&#x9;CanToolWindowsDock=&quot;False&quot;" />
+							<sampleBrowser:CodeExampleSubstitution Key="CanToolWindowsDragToLinkedDockSitesAttribute"
+															   IsEnabled="{Binding !#toolOptionsDockSite.CanToolWindowsDragToLinkedDockSites}"
+															   Value="&#xD;&#x9;CanToolWindowsDragToLinkedDockSites=&quot;False&quot;" />
+							<sampleBrowser:CodeExampleSubstitution Key="CanToolWindowsFloatAttribute"
+															   IsEnabled="{Binding !#toolOptionsDockSite.CanToolWindowsFloat}"
+															   Value="&#xD;&#x9;CanToolWindowsFloat=&quot;False&quot;" />
+							<sampleBrowser:CodeExampleSubstitution Key="CanToolWindowTabsDragAttribute"
+															   IsEnabled="{Binding !#toolOptionsDockSite.CanToolWindowTabsDrag}"
+															   Value="&#xD;&#x9;CanToolWindowTabsDrag=&quot;False&quot;" />
+							<sampleBrowser:CodeExampleSubstitution Key="FloatingToolWindowContainersHaveMaximizeButtonsAttribute"
+															   IsEnabled="{Binding !#toolOptionsDockSite.FloatingToolWindowContainersHaveMaximizeButtons}"
+															   Value="&#xD;&#x9;FloatingToolWindowContainersHaveMaximizeButtons=&quot;False&quot;" />
+							<sampleBrowser:CodeExampleSubstitution Key="FloatingToolWindowContainersHaveMinimizeButtonsAttribute"
+															   IsEnabled="{Binding #toolOptionsDockSite.FloatingToolWindowContainersHaveMinimizeButtons}"
+															   Value="&#xD;&#x9;FloatingToolWindowContainersHaveMinimizeButtons=&quot;True&quot;" />
+							<sampleBrowser:CodeExampleSubstitution Key="ToolWindowsHaveCloseButtonsAttribute"
+															   IsEnabled="{Binding !#toolOptionsDockSite.ToolWindowsHaveCloseButtons}"
+															   Value="&#xD;&#x9;ToolWindowsHaveCloseButtons=&quot;False&quot;" />
+							<sampleBrowser:CodeExampleSubstitution Key="ToolWindowsHaveOptionsButtonsAttribute"
+															   IsEnabled="{Binding !#toolOptionsDockSite.ToolWindowsHaveOptionsButtons}"
+															   Value="&#xD;&#x9;ToolWindowsHaveOptionsButtons=&quot;False&quot;" />
+							<sampleBrowser:CodeExampleSubstitution Key="ToolWindowsHaveTabIconsAttribute"
+															   IsEnabled="{Binding #toolOptionsDockSite.ToolWindowsHaveTabIcons}"
+															   Value="&#xD;&#x9;ToolWindowsHaveTabIcons=&quot;True&quot;" />
+							<sampleBrowser:CodeExampleSubstitution Key="ToolWindowsHaveTitleBarIconsAttribute"
+															   IsEnabled="{Binding #toolOptionsDockSite.ToolWindowsHaveTitleBarIcons}"
+															   Value="&#xD;&#x9;ToolWindowsHaveTitleBarIcons=&quot;True&quot;" />
+							<sampleBrowser:CodeExampleSubstitution Key="ToolWindowsHaveTitleBarsAttribute"
+															   IsEnabled="{Binding !#toolOptionsDockSite.ToolWindowsHaveTitleBars}"
+															   Value="&#xD;&#x9;ToolWindowsHaveTitleBars=&quot;False&quot;" />
+							<sampleBrowser:CodeExampleSubstitution Key="ToolWindowsHaveToggleAutoHideButtonsAttribute"
+															   IsEnabled="{Binding !#toolOptionsDockSite.ToolWindowsHaveToggleAutoHideButtons}"
+															   Value="&#xD;&#x9;ToolWindowsHaveToggleAutoHideButtons=&quot;False&quot;" />
+							
+							<!-- Tool Instance Options -->
+							<sampleBrowser:CodeExampleSubstitution Key="CanAttachAttribute"
+															   IsEnabled="{Binding #toolWindow.CanAttach, Converter={x:Static ObjectConverters.IsNotNull}}"
+															   Value="{Binding #toolWindow.CanAttach, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;CanAttach=&quot;{0}&quot;'}" />
+							<sampleBrowser:CodeExampleSubstitution Key="CanAutoHideAttribute"
+															   IsEnabled="{Binding #toolWindow.CanAutoHide, Converter={x:Static ObjectConverters.IsNotNull}}"
+															   Value="{Binding #toolWindow.CanAutoHide, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;CanAutoHide=&quot;{0}&quot;'}" />
+							<sampleBrowser:CodeExampleSubstitution Key="CanBecomeDocumentAttribute"
+															   IsEnabled="{Binding #toolWindow.CanBecomeDocument, Converter={x:Static ObjectConverters.IsNotNull}}"
+															   Value="{Binding #toolWindow.CanBecomeDocument, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;CanBecomeDocument=&quot;{0}&quot;'}" />
+							<sampleBrowser:CodeExampleSubstitution Key="CanCloseAttribute"
+															   IsEnabled="{Binding #toolWindow.CanClose, Converter={x:Static ObjectConverters.IsNotNull}}"
+															   Value="{Binding #toolWindow.CanClose, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;CanClose=&quot;{0}&quot;'}" />
+							<sampleBrowser:CodeExampleSubstitution Key="CanDockAttribute"
+															   IsEnabled="{Binding #toolWindow.CanDock, Converter={x:Static ObjectConverters.IsNotNull}}"
+															   Value="{Binding #toolWindow.CanDock, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;CanDock=&quot;{0}&quot;'}" />
+							<sampleBrowser:CodeExampleSubstitution Key="CanDragTabAttribute"
+															   IsEnabled="{Binding #toolWindow.CanDragTab, Converter={x:Static ObjectConverters.IsNotNull}}"
+															   Value="{Binding #toolWindow.CanDragTab, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;CanDragTab=&quot;{0}&quot;'}" />
+							<sampleBrowser:CodeExampleSubstitution Key="CanDragToLinkedDockSitesAttribute"
+															   IsEnabled="{Binding #toolWindow.CanDragToLinkedDockSites, Converter={x:Static ObjectConverters.IsNotNull}}"
+															   Value="{Binding #toolWindow.CanDragToLinkedDockSites, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;CanDragToLinkedDockSites=&quot;{0}&quot;'}" />
+							<sampleBrowser:CodeExampleSubstitution Key="CanFloatAttribute"
+															   IsEnabled="{Binding #toolWindow.CanFloat, Converter={x:Static ObjectConverters.IsNotNull}}"
+															   Value="{Binding #toolWindow.CanFloat, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;CanFloat=&quot;{0}&quot;'}" />
+							<sampleBrowser:CodeExampleSubstitution Key="CanStandardMdiMaximizeAttribute"
+															   IsEnabled="{Binding #toolWindow.CanStandardMdiMaximize, Converter={x:Static ObjectConverters.IsNotNull}}"
+															   Value="{Binding #toolWindow.CanStandardMdiMaximize, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;CanStandardMdiMaximize=&quot;{0}&quot;'}" />
+							<sampleBrowser:CodeExampleSubstitution Key="CanStandardMdiMinimizeAttribute"
+															   IsEnabled="{Binding #toolWindow.CanStandardMdiMinimize, Converter={x:Static ObjectConverters.IsNotNull}}"
+															   Value="{Binding #toolWindow.CanStandardMdiMinimize, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;CanStandardMdiMinimize=&quot;{0}&quot;'}" />
+							<sampleBrowser:CodeExampleSubstitution Key="HasOptionsButtonAttribute"
+															   IsEnabled="{Binding #toolWindow.HasOptionsButton, Converter={x:Static ObjectConverters.IsNotNull}}"
+															   Value="{Binding #toolWindow.HasOptionsButton, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;HasOptionsButton=&quot;{0}&quot;'}" />
+							<sampleBrowser:CodeExampleSubstitution Key="HasTitleBarAttribute"
+															   IsEnabled="{Binding #toolWindow.HasTitleBar, Converter={x:Static ObjectConverters.IsNotNull}}"
+															   Value="{Binding #toolWindow.HasTitleBar, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;HasTitleBar=&quot;{0}&quot;'}" />
+						</sampleBrowser:CodeExample.Substitutions>
+					</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

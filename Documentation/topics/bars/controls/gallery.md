@@ -152,7 +152,7 @@ xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 			UseAccentedItemBorder="True"
 			/>
 		...
-	</actipro:BarContextMenu>
+	</actipro:BarPopupButton>
 </actipro:StandaloneToolBar>
 ```
 }
@@ -171,7 +171,7 @@ xmlns:bars="http://schemas.actiprosoftware.com/winfx/xaml/bars"
 			UseAccentedItemBorder="True"
 			/>
 		...
-	</bars:BarContextMenu>
+	</bars:BarPopupButton>
 </bars:StandaloneToolBar>
 ```
 }
@@ -220,7 +220,7 @@ Use the [BarMenuGallery](xref:@ActiproUIRoot.Controls.Bars.BarMenuGallery) contr
 ```xaml
 xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 ...
-<actipro:BarContextMenu>
+<actipro:BarMenuFlyout>
 	<!-- Label is auto-generated from Key -->
 	<actipro:BarMenuGallery
 		Key="ColorPicker"
@@ -230,7 +230,7 @@ xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 		UseAccentedItemBorder="True"
 		/>
 	...
-</actipro:BarContextMenu>
+</actipro:BarMenuFlyout>
 ```
 }
 @if (wpf) {

@@ -1,0 +1,14 @@
+<Window
+	x:Class="ActiproSoftware.ProductSamples.DockingSamples.Demos.SimpleIde.MainWindow"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:local="using:ActiproSoftware.ProductSamples.DockingSamples.Demos.SimpleIde"
+	Title="Actipro Docking &amp; MDI Simple IDE Demo"
+	Icon="/Images/Icons/Actipro.ico"
+	>
+
+	<!-- Client Area -->
+	<local:MainControl x:Name="mainControl" Grid.Row="0" IsExternalSampleOptionVisible="False" />
+
+</Window>

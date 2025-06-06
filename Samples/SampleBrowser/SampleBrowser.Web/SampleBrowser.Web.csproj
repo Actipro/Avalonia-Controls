@@ -6,6 +6,9 @@
 
 		<!-- Required for JSImport -->
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>	
+		
+		<!-- Required due to dependencies with native file references -->
+		<WasmBuildNative>true</WasmBuildNative>
 
 	</PropertyGroup>
 

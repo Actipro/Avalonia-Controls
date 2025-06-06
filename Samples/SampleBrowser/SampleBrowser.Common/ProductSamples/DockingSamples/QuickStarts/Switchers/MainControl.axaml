@@ -1,0 +1,330 @@
+<UserControl 
+	xmlns="https://github.com/avaloniaui"
+	x:Class="ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.Switchers.MainControl"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:sampleCommon="using:ActiproSoftware.ProductSamples.DockingSamples.Common"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="A switcher is presented when a keyboard shortcut is pressed while focus is within the docking hierarchy, which allows the end-user to visually activate any document or tool window.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Switchers" Url="https://www.actiprosoftware.com/docs/controls/avalonia/docking/docking-window-features/switchers" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExample
+			Header="Standard switcher"
+			Footer="The default switcher used is a StandardSwitcher that mimics Visual Studio."
+			DataContext="{Binding #basicUsageStandardSwitcher}"
+			>
+
+			<actipro:DockSite MinHeight="300"
+				FloatingWindowIcon="/Images/Icons/Actipro.ico"
+				FloatingWindowTitle="Docking/MDI Demo">
+				<actipro:DockSite.Switcher>
+					<actipro:StandardSwitcher x:Name="basicUsageStandardSwitcher" />
+				</actipro:DockSite.Switcher>
+
+				<actipro:DockSite.AutoHideLeftContainers>
+					<actipro:ToolWindowContainer>
+						<sampleCommon:ToolboxToolWindow />
+					</actipro:ToolWindowContainer>
+				</actipro:DockSite.AutoHideLeftContainers>
+
+				<actipro:SplitContainer>
+
+					<!-- Workspace -->
+					<actipro:Workspace>
+						<actipro:TabbedMdiHost>
+							<actipro:TabbedMdiContainer>
+
+								<actipro:DocumentWindow Title="Instructions.txt" Description="Instructions for the sample"
+										FileName="C:\Users\Actipro\My Documents\Instructions.txt"
+										Icon="/Images/Icons/TextDocument16.png">
+									<TextBox BorderThickness="0" TextWrapping="Wrap" xml:space="preserve"><![CDATA[This QuickStart shows the StandardSwitcher in action, and allows some of its display options to be set.  Press one of the key gestures combinations to show the switcher.
+
+While the switcher is displayed and while continuing to hold down the key gesture's modifier key, use arrow keys to move the switcher's selection around.  When the modifier key is released, the selected document or tool window in the switcher will become active.]]></TextBox>
+								</actipro:DocumentWindow>
+
+								<actipro:DocumentWindow Title="Document2.txt" Description="Document2"
+										FileName="C:\Users\Actipro\My Documents\Document2.txt"
+										Icon="/Images/Icons/TextDocument16.png">
+									<TextBox BorderThickness="0" Text="The second document." TextWrapping="Wrap" />
+								</actipro:DocumentWindow>
+
+								<actipro:DocumentWindow Title="Document3.txt" Description="Document2"
+										FileName="C:\Users\Actipro\My Documents\Document3.txt"
+										Icon="/Images/Icons/TextDocument16.png">
+									<TextBox BorderThickness="0" Text="The third document." TextWrapping="Wrap" />
+								</actipro:DocumentWindow>
+
+							</actipro:TabbedMdiContainer>
+						</actipro:TabbedMdiHost>
+					</actipro:Workspace>
+
+					<actipro:ToolWindowContainer>
+						<sampleCommon:SolutionExplorerToolWindow />
+						<sampleCommon:ClassViewToolWindow />
+					</actipro:ToolWindowContainer>
+				</actipro:SplitContainer>
+
+			</actipro:DockSite>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<CheckBox IsChecked="{Binding AreDocumentsVisible}">Are documents visible</CheckBox>
+					<CheckBox IsChecked="{Binding AreToolWindowsVisible}">Are tool windows visible</CheckBox>
+					
+					<StackPanel Margin="0,20,0,0">
+						<TextBlock Classes="theme-form-control-label" Text="Select next window" />
+						<TextBlock Text="{Binding SelectNextWindowKeyGesture}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Select previous window" />
+						<TextBlock Text="{Binding SelectPreviousWindowKeyGesture}" />
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:DockSite ... >
+
+	<!-- 
+	A default StandardSwitcher is automatically configured on DockSite, so it
+	only has to be explicitly defined if non-default properties are configured
+	-->
+	<actipro:DockSite.Switcher>
+		<actipro:StandardSwitcher$(AreDocumentsVisibleAttribute)$(AreToolWindowsVisibleAttribute) />
+	</actipro:DockSite.Switcher>
+
+	...
+
+</actipro:DockSite>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="AreDocumentsVisibleAttribute"
+															   IsEnabled="{Binding !AreDocumentsVisible}"
+															   Value=" AreDocumentsVisible=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="AreToolWindowsVisibleAttribute"
+															   IsEnabled="{Binding !AreToolWindowsVisible}"
+															   Value=" AreToolWindowsVisible=&quot;False&quot;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Overflow"
+			Footer="The switcher can limit the total number of rows or columns for documents, and will show scroll buttons if overflowed."
+			DataContext="{Binding #overflowStandardSwitcher}"
+			>
+
+			<actipro:DockSite x:Name="overflowDockSite" MinHeight="300" ToolWindowsHaveTabIcons="False">
+				<actipro:DockSite.Switcher>
+					<actipro:StandardSwitcher x:Name="overflowStandardSwitcher" />
+				</actipro:DockSite.Switcher>
+
+				<actipro:DockSite.AutoHideLeftContainers>
+					<actipro:ToolWindowContainer>
+						<actipro:ToolWindow Title="Tool 1">
+							<TextBlock Margin="3" Text="This is a tool window" />
+						</actipro:ToolWindow>
+						<actipro:ToolWindow Title="Tool 2">
+							<TextBlock Margin="3" Text="This is a tool window" />
+						</actipro:ToolWindow>
+						<actipro:ToolWindow Title="Tool 3">
+							<TextBlock Margin="3" Text="This is a tool window" />
+						</actipro:ToolWindow>
+						<actipro:ToolWindow Title="Tool 4">
+							<TextBlock Margin="3" Text="This is a tool window" />
+						</actipro:ToolWindow>
+					</actipro:ToolWindowContainer>
+				</actipro:DockSite.AutoHideLeftContainers>
+
+				<actipro:DockSite.AutoHideRightContainers>
+					<actipro:ToolWindowContainer>
+						<actipro:ToolWindow Title="Tool 5">
+							<TextBlock Margin="3" Text="This is a tool window" />
+						</actipro:ToolWindow>
+						<actipro:ToolWindow Title="Tool 6">
+							<TextBlock Margin="3" Text="This is a tool window" />
+						</actipro:ToolWindow>
+						<actipro:ToolWindow Title="Tool 7">
+							<TextBlock Margin="3" Text="This is a tool window" />
+						</actipro:ToolWindow>
+					</actipro:ToolWindowContainer>
+				</actipro:DockSite.AutoHideRightContainers>
+
+				<!-- Workspace -->
+				<actipro:Workspace>
+					<actipro:TabbedMdiHost />
+				</actipro:Workspace>
+
+			</actipro:DockSite>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Max rows" />
+						<NumericUpDown Value="{Binding MaxRowCount}" Minimum="5" Maximum="20" FormatString="0" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Max document columns" />
+						<NumericUpDown Value="{Binding MaxDocumentColumnCount}" Minimum="1" Maximum="5" FormatString="0" />
+					</StackPanel>
+
+					<StackPanel Margin="0,20,0,0">
+						<TextBlock Classes="theme-form-control-label" Text="Select next window" />
+						<TextBlock Text="{Binding SelectNextWindowKeyGesture}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Select previous window" />
+						<TextBlock Text="{Binding SelectPreviousWindowKeyGesture}" />
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:DockSite ... >
+
+	<!-- 
+	A default StandardSwitcher is automatically configured on DockSite, so it
+	only has to be explicitly defined if non-default properties are configured
+	-->
+	<actipro:DockSite.Switcher>
+		<actipro:StandardSwitcher$(MaxRowCountAttribute)$(MaxDocumentColumnCountAttribute) />
+	</actipro:DockSite.Switcher>
+
+	...
+
+</actipro:DockSite>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="MaxRowCountAttribute"
+															   Value="{Binding MaxRowCount, StringFormat=' MaxRowCount=&quot;{0}&quot;'}">
+							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
+								<Binding Path="MaxRowCount" Converter="{StaticResource NotEqualToComparisonConverter}">
+									<Binding.ConverterParameter>
+										<x:Int32>15</x:Int32>
+									</Binding.ConverterParameter>
+								</Binding>
+							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
+						</sampleBrowser:CodeExampleSubstitution>
+						<sampleBrowser:CodeExampleSubstitution Key="MaxDocumentColumnCountAttribute"
+															   Value="{Binding MaxDocumentColumnCount, StringFormat=' MaxDocumentColumnCount=&quot;{0}&quot;'}">
+							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
+								<Binding Path="MaxDocumentColumnCount" Converter="{StaticResource NotEqualToComparisonConverter}">
+									<Binding.ConverterParameter>
+										<x:Int32>3</x:Int32>
+									</Binding.ConverterParameter>
+								</Binding>
+							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
+						</sampleBrowser:CodeExampleSubstitution>
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Simple switcher (no UI)"
+			Footer='{Binding SelectNextWindowKeyGesture, StringFormat="Press &apos;{0}&apos; to switch between document and tool windows."}'
+			DataContext="{Binding #simpleSwitcher}"
+			>
+
+			<actipro:DockSite MinHeight="300">
+				<actipro:DockSite.Switcher>
+					<actipro:SimpleSwitcher x:Name="simpleSwitcher" />
+				</actipro:DockSite.Switcher>
+
+				<actipro:DockSite.AutoHideLeftContainers>
+					<actipro:ToolWindowContainer>
+						<sampleCommon:ToolboxToolWindow />
+					</actipro:ToolWindowContainer>
+				</actipro:DockSite.AutoHideLeftContainers>
+
+				<actipro:SplitContainer>
+
+					<!-- Workspace -->
+					<actipro:Workspace>
+						<actipro:TabbedMdiHost>
+							<actipro:TabbedMdiContainer>
+
+								<actipro:DocumentWindow Title="Instructions.txt" Description="Instructions for the sample"
+										FileName="C:\Users\Actipro\My Documents\Instructions.txt"
+										Icon="/Images/Icons/TextDocument16.png">
+									<TextBox BorderThickness="0" TextWrapping="Wrap" xml:space="preserve"><![CDATA[This QuickStart shows the SimpleSwitcher in action, which switches between document and tool windows without showing any user interface.
+
+While the switcher is active and while continuing to hold down the key gesture's modifier key, repeat pressing the gesture's primary key to activate the next window.  Release the key gesture's modifier key keep the last selection.]]></TextBox>
+								</actipro:DocumentWindow>
+
+								<actipro:DocumentWindow Title="Document2.txt" Description="Document2"
+										FileName="C:\Users\Actipro\My Documents\Document2.txt"
+										Icon="/Images/Icons/TextDocument16.png">
+									<TextBox BorderThickness="0" Text="The second document." TextWrapping="Wrap" />
+								</actipro:DocumentWindow>
+
+								<actipro:DocumentWindow Title="Document3.txt" Description="Document2"
+										FileName="C:\Users\Actipro\My Documents\Document3.txt"
+										Icon="/Images/Icons/TextDocument16.png">
+									<TextBox BorderThickness="0" Text="The third document." TextWrapping="Wrap" />
+								</actipro:DocumentWindow>
+
+							</actipro:TabbedMdiContainer>
+						</actipro:TabbedMdiHost>
+					</actipro:Workspace>
+
+					<actipro:ToolWindowContainer>
+						<sampleCommon:SolutionExplorerToolWindow />
+						<sampleCommon:ClassViewToolWindow />
+					</actipro:ToolWindowContainer>
+				</actipro:SplitContainer>
+
+			</actipro:DockSite>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Select next window" />
+						<TextBlock Text="{Binding SelectNextWindowKeyGesture}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Select previous window" />
+						<TextBlock Text="{Binding SelectPreviousWindowKeyGesture}" />
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:DockSite ... >
+
+	<!-- Replace the default switcher with SimpleSwitcher -->
+	<actipro:DockSite.Switcher>
+		<actipro:SimpleSwitcher />
+	</actipro:DockSite.Switcher>
+
+	...
+
+</actipro:DockSite>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

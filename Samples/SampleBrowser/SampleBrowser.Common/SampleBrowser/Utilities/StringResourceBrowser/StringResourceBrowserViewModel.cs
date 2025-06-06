@@ -34,6 +34,7 @@ namespace ActiproSoftware.SampleBrowser.Utilities.StringResourceBrowser {
 			get {
 				return new AssemblyStringResourcesModel[] {
 					new AssemblyStringResourcesModel(typeof(AP.Bars.SR), typeof(AP.Bars.SRName)),
+					new AssemblyStringResourcesModel(typeof(AP.Docking.SR), typeof(AP.Docking.SRName)),
 					new AssemblyStringResourcesModel(typeof(AP.Fundamentals.SR), typeof(AP.Fundamentals.SRName)),
 					new AssemblyStringResourcesModel(typeof(AP.Shared.SR), typeof(AP.Shared.SRName)),
 				};

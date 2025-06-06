@@ -10,6 +10,7 @@
 			Key="{Binding Key}"
 			Label="{Binding Label}"
 			IsVisible="{Binding IsActive}"
+			Tag="{Binding Tag}"
 			/>
 	</DataTemplate>
 

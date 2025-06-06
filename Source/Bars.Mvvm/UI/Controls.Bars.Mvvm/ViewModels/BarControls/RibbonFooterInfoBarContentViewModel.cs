@@ -5,7 +5,7 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 	/// <summary>
 	/// Represents a view model for image and text content within a ribbon footer.
 	/// </summary>
-	public class RibbonFooterInfoBarContentViewModel : ObservableObjectBase {
+	public class RibbonFooterInfoBarContentViewModel : ObservableObjectBase, IHasTag {
 
 		private object? _action;
 		private IDataTemplate? _actionTemplate;
@@ -17,6 +17,7 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		private string? _message;
 		private Thickness _padding = new Thickness(10, 5, 10, 5);
 		private InfoBarSeverity _severity = InfoBarSeverity.Information;
+		private object? _tag;
 		private string? _title;
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -113,6 +114,12 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		public InfoBarSeverity Severity {
 			get => _severity;
 			set => SetProperty(ref _severity, value);
+		}
+
+		/// <inheritdoc cref="IHasTag.Tag"/>
+		public object? Tag {
+			get => _tag;
+			set => SetProperty(ref _tag, value);
 		}
 
 		/// <summary>

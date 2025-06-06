@@ -11,6 +11,9 @@ The [ToggleThemeButton](xref:@ActiproUIRoot.Controls.ToggleThemeButton) is a but
 
 By default, the control theme for [ToggleThemeButton](xref:@ActiproUIRoot.Controls.ToggleThemeButton) displays a "moon" icon when the light theme is requested and a "sun" icon when the dark theme is requested.
 
+> [!IMPORTANT]
+> See the [Getting Started](../getting-started.md) topic for details on configuring themes for this control.
+
 ## Theme Scope
 
 When defined within a `ThemeVariantScope`, the button will toggle the `ThemeVariantScope.RequestedThemeVariant` property.  Otherwise, the button will toggle the global `Application.RequestedThemeVariant` property.
@@ -30,13 +33,13 @@ xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 
 <!-- Toggle Ancestor ThemeVariantScope Theme -->
 <ThemeVariantScope>
-    ...
-    <actipro:ToggleThemeButton />
+	...
+	<actipro:ToggleThemeButton />
 </ThemeVariantScope>
 
 <!-- Toggle Unrelated ThemeVariantScope Theme -->
 <ThemeVariantScope x:Name="targetScope">
-    ...
+	...
 </ThemeVariantScope>
 <actipro:ToggleThemeButton Target="{Binding #targetScope}" />
 ```

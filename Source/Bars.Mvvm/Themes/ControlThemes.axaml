@@ -13,7 +13,18 @@
 		<Setter Property="KeyTipText" Value="{Binding KeyTipText, Mode=TwoWay}" />
 		<Setter Property="Label" Value="{Binding Label, Mode=TwoWay}" />
 		<Setter Property="LayoutBehavior" Value="{Binding LayoutBehavior, Mode=TwoWay}" />
+		<Setter Property="Tag" Value="{Binding Tag, Mode=TwoWay}" />
 		<Setter Property="ToolTip.Tip" Value="{Binding Description}" />
+	</ControlTheme>
+
+
+	<!-- BarMainMenu -->
+	<ControlTheme x:Key="{x:Static actipro:BarsMvvmResourceKeys.BarMainMenuControlTheme}" x:DataType="actipro:BarMainMenuViewModel" TargetType="actipro:BarMainMenu" BasedOn="{StaticResource {x:Type actipro:BarMainMenu}}">
+		<!-- NOTE: Include the ItemContainerTemplateSelector selector first for best performance -->
+		<Setter Property="ItemContainerTemplateSelector" Value="{Binding ItemContainerTemplateSelector}" />
+
+		<Setter Property="ItemsSource" Value="{Binding Items}" />
+		<Setter Property="Tag" Value="{Binding Tag, Mode=TwoWay}" />
 	</ControlTheme>
 
 
@@ -34,12 +45,14 @@
 		<Setter Property="IsApplicationButtonVisible" Value="{Binding IsApplicationButtonVisible, Mode=TwoWay}" />
 		<Setter Property="IsCollapsible" Value="{Binding IsCollapsible, Mode=TwoWay}" />
 		<Setter Property="IsMinimizable" Value="{Binding IsMinimizable, Mode=TwoWay}" />
+		<Setter Property="IsOptionsButtonVisible" Value="{Binding IsOptionsButtonVisible, Mode=TwoWay}" />
 		<Setter Property="ItemsSource" Value="{Binding Tabs}" />
 		<Setter Property="LayoutMode" Value="{Binding LayoutMode, Mode=TwoWay}" />
 		<Setter Property="TabRowToolBarContent" Value="{Binding TabRowToolBar}" />
 		<Setter Property="QuickAccessToolBarContent" Value="{Binding QuickAccessToolBar}" />
 		<Setter Property="QuickAccessToolBarLocation" Value="{Binding QuickAccessToolBarLocation, Mode=TwoWay}" />
 		<Setter Property="QuickAccessToolBarMode" Value="{Binding QuickAccessToolBarMode, Mode=TwoWay}" />
+		<Setter Property="Tag" Value="{Binding Tag, Mode=TwoWay}" />
 	</ControlTheme>
 
 
@@ -49,7 +62,8 @@
 		<Setter Property="ItemContainerTemplateSelector" Value="{Binding ItemContainerTemplateSelector}" />
 
 		<Setter Property="ItemsSource" Value="{Binding Items}" />
+		<Setter Property="Tag" Value="{Binding Tag, Mode=TwoWay}" />
 	</ControlTheme>
 
-		
+
 </ResourceDictionary>

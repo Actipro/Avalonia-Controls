@@ -48,6 +48,13 @@ namespace ActiproSoftware.SampleBrowser {
 		/// <returns>An <see cref="IImage"/>.</returns>
 		public static IImage? GetIcon(string fileName) => LoadImageResource("/Icons/" + fileName);
 
+		/// <summary>
+		/// Gets an <see cref="IImage"/> for a profile photo.
+		/// </summary>
+		/// <param name="fileName">The name of the file in the <c>/Images/ProfilePhotos</c> folder.</param>
+		/// <returns>An <see cref="IImage"/>.</returns>
+		public static IImage? GetProfilePhoto(string fileName) => LoadImageResource("/ProfilePhotos/" + fileName);
+
 	}
 
 }

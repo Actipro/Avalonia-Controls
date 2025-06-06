@@ -1,0 +1,131 @@
+<UserControl 
+	xmlns="https://github.com/avaloniaui"
+	x:Class="ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.ProgrammaticLayout.MainControl"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="This QuickStart shows how to programmatically create an entire DockSite layout. Only the DockSite is included in the XAML.  Everything else is populated in code-behind.">
+
+		<sampleBrowser:ControlExample
+			Header="Programmatic layout"
+			Footer="View the sample code for details on creating a DockSite programmatically."
+			>
+
+			<actipro:DockSite x:Name="dockSite" Height="500"
+				FloatingWindowIcon="/Images/Icons/Actipro.ico"
+				FloatingWindowTitle="Docking/MDI Demo"/>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<!-- The entire layout is populated in code-behind -->
+<actipro:DockSite x:Name="dockSite" />
+					]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+						<![CDATA[
+using ActiproSoftware.UI.Avalonia.Controls.Docking;
+...
+public partial class MainControl : UserControl {
+
+	private int _windowIndex;
+
+	public MainControl() {
+		InitializeComponent();
+	}
+
+	protected override void OnLoaded(RoutedEventArgs e) {
+		base.OnLoaded(e);
+
+		// Initialize dock site after loading
+		if (dockSite.ToolWindows.Count == 0)
+			CreateDockSite();
+	}
+
+	private void CreateDockSite() {
+		// Make sure tabs are programmatically added to the end
+		dockSite.AreNewTabsInsertedBeforeExistingTabs = false;
+
+		// Add a Workspace with Tabbed MDI
+		var workspace = new Workspace() {
+			Content = new TabbedMdiHost()
+		};
+		dockSite.Child = workspace;
+
+		// Add a couple tool windows attached to each other on the right that are 300px wide
+		var toolWindowR1 = CreateToolWindow("DockedRight-1");
+		toolWindowR1.ContainerDockedSize = new Size(300, 200);
+		var toolWindowR2 = CreateToolWindow("DockedRight-2");
+		toolWindowR1.Dock(dockSite, Side.Right);
+		toolWindowR2.Attach(toolWindowR1);
+
+		// Dock bottom
+		var toolWindowB = CreateToolWindow("DockedBottom");
+		toolWindowB.Dock(workspace, Side.Bottom);
+
+		// Auto hide left
+		var toolWindowAH = CreateToolWindow("Auto-Hidden");
+		toolWindowAH.AutoHide(Side.Left);
+
+		// Floating
+		var toolWindowU = CreateToolWindow("Floating");
+		toolWindowU.ContainerDockedSize = new Size(400, 200);
+		toolWindowU.Float(new Point(400, 300));
+
+		// Add three documents
+		var documentWindow1 = CreateDocumentWindow("Upper-1");
+		documentWindow1.Open();
+		var documentWindow2 = CreateDocumentWindow("Upper-2");
+		documentWindow2.Open();
+		var documentWindow3 = CreateDocumentWindow("Lower");
+		documentWindow3.Open();
+		documentWindow3.MoveToNewHorizontalContainer();
+
+		// Make sure new tabs are inserted before existing tabs again
+		dockSite.AreNewTabsInsertedBeforeExistingTabs = true;
+	}
+
+	/// <summary>
+	/// Creates a new <see cref="DocumentWindow"/>.
+	/// </summary>
+	/// <param name="title">The title to use.</param>
+	private DocumentWindow CreateDocumentWindow(string title) {
+		// Using this constructor registers the document window with the DockSite
+		return new DocumentWindow(
+			dockSite,
+			serializationId: $"DocumentWindow{++_windowIndex}",
+			title,
+			ImageLoader.GetIcon("TextDocument16.png"),
+			content: new TextBox() { ... }
+		);
+	}
+
+	/// <summary>
+	/// Creates a new <see cref="ToolWindow"/>.
+	/// </summary>
+	/// <param name="title">The title to use.</param>
+	private ToolWindow CreateToolWindow(string title) {
+		// Using this constructor registers the tool window with the DockSite
+		return new ToolWindow(
+			dockSite,
+			serializationId: $"ToolWindow{++_windowIndex}",
+			title,
+			ImageLoader.GetIcon("Properties16.png"),
+			content: new TextBox() { ... }
+		);
+	}
+
+}
+]]>
+					</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

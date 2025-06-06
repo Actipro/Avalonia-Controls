@@ -183,6 +183,29 @@ UserPromptBuilder.Configure()
 ```
 }
 
+## Resizable
+
+If large or complex information needs to be displayed in the prompt, it may be desirable to enable the prompt to be resizable.
+
+When using the [builder pattern](builder-pattern.md), the [WithCanResize](xref:@ActiproUIRoot.Controls.UserPromptBuilder.WithCanResize*) method is used to indicate if the prompt is resizable:
+
+@if (avalonia) {
+```csharp
+await UserPromptBuilder.Configure()
+	// ... other configuration options here
+	.WithCanResize(true)
+	.Show();
+```
+}
+@if (wpf) {
+```csharp
+UserPromptBuilder.Configure()
+	// ... other configuration options here
+	.WithCanResize(true)
+	.Show();
+```
+}
+
 ## Configuring and Evaluating Results
 
 The [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl).[Result](xref:@ActiproUIRoot.Controls.UserPromptControl.Result) property is used to read or write the user's response to a prompt and is typically only used when working with custom buttons.

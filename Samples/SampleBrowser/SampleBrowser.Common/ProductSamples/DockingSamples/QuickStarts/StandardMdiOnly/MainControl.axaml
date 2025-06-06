@@ -1,0 +1,251 @@
+<UserControl 
+	xmlns="https://github.com/avaloniaui"
+	x:Class="ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.StandardMdiOnly.MainControl"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:dockingPrims="using:ActiproSoftware.UI.Avalonia.Controls.Docking.Primitives"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+	<sampleBrowser:ControlExampleItemsControl UseImmersiveView="True">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Standard MDI" Url="https://www.actiprosoftware.com/docs/controls/avalonia/docking/workspace-mdi-features/standard-mdi" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+			<sampleBrowser:ControlExampleLinkItem Title="Tabbed MDI-only" Url="/ProductSamples/DockingSamples/QuickStarts/TabbedMdiOnly/MainControl" />
+		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+
+		<sampleBrowser:ControlExampleItemsControl.Header>
+			<x:String xml:space="preserve">This QuickStart shows how you can use a DockSite with a contained Workspace and StandardMdiHost to implement a windowed MDI (multiple document interface) for an application. While this particular sample is focused on MDI only and doesn't include any tool windows, tool windows could easily be added and docked into the layout.
+
+Command-based window cascade and tile functionality is included out-of-the-box.</x:String>
+		</sampleBrowser:ControlExampleItemsControl.Header>
+
+		<sampleBrowser:ControlExample UseImmersiveView="True" Footer="Use the File/New menu item to add more documents, and try out the various other menu items to change capabilities and adjust document layouts.">
+			<Grid RowDefinitions="Auto,*">
+
+				<!-- DockSite -->
+				<actipro:DockSite x:Name="dockSite" Grid.Row="1" Background="Transparent"
+					FloatingWindowIcon="/Images/Icons/Actipro.ico"
+					FloatingWindowTitle="Docking/MDI Demo">
+					<actipro:DockSite.Switcher>
+						<actipro:StandardSwitcher AreToolWindowsVisible="False" />
+					</actipro:DockSite.Switcher>
+
+					<!-- Workspace -->
+					<actipro:Workspace>
+						<actipro:StandardMdiHost x:Name="standardMdiHost" AreMaximizedWindowFramesVisible="False">
+							
+							<actipro:DocumentWindow
+								Title="Document3.txt"
+								Description="Text document"
+								FileName="Document3.txt"
+								IsReadOnly="True"
+								Icon="/Images/Icons/TextDocument16.png"
+								>
+
+								<TextBox BorderThickness="0" Text="The third document, also read-only." TextWrapping="Wrap" IsReadOnly="True" />
+
+							</actipro:DocumentWindow>
+							
+							<actipro:DocumentWindow
+								Title="Document2.txt"
+								Description="Text document"
+								FileName="Document2.txt"
+								Icon="/Images/Icons/TextDocument16.png"
+								>
+
+								<TextBox BorderThickness="0" Text="The second document." TextWrapping="Wrap" />
+
+							</actipro:DocumentWindow>
+							
+							<actipro:DocumentWindow x:Name="documentWindow1"
+								Title="Document1.txt"
+								Description="Text document"
+								FileName="Document1.txt"
+								Icon="/Images/Icons/TextDocument16.png"
+								>
+
+								<Grid>
+									<Grid.RowDefinitions>
+										<RowDefinition Height="Auto" />
+										<RowDefinition Height="*" />
+									</Grid.RowDefinitions>
+
+									<Border Grid.Row="0" Background="{actipro:ThemeResource TitleBarBackgroundBrush}">
+										<StackPanel Margin="5" Orientation="Horizontal" >
+											<CheckBox Content="Can Maximize" IsThreeState="True" IsChecked="{Binding #documentWindow1.CanStandardMdiMaximize, Mode=TwoWay}" />
+											<CheckBox Margin="20,0,0,0" Content="Can Minimize" IsThreeState="True" IsChecked="{Binding #documentWindow1.CanStandardMdiMinimize, Mode=TwoWay}" />
+										</StackPanel>
+									</Border>
+
+									<TextBox Grid.Row="1"  BorderThickness="0" Text="The first document, which also has checkboxes for options that override the global options in the Options menu." TextWrapping="Wrap" />
+								</Grid>
+
+							</actipro:DocumentWindow>
+
+						</actipro:StandardMdiHost>
+					</actipro:Workspace>
+
+				</actipro:DockSite>
+
+				<!-- Menu -->
+				<Panel>
+					<Menu Background="Transparent">
+						<MenuItem Header="_File">
+							<MenuItem Header="New" Click="OnNewDocumentMenuItemClick" />
+							<MenuItem Header="Open..." Click="OnOpenDocumentMenuItemClick" />
+						</MenuItem>
+						<MenuItem Header="_Options">
+							<MenuItem Header="Can Windows Maximize" IsChecked="{Binding #standardMdiHost.CanWindowsMaximize}" ToggleType="CheckBox" Click="OnCanWindowsMaximizeMenuItemClick" />
+							<MenuItem Header="Can Windows Minimize" IsChecked="{Binding #standardMdiHost.CanWindowsMinimize}" ToggleType="CheckBox" Click="OnCanWindowsMinimizeMenuItemClick" />
+							<Separator />
+							<MenuItem Header="Are Maximized Window Frames Visible" IsChecked="{Binding #standardMdiHost.AreMaximizedWindowFramesVisible}" ToggleType="CheckBox" Click="OnAreMaximizedWindowFramesVisibleMenuItemClick" />
+							<MenuItem Header="Is Scrolling Enabled" IsChecked="{Binding #standardMdiHost.IsScrollingEnabled}" ToggleType="CheckBox" Click="OnIsScrollingEnabledMenuItemClick" />
+						</MenuItem>
+						<MenuItem Header="_Window">
+							<MenuItem Header="Close All Documents" Command="{Binding #dockSite.CloseAllDocumentsCommand}" />
+							<Separator />
+							<MenuItem Header="Cascade" Command="{Binding #dockSite.CascadeDocumentsCommand}" />
+							<MenuItem Header="Tile Horizontally" Command="{Binding #dockSite.TileDocumentsHorizontallyCommand}" />
+							<MenuItem Header="Tile Vertically" Command="{Binding #dockSite.TileDocumentsVerticallyCommand}" />
+							<Separator />
+							<MenuItem Header="Arrange Minimized Windows" Click="OnArrangeMinimizedWindowsMenuItemClick" />
+						</MenuItem>
+					</Menu>
+
+					<!--
+					External UI for maximized windows (for when AreMaximizedWindowFramesVisible is false)
+					
+					Bind the button panel UI's visibility to the MDI host's IsExternalMaximizedUIRequired property.
+					The host will set that property to true when there is a maximized document visible.
+					-->
+					<StackPanel Orientation="Horizontal"
+						Margin="0,0,4,0"
+						HorizontalAlignment="Right"
+						IsVisible="{Binding #standardMdiHost.IsExternalMaximizedUIRequired}"
+						ZIndex="1"
+						>
+
+						<!-- Minimize -->
+						<Button ContentTemplate="{actipro:GlyphTemplate MinimizeWindow16}"
+								Command="{Binding #standardMdiHost.MinimizePrimaryWindowCommand}"
+								Theme="{actipro:ControlTheme DockingEmbeddedButton}" />
+
+						<!-- Restore -->
+						<Button ContentTemplate="{actipro:GlyphTemplate RestoreWindow16}"
+								Command="{Binding #standardMdiHost.RestorePrimaryWindowCommand}"
+								Theme="{actipro:ControlTheme DockingEmbeddedButton}" />
+
+						<!-- Close -->
+						<Button ContentTemplate="{actipro:GlyphTemplate CloseWindow16}"
+								Command="{Binding #standardMdiHost.ClosePrimaryWindowCommand}"
+								Theme="{actipro:ControlTheme DockingEmbeddedButton}" />
+
+					</StackPanel>
+				</Panel>
+
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<!-- Any non-default options configured in the sample are shown below -->
+
+<Grid RowDefinitions="Auto,*">
+	<!-- DockSite -->
+	<actipro:DockSite Grid.Row="1">
+
+		<!-- Workspace -->
+		<actipro:Workspace>
+			<actipro:StandardMdiHost x:Name="standardMdiHost"$(AreMaximizedWindowFramesVisibleAttribute)$(CanWindowsMaximizeAttribute)$(CanWindowsMinimizeAttribute)$(IsScrollingEnabledAttribute)>
+
+				<!-- Read-Only Indicator -->
+				<actipro:DocumentWindow Title="Document3.txt" IsReadOnly="True" ... />
+
+				<!-- Can Maximize/Minimize Overrides -->
+				<actipro:DocumentWindow ...$(CanStandardMdiMaximizeAttribute)$(CanStandardMdiMinimizeAttribute) />
+
+			</actipro:StandardMdiHost>
+		</actipro:Workspace>
+
+	</actipro:DockSite>
+	
+	<!-- Menu Row -->
+	<Panel Grid.Row="0">
+		<Menu>...</Menu>$(ExternalUIContent)
+	</Panel>
+	
+</Grid>
+					]]>
+						<sampleBrowser:CodeExample.Substitutions>
+							<sampleBrowser:CodeExampleSubstitution Key="ExternalUIContent"
+																   IsEnabled="{Binding !#standardMdiHost.AreMaximizedWindowFramesVisible}"
+																   >
+								<sampleBrowser:CodeExampleSubstitution.Value>
+									<x:String xml:space="preserve"><![CDATA[
+
+		<!--
+		External UI for maximized windows (for when AreMaximizedWindowFramesVisible is false)
+					
+		Bind the button panel UI's visibility to the MDI host's IsExternalMaximizedUIRequired property.
+		The host will set that property to true when there is a maximized document visible.
+		-->
+		<StackPanel Orientation="Horizontal"
+			Margin="0,0,4,0"
+			HorizontalAlignment="Right"
+			IsVisible="{Binding #standardMdiHost.IsExternalMaximizedUIRequired}"
+			ZIndex="1"
+			>
+
+			<!-- Minimize -->
+			<Button ContentTemplate="{actipro:GlyphTemplate MinimizeWindow16}"
+				Command="{Binding #standardMdiHost.MinimizePrimaryWindowCommand}"
+				Theme="{actipro:ControlTheme DockingEmbeddedButton}" />
+
+			<!-- Restore -->
+			<Button ContentTemplate="{actipro:GlyphTemplate RestoreWindow16}"
+				Command="{Binding #standardMdiHost.RestorePrimaryWindowCommand}"
+				Theme="{actipro:ControlTheme DockingEmbeddedButton}" />
+
+			<!-- Close -->
+			<Button ContentTemplate="{actipro:GlyphTemplate CloseWindow16}"
+				Command="{Binding #standardMdiHost.ClosePrimaryWindowCommand}"
+				Theme="{actipro:ControlTheme DockingEmbeddedButton}" />
+
+		</StackPanel>]]></x:String>
+								</sampleBrowser:CodeExampleSubstitution.Value>
+							</sampleBrowser:CodeExampleSubstitution>
+							
+							<!-- StandardMdiHost Options -->
+							<sampleBrowser:CodeExampleSubstitution Key="AreMaximizedWindowFramesVisibleAttribute"
+															   IsEnabled="{Binding !#standardMdiHost.AreMaximizedWindowFramesVisible}"
+															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;AreMaximizedWindowFramesVisible=&quot;False&quot;" />
+							<sampleBrowser:CodeExampleSubstitution Key="CanWindowsMaximizeAttribute"
+															   IsEnabled="{Binding !#standardMdiHost.CanWindowsMaximize}"
+															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;CanWindowsMaximize=&quot;False&quot;" />
+							<sampleBrowser:CodeExampleSubstitution Key="CanWindowsMinimizeAttribute"
+															   IsEnabled="{Binding !#standardMdiHost.CanWindowsMinimize}"
+															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;CanWindowsMinimize=&quot;False&quot;" />
+							<sampleBrowser:CodeExampleSubstitution Key="IsScrollingEnabledAttribute"
+															   IsEnabled="{Binding #standardMdiHost.IsScrollingEnabled}"
+															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;IsScrollingEnabled=&quot;True&quot;" />
+
+							<!-- Document Instance Options -->
+							<sampleBrowser:CodeExampleSubstitution Key="CanStandardMdiMaximizeAttribute"
+																   IsEnabled="{Binding #documentWindow1.CanStandardMdiMaximize, Converter={x:Static ObjectConverters.IsNotNull}}"
+																   Value="{Binding #documentWindow1.CanStandardMdiMaximize, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;CanStandardMdiMaximize=&quot;{0}&quot;'}" />
+							<sampleBrowser:CodeExampleSubstitution Key="CanStandardMdiMinimizeAttribute"
+																   IsEnabled="{Binding #documentWindow1.CanStandardMdiMinimize, Converter={x:Static ObjectConverters.IsNotNull}}"
+																   Value="{Binding #documentWindow1.CanStandardMdiMinimize, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;CanStandardMdiMinimize=&quot;{0}&quot;'}" />
+						</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+
+		</sampleBrowser:ControlExample>
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

@@ -2,11 +2,18 @@
 <Project>
 
 	<PropertyGroup>
-		<AvaloniaVersion>11.2.3</AvaloniaVersion>
+		<AvaloniaVersion>11.3.0</AvaloniaVersion>
+
+		<!--
+			Define additional optional constants...
+			- USE_DEV_TOOLS: Load the advanced Avalonia Dev Tools for debugging instead of the default free version
+
+		<DefineConstants>$(DefineConstants);USE_DEV_TOOLS</DefineConstants>
+		-->
 	</PropertyGroup>
 	
 	<ItemGroup>
-		<PackageReference Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" Condition="'$(Configuration)' == 'Debug'" />
+		<PackageReference Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" Condition="$([System.Text.RegularExpressions.Regex]::IsMatch($(DefineConstants), '^(.*;)*USE_DEV_TOOLS(;.*)*$')) == 'false'" />
 	</ItemGroup>
 	
 	<ItemGroup Condition="$(MSBuildProjectName.Contains('.Common')) == 'true'">

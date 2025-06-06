@@ -11,6 +11,9 @@ The [HyperlinkTextBlock](xref:@ActiproUIRoot.Controls.HyperlinkTextBlock) is a `
 
 *A HyperlinkTextBlock displayed in the default state*
 
+> [!IMPORTANT]
+> See the [Getting Started](../getting-started.md) topic for details on configuring themes for this control.
+
 The [HyperlinkTextBlock](xref:@ActiproUIRoot.Controls.HyperlinkTextBlock) class has these important members:
 
 | Member | Description |

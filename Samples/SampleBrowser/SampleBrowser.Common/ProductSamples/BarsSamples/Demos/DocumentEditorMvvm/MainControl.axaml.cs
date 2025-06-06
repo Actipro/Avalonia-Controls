@@ -90,17 +90,17 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.Demos.DocumentEditorMvvm {
 Actipro Bars contains a comprehensive implementation of an Office-like ribbon user interface for Avalonia applications, including its modern fluent design and ability to create content-rich galleries.
 
 Some things to try in this demo...
-  •  Resize the window width to see control layouts scale through their variants.
-  •  Use the ribbon's options button on its lower right to toggle between Classic and Simplified layout modes.
-  •  Hover over font family/size combobox items to see a live preview.
-  •  Hover over text highlight color or font color gallery items to see a live preview.
-  •  Show the underline split button menu to see a gallery with vertical resizing and custom rendered items.
-  •  Show the bullets split button menu to see a gallery with categorization and dual resizing.
-  •  Press and release the Alt key to enter key tip mode.
-  •  Use context menus to add controls to and remove controls from to the Quick Access Toolbar (QAT).
-  •  Look at all the Home and Insert tabs to see the variety of built-in controls that can be used, including those on menus.
-  •  Hover over various controls to see their screen tips.
-  •  Check out the recent documents list control on the Backstage's Open tab, accessible via the File application button.
+  -  Resize the window width to see control layouts scale through their variants.
+  -  Use the ribbon's options button on its lower right to toggle between Classic and Simplified layout modes.
+  -  Hover over font family/size combobox items to see a live preview.
+  -  Hover over text highlight color or font color gallery items to see a live preview.
+  -  Show the underline split button menu to see a gallery with vertical resizing and custom rendered items.
+  -  Show the bullets split button menu to see a gallery with categorization and dual resizing.
+  -  Press and release the Alt key to enter key tip mode.
+  -  Use context menus to add controls to and remove controls from to the Quick Access Toolbar (QAT).
+  -  Look at all the Home and Insert tabs to see the variety of built-in controls that can be used, including those on menus.
+  -  Hover over various controls to see their screen tips.
+  -  Check out the recent documents list control on the Backstage's Open tab, accessible via the File application button.
 ");
 		
 		private void OpenDocument(string? text) {
@@ -135,11 +135,6 @@ Some things to try in this demo...
 			set => SetValue(IsExternalSampleOptionVisibleProperty, value);
 		}
 
-		public ICommand OpenExternalWindowCommand { get; }
-			= new DelegateCommand<object>(_ => {
-				new MainWindow().Show();
-			});
-
 		protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e) {
 			base.OnAttachedToVisualTree(e);
 
@@ -151,6 +146,11 @@ Some things to try in this demo...
 
 			BarManager.UnwatchUserInterfaceDensityChangedEvent();
 		}
+
+		public ICommand OpenExternalWindowCommand { get; }
+			= new DelegateCommand<object>(_ => {
+				new MainWindow().Show();
+			});
 
 		public RibbonViewModel? RibbonViewModel {
 			get => ribbon.DataContext as RibbonViewModel;

@@ -1,22 +1,18 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 	<!-- NOTE: Additional configuration defined within 'Directory.Build.props' file -->
 
 	<PropertyGroup>
 		<AssemblyName>SampleBrowser</AssemblyName>
 
 		<!--
-			Define additional constants for private solution...
-			- MS_LOGGING: Enable Microsoft Extensions Logging to integrate Actipro logging framework with Microsoft logging framework
+			Optionally define additional constants for the project...
 			- FLUENT_THEME: Load and configure the Avalonia Fluent theme
 			- SIMPLE_THEME: Load and configure the Avalonia Simple theme
+
+		<DefineConstants>$(DefineConstants);FLUENT_THEME</DefineConstants>
 		-->
-		<DefineConstants>$(DefineConstants);MS_LOGGING</DefineConstants>
 
 	</PropertyGroup>
-
-	<ItemGroup Label="Microsoft Logging" Condition="$([System.Text.RegularExpressions.Regex]::IsMatch($(DefineConstants), '^(.*;)*MS_LOGGING(;.*)*$'))">
-		<PackageReference Include="Microsoft.Extensions.Logging" Version="6.0.0" />
-	</ItemGroup>
 
 	<ItemGroup>
 		<AvaloniaResource Include="Images\**" />

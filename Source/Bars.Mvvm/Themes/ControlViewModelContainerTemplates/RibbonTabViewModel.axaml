@@ -11,11 +11,13 @@
 			ControlVariants="{Binding ControlVariants}"
 			GroupVariants="{Binding GroupVariants}"
 			HeaderToolTip="{Binding Description}"
+			IsEnabled="{Binding IsEnabled}"
 			IsVisible="{Binding IsVisible}"
 			ItemsSource="{Binding Groups}"
 			Key="{Binding Key}"
 			KeyTipText="{Binding KeyTipText}"
 			Label="{Binding Label}"
+			Tag="{Binding Tag}"
 			Title="{Binding Title}"
 			/>
 	</DataTemplate>

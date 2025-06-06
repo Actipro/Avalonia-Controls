@@ -15,6 +15,7 @@
 			KeyTipText="{Binding KeyTipText}"
 			Label="{Binding Label}"
 			SmallIcon="{Binding SmallIcon}"
+			Tag="{Binding Tag}"
 			Title="{Binding Title}"
 			ToolTip.Tip="{Binding Description}"
 			/>
