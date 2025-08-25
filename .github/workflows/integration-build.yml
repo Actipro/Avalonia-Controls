@@ -26,6 +26,8 @@ jobs:
       uses: actions/checkout@v4
       with:
         fetch-depth: 0
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v2
     - name: Add WASM workload
       run: dotnet workload install wasm-tools-net8
     - name: Run build project
