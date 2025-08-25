@@ -28,6 +28,8 @@ jobs:
         fetch-depth: 0
     - name: Setup .NET
       uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 9.x
     - name: Add WASM workload
       run: dotnet workload install wasm-tools-net8
     - name: Run build project
