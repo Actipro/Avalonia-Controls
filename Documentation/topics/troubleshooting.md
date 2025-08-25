@@ -76,8 +76,14 @@ To resolve the issue, the application will need to explicitly reference the nece
 			<!-- When using Native DataGrid -->
 			<StyleInclude Source="avares://ActiproSoftware.Avalonia.Themes.Native.DataGrid/Themes/Common.axaml"/>
 
-			<!-- When using Pro components -->
+			<!-- When using Pro components from Fundamentals library -->
 			<StyleInclude Source="avares://ActiproSoftware.Avalonia.Fundamentals/Themes/Common.axaml"/>
+
+			<!-- When using Pro components from Bars library -->
+			<StyleInclude Source="avares://ActiproSoftware.Avalonia.Bars/Themes/Common.axaml"/>
+
+			<!-- When using Pro components from Docking library -->
+			<StyleInclude Source="avares://ActiproSoftware.Avalonia.Docking/Themes/Common.axaml"/>
 
 		</actipro:ModernTheme>
 

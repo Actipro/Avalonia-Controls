@@ -5,7 +5,7 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 	/// <summary>
 	/// Represents a view model for a size selection gallery control within a bar control.
 	/// </summary>
-	public class BarSizeSelectionMenuGalleryViewModel : BarGalleryViewModelBase {
+	public class BarSizeSelectionMenuGalleryViewModel : BarGalleryViewModelBase, IHasVariantImages {
 
 		private string? _defaultHeadingText;
 		private int _menuColumnCount = 10;
@@ -39,6 +39,22 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 			ItemSpacing = 1.0;
 			MinItemHeight = 20.0;
 			MinItemWidth = 20.0;
+		}
+
+		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// INTERFACE IMPLEMENTATION
+		/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		/// <inheritdoc/>
+		object? IHasVariantImages.LargeIcon {
+			get => null;
+			set { /* No-op since a large image is not supported by the control */ }
+		}
+
+		/// <inheritdoc/>
+		object? IHasVariantImages.MediumIcon {
+			get => null;
+			set { /* No-op since a medium image is not supported by the control */ }
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////

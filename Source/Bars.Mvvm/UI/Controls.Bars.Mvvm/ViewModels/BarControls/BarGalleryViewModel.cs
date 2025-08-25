@@ -23,6 +23,7 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		private string? _keyTipText;
 		private object? _largeIcon;
 		private int _maxMenuColumnCount = int.MaxValue;
+		private double _maxMenuGalleryHeight = 1000.0;
 		private int _maxRibbonColumnCount = 15;
 		private object? _mediumIcon;
 		private ControlResizeMode _menuResizeMode = ControlResizeMode.None;
@@ -260,6 +261,17 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		public int MaxMenuColumnCount {
 			get => _maxMenuColumnCount;
 			set => SetProperty(ref _maxMenuColumnCount, value);
+		}
+		
+		/// <summary>
+		/// The maximum height of the menu gallery in the popup.
+		/// </summary>
+		/// <value>
+		/// The default value is <c>1000.0</c>.
+		/// </value>
+		public double MaxMenuGalleryHeight {
+			get => _maxMenuGalleryHeight;
+			set => SetProperty(ref _maxMenuGalleryHeight, value);
 		}
 		
 		/// <summary>

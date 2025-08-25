@@ -208,6 +208,7 @@
 				<MenuItem x:Name="forceAutoHideToBottomMenuItem" Header="_Force Auto-Hide to Bottom" ToggleType="CheckBox" />
 				<MenuItem x:Name="limitFloatingWindowInitialSizeMenuItem" Header="_Limit Floating Window Initial Sizes" ToggleType="CheckBox" />
 				<MenuItem x:Name="restrictDraggedWindowsMenuItem" Header="_Restrict Dragged Windows (Limit Dock Guides)" ToggleType="CheckBox" />
+				<MenuItem x:Name="useNonHostedFloatingWindowDragOpacityMenuItem" Header="_Non-Hosted Floating Windows Transparent When Dragging" ToggleType="CheckBox" />
 				<Separator />
 				<MenuItem Header="_Tool Window Tab Icons" IsChecked="{Binding #dockSite.ToolWindowsHaveTabIcons, Mode=TwoWay}" ToggleType="CheckBox" />
 				<MenuItem Header="_Document Tab Icons" IsChecked="{Binding #tabbedMdiHost.HasTabIcons, Mode=TwoWay}" ToggleType="CheckBox" />

@@ -209,9 +209,9 @@ The [ModernTheme.Definition](xref:@ActiproUIRoot.Themes.ModernTheme.Definition) 
 
 Setting the [ModernTheme.Definition](xref:@ActiproUIRoot.Themes.ModernTheme.Definition) property will trigger the theme generator to refresh all theme resources.  In the event you are not setting that property but are changing the options properties on the existing [ThemeDefinition](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition) instance, the [ModernTheme.RefreshResources](xref:@ActiproUIRoot.Themes.ModernTheme.RefreshResources*) method should be manually invoked afterward to force theme resource regeneration.
 
-#### Accented Switches Example
+#### Accented Switches and Neutrals Tint Example
 
-The following example shows how to tell the theme to use accent colors for toggled switches by default, instead of using neutral colors. The accent color is also changed from the default blue hue to one based on the indigo hue.
+The following example shows how to tell the theme to use accent colors for toggled switches by default, instead of using neutral colors. The accent color is changed from the default blue hue to one based on the indigo hue. And the neutral colors in the theme are slightly tinted towards a slate color tone.
 
 ```xaml
 <Application ...
@@ -221,7 +221,11 @@ The following example shows how to tell the theme to use accent colors for toggl
 
 		<actipro:ModernTheme>
 			<actipro:ModernTheme.Definition>
-				<generation:ThemeDefinition UseAccentedSwitches="True" AccentColorRampName="Indigo" />
+				<generation:ThemeDefinition UseAccentedSwitches="True" AccentColorRampName="Indigo">
+					<generation:ThemeDefinition.ColorPaletteFactory>
+						<generation:DefaultColorPaletteFactory NeutralMidtoneColor="#64738a" />
+					</generation:ThemeDefinition.ColorPaletteFactory>
+				</generation:ThemeDefinition>
 			</actipro:ModernTheme.Definition>
 		</actipro:ModernTheme>
 

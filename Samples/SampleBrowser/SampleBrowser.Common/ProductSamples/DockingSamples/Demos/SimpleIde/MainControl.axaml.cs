@@ -1,4 +1,5 @@
-﻿using ActiproSoftware.SampleBrowser;
+﻿using ActiproSoftware.Extensions;
+using ActiproSoftware.SampleBrowser;
 using ActiproSoftware.UI.Avalonia.Controls.Docking;
 using ActiproSoftware.UI.Avalonia.Input;
 using Avalonia;
@@ -51,6 +52,21 @@ namespace ActiproSoftware.ProductSamples.DockingSamples.Demos.SimpleIde {
 			// Hide the external sample option when not supported
 			if (!ApplicationViewModel.AreExternalSamplesSupported)
 				IsExternalSampleOptionVisible = false;
+
+			// Configure menu option to toggle DockSite.NonHostedFloatingWindowDragOpacity
+			useNonHostedFloatingWindowDragOpacityMenuItem.IsChecked = !dockSite.NonHostedFloatingWindowDragOpacity.IsCloseTo(1.0);
+			useNonHostedFloatingWindowDragOpacityMenuItem.Click += (s, e) => {
+				if (dockSite.NonHostedFloatingWindowDragOpacity.IsCloseTo(1.0)) {
+					// Enable feature
+					dockSite.NonHostedFloatingWindowDragOpacity = 0.3;
+					useNonHostedFloatingWindowDragOpacityMenuItem.IsChecked = true;
+				}
+				else {
+					// Disable feature
+					dockSite.NonHostedFloatingWindowDragOpacity = 1.0;
+					useNonHostedFloatingWindowDragOpacityMenuItem.IsChecked = false;
+				}
+			};
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////

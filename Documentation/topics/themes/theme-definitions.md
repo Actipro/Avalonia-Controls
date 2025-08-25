@@ -8,7 +8,8 @@ order: 10
 A theme definition contains many options that guide a theme generator on how to dynamically generate theme resources.  Options cover a variety of theme aspects, including:
 
 - Font families and base font size.
-- Color ramps for accent and other semantic use scenarios (e.g., success, danger).
+- A color palette factory for creating a palette of color ramps.
+- Color ramp choice for accent and other semantic use scenarios (e.g., success, danger).
 - Default appearance kind when there are several control theme variations (e.g., outline, solid) available for a control type, such as for buttons, switches, edit controls, etc.
 - Corner radii, lengths, paddings, and margins.
 
@@ -34,7 +35,16 @@ Theme definitions are represented by the [ThemeDefinition](xref:@ActiproUIRoot.T
 | [HeadingFontFamily](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.HeadingFontFamily) | The `FontFamily` used by headings. |
 | [CodeFontFamily](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.CodeFontFamily) | The `FontFamily` used for code listings, typically a monospace font. |
 
-### Color Ramp Options
+### Color Palette and Ramp Options
+
+Color palettes define the colors that a [theme generator](theme-generator.md) uses to generate all of its brush resources.
+
+| Property | Description |
+|-----|-----|
+| [ColorPaletteFactory](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.ColorPaletteFactory) | The [IColorPaletteFactory](xref:@ActiproUIRoot.Themes.Generation.IColorPaletteFactory) that creates the color palette used by the [theme generator](theme-generator.md). The default value is a [DefaultColorPaletteFactory](xref:@ActiproUIRoot.Themes.Generation.DefaultColorPaletteFactory) instance. |
+
+> [!TIP]
+> The [DefaultColorPaletteFactory](xref:@ActiproUIRoot.Themes.Generation.DefaultColorPaletteFactory) class has properties on it that can adjust its algorithm for generating ramps of colors.  Adjusting the neutral midtone color can tint a majority of an application's user interface.  The [Theme Generator](theme-generator.md) topic lists several good neutral midtone color options.
 
 Color ramp name properties should be set to [Hue](xref:@ActiproUIRoot.Themes.Generation.Hue) enumeration value names.
 

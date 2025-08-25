@@ -5,7 +5,7 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 	/// <summary>
 	/// Represents a view model for a tab control within a ribbon backstage.
 	/// </summary>
-	public class RibbonBackstageTabViewModel : BarKeyedObjectViewModelBase {
+	public class RibbonBackstageTabViewModel : BarKeyedObjectViewModelBase, IHasVariantImages {
 
 		private object? _content;
 		private IDataTemplate? _contentTemplate;
@@ -52,9 +52,19 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// INTERFACE IMPLEMENTATION
+		/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		/// <inheritdoc/>
+		object? IHasVariantImages.MediumIcon {
+			get => null;
+			set { /* No-op since a medium image is not supported by the control */ }
+		}
+
+		/////////////////////////////////////////////////////////////////////////////////////////////////////
 		// PUBLIC PROCEDURES
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
-		
+
 		/// <summary>
 		/// The content for the tab's content area, which can be a UI control, a data object, or even this view model instance.
 		/// </summary>

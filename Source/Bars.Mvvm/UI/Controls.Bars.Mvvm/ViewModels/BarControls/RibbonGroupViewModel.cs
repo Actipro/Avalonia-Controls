@@ -5,7 +5,7 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 	/// <summary>
 	/// Represents a view model for a group within a ribbon tab.
 	/// </summary>
-	public class RibbonGroupViewModel : BarKeyedObjectViewModelBase {
+	public class RibbonGroupViewModel : BarKeyedObjectViewModelBase, IHasVariantImages {
 
 		private bool _canAutoCollapse = true;
 		private bool _canCloneToRibbonQuickAccessToolBar = true;
@@ -62,6 +62,16 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 					collapsedButtonKeyTipText = "Z" + collapsedButtonKeyTipText;
 			}
 			_collapsedButtonKeyTipText = collapsedButtonKeyTipText;
+		}
+
+		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// INTERFACE IMPLEMENTATION
+		/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		/// <inheritdoc/>
+		object? IHasVariantImages.MediumIcon {
+			get => null;
+			set { /* No-op since a medium image is not supported by the control */ }
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
