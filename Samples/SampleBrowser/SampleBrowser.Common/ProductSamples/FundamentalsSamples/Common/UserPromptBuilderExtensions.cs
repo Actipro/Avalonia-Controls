@@ -67,8 +67,11 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Common {
 						return;
 				}
 
+				// Use the same palette from the current theme definition
+				ModernTheme.TryGetCurrent(out var theme);
+				var colorPalette = (theme?.Definition?.ColorPaletteFactory ?? new DefaultColorPaletteFactory()).Create();
+
 				// Adjust assets based on theme
-				var colorPalette = new DefaultColorPaletteFactory().Create();
 				var colorRamp = colorPalette.Ramps[hue] ?? throw new InvalidOperationException("Unable to resolve the color ramp.");
 
 				var lightestColorFamilyBrush = new SolidColorBrush(colorRamp.Shades.Resolve(50).Color);

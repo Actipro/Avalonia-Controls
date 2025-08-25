@@ -16,9 +16,6 @@ apiRules:
     uidRegex: ^ActiproSoftware\.Licensing
     type: Namespace
 - exclude:
-    uidRegex: ^ActiproSoftware\.Properties
-    type: Namespace
-- exclude:
     uidRegex: ^ActiproSoftware\.Tests
     type: Namespace
 - exclude:

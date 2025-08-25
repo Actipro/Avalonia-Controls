@@ -123,6 +123,19 @@ These [DockSite](xref:@ActiproUIRoot.Controls.Docking.DockSite) properties contr
 
 To ensure that a portion of the hosted floating windows are always visible to the end user, their bounds are coerced such that part of the title bar is always visible.  The [DockSite](xref:@ActiproUIRoot.Controls.Docking.DockSite).[HostedFloatingWindowContainer](xref:@ActiproUIRoot.Controls.Docking.DockSite.HostedFloatingWindowContainer) property can be set to any visual ancestor of the `DockSite`, and hosted floating window bounds will be constrained to the bounds of the specified container.  If a container is not specified, the [DockSite](xref:@ActiproUIRoot.Controls.Docking.DockSite) will be used as the container.
 
+@if (avalonia) {
+
+## Non-Hosted Floating Window Drag Opacity
+
+When dragging a non-hosted floating window, it may be desirable to change the opacity of the window to better see the drop targets behind the window.
+
+Change the [DockSite](xref:@ActiproUIRoot.Controls.Docking.DockSite).[NonHostedFloatingWindowDragOpacity](xref:@ActiproUIRoot.Controls.Docking.DockSite.NonHostedFloatingWindowDragOpacity) property to a value less than <c>1.0</c> to enable semi-transparent windows during drag.
+
+> [!NOTE]
+> This is especially useful on Linux where the operating system may prevent a dragged window from being partially moved off-screen, thus obscuring what is behind it.  To help overcome this limitation, this property defaults to <c>0.3</c> (30% opacity) on Linux.  Other operating systems default to <c>1.0</c> (i.e., no transparency).
+
+}
+
 ## Determining Which Floating Windows Show in the TaskBar
 
 The [DockSite](xref:@ActiproUIRoot.Controls.Docking.DockSite).[FloatingWindowShowInTaskBarMode](xref:@ActiproUIRoot.Controls.Docking.DockSite.FloatingWindowShowInTaskBarMode) property can be used to determine which kinds of non-hosted floating windows are displayed in the @if (avalonia) { operating system }@if (wpf) { Windows } taskbar.  The default behavior is for any floating window that contains a "workspace" (such as a floating tabbed MDI document) to show up in the taskbar and not be "owned" by the main window.  This means that the floating window can appear behind the main window when the main window is activated, but it is ok since the floating window can be accessed via the taskbar.  Note that the [DockSite](xref:@ActiproUIRoot.Controls.Docking.DockSite).[FloatingWindowOwnerMode](xref:@ActiproUIRoot.Controls.Docking.DockSite.FloatingWindowOwnerMode) property can alter the default owner behavior.

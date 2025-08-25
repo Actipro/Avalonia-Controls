@@ -40,7 +40,8 @@ See the [Native Control Themes](native-control-themes.md) topic for the entire l
 A theme definition contains many options that guide a theme generator on how to dynamically generate theme resources.  Options cover a variety of theme aspects, including:
 
 - Font families and base font size.
-- Color ramps for accent and other semantic use scenarios (e.g., success, danger).
+- A color palette factory for creating a palette of color ramps.
+- Color ramp choice for accent and other semantic use scenarios (e.g., success, danger).
 - Default appearance kind when there are several control theme variations (e.g., outline, solid) available for a control type, such as for buttons, switches, edit controls, etc.
 - Corner radii, lengths, paddings, and margins.
 
@@ -49,6 +50,8 @@ See the [Theme Definitions](theme-definitions.md) topic to browse a list of avai
 ## Theme Generator
 
 A theme generator uses options in a theme definition to guide it on how to create theme resources like brushes, thicknesses, etc.  Distinct theme resources are generated for both `Light` and `Dark` theme variants, allowing for the theme generator to run a single time regardless of if an application toggles between light and dark modes at run-time.
+
+The colors of theme-generated brushes are based on a customizable color palette.  This allows all the theme's neutral colors to be tinted towards a certain color tone, accent and other semantic colors to be configurable, and more.
 
 See the [Theme Generator](theme-generator.md) topic to learn about the theme generation workflow and which extensibility points are available for customization purposes.
 

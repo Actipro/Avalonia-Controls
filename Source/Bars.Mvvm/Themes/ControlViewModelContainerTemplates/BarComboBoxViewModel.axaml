@@ -37,6 +37,7 @@
 			Label="{Binding Label}"
 			LargeIcon="{Binding LargeIcon}"
 			MaxMenuColumnCount="{Binding MaxMenuColumnCount}"
+			MaxMenuGalleryHeight="{Binding MaxMenuGalleryHeight}"
 			MaxPopupHeight="{Binding MaxPopupHeight}"
 			MediumIcon="{Binding MediumIcon}"
 			MenuResizeMode="{Binding MenuResizeMode}"

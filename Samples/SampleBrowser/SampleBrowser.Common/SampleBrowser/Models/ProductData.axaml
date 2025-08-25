@@ -98,6 +98,7 @@
 			
 			
 			
+			
 
 		</sampleBrowser:ProductFamilyInfo>
 
@@ -220,6 +221,7 @@
 			</sampleBrowser:ProductFamilyInfo.LogoImageSource>
 
 			<sampleBrowser:ProductFamilyInfo.News>
+				<sampleBrowser:ListItemInfo Title="Color Palette sample allows for some theme adjustments" />
 				<sampleBrowser:ListItemInfo Title="Native templates updated through Avalonia v11.3.0" />
 			</sampleBrowser:ProductFamilyInfo.News>
 
@@ -227,6 +229,7 @@
 				<x:String>Dynamic theme generation</x:String>
 				<x:String>Styles and templates for all native controls</x:String>
 				<x:String>Reusable theme resources like brushes</x:String>
+				<x:String>Color palette tinting and customization</x:String>
 			</sampleBrowser:ProductFamilyInfo.TeaserBulletItems>
 
 			<sampleBrowser:ProductFamilyInfo.OverviewItem>
@@ -235,7 +238,7 @@
 
 			<sampleBrowser:ProductItemInfo Category="Demos" Title="Profile Form" Path="/ProductSamples/ThemesSamples/Demos/ProfileForm/MainControl"/>
 
-			<sampleBrowser:ProductItemInfo Category="Utilities" Title="Color Palette" Path="/SampleBrowser/Utilities/ColorPalette/ColorPaletteView"/>
+			<sampleBrowser:ProductItemInfo BlurbText="Updated!" Category="Utilities" Title="Color Palette" Path="/SampleBrowser/Utilities/ColorPalette/ColorPaletteView"/>
 			<sampleBrowser:ProductItemInfo Category="Utilities" Title="Theme Resource Browser" Path="/SampleBrowser/Utilities/ThemeResourceBrowser/ThemeResourceBrowserView"/>
 
 			<sampleBrowser:ProductItemInfo Category="Styling" Title="Containers" Path="/ProductSamples/ThemesSamples/Styling/ContainerSamples"/>

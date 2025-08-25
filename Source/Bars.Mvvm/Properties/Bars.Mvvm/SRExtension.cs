@@ -1,3 +1,4 @@
+using ActiproSoftware.Properties.Shared;
 using Avalonia.Markup.Xaml;
 
 namespace ActiproSoftware.Properties.Bars.Mvvm {

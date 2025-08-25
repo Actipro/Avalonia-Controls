@@ -5,7 +5,7 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 	/// <summary>
 	/// Represents a view model for a launcher button control within a ribbon group.
 	/// </summary>
-	public class RibbonGroupLauncherButtonViewModel : BarKeyedObjectViewModelBase {
+	public class RibbonGroupLauncherButtonViewModel : BarKeyedObjectViewModelBase, IHasVariantImages {
 
 		private ICommand? _command;
 		private object? _commandParameter;
@@ -51,6 +51,22 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 			_label = label ?? BarControlService.LabelGenerator.FromCommand(command) ?? BarControlService.LabelGenerator.FromKey(key);
 			_keyTipText = keyTipText ?? BarControlService.KeyTipTextGenerator.FromCommand(command) ?? BarControlService.KeyTipTextGenerator.FromLabel(this._label);
 			_command = command;
+		}
+
+		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// INTERFACE IMPLEMENTATION
+		/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		/// <inheritdoc/>
+		object? IHasVariantImages.LargeIcon {
+			get => null;
+			set { /* No-op since a large image is not supported by the control */ }
+		}
+
+		/// <inheritdoc/>
+		object? IHasVariantImages.MediumIcon {
+			get => null;
+			set { /* No-op since a medium image is not supported by the control */ }
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
