@@ -21,7 +21,7 @@
 		<!-- 
 			Avalonia's Fluent or Simple themes can be enabled using the FLUENT_THEME or SIMPLE_THEME defined constants.
 		-->
-
+		
 		<!-- 
 			ModernTheme needs to be included once for Actipro's control styles to be loaded.
 			It automatically includes styles for controls in Actipro's free Shared Library and for native Avalonia controls.
@@ -37,6 +37,10 @@
 			<actipro:ModernTheme Includes="Pro" />
 		-->
 		<actipro:ModernTheme Includes="All" />
+
+
+		<!-- Include to avoid Rider's unknown style class warnings -->
+		<StyleInclude Source="avares://ActiproSoftware.Avalonia.Shared/Themes/StyleClassStubs.axaml" />
 
 
 		<!-- Application-specific styles -->

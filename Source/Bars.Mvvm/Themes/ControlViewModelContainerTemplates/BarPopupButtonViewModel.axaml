@@ -10,6 +10,7 @@
 			CanCloneToRibbonQuickAccessToolBar="{Binding CanCloneToRibbonQuickAccessToolBar}"
 			Command="{Binding Command}"
 			CommandParameter="{Binding CommandParameter}"
+			InvocationFocusBehavior="{Binding InvocationFocusBehavior}"
 			IsVisible="{Binding IsVisible}"
 			ItemsSource="{Binding MenuItems}"
 			Key="{Binding Key}"

@@ -1,4 +1,5 @@
-﻿using ActiproSoftware.ProductSamples.FundamentalsSamples.Common;
+﻿using ActiproSoftware.Extensions;
+using ActiproSoftware.ProductSamples.FundamentalsSamples.Common;
 using ActiproSoftware.SampleBrowser;
 using ActiproSoftware.UI.Avalonia.Controls;
 using ActiproSoftware.UI.Avalonia.Input;
@@ -11,7 +12,10 @@ using Avalonia.Interactivity;
 using Avalonia.Layout;
 using Avalonia.Media;
 using Avalonia.Styling;
+using Avalonia.Threading;
 using System;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPromptIntro {
@@ -44,6 +48,7 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 
 			// Indicate if dialogs are allowed on the platform
 			_isDialogAllowed = (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime);
+			customAppearanceDisplayModeWarning.IsVisible = !_isDialogAllowed;
 			displayModeWarning.IsVisible = !_isDialogAllowed;
 			dialogChromedDecorationsWarning.IsVisible = !_isDialogAllowed;
 			dialogChromedDecorationsShowHostedSampleButton.IsEnabled = _isDialogAllowed;
@@ -205,6 +210,13 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 			// SAMPLE: Customize the appearance of a prompt based on the type of message displayed
 			//
 
+			// Prevent exception when requested Dialog mode on unsupported platforms
+			var displayMode = (UserPromptDisplayMode)customAppearanceDisplayModeSelection.SelectedValue!;
+			if ((displayMode == UserPromptDisplayMode.Dialog) && !_isDialogAllowed) {
+				await UserPromptBuilder.Configure().ForDialogDisplayModeNotSupportedNotice().Show();
+				return;
+			}
+
 			// Determine which image is used based on the button that was clicked
 			MessageBoxImage image;
 			if (sender == customizedAppearanceInformationButton)
@@ -219,6 +231,7 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 				throw new NotImplementedException();
 
 			await ConfigureUserPrompt()
+				.WithDisplayMode(displayMode)
 				.WithTitle("Custom Theme Prompt")
 				.WithHeaderContent($"Themed {image.ToString().ToLower()} message")
 				.WithContent($"The color scheme for this prompt has been adjusted to further emphasize the type of message based on the image used.")
@@ -335,6 +348,19 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 			// SAMPLE: Customize the header and content
 			//
 
+			var statusText = new TextBlock() {
+				Text = "Estimated time remaining: 1 minute",
+				Margin = new Thickness(0, 2, 0, 2)
+			};
+			var progressBar = new ProgressBar() {
+				Margin = new Thickness(0, 5, 0, 0),
+				Minimum = 0,
+				Maximum = 100,
+				Value = 25,
+				Height = 20,
+				Classes = { "success" }
+			};
+
 			await ConfigureUserPrompt()
 				// Setting any header background will align the status icon and header content
 				.WithHeaderContent("Exporting Project (Sample Project)")
@@ -356,21 +382,55 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 								new Run(@" (C:\Templates\ProjectTemplates)"),
 							}
 						},
-						new TextBlock() {
-							Text = "Estimated time remaining: 1 minute",
-							Margin = new Thickness(0, 2, 0, 2)
-						},
-						new ProgressBar() {
-							Margin = new Thickness(0, 5, 0, 0),
-							Minimum = 0,
-							Maximum = 100,
-							Value = 25,
-							Height = 20,
-							Classes = { "success" }
-						}
+						statusText,
+						progressBar
 					}
 				})
+				.WithCheckBoxContent("Check this box to simulate an exception")
 				.WithWindowStartupLocation(WindowStartupLocation.CenterOwner)
+				.BeforeShow(builder => {
+					// Do background work here while the dialog is shown
+					Task.Run(() => {
+						var totalTime = TimeSpan.FromSeconds(10);
+						var startTaskTime = DateTime.Now;
+						var isCompleted = false;
+						var throwException = false;
+						try {
+							do {
+								if (throwException)
+									throw new ApplicationException("An error was encountered during export.");
+								Thread.Sleep(100);
+								var elapsedTime = DateTime.Now - startTaskTime;
+								var remainingTime = totalTime - elapsedTime;
+								var percentageComplete = ((elapsedTime / totalTime) * 100);
+								Dispatcher.UIThread.InvokeAsync(() => {
+									// Must interact with UI controls on the UI thread that owns them
+									throwException = builder.Instance?.IsChecked == true;
+									if (!throwException) {
+										progressBar.Value = percentageComplete;
+										statusText.Text = $"Estimated time remaining: {remainingTime.TotalSeconds.ClampToNonnegative().Round(RoundMode.Ceiling)} seconds";
+										isCompleted = ((percentageComplete >= 100) || (builder.Instance?.Result is not null));
+									}
+								});
+							} while (!isCompleted);
+							if (isCompleted) {
+								// Assign a user prompt result to automatically close the prompt once the work is complete
+								Dispatcher.UIThread.InvokeAsync(() => {
+									if ((builder.Instance is not null) && (builder.Instance.Result is null))
+										builder.Instance.Result = builder.Instance.DefaultResult;
+								});
+							}
+						}
+						catch (Exception ex) {
+							// Report the error and show the progress bar in an error state
+							Dispatcher.UIThread.InvokeAsync(() => {
+								statusText.Text = "Error: " + ex.Message;
+								progressBar.Classes.Remove("success");
+								progressBar.Classes.Add("danger");
+							});
+						}
+					});
+				})
 				.Show();
 		}
 

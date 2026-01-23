@@ -364,7 +364,7 @@
 					<actipro:SettingsExpander.HeaderIcon>
 						<PathIcon Data="{StaticResource icon-fluent-mdl2-settings}" />
 					</actipro:SettingsExpander.HeaderIcon>
-					<actipro:SettingsExpander.Content>	
+					<actipro:SettingsExpander.Content>
 						<TextBox>Optional Setting</TextBox>
 					</actipro:SettingsExpander.Content>
 					<actipro:SettingsExpander.ItemsHeader>
@@ -409,6 +409,8 @@
 						<Slider Minimum="50" Maximum="1000" Value="{Binding WrapThreshold}" TickFrequency="1" IsSnapToTickEnabled="True" SmallChange="1" LargeChange="10" />
 					</StackPanel>
 					<CheckBox IsChecked="{Binding IsHeaderIconVisible}" Content="Is header icon visible" />
+					<CheckBox IsChecked="{Binding IsExpanderIconVisible}" Content="Is expander icon visible" />
+					<CheckBox IsChecked="{Binding CanToggleExpansion}" Content="Can toggle expansion" />
 					<CheckBox IsChecked="{Binding IsAnimationEnabled}" Content="Is animation enabled" />
 					<CheckBox IsChecked="{Binding IsEnabled}" Content="Is enabled" />
 				</StackPanel>
@@ -416,7 +418,8 @@
 			<sampleBrowser:ControlExample.CodeExamples>
 				<sampleBrowser:CodeExample xml:space="preserve">
 					<![CDATA[
-<actipro:SettingsExpander WrapThreshold="$(WrapThreshold)"$(IsAnimationEnabledAttribute)$(IsHeaderIconVisibleAttribute)$(IsItemsHeaderVisibleAttribute)$(IsItemsFooterVisibleAttribute)$(HeaderAttribute)$(DescriptionAttribute)>
+<actipro:SettingsExpander WrapThreshold="$(WrapThreshold)"$(IsAnimationEnabledAttribute)$(IsHeaderIconVisibleAttribute)$(IsExpanderIconVisibleAttribute)$(CanToggleExpansionAttribute)$(IsItemsHeaderVisibleAttribute)$(IsItemsFooterVisibleAttribute)$(HeaderAttribute)$(DescriptionAttribute)>
+
 	<!-- Optionally define a header icon -->
 	<actipro:SettingsExpander.HeaderIcon>
 		<PathIcon Data="..." />
@@ -451,6 +454,12 @@
 															   IsEnabled="{Binding Header, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
 															   Value="{Binding Header, StringFormat='&#xA;&#x9;Header=&quot;{0}&quot;'}" />
 						<sampleBrowser:CodeExampleSubstitution Key="WrapThreshold" Value="{Binding WrapThreshold}" />
+						<sampleBrowser:CodeExampleSubstitution Key="CanToggleExpansionAttribute"
+															   IsEnabled="{Binding !CanToggleExpansion}"
+															   Value=" CanToggleExpansion=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsExpanderIconVisibleAttribute"
+															   IsEnabled="{Binding !IsExpanderIconVisible}"
+															   Value=" IsExpanderIconVisible=&quot;False&quot;" />
 						<sampleBrowser:CodeExampleSubstitution Key="IsHeaderIconVisibleAttribute"
 															   IsEnabled="{Binding !IsHeaderIconVisible}"
 															   Value=" IsHeaderIconVisible=&quot;False&quot;" />

@@ -261,6 +261,10 @@ A [BarButton](xref:@ActiproUIRoot.Controls.Bars.BarButton).`Click` and [BarMenuI
 
 See the [Using Commands](using-commands.md) topic for more information on commands.
 
+### Focus Behavior
+
+In cases where you wish for the button to remain focused after a click, set the [BarButton](xref:@ActiproUIRoot.Controls.Bars.BarButton).[InvocationFocusBehavior](xref:@ActiproUIRoot.Controls.Bars.BarButton.InvocationFocusBehavior) property to [Self](xref:@ActiproUIRoot.Controls.Bars.InvocationFocusBehavior.Self).
+
 ## Input Gesture Text
 
 The control can have input gesture text associated with it that describes a related keyboard shortcut, and is displayed in the screen tip for the control or in the menu item itself.

@@ -26,6 +26,7 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		private RibbonQuickAccessToolBarViewModel? _quickAccessToolBar;
 		private RibbonQuickAccessToolBarLocation _quickAccessToolBarLocation = RibbonQuickAccessToolBarLocation.Above;
 		private RibbonQuickAccessToolBarMode _quickAccessToolBarMode = RibbonQuickAccessToolBarMode.Visible;
+		private RibbonTabViewModel? _selectedItem;
 		private RibbonTabRowToolBarViewModel? _tabRowToolBar;
 		private object? _tag;
 
@@ -46,9 +47,15 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 			// Initialize the layout mode
 			_layoutMode = layoutMode;
 
-
 			// Initialize the clear footer command
 			_clearFooterCommand = new DelegateCommand<object>(_ => this.Footer = null);
+
+			// Keep SelectedItem in sync with Tabs collection by always selecting the first
+			//   tab when selection has yet to be defined or the previous selection is removed
+			Tabs.CollectionChanged += (_, _) => {
+				if (SelectedItem is not { } selectedItem || !Tabs.Contains(selectedItem))
+					SelectedItem = Tabs.FirstOrDefault();
+			};
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -230,6 +237,14 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		public RibbonQuickAccessToolBarMode QuickAccessToolBarMode {
 			get => _quickAccessToolBarMode;
 			set => SetProperty(ref _quickAccessToolBarMode, value);
+		}
+
+		/// <summary>
+		/// A <see cref="RibbonTabViewModel"/> for the currently selected tab.
+		/// </summary>
+		public RibbonTabViewModel? SelectedItem {
+			get => _selectedItem;
+			set => SetProperty(ref _selectedItem, value);
 		}
 
 		/// <summary>

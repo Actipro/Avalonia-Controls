@@ -1,10 +1,14 @@
 ﻿using ActiproSoftware.SampleBrowser;
 using ActiproSoftware.UI.Avalonia.Controls.Docking;
 using ActiproSoftware.UI.Avalonia.Controls.Docking.Serialization;
+using ActiproSoftware.UI.Avalonia.Serialization;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Media;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.LayoutSerialization {
@@ -12,7 +16,6 @@ namespace ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.LayoutSerial
 	public partial class MainControl : UserControl {
 
 		private static string _layoutXml = string.Empty;
-
 		private string _defaultLayoutXml = string.Empty;
 		private readonly DockSiteLayoutSerializer _layoutSerializer;
 
@@ -44,7 +47,21 @@ namespace ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.LayoutSerial
 
 			// Create a layout serialization and attach a DockingWindowDeserializing event handler, which is called when deserializing all windows (including ones that may not exist yet)
 			_layoutSerializer = new DockSiteLayoutSerializer();
+			_layoutSerializer.ObjectDeserialized += OnLayoutSerializerObjectDeserialized;
+			_layoutSerializer.ObjectSerialized += OnLayoutSerializerObjectSerialized;
 			_layoutSerializer.DockingWindowDeserializing += OnLayoutSerializerDockingWindowDeserializing;
+
+			// This sample can serialize custom data with one of the tool windows, so the Type of that custom
+			//   data must be known to the serializer.
+			_layoutSerializer.RegisterType<CustomToolWindowData>();
+			_layoutSerializer.RegisterType<CustomVersion>(GetVersionProperties());
+
+			IEnumerable<IXmlSerializerProperty> GetVersionProperties() {
+				yield return new XmlSerializerProperty<CustomVersion, int>(x => x.Major);
+				yield return new XmlSerializerProperty<CustomVersion, int>(x => x.Minor);
+				yield return new XmlSerializerProperty<CustomVersion, int>(x => x.Build);
+				yield return new XmlSerializerProperty<CustomVersion, int>(x => x.Revision, x => x.ShouldSerializeRevision());
+			}
 
 			InitializeComponent();
 
@@ -66,6 +83,7 @@ namespace ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.LayoutSerial
 				// Save the layout when moving away from the sample so it can be restored when returning
 				SaveLayout(saveDefaultLayout: false);
 			};
+
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -130,11 +148,19 @@ namespace ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.LayoutSerial
 		private void OnActivateProgrammaticToolWindow2Click(object? sender, RoutedEventArgs e) {
 			var toolWindow = dockSite.ToolWindows.FirstOrDefault(x => x?.Name == ProgrammaticToolWindow2Name);
 			if (toolWindow is null) {
+				// Optionally associate custom data to be associated with the tool window during serialization
+				var customData = new CustomToolWindowData() {
+					CreationDateTime = DateTime.Now,
+					InstanceId = 2,
+				};
+
 				// Create and register the tool window
 				toolWindow = new CustomToolWindow() {
-					Name = ProgrammaticToolWindow2Name
+					Name = ProgrammaticToolWindow2Name,
+					CustomData = customData,
 				};
 				dockSite.ToolWindows.Add(toolWindow);
+
 
 				// Change the menu item's label/header
 				activeProgrammaticToolWindow2.Label = "Activate Programmatic ToolWindow 2";
@@ -176,6 +202,31 @@ namespace ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.LayoutSerial
 					// Change the menu item's label/header
 					activeProgrammaticToolWindow2.Label = "Activate Programmatic ToolWindow 2";
 				}
+			}
+		}
+
+		/// <summary>
+		/// Handles <c>DockSiteLayoutSerializer.ObjectDeserialized</c> event.
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The event data.</param>
+		private void OnLayoutSerializerObjectDeserialized(object? sender, ItemSerializationEventArgs e) {
+			if ((e.Node is XmlToolWindow) && (e.Item is CustomToolWindow customToolWindow)) {
+				// After deserializing, transfer the deserialzed custom data back to tool window instance
+				if (e.Node.Tag is CustomToolWindowData customData)
+					customToolWindow.CustomData = customData;
+			}
+		}
+
+		/// <summary>
+		/// Handles <c>DockSiteLayoutSerializer.ObjectSerialized</c> event.
+		/// </summary>
+		/// <param name="sender">The source of the event.</param>
+		/// <param name="e">The event data.</param>
+		private void OnLayoutSerializerObjectSerialized(object? sender, ItemSerializationEventArgs e) {
+			if ((e.Node is XmlToolWindow) && (e.Item is CustomToolWindow customToolWindow)) {
+				// Before serializing, transfer the custom data from the tool window instance to the object data that will be serialized
+				e.Node.Tag = customToolWindow.CustomData;
 			}
 		}
 
@@ -225,12 +276,14 @@ namespace ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.LayoutSerial
 		private void SaveLayout(bool saveDefaultLayout) {
 			UpdateSerializerOptions();
 			var layout = _layoutSerializer.SaveToString(dockSite);
-			if (saveDefaultLayout)
+			if (saveDefaultLayout) {
 				_defaultLayoutXml = layout;
+			}
 			else {
 				_layoutXml = layout;
 				layoutXmlTextBlock.Text = _layoutXml;
 			}
+
 		}
 
 		private void UpdateSerializerOptions() {

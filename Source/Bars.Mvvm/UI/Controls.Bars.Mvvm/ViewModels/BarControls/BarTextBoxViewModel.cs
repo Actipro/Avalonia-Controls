@@ -11,6 +11,7 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		private ICommand? _command;
 		private object? _commandParameter;
 		private string? _description;
+		private InvocationFocusBehavior _invocationFocusBehavior = InvocationFocusBehavior.Default;
 		private bool _isStarSizingAllowed;
 		private bool _isVisible = true;
 		private string? _keyTipText;
@@ -101,6 +102,12 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		public string? Description {
 			get => _description;
 			set => SetProperty(ref _description, value);
+		}
+
+		/// <inheritdoc cref="BarGalleryViewModel.InvocationFocusBehavior"/>
+		public InvocationFocusBehavior InvocationFocusBehavior {
+			get => _invocationFocusBehavior;
+			set => SetProperty(ref _invocationFocusBehavior, value);
 		}
 
 		/// <inheritdoc cref="BarComboBoxViewModel.IsStarSizingAllowed"/>

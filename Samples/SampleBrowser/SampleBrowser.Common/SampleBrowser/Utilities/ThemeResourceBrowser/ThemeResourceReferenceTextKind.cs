@@ -6,6 +6,7 @@ namespace ActiproSoftware.SampleBrowser.Utilities.ThemeResourceBrowser {
 	/// The kind of reference text available for each theme resource.
 	/// </summary>
 	public enum ThemeResourceReferenceTextKind {
+
 		[Description("XAML Dynamic Resource")]
 		XamlDynamicResource,
 
@@ -14,6 +15,7 @@ namespace ActiproSoftware.SampleBrowser.Utilities.ThemeResourceBrowser {
 
 		[Description("C# Resource Key")]
 		CSharpToResourceKey,
+
 	}
 
 }

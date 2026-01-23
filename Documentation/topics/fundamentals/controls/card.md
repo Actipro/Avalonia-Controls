@@ -94,13 +94,13 @@ xmlns:shared="http://schemas.actiprosoftware.com/winfx/xaml/shared"
 
 ### Header
 
-The [Title](xref:@ActiproUIRoot.Controls.Card.Title) and [Description](xref:@ActiproUIRoot.Controls.Card.Description) properties can be used to define a header with a default template where the [Title](xref:@ActiproUIRoot.Controls.Card.Title) is displayed with typography consistent with a heading, and the [Description](xref:@ActiproUIRoot.Controls.Card.Description), if defined, is displayed immediately below it.
+By default, the [Header](xref:@ActiproUIRoot.Controls.Card.Header) property is undefined.  Instead, a default [HeaderTemplate](xref:@ActiproUIRoot.Controls.Card.HeaderTemplate) is provided which utilizes `TextBlock` controls to display the [Title](xref:@ActiproUIRoot.Controls.Card.Title) and [Description](xref:@ActiproUIRoot.Controls.Card.Description) properties.  The [Title](xref:@ActiproUIRoot.Controls.Card.Title) is displayed with typography consistent with a heading, and the [Description](xref:@ActiproUIRoot.Controls.Card.Description), if defined, is displayed immediately below it.
 
 @if (avalonia) {
-Use the [TitleTheme](xref:@ActiproUIRoot.Controls.Card.TitleTheme) and [DescriptionTheme](xref:@ActiproUIRoot.Controls.Card.DescriptionTheme) properties to customize the appearance of each element.
+Use the [TitleTheme](xref:@ActiproUIRoot.Controls.Card.TitleTheme) and [DescriptionTheme](xref:@ActiproUIRoot.Controls.Card.DescriptionTheme) properties to customize the appearance of each `TextBlock` element in the default [HeaderTemplate](xref:@ActiproUIRoot.Controls.Card.HeaderTemplate).
 }
 @if (wpf) {
-Use the [TitleStyle](xref:@ActiproUIRoot.Controls.Card.TitleStyle) and [DescriptionStyle](xref:@ActiproUIRoot.Controls.Card.DescriptionStyle) properties to customize the appearance of each element.
+Use the [TitleStyle](xref:@ActiproUIRoot.Controls.Card.TitleStyle) and [DescriptionStyle](xref:@ActiproUIRoot.Controls.Card.DescriptionStyle) properties to customize the appearance of each `TextBlock` element in the default [HeaderTemplate](xref:@ActiproUIRoot.Controls.Card.HeaderTemplate).
 }
 
 The following example demonstrates creating a [Card](xref:@ActiproUIRoot.Controls.Card) with both [Title](xref:@ActiproUIRoot.Controls.Card.Title) and [Description](xref:@ActiproUIRoot.Controls.Card.Description) defined:
@@ -126,16 +126,20 @@ xmlns:shared="http://schemas.actiprosoftware.com/winfx/xaml/shared"
 
 Alternatively, the [Header](xref:@ActiproUIRoot.Controls.Card.Header) can be set to any value supported by `ContentPresenter`.  In this case, the explicit content will be used instead of the default template based on the [Title](xref:@ActiproUIRoot.Controls.Card.Title) and [Description](xref:@ActiproUIRoot.Controls.Card.Description) properties.
 
-The following example demonstrates creating a [Card](xref:@ActiproUIRoot.Controls.Card) with an explicit [Header](xref:@ActiproUIRoot.Controls.Card.Header) defined:
+> [!IMPORTANT]
+> The [Title](xref:@ActiproUIRoot.Controls.Card.Title) property is not the same as the [Header](xref:@ActiproUIRoot.Controls.Card.Header) property.  It is only a `string` property that, along with the [Description](xref:@ActiproUIRoot.Controls.Card.Description) property, can be used by elements in a [Header](xref:@ActiproUIRoot.Controls.Card.Header) or [HeaderTemplate](xref:@ActiproUIRoot.Controls.Card.HeaderTemplate).
 
 @if (avalonia) {
+The following example demonstrates creating a [Card](xref:@ActiproUIRoot.Controls.Card) with an explicit [Header](xref:@ActiproUIRoot.Controls.Card.Header) defined and whose `TextBlock` applies the [TitleTheme](xref:@ActiproUIRoot.Controls.Card.TitleTheme):
+
 ```xaml
 xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 ...
 <actipro:Card>
 
 	<actipro:Card.Header>
-		<TextBlock FontWeight="Bold">Title Here</TextBlock>
+		<TextBlock FontWeight="Bold" Text="Title Here"
+			Theme="{Binding $parent[actipro:Card].TitleTheme}" />
 	</actipro:Card.Header>
 
 	<!-- Insert Card Content Here -->
@@ -144,13 +148,16 @@ xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 ```
 }
 @if (wpf) {
+The following example demonstrates creating a [Card](xref:@ActiproUIRoot.Controls.Card) with an explicit [Header](xref:@ActiproUIRoot.Controls.Card.Header) defined and whose `TextBlock` applies the [TitleStyle](xref:@ActiproUIRoot.Controls.Card.TitleStyle):
+
 ```xaml
 xmlns:shared="http://schemas.actiprosoftware.com/winfx/xaml/shared"
 ...
 <shared:Card>
 
 	<shared:Card.Header>
-		<TextBlock FontWeight="Bold">Title Here</TextBlock>
+		<TextBlock FontWeight="Bold" Text="Title Here"
+			Style="{Binding TitleStyle, RelativeSource={RelativeSource AncestorType={x:Type shared:Card}}}" />
 	</shared:Card.Header>
 
 	<!-- Insert Card Content Here -->
@@ -158,6 +165,9 @@ xmlns:shared="http://schemas.actiprosoftware.com/winfx/xaml/shared"
 </shared:Card>
 ```
 }
+
+> [!NOTE]
+> The default [HeaderTemplate](xref:@ActiproUIRoot.Controls.Card.HeaderTemplate) (that uses the [Title](xref:@ActiproUIRoot.Controls.Card.Title) and [Description](xref:@ActiproUIRoot.Controls.Card.Description) properties) is only applied when the [Header](xref:@ActiproUIRoot.Controls.Card.Header) has not been explicitly defined, so there is no need to clear the default [HeaderTemplate](xref:@ActiproUIRoot.Controls.Card.HeaderTemplate) when defining a custom [Header](xref:@ActiproUIRoot.Controls.Card.Header).
 
 ### Thumbnail
 

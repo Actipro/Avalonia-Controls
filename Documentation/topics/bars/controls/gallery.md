@@ -403,6 +403,10 @@ A [RibbonGallery](xref:@ActiproUIRoot.Controls.Bars.RibbonGallery).`SelectionCha
 
 See the [Using Commands](using-commands.md) topic for more information on commands.
 
+### Focus Behavior
+
+In cases where you wish for an in-ribbon gallery to remain focused after a click on one of its gallery items or the **More** button's popup menu items, set the [RibbonGallery](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarMenuGalleryHostBase).[InvocationFocusBehavior](xref:@ActiproUIRoot.Controls.Bars.BarPopupButton.InvocationFocusBehavior) property to [Self](xref:@ActiproUIRoot.Controls.Bars.InvocationFocusBehavior.Self).
+
 ## MVVM Support
 
 The optional companion [MVVM Library](../mvvm-support.md) defines a [BarGalleryViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarGalleryViewModel) class that is intended to be used as a view model for galleries.

@@ -217,6 +217,10 @@ A [BarCheckBox](xref:@ActiproUIRoot.Controls.Bars.BarCheckBox).`Click` and [BarM
 
 See the [Using Commands](using-commands.md) topic for more information on commands.
 
+### Focus Behavior
+
+In cases where you wish for the checkbox to remain focused after a click, set the [BarCheckBox](xref:@ActiproUIRoot.Controls.Bars.BarCheckBox).[InvocationFocusBehavior](xref:@ActiproUIRoot.Controls.Bars.BarButton.InvocationFocusBehavior) property to [Self](xref:@ActiproUIRoot.Controls.Bars.InvocationFocusBehavior.Self).
+
 ## Input Gesture Text
 
 The control can have input gesture text associated with it that describes a related keyboard shortcut,

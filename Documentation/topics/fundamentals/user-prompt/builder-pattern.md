@@ -148,12 +148,13 @@ Nothing happens with [UserPromptBuilder](xref:@ActiproUIRoot.Controls.UserPrompt
 - Use the [RequestedDisplayMode](xref:@ActiproUIRoot.Controls.UserPromptBuilder.RequestedDisplayMode) to determine how the prompt will be displayed and assign the [ActualDisplayMode](xref:@ActiproUIRoot.Controls.UserPromptBuilder.ActualDisplayMode) property to the mode that is used.
 - Invoke all [BeforeShow](xref:@ActiproUIRoot.Controls.UserPromptBuilder.BeforeShow*) callbacks.
 - When displayed as a [Dialog](xref:@ActiproUIRoot.Controls.UserPromptDisplayMode.Dialog)...
-  - Configure [UserPromptWindow](xref:@ActiproUIRoot.Controls.UserPromptWindow) to host the [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl).
+  - Configure a [UserPromptWindow](xref:@ActiproUIRoot.Controls.UserPromptWindow) to host the [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl).
   - Invoke all [AfterInitializeWindow](xref:@ActiproUIRoot.Controls.UserPromptBuilder.AfterInitializeWindow*) callbacks.
   - Show the [UserPromptWindow](xref:@ActiproUIRoot.Controls.UserPromptWindow) as a dialog and await a response.
 - When displayed as an [Overlay](xref:@ActiproUIRoot.Controls.UserPromptDisplayMode.Overlay)...
-  - Configure an overlay to host the [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl).
-  - Show the overlay and await a response.
+  - Configure a [WindowControl](xref:@ActiproUIRoot.Controls.WindowControl) to host the [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl).
+  - Invoke all [AfterInitializeOverlay](xref:@ActiproUIRoot.Controls.UserPromptBuilder.AfterInitializeOverlay*) callbacks.
+  - Show the [WindowControl](xref:@ActiproUIRoot.Controls.WindowControl) in a overlay and await a response.
 - Invoke all [OnResponding](xref:@ActiproUIRoot.Controls.UserPromptBuilder.OnResponding*) callbacks when a response is indicated.
 - Invoke all [AfterShow](xref:@ActiproUIRoot.Controls.UserPromptBuilder.AfterShow*) callbacks with the indicated result.
 - Return the result.
@@ -273,6 +274,21 @@ This callback is invoked to finalize the [UserPromptWindow](xref:@ActiproUIRoot.
 var result = UserPromptBuilder.Configure()
 	// ... other configuration options here
 	.AfterInitializeWindow(window => {
+		// Define logic here
+	})
+	.Show();
+```
+}
+
+@if (avalonia) {
+### AfterInitializeOverlay Callback (Overlays Only)
+
+When displayed as an [Overlay](xref:@ActiproUIRoot.Controls.UserPromptDisplayMode.Overlay), this callback is invoked to finalize the [WindowControl](../controls/window-control.md) that will host the [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl) as an overlay.  The callback is invoked after the window control is initially configured.
+
+```csharp
+var result = await UserPromptBuilder.Configure()
+	// ... other configuration options here
+	.AfterInitializeOverlay(windowControl => {
 		// Define logic here
 	})
 	.Show();

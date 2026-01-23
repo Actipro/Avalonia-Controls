@@ -60,7 +60,7 @@ xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 ...
 <actipro:StandaloneToolBar>
 	<!-- Label is auto-generated from Key -->
-	<actipro:TextBox
+	<actipro:BarTextBox
 		Key="Search"
 		RequestedWidth="120"
 		Command="{Binding SearchCommand}"
@@ -75,7 +75,7 @@ xmlns:bars="http://schemas.actiprosoftware.com/winfx/xaml/bars"
 ...
 <bars:StandaloneToolBar>
 	<!-- Label is auto-generated from Key -->
-	<bars:TextBox
+	<bars:BarTextBox
 		Key="Search"
 		RequestedWidth="120"
 		Command="{Binding SearchCommand}"
@@ -188,6 +188,10 @@ The `ICommand` in the [Command](xref:@ActiproUIRoot.Controls.Bars.BarTextBox.Com
 A `TextChanged` event is raised whenever the control's text changes.
 
 See the [Using Commands](using-commands.md) topic for more information on commands.
+
+### Focus Behavior
+
+In cases where you wish for the textbox to remain focused after committing a value, set the [BarTextBox](xref:@ActiproUIRoot.Controls.Bars.BarTextBox).[InvocationFocusBehavior](xref:@ActiproUIRoot.Controls.Bars.BarTextBox.InvocationFocusBehavior) property to [Self](xref:@ActiproUIRoot.Controls.Bars.InvocationFocusBehavior.Self).
 
 ## Screen Tips
 

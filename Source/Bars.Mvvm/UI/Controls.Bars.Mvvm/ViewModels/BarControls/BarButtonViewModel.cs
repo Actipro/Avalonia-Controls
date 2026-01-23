@@ -15,6 +15,7 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		private object? _commandParameter;
 		private string? _description;
 		private KeyGesture? _inputGesture;
+		private InvocationFocusBehavior _invocationFocusBehavior = InvocationFocusBehavior.Default;
 		private bool _isInputGestureTextVisible = true;
 		private bool _isVisible = true;
 		private string? _keyTipText;
@@ -139,6 +140,17 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		public KeyGesture? InputGesture {
 			get => _inputGesture;
 			set => SetProperty(ref _inputGesture, value);
+		}
+
+		/// <summary>
+		/// Indicates how the button outside of a menu context processes focus when it is clicked.
+		/// </summary>
+		/// <value>
+		/// The default value is <see cref="InvocationFocusBehavior.Default"/>.
+		/// </value>
+		public InvocationFocusBehavior InvocationFocusBehavior {
+			get => _invocationFocusBehavior;
+			set => SetProperty(ref _invocationFocusBehavior, value);
 		}
 
 		/// <summary>

@@ -43,10 +43,13 @@ namespace ActiproSoftware.SampleBrowser {
 			=> _includeMoreShades ? 50 : 100;
 
 		private void UpdatePalette() {
-			var factory = new DefaultColorPaletteFactory() { NeutralMidtoneColor = SelectedNeutralMidtoneColor.Color };
+			// Set the palette factory's neutral midtone color
+			ModernTheme.TryGetCurrent(out var theme);
+			var factory = theme?.Definition?.ColorPaletteFactory as DefaultColorPaletteFactory ?? new DefaultColorPaletteFactory();
+			factory.NeutralMidtoneColor = SelectedNeutralMidtoneColor.Color;
 
 			// Update the current theme to use the select neutral midtone color
-			if (ModernTheme.TryGetCurrent(out var theme) && (theme.Definition is not null)) {
+			if (theme?.Definition is not null) {
 				theme.Definition.AccentColorRampName = _selectedAccentColorRampHue.ToString();
 				theme.Definition.ColorPaletteFactory = factory;
 				theme.RefreshResources();

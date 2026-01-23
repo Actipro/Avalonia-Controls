@@ -11,6 +11,7 @@
 			Command="{Binding Command}"
 			CommandParameter="{Binding CommandParameter}"
 			InputGesture="{Binding InputGesture}"
+			InvocationFocusBehavior="{Binding InvocationFocusBehavior}"
 			IsInputGestureTextVisible="{Binding IsInputGestureTextVisible}"
 			IsVisible="{Binding IsVisible}"
 			ItemsSource="{Binding MenuItems}"

@@ -615,6 +615,9 @@ private void OnWindowSizeChanged(object sender, RoutedEventArgs e) { ... }
 						</DataTemplate>
 					</Setter>
 				</Style>
+				<Style Selector="actipro|WindowControl:active">
+					<Setter Property="BorderBrush" Value="{actipro:ThemeResource ControlBackgroundBrushSolidAccent}" />
+				</Style>
 				<Style Selector="actipro|WindowControl.macos">
 					<Setter Property="Title" Value="macOS Example" />
 					<Setter Property="IsIconVisible" Value="False" />

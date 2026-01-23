@@ -88,7 +88,7 @@
 			<sampleBrowser:ProductItemInfo Category="Ribbon QuickStarts" Title="Tab Row Toolbar" Path="/ProductSamples/BarsSamples/QuickStarts/TabRowToolBar/MainControl"/>
 			<sampleBrowser:ProductItemInfo Category="Ribbon QuickStarts" Title="Variant Sizing" Path="/ProductSamples/BarsSamples/QuickStarts/VariantSizing/MainControl"/>
 
-			<sampleBrowser:ProductItemInfo BlurbText="NEW!" Category="Menu &amp; Toolbar QuickStarts" Title="Main Menu" Path="/ProductSamples/BarsSamples/QuickStarts/MainMenu/MainControl"/>
+			<sampleBrowser:ProductItemInfo BlurbText="New!" Category="Menu &amp; Toolbar QuickStarts" Title="Main Menu" Path="/ProductSamples/BarsSamples/QuickStarts/MainMenu/MainControl"/>
 			<sampleBrowser:ProductItemInfo Category="Menu &amp; Toolbar QuickStarts" Title="Standalone Toolbar" Path="/ProductSamples/BarsSamples/QuickStarts/StandaloneToolBarIntro/MainControl"/>
 
 			
@@ -105,7 +105,7 @@
 		<!--
 			Docking/MDI
 		-->
-		<sampleBrowser:ProductFamilyInfo BlurbText="NEW!" IsPro="True" ShortTitle="Docking" Title="Docking/MDI" Summary="A docking tool window and multiple document interface solution">
+		<sampleBrowser:ProductFamilyInfo BlurbText="New!" IsPro="True" ShortTitle="Docking" Title="Docking/MDI" Summary="A docking tool window and multiple document interface solution">
 			<sampleBrowser:ProductFamilyInfo.LogoImageSource>
 				<actiproImages:DockingLogo48 />
 			</sampleBrowser:ProductFamilyInfo.LogoImageSource>
@@ -199,12 +199,12 @@
 			<sampleBrowser:ProductItemInfo Category="Controls" Title="Card" Path="/ProductSamples/FundamentalsSamples/Controls/CardIntro/MainControl"/>
 			<sampleBrowser:ProductItemInfo Category="Controls" Title="Circular Progressbar" Path="/ProductSamples/FundamentalsSamples/Controls/CircularProgressBarIntro/MainControl"/>
 			<sampleBrowser:ProductItemInfo Category="Controls" Title="Info Bar" Path="/ProductSamples/FundamentalsSamples/Controls/InfoBarIntro/MainControl"/>
-			<sampleBrowser:ProductItemInfo BlurbText="UPDATED!" Category="Controls" Title="MessageBox" Path="/ProductSamples/FundamentalsSamples/Controls/MessageBoxIntro/MainControl"/>
+			<sampleBrowser:ProductItemInfo BlurbText="Updated!" Category="Controls" Title="MessageBox" Path="/ProductSamples/FundamentalsSamples/Controls/MessageBoxIntro/MainControl"/>
 			<sampleBrowser:ProductItemInfo Category="Controls" Title="Progress Spinners" Path="/ProductSamples/FundamentalsSamples/Controls/ProgressSpinners/MainControl"/>
 			<sampleBrowser:ProductItemInfo Category="Controls" Title="Segmented Bar" Path="/ProductSamples/FundamentalsSamples/Controls/SegmentedBarIntro/MainControl"/>
-			<sampleBrowser:ProductItemInfo Category="Controls" Title="Settings" Path="/ProductSamples/FundamentalsSamples/Controls/SettingsIntro/MainControl"/>
-			<sampleBrowser:ProductItemInfo BlurbText="UPDATED!" Category="Controls" Title="User Prompt" Path="/ProductSamples/FundamentalsSamples/Controls/UserPromptIntro/MainControl"/>
-			<sampleBrowser:ProductItemInfo BlurbText="NEW!" Category="Controls" Title="Window Control" Path="/ProductSamples/FundamentalsSamples/Controls/WindowControlIntro/MainControl"/>
+			<sampleBrowser:ProductItemInfo BlurbText="Updated!" Category="Controls" Title="Settings" Path="/ProductSamples/FundamentalsSamples/Controls/SettingsIntro/MainControl"/>
+			<sampleBrowser:ProductItemInfo BlurbText="Updated!" Category="Controls" Title="User Prompt" Path="/ProductSamples/FundamentalsSamples/Controls/UserPromptIntro/MainControl"/>
+			<sampleBrowser:ProductItemInfo BlurbText="New!" Category="Controls" Title="Window Control" Path="/ProductSamples/FundamentalsSamples/Controls/WindowControlIntro/MainControl"/>
 			
 			
 
@@ -222,7 +222,7 @@
 
 			<sampleBrowser:ProductFamilyInfo.News>
 				<sampleBrowser:ListItemInfo Title="Color Palette sample allows for some theme adjustments" />
-				<sampleBrowser:ListItemInfo Title="Native templates updated through Avalonia v11.3.0" />
+				<sampleBrowser:ListItemInfo Title="Native templates updated through Avalonia v11.3.11" />
 			</sampleBrowser:ProductFamilyInfo.News>
 
 			<sampleBrowser:ProductFamilyInfo.TeaserBulletItems>
@@ -288,6 +288,7 @@
 			</sampleBrowser:ProductFamilyInfo.LogoImageSource>
 
 			<sampleBrowser:ProductFamilyInfo.News>
+				<sampleBrowser:ListItemInfo Title="Example code for supporting SVG image adaptation" />
 				<sampleBrowser:ListItemInfo Title="ChromedTitleBar has native-like appearance on Linux and macOS" />
 			</sampleBrowser:ProductFamilyInfo.News>
 
@@ -304,13 +305,14 @@
 			</sampleBrowser:ProductFamilyInfo.OverviewItem>
 
 			<sampleBrowser:ProductItemInfo Category="Controls" Title="Copy Button" Path="/ProductSamples/SharedSamples/Controls/CopyButtonIntro/MainControl"/>
-			<sampleBrowser:ProductItemInfo Category="Controls" Title="Dynamic Image" Path="/ProductSamples/SharedSamples/Controls/DynamicImageIntro/MainControl"/>
+			<sampleBrowser:ProductItemInfo BlurbText="Updated!" Category="Controls" Title="Dynamic Image" Path="/ProductSamples/SharedSamples/Controls/DynamicImageIntro/MainControl"/>
 			<sampleBrowser:ProductItemInfo Category="Controls" Title="Hyperlink Text Block" Path="/ProductSamples/SharedSamples/Controls/HyperlinkTextBlockIntro/MainControl"/>
 			<sampleBrowser:ProductItemInfo Category="Controls" Title="Mesh Gradient Presenter" Path="/ProductSamples/SharedSamples/Controls/MeshGradientPresenterIntro/MainControl"/>
 			<sampleBrowser:ProductItemInfo Category="Controls" Title="Scrollable Overflow" Path="/ProductSamples/SharedSamples/Controls/ScrollableOverflowPresenterIntro/MainControl"/>
 			<sampleBrowser:ProductItemInfo Category="Controls" Title="Shadow Chrome" Path="/ProductSamples/SharedSamples/Controls/ShadowChromeIntro/MainControl"/>
 			<sampleBrowser:ProductItemInfo Category="Controls" Title="Toggle Theme Button" Path="/ProductSamples/SharedSamples/Controls/ToggleThemeButtonIntro/MainControl"/>
 			<sampleBrowser:ProductItemInfo Category="Controls" Title="Window Resize Grip" Path="/ProductSamples/SharedSamples/Controls/WindowResizeGripIntro/MainControl"/>
+			
 			
 			
 			<sampleBrowser:ProductItemInfo Category="Shapes" Title="Ring Slice" Path="/ProductSamples/SharedSamples/Shapes/RingSliceIntro/MainControl"/>

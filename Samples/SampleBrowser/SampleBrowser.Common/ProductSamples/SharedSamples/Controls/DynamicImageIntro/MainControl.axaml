@@ -3,7 +3,9 @@
 	xmlns="https://github.com/avaloniaui"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sample="using:ActiproSoftware.ProductSamples.SharedSamples.Controls.DynamicImageIntro"
 	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:svg="using:Avalonia.Svg.Skia"
 	xmlns:system="using:System"
 	>
 
@@ -16,6 +18,9 @@
 
 		<actipro:ImageProvider x:Key="DarkThemeImageProvider" ChromaticAdaptationMode="DarkThemes" />
 		<actipro:ImageProvider x:Key="AlwaysAdaptImageProvider" ChromaticAdaptationMode="Always" />
+
+		<!-- Custom class that supports adaptation of SVG images -->
+		<sample:SvgImageProvider x:Key="DarkThemeSvgImageProvider" ChromaticAdaptationMode="DarkThemes" />
 
 	</UserControl.Resources>
 	<UserControl.Styles>
@@ -37,8 +42,8 @@
 
 
 		<sampleBrowser:ControlExample
-			Header="Basic usage (vector image)"
-			Footer="Easily support adaptation of vector images for dark themes or monochrome. Individual images or parts of a geometry can opt-out of adaptation if appropriate, but the grayscale disabled state is always supported."
+			Header="Basic usage (DrawingImage vector image)"
+			Footer="Easily support adaptation of DrawingImage vector images for dark themes or monochrome. Individual images or parts of a geometry can opt-out of adaptation if appropriate, but the grayscale disabled state is always supported."
 			DataContext="{Binding #primaryVectorImage}"
 			>
 			<StackPanel Orientation="Horizontal" Spacing="50" HorizontalAlignment="Center">
@@ -103,8 +108,6 @@
 						</Border>
 					</ThemeVariantScope>
 				</StackPanel>
-
-
 			</StackPanel>
 
 			<sampleBrowser:ControlExample.Options>
@@ -135,7 +138,7 @@
 															   Value=" UseMonochrome=&quot;True&quot;" />
 						<sampleBrowser:CodeExampleSubstitution Key="NoAdaptAttribute"
 															   IsEnabled="{Binding !#primaryVectorImageCanAdaptCheckBox.IsChecked}"
-															   Value="&#xD;&#x9;&#x9;&#x9;actipro:ImageProvider.CanAdapt=&quot;False&quot;" />
+															   Value="&#xD;&#x9;&#x9;actipro:ImageProvider.CanAdapt=&quot;False&quot;" />
 					</sampleBrowser:CodeExample.Substitutions>
 				</sampleBrowser:CodeExample>
 				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
@@ -145,6 +148,123 @@ using ActiproSoftware.UI.Avalonia.Media;
 // In app startup (before UI is initialized), configure the default
 // ImageProvider to support chromatic adaptation in dark themes
 ImageProvider.Default.ChromaticAdaptationMode = ImageChromaticAdaptationMode.DarkThemes;
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+		
+		<sampleBrowser:ControlExample
+			Header="Basic usage (SVG vector image)"
+			Footer="Easily support adaptation of SVG vector images for dark themes or monochrome. Individual images can opt-out of adaptation if appropriate, but the grayscale disabled state is always supported. SVG images are implemented in the third-party Svg.Controls.Skia.Avalonia NuGet package and a special SvgImageProvider class defined in this sample inherits ImageProvider to add SVG adaptation."
+			DataContext="{Binding #primarySvgImage}"
+			>
+			<StackPanel Orientation="Horizontal" Spacing="50" HorizontalAlignment="Center">
+				<StackPanel.Resources>
+					<svg:SvgImage x:Key="BasicSvgImage" Source="avares://SampleBrowser/Images/Other/SVGFile.svg" actipro:ImageProvider.Provider="{StaticResource DarkThemeSvgImageProvider}" />
+					<svg:SvgImage x:Key="BasicSvgImageNoAdapt" Source="avares://SampleBrowser/Images/Other/SVGFile.svg" actipro:ImageProvider.Provider="{StaticResource DarkThemeSvgImageProvider}" actipro:ImageProvider.CanAdapt="False" />
+					<actipro:ComparisonConverter x:Key="CanAdaptImageSourceConverter" TrueResult="{StaticResource BasicSvgImage}" FalseResult="{StaticResource BasicSvgImageNoAdapt}" />
+				</StackPanel.Resources>
+
+				<StackPanel Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Light theme" HorizontalAlignment="Center" />
+					<ThemeVariantScope RequestedThemeVariant="Light">
+						<Border Padding="20" BorderThickness="1" CornerRadius="8"
+								Background="{actipro:ThemeResource Container1BackgroundBrush}"
+								BorderBrush="{actipro:ThemeResource Container1BorderBrush}">
+
+							<StackPanel Spacing="30">
+								<StackPanel Spacing="10">
+									<TextBlock Text="Native control" />
+									<Image Width="64" Height="64" Source="{StaticResource BasicSvgImage}" />
+								</StackPanel>
+								<StackPanel Spacing="10">
+									<TextBlock Text="Dynamic image" />
+									<actipro:DynamicImage x:Name="primarySvgImage" Width="64" Height="64"
+														  DisabledOpacity="0.5"
+														  Source="{Binding #primarySvgImageCanAdaptCheckBox.IsChecked, Converter={StaticResource CanAdaptImageSourceConverter}}"/>
+								</StackPanel>
+							</StackPanel>
+						</Border>
+					</ThemeVariantScope>
+				</StackPanel>
+
+				<StackPanel Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Dark theme" HorizontalAlignment="Center" />
+					<ThemeVariantScope RequestedThemeVariant="Dark">
+						<Border Padding="20" BorderThickness="1" CornerRadius="8"
+								Background="{actipro:ThemeResource Container1BackgroundBrush}"
+								BorderBrush="{actipro:ThemeResource Container1BorderBrush}">
+
+							<StackPanel Spacing="30">
+								<StackPanel Spacing="10">
+									<TextBlock Text="Native control" />
+									<Image Width="64" Height="64" Source="{StaticResource BasicSvgImage}" />
+								</StackPanel>
+								<StackPanel Spacing="10">
+									<TextBlock Text="Dynamic image" />
+									<actipro:DynamicImage Width="64" Height="64"
+														  IsEnabled="{Binding IsEnabled}"
+														  DisabledOpacity="{Binding DisabledOpacity}"
+														  UseMonochrome="{Binding UseMonochrome}"
+														  Source="{Binding #primarySvgImageCanAdaptCheckBox.IsChecked, Converter={StaticResource CanAdaptImageSourceConverter}}"/>
+								</StackPanel>
+							</StackPanel>
+						</Border>
+					</ThemeVariantScope>
+				</StackPanel>
+
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Text="Disabled opacity" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray '0.1, 0.25, 0.5, 0.75, 1.0', Type=system:Double}" SelectedItem="{Binding DisabledOpacity}" />
+					</StackPanel>
+					<CheckBox IsChecked="{Binding IsEnabled}" Content="Enabled" />
+					<CheckBox IsChecked="{Binding UseMonochrome}" Content="Use monochrome" />
+					<CheckBox x:Name="primarySvgImageCanAdaptCheckBox" IsChecked="True" Content="Image can adapt" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample Language="XAML" xml:space="preserve">
+					<![CDATA[
+<actipro:DynamicImage DisabledOpacity="$(DisabledOpacity)"$(UseMonochromeAttribute)$(IsEnabledAttribute)>
+	<svg:SvgImage xmlns:svg="using:Avalonia.Svg.Skia"
+		Source="avares://SampleBrowser/Images/Other/SVGFile.svg"$(NoAdaptAttribute) />
+</actipro:DynamicImage>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="DisabledOpacity" Value="{Binding DisabledOpacity}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute"
+															   IsEnabled="{Binding !IsEnabled}"
+															   Value=" IsEnabled=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="UseMonochromeAttribute"
+															   IsEnabled="{Binding UseMonochrome}"
+															   Value=" UseMonochrome=&quot;True&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="NoAdaptAttribute"
+															   IsEnabled="{Binding !#primarySvgImageCanAdaptCheckBox.IsChecked}"
+															   Value="&#xD;&#x9;&#x9;actipro:ImageProvider.CanAdapt=&quot;False&quot;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+using ActiproSoftware.UI.Avalonia.Media;
+...
+// In app startup (before UI is initialized), configure the default
+// ImageProvider to support SVG images and chromatic adaptation in dark themes
+ImageProvider.Default = new SvgImageProvider();  // See sample for full class source
+ImageProvider.Default.ChromaticAdaptationMode = ImageChromaticAdaptationMode.DarkThemes;
+					]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+public static AppBuilder BuildAvaloniaApp()
+	=> AppBuilder.Configure<App>()
+		// Required to work around a Skia issue for SVG opacity rendering
+		.With(new SkiaOptions { UseOpacitySaveLayer = true })
+		...
 					]]>
 				</sampleBrowser:CodeExample>
 			</sampleBrowser:ControlExample.CodeExamples>

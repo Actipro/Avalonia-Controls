@@ -19,6 +19,7 @@
 			CollapsedButtonToolTip="{Binding CollapsedButtonDescription}"
 			Command="{Binding Command}"
 			HasCategoryHeadersOnMenu="{Binding HasCategoryHeaders}"
+			InvocationFocusBehavior="{Binding InvocationFocusBehavior}"
 			IsSelectionSupported="{Binding IsSelectionSupported}"
 			IsVisible="{Binding IsVisible}"
 			ItemContainerTheme="{Binding ItemContainerTheme}"

@@ -2,7 +2,7 @@
 <Project>
 
 	<PropertyGroup>
-		<AvaloniaVersion>11.3.0</AvaloniaVersion>
+		<AvaloniaVersion>11.3.11</AvaloniaVersion>
 
 		<!--
 			Define additional optional constants...
@@ -21,6 +21,9 @@
 		<PackageReference Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)" />
 		<PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" Condition="$([System.Text.RegularExpressions.Regex]::IsMatch($(DefineConstants), '^(.*;)*FLUENT_THEME(;.*)*$'))" />
 		<PackageReference Include="Avalonia.Themes.Simple" Version="$(AvaloniaVersion)" Condition="$([System.Text.RegularExpressions.Regex]::IsMatch($(DefineConstants), '^(.*;)*SIMPLE_THEME(;.*)*$'))" />
+		
+		<!-- If using the SvgImageProvider class in the Dynamic Image sample, which supports SVG image adaptation -->
+		<PackageReference Include="Svg.Controls.Skia.Avalonia" Version="11.3.9.1" />
 	</ItemGroup>
 
 	<ItemGroup Condition="$(MSBuildProjectName.Contains('.Web')) == 'true'">

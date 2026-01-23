@@ -194,6 +194,16 @@ For example, a regular button will execute its command and raise a `Click` event
 
 See the [Using Commands](using-commands.md) topic for more information on commands.
 
+### Focus Behavior
+
+When the primary invocation of a control occurs, such as a button click, the `InvocationFocusBehavior` setting on the control determines what happens with focus.  This property is available on most controls that can appear in a ribbon or toolbar context.
+
+The value options are:
+
+- [Default](xref:@ActiproUIRoot.Controls.Bars.InvocationFocusBehavior.Default) - When the control is in a focus scope like a ribbon or toolbar, it will try to restore focus to control that last control had focus outside of the containing focus scope.
+- [None](xref:@ActiproUIRoot.Controls.Bars.InvocationFocusBehavior.None) - The Actipro logic for the control will not do any focus processing itself.  However note that in some cases, external base classes may still process focus.
+- [Self](xref:@ActiproUIRoot.Controls.Bars.InvocationFocusBehavior.Self) - The control will focus itself.
+
 ## Input Gesture Text
 
 Input gestures are keyboard shortcuts that provide access to a control's command.  For instance, <kbd>Ctrl</kbd>+<kbd>C</kbd> is commonly associated with the clipboard copy command.
@@ -264,9 +274,11 @@ Here is a list of common attached properties that are related to concepts descri
 | [MediumIconProperty](xref:@ActiproUIRoot.Controls.Bars.BarControlService.MediumIconProperty) | Medium 24x24 size image. |
 | [LargeIconProperty](xref:@ActiproUIRoot.Controls.Bars.BarControlService.LargeIconProperty) | Large 32x32 size image. |
 | [TitleProperty](xref:@ActiproUIRoot.Controls.Bars.BarControlService.TitleProperty) | String title that can override the label in screen tips and customization UI. |
+| [InvocationFocusBehaviorProperty](xref:@ActiproUIRoot.Controls.Bars.BarControlService.InvocationFocusBehaviorProperty) | Determine how focus is moved when the primary invocation, such as a click on a button, occurs on the control. |
 | [VariantSizeProperty](xref:@ActiproUIRoot.Controls.Bars.BarControlService.VariantSizeProperty) | The current variant size of the control.  Unless otherwise indicated, this property should only be manually set when the control is standalone, and not hosted by a bar control. |
 | [CanCloneToRibbonQuickAccessToolBarProperty](xref:@ActiproUIRoot.Controls.Bars.BarControlService.CanCloneToRibbonQuickAccessToolBarProperty) | Whether the control can clone to the ribbon [Quick Access Toolbar](../ribbon-features/quick-access-toolbar.md). |
-| [HasExternalHeaderProperty](xref:@ActiproUIRoot.Controls.Bars.BarControlService.HasExternalHeaderProperty) | Whether an external header (image/label) should be rendered for the control when in a ribbon control group stack. |}
+| [HasExternalHeaderProperty](xref:@ActiproUIRoot.Controls.Bars.BarControlService.HasExternalHeaderProperty) | Whether an external header (image/label) should be rendered for the control when in a ribbon control group stack. |
+}
 @if (wpf) {
 | Attached Property | Description |
 |-----|-----|
@@ -276,6 +288,7 @@ Here is a list of common attached properties that are related to concepts descri
 | [MediumImageSourceProperty](xref:@ActiproUIRoot.Controls.Bars.BarControlService.MediumImageSourceProperty) | Medium 24x24 size image. |
 | [LargeImageSourceProperty](xref:@ActiproUIRoot.Controls.Bars.BarControlService.LargeImageSourceProperty) | Large 32x32 size image. |
 | [TitleProperty](xref:@ActiproUIRoot.Controls.Bars.BarControlService.TitleProperty) | String title that can override the label in screen tips and customization UI. |
+| [InvocationFocusBehaviorProperty](xref:@ActiproUIRoot.Controls.Bars.BarControlService.InvocationFocusBehaviorProperty) | Determine how focus is moved when the primary invocation, such as a click on a button, occurs on the control. |
 | [VariantSizeProperty](xref:@ActiproUIRoot.Controls.Bars.BarControlService.VariantSizeProperty) | The current variant size of the control.  Unless otherwise indicated, this property should only be manually set when the control is standalone, and not hosted by a bar control. |
 | [CanCloneToRibbonQuickAccessToolBarProperty](xref:@ActiproUIRoot.Controls.Bars.BarControlService.CanCloneToRibbonQuickAccessToolBarProperty) | Whether the control can clone to the ribbon [Quick Access Toolbar](../ribbon-features/quick-access-toolbar.md). |
 | [HasExternalHeaderProperty](xref:@ActiproUIRoot.Controls.Bars.BarControlService.HasExternalHeaderProperty) | Whether an external header (image/label) should be rendered for the control when in a ribbon control group stack. |

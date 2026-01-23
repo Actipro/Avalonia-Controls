@@ -52,6 +52,7 @@
 		<Setter Property="QuickAccessToolBarContent" Value="{Binding QuickAccessToolBar}" />
 		<Setter Property="QuickAccessToolBarLocation" Value="{Binding QuickAccessToolBarLocation, Mode=TwoWay}" />
 		<Setter Property="QuickAccessToolBarMode" Value="{Binding QuickAccessToolBarMode, Mode=TwoWay}" />
+		<Setter Property="SelectedItem" Value="{Binding SelectedItem, Mode=TwoWay}" />
 		<Setter Property="Tag" Value="{Binding Tag, Mode=TwoWay}" />
 	</ControlTheme>
 

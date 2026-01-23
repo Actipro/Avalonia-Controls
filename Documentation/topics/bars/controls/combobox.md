@@ -240,6 +240,10 @@ The [PopupOpeningCommand](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarMenuGa
 
 See the [Using Commands](using-commands.md) topic for more information on commands.
 
+### Focus Behavior
+
+In cases where you wish for the combobox to remain focused after selecting an item or committing a value, set the [BarComboBox](xref:@ActiproUIRoot.Controls.Bars.BarComboBox).[InvocationFocusBehavior](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarMenuGalleryHostBase.InvocationFocusBehavior) property to [Self](xref:@ActiproUIRoot.Controls.Bars.InvocationFocusBehavior.Self).
+
 ## Screen Tips
 
 The controls support screen tips, which are formatted tool tips.

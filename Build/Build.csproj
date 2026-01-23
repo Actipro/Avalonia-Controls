@@ -2,7 +2,7 @@
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
-		<TargetFramework>net6.0-windows</TargetFramework>
+		<TargetFramework>net8.0-windows</TargetFramework>
 		<RootNamespace>ActiproSoftware.Tools.Builds</RootNamespace>
 		<StartupObject>ActiproSoftware.Tools.Builds.Build</StartupObject>
 
@@ -16,7 +16,7 @@
 		<RootNamespace>ActiproSoftware.Tools.Builds</RootNamespace>
 		<Company>Actipro Software LLC</Company>
 		<Authors>Actipro Software LLC</Authors>
-		<Copyright>Copyright (c) 2021-2025 Actipro Software LLC.  All rights reserved.</Copyright>
+		<Copyright>Copyright (c) 2021-2026 Actipro Software LLC.  All rights reserved.</Copyright>
 
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 
@@ -27,7 +27,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Nuke.Common" Version="6.0.1" />
+		<PackageReference Include="Nuke.Common" Version="8.1.4" />
 	</ItemGroup>
 
 </Project>
