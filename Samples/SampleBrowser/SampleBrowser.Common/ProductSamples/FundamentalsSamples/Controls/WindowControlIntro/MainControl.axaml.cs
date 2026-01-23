@@ -158,7 +158,7 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.WindowCont
 		/// </summary>
 		/// <param name="sender">The sender of the event.</param>
 		/// <param name="e">The <see cref="RoutedEventArgs"/> that contains the event data.</param>
-		private void OnWindowSizeChanged(object sender, RoutedEventArgs e) {
+		private void OnWindowSizeChanged(object sender, SizeChangedEventArgs e) {
 			if (IsLocationSizeEventOutputEnabled)
 				AppendMessage($"{nameof(WindowControl.SizeChanged)}: {eventsWindow.Bounds.Width.Round()}x{eventsWindow.Bounds.Height.Round()}");
 		}

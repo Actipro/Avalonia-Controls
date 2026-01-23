@@ -100,6 +100,14 @@ For all other operating systems (e.g., Linux), the ancestor `Window` is configur
 - `Window.ExtendClientAreaToDecorationsHint` set to `false`.
 - `Window.ExtendClientAreaTitleBarHeightHint` set to `-1`.
 
+### OffScreenMargin Configuration
+
+A `Window` that extends a custom titlebar into the native titlebar area typically needs to apply the `Window.OffScreenMargin` property to the content of the window to ensure all content is visible when a window is maximized.
+
+The [CanConfigureWindowOffScreenMargin](xref:@ActiproUIRoot.Controls.WindowTitleBar.CanConfigureWindowOffScreenMargin) property, which defaults to `true`, can be used to attempt to automatically configure a `Window`.  When enabled, the `Window.OffScreenMargin` property is automatically configured with a one-way binding to the `Window.Padding` property.  As long as `Window.Padding` is used in the template of a `Window` control, any `Window` that uses a [WindowTitleBar](xref:@ActiproUIRoot.Controls.WindowTitleBar) will, by default, display correctly when maximized.
+
+The property can be set to `false` before the [WindowTitleBar](xref:@ActiproUIRoot.Controls.WindowTitleBar) is added to the visual tree in scenarios where the `Window.Padding` should not be bound to the `Window.OffScreenMargin`.
+
 ## Pseudo-classes
 
 The following pseudo-classes are added, as appropriate, based on the [ChromedTitleBar](xref:@ActiproUIRoot.Controls.Primitives.ChromedTitleBar).[WindowState](xref:@ActiproUIRoot.Controls.Primitives.ChromedTitleBar.WindowState) and can be used when styling the control:

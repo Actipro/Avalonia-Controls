@@ -24,7 +24,7 @@ Docking windows can be individually prevented from serializing within a layout b
 
 ## Saving Layout Data
 
-Dock site layout data can be persisted in XML format and loaded at a later time.  Probably the two most common ways to store layouts are in files and in a database.
+Dock site layout data can be persisted in XML format and loaded at a later time.  Two common ways to store layouts are in files or in a database.
 
 The [DockSiteLayoutSerializer](xref:@ActiproUIRoot.Controls.Docking.Serialization.DockSiteLayoutSerializer) class fully implements the XML object hierarchy serialization framework described in the [Serialization](../../shared/windows-serialization.md) topic.  Please see that topic for a list of methods that can be called for saving to files, string, etc.
 
@@ -124,9 +124,9 @@ The [Serialization](../../shared/windows-serialization.md) topic explains how to
 
 ## Optimal Memory Utilization when Using Layout Serializers
 
-The layout serializer uses an `XmlSerializer` as the core .NET object that reads/writes XML data.  One issue that has been discovered in Microsoft's .NET implementation is that `XmlSerializer` is capable of creating memory leaks, primarily whenever new instances of `XmlSerializer` are created.
+The layout serializer has an option to use an `XmlSerializer` for reading/writing XML data that is enabled by calling the [DockSiteLayoutSerializer](xref:@ActiproUIRoot.Controls.Docking.Serialization.DockSiteLayoutSerializer).[EnableXmlSerializer](xref:@ActiproUIRoot.Serialization.XmlSerializerBase`2.EnableXmlSerializer*) method.  One issue that has been discovered in Microsoft's .NET implementation is that `XmlSerializer` is capable of creating memory leaks, primarily whenever new instances of `XmlSerializer` are created.
 
-To combat this leak, we've implemented some caching code on our end, but also highly recommend that instead of creating a new layout serializer any time you do a layout serialization, you instead keep a reference to a single app-wide instance of the layout serializer and use that for each layout serialization.
+To combat this leak (which is only necessary when using [EnableXmlSerializer](xref:@ActiproUIRoot.Serialization.XmlSerializerBase`2.EnableXmlSerializer*)), we've implemented some caching code on our end, but also highly recommend that instead of creating a new layout serializer any time you do a layout serialization, you instead keep a reference to a single app-wide instance of the layout serializer and use that for each layout serialization.
 
 ## Disabling Floating Window Snap-to-Screen
 

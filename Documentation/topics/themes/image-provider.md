@@ -19,7 +19,7 @@ While all the image adaptation logic is contained within the [ImageProvider](xre
 *A single raster image that is altered to show normal, disabled, monochrome, and monochrome disabled states in both light and dark themes*
 
 > [!IMPORTANT]
-> [ImageProvider](xref:@ActiproUIRoot.Media.ImageProvider) can only adapt image types for which it has logic to handle.  The supported image types are `DrawingImage` and `Bitmap`.  Other image types, like SVG images from the `Avalonia.Svg` NuGet package, are not currently supported.
+> [ImageProvider](xref:@ActiproUIRoot.Media.ImageProvider) can only adapt image types for which it has logic to handle.  The supported image types are `DrawingImage` and `Bitmap`.  Other non-Avalonia native image types are not currently supported, other than SVG images from the `Svg.Controls.Skia.Avalonia` NuGet package through a special `SvgImageProvider` class that is described below in this topic.
 
 ## Usage Scenarios for ImageProvider
 
@@ -229,3 +229,27 @@ This is only necessary if attached properties must be used to configure adaptati
 
 > [!WARNING]
 > Raster images must be encoded using `PixelFormats.Bgra8888` or `PixelFormats.Rgba8888` to support adaptation. Any other pixel formats will result in the original image being used without adaptation.
+
+## Working with SVG Vector Images
+
+SVG images are not natively supported in Avalonia but can be used in Avalonia via a third-party "Svg.Controls.Skia.Avalonia" NuGet package.  Since SVG images are external to Avalonia itself, the default implementation of [ImageProvider](xref:@ActiproUIRoot.Media.ImageProvider) does not support their adaptation.
+
+A special `SvgImageProvider` class that inherits [ImageProvider](xref:@ActiproUIRoot.Media.ImageProvider) and implements adaptation of SVG images from that NuGet package is available.  This class is open source and included in the sample project's "Shared Library / Dynamic Image" sample.  Its source can be copied to your own application and used to adapt SVG images.
+
+This code shows how to configure the default image provider to support SVG files.
+
+```csharp
+using ActiproSoftware.UI.Avalonia.Media;
+...
+ImageProvider.Default = new SvgImageProvider();  // See sample for full class source
+```
+
+The following code to set Skia options should be set in app build logic to work around an issue where SVGs may not apply opacity correctly.
+
+```csharp
+public static AppBuilder BuildAvaloniaApp()
+	=> AppBuilder.Configure<App>()
+		// Required to work around a Skia issue for SVG opacity rendering
+		.With(new SkiaOptions { UseOpacitySaveLayer = true })
+		...
+```

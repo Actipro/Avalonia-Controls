@@ -11,6 +11,6 @@
 	WindowStartupLocation="CenterScreen"
 	>
 
-	<sampleBrowser:RootView Margin="{Binding #rootWindow.OffScreenMargin}" />
+	<sampleBrowser:RootView />
 	
 </Window>

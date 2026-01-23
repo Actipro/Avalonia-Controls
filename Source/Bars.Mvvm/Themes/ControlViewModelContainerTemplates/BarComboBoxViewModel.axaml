@@ -17,6 +17,7 @@
 			Command="{Binding Command}"
 			HasCategoryHeadersOnMenu="{Binding HasCategoryHeaders}"
 			InlineIconMemberBinding="{Binding Icon, x:DataType=actipro:IBarGalleryItemViewModel}"
+			InvocationFocusBehavior="{Binding InvocationFocusBehavior}"
 			IsEditable="{Binding IsEditable}"
 			IsPreviewEnabledWhenPopupClosed="{Binding IsPreviewEnabledWhenPopupClosed}"
 			IsReadOnly="{Binding IsReadOnly}"

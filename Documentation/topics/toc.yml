@@ -363,6 +363,8 @@ items:
   items:
   - name: "Overview"
     href: conversion/index.md
+  - name: "Converting to v25.2.2"
+    href: conversion/converting-to-v25-2-2.md
   - name: "Converting to v25.2"
     href: conversion/converting-to-v25-2.md
   - name: "Converting to v25.1"

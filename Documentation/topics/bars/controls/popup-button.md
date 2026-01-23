@@ -291,6 +291,10 @@ The `PopupOpeningCommand`'s can-execute result determines the enabled state of t
 
 See the [Using Commands](using-commands.md) topic for more information on commands.
 
+### Focus Behavior
+
+In cases where you wish for the button to remain focused after a click on one of its popup menu items, set the [BarPopupButton](xref:@ActiproUIRoot.Controls.Bars.BarPopupButton).[InvocationFocusBehavior](xref:@ActiproUIRoot.Controls.Bars.BarPopupButton.InvocationFocusBehavior) property to [Self](xref:@ActiproUIRoot.Controls.Bars.InvocationFocusBehavior.Self).
+
 ## Screen Tips
 
 The controls support screen tips, which are formatted tool tips.

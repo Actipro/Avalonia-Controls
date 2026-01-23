@@ -40,9 +40,9 @@
 							<actipro:TabbedMdiHost x:Name="tabbedMdiHost">
 								<actipro:TabbedMdiContainer>
 									<actipro:DocumentWindow SerializationId="LayoutDataDocument" Title="Saved Layout XML" Icon="/Images/Icons/TextDocument16.png" CanClose="False">
-										<ScrollViewer Margin="4" HorizontalScrollBarVisibility="Auto">
-											<SelectableTextBlock x:Name="layoutXmlTextBlock" Classes="theme-text-code size-xs" sampleBrowser:CodeTextBlockProperties.CodeLanguage="Xml" />
-										</ScrollViewer>
+									<ScrollViewer Margin="4" HorizontalScrollBarVisibility="Auto">
+										<SelectableTextBlock x:Name="layoutXmlTextBlock" Classes="theme-text-code size-xs" sampleBrowser:CodeTextBlockProperties.CodeLanguage="Xml" />
+									</ScrollViewer>
 									</actipro:DocumentWindow>
 								</actipro:TabbedMdiContainer>
 							</actipro:TabbedMdiHost>

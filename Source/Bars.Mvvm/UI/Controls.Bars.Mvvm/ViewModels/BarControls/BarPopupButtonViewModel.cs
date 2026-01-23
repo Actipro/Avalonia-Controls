@@ -12,6 +12,7 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		private ICommand? _command;
 		private object? _commandParameter;
 		private string? _description;
+		private InvocationFocusBehavior _invocationFocusBehavior = InvocationFocusBehavior.Default;
 		private bool _isVisible = true;
 		private string? _keyTipText;
 		private string? _label;
@@ -82,6 +83,17 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		public string? Description {
 			get => _description;
 			set => SetProperty(ref _description, value);
+		}
+
+		/// <summary>
+		/// Indicates how the button processes focus when an item is clicked.
+		/// </summary>
+		/// <value>
+		/// The default value is <see cref="InvocationFocusBehavior.Default"/>.
+		/// </value>
+		public InvocationFocusBehavior InvocationFocusBehavior {
+			get => _invocationFocusBehavior;
+			set => SetProperty(ref _invocationFocusBehavior, value);
 		}
 
 		/// <inheritdoc cref="BarButtonViewModel.IsVisible"/>

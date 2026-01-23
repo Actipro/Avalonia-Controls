@@ -295,3 +295,27 @@ public partial class App : Application {
 
 > [!TIP]
 > There are an enormous number of options in theme definitions that can alter the generated theme.  See the [theme definitions](theme-definitions.md) topic to learn more about the available options.
+
+## Rider and Unknown Style Class Warnings
+
+The Rider IDE will attempt to warn you about unknown style classes used in XAML.  For instance, if a `Button` with a `theme-solid` style class is defined like this:
+
+```xaml
+<Button Classes="theme-solid" Content="Solid Button" />
+```
+
+The solid theme will be applied to the button properly.  However, since the Actipro themes are constructed dynamically, Rider's static examination of style class definitions doesn't recognize the `theme-solid` style class as being defined.  Rider will create a warning like this:
+
+> Style class 'theme-solid' not found
+
+Warnings like these for Actipro-defined style classes can be excluded from Rider by adding a `StyleInclude` to a special XAML file that can be properly scanned by Rider's static examination logic:
+
+```xaml
+<Application ... xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui">
+	<Application.Styles>
+
+		<StyleInclude Source="avares://ActiproSoftware.Avalonia.Shared/Themes/StyleClassStubs.axaml" />
+
+	</Application.Styles>
+</Application>
+```

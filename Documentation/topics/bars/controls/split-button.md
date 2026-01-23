@@ -286,6 +286,10 @@ The [PopupOpeningCommand](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarPopupB
 
 See the [Using Commands](using-commands.md) topic for more information on commands.
 
+### Focus Behavior
+
+In cases where you wish for the button to remain focused after a click on it or one of its popup menu items, set the [BarSplitButton](xref:@ActiproUIRoot.Controls.Bars.BarSplitButton).[InvocationFocusBehavior](xref:@ActiproUIRoot.Controls.Bars.BarPopupButton.InvocationFocusBehavior) property to [Self](xref:@ActiproUIRoot.Controls.Bars.InvocationFocusBehavior.Self).
+
 ## Input Gesture Text
 
 The control can have input gesture text associated with it that describes a related keyboard shortcut, and is displayed in the screen tip for the control or in the menu item itself.

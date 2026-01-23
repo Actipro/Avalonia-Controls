@@ -3,6 +3,7 @@ using ActiproSoftware.UI.Avalonia.Themes;
 using Avalonia;
 using Avalonia.Styling;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.CodeAnalysis;
@@ -18,7 +19,7 @@ namespace ActiproSoftware.SampleBrowser.Utilities.ThemeResourceBrowser {
 	public class ThemeResourceBrowserViewModel : ObservableObjectBase {
 
 		private CancellationTokenSource? _cancellationTokenSource;
-		private readonly List<ThemeResourceViewModel> _currentThemeResources = new();
+		private readonly ConcurrentBag<ThemeResourceViewModel> _currentThemeResources = new();
 		private string _filterText = string.Empty;
 		private ThemeResourceReferenceTextKind _referenceTextKind = ThemeResourceReferenceTextKind.XamlDynamicResource;
 		private ThemeVariant _theme;
@@ -58,7 +59,7 @@ namespace ActiproSoftware.SampleBrowser.Utilities.ThemeResourceBrowser {
 					filters.Add(parts);
 				}
 
-				filteredResourceList.AddRange(_currentThemeResources.Where(x => Filter(x.Name)));
+				filteredResourceList.AddRange(_currentThemeResources.Where(x => Filter(x.Name)).OrderBy(x => x.Name));
 
 				bool Filter(string key) {
 					if (!filters.Any())
@@ -106,12 +107,19 @@ namespace ActiproSoftware.SampleBrowser.Utilities.ThemeResourceBrowser {
 
 			// Build theme resources if not already built
 			if (!_currentThemeResources.Any()) {
-				_currentThemeResources.AddRange(GetThemeResourceViewModels(Theme));
+				foreach (var resource in GetThemeResourceViewModels(Theme)) {
+					if (token.IsCancellationRequested)
+						return;
+				
+					_currentThemeResources.Add(resource);
+				}
+
 				if (token.IsCancellationRequested)
 					return;
 			}
 
 			var filteredResources = await GetFilteredResourcesViewModels(token);
+
 			if (token.IsCancellationRequested)
 				return;
 
@@ -119,9 +127,9 @@ namespace ActiproSoftware.SampleBrowser.Utilities.ThemeResourceBrowser {
 			foreach (var resource in filteredResources) {
 				if (token.IsCancellationRequested)
 					break;
+
 				FilteredResources.Add(resource);
 			}
-
 		}
 
 		public ThemeResourceReferenceTextKind ResourceReferenceTextKind {
@@ -129,7 +137,8 @@ namespace ActiproSoftware.SampleBrowser.Utilities.ThemeResourceBrowser {
 			set {
 				if (SetProperty(ref _referenceTextKind, value)) {
 					// Push to all the resource view models
-					_currentThemeResources.ForEach(x => x.ResourceReferenceTextKind = value);
+					foreach (var resource in _currentThemeResources)
+						resource.ResourceReferenceTextKind = value;
 				}
 			}
 		}

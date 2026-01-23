@@ -51,3 +51,15 @@ The following updates should be made to any class that implements [IBarGalleryIt
 ## Theme Generator Updates
 
 The [ThemeGenerator.GetBrushResource](xref:@ActiproUIRoot.Themes.Generation.ThemeGenerator.GetBrushResource*) method was updated to return `IBrush` instead of `Brush`.
+
+## CheckBoxMenuIndicator and RadioButtonMenuIndicator Updates
+
+The [CheckBoxMenuIndicator](xref:@ActiproUIRoot.Themes.ControlThemeKind.CheckBoxMenuIndicator) and [RadioButtonMenuIndicator](xref:@ActiproUIRoot.Themes.ControlThemeKind.RadioButtonMenuIndicator) control themes are no longer automatically applied to `CheckBox` and `RadioButton` controls respectively within `MenuItem` controls.  In past versions, these control themes were necessary to render check state glyphs as a menu item's `Icon`.  Recent versions of Avalonia added check state related properties, obsoleting the need for these control themes.
+
+## SettingsExpander Control Theme
+
+To support new expansion indicator features for [SettingsExpander](xref:@ActiproUIRoot.Controls.SettingsExpander), the default `ControlTheme` was updated. Any themes or styles that attempt to target the expansion indicator may need to be updated.
+- The `ContentPresenter` for the expansion indicator was changed to [IconPresenter](xref:@ActiproUIRoot.Controls.Primitives.IconPresenter).
+- The `expansionIndicator` part was renamed to `PART_ExpanderIconPresenter`.
+
+This means that any selector previously written as `ContentPresenter#expansionIndicator` will need to be changed to `controlsPrimitives|IconPresenter#PART_ExpanderIconPresenter` (where `controlsPrimitives` is imported as `using:ActiproSoftware.UI.Avalonia.Controls.Primitives`).

@@ -18,6 +18,7 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		private IDataTemplate? _categoryHeaderTemplate;
 		private string? _collapsedButtonDescription;
 		private bool _hasCategoryHeaders = true;
+		private InvocationFocusBehavior _invocationFocusBehavior = InvocationFocusBehavior.Default;
 		private bool _isSelectionSupported = true;
 		private IEnumerable? _items;
 		private string? _keyTipText;
@@ -219,7 +220,18 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 			get => _hasCategoryHeaders;
 			set => SetProperty(ref _hasCategoryHeaders, value);
 		}
-		
+
+		/// <summary>
+		/// Indicates how the control processes focus when a commit occurs.
+		/// </summary>
+		/// <value>
+		/// The default value is <see cref="InvocationFocusBehavior.Default"/>.
+		/// </value>
+		public InvocationFocusBehavior InvocationFocusBehavior {
+			get => _invocationFocusBehavior;
+			set => SetProperty(ref _invocationFocusBehavior, value);
+		}
+
 		/// <summary>
 		/// Indicates whether selection is supported by the gallery.
 		/// </summary>
