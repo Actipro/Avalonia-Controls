@@ -9,7 +9,7 @@ If you believe you have found a security vulnerability affecting:
 - **Actipro Avalonia Controls** *(commercial product)*
 - Any open-source libraries, samples, utilities, or documentation in this repository
 
-Contact us through one of the **Private Support** options listed on this page:
+Contact us either through GitHub's **Report a vulnerability** button or one of the **Private Support** options listed on this page:
 https://www.actiprosoftware.com/company/contact
 
 > ⚠️ Do NOT open a public GitHub issue or create a public discussion forum thread for security concerns.
@@ -42,7 +42,7 @@ Older releases are not maintained for security fixes.
 When you report a vulnerability, we follow a structured, coordinated workflow designed to protect customers while ensuring timely remediation. The process is the same whether the issue affects the open-source assets in this repository or the related commercial controls product, but the internal handling differs slightly depending on where the affected code lives.
 
 1. **Acknowledgment**  
-   We will confirm receipt of your report within **3 business days**.
+   We will confirm receipt of your report promptly.
    If additional information is needed to reproduce the issue, we will request it at this stage.
 
 2. **Investigation**  
@@ -54,7 +54,7 @@ When you report a vulnerability, we follow a structured, coordinated workflow de
    | Open-source *(this repo)* | Triaged in a private GitHub Security Advisory. |
 
 3. **Fix Development**  
-   Fixes are developed privately to prevent exploitation before a patch is available.
+   Fixes are developed without undue delay and privately to prevent exploitation before a patch is available.
    We may request additional details from the reporter if needed to ensure full remediation.
 
 4. **Coordinated Disclosure**  
