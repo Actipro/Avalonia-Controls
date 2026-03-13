@@ -168,7 +168,7 @@ var result = await UserPromptBuilder.Configure()
 					<StackPanel>
 						<TextBlock Classes="theme-form-control-label" Text="Display mode" />
 						<ComboBox x:Name="displayModeSelection" ItemsSource="{actipro:DelimitedArray Type=actipro:UserPromptDisplayMode}" SelectedIndex="0" />
-						<TextBlock x:Name="displayModeWarning" Classes="theme-form-control-message warning" Text="Dialog not availailable on this platform" />
+						<TextBlock IsVisible="{Binding !#sampleRootControl.IsDialogAllowed}" Classes="theme-form-control-message warning" Text="Dialog not availailable on this platform" />
 					</StackPanel>
 					<Button Classes="show-dialog theme-solid accent" Click="OnSampleShowDialogDisplayModeClick" />
 				</StackPanel>
@@ -207,8 +207,11 @@ var result = await UserPromptBuilder.Configure()
 						<TextBlock Classes="theme-form-control-label" Text="Dialog chromed decorations" />
 						<ComboBox x:Name="dialogChromedDecorationsSelection" ItemsSource="{actipro:DelimitedArray Type=actipro:ChromedDecorations}" SelectedIndex="2" />
 					</StackPanel>
-					<Button x:Name="dialogChromedDecorationsShowHostedSampleButton" Classes="show-dialog theme-solid accent" Click="OnSampleShowDialogChromedDecorationsClick" />
-					<TextBlock x:Name="dialogChromedDecorationsWarning" Classes="theme-form-control-message warning" Text="Dialog not availailable on this platform" />
+					<CheckBox x:Name="dialogChromedDecorationsResizableCheckBox" IsChecked="False" Content="Resizable" />
+					<Button IsEnabled="{Binding #sampleRootControl.IsDialogAllowed}" Classes="show-dialog theme-solid accent" Click="OnSampleShowDialogChromedDecorationsClick" />
+					<TextBlock IsVisible="{Binding !#sampleRootControl.IsDialogAllowed}" Classes="theme-form-control-message warning" Text="Dialog not availailable on this platform" />
+					<TextBlock Classes="theme-form-control-message" Text="TitleBarOnly decorations are not supported on Linux and will fallback to None." />
+					<TextBlock Classes="theme-form-control-message" Text="Full decorations are not supported with resizable dialogs on Linux and will fallback to None." />
 				</StackPanel>
 			</sampleBrowser:ControlExample.Options>
 			<sampleBrowser:ControlExample.CodeExamples>
@@ -216,11 +219,12 @@ var result = await UserPromptBuilder.Configure()
 					<![CDATA[
 var result = await UserPromptBuilder.Configure()
 	// Other common settings here
-	.WithDialogChromedDecorations($(DialogChromedDecorations))
+	.WithDialogChromedDecorations($(DialogChromedDecorations))$(CanResizeLine)
 	.Show();
 					]]>
 					<sampleBrowser:CodeExample.Substitutions>
 						<sampleBrowser:CodeExampleSubstitution Key="DialogChromedDecorations" Value="{Binding #dialogChromedDecorationsSelection.SelectedItem}" />
+						<sampleBrowser:CodeExampleSubstitution Key="CanResizeLine" Value="&#xA;&#x9;.WithCanResize(true)" IsEnabled="{Binding #dialogChromedDecorationsResizableCheckBox.IsChecked}" />
 					</sampleBrowser:CodeExample.Substitutions>
 				</sampleBrowser:CodeExample>
 			</sampleBrowser:ControlExample.CodeExamples>
@@ -495,7 +499,8 @@ var result = await UserPromptBuilder.Configure()
 			
 			<sampleBrowser:ControlExample.Options>
 				<StackPanel Spacing="10">
-					<Button Classes="show-dialog" Click="OnSampleShowDialogCustomHeaderAndContentClick" />
+					<Button IsEnabled="{Binding #sampleRootControl.IsMultiThreadAllowed}" Classes="show-dialog" Click="OnSampleShowDialogCustomHeaderAndContentClick" />
+					<TextBlock IsVisible="{Binding !#sampleRootControl.IsMultiThreadAllowed}" Classes="theme-form-control-message warning" Text="The hosted sample requires multi-threading that is not available on this platform" />
 				</StackPanel>
 			</sampleBrowser:ControlExample.Options>
 			<sampleBrowser:ControlExample.CodeExamples>
@@ -586,7 +591,7 @@ object? GetImage(string relPath) {
 				<actipro:UserPromptControl.Footer>
 					<TextBlock VerticalAlignment="Top">
 						<Run>Click </Run>
-						<InlineUIContainer>
+						<InlineUIContainer BaselineAlignment="TextBottom">
 							<actipro:HyperlinkTextBlock Click="OnGenericHyperlinkClick">here</actipro:HyperlinkTextBlock>
 						</InlineUIContainer>
 						<Run> for more information</Run>
@@ -609,7 +614,7 @@ object? GetImage(string relPath) {
 	<actipro:UserPromptControl.Footer>
 		<TextBlock VerticalAlignment="Top">
 			<Run>Click </Run>
-			<InlineUIContainer>
+			<InlineUIContainer BaselineAlignment="TextBottom">
 				<actipro:HyperlinkTextBlock Click="OnGenericHyperlinkClick">here</actipro:HyperlinkTextBlock>
 			</InlineUIContainer>
 			<Run> for more information</Run>
@@ -1472,7 +1477,7 @@ var result = await UserPromptBuilder.Configure()
 					<StackPanel>
 						<TextBlock Classes="theme-form-control-label" Text="Display mode" />
 						<ComboBox x:Name="customAppearanceDisplayModeSelection" ItemsSource="{actipro:DelimitedArray Type=actipro:UserPromptDisplayMode}" SelectedIndex="0" />
-						<TextBlock x:Name="customAppearanceDisplayModeWarning" Classes="theme-form-control-message warning" Text="Dialog not availailable on this platform" />
+						<TextBlock IsVisible="{Binding !#sampleRootControl.IsDialogAllowed}" Classes="theme-form-control-message warning" Text="Dialog not availailable on this platform" />
 					</StackPanel>
 				</StackPanel>
 			</sampleBrowser:ControlExample.Options>

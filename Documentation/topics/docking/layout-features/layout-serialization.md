@@ -110,6 +110,9 @@ If the [DockSite](xref:@ActiproUIRoot.Controls.Docking.DockSite).[WindowsOpening
 
 When using a custom class that derives from `DocumentWindow` or `ToolWindow`, the properties can be assigned in the constructor of the class. In addition, a XAML file with code-behind can be leveraged to allow the window to be designed in the Visual Studio designer.
 
+> [!IMPORTANT]
+> Custom classes that derive from `DocumentWindow` or `ToolWindow` serialize their type and assembly name in string format for later restoration during deserialization.  Due to our secure-by-default design, resolution of string type names will fail trust checks and not be loaded without additional configuration and handling described in the [Security](../../security.md) topic.
+
 ## Keeping All Existing Documents Open
 
 When deserializing document layouts, all documents are closed and only those document windows that are listed in the layout data are re-opened.  This means that if a document was open prior to the layout deserialization, but it is not listed within the layout data, it will be closed (and destroyed if [DockSite](xref:@ActiproUIRoot.Controls.Docking.DockSite).[AreDocumentWindowsDestroyedOnClose](xref:@ActiproUIRoot.Controls.Docking.DockSite.AreDocumentWindowsDestroyedOnClose) is set).

@@ -108,7 +108,7 @@
 					<actipro:SegmentedBarItem>Never</actipro:SegmentedBarItem>
 					<actipro:SegmentedBarItem>Daily</actipro:SegmentedBarItem>
 					<actipro:SegmentedBarItem>Weekly</actipro:SegmentedBarItem>
-					<actipro:SegmentedBarItem>Montly</actipro:SegmentedBarItem>
+					<actipro:SegmentedBarItem>Monthly</actipro:SegmentedBarItem>
 					<actipro:SegmentedBarItem IsEnabled="False">Quarterly</actipro:SegmentedBarItem>
 					<actipro:SegmentedBarItem>Annually</actipro:SegmentedBarItem>
 				</actipro:SegmentedBar>

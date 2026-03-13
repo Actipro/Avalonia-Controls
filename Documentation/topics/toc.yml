@@ -363,6 +363,8 @@ items:
   items:
   - name: "Overview"
     href: conversion/index.md
+  - name: "Converting to v25.2.3"
+    href: conversion/converting-to-v25-2-3.md
   - name: "Converting to v25.2.2"
     href: conversion/converting-to-v25-2-2.md
   - name: "Converting to v25.2"
@@ -383,6 +385,8 @@ items:
   href: open-source.md
 - name: "Support"
   href: support.md
+- name: "Security"
+  href: security.md
 - name: "Third-Party Software"
   href: third-party.md
 - name: "API Reference"

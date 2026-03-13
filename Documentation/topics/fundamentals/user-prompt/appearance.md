@@ -130,6 +130,9 @@ When displayed as a dialog, parts of the [UserPromptWindow](xref:@ActiproUIRoot.
 > [!IMPORTANT]
 > Avalonia on Linux either requires all system decorations or none.  It is not possible to hide just the title bar and still keep the borders, so [ChromedDecorations](xref:@ActiproUIRoot.Controls.ChromedDecorations).[TitleBarOnly](xref:@ActiproUIRoot.Controls.ChromedDecorations.TitleBarOnly) is not supported on Linux.
 
+> [!WARNING]
+> A resizable user prompt requires borders for resizing and cannot support [Full](xref:@ActiproUIRoot.Controls.ChromedDecorations.Full) chromed decorations.  On Windows and Mac OS, the user prompt must fallback to showing the native window borders.  Since Linux cannot hide the title bar without also hiding the borders, a resizable user prompt on Linux will always fallback to having no chromed decorations.
+
 The change the global default value for [ChromedDecorations](xref:@ActiproUIRoot.Controls.ChromedDecorations), set [UserPromptBuilder](xref:@ActiproUIRoot.Controls.UserPromptBuilder).[DefaultDialogChromedDecorations](xref:@ActiproUIRoot.Controls.UserPromptBuilder.DefaultDialogChromedDecorations) to the desired value.
 
 ```csharp
@@ -154,6 +157,7 @@ await MessageBox.Show(
 		.WithDialogChromedDecorations(ChromedDecorations.None)
 	);
 ```
+
 }
 
 @if (wpf) {

@@ -40,7 +40,7 @@ xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 <!-- Used as an inline with other text -->
 <TextBlock>
 	<Run>Click </Run>
-	<InlineUIContainer>
+	<InlineUIContainer BaselineAlignment="TextBottom">
 		<actipro:HyperlinkTextBlock Click="OnHyperlinkTextBlockClicked">here</actipro:HyperlinkTextBlock>
 	</InlineUIContainer>
 	<Run> for more information</Run>

@@ -1,3 +1,4 @@
+using ActiproSoftware.Security;
 using ActiproSoftware.UI.Avalonia.Controls;
 using ActiproSoftware.UI.Avalonia.Input;
 using ActiproSoftware.UI.Avalonia.Themes;
@@ -98,12 +99,13 @@ namespace ActiproSoftware.SampleBrowser {
 				if (typeName.StartsWith('/'))
 					typeName = $"ActiproSoftware{typeName}";
 				typeName = typeName.Replace('/', '.');
+				typeName += $", {typeof(ApplicationViewModel).Assembly.FullName}";
 
 				// Attempt to create an instance of a type
 				Control? control;
-				var type = Type.GetType(typeName);
+				var type = TrustedCodeService.Resolve(typeName, throwOnError: false);
 				if (type is not null) {
-					control = Activator.CreateInstance(type) as Control;
+					control = TrustedCodeService.CreateInstance(type) as Control;
 					return control;
 				}
 

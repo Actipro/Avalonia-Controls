@@ -1,5 +1,8 @@
 name: Integration Build
 
+permissions:
+  contents: read
+
 on:
   push:
     paths-ignore:

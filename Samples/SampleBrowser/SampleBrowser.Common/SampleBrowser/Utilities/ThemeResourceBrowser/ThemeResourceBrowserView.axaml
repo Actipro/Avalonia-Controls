@@ -95,6 +95,14 @@
 										<TextBlock Text="AaBbCc" FontFamily="{Binding}" FontSize="18" />
 									</DataTemplate>
 									
+									<DataTemplate x:DataType="FontStyle">
+										<TextBlock Text="{Binding}" FontStyle="{Binding}" />
+									</DataTemplate>
+									
+									<DataTemplate x:DataType="FontWeight">
+										<TextBlock Text="{Binding}" FontWeight="{Binding}" />
+									</DataTemplate>
+									
 									<DataTemplate x:DataType="Thickness">
 										<Border Width="40" Height="40"
 												Background="{actipro:ThemeResource Container1BackgroundBrush}"

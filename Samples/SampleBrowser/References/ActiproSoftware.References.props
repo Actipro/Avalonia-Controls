@@ -2,7 +2,7 @@
 <Project>
 
 	<PropertyGroup>
-		<ActiproVersion>25.2.2</ActiproVersion>
+		<ActiproVersion>25.2.3</ActiproVersion>
 	</PropertyGroup>
 	
 	<ItemGroup>
