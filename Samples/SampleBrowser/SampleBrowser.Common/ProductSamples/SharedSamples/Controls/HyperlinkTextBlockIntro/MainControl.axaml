@@ -93,7 +93,7 @@ private void OnHyperlinkTextBlockClicked(object? sender, RoutedEventArgs e) {
 
 			<TextBlock Margin="30">
 				<Run>Click </Run>
-				<InlineUIContainer>
+				<InlineUIContainer BaselineAlignment="TextBottom">
 					<actipro:HyperlinkTextBlock Click="OnHyperlinkTextBlockClicked">here</actipro:HyperlinkTextBlock>
 				</InlineUIContainer>
 				<Run> for more information</Run>
@@ -104,7 +104,7 @@ private void OnHyperlinkTextBlockClicked(object? sender, RoutedEventArgs e) {
 					<![CDATA[
 <TextBlock>
 	<Run>Click </Run>
-	<InlineUIContainer>
+	<InlineUIContainer BaselineAlignment="TextBottom">
 		<actipro:HyperlinkTextBlock Click="OnHyperlinkTextBlockClicked">here</actipro:HyperlinkTextBlock>
 	</InlineUIContainer>
 	<Run> for more information</Run>

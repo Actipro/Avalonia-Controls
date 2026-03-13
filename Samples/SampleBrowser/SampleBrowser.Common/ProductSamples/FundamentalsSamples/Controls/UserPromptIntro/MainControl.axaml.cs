@@ -24,13 +24,18 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 
 		private IImage? _basicFooterSampleImage;
 		private ICommand? _contextualHelpCommand;
-		private readonly bool _isDialogAllowed;
 		private bool _standardCheckBoxSampleIsChecked = false;
 
 		#region Property Definitions
 
 		public static readonly DirectProperty<MainControl, IImage?> BasicFooterSampleImageProperty
 			= AvaloniaProperty.RegisterDirect<MainControl, IImage?>(nameof(BasicFooterSampleImage), x => x.BasicFooterSampleImage);
+
+		public static readonly DirectProperty<MainControl, bool> IsDialogAllowedProperty
+			= AvaloniaProperty.RegisterDirect<MainControl, bool>(nameof(IsDialogAllowed), x => x.IsDialogAllowed);
+
+		public static readonly DirectProperty<MainControl, bool> IsMultiThreadAllowedProperty
+			= AvaloniaProperty.RegisterDirect<MainControl, bool>(nameof(IsMultiThreadAllowed), x => x.IsMultiThreadAllowed);
 
 		public static readonly StyledProperty<bool> ShowBasicFooterSampleImageProperty
 			= AvaloniaProperty.Register<MainControl, bool>(nameof(ShowBasicFooterSampleImage), defaultValue: true);
@@ -42,16 +47,15 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		public MainControl() {
+			// Indicate if dialogs are allowed on the platform
+			IsDialogAllowed = (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime);
+
+			// Indicate if multi-threading is allowed on the platform
+			IsMultiThreadAllowed = !OperatingSystem.IsBrowser();
+
 			InitializeComponent();
 
 			UpdateBasicFooterSampleImage();
-
-			// Indicate if dialogs are allowed on the platform
-			_isDialogAllowed = (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime);
-			customAppearanceDisplayModeWarning.IsVisible = !_isDialogAllowed;
-			displayModeWarning.IsVisible = !_isDialogAllowed;
-			dialogChromedDecorationsWarning.IsVisible = !_isDialogAllowed;
-			dialogChromedDecorationsShowHostedSampleButton.IsEnabled = _isDialogAllowed;
 		}
 
 		/////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -126,6 +130,16 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 		/// </summary>
 		public ICommand ContextualHelpCommand
 			=> _contextualHelpCommand ??= new DelegateCommand<object?>(p => ShowContextualHelp(p));
+
+		/// <summary>
+		/// Indicates if the current platform supports showing dialogs.
+		/// </summary>
+		public bool IsDialogAllowed { get; }
+		
+		/// <summary>
+		/// Indicates if the current platform supports multi-threading.
+		/// </summary>
+		public bool IsMultiThreadAllowed { get; } // TODO:
 
 		protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change) {
 			if (change.Property == ShowBasicFooterSampleImageProperty)
@@ -212,7 +226,7 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 
 			// Prevent exception when requested Dialog mode on unsupported platforms
 			var displayMode = (UserPromptDisplayMode)customAppearanceDisplayModeSelection.SelectedValue!;
-			if ((displayMode == UserPromptDisplayMode.Dialog) && !_isDialogAllowed) {
+			if ((displayMode == UserPromptDisplayMode.Dialog) && !IsDialogAllowed) {
 				await UserPromptBuilder.Configure().ForDialogDisplayModeNotSupportedNotice().Show();
 				return;
 			}
@@ -440,7 +454,7 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 			//
 
 			// Prevent exception on unsupported platforms
-			if (!_isDialogAllowed) {
+			if (!IsDialogAllowed) {
 				await UserPromptBuilder.Configure().ForDialogDisplayModeNotSupportedNotice().Show();
 				return;
 			}
@@ -450,6 +464,7 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 				.WithStatusIcon(MessageBoxImage.Information)
 				.WithContent("Apply custom chrome to all or part of a dialog to match the desired application theme.")
 				.WithStandardButtons(MessageBoxButtons.YesNoCancel)
+				.WithCanResize(dialogChromedDecorationsResizableCheckBox.IsChecked == true)
 				.WithDialogChromedDecorations((ChromedDecorations)dialogChromedDecorationsSelection.SelectedValue!)
 				.Show();
 		}
@@ -460,7 +475,7 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 			//
 
 			// Prevent exception when requested Dialog mode on unsupported platforms
-			if (((UserPromptDisplayMode)displayModeSelection.SelectedValue! == UserPromptDisplayMode.Dialog) && !_isDialogAllowed) {
+			if (((UserPromptDisplayMode)displayModeSelection.SelectedValue! == UserPromptDisplayMode.Dialog) && !IsDialogAllowed) {
 				await UserPromptBuilder.Configure().ForDialogDisplayModeNotSupportedNotice().Show();
 				return;
 			}

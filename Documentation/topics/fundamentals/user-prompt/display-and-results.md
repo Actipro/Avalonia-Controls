@@ -206,6 +206,11 @@ UserPromptBuilder.Configure()
 ```
 }
 
+@if (avalonia) {
+> [!WARNING]
+> The Linux operating system may not optimally support resizable prompts in all scenarios.  Prompts with expandable content, for example, will grow in height when expanded but will not shrink when collapsed.  Additionally, [ChromedDecorations](xref:@ActiproUIRoot.Controls.ChromedDecorations) cannot be used on Linux since it will remove the window borders used for resizing.
+}
+
 ## Configuring and Evaluating Results
 
 The [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl).[Result](xref:@ActiproUIRoot.Controls.UserPromptControl.Result) property is used to read or write the user's response to a prompt and is typically only used when working with custom buttons.

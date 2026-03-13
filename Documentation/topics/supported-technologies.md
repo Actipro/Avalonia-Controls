@@ -29,7 +29,11 @@ The assemblies have dependencies on the Avalonia framework as follows:
 <tbody>
 
 <tr>
-<td>Actipro Controls v25.2.2</td>
+<td>
+Actipro Controls v25.2.3
+<br/>
+Actipro Controls v25.2.2
+</td>
 <td>
 
 - Avalonia v11.3.7 or later

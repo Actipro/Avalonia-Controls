@@ -5,6 +5,7 @@ using LoggerFactory = ActiproSoftware.Logging.LoggerFactory;
 #endif
 
 using ActiproSoftware.Logging;
+using ActiproSoftware.Security;
 using ActiproSoftware.UI.Avalonia.Media;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
@@ -49,6 +50,14 @@ namespace ActiproSoftware.SampleBrowser {
 		/// Initializes the application.
 		/// </summary>
 		public override void Initialize() {
+			// Mark this project's assembly as trusted for dynamic loading of samples
+			TrustedCodeService.AddTrustedAssembly(Assembly.GetExecutingAssembly());
+			TrustedCodeService.TypeResolutionRequested += (sender, e) => {
+				// Some type names in deserialization scenarios may only include the pure assembly name
+				//   (no version or public key token) for context, so trust those types that are defined in this assembly
+				e.IsTrusted |= (e.TrustLevel == StringTypeNameTrustLevel.ConditionallyTrusted) && (e.AssemblyName == Assembly.GetExecutingAssembly().GetName().Name);
+			};
+
 			_logger?.LogInformation("Initializing app from XAML...");
 			AvaloniaXamlLoader.Load(this);
 
