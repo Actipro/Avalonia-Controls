@@ -34,7 +34,7 @@ jobs:
       with:
         dotnet-version: 9.x
     - name: Add WASM workload
-      run: dotnet workload install wasm-tools-net8
+      run: dotnet workload install wasm-tools
     - name: Run build project
       run: dotnet run --project ./Build/Build.csproj -- --target IntegrationBuild
     - name: Notify Slack
