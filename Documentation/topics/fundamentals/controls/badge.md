@@ -116,7 +116,7 @@ Use the [OverflowStringFormat](xref:@ActiproUIRoot.Controls.NumericBadge.Overflo
 Overflow behavior can be disabled by setting [OverflowCount](xref:@ActiproUIRoot.Controls.NumericBadge.OverflowCount) to `0`.
 
 > [!WARNING]
-> When specifying a custom [OverflowStringFormat](xref:@ActiproUIRoot.Controls.NumericBadge.OverflowStringFormat) value in XAML, prefix the actual value with `{}` to ensure the XAML parser doesn't interpret the open curly braces of the format string as a meaningful XAML delimiter.
+> Numeric and composite formats are supported.  When specifying a custom [OverflowStringFormat](xref:@ActiproUIRoot.Controls.NumericBadge.OverflowStringFormat) value in XAML, prefix any composite format value with `{}` to ensure the XAML parser doesn't interpret the open curly braces of the format string as a meaningful XAML delimiter.
 
 The following example demonstrates how to define a [NumericBadge](xref:@ActiproUIRoot.Controls.NumericBadge) that overlows at `9` and uses a custom string format of `"{0}*"`:
 

@@ -45,21 +45,22 @@
 			
 			<sampleBrowser:ControlExample.Options>
 				<StackPanel Spacing="10">
-					<TextBox Text="{Binding Title}" Watermark="Title" UseFloatingWatermark="True" />
-					<TextBox Text="{Binding Message}" Watermark="Message" UseFloatingWatermark="True" />
+					<TextBox Text="{Binding Title}" PlaceholderText="Title" UseFloatingPlaceholder="True" />
+					<TextBox Text="{Binding Message}" PlaceholderText="Message" UseFloatingPlaceholder="True" />
 					<StackPanel>
 						<TextBlock Classes="theme-form-control-label" Text="Severity" />
 						<ComboBox ItemsSource="{actipro:DelimitedArray Type=actipro:InfoBarSeverity}" SelectedValue="{Binding Severity}" />
 					</StackPanel>
 					<CheckBox IsChecked="{Binding IsOpen}">Is open</CheckBox>
 					<CheckBox IsChecked="{Binding IsIconVisible}">Is icon visible</CheckBox>
+					<CheckBox IsChecked="{Binding IsSingleLineAllowed}">Is single line allowed</CheckBox>
 					<CheckBox IsChecked="{Binding CanClose}">Can close</CheckBox>
 				</StackPanel>
 			</sampleBrowser:ControlExample.Options>
 			<sampleBrowser:ControlExample.CodeExamples>
 				<sampleBrowser:CodeExample xml:space="preserve">
 					<![CDATA[
-<actipro:InfoBar$(SeverityAttribute)$(IsIconVisibleAttribute)$(CanCloseAttribute)$(IsOpenAttribute)
+<actipro:InfoBar$(SeverityAttribute)$(IsIconVisibleAttribute)$(IsSingleLineAllowedAttribute)$(CanCloseAttribute)$(IsOpenAttribute)
 	Title="$(Title)"
 	Message="$(Message)"
 	/>
@@ -73,6 +74,9 @@
 						<sampleBrowser:CodeExampleSubstitution Key="IsIconVisibleAttribute"
 															   IsEnabled="{Binding !IsIconVisible}"
 															   Value=" IsIconVisible=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsSingleLineAllowedAttribute"
+															   IsEnabled="{Binding !IsSingleLineAllowed}"
+															   Value=" IsSingleLineAllowed=&quot;False&quot;" />
 						<sampleBrowser:CodeExampleSubstitution Key="IsOpenAttribute"
 															   IsEnabled="{Binding !IsOpen}"
 															   Value=" IsOpen=&quot;False&quot;" />

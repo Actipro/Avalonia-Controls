@@ -17,6 +17,7 @@ namespace ActiproSoftware.SampleBrowser {
 
 		private string? _text;
 		private bool _textUsesActiproXamlNamespace;
+		private bool _textUsesActiproPrimitivesXamlNamespace;
 
 		#region Property Definitions
 
@@ -45,6 +46,12 @@ namespace ActiproSoftware.SampleBrowser {
 			= AvaloniaProperty.RegisterDirect<CodeExample, string?>(nameof(Text), x => x.Text);
 
 		/// <summary>
+		/// Defines the <see cref="TextUsesActiproPrimitivesXamlNamespace"/> property.
+		/// </summary>
+		public static readonly DirectProperty<CodeExample, bool> TextUsesActiproPrimitivesXamlNamespaceProperty
+			= AvaloniaProperty.RegisterDirect<CodeExample, bool>(nameof(TextUsesActiproPrimitivesXamlNamespace), x => x.TextUsesActiproPrimitivesXamlNamespace);
+
+		/// <summary>
 		/// Defines the <see cref="TextUsesActiproXamlNamespace"/> property.
 		/// </summary>
 		public static readonly DirectProperty<CodeExample, bool> TextUsesActiproXamlNamespaceProperty
@@ -58,9 +65,9 @@ namespace ActiproSoftware.SampleBrowser {
 
 		#endregion
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		static CodeExample() {
 			UnformattedTextProperty.Changed.AddClassHandler<CodeExample>((obj, _) => obj.UpdateTextWithSubstitutions());
@@ -71,9 +78,9 @@ namespace ActiproSoftware.SampleBrowser {
 			Substitutions.CollectionChanged += this.OnSubstitutionsCollectionChanged;
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// NON-PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		private void OnSubstitutionPropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs e) {
 			if (e.Property == CodeExampleSubstitution.ValueProperty || e.Property == CodeExampleSubstitution.IsEnabledProperty)
@@ -97,6 +104,9 @@ namespace ActiproSoftware.SampleBrowser {
 		private void UpdateTextUsesActiproXamlNamespace() {
 			this.TextUsesActiproXamlNamespace = this.Language == CodeTextBlockProperties.XamlLanguageName
 				&& (this.Text?.Contains("actipro:") == true || this.Text?.Contains("(actipro|") == true);
+
+			this.TextUsesActiproPrimitivesXamlNamespace = this.Language == CodeTextBlockProperties.XamlLanguageName
+				&& (this.Text?.Contains("actiproPrimitives:") == true || this.Text?.Contains("(actiproPrimitives|") == true);
 		}
 
 		private void UpdateTextWithSubstitutions() {
@@ -131,9 +141,9 @@ namespace ActiproSoftware.SampleBrowser {
 			UpdateTextUsesActiproXamlNamespace();
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Indicates if the code example is visible.
@@ -170,6 +180,14 @@ namespace ActiproSoftware.SampleBrowser {
 		public string? Text {
 			get => _text;
 			private set => SetAndRaise(TextProperty, ref _text, value);
+		}
+
+		/// <summary>
+		/// Tests if XAML-based <see cref="Text"/> uses the Actipro Primitivies namespace (e.g., <c>actiproPrimitives:ClassName</c>).
+		/// </summary>
+		public bool TextUsesActiproPrimitivesXamlNamespace {
+			get => _textUsesActiproPrimitivesXamlNamespace;
+			private set => SetAndRaise(TextUsesActiproPrimitivesXamlNamespaceProperty, ref _textUsesActiproPrimitivesXamlNamespace, value);
 		}
 
 		/// <summary>

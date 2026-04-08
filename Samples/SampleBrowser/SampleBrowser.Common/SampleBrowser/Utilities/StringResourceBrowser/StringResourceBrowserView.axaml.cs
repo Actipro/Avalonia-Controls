@@ -5,9 +5,9 @@ namespace ActiproSoftware.SampleBrowser.Utilities.StringResourceBrowser {
 
 	public partial class StringResourceBrowserView : UserControl {
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		public StringResourceBrowserView() {
 			InitializeComponent();
@@ -26,9 +26,9 @@ namespace ActiproSoftware.SampleBrowser.Utilities.StringResourceBrowser {
 			customValueTextBox.TextChanged += (sender, e) => UpdateCodeTextBlock();
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// NON-PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		private void UpdateCodeTextBlock() {
 			if (stringResourceListBox.SelectedItem is StringResourceModel resource)
@@ -37,9 +37,9 @@ namespace ActiproSoftware.SampleBrowser.Utilities.StringResourceBrowser {
 				codeTextBlock.Text = null;
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		public StringResourceBrowserViewModel? ViewModel {
 			get => DataContext as StringResourceBrowserViewModel;

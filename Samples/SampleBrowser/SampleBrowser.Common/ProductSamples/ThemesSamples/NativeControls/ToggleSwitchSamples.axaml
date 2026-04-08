@@ -52,9 +52,9 @@
 						<TextBlock Classes="theme-form-control-label" Text="Variant" />
 						<ComboBox x:Name="sampleVariant" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
 					</StackPanel>
-					<TextBox x:Name="sampleOnContent" Text="On" Watermark="On Content" UseFloatingWatermark="True" />
-					<TextBox x:Name="sampleOffContent" Text="Off" Watermark="Off Content" UseFloatingWatermark="True" />
-					<TextBox x:Name="sampleLabel" Text="Label Content" Watermark="Label" UseFloatingWatermark="True" />
+					<TextBox x:Name="sampleOnContent" Text="On" PlaceholderText="On Content" UseFloatingPlaceholder="True" />
+					<TextBox x:Name="sampleOffContent" Text="Off" PlaceholderText="Off Content" UseFloatingPlaceholder="True" />
+					<TextBox x:Name="sampleLabel" Text="Label Content" PlaceholderText="Label" UseFloatingPlaceholder="True" />
 					<CheckBox IsChecked="{Binding (actipro:ThemeProperties.ToggleSwitchHasFarAffinity)}">Has far affinity</CheckBox>
 					<CheckBox IsChecked="{Binding IsChecked}">Checked</CheckBox>
 					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>

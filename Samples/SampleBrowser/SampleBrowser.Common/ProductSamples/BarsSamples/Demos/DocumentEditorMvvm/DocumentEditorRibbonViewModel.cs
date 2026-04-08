@@ -7,9 +7,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.Demos.DocumentEditorMvvm {
 	/// <inheritdoc/>
 	internal class DocumentEditorRibbonViewModel : RichTextEditorRibbonViewModel {
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <inheritdoc cref="RichTextEditorRibbonViewModel(BarManager)"/>
 		public DocumentEditorRibbonViewModel(BarManager barManager)
@@ -21,9 +21,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.Demos.DocumentEditorMvvm {
 		}
 
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <inheritdoc/>
 		protected override RibbonBackstageViewModel CreateBackstage(BarManager barManager) {

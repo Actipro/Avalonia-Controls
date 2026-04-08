@@ -1,0 +1,172 @@
+<UserControl
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Resources>
+
+		<!-- Icons from: https://icon-sets.iconify.design/fluent-mdl2/ -->
+		<StreamGeometry x:Key="icon-fluent-mdl2-cut">M1416 1536q51 2 96 22t79 56t53 81t20 97q0 53-20 99t-55 81t-82 55t-99 21q-53 0-99-20t-81-55t-55-81t-21-100q0-71 36-132t100-94l-266-531l-265 529q32 17 57 41t44 54t28 63t10 70q0 53-20 99t-55 81t-82 55t-99 21q-53 0-99-20t-81-55t-55-81t-21-100q0-51 19-96t52-80t77-56t96-24l322-646l-339-678l58-175l353 708l353-708l58 175l-339 678zm-776 384q27 0 50-10t40-27t28-41t10-50q0-27-10-50t-27-40t-41-28t-50-10q-27 0-50 10t-40 27t-28 41t-10 50q0 27 10 50t27 40t41 28t50 10m768 0q27 0 50-10t40-27t28-41t10-50q0-27-10-50t-27-40t-41-28t-50-10q-27 0-50 10t-40 27t-28 41t-10 50q0 27 10 50t27 40t41 28t50 10</StreamGeometry>
+		<StreamGeometry x:Key="icon-fluent-mdl2-copy">M1920 805v1243H640v-384H128V0h859l384 384h128zm-384-37h165l-165-165zM640 384h549L933 128H256v1408h384zm1152 512h-384V512H768v1408h1024z</StreamGeometry>
+		<StreamGeometry x:Key="icon-fluent-mdl2-paste">M1920 768v1280H896v-128H128V256h512q0-52 20-99t55-81t81-55T896 0q52 0 99 20t81 55t55 82t21 99h512v512zM512 384v128h768V384h-256v-33q0-17 1-36q0-34-3-67t-17-60t-39-43t-70-17q-44 0-69 16t-39 43t-17 60t-4 68v35q0 17 1 34zm384 1408V768h640V384h-128v256H384V384H256v1408zm896-896h-768v1024h768z</StreamGeometry>
+		<StreamGeometry x:Key="icon-fluent-mdl2-open-file">m1955 1533l-163-162v677h-128v-677l-163 162l-90-90l317-317l317 317zM256 1920h1280v128H128V0h1115l549 549v475h-128V640h-512V128H256zM1280 512h293l-293-293z</StreamGeometry>
+		<StreamGeometry x:Key="icon-fluent-mdl2-save">M1792 128q27 0 50 10t40 27t28 41t10 50v1664H357l-229-230V256q0-27 10-50t27-40t41-28t50-10zM512 896h1024V256H512zm768 512H640v384h128v-256h128v256h384zm512-1152h-128v768H384V256H256v1381l154 155h102v-512h896v512h384z</StreamGeometry>
+		<StreamGeometry x:Key="icon-fluent-mdl2-bold">M1255 901q92 0 173 35t142 95t96 142t35 173q0 92-35 173t-95 142t-142 96t-174 35H512V128h743q80 0 150 30t122 83t83 123t31 150t-30 150t-82 123t-123 83t-151 31m-208-535H896v475h151q49 0 92-19t76-51t51-75t19-93q0-49-19-92t-51-75t-75-51t-93-19m59 1188q49 0 92-18t76-51t51-76t19-92q0-49-18-92t-51-76t-76-51t-93-19H896v475z</StreamGeometry>
+		<StreamGeometry x:Key="icon-fluent-mdl2-italic">M1568 256h-217L882 1664h366l-128 128H416l128-128h161l469-1408H864l128-128h704z</StreamGeometry>
+		<StreamGeometry x:Key="icon-fluent-mdl2-underline">M1011 1792q-161 0-274-46t-184-133t-105-209t-33-275V128h192v988q0 109 21 201t71 159t131 106t201 38q115 0 193-36t127-101t69-154t21-195V128h192v975q0 158-34 285t-109 217t-193 138t-286 49m-627 128h1280v128H384z</StreamGeometry>
+		<StreamGeometry x:Key="icon-fluent-mdl2-border-dot">M0 0h128v128H0zm384 0h128v128H384zm384 0h128v128H768zm384 0h128v128h-128zm384 0h128v128h-128zm512 0v128h-128V0zM0 1920h128v128H0zm384 0h128v128H384zm384 0h128v128H768zm384 0h128v128h-128zm384 0h128v128h-128zM0 1536h128v128H0zm0-384h128v128H0zm0-384h128v128H0zm0-384h128v128H0zm1920 1152h128v128h-128zm0-384h128v128h-128zm0-384h128v128h-128zm0-384h128v128h-128zm0 1536h128v128h-128z</StreamGeometry>
+
+	</UserControl.Resources>
+	<UserControl.Styles>
+
+		<!-- Ensures that the command bar button icons (PathIcons) are faded when disabled -->
+		<Style Selector="PathIcon:disabled">
+			<Setter Property="Opacity" Value="0.4" />
+		</Style>
+
+	</UserControl.Styles>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Actipro's control themes create a modern appearance for native CommandBar controls.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Control themes" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/native-control-themes#other-controls" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+
+		<sampleBrowser:ControlExample
+			Header="Basic usage"
+			DataContext="{Binding #sample}"
+			>
+
+			<CommandBar x:Name="sample" BorderThickness="1" CornerRadius="{actipro:ThemeResource ToolBarCornerRadius}" Padding="{actipro:ScaledThickness 0.5}">
+				<CommandBarButton Label="Open" Icon="{StaticResource icon-fluent-mdl2-open-file}" />
+				<CommandBarButton Label="Save" IsEnabled="False" Icon="{StaticResource icon-fluent-mdl2-save}" />
+				<CommandBarSeparator />
+				<CommandBarButton Label="Cut" Icon="{StaticResource icon-fluent-mdl2-cut}" />
+				<CommandBarButton Label="Copy" Icon="{StaticResource icon-fluent-mdl2-copy}" />
+				<CommandBarButton Label="Paste" IsEnabled="False" Icon="{StaticResource icon-fluent-mdl2-paste}" />
+				<CommandBarSeparator />
+				<CommandBarToggleButton Label="Bold" Icon="{StaticResource icon-fluent-mdl2-bold}" />
+				<CommandBarToggleButton Label="Italic" IsChecked="True" Icon="{StaticResource icon-fluent-mdl2-italic}" />
+				<CommandBarToggleButton Label="Underline" IsChecked="True" IsEnabled="False" Icon="{StaticResource icon-fluent-mdl2-underline}" />
+			</CommandBar>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Default label position" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type={x:Type CommandBarDefaultLabelPosition}}" SelectedValue="{Binding DefaultLabelPosition}" />
+					</StackPanel>
+					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Primary and secondary commands"
+			DataContext="{Binding #primarySecondary}"
+			>
+
+			<CommandBar x:Name="primarySecondary" BorderThickness="1" CornerRadius="{actipro:ThemeResource ToolBarCornerRadius}" Padding="{actipro:ScaledThickness 0.5}" DefaultLabelPosition="Right">
+				<CommandBar.PrimaryCommands>
+					<CommandBarButton Label="Open" Icon="{StaticResource icon-fluent-mdl2-open-file}" />
+					<CommandBarButton Label="Save" IsEnabled="False" Icon="{StaticResource icon-fluent-mdl2-save}" />
+					<CommandBarSeparator />
+					<CommandBarButton Label="Cut" Icon="{StaticResource icon-fluent-mdl2-cut}" />
+					<CommandBarButton Label="Copy" Icon="{StaticResource icon-fluent-mdl2-copy}" />
+					<CommandBarButton Label="Paste" IsEnabled="False" Icon="{StaticResource icon-fluent-mdl2-paste}" />
+				</CommandBar.PrimaryCommands>
+				<CommandBar.SecondaryCommands>
+					<CommandBarToggleButton Label="Bold" Icon="{StaticResource icon-fluent-mdl2-bold}" />
+					<CommandBarToggleButton Label="Italic" IsChecked="True" Icon="{StaticResource icon-fluent-mdl2-italic}" />
+					<CommandBarToggleButton Label="Underline" IsChecked="True" IsEnabled="False" Icon="{StaticResource icon-fluent-mdl2-underline}" />
+					<CommandBarSeparator />
+					<CommandBarButton Label="Other A" Icon="{StaticResource icon-fluent-mdl2-border-dot}" />
+					<CommandBarButton Label="Other B" Icon="{StaticResource icon-fluent-mdl2-border-dot}" />
+					<CommandBarButton Label="Other C" Icon="{StaticResource icon-fluent-mdl2-border-dot}" />
+					<CommandBarButton Label="Other D" Icon="{StaticResource icon-fluent-mdl2-border-dot}" />
+					<CommandBarSeparator />
+					<CommandBarButton Label="Other E (Disabled)" IsEnabled="False" Icon="{StaticResource icon-fluent-mdl2-border-dot}" />
+					<CommandBarButton Label="Other F (Disabled)" IsEnabled="False" Icon="{StaticResource icon-fluent-mdl2-border-dot}" />
+					<CommandBarSeparator />
+					<CommandBarToggleButton Label="Other G (Toggle)" Icon="{StaticResource icon-fluent-mdl2-border-dot}" />
+					<CommandBarToggleButton Label="Other H (Toggle)" IsChecked="True" Icon="{StaticResource icon-fluent-mdl2-border-dot}" />
+					<CommandBarToggleButton Label="Other I (Toggle, Disabled)" IsEnabled="False" Icon="{StaticResource icon-fluent-mdl2-border-dot}" />
+					<CommandBarToggleButton Label="Other J (Toggle, Disabled)" IsEnabled="False" IsChecked="True" Icon="{StaticResource icon-fluent-mdl2-border-dot}" />
+				</CommandBar.SecondaryCommands>
+			</CommandBar>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Default label position" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type={x:Type CommandBarDefaultLabelPosition}}" SelectedValue="{Binding DefaultLabelPosition}" />
+					</StackPanel>
+					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Dynamic overflow"
+			DataContext="{Binding #overflow}"
+			>
+
+			<CommandBar x:Name="overflow" BorderThickness="1" CornerRadius="{actipro:ThemeResource ToolBarCornerRadius}" Padding="{actipro:ScaledThickness 0.5}"
+						IsDynamicOverflowEnabled="True" VerticalAlignment="Center">
+				<CommandBarButton Label="Open" Icon="{StaticResource icon-fluent-mdl2-open-file}" />
+				<CommandBarButton Label="Save" IsEnabled="False" Icon="{StaticResource icon-fluent-mdl2-save}" />
+				<CommandBarSeparator />
+				<CommandBarButton Label="Cut" Icon="{StaticResource icon-fluent-mdl2-cut}" />
+				<CommandBarButton Label="Copy" Icon="{StaticResource icon-fluent-mdl2-copy}" />
+				<CommandBarButton Label="Paste" IsEnabled="False" Icon="{StaticResource icon-fluent-mdl2-paste}" />
+				<CommandBarSeparator />
+				<CommandBarToggleButton Label="Bold" Icon="{StaticResource icon-fluent-mdl2-bold}" />
+				<CommandBarToggleButton Label="Italic" IsChecked="True" Icon="{StaticResource icon-fluent-mdl2-italic}" />
+				<CommandBarToggleButton Label="Underline" IsChecked="True" IsEnabled="False" Icon="{StaticResource icon-fluent-mdl2-underline}" />
+				<CommandBarSeparator />
+				<CommandBarButton Label="Other A" Icon="{StaticResource icon-fluent-mdl2-border-dot}" />
+				<CommandBarButton Label="Other B" Icon="{StaticResource icon-fluent-mdl2-border-dot}" />
+				<CommandBarButton Label="Other C" Icon="{StaticResource icon-fluent-mdl2-border-dot}" />
+				<CommandBarButton Label="Other D" Icon="{StaticResource icon-fluent-mdl2-border-dot}" />
+				<CommandBarSeparator />
+				<CommandBarButton Label="Other E" Icon="{StaticResource icon-fluent-mdl2-border-dot}" />
+				<CommandBarButton Label="Other F" Icon="{StaticResource icon-fluent-mdl2-border-dot}" />
+				<CommandBarButton Label="Other G" Icon="{StaticResource icon-fluent-mdl2-border-dot}" />
+				<CommandBarButton Label="Other H" Icon="{StaticResource icon-fluent-mdl2-border-dot}" />
+				<CommandBarSeparator />
+				<CommandBarButton Label="Other I" Icon="{StaticResource icon-fluent-mdl2-border-dot}" />
+				<CommandBarButton Label="Other J" Icon="{StaticResource icon-fluent-mdl2-border-dot}" />
+				<CommandBarButton Label="Other K" Icon="{StaticResource icon-fluent-mdl2-border-dot}" />
+				<CommandBarButton Label="Other L" Icon="{StaticResource icon-fluent-mdl2-border-dot}" />
+				<CommandBarSeparator />
+				<CommandBarButton Label="Other M" Icon="{StaticResource icon-fluent-mdl2-border-dot}" />
+				<CommandBarButton Label="Other N" Icon="{StaticResource icon-fluent-mdl2-border-dot}" />
+				<CommandBarButton Label="Other O" Icon="{StaticResource icon-fluent-mdl2-border-dot}" />
+				<CommandBarButton Label="Other P" Icon="{StaticResource icon-fluent-mdl2-border-dot}" />
+				<CommandBarSeparator />
+				<CommandBarButton Label="Other Q" Icon="{StaticResource icon-fluent-mdl2-border-dot}" />
+				<CommandBarButton Label="Other R" Icon="{StaticResource icon-fluent-mdl2-border-dot}" />
+				<CommandBarButton Label="Other S" Icon="{StaticResource icon-fluent-mdl2-border-dot}" />
+				<CommandBarButton Label="Other T" Icon="{StaticResource icon-fluent-mdl2-border-dot}" />
+				<CommandBarSeparator />
+				<CommandBarButton Label="Disabled U" IsEnabled="False" Icon="{StaticResource icon-fluent-mdl2-border-dot}" />
+				<CommandBarButton Label="Disabled V" IsEnabled="False" Icon="{StaticResource icon-fluent-mdl2-border-dot}" />
+				<CommandBarSeparator />
+				<CommandBarToggleButton Label="Toggle W" Icon="{StaticResource icon-fluent-mdl2-border-dot}" />
+				<CommandBarToggleButton Label="Toggle X" IsChecked="True" Icon="{StaticResource icon-fluent-mdl2-border-dot}" />
+				<CommandBarToggleButton Label="Toggle Disabled Y" IsEnabled="False" Icon="{StaticResource icon-fluent-mdl2-border-dot}" />
+				<CommandBarToggleButton Label="Toggle Disabled Z" IsEnabled="False" IsChecked="True" Icon="{StaticResource icon-fluent-mdl2-border-dot}" />
+			</CommandBar>
+
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

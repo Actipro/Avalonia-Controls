@@ -61,7 +61,7 @@
 
 					</actipro:Ribbon>
 					
-					<TextBox x:Name="xamlEditor" MinLines="10" Watermark="Layout data" UseFloatingWatermark="True" />
+					<TextBox x:Name="xamlEditor" MinLines="10" PlaceholderText="Layout data" UseFloatingPlaceholder="True" />
 				</StackPanel>
 
 			</sampleBrowser:ControlExample.XamlContent>
@@ -76,7 +76,7 @@
 						Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
 						/>
 
-					<TextBox x:Name="mvvmEditor" MinLines="10" Watermark="Layout data" UseFloatingWatermark="True" />
+					<TextBox x:Name="mvvmEditor" MinLines="10" PlaceholderText="Layout data" UseFloatingPlaceholder="True" />
 					
 				</StackPanel>
 

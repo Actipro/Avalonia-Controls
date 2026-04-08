@@ -68,15 +68,8 @@
 															   IsEnabled="{Binding !UseLargeSize}"
 															   Value="&#xD;&#x9;&#x9;UseLargeSize=&quot;False&quot;" />
 						<sampleBrowser:CodeExampleSubstitution Key="MaxDocumentCountAttribute"
-															   Value="{Binding MaxDocumentCount, StringFormat='&#xD;&#x9;&#x9;MaxDocumentCount=&quot;{0}&quot;'}">
-							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
-								<Binding Path="MaxDocumentCount" Converter="{StaticResource NotEqualToComparisonConverter}">
-									<Binding.ConverterParameter>
-										<x:Int32>16</x:Int32>
-									</Binding.ConverterParameter>
-								</Binding>
-							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
-						</sampleBrowser:CodeExampleSubstitution>
+															   IsEnabled="{Binding MaxDocumentCount, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='16'}"
+															   Value="{Binding MaxDocumentCount, StringFormat='&#xD;&#x9;&#x9;MaxDocumentCount=&quot;{0}&quot;'}" />
 					</sampleBrowser:CodeExample.Substitutions>
 				</sampleBrowser:CodeExample>
 				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
@@ -282,15 +275,8 @@ public partial class SampleRootControl : UserControl {
 															   IsEnabled="{Binding !UseLargeSize}"
 															   Value="&#xD;&#x9;&#x9;UseLargeSize=&quot;False&quot;" />
 						<sampleBrowser:CodeExampleSubstitution Key="MaxDocumentCountAttribute"
-															   Value="{Binding MaxDocumentCount, StringFormat='&#xD;&#x9;&#x9;MaxDocumentCount=&quot;{0}&quot;'}">
-							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
-								<Binding Path="MaxDocumentCount" Converter="{StaticResource NotEqualToComparisonConverter}">
-									<Binding.ConverterParameter>
-										<x:Int32>16</x:Int32>
-									</Binding.ConverterParameter>
-								</Binding>
-							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
-						</sampleBrowser:CodeExampleSubstitution>
+															   IsEnabled="{Binding MaxDocumentCount, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='16'}"
+															   Value="{Binding MaxDocumentCount, StringFormat='&#xD;&#x9;&#x9;MaxDocumentCount=&quot;{0}&quot;'}" />
 					</sampleBrowser:CodeExample.Substitutions>
 				</sampleBrowser:CodeExample>
 				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">

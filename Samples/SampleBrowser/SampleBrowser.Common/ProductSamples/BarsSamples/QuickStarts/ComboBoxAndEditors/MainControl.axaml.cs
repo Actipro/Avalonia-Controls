@@ -32,9 +32,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.ComboBoxAndEdit
 		private IEnumerable? _comboBoxNumberItems;
 		private IEnumerable? _comboBoxPersonItems;
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		public MainControl() {
 			InitializeComponent();
@@ -69,9 +69,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.ComboBoxAndEdit
 			basicTextBoxUsageRibbonMvvm.DataContext = BasicTextBoxUsageRibbonViewModel;
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// NON-PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Creates the ribbon view model for the "Basic combobox usage" sample.
@@ -280,9 +280,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.ComboBoxAndEdit
 		private void SetPreview(string? value)
 			=> basicUsagePreviewLabel.Text = (string.IsNullOrWhiteSpace(value) ? "<NONE>" : value);
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// The options view model for the "Basic combobox usage" sample.

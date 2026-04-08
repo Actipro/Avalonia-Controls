@@ -8,20 +8,20 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.InfoBarInt
 
 	public partial class MainControl : UserControl {
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		public MainControl() {
 			InitializeComponent();
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// NON-PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		private void OnInfoBarCloseButtonClick(object? sender, Avalonia.Interactivity.RoutedEventArgs e) {
-			// If the click event is handled, the CloseButtonCommand will not be invoked and the defautl behavior
+			// If the click event is handled, the CloseButtonCommand will not be invoked and the default behavior
 			// will be ignored (i.e. the InfoBar will remain open).
 			e.Handled = (closeCommandHandleClickCheckBox.IsChecked == true);
 
@@ -43,9 +43,9 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.InfoBarInt
 			}
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		public ICommand ActionCommand { get; } = new DelegateCommand<object>(
 			_ => {

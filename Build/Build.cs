@@ -27,7 +27,12 @@ namespace ActiproSoftware.Tools.Builds {
 		[Solution("Samples/SampleBrowser/SampleBrowser.Web.sln")]
 		readonly Solution SampleBrowserWebSolution;
 
-		Solution[] SampleSolutions => new Solution[] { SampleBrowserDesktopSolution, SampleBrowserWebSolution };  // MSBuild
+		[Solution("Source/Avalonia-Libraries.sln")]
+		readonly Solution SourceLibrariesSolution;
+
+		Solution[] SampleSolutions => [SampleBrowserDesktopSolution, SampleBrowserWebSolution];  // MSBuild
+
+		Solution[] SourceSolutions => [SourceLibrariesSolution];  // MSBuild
 
 		#endregion
 
@@ -71,9 +76,27 @@ namespace ActiproSoftware.Tools.Builds {
 
 			});
 
+		Target CompileSourceProjects => _ => _
+			.Unlisted()
+			.Executes(() => {
+
+				foreach (var solution in SourceSolutions) {
+					MSBuild(_ => _
+						.SetSolutionFile(solution)
+						.SetRestore(true)
+						.SetConfiguration(Configuration)
+						.SetVerbosity(MSBuildVerbosity.Minimal)
+						.SetMaxCpuCount(Environment.ProcessorCount)
+						.SetProperty("BuildInParallel", "true")
+					);
+					Log.Debug(string.Empty);
+				}
+
+			});
+
 		Target Compile => _ => _
 			.Unlisted()
-			.DependsOn(CompileSampleProjects)
+			.DependsOn(CompileSourceProjects, CompileSampleProjects)
 			.Executes();
 
 		#endregion

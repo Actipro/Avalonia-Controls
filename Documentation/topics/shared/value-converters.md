@@ -63,6 +63,7 @@ The following instance properties are available for the converter:
 | [FalseResult](xref:@ActiproUIRoot.Controls.Converters.ComparisonConverter.FalseResult) | The value of the converted result when the comparison evaluates to `false`. The default value is `false` (`Boolean`). |
 | [Operator](xref:@ActiproUIRoot.Controls.Converters.ComparisonConverter.Operator) | The [ComparisonConverterOperator](xref:@ActiproUIRoot.Controls.Converters.ComparisonConverterOperator) used to compare values. The default value is [NotDefaultOrEmpty](xref:@ActiproUIRoot.Controls.Converters.ComparisonConverterOperator.NotDefaultOrEmpty). |
 | [TrueResult](xref:@ActiproUIRoot.Controls.Converters.ComparisonConverter.TrueResult) | The value of the converted result when the comparison evaluates to `true`. The default value is boolean `true` (`Boolean`). |
+| [CompareTo](xref:@ActiproUIRoot.Controls.Converters.ComparisonConverter.CompareTo) | A fallback for the right operand value of binary operator comparisons when the converter parameter is <c>null</c>. |
 
 The following example demonstrates how to use the converter with a non-default operator:
 
@@ -80,6 +81,28 @@ by using a binding which reads as "ComboBox.SelectedItem EqualTo 'Allow Clear'".
 -->
 <TextBox ...
 	Classes.has-clear-button="{Binding #optionsComboBox.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Allow Clear'}"
+	/>
+```
+
+### String ConverterParameter Conversion
+
+When a string value is passed in the `ConverterParameter` of a binding using [ComparisonConverter](xref:@ActiproUIRoot.Controls.Converters.ComparisonConverter), the binding target property type will be examined and special logic may try to parse the string value into that type.  The supported common .NET and Avalonia types are:
+
+- **.NET Primitives** - `Boolean`, `Byte`, `Char`, `Decimal`, `Double`, `Enum`, `Int16`, `Int32`, `Int64`, `SByte`, `Single`, `UInt16`, `UInt32`, `UInt64`.
+- **Avalonia Types** - `CornerRadius`, `Point`, `Rect`, `Size`, `Thickness`.
+
+The following example shows how to use the converter to enable a `Button` when a `Double` value is not `0`.
+
+```xaml
+xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+...
+<UserControl.Resources>
+	<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+</UserControl.Resources>
+...
+
+<Button ...
+	IsEnabled="{Binding SomeDoubleValue, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='0'}"
 	/>
 ```
 

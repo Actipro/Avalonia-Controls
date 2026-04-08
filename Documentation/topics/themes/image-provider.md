@@ -234,7 +234,7 @@ This is only necessary if attached properties must be used to configure adaptati
 
 SVG images are not natively supported in Avalonia but can be used in Avalonia via a third-party "Svg.Controls.Skia.Avalonia" NuGet package.  Since SVG images are external to Avalonia itself, the default implementation of [ImageProvider](xref:@ActiproUIRoot.Media.ImageProvider) does not support their adaptation.
 
-A special `SvgImageProvider` class that inherits [ImageProvider](xref:@ActiproUIRoot.Media.ImageProvider) and implements adaptation of SVG images from that NuGet package is available.  This class is open source and included in the sample project's "Shared Library / Dynamic Image" sample.  Its source can be copied to your own application and used to adapt SVG images.
+A special `SvgImageProvider` class that inherits [ImageProvider](xref:@ActiproUIRoot.Media.ImageProvider) and implements adaptation of SVG images from that NuGet package is available.  This class is open source and included in the sample project's "Shared Library / Dynamic Image (SVG)" sample.  Its source can be copied to your own application and used to adapt SVG images.
 
 This code shows how to configure the default image provider to support SVG files.
 
@@ -253,3 +253,5 @@ public static AppBuilder BuildAvaloniaApp()
 		.With(new SkiaOptions { UseOpacitySaveLayer = true })
 		...
 ```
+
+An alternative to that app-wide setting is to selectively set the `RenderOptions.RequiresFullOpacityHandling` attached property to `true` at the root of a hierarchy that will contain the SVG images.  The control the attached property is set on must be an ancestor visual of the control that displays the SVG.

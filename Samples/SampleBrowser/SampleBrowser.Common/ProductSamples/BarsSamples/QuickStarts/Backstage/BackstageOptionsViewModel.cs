@@ -26,9 +26,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.Backstage {
 		private string _selectedTabKeyOnOpen = "(Previous Selection)";
 		private bool _useSampleButtonImages = false;
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Gets the command to be executed when one of the sample backstage buttons is invoked.

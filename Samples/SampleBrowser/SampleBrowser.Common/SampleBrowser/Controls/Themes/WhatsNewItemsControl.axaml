@@ -12,8 +12,8 @@
 			<DataTemplate x:DataType="sampleBrowser:ProductFamilyInfo">
 
 				<StackPanel Margin="{actipro:ScaledThickness '0,0,0,1.5'}">
-					<StackPanel Margin="{actipro:ScaledThickness '0,1+2'}" Orientation="Horizontal">
-						<Image Width="24" Height="24" Source="{Binding LogoImageSource}" VerticalAlignment="Center">
+					<DockPanel Margin="{actipro:ScaledThickness '0,1+2'}">
+						<Image DockPanel.Dock="Left" Width="24" Height="24" Source="{Binding LogoImageSource}" VerticalAlignment="Center">
 							<Image.Effect>
 								<DropShadowEffect OffsetX="0" OffsetY="1" BlurRadius="3" Opacity="{DynamicResource {actipro:ThemeResourceKey ShadowOpacity}}" />
 							</Image.Effect>
@@ -21,7 +21,7 @@
 
 						<actipro:HyperlinkTextBlock Margin="7,0,0,0" Command="{Binding NavigateViewToItemInfoCommand}" CommandParameter="{Binding OverviewItem}"
 													Text="{Binding Title}" FontSize="{actipro:ThemeResource HeadingFontSizeSmall}" FontWeight="SemiBold" VerticalAlignment="Center" />
-					</StackPanel>
+					</DockPanel>
 
 					<ItemsControl ItemsSource="{Binding News}" IsTabStop="False">
 						<ItemsControl.ItemTemplate>

@@ -10,9 +10,9 @@ namespace ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.StandardMdiO
 
 		private int _documentIndex = 3; // XAML predefines several documents
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		public MainControl() {
 			InitializeComponent();
@@ -27,9 +27,9 @@ namespace ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.StandardMdiO
 			}, DispatcherPriority.Input);
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// NON-PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		private void OnCanWindowsMaximizeMenuItemClick(object? sender, RoutedEventArgs e) {
 			standardMdiHost.CanWindowsMaximize = !standardMdiHost.CanWindowsMaximize;

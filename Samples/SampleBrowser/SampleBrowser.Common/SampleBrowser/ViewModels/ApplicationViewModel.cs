@@ -55,11 +55,11 @@ namespace ActiproSoftware.SampleBrowser {
 
 		private const string DefaultSampleUri = null;
 		//private const string DefaultSampleUri = "https://ActiproSoftware/SampleBrowser/Utilities/ColorPalette/ColorPaletteView";
-		//private const string DefaultSampleUri = "https://ActiproSoftware/ProductSamples/FundamentalsSamples/Controls/CircularProgressBarIntro/MainControl";
+		//private const string DefaultSampleUri = "https://ActiproSoftware/ProductSamples/FundamentalsSamples/Controls/RangeSliderIntro/MainControl";
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Initializes an instance of the class.
@@ -77,9 +77,9 @@ namespace ActiproSoftware.SampleBrowser {
 				this.ProductData = productDataResource as ProductData;
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// NON-PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Creates the <see cref="Control"/> for the specified element's XAML path.
@@ -200,9 +200,9 @@ namespace ActiproSoftware.SampleBrowser {
 			_navigateViewToPreviousItemInfoCommand?.RaiseCanExecuteChanged();
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// The Actipro blog URL.
@@ -257,7 +257,7 @@ namespace ActiproSoftware.SampleBrowser {
 		/// The copyright message.
 		/// </summary>
 		public string Copyright
-			=> string.Format(CultureInfo.CurrentCulture, "Copyright \u00A9 2022-{0} Actipro Software LLC", DateTime.Today.Year);
+			=> ActiproSoftware.Properties.Shared.AssemblyInfo.Instance.CopyrightDisplayText;
 
 		/// <summary>
 		/// The singleton instance of the class.

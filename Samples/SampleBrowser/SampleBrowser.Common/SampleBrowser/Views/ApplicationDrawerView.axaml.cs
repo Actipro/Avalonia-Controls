@@ -13,9 +13,9 @@ namespace ActiproSoftware.SampleBrowser {
 
 		private bool _isSelectingDrawerSection;
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		public ApplicationDrawerView() {
 			InitializeComponent();
@@ -31,9 +31,9 @@ namespace ActiproSoftware.SampleBrowser {
 			ApplicationViewModel.Instance.PropertyChanged += OnViewModelPropertyChanged;
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// NON-PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		
 		private void OnDrawerSectionComboBoxSelectionChanged(object? sender, SelectionChangedEventArgs e) {
 			// Update the product items list to match the selection

@@ -18,9 +18,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.Footer {
 		private RibbonFooterViewModel? _infoBarUsageFooterViewModel;
 		private InfoBarUsageOptionsViewModel? _infoBarUsageOptionsViewModel;
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		public MainControl() {
 			InitializeComponent();
@@ -34,9 +34,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.Footer {
 			infoBarUsageRibbonMvvm.DataContext = InfoBarUsageRibbonViewModel;
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// NON-PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Gets the view model for the footer used by the "Basic usage" MVVM-based sample.
@@ -222,9 +222,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.Footer {
 			infoBarUsageRibbonXaml.FooterContent = infoBarFooterXaml;
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// The view model of options for the "Basic usage" sample.

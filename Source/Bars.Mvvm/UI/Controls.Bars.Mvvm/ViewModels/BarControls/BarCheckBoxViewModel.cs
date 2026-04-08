@@ -7,9 +7,9 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 	/// </summary>
 	public class BarCheckBoxViewModel : BarToggleButtonViewModel {
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <inheritdoc cref="BarButtonViewModel()"/>
 		public BarCheckBoxViewModel()  // Parameterless constructor required for XAML support

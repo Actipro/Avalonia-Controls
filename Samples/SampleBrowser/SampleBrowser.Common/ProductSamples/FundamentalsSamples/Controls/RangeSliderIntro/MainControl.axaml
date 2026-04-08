@@ -1,0 +1,1340 @@
+<UserControl
+	x:Name="sampleRootControl"
+	x:Class="ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.RangeSliderIntro.MainControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:actiproPrimitives="using:ActiproSoftware.UI.Avalonia.Controls.Primitives"
+	xmlns:local="using:ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.RangeSliderIntro"
+	xmlns:peers="using:ActiproSoftware.UI.Avalonia.Controls.Automation.Peers"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:system="using:System"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+		
+		<local:InvalidDoubleToNulllConverter x:Key="InvalidDoubleToNulllConverter" />
+
+	</UserControl.Resources>
+	<UserControl.Styles>
+		<Style Selector="actipro|RangeSlider.sample">
+			<Setter Property="RangeStart" Value="20" />
+			<Setter Property="RangeEnd" Value="80" />
+			<Setter Property="StepFrequency" Value="1" />
+		</Style>
+		<Style Selector="actipro|RangeSlider:horizontal.sample">
+			<Setter Property="Width" Value="300" />
+		</Style>
+		<Style Selector="actipro|RangeSlider:vertical.sample">
+			<Setter Property="Height" Value="300" />
+		</Style>
+	</UserControl.Styles>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="A RangeSlider can be used to select one or more values within a pre-defined range of available values.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Range slider" Url="https://www.actiprosoftware.com/docs/controls/avalonia/fundamentals/controls/range-slider" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+			<sampleBrowser:ControlExampleLinkItem Title="Slider" Url="/ProductSamples/ThemesSamples/NativeControls/SliderSamples" />
+		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+
+
+		<sampleBrowser:ControlExample
+			Header="Sample gallery"
+			Footer="This sample uses RangeSlider in various configurations as part of a flight search form."
+			>
+			<sampleBrowser:ControlExample.Resources>
+				<local:TotalMinutesToElapsedTimeConverter x:Key="TotalMinutesToElapsedTimeConverter" />
+				<local:TotalMinutesToTimeOfDayConverter x:Key="TotalMinutesToTimeOfDayConverter" />
+			</sampleBrowser:ControlExample.Resources>
+			<Border MaxWidth="500" Background="{actipro:ThemeResource Container1BackgroundBrush}" BorderBrush="{actipro:ThemeResource Container1BorderBrush}"
+					BorderThickness="1" Padding="40,20" CornerRadius="8">
+				<StackPanel Spacing="{actipro:ScaledDouble 4}">
+					<StackPanel>
+						<TextBlock Classes="theme-text-heading size-lg" Text="Flight Search" />
+						<TextBlock Classes="theme-text-heading" Text="Nashville, TN (BNA) - Maui, HI (OGG)" />
+					</StackPanel>
+					<StackPanel Spacing="{actipro:ScaledDouble 2}">
+						<TextBlock Classes="theme-text-heading size-xs" Text="Max Flight Duration" />
+						<DockPanel>
+							<TextBlock DockPanel.Dock="Left" MinWidth="75" Text="{Binding #flightSearchMaxDuration.RangeEnd, Converter={StaticResource TotalMinutesToElapsedTimeConverter}}" />
+							<actipro:RangeSlider x:Name="flightSearchMaxDuration" Minimum="0" Maximum="1440" StepFrequency="5" IsRanged="False" RangeEnd="120" ThumbValueBadgeDisplayKinds="None" />
+						</DockPanel>
+					</StackPanel>
+					<StackPanel Spacing="{actipro:ScaledDouble 2}">
+						<TextBlock Classes="theme-text-heading size-xs" Text="Layover Duration" />
+						<Grid ColumnDefinitions="75,*,75">
+							<TextBlock Grid.Column="0" HorizontalAlignment="Left" Text="{Binding #flightSearchLayoverDuration.RangeStart, Converter={StaticResource TotalMinutesToElapsedTimeConverter}}" />
+							<actipro:RangeSlider x:Name="flightSearchLayoverDuration" Grid.Column="1" Minimum="30" Maximum="1440" StepFrequency="5" RangeStart="30" RangeEnd="360" OverlapKind="Push" ThumbValueBadgeDisplayKinds="None" />
+							<TextBlock Grid.Column="2" HorizontalAlignment="Right" Text="{Binding #flightSearchLayoverDuration.RangeEnd, Converter={StaticResource TotalMinutesToElapsedTimeConverter}}" />
+						</Grid>
+					</StackPanel>
+					<StackPanel Spacing="{actipro:ScaledDouble 2}">
+						<TextBlock Classes="theme-text-heading size-xs" Text="Departing Flight" />
+						<Grid ColumnDefinitions="75,*" RowDefinitions="Auto,Auto">
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="Depart" />
+							<actipro:RangeSlider Grid.Row="0" Grid.Column="1" Minimum="0" Maximum="2160" StepFrequency="5" RangeStart="360" RangeEnd="780" OverlapKind="Push" IsTrackEdgeAlignedWithValue="True" ValueContentConverter="{StaticResource TotalMinutesToTimeOfDayConverter}">
+								<actipro:RangeSlider.MarkElements>
+									<actiproPrimitives:RangeSliderMark Value="0" Content="12 AM" />
+									<actiproPrimitives:RangeSliderMark Value="720" Content="12 PM" />
+									<actiproPrimitives:RangeSliderMark Value="1440" Content="12 AM" />
+								</actipro:RangeSlider.MarkElements>
+							</actipro:RangeSlider>
+
+							<TextBlock Grid.Row="1" Grid.Column="0" Text="Arrive" />
+							<actipro:RangeSlider Grid.Row="1" Grid.Column="1" Minimum="0" Maximum="2160" StepFrequency="5" RangeStart="840" RangeEnd="1320" OverlapKind="Push" IsTrackEdgeAlignedWithValue="True" ValueContentConverter="{StaticResource TotalMinutesToTimeOfDayConverter}">
+								<actipro:RangeSlider.MarkElements>
+									<actiproPrimitives:RangeSliderMark Value="0" Content="12 AM" />
+									<actiproPrimitives:RangeSliderMark Value="720" Content="12 PM" />
+									<actiproPrimitives:RangeSliderMark Value="1440" Content="12 AM" />
+								</actipro:RangeSlider.MarkElements>
+							</actipro:RangeSlider>
+						</Grid>
+					</StackPanel>
+					<StackPanel Spacing="{actipro:ScaledDouble 2}">
+						<TextBlock Classes="theme-text-heading size-xs" Text="Return Flight" />
+						<Grid ColumnDefinitions="75,*" RowDefinitions="Auto,Auto">
+							<TextBlock Grid.Row="0" Grid.Column="0" Text="Depart" />
+							<actipro:RangeSlider Grid.Row="0" Grid.Column="1" Minimum="0" Maximum="2160" StepFrequency="5" RangeStart="840" RangeEnd="1440" OverlapKind="Push" IsTrackEdgeAlignedWithValue="True" ValueContentConverter="{StaticResource TotalMinutesToTimeOfDayConverter}">
+								<actipro:RangeSlider.MarkElements>
+									<actiproPrimitives:RangeSliderMark Value="0" Content="12 AM" />
+									<actiproPrimitives:RangeSliderMark Value="720" Content="12 PM" />
+									<actiproPrimitives:RangeSliderMark Value="1440" Content="12 AM" />
+								</actipro:RangeSlider.MarkElements>
+							</actipro:RangeSlider>
+
+							<TextBlock Grid.Row="1" Grid.Column="0" Text="Arrive" />
+							<actipro:RangeSlider Grid.Row="1" Grid.Column="1" Minimum="0" Maximum="2160" StepFrequency="5" RangeStart="720" RangeEnd="2000" OverlapKind="Push" IsTrackEdgeAlignedWithValue="True" ValueContentConverter="{StaticResource TotalMinutesToTimeOfDayConverter}">
+								<actipro:RangeSlider.MarkElements>
+									<actiproPrimitives:RangeSliderMark Value="0" Content="12 AM" />
+									<actiproPrimitives:RangeSliderMark Value="720" Content="12 PM" />
+									<actiproPrimitives:RangeSliderMark Value="1440" Content="12 AM" />
+								</actipro:RangeSlider.MarkElements>
+							</actipro:RangeSlider>
+						</Grid>
+					</StackPanel>
+					<StackPanel Spacing="{actipro:ScaledDouble 2}">
+						<TextBlock Classes="theme-text-heading size-xs" Text="Matching Flights" />
+						<Grid ColumnDefinitions="Auto,*,Auto" VerticalAlignment="Center">
+							<Grid Grid.Column="0" RowDefinitions="*,8,*">
+								<TextBlock Grid.Row="0" FontWeight="Bold" FontSize="18" HorizontalAlignment="Right" VerticalAlignment="Bottom">5:50a</TextBlock>
+								<TextBlock Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="0,4,0,0">BNA</TextBlock>
+							</Grid>
+							<actipro:RangeSlider Padding="10,0" Classes="theme-solid" Grid.Column="1" IsRangeEditEnabled="True" RangeEditMaximumValueCount="0" Minimum="0" Maximum="745">
+								<actipro:RangeSlider.MarkElements>
+									<actiproPrimitives:RangeSliderMark Value="170" Padding="4" Content="DEN" Background="{actipro:ThemeResource DefaultForegroundBrushSecondary}" />
+									<actiproPrimitives:RangeSliderMark Value="170" Padding="4" Content="45m" IsTrackDecorationVisible="False" ContentPlacement="TopLeft" />
+									<actiproPrimitives:RangeSliderMark Value="335" Padding="4" Content="LAX" Background="{actipro:ThemeResource DefaultForegroundBrushSecondary}" />
+									<actiproPrimitives:RangeSliderMark Value="335" Padding="4" Content="1h 15m" IsTrackDecorationVisible="False" ContentPlacement="TopLeft" />
+								</actipro:RangeSlider.MarkElements>
+							</actipro:RangeSlider>
+							<Grid Grid.Column="2" RowDefinitions="*,8,*">
+								<TextBlock Grid.Row="0" FontWeight="Bold" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Bottom">12:55p</TextBlock>
+								<TextBlock Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,4,0,0">OGG</TextBlock>
+							</Grid>
+						</Grid>
+						<Grid ColumnDefinitions="Auto,*,Auto" VerticalAlignment="Center">
+							<Grid Grid.Column="0" RowDefinitions="*,8,*">
+								<TextBlock Grid.Row="0" FontWeight="Bold" FontSize="18" HorizontalAlignment="Right" VerticalAlignment="Bottom">8:45p</TextBlock>
+								<TextBlock Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="0,4,0,0">OGG</TextBlock>
+							</Grid>
+							<actipro:RangeSlider Padding="10,0" Classes="theme-solid" Grid.Column="1" IsRangeEditEnabled="True" RangeEditMaximumValueCount="0" Minimum="0" Maximum="765">
+								<actipro:RangeSlider.MarkElements>
+									<actiproPrimitives:RangeSliderMark Value="380" Padding="4" Content="LAS" Background="{actipro:ThemeResource DefaultForegroundBrushSecondary}" />
+									<actiproPrimitives:RangeSliderMark Value="380" Padding="4" Content="1h 55m" IsTrackDecorationVisible="False" ContentPlacement="TopLeft" />
+									<actiproPrimitives:RangeSliderMark Value="560" Padding="4" Content="DAL" Background="{actipro:ThemeResource DefaultForegroundBrushSecondary}" />
+									<actiproPrimitives:RangeSliderMark Value="560" Padding="4" Content="44m" IsTrackDecorationVisible="False" ContentPlacement="TopLeft" />
+								</actipro:RangeSlider.MarkElements>
+							</actipro:RangeSlider>
+							<Grid Grid.Column="2" RowDefinitions="*,8,*">
+								<TextBlock Grid.Row="0" FontWeight="Bold" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Bottom">2:30p</TextBlock>
+								<TextBlock Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,4,0,0">BNA</TextBlock>
+							</Grid>
+						</Grid>
+					</StackPanel>
+				</StackPanel>
+			</Border>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<!--
+Each slider in this sample has a double value that represents time in minutes.
+- The "duration" sliders use this value to define total elapsed time. This value is converted to
+  a string using TotalMinutesToElapsedTimeConverter.
+- The "flight" sliders use this value to define time of day as the number of minutes since midnight.
+  This value is converted to a string using TotalMinutesToTimeOfDayConverter.
+-->
+
+<Border ... >
+	<Border.Resources>
+		<local:TotalMinutesToElapsedTimeConverter x:Key="TotalMinutesToElapsedTimeConverter" />
+		<local:TotalMinutesToTimeOfDayConverter x:Key="TotalMinutesToTimeOfDayConverter" />
+	</Border.Resources>
+	<StackPanel Spacing="{actipro:ScaledDouble 4}">
+		...
+
+		<!-- Max Flight Duration -->
+		<StackPanel Spacing="{actipro:ScaledDouble 2}">
+			<TextBlock Classes="theme-text-heading size-xs" Text="Max Flight Duration" />
+			<DockPanel>
+				<TextBlock DockPanel.Dock="Left" MinWidth="75"
+					Text="{Binding #flightSearchMaxDuration.RangeEnd, Converter={StaticResource TotalMinutesToElapsedTimeConverter}}"
+					/>
+				<actipro:RangeSlider x:Name="flightSearchMaxDuration"
+					IsRanged="False" ThumbValueBadgeDisplayKinds="None"
+					Minimum="0" Maximum="1440" StepFrequency="5" RangeEnd="120"
+					/>
+			</DockPanel>
+		</StackPanel>
+		
+		<!-- Layover Duration -->
+		<StackPanel Spacing="{actipro:ScaledDouble 2}">
+			<TextBlock Classes="theme-text-heading size-xs" Text="Layover Duration" />
+			<Grid ColumnDefinitions="75,*,75">
+				<TextBlock Grid.Column="0" HorizontalAlignment="Left"
+					Text="{Binding #flightSearchLayoverDuration.RangeStart, Converter={StaticResource TotalMinutesToElapsedTimeConverter}}"
+					/>
+				<actipro:RangeSlider x:Name="flightSearchLayoverDuration" Grid.Column="1"
+					Minimum="30" Maximum="1440" StepFrequency="5"
+					RangeStart="30" RangeEnd="360"
+					OverlapKind="Push" ThumbValueBadgeDisplayKinds="None"
+					/>
+				<TextBlock Grid.Column="2" HorizontalAlignment="Right"
+					Text="{Binding #flightSearchLayoverDuration.RangeEnd, Converter={StaticResource TotalMinutesToElapsedTimeConverter}}"
+					/>
+			</Grid>
+		</StackPanel>
+
+		<!-- Departing Flight -->
+		<StackPanel Spacing="{actipro:ScaledDouble 2}">
+			<TextBlock Classes="theme-text-heading size-xs" Text="Departing Flight" />
+			<Grid ColumnDefinitions="75,*" RowDefinitions="Auto,Auto">
+
+				<!-- Depart -->
+				<TextBlock Grid.Row="0" Grid.Column="0" Text="Depart" />
+				<actipro:RangeSlider Grid.Row="0" Grid.Column="1"
+					Minimum="0" Maximum="2160" StepFrequency="5"
+					RangeStart="360" RangeEnd="780"
+					OverlapKind="Push" IsTrackEdgeAlignedWithValue="True"
+					ValueContentConverter="{StaticResource TotalMinutesToTimeOfDayConverter}"
+					>
+					<actipro:RangeSlider.MarkElements>
+						<actiproPrimitives:RangeSliderMark Value="0" Content="12 AM" />
+						<actiproPrimitives:RangeSliderMark Value="720" Content="12 PM" />
+						<actiproPrimitives:RangeSliderMark Value="1440" Content="12 AM" />
+					</actipro:RangeSlider.MarkElements>
+				</actipro:RangeSlider>
+
+				<!-- Arrive (Same as Depart) -->
+				...
+			</Grid>
+		</StackPanel>
+		
+		<!-- Return Flight (Same as Departing Flight) -->
+		...
+		
+		<!-- Matching Flights -->
+		<StackPanel Spacing="{actipro:ScaledDouble 2}">
+			<TextBlock Classes="theme-text-heading size-xs" Text="Matching Flights" />
+			
+			<!-- Depart -->
+			<Grid ColumnDefinitions="Auto,*,Auto" VerticalAlignment="Center">
+				<Grid Grid.Column="0" RowDefinitions="*,8,*">
+					<TextBlock Grid.Row="0" FontWeight="Bold" FontSize="18" HorizontalAlignment="Right" VerticalAlignment="Bottom">5:50a</TextBlock>
+					<TextBlock Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Top" Padding="0,4,0,0">BNA</TextBlock>
+				</Grid>
+
+				<!-- TIP: By setting IsRangeEditEnabled="True" and RangeEditMaximumValueCount="0" the slider can be used without any thumb controls -->
+				<actipro:RangeSlider Classes="theme-solid" Grid.Column="1" Padding="10,0"
+					Minimum="0" Maximum="745"
+					IsRangeEditEnabled="True" RangeEditMaximumValueCount="0"
+					>
+					<actipro:RangeSlider.MarkElements>
+						<actiproPrimitives:RangeSliderMark Value="170" Padding="4" Content="DEN" Background="{actipro:ThemeResource DefaultForegroundBrushSecondary}" />
+						<actiproPrimitives:RangeSliderMark Value="170" Padding="4" Content="45m" IsTrackDecorationVisible="False" ContentPlacement="TopLeft" />
+						<actiproPrimitives:RangeSliderMark Value="335" Padding="4" Content="LAX" Background="{actipro:ThemeResource DefaultForegroundBrushSecondary}" />
+						<actiproPrimitives:RangeSliderMark Value="335" Padding="4" Content="1h 15m" IsTrackDecorationVisible="False" ContentPlacement="TopLeft" />
+					</actipro:RangeSlider.MarkElements>
+				</actipro:RangeSlider>
+
+				<Grid Grid.Column="2" RowDefinitions="*,8,*">
+					<TextBlock Grid.Row="0" FontWeight="Bold" FontSize="18" HorizontalAlignment="Left" VerticalAlignment="Bottom">12:55p</TextBlock>
+					<TextBlock Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Top" Padding="0,4,0,0">OGG</TextBlock>
+				</Grid>
+			</Grid>
+			
+			<!-- Return (Same as Depart) -->
+			...
+		</StackPanel>
+	</StackPanel>
+</Border>
+					]]>
+				</sampleBrowser:CodeExample>
+				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
+					<![CDATA[
+/// <summary>
+/// Represents a value converter that converts a total number of minutes into a string.
+/// </summary>
+public class TotalMinutesToElapsedTimeConverter : IValueConverter {
+
+	// --------------------------------------------------------------------------------------------------
+	// PUBLIC PROCEDURES
+	// --------------------------------------------------------------------------------------------------
+
+	/// <inheritdoc cref="IValueConverter.Convert"/>
+	public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture) {
+		if (value is not double doubleValue)
+			return new BindingNotification(new ArgumentException($"Value must be of type {nameof(Double)}.", nameof(value)), BindingErrorType.Error);
+
+		if (double.IsNaN(doubleValue) || double.IsInfinity(doubleValue))
+			return null;
+
+		var elaspedTime = TimeSpan.FromMinutes(doubleValue);
+		if (elaspedTime.Hours > 0)
+			return $"{elaspedTime.Hours}h {elaspedTime.Minutes}m";
+		else
+			return $"{elaspedTime.Minutes}m";
+	}
+
+	/// <inheritdoc cref="IValueConverter.ConvertBack"/>
+	public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+		=> new BindingNotification(new NotImplementedException(), BindingErrorType.Error);
+
+}
+
+/// <summary>
+/// Represents a value converter that converts a total number of minutes since midnight into the time of day.
+/// </summary>
+public class TotalMinutesToTimeOfDayConverter : IValueConverter {
+
+	// --------------------------------------------------------------------------------------------------
+	// PUBLIC PROCEDURES
+	// --------------------------------------------------------------------------------------------------
+
+	/// <inheritdoc cref="IValueConverter.Convert"/>
+	public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture) {
+		if (value is not double doubleValue)
+			return new BindingNotification(new ArgumentException($"Value must be of type {nameof(Double)}.", nameof(value)), BindingErrorType.Error);
+
+		if (double.IsNaN(doubleValue) || double.IsInfinity(doubleValue))
+			return null;
+
+		var elaspedTime = TimeSpan.FromMinutes(doubleValue);
+		var timeOfDay = DateTime.Today.AddMinutes(elaspedTime.TotalMinutes);
+		return timeOfDay.ToShortTimeString();
+	}
+
+	/// <inheritdoc cref="IValueConverter.ConvertBack"/>
+	public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)
+		=> new BindingNotification(new NotImplementedException(), BindingErrorType.Error);
+
+}
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+		<sampleBrowser:ControlExample
+			Header="Basic usage"
+			DataContext="{Binding #basicSlider}"
+			>
+			<sampleBrowser:ControlExample.Styles>
+				<Style Selector="actipro|RangeSlider:horizontal">
+					<Setter Property="Width" Value="300" />
+				</Style>
+				<Style Selector="actipro|RangeSlider:vertical">
+					<Setter Property="Height" Value="300" />
+				</Style>
+			</sampleBrowser:ControlExample.Styles>
+
+			<actipro:RangeSlider x:Name="basicSlider" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
+				RangeStart="20"
+				RangeEnd="80"
+				StepFrequency="1"
+				Classes.theme-outline="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Outline'}"
+				Classes.theme-solid="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Solid'}"
+				Classes.accent="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Accent'}"
+				Classes.success="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Success'}"
+				Classes.warning="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Warning'}"
+				Classes.danger="{Binding #sampleVariant.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Danger'}"
+				/>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Theme" />
+						<ComboBox x:Name="sampleTheme" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Outline, Solid'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Variant" />
+						<ComboBox x:Name="sampleVariant" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Orientation" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type=Orientation}" SelectedValue="{Binding Orientation}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Range start" />
+						<NumericUpDown Value="{Binding RangeStart}" Minimum="{Binding Minimum}" Maximum="{Binding Maximum}" IsEnabled="{Binding IsRanged}" FormatString="G8" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Range end" />
+						<NumericUpDown Value="{Binding RangeEnd}" Minimum="{Binding Minimum}" Maximum="{Binding Maximum}" FormatString="G8" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Step frequency" />
+						<NumericUpDown Value="{Binding StepFrequency}" Minimum="0" Maximum="10" FormatString="N1" />
+					</StackPanel>
+					<CheckBox IsChecked="{Binding IsRanged}">Ranged</CheckBox>
+					<CheckBox IsChecked="{Binding IsRangeDragEnabled}">Range drag enabled</CheckBox>
+					<CheckBox IsChecked="{Binding IsInclusive}">Inclusive</CheckBox>
+					<CheckBox IsChecked="{Binding IsDirectionReversed}">Direction reversed</CheckBox>
+					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:RangeSlider$(ClassesAttribute)
+	RangeStart="$(RangeStart)"
+	RangeEnd="$(RangeEnd)"
+	StepFrequency="$(StepFrequency)"$(IsDirectionReversedAttribute)$(IsInclusiveAttribute)$(IsRangedAttribute)$(IsRangeDragEnabledAttribute)$(OrientationAttribute)
+	/>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
+															   IsEnabled="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), StringFormat=' Classes=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="RangeEnd" Value="{Binding RangeEnd}" />
+						<sampleBrowser:CodeExampleSubstitution Key="RangeStart" Value="{Binding RangeStart}" />
+						<sampleBrowser:CodeExampleSubstitution Key="StepFrequency" Value="{Binding StepFrequency}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsDirectionReversedAttribute"
+															   IsEnabled="{Binding IsDirectionReversed}"
+															   Value="&#xD;&#x9;IsDirectionReversed=&quot;True&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsInclusiveAttribute"
+															   IsEnabled="{Binding !IsInclusive}"
+															   Value="&#xD;&#x9;IsInclusive=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsRangedAttribute"
+															   IsEnabled="{Binding !IsRanged}"
+															   Value="&#xD;&#x9;IsRanged=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsRangeDragEnabledAttribute"
+															   IsEnabled="{Binding IsRangeDragEnabled}"
+															   Value="&#xD;&#x9;IsRangeDragEnabled=&quot;True&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="OrientationAttribute"
+															   IsEnabled="{Binding Orientation, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Vertical'}"
+															   Value="&#xD;&#x9;Orientation=&quot;Vertical&quot;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Themes"
+			Footer="The appearance can be changed from the default with the use of the 'theme-outline' or 'theme-solid' style classes."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Outline" HorizontalAlignment="Center" />
+					<actipro:RangeSlider Classes="sample theme-outline" MaxWidth="200" Minimum="0" Maximum="100" />
+					<actipro:RangeSlider Classes="sample theme-outline" MaxWidth="200" Minimum="0" Maximum="100" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Solid" HorizontalAlignment="Center" />
+					<actipro:RangeSlider Classes="sample theme-solid" MaxWidth="200" />
+					<actipro:RangeSlider Classes="sample theme-solid" MaxWidth="200" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:RangeSlider Classes="theme-outline" ... />
+
+<actipro:RangeSlider Classes="theme-solid" ... />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Accent variants"
+			Footer="Add the 'accent' style class to a RangeSlider and the theme accent color will be used to provide emphasis."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Outline" HorizontalAlignment="Center" />
+					<actipro:RangeSlider Classes="sample theme-outline accent" MaxWidth="200" Minimum="0" Maximum="100" />
+					<actipro:RangeSlider Classes="sample theme-outline accent" MaxWidth="200" Minimum="0" Maximum="100" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Solid" HorizontalAlignment="Center" />
+					<actipro:RangeSlider Classes="sample theme-solid accent" MaxWidth="200" />
+					<actipro:RangeSlider Classes="sample theme-solid accent" MaxWidth="200" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:RangeSlider Classes="theme-outline accent" ... />
+
+<actipro:RangeSlider Classes="theme-solid accent" ... />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Success variants"
+			Footer="Add the 'success' style class to a RangeSlider and a color will be used to indicate success."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Outline" HorizontalAlignment="Center" />
+					<actipro:RangeSlider Classes="sample theme-outline success" MaxWidth="200" Minimum="0" Maximum="100" />
+					<actipro:RangeSlider Classes="sample theme-outline success" MaxWidth="200" Minimum="0" Maximum="100" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Solid" HorizontalAlignment="Center" />
+					<actipro:RangeSlider Classes="sample theme-solid success" MaxWidth="200" />
+					<actipro:RangeSlider Classes="sample theme-solid success" MaxWidth="200" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:RangeSlider Classes="theme-outline success" ... />
+
+<actipro:RangeSlider Classes="theme-solid success" ... />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Warning variants"
+			Footer="Add the 'warning' style class to a RangeSlider and a color will be used to indicate caution."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Outline" HorizontalAlignment="Center" />
+					<actipro:RangeSlider Classes="sample theme-outline warning" MaxWidth="200" Minimum="0" Maximum="100" />
+					<actipro:RangeSlider Classes="sample theme-outline warning" MaxWidth="200" Minimum="0" Maximum="100" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Solid" HorizontalAlignment="Center" />
+					<actipro:RangeSlider Classes="sample theme-solid warning" MaxWidth="200" />
+					<actipro:RangeSlider Classes="sample theme-solid warning" MaxWidth="200" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:RangeSlider Classes="theme-outline warning" ... />
+
+<actipro:RangeSlider Classes="theme-solid warning" ... />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Danger variants"
+			Footer="Add the 'warning' style class to a RangeSlider and a color will be used to indicate extreme caution."
+			>
+			<Grid ColumnDefinitions="*,40,*">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Outline" HorizontalAlignment="Center" />
+					<actipro:RangeSlider Classes="sample theme-outline danger" MaxWidth="200" Minimum="0" Maximum="100" />
+					<actipro:RangeSlider Classes="sample theme-outline danger" MaxWidth="200" Minimum="0" Maximum="100" IsEnabled="False" />
+				</StackPanel>
+
+				<StackPanel Grid.Column="2" Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Solid" HorizontalAlignment="Center" />
+					<actipro:RangeSlider Classes="sample theme-solid danger" MaxWidth="200" />
+					<actipro:RangeSlider Classes="sample theme-solid danger" MaxWidth="200" IsEnabled="False" />
+				</StackPanel>
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:RangeSlider Classes="theme-outline danger" ... />
+
+<actipro:RangeSlider Classes="theme-solid danger" ... />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Overlap"
+			Footer="Define how thumbs behave when one thumb is dragged into another one."
+			DataContext="{Binding #overlapSample1}"
+			>
+
+			<StackPanel Spacing="30">
+				<StackPanel HorizontalAlignment="Center" Spacing="5">
+					<TextBlock Classes="theme-text-heading size-xs" TextAlignment="Center">OverlapKind = Overlap (Default)</TextBlock>
+					<actipro:RangeSlider x:Name="overlapSample1" Classes="sample" OverlapKind="Overlap" MinimumStepsBetweenThumbs="5" />
+				</StackPanel>
+				<StackPanel HorizontalAlignment="Center" Spacing="5">
+					<TextBlock Classes="theme-text-heading size-xs" TextAlignment="Center">OverlapKind = Push</TextBlock>
+					<actipro:RangeSlider Classes="sample" OverlapKind="Push" IsDirectionReversed="{Binding IsDirectionReversed}" MinimumStepsBetweenThumbs="{Binding MinimumStepsBetweenThumbs}" StepFrequency="{Binding StepFrequency}" />
+				</StackPanel>
+				<StackPanel HorizontalAlignment="Center" Spacing="5">
+					<TextBlock Classes="theme-text-heading size-xs" TextAlignment="Center">OverlapKind = None</TextBlock>
+					<actipro:RangeSlider Classes="sample" OverlapKind="None" IsDirectionReversed="{Binding IsDirectionReversed}" MinimumStepsBetweenThumbs="{Binding MinimumStepsBetweenThumbs}" StepFrequency="{Binding StepFrequency}" />
+				</StackPanel>
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Step frequency" />
+						<NumericUpDown Minimum="0.0" Maximum="10.0" Value="{Binding StepFrequency}" Increment="1.0" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Minimum steps between thumbs" />
+						<NumericUpDown Minimum="0" Maximum="10" Value="{Binding MinimumStepsBetweenThumbs}" Increment="1" />
+					</StackPanel>
+					<CheckBox IsChecked="{Binding IsDirectionReversed}">Direction reversed</CheckBox>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<!-- Overlap (Default) -->
+<actipro:RangeSlider OverlapKind="Overlap" StepFrequency="$(StepFrequency)" ... />
+
+<!-- Push -->
+<actipro:RangeSlider OverlapKind="Push" StepFrequency="$(StepFrequency)" MinimumStepsBetweenThumbs="$(MinimumStepsBetweenThumbs)" ... />
+
+<!-- None -->
+<actipro:RangeSlider OverlapKind="None" StepFrequency="$(StepFrequency)" MinimumStepsBetweenThumbs="$(MinimumStepsBetweenThumbs)" ... />
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="StepFrequency" Value="{Binding StepFrequency}" />
+						<sampleBrowser:CodeExampleSubstitution Key="MinimumStepsBetweenThumbs" Value="{Binding MinimumStepsBetweenThumbs}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Value badge"
+			Footer="The value badge is used to display the current value represented by a thumb."
+			DataContext="{Binding #valueBadgeSample}"
+			>
+			
+			<StackPanel Spacing="40">
+				<actipro:RangeSlider x:Name="valueBadgeSample" Classes="sample" Margin="0,40"
+					RangeStart="20"
+					RangeEnd="80"
+					StepFrequency="0"
+					ThumbValueBadgeDisplayKinds="Always"
+					ThumbValueBadgePlacement="{Binding #valueBadgePlacementComboBox.SelectedItem}"
+					ValueFormat="N2" />
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Orientation" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type=Orientation}" SelectedValue="{Binding Orientation}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Value badge display kind" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray 'Always,Interacting,None' Type={x:Type actipro:RangeSliderValueBadgeDisplayKinds}}" SelectedItem="{Binding ThumbValueBadgeDisplayKinds}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Value badge placement" />
+						<ComboBox x:Name="valueBadgePlacementComboBox" ItemsSource="{actipro:DelimitedArray Type={x:Type actiproPrimitives:RangeSliderPlacement}}" SelectedIndex="0" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Value string format" />
+						<TextBox Text="{Binding ValueFormat}" />
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:RangeSlider
+	ThumbValueBadgeDisplayKinds="$(ValueBadgeDisplayKinds)"
+	ThumbValueBadgePlacement="$(ValueBadgePlacement)"
+	ValueFormat="$(ValueFormat)"
+	... />
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ValueBadgeDisplayKinds" Value="{Binding ThumbValueBadgeDisplayKinds}" />
+						<sampleBrowser:CodeExampleSubstitution Key="ValueBadgePlacement" Value="{Binding #valueBadgePlacementComboBox.SelectedItem}" />
+						<sampleBrowser:CodeExampleSubstitution Key="ValueFormat" Value="{Binding ValueFormat}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Marks"
+			Footer="Use marks to designate special values along the slider track."
+			DataContext="{Binding #marksSlider}"
+			>
+			<actipro:RangeSlider x:Name="marksSlider" Classes="sample"
+				ValueFormat="{Binding #marksSliderValueFormatTextBox.Text}"
+				IsRanged="False"
+				IsTrackEdgeAlignedWithValue="True"
+				Minimum="0.0"
+				Maximum="1.0"
+				StepFrequency="0.001"
+				RangeEnd="0.25"
+				SmallChange="0.01"
+				LargeChange="0.05"
+				Marks="0.0, 0.5, 1.0"
+				MarkContentPlacement="{Binding #marksSliderContentPlacementComboBox.SelectedItem}"
+				MarkSnapDistance="0.02"
+				IsMarkContentVisible="{Binding #marksSliderIsContentVisibleCheckBox.IsChecked}"
+				IsMarkTrackDecorationVisible="{Binding #marksSliderIsTrackDecorationVisibleCheckBox.IsChecked}"
+				/>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Orientation" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type=Orientation}" SelectedValue="{Binding Orientation}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Content placement" />
+						<ComboBox x:Name="marksSliderContentPlacementComboBox" ItemsSource="{actipro:DelimitedArray Type={x:Type actiproPrimitives:RangeSliderPlacement}}" SelectedIndex="1" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Mark snap distance" />
+						<NumericUpDown Value="{Binding MarkSnapDistance}" Minimum="0.0" Maximum="10.0" Increment="0.01" FormatString="N2" />
+					</StackPanel>
+					<TextBox x:Name="marksSliderValueFormatTextBox" Text="P1" PlaceholderText="Value string format:" UseFloatingPlaceholder="True" />
+					<CheckBox x:Name="marksSliderIsContentVisibleCheckBox" IsChecked="True">Mark content visible</CheckBox>
+					<CheckBox x:Name="marksSliderIsTrackDecorationVisibleCheckBox" IsChecked="True">Mark track decoration visible</CheckBox>
+					<CheckBox IsChecked="{Binding IsTrackEdgeAlignedWithValue}">Track edge aligned with value</CheckBox>
+					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:RangeSlider IsRanged="False" Minimum="0.0" Maximum="1.0" StepFrequency="0.001"
+	Marks="0.0, 0.5, 1.0"
+	ValueFormat="$(ValueFormat)"
+	MarkContentPlacement="$(MarkContentPlacement)"
+	MarkSnapDistance="$(MarkSnapDistance)"$(IsMarkContentVisibleAttribute)$(IsMarkTrackDecorationVisibleAttribute)$(IsTrackEdgeAlignedWithValueAttribute)
+	...
+	/>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="MarkContentPlacement" Value="{Binding #marksSliderContentPlacementComboBox.SelectedItem}" />
+						<sampleBrowser:CodeExampleSubstitution Key="MarkSnapDistance" Value="{Binding MarkSnapDistance}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsMarkTrackDecorationVisibleAttribute"
+															   IsEnabled="{Binding !#marksSliderIsTrackDecorationVisibleCheckBox.IsChecked}"
+															   Value="&#xD;&#x9;IsMarkTrackDecorationVisible=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsMarkContentVisibleAttribute"
+															   IsEnabled="{Binding !#marksSliderIsContentVisibleCheckBox.IsChecked}"
+															   Value="&#xD;&#x9;IsMarkContentVisible=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsTrackEdgeAlignedWithValueAttribute"
+															   IsEnabled="{Binding IsTrackEdgeAlignedWithValue}"
+															   Value="&#xD;&#x9;IsTrackEdgeAlignedWithValue=&quot;True&quot; " />
+						<sampleBrowser:CodeExampleSubstitution Key="ValueFormat" Value="{Binding #marksSliderValueFormatTextBox.Text}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Ticks"
+			Footer="Ticks can be displayed to donote meaningful values within the range."
+			DataContext="{Binding #ticksSample}"
+			>
+
+			<StackPanel Spacing="40">
+				<StackPanel Grid.Column="0" Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="By tick frequency" HorizontalAlignment="Center" />
+					<actipro:RangeSlider x:Name="ticksSample" Classes="sample"
+						RangeStart="20"
+						RangeEnd="80"
+						IsSnapToTickEnabled="True"
+						TickFrequency="10"
+						TickPlacement="{Binding #tickPlacementComboBox.SelectedValue}"
+						/>
+				</StackPanel>
+				<StackPanel Grid.Column="0" Spacing="10">
+					<TextBlock Classes="theme-text-heading size-xs" Text="By explicit values (10, 20, 50, 80)" HorizontalAlignment="Center" />
+					<actipro:RangeSlider Classes="sample"
+						IsDirectionReversed="{Binding IsDirectionReversed}"
+						IsEnabled="{Binding IsEnabled}"
+						IsSnapToTickEnabled="{Binding IsSnapToTickEnabled}"
+						IsTrackEdgeAlignedWithValue="{Binding IsTrackEdgeAlignedWithValue}"
+						OverlapKind="{Binding OverlapKind}"
+						RangeStart="20"
+						RangeEnd="80"
+						Ticks="10,20,50,80"
+						TickPlacement="{Binding TickPlacement}"
+						/>
+				</StackPanel>
+
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Tick placement:" />
+						<ComboBox x:Name="tickPlacementComboBox" ItemsSource="{actipro:DelimitedArray Type=TickPlacement}" SelectedIndex="2" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Tick frequency" />
+						<NumericUpDown Value="{Binding TickFrequency}" Minimum="0" Maximum="25" FormatString="N1" />
+					</StackPanel>
+					<CheckBox Content="Snap to tick" IsChecked="{Binding IsSnapToTickEnabled}" />
+					<CheckBox Content="Direction reversed" IsChecked="{Binding IsDirectionReversed}" />
+					<CheckBox IsChecked="{Binding IsTrackEdgeAlignedWithValue}">Track end centered on thumb</CheckBox>
+					<CheckBox Content="Enabled" IsChecked="{Binding IsEnabled}" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<!-- By tick frequency -->
+<actipro:RangeSlider TickFrequency="$(TickFrequency)" TickPlacement="$(TickPlacement)"$(IsSnapToTickEnabledAttribute)$(IsTrackEdgeAlignedWithValueAttribute) ... />
+
+<!-- By explicit values -->
+<actipro:RangeSlider Ticks="10,20,50,80" TickPlacement="$(TickPlacement)"$(IsSnapToTickEnabledAttribute)$(IsTrackEdgeAlignedWithValueAttribute) ... />
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="IsSnapToTickEnabledAttribute"
+															   IsEnabled="{Binding IsSnapToTickEnabled}"
+															   Value=" IsSnapToTickEnabled=&quot;True&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsTrackEdgeAlignedWithValueAttribute"
+															   IsEnabled="{Binding IsTrackEdgeAlignedWithValue}"
+															   Value=" IsTrackEdgeAlignedWithValue=&quot;True&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="TickFrequency" Value="{Binding TickFrequency}" />
+						<sampleBrowser:CodeExampleSubstitution Key="TickPlacement" Value="{Binding TickPlacement}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Multiple values"
+			Footer="A ranged slider can define more than just a start and end value. When enabled, Ctrl+Click to add a new value or remove an existing value."
+			DataContext="{Binding #multiSlider}"
+			>
+
+			<actipro:RangeSlider x:Name="multiSlider"
+				IsRangeDragEnabled="True"
+				IsRangeEditEnabled="True"
+				RangeEditMinimumValueCount="0"
+				RangeEditMaximumValueCount="5"
+				StepFrequency="1"
+				Values="{Binding #sampleRootControl.MultiValues}"
+				Width="300"
+				/>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Range start" />
+						<NumericUpDown Value="{Binding RangeStart, Converter={StaticResource InvalidDoubleToNulllConverter}}" Minimum="{Binding Minimum}" Maximum="{Binding Maximum}" IsEnabled="{Binding IsRanged}" FormatString="G8" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Range end" />
+						<NumericUpDown Value="{Binding RangeEnd, Converter={StaticResource InvalidDoubleToNulllConverter}}" Minimum="{Binding Minimum}" Maximum="{Binding Maximum}" FormatString="G8" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Values collection" />
+						<ListBox x:Name="multiValuesListBox" Height="120" ItemsSource="{Binding Values, Mode=OneWay}" />
+						<StackPanel Orientation="Horizontal">
+							<HyperlinkButton Content="Add" Command="{Binding #sampleRootControl.AddMultiValueCommand}" ToolTip.Tip="Add a new random value" />
+							<HyperlinkButton Content="Remove" Command="{Binding #sampleRootControl.RemoveMultiValueCommand}" CommandParameter="{Binding #multiValuesListBox.SelectedValue}" ToolTip.Tip="Remove the selected value" />
+							<HyperlinkButton Content="Clear" Command="{Binding #sampleRootControl.ClearMultiValuesCommand}" ToolTip.Tip="Clear all values" />
+						</StackPanel>
+					</StackPanel>
+					<CheckBox Content="Range drag enabled" IsChecked="{Binding IsRangeDragEnabled}" />
+					<CheckBox Content="Range edit enabled" IsChecked="{Binding IsRangeEditEnabled}" />
+					<StackPanel IsEnabled="{Binding IsRangeEditEnabled}">
+						<TextBlock Classes="theme-form-control-label" Text="Min range value count" />
+						<NumericUpDown Value="{Binding RangeEditMinimumValueCount}" Minimum="0" Maximum="5" FormatString="G8" />
+					</StackPanel>
+					<StackPanel IsEnabled="{Binding IsRangeEditEnabled}">
+						<TextBlock Classes="theme-form-control-label" Text="Max range value count" />
+						<NumericUpDown Value="{Binding RangeEditMaximumValueCount}" Minimum="1" Maximum="5" FormatString="G8" />
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<!--
+This sample assumes a DataContext with a RangeValues property of type ObservableCollection<Double>
+-->
+<actipro:RangeSlider$(IsRangeDragEnabledAttribute)$(IsRangeEditEnabledAttribute)
+	RangeEditMinimumValueCount="$(RangeEditMinimumValueCount)"
+	RangeEditMaximumValueCount="$(RangeEditMaximumValueCount)"
+	Values="{Binding RangeValues}"
+	...
+	/>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="IsRangeDragEnabledAttribute"
+															   IsEnabled="{Binding IsRangeDragEnabled}"
+															   Value="&#xD;&#x9;IsRangeDragEnabled=&quot;True&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsRangeEditEnabledAttribute"
+															   IsEnabled="{Binding IsRangeEditEnabled}"
+															   Value="&#xD;&#x9;IsRangeEditEnabled=&quot;True&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="RangeEditMinimumValueCount" Value="{Binding RangeEditMinimumValueCount}" />
+						<sampleBrowser:CodeExampleSubstitution Key="RangeEditMaximumValueCount" Value="{Binding RangeEditMaximumValueCount}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Data validation errors"
+			Footer="RangeSlider with a validation error."
+			>
+
+			<actipro:RangeSlider MaxWidth="400">
+				<DataValidationErrors.Error>
+					<system:Exception />
+				</DataValidationErrors.Error>
+			</actipro:RangeSlider>
+
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Custom thumbs"
+			Footer="This sample uses a custom thumb theme to adjust the appearance based on position."
+			>
+
+			<actipro:RangeSlider MaxWidth="200"
+				Minimum="0" Maximum="100"
+				RangeStart="20" RangeEnd="80"
+				SmallChange="1" LargeChange="10"
+				StepFrequency="1"
+				IsRangeDragEnabled="True"
+				ThumbValueBadgePlacement="BottomRight"
+				>
+				<actipro:RangeSlider.Resources>
+					<!-- Thumb and Track must be odd number to vertically center the point of the arrow -->
+					<x:Double x:Key="{actipro:ThemeResourceKey SliderTrackAscent}">5</x:Double>
+				</actipro:RangeSlider.Resources>
+
+				<actipro:RangeSlider.ThumbTheme>
+					<ControlTheme TargetType="actiproPrimitives:RangeSliderThumb" BasedOn="{actipro:ControlTheme RangeSliderThumbBase}">
+						<ControlTheme.Resources>
+							<Geometry x:Key="SliderPointedThumbGeometry">M 0.5,1.5 A 1 1 0 0 0 1.5,0.5 L 10.5,0.5 L 17.5,7.5 L 10.5,14.5 L 1.5,14.5 A 1 1 0 0 0 0.5,13.5 Z</Geometry>
+						</ControlTheme.Resources>
+
+						<Setter Property="Width" Value="18" />
+						<Setter Property="Height" Value="15" />
+
+						<!-- Range Start Thumb -->
+						<Style Selector="^[Index=0]">
+							<Setter Property="Template">
+								<ControlTemplate>
+									<Canvas>
+										<Path StrokeThickness="1"
+											Stroke="{actipro:ThemeResource ControlBackgroundBrushSolidSuccess}"
+											Fill="{actipro:ThemeResource ControlBackgroundBrushSoftSuccess}"
+											Data="{StaticResource SliderPointedThumbGeometry}"
+											/>
+									</Canvas>
+								</ControlTemplate>
+							</Setter>
+						</Style>
+
+						<!-- Range End Thumb -->
+						<Style Selector="^[Index=1]">
+							<Setter Property="Template">
+								<ControlTemplate>
+									<Canvas>
+										<Canvas.RenderTransform>
+											<RotateTransform Angle="180" />
+										</Canvas.RenderTransform>
+										<Path StrokeThickness="1"
+											Stroke="{actipro:ThemeResource ControlBackgroundBrushSolidDanger}"
+											Fill="{actipro:ThemeResource ControlBackgroundBrushSoftDanger}"
+											Data="{StaticResource SliderPointedThumbGeometry}"
+											/>
+									</Canvas>
+								</ControlTemplate>
+							</Setter>
+						</Style>
+
+					</ControlTheme>
+				</actipro:RangeSlider.ThumbTheme>
+			</actipro:RangeSlider>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:RangeSlider Minimum="0" Maximum="100" ... >
+	<actipro:RangeSlider.Resources>
+		<!-- Thumb and Track must be odd number to center the point of the arrow -->
+		<x:Double x:Key="{actipro:ThemeResourceKey SliderTrackAscent}">5</x:Double>
+	</actipro:RangeSlider.Resources>
+
+	<actipro:RangeSlider.ThumbTheme>
+		<ControlTheme TargetType="actiproPrimitives:RangeSliderThumb" BasedOn="{actipro:ControlTheme RangeSliderThumbBase}">
+			<ControlTheme.Resources>
+				<Geometry x:Key="SliderPointedThumbGeometry">M 0.5,1.5 A 1 1 0 0 0 1.5,0.5 L 10.5,0.5 L 17.5,7.5 L 10.5,14.5 L 1.5,14.5 A 1 1 0 0 0 0.5,13.5 Z</Geometry>
+			</ControlTheme.Resources>
+
+			<Setter Property="Width" Value="18" />
+			<Setter Property="Height" Value="15" />
+
+			<!-- Range Start Thumb -->
+			<Style Selector="^[Index=0]">
+				<Setter Property="Template">
+					<ControlTemplate>
+						<Canvas>
+							<Path StrokeThickness="1"
+								Stroke="{actipro:ThemeResource ControlBackgroundBrushSolidSuccess}"
+								Fill="{actipro:ThemeResource ControlBackgroundBrushSoftSuccess}"
+								Data="{StaticResource SliderPointedThumbGeometry}"
+								/>
+						</Canvas>
+					</ControlTemplate>
+				</Setter>
+			</Style>
+
+			<!-- Range End Thumb -->
+			<Style Selector="^[Index=1]">
+				<Setter Property="Template">
+					<ControlTemplate>
+						<Canvas>
+							<Canvas.RenderTransform>
+								<RotateTransform Angle="180" />
+							</Canvas.RenderTransform>
+							<Path StrokeThickness="1"
+								Stroke="{actipro:ThemeResource ControlBackgroundBrushSolidDanger}"
+								Fill="{actipro:ThemeResource ControlBackgroundBrushSoftDanger}"
+								Data="{StaticResource SliderPointedThumbGeometry}"
+								/>
+						</Canvas>
+					</ControlTemplate>
+				</Setter>
+			</Style>
+
+		</ControlTheme>
+	</actipro:RangeSlider.ThumbTheme>
+</actipro:RangeSlider>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Example: Price range"
+			Footer="This sample shows how to customize the tickbar, marks, and thumb value badge."
+			>
+
+			<actipro:RangeSlider Classes="accent" MaxWidth="500" Margin="0,20"
+				Minimum="0" Maximum="100000"
+				RangeStart="20000" RangeEnd="65000"
+				SmallChange="1000" LargeChange="10000"
+				StepFrequency="1000"
+				TickFrequency="10000"
+				TickPlacement="BottomRight"
+				ValueFormat="C0"
+				ThumbValueBadgeDisplayKinds="Always"
+				IsTrackEdgeAlignedWithValue="True"
+				Marks="0, 25000, 50000, 75000, 100000"
+				>
+
+				<actipro:RangeSlider.Styles>
+					<Style Selector="actiproPrimitives|RangeSliderMark">
+						<Setter Property="Padding" Value="12" />
+						<Style Selector="^:active">
+							<Setter Property="Foreground" Value="{actipro:ThemeResource ControlForegroundBrushOutlineAccent}" />
+						</Style>
+					</Style>
+					<Style Selector="actiproPrimitives|RangeSliderThumb">
+						<Setter Property="ValueBadgeTheme">
+							<ControlTheme TargetType="actipro:Badge" BasedOn="{actipro:ControlTheme BadgeSolid}">
+								<Setter Property="FontSize" Value="{actipro:ThemeResource DefaultFontSizeMedium}" />
+								<Setter Property="Padding" Value="5,2" />
+								<Setter Property="BorderThickness" Value="0" />
+								<Setter Property="Foreground" Value="{actipro:ThemeResource ControlForegroundBrushSolidAccent}" />
+								<Setter Property="Background" Value="{actipro:ThemeResource ControlBackgroundBrushSolidAccent}" />
+							</ControlTheme>
+						</Setter>
+					</Style>
+				</actipro:RangeSlider.Styles>
+
+				<actipro:RangeSlider.TickBarTheme>
+					<ControlTheme TargetType="TickBar" BasedOn="{actipro:ControlTheme RangeSliderTickBar}">
+						<Style Selector="^[Placement=Bottom]">
+							<Setter Property="Margin" Value="0,-46,0,0" />
+							<Setter Property="Height" Value="10" />
+						</Style>
+					</ControlTheme>
+				</actipro:RangeSlider.TickBarTheme>
+
+			</actipro:RangeSlider>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:RangeSlider Classes="accent" MaxWidth="500"
+	Minimum="0" Maximum="100000"
+	RangeStart="20000" RangeEnd="65000"
+	SmallChange="1000" LargeChange="10000"
+	StepFrequency="1000"
+	TickFrequency="10000"
+	TickPlacement="BottomRight"
+	ValueFormat="C0"
+	ThumbValueBadgeDisplayKinds="Always"
+	IsTrackEdgeAlignedWithValue="True"
+	Marks="0, 25000, 50000, 75000, 100000"
+	>
+
+	<actipro:RangeSlider.Styles>
+		<Style Selector="actiproPrimitives|RangeSliderMark">
+			<Setter Property="Padding" Value="12" />
+			<Style Selector="^:active">
+				<Setter Property="Foreground" Value="{actipro:ThemeResource ControlForegroundBrushOutlineAccent}" />
+			</Style>
+		</Style>
+		<Style Selector="actiproPrimitives|RangeSliderThumb">
+			<Setter Property="ValueBadgeTheme">
+				<ControlTheme TargetType="actipro:Badge" BasedOn="{actipro:ControlTheme BadgeSolid}">
+					<Setter Property="FontSize" Value="{actipro:ThemeResource DefaultFontSizeMedium}" />
+					<Setter Property="Padding" Value="5,2" />
+					<Setter Property="BorderThickness" Value="0" />
+					<Setter Property="Foreground" Value="{actipro:ThemeResource ControlForegroundBrushSolidAccent}" />
+					<Setter Property="Background" Value="{actipro:ThemeResource ControlBackgroundBrushSolidAccent}" />
+				</ControlTheme>
+			</Setter>
+		</Style>
+	</actipro:RangeSlider.Styles>
+
+	<actipro:RangeSlider.TickBarTheme>
+		<ControlTheme TargetType="TickBar" BasedOn="{actipro:ControlTheme RangeSliderTickBar}">
+			<Style Selector="^[Placement=Bottom]">
+				<Setter Property="Margin" Value="0,-46,0,0" />
+				<Setter Property="Height" Value="10" />
+			</Style>
+		</ControlTheme>
+	</actipro:RangeSlider.TickBarTheme>
+
+</actipro:RangeSlider>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Example: Condition range 1"
+			Footer="This sample uses custom mark labels that change color when included in the range."
+			>
+
+			<actipro:RangeSlider Classes="accent" MaxWidth="500"
+				Minimum="1" Maximum="5"
+				RangeStart="3" RangeEnd="5"
+				StepFrequency="1"
+				IsTrackEdgeAlignedWithValue="True"
+				ThumbValueBadgeDisplayKinds="None"
+				>
+				<actipro:RangeSlider.Styles>
+					<Style Selector="actiproPrimitives|RangeSliderMark:active">
+						<Setter Property="Foreground" Value="{actipro:ThemeResource ControlForegroundBrushOutlineAccent}" />
+					</Style>
+				</actipro:RangeSlider.Styles>
+				<actipro:RangeSlider.MarkElements>
+					<actiproPrimitives:RangeSliderMark Value="1" Content="Poor" />
+					<actiproPrimitives:RangeSliderMark Value="2" Content="Fair" />
+					<actiproPrimitives:RangeSliderMark Value="3" Content="Good" />
+					<actiproPrimitives:RangeSliderMark Value="4" Content="Very Good" />
+					<actiproPrimitives:RangeSliderMark Value="5" Content="Excellent" />
+				</actipro:RangeSlider.MarkElements>
+			</actipro:RangeSlider>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:RangeSlider Classes="accent" MaxWidth="500"
+	Minimum="1" Maximum="5"
+	RangeStart="3" RangeEnd="5"
+	StepFrequency="1"
+	IsTrackEdgeAlignedWithValue="True"
+	ThumbValueBadgeDisplayKinds="None"
+	>
+	<actipro:RangeSlider.Styles>
+		<Style Selector="actiproPrimitives|RangeSliderMark:active">
+			<Setter Property="Foreground" Value="{actipro:ThemeResource ControlForegroundBrushOutlineAccent}" />
+		</Style>
+	</actipro:RangeSlider.Styles>
+
+	<!-- Explicitly define marks for more advanced scenarios -->
+	<actipro:RangeSlider.MarkElements>
+		<actiproPrimitives:RangeSliderMark Value="1" Content="Poor" />
+		<actiproPrimitives:RangeSliderMark Value="2" Content="Fair" />
+		<actiproPrimitives:RangeSliderMark Value="3" Content="Good" />
+		<actiproPrimitives:RangeSliderMark Value="4" Content="Very Good" />
+		<actiproPrimitives:RangeSliderMark Value="5" Content="Excellent" />
+	</actipro:RangeSlider.MarkElements>
+</actipro:RangeSlider>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Example: Condition range 2"
+			Footer="This sample hides the standard labels and places a label-only mark between the snap points."
+			>
+
+			<actipro:RangeSlider Classes="theme-solid success" MaxWidth="500"
+				Minimum="0" Maximum="10"
+				RangeStart="4" RangeEnd="10"
+				StepFrequency="2"
+				MinimumStepsBetweenThumbs="1"
+				OverlapKind="Push"
+				IsTrackEdgeAlignedWithValue="True"
+				ThumbValueBadgeDisplayKinds="None"
+				>
+				<actipro:RangeSlider.MarkElements>
+					<actiproPrimitives:RangeSliderMark Value="0" IsContentVisible="False" />
+					<actiproPrimitives:RangeSliderMark Value="1" Content="Poor" IsTrackDecorationVisible="False" />
+					<actiproPrimitives:RangeSliderMark Value="2" IsContentVisible="False" />
+					<actiproPrimitives:RangeSliderMark Value="3" Content="Fair" IsTrackDecorationVisible="False" />
+					<actiproPrimitives:RangeSliderMark Value="4" IsContentVisible="False" />
+					<actiproPrimitives:RangeSliderMark Value="5" Content="Good" IsTrackDecorationVisible="False" />
+					<actiproPrimitives:RangeSliderMark Value="6" IsContentVisible="False" />
+					<actiproPrimitives:RangeSliderMark Value="7" Content="Very Good" IsTrackDecorationVisible="False" />
+					<actiproPrimitives:RangeSliderMark Value="8" IsContentVisible="False" />
+					<actiproPrimitives:RangeSliderMark Value="9" Content="Excellent" IsTrackDecorationVisible="False" />
+					<actiproPrimitives:RangeSliderMark Value="10" IsContentVisible="False" />
+				</actipro:RangeSlider.MarkElements>
+			</actipro:RangeSlider>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:RangeSlider Classes="theme-solid success" MaxWidth="500"
+	Minimum="0" Maximum="10"
+	RangeStart="4" RangeEnd="10"
+	StepFrequency="2"
+	MinimumStepsBetweenThumbs="1"
+	OverlapKind="Push"
+	IsTrackEdgeAlignedWithValue="True"
+	ThumbValueBadgeDisplayKinds="None"
+	>
+
+	<!-- Explicitly define marks for more advanced scenarios -->
+	<actipro:RangeSlider.MarkElements>
+		<actiproPrimitives:RangeSliderMark Value="0" IsContentVisible="False" />
+		<actiproPrimitives:RangeSliderMark Value="1" Content="Poor" IsTrackDecorationVisible="False" />
+		<actiproPrimitives:RangeSliderMark Value="2" IsContentVisible="False" />
+		<actiproPrimitives:RangeSliderMark Value="3" Content="Fair" IsTrackDecorationVisible="False" />
+		<actiproPrimitives:RangeSliderMark Value="4" IsContentVisible="False" />
+		<actiproPrimitives:RangeSliderMark Value="5" Content="Good" IsTrackDecorationVisible="False" />
+		<actiproPrimitives:RangeSliderMark Value="6" IsContentVisible="False" />
+		<actiproPrimitives:RangeSliderMark Value="7" Content="Very Good" IsTrackDecorationVisible="False" />
+		<actiproPrimitives:RangeSliderMark Value="8" IsContentVisible="False" />
+		<actiproPrimitives:RangeSliderMark Value="9" Content="Excellent" IsTrackDecorationVisible="False" />
+		<actiproPrimitives:RangeSliderMark Value="10" IsContentVisible="False" />
+	</actipro:RangeSlider.MarkElements>
+</actipro:RangeSlider>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Example: Temperature"
+			Footer="Custom mark elements for significant temperature points."
+			DataContext="{Binding #tempSlider}"
+			>
+
+			<actipro:RangeSlider x:Name="tempSlider"
+				Orientation="Vertical"
+				Height="150"
+				Minimum="-20" Maximum="150"
+				IsRanged="False"
+				RangeEnd="25"
+				SmallChange="1" LargeChange="10"
+				StepFrequency="1"
+				TickFrequency="10"
+				TickPlacement="TopLeft"
+				ValueFormat="{}{0:N0}&#176;C"
+				>
+
+				<actipro:RangeSlider.MarkElements>
+					<actiproPrimitives:RangeSliderMark Value="0" Content="0&#176;C (Freezing)" Foreground="#306bdc" BorderBrush="#306bdc" />
+					<actiproPrimitives:RangeSliderMark Value="100" Content="100&#176;C (Boiling)" Foreground="#ee4343" BorderBrush="#ee4343" />
+				</actipro:RangeSlider.MarkElements>
+
+			</actipro:RangeSlider>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:RangeSlider
+	Orientation="Vertical"
+	Minimum="-20" Maximum="150"
+	IsRanged="False"
+	RangeEnd="$(RangeEnd)"
+	SmallChange="1" LargeChange="10"
+	StepFrequency="1"
+	TickFrequency="10"
+	TickPlacement="TopLeft"
+	ValueFormat="{}{0:N0}&#176;C"
+	IsTrackEdgeAlignedWithValue="True"
+	>
+
+	<actipro:RangeSlider.MarkElements>
+		<actiproPrimitives:RangeSliderMark Value="0" Content="0&#176;C (Freezing)" Foreground="#306bdc" BorderBrush="#306bdc" />
+		<actiproPrimitives:RangeSliderMark Value="100" Content="100&#176;C (Boiling)" Foreground="#ee4343" BorderBrush="#ee4343" />
+	</actipro:RangeSlider.MarkElements>
+
+</actipro:RangeSlider>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="RangeEnd" Value="{Binding RangeEnd}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+</UserControl>

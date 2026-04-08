@@ -21,9 +21,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.Common {
 		private ColorBarGalleryItemViewModel? _automaticColorGalleryItemViewModel;
 		private ColorBarGalleryItemViewModel? _noShadingColorGalleryItemViewModel;
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// NON-PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Gets a <see cref="ColorBarGalleryItemViewModel"/> used to represent an automatic color.
@@ -249,9 +249,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.Common {
 			}
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Gets or sets the <see cref="BarGalleryItemTemplateSelector"/> that will be assigned to <see cref="BarGalleryViewModelBase.ItemTemplateSelector"/>

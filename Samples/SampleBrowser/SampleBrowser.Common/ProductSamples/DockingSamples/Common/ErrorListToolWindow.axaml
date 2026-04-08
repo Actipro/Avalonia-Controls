@@ -5,7 +5,6 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
-	xmlns:controlsPrimitives="using:ActiproSoftware.UI.Avalonia.Controls.Primitives"	
 	xmlns:sampleCommon="using:ActiproSoftware.ProductSamples.DockingSamples.Common"
 	Icon="/Images/Icons/ErrorList16.png"
 	SerializationId="ErrorList"

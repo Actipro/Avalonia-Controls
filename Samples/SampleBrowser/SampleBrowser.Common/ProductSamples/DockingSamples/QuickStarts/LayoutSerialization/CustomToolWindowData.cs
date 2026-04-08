@@ -10,9 +10,9 @@ namespace ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.LayoutSerial
 	/// </summary>
 	public class CustomToolWindowData : XmlObjectBase {
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Sample property storing a <c>DateTime</c> value as an XMl attribute.

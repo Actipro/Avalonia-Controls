@@ -54,10 +54,11 @@ EXPECTED OPERATION:
 
 			<!-- Editor Control -->
 			<ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" Focusable="False">
-				<sampleBrowser:AdvancedTextBox x:Name="editor"
+				<TextBox x:Name="editor"
 					Margin="32,20"
 					AcceptsReturn="True"
 					AcceptsTab="True"
+					ClearSelectionOnLostFocus="False"
 					Text="Actipro Bars contains a comprehensive implementation of an Office-like ribbon user interface for Avalonia applications, including its modern fluent design and ability to create content-rich galleries."
 					TextWrapping="Wrap">
 					<TextBox.ContextFlyout>
@@ -66,7 +67,7 @@ EXPECTED OPERATION:
 							ItemContainerTemplateSelector="{Binding Ribbon.ItemContainerTemplateSelector}"
 							/>
 					</TextBox.ContextFlyout>
-				</sampleBrowser:AdvancedTextBox>
+				</TextBox>
 			</ScrollViewer>
 
 		</DockPanel>

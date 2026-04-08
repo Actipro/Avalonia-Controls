@@ -36,7 +36,7 @@
 			<AutoCompleteBox
 				x:Name="sampleAutoCompleteBox"
 				ItemsSource="{StaticResource StatesArray}"
-				Watermark="Select a state"
+				PlaceholderText="Select a state"
 				sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
 				Classes.has-clear-button="{Binding #sampleHasClearButton.IsChecked}"
 				Classes.theme-outline="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Outline'}"
@@ -57,7 +57,7 @@
 						<TextBlock Classes="theme-form-control-label" Text="Variant" />
 						<ComboBox x:Name="sampleVariant" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
 					</StackPanel>
-					<TextBox Text="{Binding Watermark}" Watermark="Watermark" UseFloatingWatermark="True" />
+					<TextBox Text="{Binding PlaceholderText}" PlaceholderText="Placeholder" UseFloatingPlaceholder="True" />
 					<CheckBox x:Name="sampleHasClearButton">Has clear button</CheckBox>
 					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
 				</StackPanel>
@@ -66,7 +66,7 @@
 				<sampleBrowser:CodeExample xml:space="preserve">
 					<![CDATA[
 <AutoCompleteBox $(ClassesAttribute)Text="Define text here"
-	$(WatermarkAttribute)$(IsEnabledAttribute)/>
+	$(PlaceholderTextAttribute)$(IsEnabledAttribute)/>
 					]]>
 					<sampleBrowser:CodeExample.Substitutions>
 						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
@@ -75,9 +75,9 @@
 						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute"
 															   IsEnabled="{Binding !IsEnabled}"
 															   Value="IsEnabled=&quot;False&quot; " />
-						<sampleBrowser:CodeExampleSubstitution Key="WatermarkAttribute"
-															   IsEnabled="{Binding Watermark, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
-															   Value="{Binding Watermark, StringFormat='Watermark=&quot;{0}&quot; '}" />
+						<sampleBrowser:CodeExampleSubstitution Key="PlaceholderTextAttribute"
+															   IsEnabled="{Binding PlaceholderText, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding PlaceholderText, StringFormat='PlaceholderText=&quot;{0}&quot; '}" />
 					</sampleBrowser:CodeExample.Substitutions>
 				</sampleBrowser:CodeExample>
 			</sampleBrowser:ControlExample.CodeExamples>
@@ -92,15 +92,15 @@
 				<StackPanel Grid.Column="0" Spacing="10">
 					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline" Text="Outline" />
 					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline" Text="Disabled" IsEnabled="False" />
-					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline" Watermark="Watermark" />
-					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline" Watermark="Watermark (disabled)" IsEnabled="False" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline" PlaceholderText="Placeholder" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline" PlaceholderText="Placeholder (disabled)" IsEnabled="False" />
 				</StackPanel>
 
 				<StackPanel Grid.Column="2" Spacing="10">
 					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft" Text="Soft" />
 					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft" Text="Disabled" IsEnabled="False" />
-					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft" Watermark="Watermark" />
-					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft" Watermark="Watermark (disabled)" IsEnabled="False" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft" PlaceholderText="Placeholder" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft" PlaceholderText="Placeholder (disabled)" IsEnabled="False" />
 				</StackPanel>
 			</Grid>
 
@@ -124,15 +124,15 @@
 				<StackPanel Grid.Column="0" Spacing="10">
 					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline accent" Text="Outline" />
 					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline accent" Text="Disabled" IsEnabled="False" />
-					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline accent" Watermark="Watermark" />
-					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline accent" Watermark="Watermark (disabled)" IsEnabled="False" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline accent" PlaceholderText="Placeholder" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline accent" PlaceholderText="Placeholder (disabled)" IsEnabled="False" />
 				</StackPanel>
 
 				<StackPanel Grid.Column="2" Spacing="10">
 					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft accent" Text="Soft" />
 					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft accent" Text="Disabled" IsEnabled="False" />
-					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft accent" Watermark="Watermark" />
-					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft accent" Watermark="Watermark (disabled)" IsEnabled="False" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft accent" PlaceholderText="Placeholder" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft accent" PlaceholderText="Placeholder (disabled)" IsEnabled="False" />
 				</StackPanel>
 			</Grid>
 
@@ -156,15 +156,15 @@
 				<StackPanel Grid.Column="0" Spacing="10">
 					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline success" Text="Outline" />
 					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline success" Text="Disabled" IsEnabled="False" />
-					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline success" Watermark="Watermark" />
-					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline success" Watermark="Watermark (disabled)" IsEnabled="False" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline success" PlaceholderText="Placeholder" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline success" PlaceholderText="Placeholder (disabled)" IsEnabled="False" />
 				</StackPanel>
 
 				<StackPanel Grid.Column="2" Spacing="10">
 					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft success" Text="Soft" />
 					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft success" Text="Disabled" IsEnabled="False" />
-					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft success" Watermark="Watermark" />
-					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft success" Watermark="Watermark (disabled)" IsEnabled="False" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft success" PlaceholderText="Placeholder" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft success" PlaceholderText="Placeholder (disabled)" IsEnabled="False" />
 				</StackPanel>
 			</Grid>
 
@@ -188,15 +188,15 @@
 				<StackPanel Grid.Column="0" Spacing="10">
 					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline warning" Text="Outline" />
 					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline warning" Text="Disabled" IsEnabled="False" />
-					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline warning" Watermark="Watermark" />
-					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline warning" Watermark="Watermark (disabled)" IsEnabled="False" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline warning" PlaceholderText="Placeholder" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline warning" PlaceholderText="Placeholder (disabled)" IsEnabled="False" />
 				</StackPanel>
 
 				<StackPanel Grid.Column="2" Spacing="10">
 					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft warning" Text="Soft" />
 					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft warning" Text="Disabled" IsEnabled="False" />
-					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft warning" Watermark="Watermark" />
-					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft warning" Watermark="Watermark (disabled)" IsEnabled="False" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft warning" PlaceholderText="Placeholder" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft warning" PlaceholderText="Placeholder (disabled)" IsEnabled="False" />
 				</StackPanel>
 			</Grid>
 
@@ -220,15 +220,15 @@
 				<StackPanel Grid.Column="0" Spacing="10">
 					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline danger" Text="Outline" />
 					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline danger" Text="Disabled" IsEnabled="False" />
-					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline danger" Watermark="Watermark" />
-					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline danger" Watermark="Watermark (disabled)" IsEnabled="False" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline danger" PlaceholderText="Placeholder" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-outline danger" PlaceholderText="Placeholder (disabled)" IsEnabled="False" />
 				</StackPanel>
 
 				<StackPanel Grid.Column="2" Spacing="10">
 					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft danger" Text="Soft" />
 					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft danger" Text="Disabled" IsEnabled="False" />
-					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft danger" Watermark="Watermark" />
-					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft danger" Watermark="Watermark (disabled)" IsEnabled="False" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft danger" PlaceholderText="Placeholder" />
+					<AutoCompleteBox ItemsSource="{StaticResource StatesArray}" Classes="theme-soft danger" PlaceholderText="Placeholder (disabled)" IsEnabled="False" />
 				</StackPanel>
 			</Grid>
 

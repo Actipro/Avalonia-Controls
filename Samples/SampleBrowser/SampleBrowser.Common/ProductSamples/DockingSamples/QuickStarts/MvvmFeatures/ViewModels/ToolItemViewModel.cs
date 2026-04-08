@@ -17,9 +17,9 @@ namespace ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.MvvmFeatures
 		private Dock _defaultDockSide = Dock.Right;
 		private ToolItemState _state = ToolItemState.Docked;
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// The default side that the tool window will dock towards when no prior location is known.

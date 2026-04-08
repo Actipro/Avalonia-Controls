@@ -102,6 +102,12 @@ Color ramp name properties should be set to [Hue](xref:@ActiproUIRoot.Themes.Gen
 | [SpinnerHasHorizontalOrientation](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.SpinnerHasHorizontalOrientation) | Whether to arrange `ButtonSpinner` buttons horizontally.
 | [TabAppearanceKind](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.TabAppearanceKind) | The [TabAppearanceKind](xref:@ActiproUIRoot.Themes.Generation.TabAppearanceKind) that indicates the default appearance for various tab controls (e.g., `TabControl`). |
 
+### Avalonia Pro Support Options
+
+| Property | Description |
+|-----|-----|
+| [AvaloniaProResourceIncludes](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.AvaloniaProResourceIncludes) | The [AvaloniaProResourceIncludes](xref:@ActiproUIRoot.Themes.Generation.AvaloniaProResourceIncludes) flags that indicate AvaloniaUI OÜ's Avalonia Pro resources to override when generating a theme. See the [Avalonia Pro Support](avalonia-pro-support.md) topic for details. |
+
 ## Custom Theme Generators
 
 The default theme generator implementation fully generates theme resources for all supported theme variants.  Sometimes you may wish to further customize the default output of specific resource values for each theme variant.  In those cases, creation of a custom [ThemeGenerator](xref:@ActiproUIRoot.Themes.Generation.ThemeGenerator)-based class is possible.  An instance of the custom generator class can be assigned to the [ThemeDefinition.Generator](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.Generator) property.

@@ -586,9 +586,9 @@
 			>
 
 			<StackPanel Spacing="10">
-				<TextBox Watermark="This textbox has a default context menu" />
+				<TextBox PlaceholderText="This textbox has a default context menu" />
 
-				<TextBox Watermark="This textbox has a custom context menu">
+				<TextBox PlaceholderText="This textbox has a custom context menu">
 					<TextBox.ContextMenu>
 						<ContextMenu>
 							<MenuItem Header="Cu_t" Command="{Binding $parent[TextBox].Cut}" IsEnabled="{Binding $parent[TextBox].CanCut}" InputGesture="{x:Static TextBox.CutGesture}">
@@ -677,8 +677,8 @@
 					</Style>
 				</StackPanel.Styles>
 
-				<TextBox Watermark="This textbox auto-configured with custom context menu" />
-				<TextBox Watermark="This textbox auto-configured with custom context menu" />
+				<TextBox PlaceholderText="This textbox auto-configured with custom context menu" />
+				<TextBox PlaceholderText="This textbox auto-configured with custom context menu" />
 			</StackPanel>
 
 			<sampleBrowser:ControlExample.CodeExamples>
@@ -716,7 +716,7 @@
 ...
 
 <!-- No additional configuration necessary on TextBox -->
-<TextBox Watermark="This textbox auto-configured with custom context menu" />
+<TextBox PlaceholderText="This textbox auto-configured with custom context menu" />
 					]]>
 				</sampleBrowser:CodeExample>
 			</sampleBrowser:ControlExample.CodeExamples>

@@ -7,9 +7,9 @@ namespace ActiproSoftware.ProductSamples.ThemeSamples.Styling {
 
 	public partial class UserInterfaceDensitySamples : UserControl {
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		public UserInterfaceDensitySamples() {
 			InitializeComponent();
@@ -23,9 +23,9 @@ namespace ActiproSoftware.ProductSamples.ThemeSamples.Styling {
 			}
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// NON-PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		private void OnThemeDefinitionPropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e) {
 			if (e.PropertyName == nameof(ThemeDefinition.UserInterfaceDensity)) {

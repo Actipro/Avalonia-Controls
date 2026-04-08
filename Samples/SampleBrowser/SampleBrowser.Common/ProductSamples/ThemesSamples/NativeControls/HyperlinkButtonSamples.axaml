@@ -38,8 +38,8 @@
 
 			<sampleBrowser:ControlExample.Options>
 				<StackPanel Spacing="10">
-					<TextBox x:Name="sampleText" Text="Button Text" Watermark="Content" UseFloatingWatermark="True" />
-					<TextBox x:Name="sampleUri" Text="https://www.actiprosoftware.com" Watermark="Navigate URI" UseFloatingWatermark="True" />
+					<TextBox x:Name="sampleText" Text="Button Text" PlaceholderText="Content" UseFloatingPlaceholder="True" />
+					<TextBox x:Name="sampleUri" Text="https://www.actiprosoftware.com" PlaceholderText="Navigate URI" UseFloatingPlaceholder="True" />
 					<CheckBox IsChecked="{Binding IsVisited}">Visited</CheckBox>
 					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
 				</StackPanel>

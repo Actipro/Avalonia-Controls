@@ -8,9 +8,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.PopupAndContext
 	/// </summary>
 	public class TagColorGalleryItem : ColorBarGalleryItemViewModel {
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="TagColorGalleryItem"/> class.
@@ -20,9 +20,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.PopupAndContext
 		public TagColorGalleryItem(UIColor value, string label)
 			: base(value.ToRgb(), category: null, label) { }
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Creates the default collection of <see cref="TagColorGalleryItem"/> instances.

@@ -15,9 +15,9 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		private object? _selectedItem;
 		private object? _tag;
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Indicates whether the Backstage close button should be visible, and whether <c>Esc</c> can close Backstage.

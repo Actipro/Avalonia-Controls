@@ -3,16 +3,16 @@ using Avalonia.Media;
 using Avalonia.Svg.Skia;
 using ShimSkiaSharp;
 
-namespace ActiproSoftware.ProductSamples.SharedSamples.Controls.DynamicImageIntro;
+namespace ActiproSoftware.ProductSamples.SharedSamples.Controls.DynamicImageSvg;
 
 /// <summary>
 /// Enhances the default <see cref="ImageProvider"/> with support for SVG images from the "Svg.Controls.Skia.Avalonia" NuGet package.
 /// </summary>
 public class SvgImageProvider : ImageProvider {
 
-	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	// --------------------------------------------------------------------------------------------------
 	// NON-PUBLIC PROCEDURES
-	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	// --------------------------------------------------------------------------------------------------
 
 	/// <summary>
 	/// Converts a <see cref="SKColor"/> to an Avalonia <see cref="Color"/>.
@@ -30,9 +30,9 @@ public class SvgImageProvider : ImageProvider {
 	private static SKColor ToSKColor(Color color)
 		=> new(color.R, color.G, color.B, color.A);
 
-	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	// --------------------------------------------------------------------------------------------------
 	// PUBLIC PROCEDURES
-	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	// --------------------------------------------------------------------------------------------------
 
 	/// <inheritdoc/>
 	protected override IImage? AdaptImageSource(IImage originalImageSource, ImageProviderRequest request) {

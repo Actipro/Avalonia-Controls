@@ -658,7 +658,7 @@
 										<!-- Custom indicator for pointer over (initially hidden) -->
 										<Border x:Name="hoverBorder"
 											Background="{actipro:ThemeResource Container5BorderBrush}"
-											CornerRadius="1"
+											CornerRadius="{actipro:ThemeResource FullRoundCornerRadius}"
 											Height="{actipro:ScaledDouble 0.5}"
 											Width="{actipro:ScaledDouble 3}"
 											HorizontalAlignment="Center"
@@ -684,7 +684,7 @@
 
 							<Border
 								Background="{actipro:ThemeResource ActiproBrandBrush}"
-								CornerRadius="1"
+								CornerRadius="{actipro:ThemeResource FullRoundCornerRadius}"
 								Height="{actipro:ScaledDouble 0.5}"
 								Width="{actipro:ScaledDouble 3}"
 								HorizontalAlignment="Center"
@@ -736,7 +736,7 @@
 						<!-- Custom indicator for pointer over (initially hidden) -->
 						<Border x:Name="hoverBorder"
 							Background="{actipro:ThemeResource Container5BorderBrush}"
-							CornerRadius="1"
+							CornerRadius="{actipro:ThemeResource FullRoundCornerRadius}"
 							Height="3"
 							Width="16"
 							HorizontalAlignment="Center"
@@ -762,7 +762,7 @@
 
 			<Border
 				Background="{actipro:ThemeResource ActiproBrandBrush}"
-				CornerRadius="1"
+				CornerRadius="{actipro:ThemeResource FullRoundCornerRadius}"
 				Height="3"
 				Width="16"
 				HorizontalAlignment="Center"

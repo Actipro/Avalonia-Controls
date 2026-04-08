@@ -49,7 +49,7 @@
 						<TextBlock Classes="theme-form-control-label" Text="Value" />
 						<Slider Minimum="{Binding Minimum}" Maximum="{Binding Maximum}" Value="{Binding Value}" />
 					</StackPanel>
-					<TextBox Text="{Binding ProgressTextFormat}" Watermark="Progress text format" UseFloatingWatermark="True" />
+					<TextBox Text="{Binding ProgressTextFormat}" PlaceholderText="Progress text format" UseFloatingPlaceholder="True" />
 					<CheckBox IsChecked="{Binding ShowProgressText}">Show progress text</CheckBox>
 					<CheckBox IsChecked="{Binding IsIndeterminate}">Indeterminate</CheckBox>
 				</StackPanel>

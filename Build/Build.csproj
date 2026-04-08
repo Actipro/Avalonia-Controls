@@ -11,12 +11,7 @@
 		<Title>Actipro Avalonia Controls Open-Source Build</Title>
 		<Description>Actipro Avalonia Controls Open-Source Build</Description>
 
-		<Version>23.1.0.0</Version>
-
 		<RootNamespace>ActiproSoftware.Tools.Builds</RootNamespace>
-		<Company>Actipro Software LLC</Company>
-		<Authors>Actipro Software LLC</Authors>
-		<Copyright>Copyright (c) 2021-2026 Actipro Software LLC.  All rights reserved.</Copyright>
 
 		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 

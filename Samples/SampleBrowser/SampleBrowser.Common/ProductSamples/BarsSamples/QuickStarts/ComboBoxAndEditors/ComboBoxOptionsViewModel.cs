@@ -18,9 +18,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.ComboBoxAndEdit
 		private ControlResizeMode _menuResizeMode = ControlResizeMode.None;
 		private string? _placeholderText = "(employee)";
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// If the gallery is categorized when displayed as a menu.

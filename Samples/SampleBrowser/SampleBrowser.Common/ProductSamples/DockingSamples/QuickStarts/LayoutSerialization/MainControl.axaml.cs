@@ -38,9 +38,9 @@ namespace ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.LayoutSerial
 
 		#endregion
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		public MainControl() {
 			InitializeComponent();
@@ -86,9 +86,9 @@ namespace ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.LayoutSerial
 
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// NON-PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Initializes the "Programmatic Tool Window 1" tool window.
@@ -307,9 +307,9 @@ namespace ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.LayoutSerial
 			_layoutSerializer.DocumentWindowDeserializationBehavior = DockingWindowDeserializationBehavior;
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		public DockingWindowDeserializationBehavior DockingWindowDeserializationBehavior {
 			get => GetValue(DockingWindowDeserializationBehaviorProperty);

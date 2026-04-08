@@ -18,9 +18,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.Footer {
 		private ICommand? _showFooterMvvmCommand;
 		private ICommand? _showFooterXamlCommand;
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Indicates if the info bar can be closed.

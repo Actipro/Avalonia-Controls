@@ -121,8 +121,8 @@
 															IsVisible="{Binding IsVisible}">
 														<Grid RowDefinitions="Auto,Auto">
 															
-															<StackPanel Margin="{actipro:ScaledThickness '0,1,0,0'}" Orientation="Horizontal">
-																<TextBlock Margin="{actipro:ScaledThickness '2.5,0,1,0'}" Text="{Binding Language}" FontWeight="SemiBold" VerticalAlignment="Center" />
+															<StackPanel Margin="{actipro:ScaledThickness '0,1,0,0'}" Orientation="Horizontal" Spacing="{actipro:ScaledDouble 1}">
+																<TextBlock Margin="{actipro:ScaledThickness '2.5,0,0,0'}" Text="{Binding Language}" FontWeight="SemiBold" VerticalAlignment="Center" />
 																<StackPanel Orientation="Horizontal" VerticalAlignment="Center"
 																			IsVisible="{Binding TextUsesActiproXamlNamespace}">
 																	<TextBlock Text="(" VerticalAlignment="Center" />
@@ -132,7 +132,22 @@
 																						ToolTip.Tip="Copy required namespace declaration to the clipboard.">
 																		<actipro:CopyButton.ContentTemplate>
 																			<DataTemplate>
-																				<TextBlock TextDecorations="Underline" Text="xmlns:actipro"  />
+																				<TextBlock TextDecorations="Underline" Text="xmlns:actipro" />
+																			</DataTemplate>
+																		</actipro:CopyButton.ContentTemplate>
+																	</actipro:CopyButton>
+																	<TextBlock Text=")" VerticalAlignment="Center" />
+																</StackPanel>
+																<StackPanel Orientation="Horizontal" VerticalAlignment="Center"
+																			IsVisible="{Binding TextUsesActiproPrimitivesXamlNamespace}">
+																	<TextBlock Text="(" VerticalAlignment="Center" />
+																	<actipro:CopyButton Classes="theme-link accent" Padding="0" VerticalAlignment="Center"
+																						CopyText="xmlns:actiproPrimitives=&quot;using:ActiproSoftware.UI.Avalonia.Controls.Primitives&quot;"
+																						FeedbackKind="Popup"
+																						ToolTip.Tip="Copy required namespace declaration to the clipboard.">
+																		<actipro:CopyButton.ContentTemplate>
+																			<DataTemplate>
+																				<TextBlock TextDecorations="Underline" Text="xmlns:actiproPrimitives" />
 																			</DataTemplate>
 																		</actipro:CopyButton.ContentTemplate>
 																	</actipro:CopyButton>
@@ -288,8 +303,8 @@
 													>
 													<Grid RowDefinitions="Auto,Auto">
 															
-														<StackPanel Margin="{actipro:ScaledThickness '0,1,0,0'}" Orientation="Horizontal">
-															<TextBlock Margin="{actipro:ScaledThickness '2.5,0,1,0'}" Text="{Binding Language}" FontWeight="SemiBold" VerticalAlignment="Center" />
+														<StackPanel Margin="{actipro:ScaledThickness '0,1,0,0'}" Orientation="Horizontal" Spacing="{actipro:ScaledDouble 1}">
+															<TextBlock Margin="{actipro:ScaledThickness '2.5,0,0,0'}" Text="{Binding Language}" FontWeight="SemiBold" VerticalAlignment="Center" />
 															<StackPanel Orientation="Horizontal" VerticalAlignment="Center"
 																		IsVisible="{Binding TextUsesActiproXamlNamespace}">
 																<TextBlock Text="(" VerticalAlignment="Center" />
@@ -300,6 +315,21 @@
 																	<actipro:CopyButton.ContentTemplate>
 																		<DataTemplate>
 																			<TextBlock TextDecorations="Underline" Text="xmlns:actipro"  />
+																		</DataTemplate>
+																	</actipro:CopyButton.ContentTemplate>
+																</actipro:CopyButton>
+																<TextBlock Text=")" VerticalAlignment="Center" />
+															</StackPanel>
+															<StackPanel Orientation="Horizontal" VerticalAlignment="Center"
+																		IsVisible="{Binding TextUsesActiproPrimitivesXamlNamespace}">
+																<TextBlock Text="(" VerticalAlignment="Center" />
+																<actipro:CopyButton Classes="theme-link accent" Padding="0" VerticalAlignment="Center"
+																					CopyText="xmlns:actiproPrimitives=&quot;using:ActiproSoftware.UI.Avalonia.Controls.Primitives&quot;"
+																					FeedbackKind="Popup"
+																					ToolTip.Tip="Copy required namespace declaration to the clipboard.">
+																	<actipro:CopyButton.ContentTemplate>
+																		<DataTemplate>
+																			<TextBlock TextDecorations="Underline" Text="xmlns:actiproPrimitives" />
 																		</DataTemplate>
 																	</actipro:CopyButton.ContentTemplate>
 																</actipro:CopyButton>

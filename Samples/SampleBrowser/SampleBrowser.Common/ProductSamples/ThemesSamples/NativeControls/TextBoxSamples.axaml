@@ -32,7 +32,7 @@
 
 			<TextBox x:Name="sampleTextBox" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
 					 Text="Sample text here"
-					 Watermark="Actipro themes for textbox" UseFloatingWatermark="True"
+					 PlaceholderText="Actipro themes for textbox" UseFloatingPlaceholder="True"
 					 Classes.has-clear-button="{Binding #sampleTextBoxHasClearButton.IsChecked}"
 					 Classes.theme-outline="{Binding #sampleTextBoxTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Outline'}"
 					 Classes.theme-soft="{Binding #sampleTextBoxTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Soft'}"
@@ -52,8 +52,8 @@
 						<TextBlock Classes="theme-form-control-label" Text="Variant" />
 						<ComboBox x:Name="sampleTextBoxVariant" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
 					</StackPanel>
-					<TextBox Text="{Binding Watermark}" Watermark="Watermark" UseFloatingWatermark="True" />
-					<CheckBox IsChecked="{Binding UseFloatingWatermark}">Use floating watermark</CheckBox>
+					<TextBox Text="{Binding PlaceholderText}" PlaceholderText="Placeholder" UseFloatingPlaceholder="True" />
+					<CheckBox IsChecked="{Binding UseFloatingPlaceholder}">Use floating placeholder</CheckBox>
 					<CheckBox IsChecked="True" x:Name="sampleTextBoxHasClearButton">Has clear button</CheckBox>
 					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
 					<CheckBox IsChecked="{Binding IsReadOnly}">Read-only</CheckBox>
@@ -63,7 +63,7 @@
 				<sampleBrowser:CodeExample xml:space="preserve">
 					<![CDATA[
 <TextBox $(ClassesAttribute)Text="Define text here"
-	$(WatermarkAttribute)$(UseFloatingWatermarkAttribute)$(IsEnabledAttribute)$(IsReadOnlyAttribute)/>
+	$(PlaceholderTextAttribute)$(UseFloatingPlaceholderAttribute)$(IsEnabledAttribute)$(IsReadOnlyAttribute)/>
 					]]>
 					<sampleBrowser:CodeExample.Substitutions>
 						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
@@ -75,12 +75,12 @@
 						<sampleBrowser:CodeExampleSubstitution Key="IsReadOnlyAttribute"
 															   IsEnabled="{Binding IsReadOnly}"
 															   Value="IsReadOnly=&quot;True&quot; " />
-						<sampleBrowser:CodeExampleSubstitution Key="UseFloatingWatermarkAttribute"
-															   IsEnabled="{Binding UseFloatingWatermark}"
-															   Value="UseFloatingWatermark=&quot;True&quot; " />
-						<sampleBrowser:CodeExampleSubstitution Key="WatermarkAttribute"
-															   IsEnabled="{Binding Watermark, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
-															   Value="{Binding Watermark, StringFormat='Watermark=&quot;{0}&quot; '}" />
+						<sampleBrowser:CodeExampleSubstitution Key="UseFloatingPlaceholderAttribute"
+															   IsEnabled="{Binding UseFloatingPlaceholder}"
+															   Value="UseFloatingPlaceholder=&quot;True&quot; " />
+						<sampleBrowser:CodeExampleSubstitution Key="PlaceholderTextAttribute"
+															   IsEnabled="{Binding PlaceholderText, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding PlaceholderText, StringFormat='PlaceholderText=&quot;{0}&quot; '}" />
 					</sampleBrowser:CodeExample.Substitutions>
 				</sampleBrowser:CodeExample>
 			</sampleBrowser:ControlExample.CodeExamples>
@@ -95,7 +95,7 @@
 
 			<TextBox x:Name="samplePasswordBox" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
 					 PasswordChar="{actipro:ThemeResource EditPasswordChar}" Text="Sample text here"
-					 Watermark="Password" UseFloatingWatermark="True"
+					 PlaceholderText="Password" UseFloatingPlaceholder="True"
 					 Classes.has-reveal-password-button="{Binding #samplePasswordBoxHasRevealPasswordButton.IsChecked}"
 					 Classes.theme-outline="{Binding #samplePasswordBoxTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Outline'}"
 					 Classes.theme-soft="{Binding #samplePasswordBoxTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Soft'}"
@@ -116,10 +116,10 @@
 						<ComboBox x:Name="samplePasswordBoxVariant" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
 					</StackPanel>
 					<StackPanel>
-						<TextBlock Classes="theme-form-control-label" Text="Watermark" />
-						<TextBox Text="{Binding Watermark}" />
+						<TextBlock Classes="theme-form-control-label" Text="Placeholder" />
+						<TextBox Text="{Binding PlaceholderText}" />
 					</StackPanel>
-					<CheckBox IsChecked="{Binding UseFloatingWatermark}">Use floating watermark</CheckBox>
+					<CheckBox IsChecked="{Binding UseFloatingPlaceholder}">Use floating placeholder</CheckBox>
 					<CheckBox IsChecked="True" x:Name="samplePasswordBoxHasRevealPasswordButton">Has password reveal button</CheckBox>
 					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
 				</StackPanel>
@@ -128,7 +128,7 @@
 				<sampleBrowser:CodeExample xml:space="preserve">
 					<![CDATA[
 <TextBox $(ClassesAttribute)PasswordChar="{actipro:ThemeResource EditPasswordChar}" Text="Define text here"
-	$(WatermarkAttribute)$(UseFloatingWatermarkAttribute)$(IsEnabledAttribute)/>
+	$(PlaceholderTextAttribute)$(UseFloatingPlaceholderAttribute)$(IsEnabledAttribute)/>
 					]]>
 					<sampleBrowser:CodeExample.Substitutions>
 						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
@@ -137,12 +137,12 @@
 						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute"
 															   IsEnabled="{Binding !IsEnabled}"
 															   Value="IsEnabled=&quot;False&quot; " />
-						<sampleBrowser:CodeExampleSubstitution Key="UseFloatingWatermarkAttribute"
-															   IsEnabled="{Binding UseFloatingWatermark}"
-															   Value="UseFloatingWatermark=&quot;True&quot; " />
-						<sampleBrowser:CodeExampleSubstitution Key="WatermarkAttribute"
-															   IsEnabled="{Binding Watermark, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
-															   Value="{Binding Watermark, StringFormat='Watermark=&quot;{0}&quot; '}" />
+						<sampleBrowser:CodeExampleSubstitution Key="UseFloatingPlaceholderAttribute"
+															   IsEnabled="{Binding UseFloatingPlaceholder}"
+															   Value="UseFloatingPlaceholder=&quot;True&quot; " />
+						<sampleBrowser:CodeExampleSubstitution Key="PlaceholderTextAttribute"
+															   IsEnabled="{Binding PlaceholderText, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding PlaceholderText, StringFormat='PlaceholderText=&quot;{0}&quot; '}" />
 					</sampleBrowser:CodeExample.Substitutions>
 				</sampleBrowser:CodeExample>
 			</sampleBrowser:ControlExample.CodeExamples>
@@ -156,7 +156,7 @@
 			>
 
 			<MaskedTextBox x:Name="sampleMaskedTextBox" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
-						   Mask="(000) 000-0000" Watermark="Phone number" UseFloatingWatermark="True"
+						   Mask="(000) 000-0000" PlaceholderText="Phone number" UseFloatingPlaceholder="True"
 						   Classes.has-clear-button="{Binding #sampleMaskedTextBoxHasClearButton.IsChecked}"
 						   Classes.theme-outline="{Binding #sampleMaskedTextBoxTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Outline'}"
 						   Classes.theme-soft="{Binding #sampleMaskedTextBoxTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Soft'}"
@@ -176,9 +176,9 @@
 						<TextBlock Classes="theme-form-control-label" Text="Variant" />
 						<ComboBox x:Name="sampleMaskedTextBoxVariant" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
 					</StackPanel>
-					<TextBox Text="{Binding Watermark}" Watermark="Watermark" UseFloatingWatermark="True" />
-					<TextBox Text="{Binding Mask}" Watermark="Mask" UseFloatingWatermark="True" />
-					<CheckBox IsChecked="{Binding UseFloatingWatermark}">Use floating watermark</CheckBox>
+					<TextBox Text="{Binding PlaceholderText}" PlaceholderText="Placeholder" UseFloatingPlaceholder="True" />
+					<TextBox Text="{Binding Mask}" PlaceholderText="Mask" UseFloatingPlaceholder="True" />
+					<CheckBox IsChecked="{Binding UseFloatingPlaceholder}">Use floating placeholder</CheckBox>
 					<CheckBox IsChecked="True" x:Name="sampleMaskedTextBoxHasClearButton">Has clear button</CheckBox>
 					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
 				</StackPanel>
@@ -187,7 +187,7 @@
 				<sampleBrowser:CodeExample xml:space="preserve">
 					<![CDATA[
 <MaskedTextBox $(ClassesAttribute)Mask="$(Mask)" Text="Define text here"
-	$(WatermarkAttribute)$(UseFloatingWatermarkAttribute)$(IsEnabledAttribute)/>
+	$(PlaceholderTextAttribute)$(UseFloatingPlaceholderAttribute)$(IsEnabledAttribute)/>
 					]]>
 					<sampleBrowser:CodeExample.Substitutions>
 						<sampleBrowser:CodeExampleSubstitution Key="ClassesAttribute"
@@ -197,12 +197,12 @@
 						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute"
 															   IsEnabled="{Binding !IsEnabled}"
 															   Value="IsEnabled=&quot;False&quot; " />
-						<sampleBrowser:CodeExampleSubstitution Key="UseFloatingWatermarkAttribute"
-															   IsEnabled="{Binding UseFloatingWatermark}"
-															   Value="UseFloatingWatermark=&quot;True&quot; " />
-						<sampleBrowser:CodeExampleSubstitution Key="WatermarkAttribute"
-															   IsEnabled="{Binding Watermark, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
-															   Value="{Binding Watermark, StringFormat='Watermark=&quot;{0}&quot; '}" />
+						<sampleBrowser:CodeExampleSubstitution Key="UseFloatingPlaceholderAttribute"
+															   IsEnabled="{Binding UseFloatingPlaceholder}"
+															   Value="UseFloatingPlaceholder=&quot;True&quot; " />
+						<sampleBrowser:CodeExampleSubstitution Key="PlaceholderTextAttribute"
+															   IsEnabled="{Binding PlaceholderText, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
+															   Value="{Binding PlaceholderText, StringFormat='PlaceholderText=&quot;{0}&quot; '}" />
 					</sampleBrowser:CodeExample.Substitutions>
 				</sampleBrowser:CodeExample>
 			</sampleBrowser:ControlExample.CodeExamples>
@@ -218,24 +218,24 @@
 					<TextBox Classes="theme-outline" Text="Outline" />
 					<TextBox Classes="theme-outline" Text="Read-only" IsReadOnly="True" />
 					<TextBox Classes="theme-outline" Text="Disabled" IsEnabled="False" />
-					<TextBox Classes="theme-outline" Watermark="Watermark" />
-					<TextBox Classes="theme-outline" Watermark="Watermark (disabled)" IsEnabled="False" />
+					<TextBox Classes="theme-outline" PlaceholderText="Placeholder" />
+					<TextBox Classes="theme-outline" PlaceholderText="Placeholder (disabled)" IsEnabled="False" />
 					<TextBox Height="100" Classes="theme-outline" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.IsScrollChainingEnabled="False"
-							 Text="This is longer text.&#x0a;It has more than one line and this second line is longer than the first one.&#x0a;There is more text on this third line." Watermark="Multi-line (word wrapped)" UseFloatingWatermark="True" />
+							 Text="This is longer text.&#x0a;It has more than one line and this second line is longer than the first one.&#x0a;There is more text on this third line." PlaceholderText="Multi-line (word wrapped)" UseFloatingPlaceholder="True" />
 					<TextBox Height="100" Classes="theme-outline" AcceptsReturn="True" ScrollViewer.IsScrollChainingEnabled="False"
-							 Text="This is longer text.&#x0a;It has more than one line and this second line is longer than the first one.&#x0a;There is more text on this third line." Watermark="Multi-line" UseFloatingWatermark="True" />
+							 Text="This is longer text.&#x0a;It has more than one line and this second line is longer than the first one.&#x0a;There is more text on this third line." PlaceholderText="Multi-line" UseFloatingPlaceholder="True" />
 				</StackPanel>
 
 				<StackPanel Grid.Column="2" Spacing="10">
 					<TextBox Classes="theme-soft" Text="Soft" />
 					<TextBox Classes="theme-soft" Text="Read-only" IsReadOnly="True" />
 					<TextBox Classes="theme-soft" Text="Disabled" IsEnabled="False" />
-					<TextBox Classes="theme-soft" Watermark="Watermark" />
-					<TextBox Classes="theme-soft" Watermark="Watermark (disabled)" IsEnabled="False" />
+					<TextBox Classes="theme-soft" PlaceholderText="Placeholder" />
+					<TextBox Classes="theme-soft" PlaceholderText="Placeholder (disabled)" IsEnabled="False" />
 					<TextBox Height="100" Classes="theme-soft" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.IsScrollChainingEnabled="False"
-							 Text="This is longer text.&#x0a;It has more than one line and this second line is longer than the first one.&#x0a;There is more text on this third line." Watermark="Multi-line (word wrapped)" UseFloatingWatermark="True" />
+							 Text="This is longer text.&#x0a;It has more than one line and this second line is longer than the first one.&#x0a;There is more text on this third line." PlaceholderText="Multi-line (word wrapped)" UseFloatingPlaceholder="True" />
 					<TextBox Height="100" Classes="theme-soft" AcceptsReturn="True" ScrollViewer.IsScrollChainingEnabled="False"
-							 Text="This is longer text.&#x0a;It has more than one line and this second line is longer than the first one.&#x0a;There is more text on this third line." Watermark="Multi-line" UseFloatingWatermark="True" />
+							 Text="This is longer text.&#x0a;It has more than one line and this second line is longer than the first one.&#x0a;There is more text on this third line." PlaceholderText="Multi-line" UseFloatingPlaceholder="True" />
 				</StackPanel>
 			</Grid>
 
@@ -260,16 +260,16 @@
 					<TextBox Classes="theme-outline accent" Text="Outline" />
 					<TextBox Classes="theme-outline accent" Text="Read-only" IsReadOnly="True" />
 					<TextBox Classes="theme-outline accent" Text="Disabled" IsEnabled="False" />
-					<TextBox Classes="theme-outline accent" Watermark="Watermark" />
-					<TextBox Classes="theme-outline accent" Watermark="Watermark (disabled)" IsEnabled="False" />
+					<TextBox Classes="theme-outline accent" PlaceholderText="Placeholder" />
+					<TextBox Classes="theme-outline accent" PlaceholderText="Placeholder (disabled)" IsEnabled="False" />
 				</StackPanel>
 
 				<StackPanel Grid.Column="2" Spacing="10">
 					<TextBox Classes="theme-soft accent" Text="Soft" />
 					<TextBox Classes="theme-soft accent" Text="Read-only" IsReadOnly="True" />
 					<TextBox Classes="theme-soft accent" Text="Disabled" IsEnabled="False" />
-					<TextBox Classes="theme-soft accent" Watermark="Watermark" />
-					<TextBox Classes="theme-soft accent" Watermark="Watermark (disabled)" IsEnabled="False" />
+					<TextBox Classes="theme-soft accent" PlaceholderText="Placeholder" />
+					<TextBox Classes="theme-soft accent" PlaceholderText="Placeholder (disabled)" IsEnabled="False" />
 				</StackPanel>
 			</Grid>
 
@@ -294,16 +294,16 @@
 					<TextBox Classes="theme-outline success" Text="Outline" />
 					<TextBox Classes="theme-outline success" Text="Read-only" IsReadOnly="True" />
 					<TextBox Classes="theme-outline success" Text="Disabled" IsEnabled="False" />
-					<TextBox Classes="theme-outline success" Watermark="Watermark" />
-					<TextBox Classes="theme-outline success" Watermark="Watermark (disabled)" IsEnabled="False" />
+					<TextBox Classes="theme-outline success" PlaceholderText="Placeholder" />
+					<TextBox Classes="theme-outline success" PlaceholderText="Placeholder (disabled)" IsEnabled="False" />
 				</StackPanel>
 
 				<StackPanel Grid.Column="2" Spacing="10">
 					<TextBox Classes="theme-soft success" Text="Soft" />
 					<TextBox Classes="theme-soft success" Text="Read-only" IsReadOnly="True" />
 					<TextBox Classes="theme-soft success" Text="Disabled" IsEnabled="False" />
-					<TextBox Classes="theme-soft success" Watermark="Watermark" />
-					<TextBox Classes="theme-soft success" Watermark="Watermark (disabled)" IsEnabled="False" />
+					<TextBox Classes="theme-soft success" PlaceholderText="Placeholder" />
+					<TextBox Classes="theme-soft success" PlaceholderText="Placeholder (disabled)" IsEnabled="False" />
 				</StackPanel>
 			</Grid>
 
@@ -328,16 +328,16 @@
 					<TextBox Classes="theme-outline warning" Text="Outline" />
 					<TextBox Classes="theme-outline warning" Text="Read-only" IsReadOnly="True" />
 					<TextBox Classes="theme-outline warning" Text="Disabled" IsEnabled="False" />
-					<TextBox Classes="theme-outline warning" Watermark="Watermark" />
-					<TextBox Classes="theme-outline warning" Watermark="Watermark (disabled)" IsEnabled="False" />
+					<TextBox Classes="theme-outline warning" PlaceholderText="Placeholder" />
+					<TextBox Classes="theme-outline warning" PlaceholderText="Placeholder (disabled)" IsEnabled="False" />
 				</StackPanel>
 
 				<StackPanel Grid.Column="2" Spacing="10">
 					<TextBox Classes="theme-soft warning" Text="Soft" />
 					<TextBox Classes="theme-soft warning" Text="Read-only" IsReadOnly="True" />
 					<TextBox Classes="theme-soft warning" Text="Disabled" IsEnabled="False" />
-					<TextBox Classes="theme-soft warning" Watermark="Watermark" />
-					<TextBox Classes="theme-soft warning" Watermark="Watermark (disabled)" IsEnabled="False" />
+					<TextBox Classes="theme-soft warning" PlaceholderText="Placeholder" />
+					<TextBox Classes="theme-soft warning" PlaceholderText="Placeholder (disabled)" IsEnabled="False" />
 				</StackPanel>
 			</Grid>
 
@@ -362,16 +362,16 @@
 					<TextBox Classes="theme-outline danger" Text="Outline" />
 					<TextBox Classes="theme-outline danger" Text="Read-only" IsReadOnly="True" />
 					<TextBox Classes="theme-outline danger" Text="Disabled" IsEnabled="False" />
-					<TextBox Classes="theme-outline danger" Watermark="Watermark" />
-					<TextBox Classes="theme-outline danger" Watermark="Watermark (disabled)" IsEnabled="False" />
+					<TextBox Classes="theme-outline danger" PlaceholderText="Placeholder" />
+					<TextBox Classes="theme-outline danger" PlaceholderText="Placeholder (disabled)" IsEnabled="False" />
 				</StackPanel>
 
 				<StackPanel Grid.Column="2" Spacing="10">
 					<TextBox Classes="theme-soft danger" Text="Soft" />
 					<TextBox Classes="theme-soft danger" Text="Read-only" IsReadOnly="True" />
 					<TextBox Classes="theme-soft danger" Text="Disabled" IsEnabled="False" />
-					<TextBox Classes="theme-soft danger" Watermark="Watermark" />
-					<TextBox Classes="theme-soft danger" Watermark="Watermark (disabled)" IsEnabled="False" />
+					<TextBox Classes="theme-soft danger" PlaceholderText="Placeholder" />
+					<TextBox Classes="theme-soft danger" PlaceholderText="Placeholder (disabled)" IsEnabled="False" />
 				</StackPanel>
 			</Grid>
 

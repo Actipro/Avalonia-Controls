@@ -88,7 +88,7 @@
 
 			<sampleBrowser:ControlExample.Options>
 				<StackPanel Spacing="10">
-					<TextBox x:Name="buttonsKeyTextBox" Watermark="Key" UseFloatingWatermark="True" Text="MyButton"/>
+					<TextBox x:Name="buttonsKeyTextBox" PlaceholderText="Key" UseFloatingPlaceholder="True" Text="MyButton"/>
 					<sampleBrowser:NullableStringSettingControl x:Name="buttonsLabelTextBox" Label="Label" Text="" CoerceEmptyAsNull="True" IsCoerceCheckBoxVisible="False"/>
 					<StackPanel>
 						<TextBlock Classes="theme-form-control-label" Text="Variant size" />
@@ -231,7 +231,7 @@
 
 			<sampleBrowser:ControlExample.Options>
 				<StackPanel Spacing="10">
-					<TextBox x:Name="buttonsBackstageKeyTextBox" Watermark="Key" UseFloatingWatermark="True" Text="MyButton"/>
+					<TextBox x:Name="buttonsBackstageKeyTextBox" PlaceholderText="Key" UseFloatingPlaceholder="True" Text="MyButton"/>
 					<sampleBrowser:NullableStringSettingControl x:Name="buttonsBackstageLabelTextBox" Label="Label" Text="" CoerceEmptyAsNull="True" IsCoerceCheckBoxVisible="False"/>
 					<CheckBox x:Name="buttonsBackstageIsCheckedCheckBox" Content="Checked (toggle buttons)" IsChecked="True" />
 					<CheckBox x:Name="buttonsBackstageIsEnabledCheckBox" Content="Enabled" IsChecked="True" />

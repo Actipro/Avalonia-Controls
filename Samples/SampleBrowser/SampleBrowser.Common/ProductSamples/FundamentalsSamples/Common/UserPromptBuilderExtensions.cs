@@ -100,6 +100,7 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Common {
 					userPromptControl.Resources.Add(ThemeResourceKind.ButtonForegroundBrush.ToResourceKey(), Brushes.Black);
 					userPromptControl.Resources.Add(ThemeResourceKind.ButtonBackgroundBrushOutline.ToResourceKey(), lightColorFamilyBrush);
 					userPromptControl.Resources.Add(ThemeResourceKind.ButtonBorderBrushOutline.ToResourceKey(), litColorFamilyBrush);
+					userPromptControl.Resources.Add(ThemeResourceKind.ButtonBorderBrushOutlineDefaulted.ToResourceKey(), darkerColorFamilyBrush);
 
 					// Hover
 					userPromptControl.Resources.Add(ThemeResourceKind.ButtonBackgroundBrushOutlinePointerOver.ToResourceKey(), litColorFamilyBrush);

@@ -98,6 +98,9 @@ xmlns:bars="http://schemas.actiprosoftware.com/winfx/xaml/bars"
 ```
 }
 
+> [!TIP]
+> A [BarSeparator](xref:@ActiproUIRoot.Controls.Bars.BarSeparator) also can be used as a spacer separator within a non-overflowed standalone toolbar.  This capability allows for aligning some items to the far (right/bottom) side of the standalone toolbar, and supports other grouping features.  See the [Standalone Toolbars](../toolbar-features/standalone-toolbars.md) topic for more information on spacer separators.
+
 ### Menu Contexts
 
 Use the [BarMenuSeparator](xref:@ActiproUIRoot.Controls.Bars.BarMenuSeparator) control to implement a separator within a menu context.

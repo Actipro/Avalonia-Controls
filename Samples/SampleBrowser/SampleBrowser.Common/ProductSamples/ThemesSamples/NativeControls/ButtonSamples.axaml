@@ -57,14 +57,15 @@
 						<TextBlock Classes="theme-form-control-label" Text="Variant" />
 						<ComboBox x:Name="sampleVariant" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
 					</StackPanel>
-					<TextBox x:Name="sampleText" Text="Button Text" Watermark="Content" UseFloatingWatermark="True" />
+					<TextBox x:Name="sampleText" Text="Button Text" PlaceholderText="Content" UseFloatingPlaceholder="True" />
+					<CheckBox IsChecked="{Binding IsDefault}">Default</CheckBox>
 					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
 				</StackPanel>
 			</sampleBrowser:ControlExample.Options>
 			<sampleBrowser:ControlExample.CodeExamples>
 				<sampleBrowser:CodeExample xml:space="preserve">
 					<![CDATA[
-<Button$(ClassesAttribute)$(IsEnabledAttribute)>
+<Button$(ClassesAttribute)$(IsDefaultAttribute)$(IsEnabledAttribute)>
 	$(Content)
 </Button>
 					]]>
@@ -73,6 +74,9 @@
 															   IsEnabled="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
 															   Value="{Binding (sampleBrowser:ObservableStyledClassesProperties.ClassesString), StringFormat=' Classes=&quot;{0}&quot;'}" />
 						<sampleBrowser:CodeExampleSubstitution Key="Content" Value="{Binding #sampleText.Text}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsDefaultAttribute"
+															   IsEnabled="{Binding IsDefault}"
+															   Value=" IsDefault=&quot;True&quot;" />
 						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute"
 															   IsEnabled="{Binding !IsEnabled}"
 															   Value=" IsEnabled=&quot;False&quot;" />

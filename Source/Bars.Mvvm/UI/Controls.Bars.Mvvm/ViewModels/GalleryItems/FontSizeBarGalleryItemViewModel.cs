@@ -10,9 +10,9 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 
 		internal const double DefaultFontSize = 12.0;
 		
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Initializes a new instance of the class with a default font size.
@@ -44,9 +44,9 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		public FontSizeBarGalleryItemViewModel(double value, string? category, string? label)
 			: base(ValidateFontSize(value, nameof(value)), category, label) { }
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// NON-PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Tests if the given font size is valid and throws <see cref="ArgumentOutOfRangeException"/> if invalid.
@@ -62,9 +62,9 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 			return size;
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Creates a default collection of gallery item view models representing common font sizes.

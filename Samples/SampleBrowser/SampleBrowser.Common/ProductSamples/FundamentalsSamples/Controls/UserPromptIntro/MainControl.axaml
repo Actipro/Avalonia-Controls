@@ -100,8 +100,8 @@
 
 			<sampleBrowser:ControlExample.Options>
 				<StackPanel Spacing="10">
-					<TextBox Text="{Binding Header}" Watermark="Header" UseFloatingWatermark="True" />
-					<TextBox Text="{Binding Content}" Watermark="Content" UseFloatingWatermark="True" />
+					<TextBox Text="{Binding Header}" PlaceholderText="Header" UseFloatingPlaceholder="True" />
+					<TextBox Text="{Binding Content}" PlaceholderText="Content" UseFloatingPlaceholder="True" />
 					<StackPanel>
 						<TextBlock Classes="theme-form-control-label" Text="Status icon" />
 						<ComboBox ItemsSource="{actipro:DelimitedArray Type=actipro:MessageBoxImage}" SelectedItem="{Binding StandardStatusIcon}" />
@@ -247,35 +247,47 @@ var result = await UserPromptBuilder.Configure()
 
 			<sampleBrowser:ControlExample.Options>
 				<StackPanel Spacing="10">
-					<TextBox Text="{Binding DefaultButtonClasses}" Watermark="Default button classes" UseFloatingWatermark="True" />
+					<TextBox x:Name="defaultButtonDefaultButtonClassesTextBox" Text="{Binding DefaultButtonClasses}" PlaceholderText="Default button classes" UseFloatingPlaceholder="True" />
 					<StackPanel>
 						<TextBlock Classes="theme-form-control-label" Text="Default result" />
-						<ComboBox ItemsSource="{actipro:DelimitedArray 'None, Yes, No, Cancel', Type={x:Type actipro:MessageBoxResult}}" SelectedItem="{Binding DefaultResult}" />
+						<ComboBox x:Name="defaultButtonDefaultResultComboBox" ItemsSource="{actipro:DelimitedArray 'None, Yes, No, Cancel', Type={x:Type actipro:MessageBoxResult}}" SelectedItem="{Binding DefaultResult}" />
 					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Navigation method" />
+						<ComboBox x:Name="defaultButtonFocusNavigationComboBox" ItemsSource="{actipro:DelimitedArray Type=NavigationMethod}" SelectedItem="{Binding DefaultButtonFocusNavigationMethod}" />
+					</StackPanel>
+
+					<Button Classes="show-dialog theme-solid accent" Click="OnSampleShowDialogDefaultButtonClick" />
 				</StackPanel>
 			</sampleBrowser:ControlExample.Options>
 			<sampleBrowser:ControlExample.CodeExamples>
 				<sampleBrowser:CodeExample xml:space="preserve">
 					<![CDATA[
 <actipro:UserPromptControl ...
-	DefaultResult="$(DefaultResult)" DefaultButtonClasses="$(DefaultButtonClasses)" />
+	DefaultButtonClasses="$(DefaultButtonClasses)"
+	DefaultButtonFocusNavigationMethod="$(DefaultButtonFocusNavigationMethod)"
+	DefaultResult="$(DefaultResult)"
+	/>
 					]]>
 					<sampleBrowser:CodeExample.Substitutions>
-						<sampleBrowser:CodeExampleSubstitution Key="DefaultResult" Value="{Binding DefaultResult}" />
 						<sampleBrowser:CodeExampleSubstitution Key="DefaultButtonClasses" Value="{Binding DefaultButtonClasses}" />
+						<sampleBrowser:CodeExampleSubstitution Key="DefaultButtonFocusNavigationMethod" Value="{Binding DefaultButtonFocusNavigationMethod}" />
+						<sampleBrowser:CodeExampleSubstitution Key="DefaultResult" Value="{Binding DefaultResult}" />
 					</sampleBrowser:CodeExample.Substitutions>
 				</sampleBrowser:CodeExample>
 				<sampleBrowser:CodeExample Language="C#" xml:space="preserve">
 					<![CDATA[
 var result = await UserPromptBuilder.Configure()
 	// Other common settings here
-	.WithDefaultResult(MessageBoxResult.$(DefaultResult))
 	.WithDefaultButtonClasses("$(DefaultButtonClasses)")
+	.WithDefaultButtonFocusNavigationMethod($(DefaultButtonFocusNavigationMethod))
+	.WithDefaultResult(MessageBoxResult.$(DefaultResult))
 	.Show();
 					]]>
 					<sampleBrowser:CodeExample.Substitutions>
-						<sampleBrowser:CodeExampleSubstitution Key="DefaultResult" Value="{Binding DefaultResult}" />
 						<sampleBrowser:CodeExampleSubstitution Key="DefaultButtonClasses" Value="{Binding DefaultButtonClasses}" />
+						<sampleBrowser:CodeExampleSubstitution Key="DefaultButtonFocusNavigationMethod" Value="{Binding DefaultButtonFocusNavigationMethod}" />
+						<sampleBrowser:CodeExampleSubstitution Key="DefaultResult" Value="{Binding DefaultResult}" />
 						<sampleBrowser:CodeExampleSubstitution Key="StandardButtons" Value="{Binding StandardButtons}" />
 					</sampleBrowser:CodeExample.Substitutions>
 				</sampleBrowser:CodeExample>
@@ -340,9 +352,9 @@ var result = await UserPromptBuilder.Configure()
 
 			<sampleBrowser:ControlExample.Options>
 				<StackPanel Spacing="10">
-					<TextBox Text="{Binding ExpandedInformationContent}" Watermark="Expanded content" UseFloatingWatermark="True" />
-					<TextBox Text="{Binding ExpandedInformationCollapsedHeaderText}" Watermark="Toggle header (collapsed)" UseFloatingWatermark="True" />
-					<TextBox Text="{Binding ExpandedInformationExpandedHeaderText}" Watermark="Toggle header (expanded)" UseFloatingWatermark="True" />
+					<TextBox Text="{Binding ExpandedInformationContent}" PlaceholderText="Expanded content" UseFloatingPlaceholder="True" />
+					<TextBox Text="{Binding ExpandedInformationCollapsedHeaderText}" PlaceholderText="Toggle header (collapsed)" UseFloatingPlaceholder="True" />
+					<TextBox Text="{Binding ExpandedInformationExpandedHeaderText}" PlaceholderText="Toggle header (expanded)" UseFloatingPlaceholder="True" />
 					<CheckBox IsChecked="{Binding IsExpanded}" Content="Expanded" />
 				</StackPanel>
 			</sampleBrowser:ControlExample.Options>
@@ -394,7 +406,7 @@ var result = await UserPromptBuilder.Configure()
 
 			<sampleBrowser:ControlExample.Options>
 				<StackPanel Spacing="10">
-					<TextBox Text="{Binding Footer}" Watermark="Footer content" UseFloatingWatermark="True" MaxLines="4" AcceptsReturn="True" ScrollViewer.HorizontalScrollBarVisibility="Disabled" />
+					<TextBox Text="{Binding Footer}" PlaceholderText="Footer content" UseFloatingPlaceholder="True" MaxLines="4" AcceptsReturn="True" ScrollViewer.HorizontalScrollBarVisibility="Disabled" />
 					<CheckBox IsChecked="{Binding #sampleRootControl.ShowBasicFooterSampleImage}" Content="Include image" />
 				</StackPanel>
 			</sampleBrowser:ControlExample.Options>
@@ -666,7 +678,7 @@ var result = await UserPromptBuilder.Configure()
 
 			<sampleBrowser:ControlExample.Options>
 				<StackPanel Spacing="10">
-					<TextBox Text="{Binding CheckBoxContent}" Watermark="Checkbox content" UseFloatingWatermark="True" />
+					<TextBox Text="{Binding CheckBoxContent}" PlaceholderText="Checkbox content" UseFloatingPlaceholder="True" />
 					<CheckBox IsChecked="{Binding IsChecked}" Content="Is checked" />
 					
 					<Button Classes="show-dialog" Margin="0,20,0,0" Click="OnSampleShowDialogStandardCheckBoxClick" />
@@ -1171,7 +1183,9 @@ var result = await UserPromptBuilder.Configure()
 						<Button Command="{StaticResource ConfirmationCommand}"
 								CommandParameter="{ReflectionBinding RelativeSource={RelativeSource Self}}"
 								Content="_Yes"
-								actipro:UserPromptControl.ButtonResult="Yes"/>
+								actipro:UserPromptControl.ButtonResult="Yes"
+								IsDefault="True"
+								/>
 						<Button Command="{StaticResource ConfirmationCommand}"
 								CommandParameter="{ReflectionBinding RelativeSource={RelativeSource Self}}"
 								Content="_No"
@@ -1195,7 +1209,7 @@ var result = await UserPromptBuilder.Configure()
 	<!-- This sample assumes a ViewModel with associated commands is the DataContext -->
 	<actipro:UserPromptControl.ButtonItems>
 		<actipro:Array x:DataType="Button">
-			<Button Command="{Binding YesCommand}" Content="_Yes"
+			<Button Command="{Binding YesCommand}" Content="_Yes" IsDefault="True"
 					actipro:UserPromptControl.ButtonResult="Yes"/>
 			<Button Command="{Binding NoCommand}" Content="_No"
 					actipro:UserPromptControl.ButtonResult="No"/>

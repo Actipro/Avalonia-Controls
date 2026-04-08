@@ -8,6 +8,7 @@
 	<DataTemplate x:Key="{x:Static actipro:BarsMvvmResourceKeys.BarSeparatorDefaultItemContainerTemplate}" DataType="actipro:BarSeparatorViewModel">
 		<actipro:BarSeparator
 			IsVisible="{Binding IsVisible}"
+			StandaloneToolBarSeparatorMode="{Binding StandaloneToolBarSeparatorMode}"
 			/>
 	</DataTemplate>
 

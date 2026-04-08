@@ -11,9 +11,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.Demos.DocumentEditorMvvm {
 
 		private readonly BarManager _barManager;
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="NewRibbonBackstageTabViewModel"/> class.
@@ -28,9 +28,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.Demos.DocumentEditorMvvm {
 			SmallIcon = barManager.ImageProvider.GetImage(BarControlKeys.BackstageTabNew, BarImageSize.Small);
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <inheritdoc cref="BarManager.NewBlankDocumentCommand"/>
 		public ICommand? NewBlankDocumentCommand => _barManager?.NewBlankDocumentCommand;

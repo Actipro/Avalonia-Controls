@@ -25,9 +25,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.ColorPickers {
 		
 		ICollectionView? _customColorItemsView;
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		public MainControl() {
 			InitializeComponent();
@@ -79,9 +79,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.ColorPickers {
 			customThemeRibbonMvvm.DataContext = CustomThemeRibbonViewModel;
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// NON-PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// A <see cref="ColorBarGalleryItemViewModel"/> used to represent an automatic color.
@@ -581,9 +581,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.ColorPickers {
 			barGalleryViewModel.MinItemHeight = barGalleryViewModel.MinItemWidth = optionsViewModel.MinItemLength;
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// A basic command to be executed when a color is selected from a color picker.

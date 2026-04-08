@@ -3,12 +3,15 @@
 
 	<PropertyGroup>
 
-		<TargetFramework>net8.0</TargetFramework>
+		<TargetFramework Label="Visual Studio 2022 Target" Condition="'$(VisualStudioVersion)' == '17.0'">net8.0</TargetFramework>
+		<TargetFramework Label="Default Target" Condition="'$(TargetFramework)' == ''">net10.0</TargetFramework>
+
+		<TargetFrameworkBrowser>$(TargetFramework)-browser</TargetFrameworkBrowser>
+
 		<Nullable>enable</Nullable>
 		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
 
-		<Version>25.2.3.0</Version>
-		<InformationalVersion>25.2.3.0 - 20260313</InformationalVersion>
+		<Version>26.1.0$(PreReleaseTagWithDash)</Version>
 
 		<Product>Actipro Avalonia Controls Sample Browser</Product>
 		<Title>$(Product)</Title>
@@ -17,7 +20,7 @@
 
 		<RootNamespace>ActiproSoftware</RootNamespace>
 		<Authors>Actipro Software LLC</Authors>
-		<Copyright>Copyright (c) 2022-2026 Actipro Software LLC.  All rights reserved.</Copyright>
+		<Copyright>Copyright (c) 2022-2026 Actipro Software LLC</Copyright>
 
 		<DefineConstants>AVALONIA</DefineConstants>
 		<GenerateAssemblyInfo>true</GenerateAssemblyInfo>

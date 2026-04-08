@@ -19,6 +19,10 @@
 			<sampleBrowser:ControlExampleLinkItem Title="Switch control themes" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/native-control-themes#switch-controls" />
 		</sampleBrowser:ControlExampleItemsControl.Documentation>
 
+		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+			<sampleBrowser:ControlExampleLinkItem Title="Range slider" Url="/ProductSamples/FundamentalsSamples/Controls/RangeSliderIntro/MainControl" />
+		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+
 
 		<sampleBrowser:ControlExample
 			Header="Slider usage"
@@ -70,7 +74,7 @@
 						<TextBlock Classes="theme-form-control-label" Text="Tick placement" />
 						<ComboBox ItemsSource="{actipro:DelimitedArray Type={x:Type TickPlacement}}" SelectedValue="{Binding TickPlacement}" />
 					</StackPanel>
-					<TextBox Text="{Binding Value, Mode=OneWay, StringFormat='{}{0:N0}'}" IsReadOnly="True" Watermark="Value" UseFloatingWatermark="True" />
+					<TextBox Text="{Binding Value, Mode=OneWay, StringFormat='{}{0:N0}'}" IsReadOnly="True" PlaceholderText="Value" UseFloatingPlaceholder="True" />
 					<CheckBox IsChecked="{Binding IsDirectionReversed}">Direction reversed</CheckBox>
 					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
 				</StackPanel>

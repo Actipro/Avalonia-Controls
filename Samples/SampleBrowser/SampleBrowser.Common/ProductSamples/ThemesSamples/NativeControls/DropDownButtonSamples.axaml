@@ -67,7 +67,7 @@
 						<TextBlock Classes="theme-form-control-label" Text="Variant" />
 						<ComboBox x:Name="sampleVariant" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
 					</StackPanel>
-					<TextBox x:Name="sampleText" Text="Button Text" Watermark="Content" UseFloatingWatermark="True" />
+					<TextBox x:Name="sampleText" Text="Button Text" PlaceholderText="Content" UseFloatingPlaceholder="True" />
 					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
 				</StackPanel>
 			</sampleBrowser:ControlExample.Options>

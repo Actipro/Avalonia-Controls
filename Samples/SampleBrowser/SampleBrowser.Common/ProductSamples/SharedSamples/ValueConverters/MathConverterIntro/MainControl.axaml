@@ -318,7 +318,7 @@
 						<TextBlock Classes="theme-form-control-label" Margin="0" Text="{Binding #fontTextBlock.FontSize, StringFormat='Font size = {0}pt'}" />
 						<Slider x:Name="fontSizeSlider" Minimum="8" Maximum="48" IsSnapToTickEnabled="True" TickFrequency="1" Value="{Binding #fontTextBlock.FontSize}" />
 					</StackPanel>
-					<TextBox Watermark="Shape height" UseFloatingWatermark="True" IsReadOnly="True" Text="{Binding #fontShape.Height}" />
+					<TextBox PlaceholderText="Shape height" UseFloatingPlaceholder="True" IsReadOnly="True" Text="{Binding #fontShape.Height}" />
 				</StackPanel>
 			</sampleBrowser:ControlExample.Options>
 			<sampleBrowser:ControlExample.CodeExamples>

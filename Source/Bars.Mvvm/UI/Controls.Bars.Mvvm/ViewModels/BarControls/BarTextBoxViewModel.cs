@@ -23,9 +23,9 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		private string? _title;
 		private ItemCollapseBehavior _toolBarItemCollapseBehavior = ItemCollapseBehavior.Default;
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <inheritdoc cref="BarButtonViewModel()"/>
 		public BarTextBoxViewModel()  // Parameterless constructor required for XAML support
@@ -60,9 +60,9 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 			_command = command;
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// INTERFACE IMPLEMENTATION
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <inheritdoc/>
 		object? IHasVariantImages.LargeIcon {
@@ -76,9 +76,9 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 			set { /* No-op since a medium image is not supported by the control */ }
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		
 		/// <inheritdoc cref="BarButtonViewModel.CanCloneToRibbonQuickAccessToolBar"/>
 		public bool CanCloneToRibbonQuickAccessToolBar {

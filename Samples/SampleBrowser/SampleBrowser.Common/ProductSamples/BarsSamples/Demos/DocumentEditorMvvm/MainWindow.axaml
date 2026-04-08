@@ -3,8 +3,6 @@
 	xmlns="https://github.com/avaloniaui"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
-	xmlns:actiproPrims="using:ActiproSoftware.UI.Avalonia.Controls.Primitives"
-	xmlns:barsPrims="using:ActiproSoftware.UI.Avalonia.Controls.Bars.Primitives"
 	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
 	xmlns:local="using:ActiproSoftware.ProductSamples.BarsSamples.Demos.DocumentEditorMvvm"
 	Title="Document1 - Actipro Bars"

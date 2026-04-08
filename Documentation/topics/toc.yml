@@ -233,6 +233,8 @@ items:
       href: fundamentals/controls/circular-progressbar.md
     - name: "Info Bar"
       href: fundamentals/controls/info-bar.md
+    - name: "Range Slider"
+      href: fundamentals/controls/range-slider.md
     - name: "Segmented Bar"
       href: fundamentals/controls/segmented-bar.md
     - name: "Settings Card"
@@ -279,6 +281,8 @@ items:
     href: themes/image-provider.md
   - name: "Icon Presenter"
     href: themes/icon-presenter.md
+  - name: "Avalonia Pro Support"
+    href: themes/avalonia-pro-support.md
 - name: "Actipro Shared Library"
   href: shared/index.md
   items:
@@ -324,6 +328,8 @@ items:
     href: shared/media.md
   - name: "Serialization"
     href: shared/windows-serialization.md
+  - name: "Menu Factory"
+    href: shared/menu-factory.md
   - name: "Extension Methods"
     href: shared/extension-methods.md
   - name: "Value Converters"
@@ -363,6 +369,8 @@ items:
   items:
   - name: "Overview"
     href: conversion/index.md
+  - name: "Converting to v26.1"
+    href: conversion/converting-to-v26-1.md
   - name: "Converting to v25.2.3"
     href: conversion/converting-to-v25-2-3.md
   - name: "Converting to v25.2.2"

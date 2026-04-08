@@ -18,9 +18,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.RecentDocuments
 		private ICommand? _openCommand;
 		private ICommand? _openCommandMvvm;
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		public MainControl() {
 			// Use a helper class to predefine a collection of recently opened documents
@@ -34,9 +34,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.RecentDocuments
 			InitializeComponent();
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// NON-PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		private IStorageProvider GetStorageProvider() {
 			return TopLevel.GetTopLevel(this)?.StorageProvider
@@ -93,9 +93,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.RecentDocuments
 			recentDocumentViewModel.LastOpenedDateTime = DateTime.Now;
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// The command that, when invoked, will clear the collection of view models used by the "MVVM usage" sample.

@@ -14,9 +14,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.Common {
 		/// </summary>
 		public const string DefaultCategory = "Bullet Library";
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Initializes a new instance of the class with a default value and category.
@@ -48,9 +48,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.Common {
 		public BulletBarGalleryItemViewModel(BulletKind value, string? category, string? label)
 			: base(value, category, label) { }
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Creates a default collection of gallery item view models representing bullet kinds.

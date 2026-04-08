@@ -164,8 +164,8 @@
 
 					<actipro:BarMenuGallery Key="ColorPickerGallery"$(UseAccentedItemBorderAttribute)
 						Command="{Binding BasicSetColorCommand}"$(MinColumnCountAttribute)
-						MaxColumnCount="$(MaxColumnCount)"
-						ItemSpacing="$(ItemSpacing)"$(MinItemHeightAttribute)$(MaxItemWidthAttribute)
+						MaxColumnCount="$(MaxColumnCountAttribute)"
+						ItemSpacing="$(ItemSpacingAttribute)"$(MinItemHeightAttribute)$(MaxItemWidthAttribute)
 						ItemContainerTheme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.BarGalleryItemControlTheme}}">
 
 						<!-- Use the pre-defined item templates from Bars MVVM library -->
@@ -196,38 +196,17 @@
 </actipro:Ribbon>
 					]]>
 					<sampleBrowser:CodeExample.Substitutions>
-						<sampleBrowser:CodeExampleSubstitution Key="ItemSpacing" Value="{Binding #sampleRootControl.BasicUsageOptions.ItemSpacing}" />
+						<sampleBrowser:CodeExampleSubstitution Key="ItemSpacingAttribute" Value="{Binding #sampleRootControl.BasicUsageOptions.ItemSpacing}" />
 						<sampleBrowser:CodeExampleSubstitution Key="MinColumnCountAttribute"
-															   Value="{Binding #sampleRootControl.BasicUsageOptions.MinColumnCount, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;MinColumnCount=&quot;{0}&quot;'}">
-							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
-								<Binding Path="#sampleRootControl.BasicUsageOptions.MinColumnCount" Converter="{StaticResource NotEqualToComparisonConverter}">
-									<Binding.ConverterParameter>
-										<x:Int32>1</x:Int32>
-									</Binding.ConverterParameter>
-								</Binding>
-							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
-						</sampleBrowser:CodeExampleSubstitution>
-						<sampleBrowser:CodeExampleSubstitution Key="MaxColumnCount" Value="{Binding #sampleRootControl.BasicUsageOptions.MaxColumnCount}" />
+															   IsEnabled="{Binding #sampleRootControl.BasicUsageOptions.MinColumnCount, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='1'}"
+															   Value="{Binding #sampleRootControl.BasicUsageOptions.MinColumnCount, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;MinColumnCount=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="MaxColumnCountAttribute" Value="{Binding #sampleRootControl.BasicUsageOptions.MaxColumnCount}" />
 						<sampleBrowser:CodeExampleSubstitution Key="MinItemHeightAttribute"
-															   Value="{Binding #sampleRootControl.BasicUsageOptions.MinItemLength, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;MinItemHeight=&quot;{0}&quot;'}">
-							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
-								<Binding Path="#sampleRootControl.BasicUsageOptions.MinItemLength" Converter="{StaticResource NotEqualToComparisonConverter}">
-									<Binding.ConverterParameter>
-										<x:Int32>16</x:Int32>
-									</Binding.ConverterParameter>
-								</Binding>
-							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
-						</sampleBrowser:CodeExampleSubstitution>
+															   IsEnabled="{Binding #sampleRootControl.BasicUsageOptions.MinItemLength, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='16'}"
+															   Value="{Binding #sampleRootControl.BasicUsageOptions.MinItemLength, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;MinItemHeight=&quot;{0}&quot;'}" />
 						<sampleBrowser:CodeExampleSubstitution Key="MaxItemWidthAttribute"
-															   Value="{Binding #sampleRootControl.BasicUsageOptions.MinItemLength, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;MinItemWidth=&quot;{0}&quot;'}">
-							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
-								<Binding Path="#sampleRootControl.BasicUsageOptions.MinItemLength" Converter="{StaticResource NotEqualToComparisonConverter}">
-									<Binding.ConverterParameter>
-										<x:Int32>16</x:Int32>
-									</Binding.ConverterParameter>
-								</Binding>
-							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
-						</sampleBrowser:CodeExampleSubstitution>
+															   IsEnabled="{Binding #sampleRootControl.BasicUsageOptions.MinItemLength, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='16'}"
+															   Value="{Binding #sampleRootControl.BasicUsageOptions.MinItemLength, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;MinItemWidth=&quot;{0}&quot;'}" />
 						<sampleBrowser:CodeExampleSubstitution Key="UseAccentedItemBorderAttribute"
 															   IsEnabled="{Binding #sampleRootControl.BasicUsageOptions.UseAccentedItemBorder}"
 															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;UseAccentedItemBorder=&quot;True&quot;" />
@@ -315,36 +294,15 @@ public partial class SampleRootControl : UserControl {
 					<sampleBrowser:CodeExample.Substitutions>
 						<sampleBrowser:CodeExampleSubstitution Key="ItemSpacing" Value="{Binding #sampleRootControl.BasicUsageOptions.ItemSpacing}" />
 						<sampleBrowser:CodeExampleSubstitution Key="MinColumnCountSetter"
-															   Value="{Binding #sampleRootControl.BasicUsageOptions.MinColumnCount, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;MinMenuColumnCount = {0},'}">
-							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
-								<Binding Path="#sampleRootControl.BasicUsageOptions.MinColumnCount" Converter="{StaticResource NotEqualToComparisonConverter}">
-									<Binding.ConverterParameter>
-										<x:Int32>1</x:Int32>
-									</Binding.ConverterParameter>
-								</Binding>
-							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
-						</sampleBrowser:CodeExampleSubstitution>
+															   IsEnabled="{Binding #sampleRootControl.BasicUsageOptions.MinColumnCount, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='1'}"
+															   Value="{Binding #sampleRootControl.BasicUsageOptions.MinColumnCount, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;MinMenuColumnCount = {0},'}" />
 						<sampleBrowser:CodeExampleSubstitution Key="MaxColumnCount" Value="{Binding #sampleRootControl.BasicUsageOptions.MaxColumnCount}" />
 						<sampleBrowser:CodeExampleSubstitution Key="MinItemHeightSetter"
-															   Value="{Binding #sampleRootControl.BasicUsageOptions.MinItemLength, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;MinItemHeight = {0},'}">
-							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
-								<Binding Path="#sampleRootControl.BasicUsageOptions.MinItemLength" Converter="{StaticResource NotEqualToComparisonConverter}">
-									<Binding.ConverterParameter>
-										<x:Int32>16</x:Int32>
-									</Binding.ConverterParameter>
-								</Binding>
-							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
-						</sampleBrowser:CodeExampleSubstitution>
+															   IsEnabled="{Binding #sampleRootControl.BasicUsageOptions.MinItemLength, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='16'}"
+															   Value="{Binding #sampleRootControl.BasicUsageOptions.MinItemLength, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;MinItemHeight = {0},'}" />
 						<sampleBrowser:CodeExampleSubstitution Key="MinItemWidthSetter"
-															   Value="{Binding #sampleRootControl.BasicUsageOptions.MinItemLength, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;MinItemWidth = {0},'}">
-							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
-								<Binding Path="#sampleRootControl.BasicUsageOptions.MinItemLength" Converter="{StaticResource NotEqualToComparisonConverter}">
-									<Binding.ConverterParameter>
-										<x:Int32>16</x:Int32>
-									</Binding.ConverterParameter>
-								</Binding>
-							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
-						</sampleBrowser:CodeExampleSubstitution>
+															   IsEnabled="{Binding #sampleRootControl.BasicUsageOptions.MinItemLength, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='16'}"
+															   Value="{Binding #sampleRootControl.BasicUsageOptions.MinItemLength, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;MinItemWidth = {0},'}" />
 						<sampleBrowser:CodeExampleSubstitution Key="UseAccentedItemBorderSetter"
 															   IsEnabled="{Binding #sampleRootControl.BasicUsageOptions.UseAccentedItemBorder}"
 															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;UseAccentedItemBorder = true," />

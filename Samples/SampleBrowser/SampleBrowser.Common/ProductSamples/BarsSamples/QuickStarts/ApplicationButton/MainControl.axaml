@@ -69,8 +69,8 @@
 			<sampleBrowser:ControlExample.Options>
 				<StackPanel Spacing="10" DataContext="{Binding #sampleRootControl.BasicUsageRibbonViewModel}">
 					<CheckBox x:Name="basicUsageIsAppButtonVisibleCheckBox" Content="Is app button visible" IsChecked="{Binding IsApplicationButtonVisible}" />
-					<TextBox x:Name="basicUsageLabelTextBox" Text="{Binding ApplicationButton.Label}" Watermark="Label" UseFloatingWatermark="True" />
-					<TextBox x:Name="basicUsageKeyTipTextBox" Text="{Binding ApplicationButton.KeyTipText}" Watermark="Key tip text" UseFloatingWatermark="True" />
+					<TextBox x:Name="basicUsageLabelTextBox" Text="{Binding ApplicationButton.Label}" PlaceholderText="Label" UseFloatingPlaceholder="True" />
+					<TextBox x:Name="basicUsageKeyTipTextBox" Text="{Binding ApplicationButton.KeyTipText}" PlaceholderText="Key tip text" UseFloatingPlaceholder="True" />
 				</StackPanel>
 			</sampleBrowser:ControlExample.Options>
 			<sampleBrowser:ControlExample.CodeExamples>

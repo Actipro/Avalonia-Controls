@@ -4,9 +4,9 @@ namespace ActiproSoftware.SampleBrowser.Utilities.ThemeResourceBrowser {
 
 	public partial class ThemeResourceBrowserView : UserControl {
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		public ThemeResourceBrowserView() {
 			InitializeComponent();
@@ -15,9 +15,9 @@ namespace ActiproSoftware.SampleBrowser.Utilities.ThemeResourceBrowser {
 			ActualThemeVariantChanged += this.OnActualThemeVariantChanged;
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// NON-PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		private void OnActualThemeVariantChanged(object? sender, System.EventArgs e) {
 			var viewModel = this.ViewModel;
@@ -25,9 +25,9 @@ namespace ActiproSoftware.SampleBrowser.Utilities.ThemeResourceBrowser {
 				viewModel.Theme = this.ActualThemeVariant;
 		}
 		
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		public ThemeResourceBrowserViewModel? ViewModel {
 			get => DataContext as ThemeResourceBrowserViewModel;

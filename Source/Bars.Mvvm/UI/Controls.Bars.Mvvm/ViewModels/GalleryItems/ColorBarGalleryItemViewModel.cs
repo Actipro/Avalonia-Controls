@@ -9,9 +9,9 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 	/// </summary>
 	public class ColorBarGalleryItemViewModel : BarGalleryItemViewModel<Color> {
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Initializes a new instance of the class.
@@ -43,9 +43,9 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		public ColorBarGalleryItemViewModel(Color value, string? category, string? label)
 			: base(value, category, label) { }
 		
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// NON-PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Appends color shade view models.
@@ -84,9 +84,9 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 			}
 		}
 		
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Creates a default collection of gallery item view models representing a number of standard colors and their various shades, intended for use in a color picker gallery.

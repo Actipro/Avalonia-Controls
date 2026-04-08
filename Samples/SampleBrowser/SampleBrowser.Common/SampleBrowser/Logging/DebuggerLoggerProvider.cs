@@ -13,9 +13,9 @@ namespace ActiproSoftware.SampleBrowser.Logging {
 
 		private readonly ConcurrentDictionary<string, DebuggerLoggerAdapter> _loggers = new ();
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// INTERFACE IMPLEMENTATION
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <inheritdoc cref="ILoggerProvider.CreateLogger(string)"/>
 		ILogger ILoggerProvider.CreateLogger(string categoryName) {

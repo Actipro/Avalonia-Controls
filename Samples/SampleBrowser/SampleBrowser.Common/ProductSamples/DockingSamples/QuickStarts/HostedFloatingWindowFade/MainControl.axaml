@@ -94,40 +94,18 @@
 																   AllowNestedSubstitution="True"
 																   Value="$(InactiveFloatingWindowFadeDelayAttribute)$(InactiveFloatingWindowFadeDurationAttribute)$(InactiveFloatingWindowFadeOpacityAttribute)" />
 							<sampleBrowser:CodeExampleSubstitution Key="InactiveFloatingWindowFadeDelayAttribute"
-																   Value="{Binding InactiveFloatingWindowFadeDelay, StringFormat='&#xD;&#x9;InactiveFloatingWindowFadeDelay=&quot;{0}&quot;'}">
-								<sampleBrowser:CodeExampleSubstitution.IsEnabled>
-									<Binding Path="InactiveFloatingWindowFadeDelay" Converter="{StaticResource NotEqualToComparisonConverter}">
-										<Binding.ConverterParameter>
-											<x:Double>20000</x:Double>
-										</Binding.ConverterParameter>
-									</Binding>
-								</sampleBrowser:CodeExampleSubstitution.IsEnabled>
-							</sampleBrowser:CodeExampleSubstitution>
+																   IsEnabled="{Binding InactiveFloatingWindowFadeDelay, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='20000'}"
+																   Value="{Binding InactiveFloatingWindowFadeDelay, StringFormat='&#xD;&#x9;InactiveFloatingWindowFadeDelay=&quot;{0}&quot;'}" />
 							<sampleBrowser:CodeExampleSubstitution Key="InactiveFloatingWindowFadeDurationAttribute"
-																   Value="{Binding InactiveFloatingWindowFadeDuration, StringFormat='&#xD;&#x9;InactiveFloatingWindowFadeDuration=&quot;{0}&quot;'}">
-								<sampleBrowser:CodeExampleSubstitution.IsEnabled>
-									<Binding Path="InactiveFloatingWindowFadeDuration" Converter="{StaticResource NotEqualToComparisonConverter}">
-										<Binding.ConverterParameter>
-											<x:Double>20000</x:Double>
-										</Binding.ConverterParameter>
-									</Binding>
-								</sampleBrowser:CodeExampleSubstitution.IsEnabled>
-							</sampleBrowser:CodeExampleSubstitution>
+																   IsEnabled="{Binding InactiveFloatingWindowFadeDuration, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='20000'}"
+																   Value="{Binding InactiveFloatingWindowFadeDuration, StringFormat='&#xD;&#x9;InactiveFloatingWindowFadeDuration=&quot;{0}&quot;'}" />
 							<sampleBrowser:CodeExampleSubstitution Key="InactiveFloatingWindowFadeOpacityAttribute"
-																   Value="{Binding InactiveFloatingWindowFadeOpacity, StringFormat='&#xD;&#x9;InactiveFloatingWindowFadeOpacity=&quot;{0:0.00}&quot;'}">
-								<sampleBrowser:CodeExampleSubstitution.IsEnabled>
-									<Binding Path="InactiveFloatingWindowFadeOpacity" Converter="{StaticResource NotEqualToComparisonConverter}">
-										<Binding.ConverterParameter>
-											<x:Double>0.25</x:Double>
-										</Binding.ConverterParameter>
-									</Binding>
-								</sampleBrowser:CodeExampleSubstitution.IsEnabled>
-							</sampleBrowser:CodeExampleSubstitution>
+																   IsEnabled="{Binding InactiveFloatingWindowFadeOpacity, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='0.25'}"
+																   Value="{Binding InactiveFloatingWindowFadeOpacity, StringFormat='&#xD;&#x9;InactiveFloatingWindowFadeOpacity=&quot;{0:0.00}&quot;'}" />
 						</sampleBrowser:CodeExample.Substitutions>
 					</sampleBrowser:CodeExample>
 			</sampleBrowser:ControlExample.CodeExamples>
 		</sampleBrowser:ControlExample>
-
 
 
 	</sampleBrowser:ControlExampleItemsControl>

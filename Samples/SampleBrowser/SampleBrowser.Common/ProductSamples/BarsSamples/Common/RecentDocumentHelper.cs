@@ -14,9 +14,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.Common {
 	/// </summary>
 	public static class RecentDocumentHelper {
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// NON-PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		private static RecentDocumentItem CreateDemoRecentDocumentItem(Uri location, int documentIndex = -1, bool isPinned = false) {
 			// Randomize the last opened date/time to simulate a real-world scenario of documents touched over various days and times
@@ -48,9 +48,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.Common {
 			return recentDocumentItem;
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Creates a default collection of pre-defined <see cref="RecentDocumentItem"/> instances used for demonstration purposes.

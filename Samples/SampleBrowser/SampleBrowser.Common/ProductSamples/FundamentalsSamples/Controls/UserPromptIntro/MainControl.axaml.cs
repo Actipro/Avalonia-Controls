@@ -8,6 +8,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Controls.Documents;
+using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Layout;
 using Avalonia.Media;
@@ -42,9 +43,9 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 
 		#endregion
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		public MainControl() {
 			// Indicate if dialogs are allowed on the platform
@@ -58,9 +59,9 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 			UpdateBasicFooterSampleImage();
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// NON-PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		private void OnGenericHyperlinkClick(object? sender, RoutedEventArgs e) {
 			ApplicationViewModel.Instance.MessageService?.ShowMessage("Use this event handler to respond to the hyperlink.", "Hyperlink Clicked");
@@ -116,9 +117,9 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 		private void UpdateBasicFooterSampleImage()
 			=> this.BasicFooterSampleImage = ShowBasicFooterSampleImage ? ImageLoader.GetIcon("Help16.png") : null;
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		public IImage? BasicFooterSampleImage {
 			get => _basicFooterSampleImage;
@@ -139,7 +140,7 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 		/// <summary>
 		/// Indicates if the current platform supports multi-threading.
 		/// </summary>
-		public bool IsMultiThreadAllowed { get; } // TODO:
+		public bool IsMultiThreadAllowed { get; }
 
 		protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change) {
 			if (change.Property == ShowBasicFooterSampleImageProperty)
@@ -152,9 +153,9 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 			set => SetValue(ShowBasicFooterSampleImageProperty, value);
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// DIALOG SAMPLE PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		private async void OnSampleShowDialogButtonThemeClick(object? sender, RoutedEventArgs e) {
 			//
@@ -326,7 +327,7 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 			await ConfigureUserPrompt()
 				.WithHeaderContent("Each button can have its own command.")
 				.WithContent("The default command for a button will notify the UserPromptControl of the response for that button, but you can define your own command instead. This sample demonstrates how to define custom commands by associating each button with a command that will confirm the response before submitting it.")
-				.WithButton(MessageBoxResult.Yes, afterInitialize: builder => builder.WithCommand(command, builder.Instance))
+				.WithButton(MessageBoxResult.Yes, afterInitialize: builder => builder.WithCommand(command, builder.Instance).UseAsDefaultResult())
 				.WithButton(MessageBoxResult.No, afterInitialize: builder => builder.WithCommand(command, builder.Instance))
 				.Show();
 		}
@@ -466,6 +467,28 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.UserPrompt
 				.WithStandardButtons(MessageBoxButtons.YesNoCancel)
 				.WithCanResize(dialogChromedDecorationsResizableCheckBox.IsChecked == true)
 				.WithDialogChromedDecorations((ChromedDecorations)dialogChromedDecorationsSelection.SelectedValue!)
+				.Show();
+		}
+
+		private async void OnSampleShowDialogDefaultButtonClick(object? sender, RoutedEventArgs e) {
+			//
+			// SAMPLE: Default button
+			//
+
+			// Prevent exception when requested Dialog mode on unsupported platforms
+			if (((UserPromptDisplayMode)displayModeSelection.SelectedValue! == UserPromptDisplayMode.Dialog) && !IsDialogAllowed) {
+				await UserPromptBuilder.Configure().ForDialogDisplayModeNotSupportedNotice().Show();
+				return;
+			}
+
+			await ConfigureUserPrompt()
+				.WithHeaderContent("Default button")
+				.WithContent("Any button can be set as the default and optionally define custom style classes for the button.")
+				.WithStandardButtons(MessageBoxButtons.YesNoCancel)
+				.WithFooterContent("When not explicitly defined, the first button will be the default.")
+				.WithDefaultButtonClasses(defaultButtonDefaultButtonClassesTextBox.Text)
+				.WithDefaultResult((MessageBoxResult)defaultButtonDefaultResultComboBox.SelectedItem!)
+				.WithDefaultButtonFocusNavigationMethod((NavigationMethod)defaultButtonFocusNavigationComboBox.SelectedItem!)
 				.Show();
 		}
 

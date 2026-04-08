@@ -51,7 +51,7 @@ See the [Theme Definitions](theme-definitions.md) topic to browse a list of avai
 
 A theme generator uses options in a theme definition to guide it on how to create theme resources like brushes, thicknesses, etc.  Distinct theme resources are generated for both `Light` and `Dark` theme variants, allowing for the theme generator to run a single time regardless of if an application toggles between light and dark modes at run-time.
 
-The colors of theme-generated brushes are based on a customizable color palette.  This allows all the theme's neutral colors to be tinted towards a certain color tone, accent and other semantic colors to be configurable, and more.
+The colors of theme-generated brushes are based on a customizable color palette.  This allows all the theme's neutral colors to be tinted towards a certain color tone, darkness level controlled, accent and other semantic colors to be configurable, and more.
 
 See the [Theme Generator](theme-generator.md) topic to learn about the theme generation workflow and which extensibility points are available for customization purposes.
 

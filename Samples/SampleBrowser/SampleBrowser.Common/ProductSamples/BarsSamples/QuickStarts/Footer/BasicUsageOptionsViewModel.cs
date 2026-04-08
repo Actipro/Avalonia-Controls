@@ -12,9 +12,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.Footer {
 		private bool _isFooterVisible = true;
 		private RibbonQuickAccessToolBarLocation _qatLocation = RibbonQuickAccessToolBarLocation.Below;
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// The footer kind.

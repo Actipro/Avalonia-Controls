@@ -10,9 +10,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.QuickAccessTool
 
 		private BasicUsageOptionsViewModel? _basicUsageOptionsViewModel;
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		public MainControl() {
 			BasicUsageRibbonViewModel = CreateBasicUsageRibbonViewModel();
@@ -25,9 +25,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.QuickAccessTool
 			InitializeComponent();
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// NON-PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Creates the ribbon view model for the "Basic Usage" sample.
@@ -213,9 +213,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.QuickAccessTool
 				qat.IsCustomizeButtonVisible = BasicUsageOptions.IsCustomizeButtonVisible;
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// The ribbon view model for the "Basic Usage" sample.

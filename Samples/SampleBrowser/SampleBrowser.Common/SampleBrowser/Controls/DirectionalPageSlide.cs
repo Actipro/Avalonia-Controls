@@ -13,9 +13,9 @@ namespace ActiproSoftware.SampleBrowser {
 	/// </summary>
 	public class DirectionalPageSlide : PageSlide {
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		public override async Task Start(Visual? from, Visual? to, bool forward, CancellationToken cancellationToken) {
 			// Update the direction based on the property

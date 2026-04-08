@@ -11,9 +11,9 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		private BarControlTemplateSelector _itemContainerTemplateSelector = new();
 		private object? _tag;
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <inheritdoc cref="BarButtonViewModel.IsVisible"/>
 		public bool IsVisible {

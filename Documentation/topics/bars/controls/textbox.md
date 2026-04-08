@@ -169,7 +169,7 @@ Star-sizing is a handy feature when the control is within a [RibbonMultiRowContr
 
 Placeholder text is a way to prompt the end user for the type of value that should be entered into the control when no value has been set.  For instance, a textbox that is used to search for something might use placeholder text `"(search text)"`.
 
-Placeholder text is faintly rendered when there is no value in the control, and can be designated via the [PlaceholderText](xref:@ActiproUIRoot.Controls.Bars.BarTextBox.PlaceholderText) property.
+Placeholder text is faintly rendered when there is no value in the control, and can be designated via the `PlaceholderText` property.
 
 ## Key Tips
 

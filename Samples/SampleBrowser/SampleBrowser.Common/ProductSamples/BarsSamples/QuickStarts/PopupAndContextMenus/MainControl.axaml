@@ -972,9 +972,9 @@ public class PasteOptionGalleryItem : BarGalleryItemViewModel<PasteSpecialKind> 
 
 	private IImage? _image;
 
-	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	// --------------------------------------------------------------------------------------------------
 	// OBJECT
-	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	// --------------------------------------------------------------------------------------------------
 
 	/// <summary>
 	/// Initializes a new instance of the <see cref="PasteOptionGalleryItem"/> class.
@@ -986,9 +986,9 @@ public class PasteOptionGalleryItem : BarGalleryItemViewModel<PasteSpecialKind> 
 		// NOTE: The base gallery item category is used to display the category name above the paste options
 	}
 
-	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	// --------------------------------------------------------------------------------------------------
 	// PUBLIC PROCEDURES
-	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	// --------------------------------------------------------------------------------------------------
 
 	/// <summary>
 	/// Creates the default <see cref="ICollectionView"/> of <see cref="PasteOptionGalleryItem"/> instances.
@@ -1182,9 +1182,9 @@ using ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm;
 /// </summary>
 public class TagColorGalleryItem : ColorBarGalleryItemViewModel {
 
-	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	// --------------------------------------------------------------------------------------------------
 	// OBJECT
-	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	// --------------------------------------------------------------------------------------------------
 
 	/// <summary>
 	/// Initializes a new instance of the <see cref="TagColorGalleryItem"/> class.
@@ -1194,9 +1194,9 @@ public class TagColorGalleryItem : ColorBarGalleryItemViewModel {
 	public TagColorGalleryItem(UIColor value, string label)
 		: base(value.ToRgb(), category: null, label) { }
 
-	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	// --------------------------------------------------------------------------------------------------
 	// PUBLIC PROCEDURES
-	/////////////////////////////////////////////////////////////////////////////////////////////////////
+	// --------------------------------------------------------------------------------------------------
 
 	/// <summary>
 	/// Creates the default collection of <see cref="TagColorGalleryItem"/> instances.

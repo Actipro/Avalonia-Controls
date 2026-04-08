@@ -38,6 +38,11 @@ The Actipro Shared Library is a common control library referenced by all of our 
 
 - The [UIColor](xref:@ActiproUIRoot.Media.UIColor) structure provides an enhanced representation of a color that supports the RGB, HSL, and HSV color models, conversion between models, and numerous other helper methods.  Static methods on the structure are used to create instances of the structure based on the supported models.
 
+### Menu Factory
+
+- Easily customize the built-in contextual menus shown by Actipro products.
+- Swap out native menu controls with [Bars Context Menus](../bars/menu-features/context-menus.md).
+
 ### Extension Methods
 
 - Various [extension methods](extension-methods.md) are provided for several Avalonia types.

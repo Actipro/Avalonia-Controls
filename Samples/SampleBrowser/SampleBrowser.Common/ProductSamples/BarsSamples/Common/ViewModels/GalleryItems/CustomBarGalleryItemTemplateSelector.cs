@@ -13,9 +13,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.Common {
 	/// </remarks>
 	public class CustomBarGalleryItemTemplateSelector : BarGalleryItemTemplateSelector {
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="CustomBarGalleryItemTemplateSelector"/> class.
@@ -29,9 +29,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.Common {
 			this.UnderlineTemplate = FindDataTemplateResource(UnderlineTemplateResourceKey);
 		}
 		
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// NON-PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		
 		private void EnsureResourcesLoaded() {
 			if (!CustomBarGalleryItemResources.TryGetCurrent(out _)) {
@@ -45,9 +45,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.Common {
 		private static IDataTemplate? FindDataTemplateResource(string key)
 			=> Application.Current?.FindResource(key) as IDataTemplate;
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		
 		/// <inheritdoc/>
 		public override IDataTemplate? SelectTemplate(object? item, Control? container) {
@@ -65,9 +65,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.Common {
 			return base.SelectTemplate(item, container);
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC DATATEMPLATE PROPERTIES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// The <see cref="IDataTemplate"/> to use for a <see cref="BulletBarGalleryItemViewModel"/>.
@@ -89,9 +89,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.Common {
 		/// </summary>
 		public IDataTemplate? UnderlineTemplate { get; set; }
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC RESOURCEKEY PROPERTIES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		public const string BulletTemplateResourceKey = nameof(BulletTemplateResourceKey);
 		public const string NumberingTemplateResourceKey = nameof(NumberingTemplateResourceKey);
