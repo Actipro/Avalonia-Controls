@@ -26,6 +26,7 @@
       "enum": [
         "Compile",
         "CompileSampleProjects",
+        "CompileSourceProjects",
         "IntegrationBuild"
       ]
     },
@@ -115,6 +116,10 @@
         "SampleBrowserWebSolution": {
           "type": "string",
           "description": "Path to a solution file that is automatically loaded. Default is Samples/SampleBrowser/SampleBrowser.Web.sln"
+        },
+        "SourceLibrariesSolution": {
+          "type": "string",
+          "description": "Path to a solution file that is automatically loaded. Default is Source/Avalonia-Libraries.sln"
         }
       }
     },
