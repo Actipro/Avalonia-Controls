@@ -16,7 +16,7 @@
 
 	<!-- AvaloniaUI Developer Tools -->
 	<ItemGroup>
-		<PackageReference Include="AvaloniaUI.DiagnosticsSupport" Version="2.0.1-*" Condition="$([System.Text.RegularExpressions.Regex]::IsMatch($(DefineConstants), '^(.*;)*USE_DEV_TOOLS(;.*)*$'))" />
+		<PackageReference Include="AvaloniaUI.DiagnosticsSupport" Version="$(AvaloniaUIDiagnosticsSupportVersion)" />
 	</ItemGroup>
 
 </Project>
