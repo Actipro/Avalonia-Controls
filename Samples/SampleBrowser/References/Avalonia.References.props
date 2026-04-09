@@ -12,8 +12,8 @@
 		<PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" Condition="$([System.Text.RegularExpressions.Regex]::IsMatch($(DefineConstants), '^(.*;)*FLUENT_THEME(;.*)*$'))" />
 		<PackageReference Include="Avalonia.Themes.Simple" Version="$(AvaloniaVersion)" Condition="$([System.Text.RegularExpressions.Regex]::IsMatch($(DefineConstants), '^(.*;)*SIMPLE_THEME(;.*)*$'))" />
 		
-		<!-- If using the SvgImageProvider class in the Dynamic Image sample, which supports SVG image adaptation -->
-		<PackageReference Include="Svg.Controls.Skia.Avalonia" Version="12.0.0-rc1" />
+		<!-- If using the SvgImageProvider class in the Dynamic Image (SVG) sample, which supports SVG image adaptation -->
+		<PackageReference Include="Svg.Controls.Skia.Avalonia" Version="12.0.0" />
 	</ItemGroup>
 
 	<ItemGroup Condition="$(MSBuildProjectName.Contains('.Web')) == 'true'">

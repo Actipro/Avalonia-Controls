@@ -30,6 +30,46 @@ public class SvgImageProvider : ImageProvider {
 	private static SKColor ToSKColor(Color color)
 		=> new(color.R, color.G, color.B, color.A);
 
+	/// <summary>
+	/// Updates the paint colors within a command.
+	/// </summary>
+	/// <param name="command">The <see cref="CanvasCommand"/> to examine.</param>
+	/// <param name="request">The <see cref="ImageProviderRequest"/> containing the adaptation request.</param>
+	private void UpdatePaintColorsInCommand(CanvasCommand? command, ImageProviderRequest request) {
+		if (command is DrawPathCanvasCommand drawPathCommand)
+			UpdatePaintColors(drawPathCommand.Paint, request);
+		else if (command is DrawPictureCanvasCommand drawPictureCommand) {
+			if (drawPictureCommand.Picture?.Commands is { } commands) {
+				foreach (var childCommand in commands)
+					UpdatePaintColorsInCommand(childCommand, request);
+			}
+		}
+	}
+
+	/// <summary>
+	/// Updates the paint colors.
+	/// </summary>
+	/// <param name="paint">The <see cref="SKPaint"/> to examine.</param>
+	/// <param name="request">The <see cref="ImageProviderRequest"/> containing the adaptation request.</param>
+	private void UpdatePaintColors(SKPaint? paint, ImageProviderRequest request) {
+		if (paint is null)
+			return;
+
+		if (paint.Color is { } skColor) {
+			var color = ToColor(skColor);
+			var adaptedColor = AdaptColor(color, request);
+			if (adaptedColor != color)
+				paint.Color = ToSKColor(adaptedColor);
+		}
+
+		if ((paint.Shader is ColorShader shader) && (shader.Color is { } skShaderColor)) {
+			var color = ToColor(skShaderColor);
+			var adaptedColor = AdaptColor(color, request);
+			if (adaptedColor != color)
+				paint.Shader = SKShader.CreateColor(ToSKColor(adaptedColor), shader.ColorSpace);
+		}
+	}
+
 	// --------------------------------------------------------------------------------------------------
 	// PUBLIC PROCEDURES
 	// --------------------------------------------------------------------------------------------------
@@ -45,25 +85,8 @@ public class SvgImageProvider : ImageProvider {
 
 			// Iterate through draw commands to adapt colors
 			if (svgImage.Source?.Svg?.Model?.Commands is { } commands) {
-				foreach (var command in commands) {
-					SKPaint? paint = null;
-					if (command is DrawPathCanvasCommand drawPathCommand)
-						paint = drawPathCommand.Paint;
-
-					if (paint?.Color is { } skColor) {
-						var color = ToColor(skColor);
-						var adaptedColor = AdaptColor(color, request);
-						if (adaptedColor != color)
-							paint.Color = ToSKColor(adaptedColor);
-					}
-
-					if ((paint?.Shader is ColorShader shader) && (shader.Color is { } skShaderColor)) {
-						var color = ToColor(skShaderColor);
-						var adaptedColor = AdaptColor(color, request);
-						if (adaptedColor != color)
-							paint.Shader = SKShader.CreateColor(ToSKColor(adaptedColor), shader.ColorSpace);
-					}
-				}
+				foreach (var command in commands)
+					UpdatePaintColorsInCommand(command, request);
 			}
 
 			return svgImage;
