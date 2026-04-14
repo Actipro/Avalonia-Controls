@@ -9,6 +9,7 @@ using Avalonia.Layout;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Avalonia.Threading;
+using Avalonia.VisualTree;
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -47,6 +48,7 @@ namespace ActiproSoftware.SampleBrowser {
 		private DelegateCommand<object>? _openUrlCommand;
 		private DelegateCommand<object>? _setScaleFactorCommand;
 		private DelegateCommand<UserInterfaceDensity?>? _setUserInterfaceDensityCommand;
+		private DelegateCommand<object?>? _toggleAllowFullScreenCommand;
 		private DelegateCommand<object?>? _toggleDrawerOpenCommand;
 		private DelegateCommand<object?>? _toggleFlowDirectionCommand;
 		private DelegateCommand<object?>? _toggleShowPrivateItemsCommand;
@@ -663,6 +665,19 @@ namespace ActiproSoftware.SampleBrowser {
 			get => _statusMessage;
 			set => SetProperty(ref _statusMessage, value ?? "Ready");
 		}
+
+		/// <summary>
+		/// The <see cref="ICommand"/> to toggle the flow direction of the application.
+		/// </summary>
+		public ICommand ToggleAllowFullScreenCommand
+			=> _toggleAllowFullScreenCommand ??= new DelegateCommand<object?>(_ => {
+				if (
+					ResolveDefaultTopLevel() is Window window
+					&& window.FindDescendantOfType<WindowTitleBar>() is { } windowTitleBar
+				) {
+					windowTitleBar.IsFullScreenButtonAllowed = !windowTitleBar.IsFullScreenButtonAllowed;
+				}
+			});
 
 		/// <summary>
 		/// The <see cref="ICommand"/> to toggle the drawer visibility.

@@ -26,7 +26,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="ActiproSoftware.Controls.Avalonia.Pro" Version="26.1.0-rc.1" />
+		<PackageReference Include="ActiproSoftware.Controls.Avalonia.Pro" Version="26.1.0-rc.2" />
 	</ItemGroup>
 
 	<ItemGroup>
