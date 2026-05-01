@@ -22,6 +22,7 @@
 							<TextBox IsReadOnly="True" Text="{Binding FileName}" PlaceholderText="File name" UseFloatingPlaceholder="True" />
 							<TextBox IsReadOnly="True" Text="{Binding Description}" PlaceholderText="Description" UseFloatingPlaceholder="True" />
 							<CheckBox IsChecked="{Binding IsReadOnly}" Content="Is read-only" />
+							<CheckBox IsChecked="{Binding CanFloat}" Content="Can float" />
 						</StackPanel>
 					</DataTemplate>
 

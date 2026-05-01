@@ -83,7 +83,7 @@
 			<sampleBrowser:ProductItemInfo Category="Ribbon QuickStarts" Title="Popup and Context Menus" Path="/ProductSamples/BarsSamples/QuickStarts/PopupAndContextMenus/MainControl"/>
 			<sampleBrowser:ProductItemInfo Category="Ribbon QuickStarts" Title="Quick Access Toolbar" Path="/ProductSamples/BarsSamples/QuickStarts/QuickAccessToolBar/MainControl"/>
 			<sampleBrowser:ProductItemInfo Category="Ribbon QuickStarts" Title="Recent Documents" Path="/ProductSamples/BarsSamples/QuickStarts/RecentDocuments/MainControl"/>
-			<sampleBrowser:ProductItemInfo Category="Ribbon QuickStarts" Title="Screen Tips" Path="/ProductSamples/BarsSamples/QuickStarts/ScreenTips/MainControl"/>
+			<sampleBrowser:ProductItemInfo BlurbText="Updated!" Category="Ribbon QuickStarts" Title="Screen Tips" Path="/ProductSamples/BarsSamples/QuickStarts/ScreenTips/MainControl"/>
 			<sampleBrowser:ProductItemInfo Category="Ribbon QuickStarts" Title="Serialization" Path="/ProductSamples/BarsSamples/QuickStarts/Serialization/MainControl"/>
 			<sampleBrowser:ProductItemInfo Category="Ribbon QuickStarts" Title="Standalone Buttons" Path="/ProductSamples/BarsSamples/QuickStarts/StandaloneButtons/MainControl"/>
 			<sampleBrowser:ProductItemInfo Category="Ribbon QuickStarts" Title="Tab Row Toolbar" Path="/ProductSamples/BarsSamples/QuickStarts/TabRowToolBar/MainControl"/>
@@ -102,6 +102,56 @@
 			
 			
 
+		</sampleBrowser:ProductFamilyInfo>
+		
+		<!--
+			Data Visualization
+		-->
+		<sampleBrowser:ProductFamilyInfo BlurbText="New!" IsPro="True" NewsSortOrder="1" ShortTitle="Data Visualization" Title="Data Visualization" Summary="Vector-based barcodes that scale cleanly on any type of media">
+			<sampleBrowser:ProductFamilyInfo.LogoImageSource>
+				<actiproImages:DataVisualizationLogo48 />
+			</sampleBrowser:ProductFamilyInfo.LogoImageSource>
+			
+			<sampleBrowser:ProductFamilyInfo.News>
+				<sampleBrowser:ListItemInfo Title="Added many popular 2D and linear barcode symbology implementations" />
+			</sampleBrowser:ProductFamilyInfo.News>
+			
+			<sampleBrowser:ProductFamilyInfo.TeaserBulletItems>
+				<x:String>QR Code and Micro QR Code</x:String>
+				<x:String>Customizable appearance options</x:String>
+				<x:String>EAN/UPC variations</x:String>
+				<x:String>Code 128 and GS1-128</x:String>
+				<x:String>ITF-14 and Interleaved 2 of 5</x:String>
+				<x:String>Code 39 and Code 93 variations</x:String>
+			</sampleBrowser:ProductFamilyInfo.TeaserBulletItems>
+
+			<sampleBrowser:ProductFamilyInfo.OverviewItem>
+				<sampleBrowser:ProductItemInfo Title="Overview" Path="/ProductSamples/DataVisualizationSamples/Overview" />
+			</sampleBrowser:ProductFamilyInfo.OverviewItem>
+
+			<sampleBrowser:ProductItemInfo BlurbText="New!" Category="Demos" Title="Barcode Gallery" Path="/ProductSamples/DataVisualizationSamples/Demos/BarcodeGallery/MainControl"/>
+
+			<sampleBrowser:ProductItemInfo BlurbText="New!" Category="Barcode QuickStarts" Title="Presenter Customization" Path="/ProductSamples/DataVisualizationSamples/BarcodeQuickStarts/PresenterCustomization/MainControl"/>
+			<sampleBrowser:ProductItemInfo BlurbText="New!" Category="Barcode QuickStarts" Title="Exporting" Path="/ProductSamples/DataVisualizationSamples/BarcodeQuickStarts/Exporting/MainControl"/>
+
+			<sampleBrowser:ProductItemInfo BlurbText="New!" Category="Barcode Symbologies" Title="QR Code" Path="/ProductSamples/DataVisualizationSamples/BarcodeSymbologies/QrCode/MainControl"/>
+			<sampleBrowser:ProductItemInfo BlurbText="New!" Category="Barcode Symbologies" Title="Micro QR Code" Path="/ProductSamples/DataVisualizationSamples/BarcodeSymbologies/MicroQrCode/MainControl"/>
+
+			<sampleBrowser:ProductItemInfo BlurbText="New!" Category="Barcode Symbologies" Title="Codabar" Path="/ProductSamples/DataVisualizationSamples/BarcodeSymbologies/Codabar/MainControl"/>
+			<sampleBrowser:ProductItemInfo BlurbText="New!" Category="Barcode Symbologies" Title="Code 39" Path="/ProductSamples/DataVisualizationSamples/BarcodeSymbologies/Code39/MainControl"/>
+			<sampleBrowser:ProductItemInfo BlurbText="New!" Category="Barcode Symbologies" Title="Code 39 Extended" Path="/ProductSamples/DataVisualizationSamples/BarcodeSymbologies/Code39Extended/MainControl"/>
+			<sampleBrowser:ProductItemInfo BlurbText="New!" Category="Barcode Symbologies" Title="Code 93" Path="/ProductSamples/DataVisualizationSamples/BarcodeSymbologies/Code93/MainControl"/>
+			<sampleBrowser:ProductItemInfo BlurbText="New!" Category="Barcode Symbologies" Title="Code 93 Extended" Path="/ProductSamples/DataVisualizationSamples/BarcodeSymbologies/Code93Extended/MainControl"/>
+			<sampleBrowser:ProductItemInfo BlurbText="New!" Category="Barcode Symbologies" Title="Code 128" Path="/ProductSamples/DataVisualizationSamples/BarcodeSymbologies/Code128/MainControl"/>
+			<sampleBrowser:ProductItemInfo BlurbText="New!" Category="Barcode Symbologies" Title="GS1-128" Path="/ProductSamples/DataVisualizationSamples/BarcodeSymbologies/GS1128/MainControl"/>
+			<sampleBrowser:ProductItemInfo BlurbText="New!" Category="Barcode Symbologies" Title="EAN-13" Path="/ProductSamples/DataVisualizationSamples/BarcodeSymbologies/Ean13/MainControl"/>
+			<sampleBrowser:ProductItemInfo BlurbText="New!" Category="Barcode Symbologies" Title="EAN-8" Path="/ProductSamples/DataVisualizationSamples/BarcodeSymbologies/Ean8/MainControl"/>
+			<sampleBrowser:ProductItemInfo BlurbText="New!" Category="Barcode Symbologies" Title="Interleaved 2 of 5" Path="/ProductSamples/DataVisualizationSamples/BarcodeSymbologies/Interleaved2of5/MainControl"/>
+			<sampleBrowser:ProductItemInfo BlurbText="New!" Category="Barcode Symbologies" Title="ITF-14" Path="/ProductSamples/DataVisualizationSamples/BarcodeSymbologies/Itf14/MainControl"/>
+			<sampleBrowser:ProductItemInfo BlurbText="New!" Category="Barcode Symbologies" Title="UPC-A" Path="/ProductSamples/DataVisualizationSamples/BarcodeSymbologies/UpcA/MainControl"/>
+			<sampleBrowser:ProductItemInfo BlurbText="New!" Category="Barcode Symbologies" Title="UPC-E" Path="/ProductSamples/DataVisualizationSamples/BarcodeSymbologies/UpcE/MainControl"/>
+		
+			
 		</sampleBrowser:ProductFamilyInfo>
 
 		<!--
@@ -207,7 +257,7 @@
 			
 
 			<sampleBrowser:ProductItemInfo Category="Panels" Title="Multi-Column Panel" Path="/ProductSamples/FundamentalsSamples/Panels/MultiColumnPanelIntro/MainControl"/>
-
+			
 		</sampleBrowser:ProductFamilyInfo>
 
 		<!--
@@ -222,7 +272,7 @@
 				<sampleBrowser:ListItemInfo Title="Neutral darkness level option adjusts dark theme backgrounds anywhere from dark gray to black" />
 				<sampleBrowser:ListItemInfo Title="Color Palette sample allows for more theme adjustments" />
 				<sampleBrowser:ListItemInfo Title="Pro customers can optionally theme AvaloniaUI OÜ's Avalonia Pro controls" />
-				<sampleBrowser:ListItemInfo Title="Native templates updated through Avalonia v12.0.0" />
+				<sampleBrowser:ListItemInfo Title="Native templates updated through Avalonia v12.0" />
 			</sampleBrowser:ProductFamilyInfo.News>
 
 			<sampleBrowser:ProductFamilyInfo.TeaserBulletItems>

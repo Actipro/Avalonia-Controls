@@ -19,6 +19,12 @@ Elevate your application by [licensing](licensing.md) professionally designed co
 
 [Actipro Bars](bars/index.md) contains everything you need to implement advanced Office-like ribbon, toolbar, and menu functionality in your Avalonia applications. Multiple ribbon layout modes, variant sizing, content-rich galleries, screen tips, key tips, backstage, and MVVM support are all included.
 
+### Data Visualization
+
+![Screenshot](data-visualization/images/overview.png)
+
+[Data Visualization](data-visualization/index.md) allows you to integrate barcodes into your application to streamline data entry, accelerate scanning workflows, and unlock richer, more automated app experiences.
+
 ### Docking & MDI
 
 ![Screenshot](docking/images/docking.png)

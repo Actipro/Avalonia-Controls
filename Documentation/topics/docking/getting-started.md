@@ -7,7 +7,7 @@ order: 2
 
 Getting up and running with Docking & MDI controls is extremely easy.
 
-This topic's information will assume you are using Visual Studio to write your XAML code for control that will contain docking windows and/or MDI.
+This topic's information will assume you are using Visual Studio to write your XAML code for a control that will contain docking windows and/or MDI.
 
 @if (avalonia) {
 

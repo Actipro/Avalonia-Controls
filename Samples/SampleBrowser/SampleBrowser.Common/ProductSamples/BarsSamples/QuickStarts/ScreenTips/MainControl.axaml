@@ -78,21 +78,28 @@
 							<actipro:BarButton Key="Advanced Footer"
 								LargeIcon="/Images/Icons/QuickStart32.png"
 								SmallIcon="/Images/Icons/QuickStart16.png"
-								ToolTip.Tip="The Header and Footer can be set to any content."
 								>
-								<actipro:BarButton.ScreenTipFooter>
-									<Grid Margin="0,4" ColumnDefinitions="Auto,*">
-										<Image Margin="0,0,8,0" Width="16" Height="16" Source="/Images/Icons/Help16.png" />
-										<TextBlock Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" Text="Press F1 for more help." />
-									</Grid>
-								</actipro:BarButton.ScreenTipFooter>
+								<ToolTip.Tip>
+									<actipro:ScreenTip
+										Header="Advanced Footer"
+										Content="The Header and Footer can be set to any content."
+										Tag="[AdvancedFooterHelpId]"
+										>
+										<actipro:ScreenTip.Footer>
+											<Grid Margin="0,4" ColumnDefinitions="Auto,*">
+												<Image Margin="0,0,8,0" Width="16" Height="16" Source="/Images/Icons/Help16.png" />
+												<TextBlock Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" Text="Press F1 for more help." />
+											</Grid>
+										</actipro:ScreenTip.Footer>
+									</actipro:ScreenTip>
+								</ToolTip.Tip>
 							</actipro:BarButton>
 
 							<actipro:BarButton Key="Complex"
 								LargeIcon="/Images/Icons/QuickStart32.png"
 								SmallIcon="/Images/Icons/QuickStart16.png">
 								<ToolTip.Tip>
-									<actipro:ScreenTip ComplexContentWidth="350" Header="ScreenTip Customization">
+									<actipro:ScreenTip ComplexContentWidth="350" Header="ScreenTip Customization" Tag="[ComplexScreenTipHelpId]">
 										<actipro:ScreenTip.Content>
 											<Grid Margin="8" ColumnDefinitions="Auto,*">
 												<Image Margin="0,0,8,0" StretchDirection="DownOnly" Source="/Images/Other/CoverPageScreenTip.png" />
@@ -734,7 +741,7 @@ public partial class MainControl : UserControl {
 
 			<TextBox Text="Hover over this TextBox to see how a ScreenTip can be shown for any control." TextWrapping="Wrap">
 				<ToolTip.Tip>
-					<actipro:ScreenTip Header="TextBox with screen tip">
+					<actipro:ScreenTip Header="TextBox with screen tip" Tag="[TextBoxHelpId]">
 						Screen tips can be used with any control to enhance the user experience.
 					</actipro:ScreenTip>
 				</ToolTip.Tip>

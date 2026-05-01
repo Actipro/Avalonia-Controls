@@ -1,0 +1,125 @@
+<UserControl
+	x:Name="sampleRootControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+
+		<actipro:Interleaved2of5Symbology x:Key="PrimarySymbology" />
+
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Interleaved 2 of 5 (ITF) is a high-density, numeric-only linear symbology that encodes digit pairs.  The first digit of each pair is encoded in bars and the second in the interleaved spaces.  Values with an odd number of digits are automatically padded with a leading zero, and an optional modulo-10 check digit can be appended.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Barcode Basics" Url="https://www.actiprosoftware.com/docs/controls/avalonia/data-visualization/barcodes/barcode-basics" />
+			<sampleBrowser:ControlExampleLinkItem Title="Linear Symbologies" Url="https://www.actiprosoftware.com/docs/controls/avalonia/data-visualization/barcodes/linear-symbologies" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+
+		<sampleBrowser:ControlExample
+			Header="Basic usage"
+			DataContext="{Binding #primaryBarcode}"
+			>
+			
+			<ScrollViewer HorizontalScrollBarVisibility="Auto">
+				<Border Background="{Binding #primaryBarcode.Background}" BorderBrush="{actipro:ThemeResource Container1BorderBrush}" BorderThickness="1" 
+						CornerRadius="10" Padding="20" HorizontalAlignment="Center">
+					
+					<actipro:BarcodePresenter x:Name="primaryBarcode" Symbology="{StaticResource PrimarySymbology}" Value="12345670" ZoomLevel="2" />
+
+				</Border>
+			</ScrollViewer>
+			
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel MinWidth="220" Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Value" />
+						<TextBox Text="{Binding Value}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Zoom level" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type={x:Type x:Double}, DelimitedText='1, 2, 3, 4, 5'}" SelectedItem="{Binding ZoomLevel}" DisplayMemberBinding="{Binding StringFormat={}{0:P0}}" />
+					</StackPanel>
+
+					<StackPanel Spacing="10" DataContext="{Binding Symbology}" x:DataType="actipro:Interleaved2of5Symbology">
+						<StackPanel>
+							<TextBlock Classes="theme-form-control-label" Text="Value alignment" />
+							<ComboBox ItemsSource="{actipro:DelimitedArray Type=actipro:LinearBarcodeValueAlignment}" SelectedValue="{Binding ValueAlignment}" />
+						</StackPanel>
+						<CheckBox IsChecked="{Binding IsChecksumEnabled}" Content="Checksum enabled" />
+						<StackPanel>
+							<TextBlock Classes="theme-form-control-label" Text="Bearer bar kind" />
+							<ComboBox ItemsSource="{actipro:DelimitedArray Type=actipro:Interleaved2of5BearerBarKind}" SelectedValue="{Binding BearerBarKind}" />
+						</StackPanel>
+						<StackPanel>
+							<TextBlock Classes="theme-form-control-label" Text="Bearer bar width" />
+							<NumericUpDown Value="{Binding BearerBarWidth}" Minimum="2" Maximum="10" Increment="0.5" />
+						</StackPanel>
+						<StackPanel>
+							<TextBlock Classes="theme-form-control-label" Text="Bar height" />
+							<NumericUpDown Value="{Binding BarHeight}" Minimum="30" Maximum="70" Increment="5" />
+						</StackPanel>
+						<StackPanel>
+							<TextBlock Classes="theme-form-control-label" Text="Wide-to-narrow ratio" />
+							<NumericUpDown Value="{Binding WideToNarrowRatio}" Minimum="2" Maximum="3" Increment="1" />
+						</StackPanel>
+						<StackPanel>
+							<TextBlock Classes="theme-form-control-label" Text="Quiet zone thickness" />
+							<ComboBox SelectedItem="{Binding QuietZoneThickness}">
+								<Thickness>0</Thickness>
+								<Thickness>10,0</Thickness>
+								<Thickness>10,2</Thickness>
+								<Thickness>10,5</Thickness>
+							</ComboBox>
+						</StackPanel>
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:BarcodePresenter Value="$(ValueAttribute)"$(ZoomLevelAttribute)>
+	<actipro:Interleaved2of5Symbology$(ValueAlignmentAttribute)$(IsChecksumEnabledAttribute)$(BearerBarKindAttribute)$(BearerBarWidthAttribute)$(BarHeightAttribute)$(WideToNarrowRatioAttribute)$(QuietZoneThicknessAttribute) />
+</actipro:BarcodePresenter>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ValueAttribute" Value="{Binding Value}" />
+						<sampleBrowser:CodeExampleSubstitution Key="ZoomLevelAttribute"
+															   IsEnabled="{Binding ZoomLevel, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='1'}"
+															   Value="{Binding ZoomLevel, StringFormat='&#xA;&#x9;ZoomLevel=&quot;{0}&quot;'}" />
+
+						<sampleBrowser:CodeExampleSubstitution Key="ValueAlignmentAttribute"
+															   IsEnabled="{Binding Source={StaticResource PrimarySymbology}, Path=ValueAlignment, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Center'}"
+															   Value="{Binding Source={StaticResource PrimarySymbology}, Path=ValueAlignment, StringFormat='&#xA;&#x9;&#x9;ValueAlignment=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsChecksumEnabledAttribute"
+															   IsEnabled="{Binding Source={StaticResource PrimarySymbology}, Path=IsChecksumEnabled}"
+															   Value="{Binding Source={StaticResource PrimarySymbology}, Path=IsChecksumEnabled, StringFormat='&#xA;&#x9;&#x9;IsChecksumEnabled=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="BearerBarKindAttribute"
+															   IsEnabled="{Binding Source={StaticResource PrimarySymbology}, Path=BearerBarKind, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='None'}"
+															   Value="{Binding Source={StaticResource PrimarySymbology}, Path=BearerBarKind, StringFormat='&#xA;&#x9;&#x9;BearerBarKind=&quot;{0}&quot;'}" />
+								<sampleBrowser:CodeExampleSubstitution Key="BearerBarWidthAttribute"
+													   IsEnabled="{Binding Source={StaticResource PrimarySymbology}, Path=BearerBarWidth, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='4'}"
+													   Value="{Binding Source={StaticResource PrimarySymbology}, Path=BearerBarWidth, StringFormat='&#xA;&#x9;&#x9;BearerBarWidth=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="BarHeightAttribute"
+															   IsEnabled="{Binding Source={StaticResource PrimarySymbology}, Path=BarHeight, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='35'}"
+															   Value="{Binding Source={StaticResource PrimarySymbology}, Path=BarHeight, StringFormat='&#xA;&#x9;&#x9;BarHeight=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="WideToNarrowRatioAttribute"
+															   IsEnabled="{Binding Source={StaticResource PrimarySymbology}, Path=WideToNarrowRatio, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='2.5'}"
+															   Value="{Binding Source={StaticResource PrimarySymbology}, Path=WideToNarrowRatio, StringFormat='&#xA;&#x9;&#x9;WideToNarrowRatio=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="QuietZoneThicknessAttribute"
+															   IsEnabled="{Binding Source={StaticResource PrimarySymbology}, Path=QuietZoneThickness, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='10,0'}"
+															   Value="{Binding Source={StaticResource PrimarySymbology}, Path=QuietZoneThickness, StringFormat='&#xA;&#x9;&#x9;QuietZoneThickness=&quot;{0}&quot;'}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+</UserControl>

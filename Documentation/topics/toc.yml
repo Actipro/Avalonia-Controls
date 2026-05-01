@@ -106,6 +106,28 @@ items:
     href: bars/localization.md
   - name: "Troubleshooting"
     href: bars/troubleshooting.md
+- name: "Actipro Data Visualization"
+  href: data-visualization/index.md
+  items:
+  - name: "Overview"
+    href: data-visualization/index.md
+  - name: "Getting Started"
+    href: data-visualization/getting-started.md
+  - name: "Barcodes"
+    href: data-visualization/barcodes/index.md
+    items:
+    - name: "Overview"
+      href: data-visualization/barcodes/index.md
+    - name: "Barcode Basics"
+      href: data-visualization/barcodes/barcode-basics.md
+    - name: "QR Code Symbologies"
+      href: data-visualization/barcodes/qr-code-symbologies.md
+    - name: "Linear Symbologies"
+      href: data-visualization/barcodes/linear-symbologies.md
+    - name: "Presenter Customization"
+      href: data-visualization/barcodes/presenter-customization.md
+    - name: "Exporting to Images"
+      href: data-visualization/barcodes/exporting-to-images.md
 - name: "Actipro Docking & MDI"
   href: docking/index.md
   items:

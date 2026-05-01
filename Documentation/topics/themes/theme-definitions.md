@@ -34,6 +34,7 @@ Theme definitions are represented by the [ThemeDefinition](xref:@ActiproUIRoot.T
 | [DefaultFontFamily](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.DefaultFontFamily) | The `FontFamily` used by default. |
 | [HeadingFontFamily](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.HeadingFontFamily) | The `FontFamily` used by headings. |
 | [CodeFontFamily](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.CodeFontFamily) | The `FontFamily` used for code listings, typically a monospace font. |
+| [BarcodeFontFamily](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.BarcodeFontFamily) | The `FontFamily` used for barcode values, typically an OCR-B or monospace font. |
 
 ### Color Palette and Ramp Options
 

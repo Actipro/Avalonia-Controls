@@ -24,7 +24,6 @@
 
 			<sampleBrowser:ProductOverviewHeader>
 				Fundamentals contains advanced controls and components that are useful in a variety of scenarios.
-				The library will be grown over time, with new controls coming soon.
 			</sampleBrowser:ProductOverviewHeader>
 
 			<actipro:MultiColumnPanel Classes="sample-layout-panel" Margin="{actipro:ScaledThickness '6,0'}" MinColumnWidth="390" HorizontalSpacing="{actipro:ScaledDouble 4}" VerticalSpacing="{actipro:ScaledDouble 4}">

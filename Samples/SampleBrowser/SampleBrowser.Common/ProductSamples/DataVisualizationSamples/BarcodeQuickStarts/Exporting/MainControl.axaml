@@ -1,0 +1,91 @@
+<UserControl
+	x:Name="sampleRootControl"
+	x:Class="ActiproSoftware.ProductSamples.DataVisualizationSamples.BarcodeQuickStarts.Exporting.MainControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:barcodeQuickStarts="using:ActiproSoftware.ProductSamples.DataVisualizationSamples.BarcodeQuickStarts"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:svg="using:Avalonia.Svg.Skia"
+	>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Export any barcode to an SVG image, enabling resolution‑independent graphics ideal for both screen and print workflows.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Barcode Basics" Url="https://www.actiprosoftware.com/docs/controls/avalonia/data-visualization/barcodes/barcode-basics" />
+			<sampleBrowser:ControlExampleLinkItem Title="Exporting to Images" Url="https://www.actiprosoftware.com/docs/controls/avalonia/data-visualization/barcodes/exporting-to-images" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+
+		<sampleBrowser:ControlExample
+			Header="Exporting"
+			Footer="The exported SVG for the barcode on the left is rendered in the third-party Svg control on the right."
+			>
+			
+			<StackPanel Spacing="20" DataContext="{Binding #sampleRootControl}">
+					
+				<ScrollViewer HorizontalScrollBarVisibility="Auto">
+					<ThemeVariantScope RequestedThemeVariant="Light">
+						<Border Background="{Binding #primaryBarcode.Background}" BorderBrush="{actipro:ThemeResource Container1BorderBrush}" BorderThickness="1" 
+								CornerRadius="10" Padding="40,20" HorizontalAlignment="Center">
+							<StackPanel Orientation="Horizontal" Spacing="40" HorizontalAlignment="Center">
+
+								<StackPanel Spacing="10">
+									<TextBlock Classes="theme-text-heading size-xs" Text="Barcode Presenter" HorizontalAlignment="Center" />
+									<actipro:BarcodePresenter x:Name="primaryBarcode" Value="12345" HorizontalAlignment="Center" />
+								</StackPanel>
+
+								<StackPanel Spacing="10">
+									<TextBlock Classes="theme-text-heading size-xs" Text="Exported SVG" HorizontalAlignment="Center" />
+									<svg:Svg Source="{Binding ExportedSvg, Mode=OneWay}" HorizontalAlignment="Center" />
+								</StackPanel>
+							</StackPanel>
+						</Border>
+					</ThemeVariantScope>
+				</ScrollViewer>
+			
+				<Border Background="{actipro:ThemeResource Container1BackgroundBrush}"
+						BorderBrush="{actipro:ThemeResource Container1BorderBrush}"
+						BorderThickness="1"
+						CornerRadius="{actipro:ScaledCornerRadius 1}"
+						>
+					<Grid RowDefinitions="Auto,Auto">
+															
+						<StackPanel Margin="{actipro:ScaledThickness '0,1,0,0'}" Orientation="Horizontal" Spacing="{actipro:ScaledDouble 1}">
+							<TextBlock Margin="{actipro:ScaledThickness '2.5,0.5,0,0.5'}" Text="Exported SVG" FontWeight="SemiBold" VerticalAlignment="Center" />
+						</StackPanel>
+						<ScrollViewer Grid.Row="1" Margin="{actipro:ScaledThickness '2.5,1'}" MaxHeight="300" HorizontalScrollBarVisibility="Auto">
+							<SelectableTextBlock 
+								Classes="theme-text-code" 
+								sampleBrowser:CodeTextBlockProperties.CodeLanguage="XML"
+								FlowDirection="LeftToRight"
+								Text="{Binding ExportedSvg, Mode=OneWay}"
+								TextWrapping="Wrap"
+								/>
+						</ScrollViewer>
+						<actipro:CopyButton Grid.RowSpan="2" Margin="{actipro:ScaledThickness 1}" CopyText="{Binding ExportedSvg}"
+											ToolTip.Tip="Copy Sample Code" HorizontalAlignment="Right" VerticalAlignment="Top" />
+					</Grid>
+				</Border>
+
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel MinWidth="170" Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Symbology" />
+						<ComboBox
+							x:Name="symbologyComboBox"
+							ItemsSource="{x:Static barcodeQuickStarts:BarcodeSymbologies.All}" 
+							DisplayMemberBinding="{Binding Name}"
+							SelectionChanged="OnSymbologyComboBoxSelectionChanged"
+							/>
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+		</sampleBrowser:ControlExample>
+		
+
+	</sampleBrowser:ControlExampleItemsControl>
+</UserControl>
