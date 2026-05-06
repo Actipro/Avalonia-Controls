@@ -138,11 +138,10 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.Serialization {
 
 		private void OnQuickAccessToolBarItemAdding(object? sender, RibbonQuickAccessToolBarItemAddingEventArgs e) {
 			// This event is raised when an item is being added to the Quick Access Toolbar.
-			// The event data defines the Key of the item being added and, if found, the Item
+			// The event data may define the Key of the item being added and, if found, the Item
 			// that will be added. If the Ribbon is unable to automatically locate an item with
-			// the desired key, the Item property will be NULL. When this happens, you can manually
-			// assign an Item that corresponds to the given Key. If Item is NULL or Cancel is set
-			// to TRUE then nothing will be added.
+			// the desired key, the Item property will be NULL. When this happens, you can manually assign
+			// a corresponding Item. If Item is NULL or Cancel is set to TRUE then nothing will be added.
 			//
 			// This event can also be used to notify a user if an attempt was made to add an item
 			// to the Quick Access Toolbar that might no longer be available.
@@ -151,7 +150,7 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.Serialization {
 
 				// Attempt to resolve any unspecified items by looking up the control by the key.
 				// In more advanced scenarios, a BarManager instance might be used to managed all the controls.
-				if ((e.Item is null) && _mvvmControls.TryGetValue(e.Key, out var item)) {
+				if ((e.Item is null) && (e.Key is not null) && _mvvmControls.TryGetValue(e.Key, out var item)) {
 					e.Item = item;
 				}
 
