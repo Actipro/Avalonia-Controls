@@ -64,10 +64,10 @@
 
 			<sampleBrowser:ControlExample.Options>
 				<StackPanel Spacing="10">
-					<TextBox Text="{Binding Title}" Watermark="Title" UseFloatingWatermark="True" />
-					<TextBox Text="{Binding Description}" Watermark="Description" UseFloatingWatermark="True" />
-					<TextBox Text="{Binding Content}" Watermark="Content" UseFloatingWatermark="True" />
-					<TextBox Text="{Binding Footer}" Watermark="Footer" UseFloatingWatermark="True" />
+					<TextBox Text="{Binding Title}" PlaceholderText="Title" UseFloatingPlaceholder="True" />
+					<TextBox Text="{Binding Description}" PlaceholderText="Description" UseFloatingPlaceholder="True" />
+					<TextBox Text="{Binding Content}" PlaceholderText="Content" UseFloatingPlaceholder="True" />
+					<TextBox Text="{Binding Footer}" PlaceholderText="Footer" UseFloatingPlaceholder="True" />
 					<StackPanel>
 						<TextBlock Classes="theme-form-control-label" Text="Theme" />
 						<ComboBox x:Name="basicUsageTheme" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Elevated, Outline, Solid, Soft'}" />

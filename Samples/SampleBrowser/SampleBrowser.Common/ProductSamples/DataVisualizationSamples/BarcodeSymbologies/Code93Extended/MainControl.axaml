@@ -1,0 +1,104 @@
+<UserControl
+	x:Name="sampleRootControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+
+		<actipro:Code93ExtendedSymbology x:Key="PrimarySymbology" />
+
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Code 93 Extended is an extension of Code 93 that supports encoding all of the lower 128 ASCII characters, including lowercase letters and control characters.  Extended characters are encoded using special shift character combinations.  Like the base Code 93 symbology, two mandatory check characters (C and K) are automatically calculated and inserted.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Barcode Basics" Url="https://www.actiprosoftware.com/docs/controls/avalonia/data-visualization/barcodes/barcode-basics" />
+			<sampleBrowser:ControlExampleLinkItem Title="Linear Symbologies" Url="https://www.actiprosoftware.com/docs/controls/avalonia/data-visualization/barcodes/linear-symbologies" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+
+		<sampleBrowser:ControlExample
+			Header="Basic usage"
+			DataContext="{Binding #primaryBarcode}"
+			>
+			
+			<ScrollViewer HorizontalScrollBarVisibility="Auto">
+				<Border Background="{Binding #primaryBarcode.Background}" BorderBrush="{actipro:ThemeResource Container1BorderBrush}" BorderThickness="1" 
+						CornerRadius="10" Padding="20" HorizontalAlignment="Center">
+
+					<actipro:BarcodePresenter x:Name="primaryBarcode" Symbology="{StaticResource PrimarySymbology}" Value="abc-123" ZoomLevel="2" />
+
+				</Border>
+			</ScrollViewer>
+			
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel MinWidth="220" Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Value" />
+						<TextBox Text="{Binding Value}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Zoom level" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type={x:Type x:Double}, DelimitedText='1, 2, 3, 4, 5'}" SelectedItem="{Binding ZoomLevel}" DisplayMemberBinding="{Binding StringFormat={}{0:P0}}" />
+					</StackPanel>
+
+					<StackPanel Spacing="10" DataContext="{Binding Symbology}" x:DataType="actipro:Code93ExtendedSymbology">
+						<StackPanel>
+							<TextBlock Classes="theme-form-control-label" Text="Value alignment" />
+							<ComboBox ItemsSource="{actipro:DelimitedArray Type=actipro:LinearBarcodeValueAlignment}" SelectedValue="{Binding ValueAlignment}" />
+						</StackPanel>
+						<CheckBox IsChecked="{Binding AreStartStopCharactersVisible}" Content="Start/stop chars visible" />
+						<StackPanel>
+							<TextBlock Classes="theme-form-control-label" Text="Bar height" />
+							<NumericUpDown Value="{Binding BarHeight}" Minimum="30" Maximum="70" Increment="5" />
+						</StackPanel>
+						<StackPanel>
+							<TextBlock Classes="theme-form-control-label" Text="Quiet zone thickness" />
+							<ComboBox SelectedItem="{Binding QuietZoneThickness}">
+								<Thickness>0</Thickness>
+								<Thickness>10,0</Thickness>
+								<Thickness>10,2</Thickness>
+								<Thickness>10,5</Thickness>
+							</ComboBox>
+						</StackPanel>
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:BarcodePresenter Value="$(ValueAttribute)"$(ZoomLevelAttribute)>
+	<actipro:Code93ExtendedSymbology$(ValueAlignmentAttribute)$(AreStartStopCharactersVisibleAttribute)$(BarHeightAttribute)$(QuietZoneThicknessAttribute) />
+</actipro:BarcodePresenter>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ValueAttribute" Value="{Binding Value}" />
+						<sampleBrowser:CodeExampleSubstitution Key="ZoomLevelAttribute"
+															   IsEnabled="{Binding ZoomLevel, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='1'}"
+															   Value="{Binding ZoomLevel, StringFormat='&#xA;&#x9;ZoomLevel=&quot;{0}&quot;'}" />
+
+						<sampleBrowser:CodeExampleSubstitution Key="ValueAlignmentAttribute"
+															   IsEnabled="{Binding Source={StaticResource PrimarySymbology}, Path=ValueAlignment, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Center'}"
+															   Value="{Binding Source={StaticResource PrimarySymbology}, Path=ValueAlignment, StringFormat='&#xA;&#x9;&#x9;ValueAlignment=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="AreStartStopCharactersVisibleAttribute"
+															   IsEnabled="{Binding Source={StaticResource PrimarySymbology}, Path=AreStartStopCharactersVisible}"
+															   Value="{Binding Source={StaticResource PrimarySymbology}, Path=AreStartStopCharactersVisible, StringFormat='&#xA;&#x9;&#x9;AreStartStopCharactersVisible=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="BarHeightAttribute"
+															   IsEnabled="{Binding Source={StaticResource PrimarySymbology}, Path=BarHeight, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='35'}"
+															   Value="{Binding Source={StaticResource PrimarySymbology}, Path=BarHeight, StringFormat='&#xA;&#x9;&#x9;BarHeight=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="QuietZoneThicknessAttribute"
+															   IsEnabled="{Binding Source={StaticResource PrimarySymbology}, Path=QuietZoneThickness, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='10,0'}"
+															   Value="{Binding Source={StaticResource PrimarySymbology}, Path=QuietZoneThickness, StringFormat='&#xA;&#x9;&#x9;QuietZoneThickness=&quot;{0}&quot;'}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+</UserControl>

@@ -4,7 +4,7 @@
 	xmlns="https://github.com/avaloniaui"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
-	xmlns:actiproPrims="using:ActiproSoftware.UI.Avalonia.Controls.Primitives"
+	xmlns:actiproPrimitives="using:ActiproSoftware.UI.Avalonia.Controls.Primitives"
 	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
 	>
 
@@ -36,7 +36,7 @@
 					</actipro:ComparisonConverter>
 				</actipro:WindowTitleBar.Resources>
 
-				<actiproPrims:OverlayInputFilter>
+				<actiproPrimitives:OverlayInputFilter>
 					<StackPanel Orientation="Horizontal">
 						<Button x:Name="applicationButton" Margin="0,0,20,0" Command="{Binding ToggleDrawerOpenCommand}"
 								ContentTemplate="{actipro:GlyphTemplate Menu16}"
@@ -54,10 +54,10 @@
 							<TextBlock Margin="0,-2,0,0" Text="{Binding ViewTitle}" FontSize="18" FontWeight="SemiBold" TextTrimming="CharacterEllipsis" />
 						</StackPanel>
 					</StackPanel>
-				</actiproPrims:OverlayInputFilter>
+				</actiproPrimitives:OverlayInputFilter>
 
 				<actipro:WindowTitleBar.RightContent>
-					<actiproPrims:OverlayInputFilter>
+					<actiproPrimitives:OverlayInputFilter>
 						<StackPanel Margin="{Binding $parent[actipro:WindowTitleBar].HasCaptionButtons, Converter={StaticResource RightContentMarginConverter}}" Orientation="Horizontal">
 							<Button ContentTemplate="{actipro:GlyphTemplate Home16}"
 									Command="{Binding NavigateViewToHomeCommand}"
@@ -125,26 +125,26 @@
 								</StackPanel>
 							</Button>
 						</StackPanel>
-					</actiproPrims:OverlayInputFilter>
+					</actiproPrimitives:OverlayInputFilter>
 				</actipro:WindowTitleBar.RightContent>
 
 			</actipro:WindowTitleBar>
 
 			<!-- Status Bar -->
-			<actiproPrims:OverlayInputFilter DockPanel.Dock="Bottom">
+			<actiproPrimitives:OverlayInputFilter DockPanel.Dock="Bottom">
 				<Border Background="{actipro:ThemeResource StatusBarBackgroundBrush}"
 						BorderBrush="{actipro:ThemeResource StatusBarBorderBrush}" BorderThickness="{actipro:ThemeResource StatusBarBorderThickness}"
 						TextElement.Foreground="{actipro:ThemeResource StatusBarForegroundBrush}">
 					<Grid Margin="0,0,0,1" ColumnDefinitions="*,Auto,Auto" IsVisible="{Binding !ViewHasCustomStatusBar}">
 						<TextBlock Margin="{actipro:ScaledThickness '2.5,0.5'}" Text="{Binding StatusMessage}" />
-						<TextBlock Grid.Column="1" Margin="{actipro:ScaledThickness '0,0.5'}" Text="{Binding ProductData.ProductVersionAndDateSummaryText}" />
+						<TextBlock Grid.Column="1" Margin="{actipro:ScaledThickness '0,0.5'}" Text="{Binding ProductData.ProductVersionWithBuildText}" />
 						<actipro:WindowResizeGrip Grid.Column="2" />
 					</Grid>
 				</Border>
-			</actiproPrims:OverlayInputFilter>
+			</actiproPrimitives:OverlayInputFilter>
 
 			<!-- Client Area -->
-			<actiproPrims:OverlayInputFilter>
+			<actiproPrimitives:OverlayInputFilter>
 				<Border Background="Transparent">
 					<SplitView x:Name="splitView" DisplayMode="Inline" IsPaneOpen="{Binding IsDrawerOpen}" OpenPaneLength="236" PanePlacement="Left">
 						<SplitView.Pane>
@@ -163,7 +163,7 @@
 						</TransitioningContentControl>
 					</SplitView>
 				</Border>
-			</actiproPrims:OverlayInputFilter>
+			</actiproPrimitives:OverlayInputFilter>
 
 		</DockPanel>
 

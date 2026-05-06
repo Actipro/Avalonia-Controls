@@ -15,9 +15,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.Serialization {
 		private bool _quickAccessToolBarLocation = true;
 		private bool _quickAccessToolBarMode = true;
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// The <see cref="RibbonSerializerOptions"/> that are reflected by the current configuration.

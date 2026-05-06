@@ -27,9 +27,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.
 	/// </summary>
 	public class SampleBarManager {
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Initializes a new instance of the class.
@@ -53,9 +53,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.
 			RegisterControlViewModels();
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// NON-PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Creates an <see cref="IImage"/> based on the given options.
@@ -171,9 +171,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.
 				options => CreateBitmapImage(options, "Help16.png", "Help32.png"));	// The factory delegate called to return the requested image
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		//	SAMPLE NOTE 3.8:
 		//		The Bars.MVVM assembly includes an implementation of a view model collection

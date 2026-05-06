@@ -27,7 +27,7 @@
 					Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
 					/>
 
-				<TextBox x:Name="outputTextBox" MinLines="12" IsReadOnly="True" Watermark="Menu data" UseFloatingWatermark="True" />
+				<TextBox x:Name="outputTextBox" MinLines="12" IsReadOnly="True" PlaceholderText="Menu data" UseFloatingPlaceholder="True" />
 					
 			</StackPanel>
 			<sampleBrowser:ControlExample.CodeExamples>

@@ -44,9 +44,9 @@ namespace ActiproSoftware.SampleBrowser {
 		private const string pcImmersive = ":immersive";
 		private const string pcWide = ":wide";
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		static ControlExampleItemsControl() {
 			UseImmersiveViewProperty.Changed.AddClassHandler<ControlExampleItemsControl>((x, _) => x.UpdatePseudoClasses());
@@ -58,9 +58,9 @@ namespace ActiproSoftware.SampleBrowser {
 			this.RelatedSamples.CollectionChanged += (_, _) => UpdateHasRelatedSamples();
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// NON-PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		private void OnItemsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) {
 			if ((e.Action == NotifyCollectionChangedAction.Add) && (e.NewItems is not null)) {
@@ -88,9 +88,9 @@ namespace ActiproSoftware.SampleBrowser {
 			PseudoClasses.Set(pcWide, _isWideMeasure);
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// The documentation links.
@@ -173,9 +173,9 @@ namespace ActiproSoftware.SampleBrowser {
 	/// <param name="Example">The related <see cref="ControlExample"/>.</param>
 	public record ControlExampleTocItem(ControlExample Example) {
 		
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Brings the related example into view.

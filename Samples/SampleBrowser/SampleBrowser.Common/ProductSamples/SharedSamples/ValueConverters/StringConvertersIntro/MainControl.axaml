@@ -22,11 +22,11 @@
 			<StackPanel Spacing="30">
 				<StackPanel>
 					<TextBlock Classes="theme-form-control-label" Text="Original value" />
-					<TextBox x:Name="toPercentSample" Text="0.5" Watermark="Enter a numeric value" />
+					<TextBox x:Name="toPercentSample" Text="0.5" PlaceholderText="Enter a numeric value" />
 				</StackPanel>
 				<StackPanel>
 					<TextBlock Classes="theme-form-control-label" Text="Converted value" />
-					<TextBox IsReadOnly="True" Watermark="Converted value will appear here" Text="{Binding #toPercentSample.Text, Converter={x:Static actipro:StringConverters.ToPercent}, Mode=OneWay}" />
+					<TextBox IsReadOnly="True" PlaceholderText="Converted value will appear here" Text="{Binding #toPercentSample.Text, Converter={x:Static actipro:StringConverters.ToPercent}, Mode=OneWay}" />
 				</StackPanel>
 			</StackPanel>
 
@@ -49,11 +49,11 @@
 			<StackPanel Spacing="30">
 				<StackPanel>
 					<TextBlock Classes="theme-form-control-label" Text="Original value" />
-					<TextBox x:Name="toUpperSample" Text="Actipro Software" Watermark="Enter text value" />
+					<TextBox x:Name="toUpperSample" Text="Actipro Software" PlaceholderText="Enter text value" />
 				</StackPanel>
 				<StackPanel>
 					<TextBlock Classes="theme-form-control-label" Text="Converted value" />
-					<TextBox IsReadOnly="True" Watermark="Converted value will appear here" Text="{Binding #toUpperSample.Text, Converter={x:Static actipro:StringConverters.ToUpperInvariant}, Mode=OneWay}" />
+					<TextBox IsReadOnly="True" PlaceholderText="Converted value will appear here" Text="{Binding #toUpperSample.Text, Converter={x:Static actipro:StringConverters.ToUpperInvariant}, Mode=OneWay}" />
 				</StackPanel>
 			</StackPanel>
 
@@ -76,11 +76,11 @@
 			<StackPanel Spacing="30">
 				<StackPanel>
 					<TextBlock Classes="theme-form-control-label" Text="Original value" />
-					<TextBox x:Name="toLowerSample" Text="Actipro Software" Watermark="Enter text value" />
+					<TextBox x:Name="toLowerSample" Text="Actipro Software" PlaceholderText="Enter text value" />
 				</StackPanel>
 				<StackPanel>
 					<TextBlock Classes="theme-form-control-label" Text="Converted value" />
-					<TextBox IsReadOnly="True" Watermark="Converted value will appear here" Text="{Binding #toLowerSample.Text, Converter={x:Static actipro:StringConverters.ToLowerInvariant}, Mode=OneWay}" />
+					<TextBox IsReadOnly="True" PlaceholderText="Converted value will appear here" Text="{Binding #toLowerSample.Text, Converter={x:Static actipro:StringConverters.ToLowerInvariant}, Mode=OneWay}" />
 				</StackPanel>
 			</StackPanel>
 

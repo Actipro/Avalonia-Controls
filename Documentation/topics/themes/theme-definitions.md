@@ -34,6 +34,7 @@ Theme definitions are represented by the [ThemeDefinition](xref:@ActiproUIRoot.T
 | [DefaultFontFamily](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.DefaultFontFamily) | The `FontFamily` used by default. |
 | [HeadingFontFamily](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.HeadingFontFamily) | The `FontFamily` used by headings. |
 | [CodeFontFamily](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.CodeFontFamily) | The `FontFamily` used for code listings, typically a monospace font. |
+| [BarcodeFontFamily](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.BarcodeFontFamily) | The `FontFamily` used for barcode values, typically an OCR-B or monospace font. |
 
 ### Color Palette and Ramp Options
 
@@ -101,6 +102,12 @@ Color ramp name properties should be set to [Hue](xref:@ActiproUIRoot.Themes.Gen
 | [SegmentedBarAppearanceKind](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.SegmentedBarAppearanceKind) | The [SegmentedBarAppearanceKind](xref:@ActiproUIRoot.Themes.Generation.SegmentedBarAppearanceKind) that indicates the default appearance for [Segmented Bar](../fundamentals/controls/segmented-bar.md) controls. |
 | [SpinnerHasHorizontalOrientation](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.SpinnerHasHorizontalOrientation) | Whether to arrange `ButtonSpinner` buttons horizontally.
 | [TabAppearanceKind](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.TabAppearanceKind) | The [TabAppearanceKind](xref:@ActiproUIRoot.Themes.Generation.TabAppearanceKind) that indicates the default appearance for various tab controls (e.g., `TabControl`). |
+
+### Avalonia Pro Support Options
+
+| Property | Description |
+|-----|-----|
+| [AvaloniaProResourceIncludes](xref:@ActiproUIRoot.Themes.Generation.ThemeDefinition.AvaloniaProResourceIncludes) | The [AvaloniaProResourceIncludes](xref:@ActiproUIRoot.Themes.Generation.AvaloniaProResourceIncludes) flags that indicate AvaloniaUI OÜ's Avalonia Pro resources to override when generating a theme. See the [Avalonia Pro Support](avalonia-pro-support.md) topic for details. |
 
 ## Custom Theme Generators
 

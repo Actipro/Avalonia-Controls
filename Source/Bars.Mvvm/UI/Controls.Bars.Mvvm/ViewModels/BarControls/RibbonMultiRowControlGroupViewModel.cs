@@ -12,9 +12,9 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		private object? _tag;
 		private ICollection<int>? _threeRowItemSortOrder = new Collection<int>();
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		
 		/// <inheritdoc cref="BarButtonViewModel.IsVisible"/>
 		public bool IsVisible {

@@ -13,6 +13,7 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Styling;
 using Avalonia.Data.Core.Plugins;
 using System.Reflection;
+
 #if FLUENT_THEME
 using Avalonia.Themes.Fluent;
 #elif SIMPLE_THEME
@@ -28,9 +29,9 @@ namespace ActiproSoftware.SampleBrowser {
 
 		private static readonly Logger? _logger;
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		
 		static App() {
 			#if DEBUG && MS_LOGGING
@@ -42,9 +43,9 @@ namespace ActiproSoftware.SampleBrowser {
 			_logger = LoggerFactory.DefaultInstance.CreateLogger<App>();
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Initializes the application.
@@ -90,10 +91,6 @@ namespace ActiproSoftware.SampleBrowser {
 		/// </summary>
 		public override void OnFrameworkInitializationCompleted() {
 			
-			// Remove Avalonia data validation to avoid duplicate validations
-			// from both Avalonia and Windows Community Toolkit
-			BindingPlugins.DataValidators.RemoveAt(0);
-
 			if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop) {
 				// Create a root window for desktop applications
 				desktop.MainWindow = new RootWindow();

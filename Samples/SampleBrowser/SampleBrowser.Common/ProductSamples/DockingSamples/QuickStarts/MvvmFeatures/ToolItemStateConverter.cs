@@ -17,9 +17,9 @@ namespace ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.MvvmFeatures
 	/// </summary>
 	public sealed class ToolItemStateConverter : IValueConverter {
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <inheritdoc cref="IValueConverter.Convert(object?, Type, object?, CultureInfo)"/>
 		public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture) {

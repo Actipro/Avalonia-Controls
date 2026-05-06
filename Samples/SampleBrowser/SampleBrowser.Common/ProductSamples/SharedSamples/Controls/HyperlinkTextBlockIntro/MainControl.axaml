@@ -28,7 +28,7 @@
 
 			<sampleBrowser:ControlExample.Options>
 				<StackPanel Spacing="10">
-					<TextBox Text="{Binding Text}" Watermark="Text" UseFloatingWatermark="True" />
+					<TextBox Text="{Binding Text}" PlaceholderText="Text" UseFloatingPlaceholder="True" />
 					<CheckBox IsChecked="{Binding IsEnabled}" Content="Enabled" />
 				</StackPanel>
 			</sampleBrowser:ControlExample.Options>

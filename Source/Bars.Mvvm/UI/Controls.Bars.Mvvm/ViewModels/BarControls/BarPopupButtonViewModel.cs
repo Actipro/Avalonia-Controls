@@ -25,9 +25,9 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		private ItemVariantBehavior _toolBarItemVariantBehavior = ItemVariantBehavior.AlwaysSmall;
 		private bool _useLargeMenuItem;
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <inheritdoc cref="BarButtonViewModel()"/>
 		public BarPopupButtonViewModel()  // Parameterless constructor required for XAML support
@@ -57,9 +57,9 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 			_command = command;
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		
 		/// <inheritdoc cref="BarButtonViewModel.CanCloneToRibbonQuickAccessToolBar"/>
 		public bool CanCloneToRibbonQuickAccessToolBar {

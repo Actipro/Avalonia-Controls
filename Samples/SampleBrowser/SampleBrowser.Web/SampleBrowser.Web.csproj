@@ -2,7 +2,7 @@
 	<!-- NOTE: Additional configuration defined within 'Directory.Build.props' file -->
 
 	<PropertyGroup>
-		<TargetFramework>net8.0-browser</TargetFramework>
+		<TargetFramework>$(TargetFrameworkBrowser)</TargetFramework>
 
 		<!-- Required for JSImport -->
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>	

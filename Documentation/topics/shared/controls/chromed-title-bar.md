@@ -11,11 +11,6 @@ The [ChromedTitleBar](xref:@ActiproUIRoot.Controls.Primitives.ChromedTitleBar) i
 
 *A ChromedTitleBar with content on the left, middle, and right in addition to standard caption buttons on Windows*
 
-> [!NOTE]
-> This control class does not inherit the native `TitleBar` class because `TitleBar`
-> is specifically designed for use on a `Window` whereas `ChromedTitleBar`
-> is designed to be useable anywhere.
-
 > [!IMPORTANT]
 > See the [Getting Started](../getting-started.md) topic for details on configuring themes for this control.
 
@@ -82,7 +77,7 @@ The [WindowTitleBar](xref:@ActiproUIRoot.Controls.WindowTitleBar) should only be
 
 On Windows and macOS operating systems, a `Window` that has a [WindowTitleBar](xref:@ActiproUIRoot.Controls.WindowTitleBar) will hide its native title bar and the [WindowTitleBar](xref:@ActiproUIRoot.Controls.WindowTitleBar) will provide all title bar functionality in its place.
 
-On other operating systems (e.g., Linux), when the `Window.SystemDecorations` property is explicitly set to `SystemDecorations.None`, [WindowTitleBar](xref:@ActiproUIRoot.Controls.WindowTitleBar)'s caption buttons will be displayed.  Otherwise, they will remain hidden, as they would duplicate the caption buttons found in the native title bar.  The other content portions of the [WindowTitleBar](xref:@ActiproUIRoot.Controls.WindowTitleBar) will always be displayed regardless.
+On other operating systems (e.g., Linux), when the `Window.WindowDecorations` property is explicitly set to `WindowDecorations.None`, [WindowTitleBar](xref:@ActiproUIRoot.Controls.WindowTitleBar)'s caption buttons will be displayed.  Otherwise, they will remain hidden, as they would duplicate the caption buttons found in the native title bar.  The other content portions of the [WindowTitleBar](xref:@ActiproUIRoot.Controls.WindowTitleBar) will always be displayed regardless.
 
 ### Extend Client Area Configuration
 
@@ -91,12 +86,12 @@ Various `Window` client area extension properties are set if the [CanConfigureWi
 #### Operating System Settings When Enabled
 
 On the Windows and macOS operating systems, the ancestor `Window` is automatically configured with the following properties for ideal display of the client area:
-- `Window.ExtendClientAreaChromeHints` set to `ExtendClientAreaChromeHints.NoChrome`.
+- `Window.WindowDecorations` set to `WindowDecorations.BorderOnly`.
 - `Window.ExtendClientAreaToDecorationsHint` set to `true`.
 - `Window.ExtendClientAreaTitleBarHeightHint` set to the final height of [WindowTitleBar](xref:@ActiproUIRoot.Controls.WindowTitleBar).
 
 For all other operating systems (e.g., Linux), the ancestor `Window` is configured as follows:
-- `Window.ExtendClientAreaChromeHints` set to `ExtendClientAreaChromeHints.SystemChrome`.
+- `Window.WindowDecorations` set to `WindowDecorations.Full`.
 - `Window.ExtendClientAreaToDecorationsHint` set to `false`.
 - `Window.ExtendClientAreaTitleBarHeightHint` set to `-1`.
 

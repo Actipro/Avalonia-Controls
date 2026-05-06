@@ -24,9 +24,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GalleryInRibbon
 		private int _minMenuColumnCount = 1;
 		private bool _useAccentedItemBorder = true;
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// If the gallery is categorized when displayed as a menu.

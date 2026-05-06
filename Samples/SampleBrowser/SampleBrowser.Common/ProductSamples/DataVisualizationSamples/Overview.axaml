@@ -1,0 +1,54 @@
+﻿<UserControl
+	x:DataType="sampleBrowser:ApplicationViewModel"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+	<ScrollViewer Classes="theme-scroll-overlay" HorizontalScrollBarVisibility="Disabled">
+		<StackPanel>
+
+			<sampleBrowser:ProductOverviewHeader>
+				Integrate barcodes to streamline data entry, accelerate scanning workflows, and unlock richer, more automated app experiences.
+			</sampleBrowser:ProductOverviewHeader>
+
+			<actipro:MultiColumnPanel Classes="sample-layout-panel" Margin="{actipro:ScaledThickness '6,0'}" MinColumnWidth="390" HorizontalSpacing="{actipro:ScaledDouble 4}" VerticalSpacing="{actipro:ScaledDouble 4}">
+				<actipro:BarcodePresenter Header="Actipro Barcodes" Value="5901234123457" SupplementValue="15245" ZoomLevel="2" CornerRadius="10" Padding="3">
+					<actipro:Ean13Symbology />
+				</actipro:BarcodePresenter>
+
+				<StackPanel Orientation="Horizontal" Spacing="30" HorizontalAlignment="Center">
+					<actipro:BarcodePresenter Value="Actipro Avalonia Controls are amazing! 🚀" ModuleShapeKind="RoundedRectangle" CornerRadius="10" Padding="0">
+						<actipro:BarcodePresenter.Foreground>
+							<LinearGradientBrush EndPoint="0%,100%">
+								<GradientStop Offset="0" Color="#dc4b1e" />
+								<GradientStop Offset="0.5" Color="#811f68" />
+								<GradientStop Offset="1" Color="#3300bb" />
+							</LinearGradientBrush>
+						</actipro:BarcodePresenter.Foreground>
+
+						<actipro:QrCodeSymbology ModuleScale="5" FinderPatternOuterShapeKind="RoundedRectangle" />
+					</actipro:BarcodePresenter>
+
+					<actipro:BarcodePresenter Value="Micro QR Code" ModuleShapeKind="RoundedRectangle" PrimaryAccent="#1e37cf" SecondaryAccent="#1e37cf"
+											  CornerRadius="10" Padding="0" VerticalAlignment="Center">
+						<actipro:MicroQrCodeSymbology ModuleScale="5" FinderPatternOuterShapeKind="RoundedRectangle" />
+					</actipro:BarcodePresenter>
+				</StackPanel>
+			</actipro:MultiColumnPanel>
+
+			<TextBlock Classes="theme-text-body" Margin="{actipro:ScaledThickness 6}" Text="Dive into our individual samples linked below for many more detailed examples."
+					   FontStyle="Italic" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" TextAlignment="Center" />
+
+			<Border Background="{actipro:ThemeResource Container2BackgroundBrush}">
+				<StackPanel Classes="sample-layout-panel" Margin="{actipro:ScaledThickness '6,0'}">
+					<sampleBrowser:CategorizedSampleItemsControl ItemsSource="{Binding ViewItemInfo.ProductFamily.GroupedItems}" />
+				</StackPanel>
+			</Border>
+			
+		</StackPanel>
+	</ScrollViewer>
+
+</UserControl>

@@ -20,9 +20,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.RecentDocuments
 		private DateTime _lastOpenedDateTime = DateTime.Now;
 		private Uri? _location;
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Creates a default collection of view models used by samples.

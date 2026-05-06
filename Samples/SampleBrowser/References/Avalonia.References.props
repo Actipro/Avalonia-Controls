@@ -2,19 +2,9 @@
 <Project>
 
 	<PropertyGroup>
-		<AvaloniaVersion>11.3.11</AvaloniaVersion>
-
-		<!--
-			Define additional optional constants...
-			- USE_DEV_TOOLS: Load the advanced Avalonia Dev Tools for debugging instead of the default free version
-
-		<DefineConstants>$(DefineConstants);USE_DEV_TOOLS</DefineConstants>
-		-->
+		<AvaloniaVersion>12.0.2</AvaloniaVersion>
+		<AvaloniaUIDiagnosticsSupportVersion>2.2.0-*</AvaloniaUIDiagnosticsSupportVersion>
 	</PropertyGroup>
-	
-	<ItemGroup>
-		<PackageReference Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" Condition="$([System.Text.RegularExpressions.Regex]::IsMatch($(DefineConstants), '^(.*;)*USE_DEV_TOOLS(;.*)*$')) == 'false'" />
-	</ItemGroup>
 	
 	<ItemGroup Condition="$(MSBuildProjectName.Contains('.Common')) == 'true'">
 		<PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
@@ -22,8 +12,8 @@
 		<PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" Condition="$([System.Text.RegularExpressions.Regex]::IsMatch($(DefineConstants), '^(.*;)*FLUENT_THEME(;.*)*$'))" />
 		<PackageReference Include="Avalonia.Themes.Simple" Version="$(AvaloniaVersion)" Condition="$([System.Text.RegularExpressions.Regex]::IsMatch($(DefineConstants), '^(.*;)*SIMPLE_THEME(;.*)*$'))" />
 		
-		<!-- If using the SvgImageProvider class in the Dynamic Image sample, which supports SVG image adaptation -->
-		<PackageReference Include="Svg.Controls.Skia.Avalonia" Version="11.3.9.1" />
+		<!-- If using the SvgImageProvider class in the Dynamic Image (SVG) sample, which supports SVG image adaptation -->
+		<PackageReference Include="Svg.Controls.Skia.Avalonia" Version="12.0.0.5" />
 	</ItemGroup>
 
 	<ItemGroup Condition="$(MSBuildProjectName.Contains('.Web')) == 'true'">

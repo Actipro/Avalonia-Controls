@@ -23,10 +23,10 @@ namespace ActiproSoftware.SampleBrowser {
 			= AvaloniaProperty.Register<NullableStringSettingControl, bool>(nameof(IsCoerceCheckBoxVisible), defaultValue: true);
 
 		/// <summary>
-		/// Defines the <see cref="IsWatermarkVisible"/> property.
+		/// Defines the <see cref="IsPlaceholderVisible"/> property.
 		/// </summary>
-		public static readonly StyledProperty<bool> IsWatermarkVisibleProperty
-			= AvaloniaProperty.Register<NullableStringSettingControl, bool>(nameof(IsWatermarkVisible), defaultValue: true);
+		public static readonly StyledProperty<bool> IsPlaceholderVisibleProperty
+			= AvaloniaProperty.Register<NullableStringSettingControl, bool>(nameof(IsPlaceholderVisible), defaultValue: true);
 
 		/// <summary>
 		/// Defines the <see cref="Label"/> property.
@@ -42,9 +42,9 @@ namespace ActiproSoftware.SampleBrowser {
 
 		#endregion
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Initializes an instance of the class.
@@ -53,9 +53,9 @@ namespace ActiproSoftware.SampleBrowser {
 			CoerceEmptyAsNullProperty.Changed.AddClassHandler<NullableStringSettingControl>((x, _) => x.CoerceValue(TextProperty));
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// NON-PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		private static string? CoerceTextPropertyValue(AvaloniaObject obj, string? value) {
 			if (obj is NullableStringSettingControl control && control.CoerceEmptyAsNull && string.IsNullOrEmpty(value))
@@ -65,9 +65,9 @@ namespace ActiproSoftware.SampleBrowser {
 			return value ?? string.Empty;
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Indicates if the text should be coerced to null when it is an empty string.
@@ -86,11 +86,11 @@ namespace ActiproSoftware.SampleBrowser {
 		}
 
 		/// <summary>
-		/// Indicates if the textbox watermark is visible.
+		/// Indicates if the textbox placeholder text is visible.
 		/// </summary>
-		public bool IsWatermarkVisible {
-			get => GetValue(IsWatermarkVisibleProperty);
-			set => SetValue(IsWatermarkVisibleProperty, value);
+		public bool IsPlaceholderVisible {
+			get => GetValue(IsPlaceholderVisibleProperty);
+			set => SetValue(IsPlaceholderVisibleProperty, value);
 		}
 
 		/// <summary>

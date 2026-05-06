@@ -314,7 +314,7 @@
 						<TextBlock Classes="theme-form-control-label" Text="Value" />
 						<Slider Minimum="{Binding Minimum}" Maximum="{Binding Maximum}" Value="{Binding Value}" TickFrequency="1" IsSnapToTickEnabled="True" />
 					</StackPanel>
-					<TextBox Text="{Binding ProgressTextFormat}" Watermark="Progress text format" UseFloatingWatermark="True" />
+					<TextBox Text="{Binding ProgressTextFormat}" PlaceholderText="Progress text format" UseFloatingPlaceholder="True" />
 				</StackPanel>
 			</sampleBrowser:ControlExample.Options>
 			<sampleBrowser:ControlExample.CodeExamples>

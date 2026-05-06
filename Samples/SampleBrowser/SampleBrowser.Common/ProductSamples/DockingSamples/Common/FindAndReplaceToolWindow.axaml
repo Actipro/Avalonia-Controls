@@ -19,7 +19,7 @@
 			<ScrollViewer>
 				<Grid RowDefinitions="*,Auto">
 					<StackPanel Grid.Row="0" Spacing="{actipro:ScaledDouble 2}">
-						<TextBox Watermark="Find what" />
+						<TextBox PlaceholderText="Find what" />
 						<CheckBox Content="Match case" />
 						<CheckBox Content="Match whole word" />
 						<CheckBox Content="Use regular expressions" />

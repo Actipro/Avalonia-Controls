@@ -22,9 +22,9 @@
 				<Border Background="{actipro:ThemeResource Container2BackgroundBrush}" 
 						BorderBrush="{actipro:ThemeResource Container2BorderBrush}" BorderThickness="1" CornerRadius="{actipro:ScaledCornerRadius 1.5}" Padding="{actipro:ScaledThickness 4}">
 					<StackPanel>
-						<TextBox Classes="has-clear-button" Text="sales@actiprosoftware.com" UseFloatingWatermark="True" Watermark="E-mail Address" />
+						<TextBox Classes="has-clear-button" Text="sales@actiprosoftware.com" UseFloatingPlaceholder="True" PlaceholderText="E-mail Address" />
 						
-						<TextBox Margin="{actipro:ScaledThickness '0,1.5,0,0'}" Classes="has-reveal-password-button danger" UseFloatingWatermark="True" Watermark="Password" PasswordChar="{actipro:ThemeResource EditPasswordChar}" />
+						<TextBox Margin="{actipro:ScaledThickness '0,1.5,0,0'}" Classes="has-reveal-password-button danger" UseFloatingPlaceholder="True" PlaceholderText="Password" PasswordChar="{actipro:ThemeResource EditPasswordChar}" />
 						<TextBlock Classes="theme-form-control-message danger" Text="Password is required." />
 						
 						<CheckBox Classes="theme-solid accent" Margin="{actipro:ScaledThickness '0,1.5,0,0'}" Content="Remember me" IsChecked="True" />

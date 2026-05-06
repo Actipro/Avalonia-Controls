@@ -52,7 +52,7 @@
 						<TextBlock Classes="theme-form-control-label" Text="Variant" />
 						<ComboBox x:Name="sampleVariant" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
 					</StackPanel>
-					<TextBox x:Name="sampleText" Text="CheckBox Content" Watermark="Content" UseFloatingWatermark="True" />
+					<TextBox x:Name="sampleText" Text="CheckBox Content" PlaceholderText="Content" UseFloatingPlaceholder="True" />
 					<CheckBox IsThreeState="{Binding IsThreeState}" IsChecked="{Binding IsChecked}">Checked</CheckBox>
 					<CheckBox IsChecked="{Binding IsThreeState}">Three state</CheckBox>
 					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>

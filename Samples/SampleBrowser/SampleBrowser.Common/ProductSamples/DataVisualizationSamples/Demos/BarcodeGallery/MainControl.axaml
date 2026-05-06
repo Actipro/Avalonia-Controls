@@ -1,0 +1,44 @@
+<UserControl
+	x:Name="sampleRootControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:barcodeQuickStarts="using:ActiproSoftware.ProductSamples.DataVisualizationSamples.BarcodeQuickStarts"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+
+		<actipro:CodabarSymbology x:Key="PrimarySymbology" />
+
+	</UserControl.Resources>
+
+	<ScrollViewer Classes="theme-scroll-overlay" HorizontalScrollBarVisibility="Disabled">
+		<StackPanel Margin="{actipro:ScaledThickness 6}" Spacing="{actipro:ScaledDouble 4}">
+
+			<TextBlock Classes="theme-text-body size-lg"
+			Text="Many popular barcode symbologies are supported, each with a wide range of options that allow you to customize the appearance of the barcode." TextWrapping="Wrap" />
+
+			<ItemsControl ItemsSource="{x:Static barcodeQuickStarts:BarcodeSymbologies.All}" >
+				<ItemsControl.ItemsPanel>
+					<ItemsPanelTemplate>
+						<WrapPanel Orientation="Horizontal" LineSpacing="{actipro:ScaledDouble 4}" ItemSpacing="{actipro:ScaledDouble 4}" />
+					</ItemsPanelTemplate>
+				</ItemsControl.ItemsPanel>
+				<ItemsControl.ItemTemplate>
+					<DataTemplate x:DataType="actipro:BarcodeSymbologyBase">
+
+						<Border Background="{Binding #barcode.Background}" BorderBrush="{actipro:ThemeResource Container1BorderBrush}" BorderThickness="1" 
+								CornerRadius="10" Padding="10" VerticalAlignment="Center">
+							<actipro:BarcodePresenter x:Name="barcode" Symbology="{Binding}" Header="{Binding Name}" Value="{Binding ExampleValue}" />
+						</Border>
+					
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+
+			</ItemsControl>
+
+		</StackPanel>
+	</ScrollViewer>
+</UserControl>

@@ -22,9 +22,9 @@ namespace ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.MvvmFeatures
 		private DelegateCommand<object>? _createNewTextDocumentCommand;
 		private DelegateCommand<object>? _selectFirstDocumentCommand;
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Initializes a new instance of the class.
@@ -35,9 +35,9 @@ namespace ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.MvvmFeatures
 			CreateNewImageDocument(activate: false);
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// NON-PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		private string GetNextProfilePhotoFileName() {
 			// Cycle profile photos Woman01.jpg through Woman06.jpg
@@ -48,9 +48,9 @@ namespace ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.MvvmFeatures
 			return $"Woman0{index}.jpg";
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// The "Activate Next Document" command.

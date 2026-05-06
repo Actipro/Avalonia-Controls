@@ -106,6 +106,28 @@ items:
     href: bars/localization.md
   - name: "Troubleshooting"
     href: bars/troubleshooting.md
+- name: "Actipro Data Visualization"
+  href: data-visualization/index.md
+  items:
+  - name: "Overview"
+    href: data-visualization/index.md
+  - name: "Getting Started"
+    href: data-visualization/getting-started.md
+  - name: "Barcodes"
+    href: data-visualization/barcodes/index.md
+    items:
+    - name: "Overview"
+      href: data-visualization/barcodes/index.md
+    - name: "Barcode Basics"
+      href: data-visualization/barcodes/barcode-basics.md
+    - name: "QR Code Symbologies"
+      href: data-visualization/barcodes/qr-code-symbologies.md
+    - name: "Linear Symbologies"
+      href: data-visualization/barcodes/linear-symbologies.md
+    - name: "Presenter Customization"
+      href: data-visualization/barcodes/presenter-customization.md
+    - name: "Exporting to Images"
+      href: data-visualization/barcodes/exporting-to-images.md
 - name: "Actipro Docking & MDI"
   href: docking/index.md
   items:
@@ -233,6 +255,8 @@ items:
       href: fundamentals/controls/circular-progressbar.md
     - name: "Info Bar"
       href: fundamentals/controls/info-bar.md
+    - name: "Range Slider"
+      href: fundamentals/controls/range-slider.md
     - name: "Segmented Bar"
       href: fundamentals/controls/segmented-bar.md
     - name: "Settings Card"
@@ -279,6 +303,8 @@ items:
     href: themes/image-provider.md
   - name: "Icon Presenter"
     href: themes/icon-presenter.md
+  - name: "Avalonia Pro Support"
+    href: themes/avalonia-pro-support.md
 - name: "Actipro Shared Library"
   href: shared/index.md
   items:
@@ -324,6 +350,8 @@ items:
     href: shared/media.md
   - name: "Serialization"
     href: shared/windows-serialization.md
+  - name: "Menu Factory"
+    href: shared/menu-factory.md
   - name: "Extension Methods"
     href: shared/extension-methods.md
   - name: "Value Converters"
@@ -363,6 +391,8 @@ items:
   items:
   - name: "Overview"
     href: conversion/index.md
+  - name: "Converting to v26.1"
+    href: conversion/converting-to-v26-1.md
   - name: "Converting to v25.2.3"
     href: conversion/converting-to-v25-2-3.md
   - name: "Converting to v25.2.2"

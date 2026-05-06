@@ -40,7 +40,11 @@ Elevate your application by licensing professionally designed commercial control
 
 ![Fundamentals](.github/image-content/fundamentals-welcome.png)
 
-[Actipro Fundamentals](https://www.actiprosoftware.com/docs/controls/avalonia/fundamentals/index) provides a collection of advanced controls that are useful for many different types of applications, including settings configuration controls, user prompts, message boxes, info bars, avatars, badges, segmented bars, progress spinners, and more.
+[Actipro Fundamentals](https://www.actiprosoftware.com/docs/controls/avalonia/fundamentals/index) provides a collection of advanced controls that are useful for many different types of applications, including settings editors, user prompts, message boxes, info bars, avatars, badges, segmented bars, range sliders, progress indicators, and more.
+
+![Data Visualization](.github/image-content/data-visualization-welcome.png)
+
+[Actipro Data Visualization](https://www.actiprosoftware.com/docs/controls/avalonia/data-visualization/index) delivers modern barcode generation for Avalonia apps, with a highly customizable BarcodePresenter and many popular built-in symbologies including QR Code, Micro QR Code, Code 128, GS1-128, EAN/UPC, ITF, Code 39/93, and Codabar.  Create everything from branded QR codes with custom shapes, gradients, and centered logos to production-ready retail, logistics, and packaging barcodes.
 
 ## Actipro Avalonia Free Products
 
@@ -102,7 +106,7 @@ These two NuGet packages can be referenced if you wish to use Actipro's themes f
 
 ## Supported Technologies
 
-- **Frameworks:** .NET 6+
+- **Frameworks:** .NET 8+
 - **Architectures:** Any CPU, ARM64, x64, and x86
 - **Platforms:** Windows, macOS, Linux, WASM (Browser), and more *
 - **IDEs:** All IDEs supported by Avalonia

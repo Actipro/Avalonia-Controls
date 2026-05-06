@@ -36,7 +36,7 @@
 					FlowDirection="LeftToRight">
 				<Border Margin="0,50,0,0" Background="{actipro:ThemeResource Container3BackgroundBrush}" actipro:BorderChildClipConverter.ClipToContainingBorder="True">
 					<Grid ColumnDefinitions="*,Auto">
-						<TextBlock Margin="0,4" Text="{Binding ProductData.ProductVersionAndDateSummaryText}" HorizontalAlignment="Right" />
+						<TextBlock Margin="0,4" Text="{Binding ProductData.ProductVersionWithBuildText}" HorizontalAlignment="Right" />
 						<actipro:WindowResizeGrip Grid.Column="1" Classes.transparent="{Binding !#showTargetAreaCheckBox.IsChecked}" IsEnabled="False" />
 					</Grid>
 				</Border>

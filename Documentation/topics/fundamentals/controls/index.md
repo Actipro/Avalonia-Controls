@@ -43,6 +43,12 @@ The Fundamentals product contains various using interface controls that may be u
 
 [Info Bar](info-bar.md) can be used to display essential information to a user without disrupting the user flow.
 
+## Range Slider
+
+![Screenshot](../images/range-slider.png)
+
+[Range Slider](range-slider.md) can be used to select one or more values within a pre-defined range of available values.
+
 ## Segmented Bar
 
 ![Screenshot](../images/segmented-bar.png)

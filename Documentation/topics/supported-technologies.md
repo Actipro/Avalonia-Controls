@@ -11,7 +11,8 @@ Actipro @@PlatformName controls are compatible with a number of different techno
 
 The products have assemblies available for multiple runtime frameworks, including:
 
-- .NET 8 or later
+- .NET 8
+- .NET 10 or later
 
 ### Avalonia Support Matrix
 
@@ -29,6 +30,17 @@ The assemblies have dependencies on the Avalonia framework as follows:
 <tbody>
 
 <tr>
+<td>Actipro Controls v26.1.0</td>
+<td>
+
+- Avalonia v12.0.0 or later
+- Native themes compatible up to Avalonia v12.0.2
+- *Minor updates to Avalonia are expected to be supported and will be verified as they are released*
+
+</td>
+</tr>
+
+<tr>
 <td>
 Actipro Controls v25.2.3
 <br/>
@@ -38,7 +50,6 @@ Actipro Controls v25.2.2
 
 - Avalonia v11.3.7 or later
 - Native themes compatible up to Avalonia v11.3.11
-- *Minor updates to Avalonia are expected to be supported and will be verified as they are released*
 
 </td>
 </tr>

@@ -39,7 +39,7 @@
 						<TextBlock Classes="theme-form-control-label" Text="Shadow opacity" />
 						<ComboBox ItemsSource="{actipro:DelimitedArray '0.1, 0.3, 0.5, 0.75, 1.0', Type=system:Double}" SelectedItem="{Binding #shadow.ShadowOpacity}" />
 					</StackPanel>
-					<TextBox Text="{Binding #shadow.ShadowThickness, Mode=OneWay}" IsEnabled="False" Watermark="Shadow thickness" UseFloatingWatermark="True" />
+					<TextBox Text="{Binding #shadow.ShadowThickness, Mode=OneWay}" IsEnabled="False" PlaceholderText="Shadow thickness" UseFloatingPlaceholder="True" />
 				</StackPanel>
 			</sampleBrowser:ControlExample.Options>
 			<sampleBrowser:ControlExample.CodeExamples>

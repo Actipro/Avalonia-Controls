@@ -14,9 +14,9 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		private RibbonControlGroupSeparatorMode _separatorMode = RibbonControlGroupSeparatorMode.Default;
 		private object? _tag;
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		
 		/// <summary>
 		/// A <see cref="HorizontalAlignment"/> that indicates how items stacked vertically should be aligned horizontally.

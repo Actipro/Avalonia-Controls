@@ -17,9 +17,9 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		private string? _label;
 		private string? _title;
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <inheritdoc cref="BarButtonViewModel()"/>
 		public RibbonTabViewModel()  // Parameterless constructor required for XAML support
@@ -40,9 +40,9 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 			_keyTipText = keyTipText ?? BarControlService.KeyTipTextGenerator.FromLabel(_label);
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// The string key of the related contextual tab group, if this should be a contextual tab.

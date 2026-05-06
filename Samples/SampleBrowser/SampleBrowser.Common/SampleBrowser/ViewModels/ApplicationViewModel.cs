@@ -9,6 +9,7 @@ using Avalonia.Layout;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
 using Avalonia.Threading;
+using Avalonia.VisualTree;
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -47,6 +48,7 @@ namespace ActiproSoftware.SampleBrowser {
 		private DelegateCommand<object>? _openUrlCommand;
 		private DelegateCommand<object>? _setScaleFactorCommand;
 		private DelegateCommand<UserInterfaceDensity?>? _setUserInterfaceDensityCommand;
+		private DelegateCommand<object?>? _toggleAllowFullScreenCommand;
 		private DelegateCommand<object?>? _toggleDrawerOpenCommand;
 		private DelegateCommand<object?>? _toggleFlowDirectionCommand;
 		private DelegateCommand<object?>? _toggleShowPrivateItemsCommand;
@@ -55,11 +57,11 @@ namespace ActiproSoftware.SampleBrowser {
 
 		private const string DefaultSampleUri = null;
 		//private const string DefaultSampleUri = "https://ActiproSoftware/SampleBrowser/Utilities/ColorPalette/ColorPaletteView";
-		//private const string DefaultSampleUri = "https://ActiproSoftware/ProductSamples/FundamentalsSamples/Controls/CircularProgressBarIntro/MainControl";
+		//private const string DefaultSampleUri = "https://ActiproSoftware/ProductSamples/DataVisualizationSamples/BarcodeSymbologies/QrCode/MainControl";
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Initializes an instance of the class.
@@ -77,9 +79,9 @@ namespace ActiproSoftware.SampleBrowser {
 				this.ProductData = productDataResource as ProductData;
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// NON-PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Creates the <see cref="Control"/> for the specified element's XAML path.
@@ -200,9 +202,9 @@ namespace ActiproSoftware.SampleBrowser {
 			_navigateViewToPreviousItemInfoCommand?.RaiseCanExecuteChanged();
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// The Actipro blog URL.
@@ -257,7 +259,7 @@ namespace ActiproSoftware.SampleBrowser {
 		/// The copyright message.
 		/// </summary>
 		public string Copyright
-			=> string.Format(CultureInfo.CurrentCulture, "Copyright \u00A9 2022-{0} Actipro Software LLC", DateTime.Today.Year);
+			=> ActiproSoftware.Properties.Shared.AssemblyInfo.Instance.CopyrightDisplayText;
 
 		/// <summary>
 		/// The singleton instance of the class.
@@ -663,6 +665,19 @@ namespace ActiproSoftware.SampleBrowser {
 			get => _statusMessage;
 			set => SetProperty(ref _statusMessage, value ?? "Ready");
 		}
+
+		/// <summary>
+		/// The <see cref="ICommand"/> to toggle the flow direction of the application.
+		/// </summary>
+		public ICommand ToggleAllowFullScreenCommand
+			=> _toggleAllowFullScreenCommand ??= new DelegateCommand<object?>(_ => {
+				if (
+					ResolveDefaultTopLevel() is Window window
+					&& window.FindDescendantOfType<WindowTitleBar>() is { } windowTitleBar
+				) {
+					windowTitleBar.IsFullScreenButtonAllowed = !windowTitleBar.IsFullScreenButtonAllowed;
+				}
+			});
 
 		/// <summary>
 		/// The <see cref="ICommand"/> to toggle the drawer visibility.

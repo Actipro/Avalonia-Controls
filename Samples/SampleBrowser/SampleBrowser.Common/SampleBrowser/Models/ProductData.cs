@@ -12,9 +12,9 @@ namespace ActiproSoftware.SampleBrowser {
 	/// </summary>
 	public class ProductData {
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Yields all <see cref="ProductItemInfo"/> instances anywhere in the product data.
@@ -122,14 +122,8 @@ namespace ActiproSoftware.SampleBrowser {
 		/// The product version with build text.
 		/// </summary>
 		public string ProductVersionWithBuildText
-			=> $"v{Properties.Shared.AssemblyInfo.Instance.VersionText}";
+			=> $"v{Properties.Shared.AssemblyInfo.Instance.InformationalVersionText}";
 		
-		/// <summary>
-		/// The product version and date summary text.
-		/// </summary>
-		public string ProductVersionAndDateSummaryText
-			=> $"{this.ProductVersionWithBuildText} on {this.BuildDateText}";
-
 		/// <summary>
 		/// The <see cref="ProductFamilyInfo"/> that contains release histories.
 		/// </summary>

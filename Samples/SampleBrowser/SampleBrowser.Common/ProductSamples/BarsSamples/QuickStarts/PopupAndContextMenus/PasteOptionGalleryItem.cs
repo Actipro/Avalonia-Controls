@@ -12,9 +12,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.PopupAndContext
 
 		private IImage? _image;
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="PasteOptionGalleryItem"/> class.
@@ -26,9 +26,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.PopupAndContext
 			// NOTE: The base gallery item category is used to display the category name above the paste options
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Creates the default <see cref="ICollectionView"/> of <see cref="PasteOptionGalleryItem"/> instances.

@@ -145,3 +145,9 @@ xmlns:bars="http://schemas.actiprosoftware.com/winfx/xaml/bars"
 
 > [!TIP]
 > See the [MVVM Support](../mvvm-support.md) topic for more information on how to use the library's view models and view templates to create and manage your application's bars controls with MVVM techniques.
+
+## Menu Factory Integration
+
+Actipro Products use a menu factory to create built-in contextual menus.  By setting [MenuFactory](xref:@ActiproUIRoot.Controls.MenuFactory).[Current](xref:@ActiproUIRoot.Controls.MenuFactory.Current) to an instance of [BarsMenuFactory](xref:@ActiproUIRoot.Controls.Bars.BarsMenuFactory), all Actipro products will produce contextual menus based on @if (avalonia) { [BarMenuFlyout](xref:@ActiproUIRoot.Controls.Bars.BarMenuFlyout). }@if (wpf) { [BarContextMenu](xref:@ActiproUIRoot.Controls.Bars.BarContextMenu). }
+
+See the [Menu Factory](../../shared/menu-factory.md) topic for more information.

@@ -18,9 +18,9 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.MessageBox
 
 		#endregion
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		public MainControl() {
 			InitializeComponent();
@@ -28,9 +28,9 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.MessageBox
 			this.MessageBoxSampleViewModel = new MessageBoxSampleViewModel();
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// NON-PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		private async void OnSampleShowDialogCustomizationButtonClick(object? sender, RoutedEventArgs e) {
 			bool stopShowing = false;
@@ -53,9 +53,9 @@ namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.MessageBox
 				await MessageBox.Show($"You selected '{result}' and will continue to see this message.", "Result");
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		public MessageBoxSampleViewModel? MessageBoxSampleViewModel {
 			get => _messageBoxSampleViewModel;

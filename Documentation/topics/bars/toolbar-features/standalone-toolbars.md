@@ -114,6 +114,48 @@ Most controls define a `ToolBarItemVariantBehavior` property (e.g., [BarButton](
 
 Since the standalone toolbar doesn't dynamically adjust child control variants as space decreases like a ribbon in `Simplified` layout mode does, it only uses each child's `ToolBarItemVariantBehavior` property as a guideline for what single variant size to support for that child.  Therefore as an example, to display an icon and label for a particular button, set the [BarButton](xref:@ActiproUIRoot.Controls.Bars.BarButton).[ToolBarItemVariantBehavior](xref:@ActiproUIRoot.Controls.Bars.BarButton.ToolBarItemVariantBehavior) property to `AlwaysMedium`.
 
+## Spacer Separators
+
+The [BarSeparator](xref:@ActiproUIRoot.Controls.Bars.BarSeparator) control can indicate whether it should render like a traditional separator, which is the default behavior, or alternatively as a spacer when used within a standalone toolbar.  Set the [BarSeparator](xref:@ActiproUIRoot.Controls.Bars.BarSeparator).[StandaloneToolBarSeparatorMode](xref:@ActiproUIRoot.Controls.Bars.BarSeparator.StandaloneToolBarSeparatorMode) property to `Spacer` to engage spacer behavior when within a [StandaloneToolBar](xref:@ActiproUIRoot.Controls.Bars.StandaloneToolBar).
+
+When spacer separators are present in a non-overflowed standalone toolbar, they distribute the available space evenly.  A single spacer separator causes the items after it to appear right or bottom-aligned, depending on orientation.  Multiple spacer separators can also be used to distribute items across the available space in groups.
+
+![Screenshot](../images/standalone-toolbar-spacer-separators.png)
+
+@if (avalonia) {
+*Examples of spacer separators between button groups*
+}
+@if (wpf) {
+*Example of a spacer separator between button groups*
+}
+
+This code snippet demonstrates how to declare a spacer separator:
+
+@if (avalonia) {
+```xaml
+xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+...
+<actipro:StandaloneToolBar>
+	<actipro:BarButton Key="Undo" SmallIcon="/Images/Undo16.png" ToolBarItemVariantBehavior="AlwaysMedium" />
+	<actipro:BarButton Key="Redo" SmallIcon="/Images/Redo16.png" ToolBarItemVariantBehavior="AlwaysMedium" />
+	<actipro:BarSeparator StandaloneToolBarSeparatorMode="Spacer" />
+	<actipro:BarButton Key="Share" SmallIcon="/Images/Share16.png" ToolBarItemVariantBehavior="AlwaysMedium" />
+</actipro:StandaloneToolBar>
+```
+}
+@if (wpf) {
+```xaml
+xmlns:bars="http://schemas.actiprosoftware.com/winfx/xaml/bars"
+...
+<bars:StandaloneToolBar>
+	<bars:BarButton Key="Undo" SmallIcon="/Images/Undo16.png" ToolBarItemVariantBehavior="AlwaysMedium" />
+	<bars:BarButton Key="Redo" SmallIcon="/Images/Redo16.png" ToolBarItemVariantBehavior="AlwaysMedium" />
+	<bars:BarSeparator StandaloneToolBarSeparatorMode="Spacer" />
+	<bars:BarButton Key="Share" SmallIcon="/Images/Share16.png" ToolBarItemVariantBehavior="AlwaysMedium" />
+</bars:StandaloneToolBar>
+```
+}
+
 ## Key Tips
 
 Key tips in child controls are supported, but are not active by default and must be enabled by setting the attached [BarControlService](xref:@ActiproUIRoot.Controls.Bars.KeyTipService.IsRootKeyTipScopeProperty) property to `true`.

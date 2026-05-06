@@ -544,18 +544,6 @@ Each typography control type defines "body", "code", and "heading" control theme
 
 ### Other Controls
 
-#### CaptionButtons Type
-
-![Screenshot](images/caption-buttons.png)
-
-*CaptionButtons control in the default theme*
-
-- [CaptionButtons](xref:@ActiproUIRoot.Themes.ControlThemeKind.CaptionButtons) - Default control theme.
-
-The following additional control themes are used by the default control themes:
-
-- [TitleBarButton](xref:@ActiproUIRoot.Themes.ControlThemeKind.TitleBarButton) - Individual `Button` controls.
-
 #### DataValidationErrors Type
 
 - [DataValidationErrors](xref:@ActiproUIRoot.Themes.ControlThemeKind.DataValidationErrors) - Default control theme that shows errors below a control.
@@ -581,6 +569,21 @@ The following additional control themes are available for the `ToggleButton` use
 
 - [NotificationCard](xref:@ActiproUIRoot.Themes.ControlThemeKind.NotificationCard) - Default control theme with color variants based on the notification type.
 
+#### Page-Based Navigation Types
+
+- [CarouselPage](xref:@ActiproUIRoot.Themes.ControlThemeKind.CarouselPage) - Default control theme.
+- [CommandBar](xref:@ActiproUIRoot.Themes.ControlThemeKind.CommandBar) - Default control theme.
+- [CommandBarButton](xref:@ActiproUIRoot.Themes.ControlThemeKind.CommandBarButton) - Default control theme.
+- [CommandBarOverflowButton](xref:@ActiproUIRoot.Themes.ControlThemeKind.CommandBarOverflowButton) - Default control theme for the `Button` used to open the overflow menu on a `CommandBar`.
+- [CommandBarSeparator](xref:@ActiproUIRoot.Themes.ControlThemeKind.CommandBarSeparator) - Default control theme.
+- [CommandBarToggleButton](xref:@ActiproUIRoot.Themes.ControlThemeKind.CommandBarToggleButton) - Default control theme.
+- [ContentPage](xref:@ActiproUIRoot.Themes.ControlThemeKind.ContentPage) - Default control theme.
+- [DrawerPage](xref:@ActiproUIRoot.Themes.ControlThemeKind.DrawerPage) - Default control theme.
+- [NavigationPage](xref:@ActiproUIRoot.Themes.ControlThemeKind.NavigationPage) - Default control theme.
+- [TabbedPage](xref:@ActiproUIRoot.Themes.ControlThemeKind.TabbedPage) - Default control theme.
+- [TabbedPageTabControl](xref:@ActiproUIRoot.Themes.ControlThemeKind.TabbedPageTabControl) - Default control theme for a `TabControl` used within a `TabbedPage`.
+- [TabbedPageTabItem](xref:@ActiproUIRoot.Themes.ControlThemeKind.TabbedPageTabItem) - Default control theme for a `TabItem` used within a `TabbedPage`.
+
 #### ProgressBar Type
 
 The default control theme supports the `accent`, `success`, `warning`, and `danger` style class names for semantic color variants.
@@ -600,19 +603,21 @@ The following default control themes are defined for their respective control ty
 - [EmbeddableControlRoot](xref:@ActiproUIRoot.Themes.ControlThemeKind.EmbeddableControlRoot)
 - [EmbeddableCoFlyoutPresenterntrolRoot](xref:@ActiproUIRoot.Themes.ControlThemeKind.FlyoutPresenter)
 - [GridSplitter](xref:@ActiproUIRoot.Themes.ControlThemeKind.GridSplitter)
+- [GroupBox](xref:@ActiproUIRoot.Themes.ControlThemeKind.GroupBox)
 - [HeaderedContentControl](xref:@ActiproUIRoot.Themes.ControlThemeKind.HeaderedContentControl)
 - [ManagedFileChooser](xref:@ActiproUIRoot.Themes.ControlThemeKind.ManagedFileChooser)
 - [OverlayPopupHost](xref:@ActiproUIRoot.Themes.ControlThemeKind.OverlayPopupHost)
 - [PathIcon](xref:@ActiproUIRoot.Themes.ControlThemeKind.PathIcon)
+- [PipsPager](xref:@ActiproUIRoot.Themes.ControlThemeKind.PipsPager)
 - [PopupRoot](xref:@ActiproUIRoot.Themes.ControlThemeKind.PopupRoot)
 - [RefreshContainer](xref:@ActiproUIRoot.Themes.ControlThemeKind.RefreshContainer)
 - [RefreshVisualizer](xref:@ActiproUIRoot.Themes.ControlThemeKind.RefreshVisualizer)
 - [SplitView](xref:@ActiproUIRoot.Themes.ControlThemeKind.SplitView)
 - [ThemeVariantScope](xref:@ActiproUIRoot.Themes.ControlThemeKind.ThemeVariantScope)
-- [TitleBar](xref:@ActiproUIRoot.Themes.ControlThemeKind.TitleBar)
 - [ToolTip](xref:@ActiproUIRoot.Themes.ControlThemeKind.ToolTip)
 - [TransitioningContentControl](xref:@ActiproUIRoot.Themes.ControlThemeKind.TransitioningContentControl)
 - [Window](xref:@ActiproUIRoot.Themes.ControlThemeKind.Window)
+- [WindowDrawnDecorations](xref:@ActiproUIRoot.Themes.ControlThemeKind.WindowDrawnDecorations)
 - [WindowNotificationManager](xref:@ActiproUIRoot.Themes.ControlThemeKind.WindowNotificationManager)
 
 ## ColorPicker Control

@@ -45,7 +45,7 @@
 						<TextBlock Classes="theme-form-control-label" Text="Expand direction" />
 						<ComboBox x:Name="sampleExpandDirection" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray Type={x:Type ExpandDirection}}" SelectedValue="{Binding ExpandDirection}" />
 					</StackPanel>
-					<TextBox x:Name="sampleHeader" Text="Toggle Expansion" Watermark="Header content" UseFloatingWatermark="True" />
+					<TextBox x:Name="sampleHeader" Text="Toggle Expansion" PlaceholderText="Header content" UseFloatingPlaceholder="True" />
 					<CheckBox IsChecked="{Binding IsExpanded}">Expanded</CheckBox>
 					<CheckBox IsChecked="{Binding (actipro:ThemeProperties.IsAnimationEnabled)}">Animated</CheckBox>
 					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>

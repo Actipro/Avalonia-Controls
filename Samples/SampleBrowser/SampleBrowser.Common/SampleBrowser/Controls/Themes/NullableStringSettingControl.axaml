@@ -28,11 +28,11 @@
 			</ControlTemplate>
 		</Setter>
 
-		<Style Selector="^[IsWatermarkVisible=True][CoerceEmptyAsNull=True] /template/ TextBox#textBox">
-			<Setter Property="Watermark" Value="(Null)" />
+		<Style Selector="^[IsPlaceholderVisible=True][CoerceEmptyAsNull=True] /template/ TextBox#textBox">
+			<Setter Property="PlaceholderText" Value="(Null)" />
 		</Style>
-		<Style Selector="^[IsWatermarkVisible=True][CoerceEmptyAsNull=False] /template/ TextBox#textBox">
-			<Setter Property="Watermark" Value="(Empty)" />
+		<Style Selector="^[IsPlaceholderVisible=True][CoerceEmptyAsNull=False] /template/ TextBox#textBox">
+			<Setter Property="PlaceholderText" Value="(Empty)" />
 		</Style>
 
 	</ControlTheme>

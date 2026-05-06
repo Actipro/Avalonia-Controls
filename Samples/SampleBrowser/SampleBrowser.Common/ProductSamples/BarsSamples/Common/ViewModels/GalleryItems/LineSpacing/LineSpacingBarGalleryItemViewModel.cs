@@ -19,9 +19,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.Common {
 		/// </summary>
 		public const string DefaultCategory = "Line Spacing";
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Initializes a new instance of the class with a default value and category.
@@ -53,9 +53,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.Common {
 		public LineSpacingBarGalleryItemViewModel(double value, string? category, string? label)
 			: base(value, category, label) { }
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <inheritdoc/>
 		protected override string CoerceLabel() {

@@ -27,9 +27,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.Common {
 		
 		private string _format = DotFormat;
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Initializes a new instance of the class with a default value and category using dot format.
@@ -61,9 +61,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.Common {
 		public NumberingBarGalleryItemViewModel(NumberingKind value, string? category, string? label)
 			: base(value, category, label) { }
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		protected override string? CoerceLabel() {
 			if (Value != NumberingKind.None) {

@@ -12,9 +12,9 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		private bool _isInputGestureTextVisible = true;
 		private bool _staysOpenOnClick;
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <inheritdoc cref="BarButtonViewModel()"/>
 		public BarSplitButtonViewModel()  // Parameterless constructor required for XAML support
@@ -44,9 +44,9 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		public BarSplitButtonViewModel(string? key, string? label, string? keyTipText, ICommand? command)
 			: base(key, label, keyTipText, command) { }
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <inheritdoc cref="BarButtonViewModel.InputGesture"/>
 		public KeyGesture? InputGesture {

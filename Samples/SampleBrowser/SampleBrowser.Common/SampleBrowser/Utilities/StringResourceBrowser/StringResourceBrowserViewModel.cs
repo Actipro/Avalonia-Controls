@@ -10,9 +10,9 @@ namespace ActiproSoftware.SampleBrowser.Utilities.StringResourceBrowser {
 	/// </summary>
 	public class StringResourceBrowserViewModel : ObservableObjectBase {
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		[DynamicDependency(DynamicallyAccessedMemberTypes.All, typeof(AP.Shared.SR))] // Required to ensure SR.GetString method is available
 		public StringResourceBrowserViewModel() {
@@ -20,9 +20,9 @@ namespace ActiproSoftware.SampleBrowser.Utilities.StringResourceBrowser {
 			_ = Enum.GetValues<AP.Shared.SRName>();
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// The collection of all assemblies with string resources.

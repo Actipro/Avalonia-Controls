@@ -11,9 +11,9 @@ namespace ActiproSoftware.ProductSamples.DockingSamples.Controls.AdvancedTabCont
 
 		private int _newDocumentIndex = 3; // 3 documents are defined in XAML, so next zero-based index is 3
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		public MainControl() {
 			// Generate platform-specific keyboard shortcuts for activating tabs by position
@@ -32,9 +32,9 @@ namespace ActiproSoftware.ProductSamples.DockingSamples.Controls.AdvancedTabCont
 			InitializeComponent();
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// NON-PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		private void OnCustomMenuUsageMenuOpening(object? sender, AdvancedTabControlMenuEventArgs e) {
 			const string CustomMenuTag = "CustomMenu";
@@ -126,9 +126,9 @@ namespace ActiproSoftware.ProductSamples.DockingSamples.Controls.AdvancedTabCont
 			}
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// The textual representation of the key gesture that will activate the first normal tab.

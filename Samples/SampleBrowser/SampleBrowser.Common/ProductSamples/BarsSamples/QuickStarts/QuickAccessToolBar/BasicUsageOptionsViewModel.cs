@@ -12,9 +12,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.QuickAccessTool
 		private RibbonQuickAccessToolBarLocation _location = RibbonQuickAccessToolBarLocation.Below;
 		private RibbonQuickAccessToolBarMode _mode = RibbonQuickAccessToolBarMode.Visible;
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		public bool AllowLabels {
 			get => _allowLabels;

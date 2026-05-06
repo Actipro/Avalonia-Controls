@@ -27,7 +27,7 @@
 			<StackPanel Spacing="30">
 				<StackPanel>
 					<TextBlock Classes="theme-form-control-label" Text="Original value" />
-					<TextBox x:Name="basicSample" Text="5, 10" Watermark="Enter a thickness value" />
+					<TextBox x:Name="basicSample" Text="5, 10" PlaceholderText="Enter a thickness value" />
 					<TextBlock Classes="theme-form-control-message" Text='Examples: "5", "5, 10", or "5, 10, 5, 10"' />
 				</StackPanel>
 				<StackPanel>
@@ -63,7 +63,7 @@
 						<CheckBox x:Name="filterRightCheckBox" Margin="0,5,0,0" IsChecked="True" Content="Right" />
 						<CheckBox x:Name="filterBottomCheckBox" Margin="0,5,0,0" IsChecked="True" Content="Bottom" />
 					</StackPanel>
-					<TextBox Text="1, 2, 3, 4" IsEnabled="False" Watermark="Base thickness" UseFloatingWatermark="True" />
+					<TextBox Text="1, 2, 3, 4" IsEnabled="False" PlaceholderText="Base thickness" UseFloatingPlaceholder="True" />
 				</StackPanel>
 			</sampleBrowser:ControlExample.Options>
 			<sampleBrowser:ControlExample.CodeExamples>

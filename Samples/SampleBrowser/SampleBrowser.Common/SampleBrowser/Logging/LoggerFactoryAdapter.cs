@@ -17,9 +17,9 @@ namespace ActiproSoftware.SampleBrowser.Logging {
 
 		private readonly IMSExtensionsLoggerFactory wrappedFactory;
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Initializes a new instance of the <see cref="LoggerFactoryAdapter"/> class.
@@ -29,9 +29,9 @@ namespace ActiproSoftware.SampleBrowser.Logging {
 			this.wrappedFactory = wrappedFactory ?? throw new ArgumentNullException(nameof(wrappedFactory));
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// INTERFACE IMPLEMENTATION
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <inheritdoc cref="IActiproLoggerFatcory.CreateLogger(Type)"/>
 		Logger IActiproLoggerFatcory.CreateLogger(Type categoryType) {
@@ -51,9 +51,9 @@ namespace ActiproSoftware.SampleBrowser.Logging {
 			GC.SuppressFinalize(this);
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Configures Actipro-based logging to use Microsoft extensions for logging.

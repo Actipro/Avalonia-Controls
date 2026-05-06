@@ -238,8 +238,8 @@
 
 			<sampleBrowser:ControlExample.Options>
 				<StackPanel Spacing="10">
-					<TextBox Text="{Binding Header}" Watermark="Header" UseFloatingWatermark="True" />
-					<TextBox Text="{Binding Description}" Watermark="Description" UseFloatingWatermark="True" />
+					<TextBox Text="{Binding Header}" PlaceholderText="Header" UseFloatingPlaceholder="True" />
+					<TextBox Text="{Binding Description}" PlaceholderText="Description" UseFloatingPlaceholder="True" />
 					<StackPanel>
 						<TextBlock Classes="theme-form-control-label" Text="{Binding WrapThreshold, StringFormat='Wrap threshold: {0}'}" />
 						<Slider Minimum="50" Maximum="1000" Value="{Binding WrapThreshold}" TickFrequency="1" IsSnapToTickEnabled="True" SmallChange="1" LargeChange="10" />
@@ -402,8 +402,8 @@
 
 			<sampleBrowser:ControlExample.Options>
 				<StackPanel Spacing="10">
-					<TextBox Text="{Binding Header}" Watermark="Header" UseFloatingWatermark="True" />
-					<TextBox Text="{Binding Description}" Watermark="Description" UseFloatingWatermark="True" />
+					<TextBox Text="{Binding Header}" PlaceholderText="Header" UseFloatingPlaceholder="True" />
+					<TextBox Text="{Binding Description}" PlaceholderText="Description" UseFloatingPlaceholder="True" />
 					<StackPanel>
 						<TextBlock Classes="theme-form-control-label" Text="{Binding WrapThreshold, StringFormat='Wrap threshold: {0}'}" />
 						<Slider Minimum="50" Maximum="1000" Value="{Binding WrapThreshold}" TickFrequency="1" IsSnapToTickEnabled="True" SmallChange="1" LargeChange="10" />
@@ -527,8 +527,8 @@
 
 			<sampleBrowser:ControlExample.Options>
 				<StackPanel Spacing="10">
-					<TextBox Text="{Binding Header}" Watermark="Header" UseFloatingWatermark="True" />
-					<TextBox Text="{Binding Description}" Watermark="Description" UseFloatingWatermark="True" />
+					<TextBox Text="{Binding Header}" PlaceholderText="Header" UseFloatingPlaceholder="True" />
+					<TextBox Text="{Binding Description}" PlaceholderText="Description" UseFloatingPlaceholder="True" />
 					<CheckBox IsChecked="{Binding IsEnabled}" Content="Is enabled" />
 				</StackPanel>
 			</sampleBrowser:ControlExample.Options>

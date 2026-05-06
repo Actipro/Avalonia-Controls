@@ -7,9 +7,9 @@ namespace ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.MultipleDock
 
 	public partial class MainControl : UserControl {
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		public MainControl() {
 			InitializeComponent();
@@ -22,9 +22,9 @@ namespace ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.MultipleDock
 			linkedDockSite2.ToolWindows.CollectionChanged += this.OnLinkedDockSite2ToolWindowsCollectionChanged;
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// NON-PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		
 		private void OnLinkedDockSite1ToolWindowsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e) {
 			UpdateDockSiteToolWindowNames(linkedDockSite1, LinkedDockSite1ToolWindowNames);
@@ -40,9 +40,9 @@ namespace ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.MultipleDock
 				names.Add(toolWindow.Title);
 		}
 		
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		public ObservableCollection<string?> LinkedDockSite1ToolWindowNames { get; } = [];
 

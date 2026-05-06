@@ -213,15 +213,8 @@ While the switcher is displayed and while continuing to hold down the key gestur
 					]]>
 					<sampleBrowser:CodeExample.Substitutions>
 						<sampleBrowser:CodeExampleSubstitution Key="MaxRowCountAttribute"
-															   Value="{Binding MaxRowCount, StringFormat=' MaxRowCount=&quot;{0}&quot;'}">
-							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
-								<Binding Path="MaxRowCount" Converter="{StaticResource NotEqualToComparisonConverter}">
-									<Binding.ConverterParameter>
-										<x:Int32>15</x:Int32>
-									</Binding.ConverterParameter>
-								</Binding>
-							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
-						</sampleBrowser:CodeExampleSubstitution>
+															   IsEnabled="{Binding MaxRowCount, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='15'}"
+															   Value="{Binding MaxRowCount, StringFormat=' MaxRowCount=&quot;{0}&quot;'}" />
 						<sampleBrowser:CodeExampleSubstitution Key="MaxDocumentColumnCountAttribute"
 															   Value="{Binding MaxDocumentColumnCount, StringFormat=' MaxDocumentColumnCount=&quot;{0}&quot;'}">
 							<sampleBrowser:CodeExampleSubstitution.IsEnabled>

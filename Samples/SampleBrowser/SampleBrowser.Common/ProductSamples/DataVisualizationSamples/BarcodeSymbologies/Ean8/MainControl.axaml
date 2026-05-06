@@ -1,0 +1,151 @@
+<UserControl
+	x:Name="sampleRootControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+
+		<actipro:Ean8Symbology x:Key="PrimarySymbology" />
+
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="EAN-8 (European Article Number 8) is a compressed version of EAN-13 for use on small packages.  It encodes an 8-digit number consisting of a country code, item code, and check digit.  Optional 2-digit or 5-digit add-on supplements are supported for periodicals and books.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Barcode Basics" Url="https://www.actiprosoftware.com/docs/controls/avalonia/data-visualization/barcodes/barcode-basics" />
+			<sampleBrowser:ControlExampleLinkItem Title="Linear Symbologies" Url="https://www.actiprosoftware.com/docs/controls/avalonia/data-visualization/barcodes/linear-symbologies" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+
+		<sampleBrowser:ControlExample
+			Header="Basic usage"
+			DataContext="{Binding #primaryBarcode}"
+			>
+
+			<ScrollViewer HorizontalScrollBarVisibility="Auto">
+				<Border Background="{Binding #primaryBarcode.Background}" BorderBrush="{actipro:ThemeResource Container1BorderBrush}" BorderThickness="1" 
+						CornerRadius="10" Padding="20" HorizontalAlignment="Center">
+
+					<actipro:BarcodePresenter x:Name="primaryBarcode" Symbology="{StaticResource PrimarySymbology}" Value="55123457" ZoomLevel="2" />
+
+				</Border>
+			</ScrollViewer>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel MinWidth="220" Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Value (7 or 8 digits)" />
+						<TextBox Text="{Binding Value}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Supplement value (0, 2, or 5 digits)" />
+						<TextBox Text="{Binding SupplementValue}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Zoom level" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type={x:Type x:Double}, DelimitedText='1, 2, 3, 4, 5'}" SelectedItem="{Binding ZoomLevel}" DisplayMemberBinding="{Binding StringFormat={}{0:P0}}" />
+					</StackPanel>
+
+					<StackPanel Spacing="10" DataContext="{Binding Symbology}" x:DataType="actipro:Ean8Symbology">
+						<StackPanel>
+							<TextBlock Classes="theme-form-control-label" Text="Value alignment" />
+							<ComboBox ItemsSource="{actipro:DelimitedArray Type=actipro:LinearBarcodeValueAlignment}" SelectedValue="{Binding ValueAlignment}" />
+						</StackPanel>
+						<StackPanel>
+							<TextBlock Classes="theme-form-control-label" Text="Bar height" />
+							<NumericUpDown Value="{Binding BarHeight}" Minimum="30" Maximum="70" Increment="5" />
+						</StackPanel>
+						<StackPanel>
+							<TextBlock Classes="theme-form-control-label" Text="Quiet zone thickness" />
+							<ComboBox SelectedItem="{Binding QuietZoneThickness}">
+								<Thickness>0</Thickness>
+								<Thickness>10,0</Thickness>
+								<Thickness>10,2</Thickness>
+								<Thickness>10,5</Thickness>
+							</ComboBox>
+						</StackPanel>
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:BarcodePresenter Value="$(ValueAttribute)"$(SupplementValueAttribute)$(ZoomLevelAttribute)>
+	<actipro:Ean8Symbology$(ValueAlignmentAttribute)$(BarHeightAttribute)$(QuietZoneThicknessAttribute) />
+</actipro:BarcodePresenter>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ValueAttribute" Value="{Binding Value}" />
+						<sampleBrowser:CodeExampleSubstitution Key="ZoomLevelAttribute"
+															   IsEnabled="{Binding ZoomLevel, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='1'}"
+															   Value="{Binding ZoomLevel, StringFormat='&#xA;&#x9;ZoomLevel=&quot;{0}&quot;'}" />
+
+						<sampleBrowser:CodeExampleSubstitution Key="ValueAlignmentAttribute"
+															   IsEnabled="{Binding Source={StaticResource PrimarySymbology}, Path=ValueAlignment, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='EanUpc'}"
+															   Value="{Binding Source={StaticResource PrimarySymbology}, Path=ValueAlignment, StringFormat='&#xA;&#x9;&#x9;ValueAlignment=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="BarHeightAttribute"
+															   IsEnabled="{Binding Source={StaticResource PrimarySymbology}, Path=BarHeight, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='55'}"
+															   Value="{Binding Source={StaticResource PrimarySymbology}, Path=BarHeight, StringFormat='&#xA;&#x9;&#x9;BarHeight=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="QuietZoneThicknessAttribute"
+											   IsEnabled="{Binding Source={StaticResource PrimarySymbology}, Path=QuietZoneThickness, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='10,0'}"
+											   Value="{Binding Source={StaticResource PrimarySymbology}, Path=QuietZoneThickness, StringFormat='&#xA;&#x9;&#x9;QuietZoneThickness=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="SupplementValueAttribute"
+															   IsEnabled="{Binding SupplementValue, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter={x:Null}}"
+															   Value="{Binding SupplementValue, StringFormat='&#xA;&#x9;SupplementValue=&quot;{0}&quot;'}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+		
+		<sampleBrowser:ControlExample
+			Header="Supplements"
+			Footer="This symbology supports optional 2-digit or 5-digit add-on supplements."
+			>
+			
+			<ScrollViewer HorizontalScrollBarVisibility="Auto">
+				<Border Background="{Binding #primaryBarcode.Background}" BorderBrush="{actipro:ThemeResource Container1BorderBrush}" BorderThickness="1" 
+						CornerRadius="10" Padding="20" HorizontalAlignment="Center">
+					<StackPanel Orientation="Horizontal" Spacing="40" HorizontalAlignment="Center">
+						<actipro:BarcodePresenter Header="No Supplement" Value="73513537">
+							<actipro:Ean8Symbology />
+						</actipro:BarcodePresenter>
+
+						<actipro:BarcodePresenter Header="2-Digit" Value="73513537" SupplementValue="12">
+							<actipro:Ean8Symbology />
+						</actipro:BarcodePresenter>
+
+						<actipro:BarcodePresenter Header="5-Digit" Value="73513537" SupplementValue="12345">
+							<actipro:Ean8Symbology />
+						</actipro:BarcodePresenter>
+					</StackPanel>
+				</Border>
+			</ScrollViewer>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:BarcodePresenter Header="No Supplement" Value="73513537">
+	<actipro:Ean8Symbology />
+</actipro:BarcodePresenter>
+
+<actipro:BarcodePresenter Header="2-Digit" Value="73513537" SupplementValue="12">
+	<actipro:Ean8Symbology />
+</actipro:BarcodePresenter>
+
+<actipro:BarcodePresenter Header="5-Digit" Value="73513537" SupplementValue="12345">
+	<actipro:Ean8Symbology />
+</actipro:BarcodePresenter>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+</UserControl>

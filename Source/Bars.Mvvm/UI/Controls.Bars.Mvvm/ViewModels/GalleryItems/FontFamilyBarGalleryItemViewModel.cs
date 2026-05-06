@@ -12,9 +12,9 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		private static ReadOnlyCollection<FontFamilyBarGalleryItemViewModel>? _cachedDefaultCollection;
 		private static string? _defaultFontFamilyName;
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Initializes a new instance of the class with a default font family name and category.
@@ -70,9 +70,9 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		public FontFamilyBarGalleryItemViewModel(FontFamily value, string? category, string? label)
 			: base(value, category, label) { }
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// NON-PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Tests if the given font family name is valid and throws <see cref="ArgumentException"/> if invalid.
@@ -88,9 +88,9 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 			return name;
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <inheritdoc/>
 		protected override string? CoerceLabel() {

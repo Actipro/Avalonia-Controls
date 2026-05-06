@@ -32,7 +32,7 @@
 
 			<NumericUpDown x:Name="sample" sampleBrowser:ObservableStyledClassesProperties.IsWatching="True"
 						   Width="150" AllowSpin="True" ShowButtonSpinner="True"
-						   Watermark="0-100"
+						   PlaceholderText="0-100"
 						   Minimum="0" Maximum="100" Increment="1" ClipValueToMinMax="True"
 						   Classes.theme-outline="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Outline'}"
 						   Classes.theme-soft="{Binding #sampleTheme.SelectedItem, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='Soft'}"
@@ -101,19 +101,19 @@
 			Footer="The appearance can be changed from the default with the use of the 'theme-outline' or 'theme-soft' style classes."
 			>
 			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,200,40,200,*">
-				<NumericUpDown Grid.Row="0" Grid.Column="1" Classes="theme-outline" Watermark="Outline" />
-				<NumericUpDown Grid.Row="2" Grid.Column="1" Classes="theme-outline" Watermark="Disabled" IsEnabled="False" />
+				<NumericUpDown Grid.Row="0" Grid.Column="1" Classes="theme-outline" PlaceholderText="Outline" />
+				<NumericUpDown Grid.Row="2" Grid.Column="1" Classes="theme-outline" PlaceholderText="Disabled" IsEnabled="False" />
 
-				<NumericUpDown Grid.Row="0" Grid.Column="3" Classes="theme-soft" Watermark="Soft" />
-				<NumericUpDown Grid.Row="2" Grid.Column="3" Classes="theme-soft" Watermark="Disabled" IsEnabled="False" />
+				<NumericUpDown Grid.Row="0" Grid.Column="3" Classes="theme-soft" PlaceholderText="Soft" />
+				<NumericUpDown Grid.Row="2" Grid.Column="3" Classes="theme-soft" PlaceholderText="Disabled" IsEnabled="False" />
 			</Grid>
 
 			<sampleBrowser:ControlExample.CodeExamples>
 				<sampleBrowser:CodeExample xml:space="preserve">
 					<![CDATA[
-<NumericUpDown Classes="theme-outline" Watermark="Outline" />
+<NumericUpDown Classes="theme-outline" PlaceholderText="Outline" />
 
-<NumericUpDown Classes="theme-soft" Watermark="Soft" />
+<NumericUpDown Classes="theme-soft" PlaceholderText="Soft" />
 					]]>
 				</sampleBrowser:CodeExample>
 			</sampleBrowser:ControlExample.CodeExamples>
@@ -125,19 +125,19 @@
 			Footer="Add the 'accent' style class to a NumericUpDown and the theme accent color will be used to provide emphasis."
 			>
 			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,200,40,200,*">
-				<NumericUpDown Grid.Row="0" Grid.Column="1" Classes="theme-outline accent" Watermark="Outline" />
-				<NumericUpDown Grid.Row="2" Grid.Column="1" Classes="theme-outline accent" Watermark="Disabled" IsEnabled="False" />
+				<NumericUpDown Grid.Row="0" Grid.Column="1" Classes="theme-outline accent" PlaceholderText="Outline" />
+				<NumericUpDown Grid.Row="2" Grid.Column="1" Classes="theme-outline accent" PlaceholderText="Disabled" IsEnabled="False" />
 
-				<NumericUpDown Grid.Row="0" Grid.Column="3" Classes="theme-soft accent" Watermark="Soft" />
-				<NumericUpDown Grid.Row="2" Grid.Column="3" Classes="theme-soft accent" Watermark="Disabled" IsEnabled="False" />
+				<NumericUpDown Grid.Row="0" Grid.Column="3" Classes="theme-soft accent" PlaceholderText="Soft" />
+				<NumericUpDown Grid.Row="2" Grid.Column="3" Classes="theme-soft accent" PlaceholderText="Disabled" IsEnabled="False" />
 			</Grid>
 
 			<sampleBrowser:ControlExample.CodeExamples>
 				<sampleBrowser:CodeExample xml:space="preserve">
 					<![CDATA[
-<NumericUpDown Classes="theme-outline accent" Watermark="Outline" />
+<NumericUpDown Classes="theme-outline accent" PlaceholderText="Outline" />
 
-<NumericUpDown Classes="theme-soft accent" Watermark="Soft" />
+<NumericUpDown Classes="theme-soft accent" PlaceholderText="Soft" />
 					]]>
 				</sampleBrowser:CodeExample>
 			</sampleBrowser:ControlExample.CodeExamples>
@@ -149,19 +149,19 @@
 			Footer="Add the 'success' style class to a NumericUpDown and a color will be used to indicate success."
 			>
 			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,200,40,200,*">
-				<NumericUpDown Grid.Row="0" Grid.Column="1" Classes="theme-outline success" Watermark="Outline" />
-				<NumericUpDown Grid.Row="2" Grid.Column="1" Classes="theme-outline success" Watermark="Disabled" IsEnabled="False" />
+				<NumericUpDown Grid.Row="0" Grid.Column="1" Classes="theme-outline success" PlaceholderText="Outline" />
+				<NumericUpDown Grid.Row="2" Grid.Column="1" Classes="theme-outline success" PlaceholderText="Disabled" IsEnabled="False" />
 
-				<NumericUpDown Grid.Row="0" Grid.Column="3" Classes="theme-soft success" Watermark="Soft" />
-				<NumericUpDown Grid.Row="2" Grid.Column="3" Classes="theme-soft success" Watermark="Disabled" IsEnabled="False" />
+				<NumericUpDown Grid.Row="0" Grid.Column="3" Classes="theme-soft success" PlaceholderText="Soft" />
+				<NumericUpDown Grid.Row="2" Grid.Column="3" Classes="theme-soft success" PlaceholderText="Disabled" IsEnabled="False" />
 			</Grid>
 
 			<sampleBrowser:ControlExample.CodeExamples>
 				<sampleBrowser:CodeExample xml:space="preserve">
 					<![CDATA[
-<NumericUpDown Classes="theme-outline success" Watermark="Outline" />
+<NumericUpDown Classes="theme-outline success" PlaceholderText="Outline" />
 
-<NumericUpDown Classes="theme-soft success" Watermark="Soft" />
+<NumericUpDown Classes="theme-soft success" PlaceholderText="Soft" />
 					]]>
 				</sampleBrowser:CodeExample>
 			</sampleBrowser:ControlExample.CodeExamples>
@@ -173,19 +173,19 @@
 			Footer="Add the 'warning' style class to a NumericUpDown and a color will be used to indicate caution."
 			>
 			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,200,40,200,*">
-				<NumericUpDown Grid.Row="0" Grid.Column="1" Classes="theme-outline warning" Watermark="Outline" />
-				<NumericUpDown Grid.Row="2" Grid.Column="1" Classes="theme-outline warning" Watermark="Disabled" IsEnabled="False" />
+				<NumericUpDown Grid.Row="0" Grid.Column="1" Classes="theme-outline warning" PlaceholderText="Outline" />
+				<NumericUpDown Grid.Row="2" Grid.Column="1" Classes="theme-outline warning" PlaceholderText="Disabled" IsEnabled="False" />
 
-				<NumericUpDown Grid.Row="0" Grid.Column="3" Classes="theme-soft warning" Watermark="Soft" />
-				<NumericUpDown Grid.Row="2" Grid.Column="3" Classes="theme-soft warning" Watermark="Disabled" IsEnabled="False" />
+				<NumericUpDown Grid.Row="0" Grid.Column="3" Classes="theme-soft warning" PlaceholderText="Soft" />
+				<NumericUpDown Grid.Row="2" Grid.Column="3" Classes="theme-soft warning" PlaceholderText="Disabled" IsEnabled="False" />
 			</Grid>
 
 			<sampleBrowser:ControlExample.CodeExamples>
 				<sampleBrowser:CodeExample xml:space="preserve">
 					<![CDATA[
-<NumericUpDown Classes="theme-outline warning" Watermark="Outline" />
+<NumericUpDown Classes="theme-outline warning" PlaceholderText="Outline" />
 
-<NumericUpDown Classes="theme-soft warning" Watermark="Soft" />
+<NumericUpDown Classes="theme-soft warning" PlaceholderText="Soft" />
 					]]>
 				</sampleBrowser:CodeExample>
 			</sampleBrowser:ControlExample.CodeExamples>
@@ -197,19 +197,19 @@
 			Footer="Add the 'danger' style class to a NumericUpDown and a color will be used to indicate extreme caution."
 			>
 			<Grid RowDefinitions="Auto,10,Auto" ColumnDefinitions="*,200,40,200,*">
-				<NumericUpDown Grid.Row="0" Grid.Column="1" Classes="theme-outline danger" Watermark="Outline" />
-				<NumericUpDown Grid.Row="2" Grid.Column="1" Classes="theme-outline danger" Watermark="Disabled" IsEnabled="False" />
+				<NumericUpDown Grid.Row="0" Grid.Column="1" Classes="theme-outline danger" PlaceholderText="Outline" />
+				<NumericUpDown Grid.Row="2" Grid.Column="1" Classes="theme-outline danger" PlaceholderText="Disabled" IsEnabled="False" />
 
-				<NumericUpDown Grid.Row="0" Grid.Column="3" Classes="theme-soft danger" Watermark="Soft" />
-				<NumericUpDown Grid.Row="2" Grid.Column="3" Classes="theme-soft danger" Watermark="Disabled" IsEnabled="False" />
+				<NumericUpDown Grid.Row="0" Grid.Column="3" Classes="theme-soft danger" PlaceholderText="Soft" />
+				<NumericUpDown Grid.Row="2" Grid.Column="3" Classes="theme-soft danger" PlaceholderText="Disabled" IsEnabled="False" />
 			</Grid>
 
 			<sampleBrowser:ControlExample.CodeExamples>
 				<sampleBrowser:CodeExample xml:space="preserve">
 					<![CDATA[
-<NumericUpDown Classes="theme-outline danger" Watermark="Outline" />
+<NumericUpDown Classes="theme-outline danger" PlaceholderText="Outline" />
 
-<NumericUpDown Classes="theme-soft danger" Watermark="Soft" />
+<NumericUpDown Classes="theme-soft danger" PlaceholderText="Soft" />
 					]]>
 				</sampleBrowser:CodeExample>
 			</sampleBrowser:ControlExample.CodeExamples>
@@ -220,7 +220,7 @@
 			Header="Data validation errors"
 			>
 
-			<NumericUpDown Watermark="NumericUpDown with a validation error">
+			<NumericUpDown PlaceholderText="NumericUpDown with a validation error">
 				<DataValidationErrors.Error>
 					<system:Exception />
 				</DataValidationErrors.Error>

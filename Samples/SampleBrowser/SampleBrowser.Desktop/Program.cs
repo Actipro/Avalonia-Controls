@@ -8,9 +8,9 @@ namespace ActiproSoftware.SampleBrowser {
 	/// </summary>
 	internal class Program {
 		
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Provides the main entry point of the application.
@@ -19,11 +19,6 @@ namespace ActiproSoftware.SampleBrowser {
 		[STAThread]
 		public static void Main(string[] args) {
 			BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
-
-			#if DEBUG && !USE_DEV_TOOLS
-			// Make sure legacy built-in dev tools are attached to all windows when not using professional dev tools
-			Avalonia.Controls.Control.LoadedEvent.AddClassHandler<Avalonia.Controls.Window>((s, _) => s.AttachDevTools(), Avalonia.Interactivity.RoutingStrategies.Bubble, handledEventsToo: true);
-			#endif
 		}
 
 		/// <summary>
@@ -35,8 +30,11 @@ namespace ActiproSoftware.SampleBrowser {
 
 				// NOTE: See the 'Licensing' documentation topic for details on how to register an evaluation or paid license here:
 				// .RegisterActiproLicense(licensee, licenseKey)
+				#if DEBUG
+				.WithDeveloperTools()
+				#endif
 
-				// This SkipOptions setting is required if using SVGs with DynamicImage (https://github.com/wieslawsoltes/Svg.Skia/discussions/82)
+				// This SkiaOptions setting is required if using SVGs with DynamicImage (https://github.com/wieslawsoltes/Svg.Skia/discussions/82)
 				.With(new SkiaOptions { UseOpacitySaveLayer = true })
 
 				.WithInterFont()

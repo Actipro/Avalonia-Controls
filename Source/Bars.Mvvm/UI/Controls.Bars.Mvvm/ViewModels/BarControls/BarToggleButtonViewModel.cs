@@ -10,9 +10,9 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 
 		private bool _isChecked = false;
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <inheritdoc cref="BarButtonViewModel()"/>
 		public BarToggleButtonViewModel()  // Parameterless constructor required for XAML support
@@ -42,9 +42,9 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		public BarToggleButtonViewModel(string? key, string? label, string? keyTipText, ICommand? command)
 			: base(key, label, keyTipText, command) { }
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <inheritdoc cref="ICheckable.IsChecked"/>
 		public bool IsChecked {

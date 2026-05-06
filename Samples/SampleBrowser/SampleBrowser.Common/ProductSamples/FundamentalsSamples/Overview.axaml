@@ -24,7 +24,6 @@
 
 			<sampleBrowser:ProductOverviewHeader>
 				Fundamentals contains advanced controls and components that are useful in a variety of scenarios.
-				The library will be grown over time, with new controls coming soon.
 			</sampleBrowser:ProductOverviewHeader>
 
 			<actipro:MultiColumnPanel Classes="sample-layout-panel" Margin="{actipro:ScaledThickness '6,0'}" MinColumnWidth="390" HorizontalSpacing="{actipro:ScaledDouble 4}" VerticalSpacing="{actipro:ScaledDouble 4}">
@@ -183,10 +182,10 @@
 									</actipro:InfoBar>
 								</actipro:SettingsExpander.ItemsHeader>
 
-								<actipro:SettingsCard Header="Font size">
+								<actipro:SettingsCard Header="Font size range" ClipToBounds="False" ToolTip.Tip="RangeSlider control within a SettingsCard">
 									<StackPanel Orientation="Horizontal" MinWidth="150">
 										<TextBlock Text="A" FontSize="12" VerticalAlignment="Center" />
-										<Slider Margin="10,0" Minimum="10" Value="20" Maximum="50" MinWidth="100" VerticalAlignment="Center" TickFrequency="10" TickPlacement="BottomRight" />
+										<actipro:RangeSlider Margin="10,0" Minimum="10" RangeStart="20" RangeEnd="50" Maximum="50" MinWidth="100" VerticalAlignment="Center" Marks="20,30,40" MarkSnapDistance="2" StepFrequency="1" IsMarkContentVisible="False" />
 										<TextBlock Text="A" FontSize="24" VerticalAlignment="Center" />
 									</StackPanel>
 								</actipro:SettingsCard>

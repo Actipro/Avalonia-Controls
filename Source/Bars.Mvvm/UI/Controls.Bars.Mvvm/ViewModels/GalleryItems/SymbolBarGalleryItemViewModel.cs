@@ -7,9 +7,9 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 	/// </summary>
 	public class SymbolBarGalleryItemViewModel : BarGalleryItemViewModel<string> {
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Initializes a new instance of the class with a default category.
@@ -41,9 +41,9 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		public SymbolBarGalleryItemViewModel(string? value, string? category, string? label)
 			: base(value, category, label) { }
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// The localizable default category to be used for view models of this type.

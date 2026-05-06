@@ -1,0 +1,333 @@
+<UserControl
+	x:Name="sampleRootControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:actiproImages="using:ActiproSoftware.UI.Avalonia.Images"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+
+		<actipro:QrCodeSymbology x:Key="PrimarySymbology" />
+
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="QR Code is a versatile 2D matrix barcode capable of encoding text, URLs, or binary data, featuring robust error‑correction levels for fast, dependable scanning across devices.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Barcode Basics" Url="https://www.actiprosoftware.com/docs/controls/avalonia/data-visualization/barcodes/barcode-basics" />
+			<sampleBrowser:ControlExampleLinkItem Title="QR Code Symbologies" Url="https://www.actiprosoftware.com/docs/controls/avalonia/data-visualization/barcodes/qr-code-symbologies" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		
+		<sampleBrowser:ControlExample
+			Header="QR Codes with personality"
+			Footer="Fully customize the appearance of your QR Codes to achieve a stylistic look that matches your brand. Everything from the finder pattern and module shapes to colors and gradients can be adjusted.  Or even add a logo to the center if you also turn up the error correction level."
+			>
+			
+			<Border Background="{Binding #primaryBarcode.Background}" BorderBrush="{actipro:ThemeResource Container1BorderBrush}" BorderThickness="1" 
+					CornerRadius="10" Padding="20">
+				<WrapPanel>
+
+					<actipro:BarcodePresenter
+						Value="QR Codes can have their appearance customized. 😎"
+						ModuleShapeKind="RoundedRectangle">
+						<actipro:BarcodePresenter.Foreground>
+							<LinearGradientBrush EndPoint="0%,100%">
+								<GradientStop Offset="0" Color="#dc4b1e" />
+								<GradientStop Offset="0.5" Color="#811f68" />
+								<GradientStop Offset="1" Color="#3300bb" />
+							</LinearGradientBrush>
+						</actipro:BarcodePresenter.Foreground>
+
+						<actipro:QrCodeSymbology Version="Version4" ModuleScale="6" FinderPatternOuterShapeKind="RoundedRectangle" />
+					</actipro:BarcodePresenter>
+
+					<actipro:BarcodePresenter
+						Value="Various shapes are available for finder patterns and modules."
+						ModuleShapeKind="Circle"
+						PrimaryAccent="#1934a7"
+						SecondaryAccent="#081033"
+						>
+						<actipro:BarcodePresenter.Foreground>
+							<RadialGradientBrush RadiusX="80%" RadiusY="80%">
+								<GradientStop Offset="0" Color="#0022b4" />
+								<GradientStop Offset="1" Color="#081033" />
+							</RadialGradientBrush>
+						</actipro:BarcodePresenter.Foreground>
+						<actipro:QrCodeSymbology Version="Version4" ModuleScale="6" FinderPatternOuterShapeKind="Diamond" FinderPatternInnerShapeKind="Diamond" />
+					</actipro:BarcodePresenter>
+					
+					<Panel>
+						<actipro:BarcodePresenter
+							x:Name="logoPresenter"
+							Value="Add a logo and module dots for a clean look."
+							ModuleShapeKind="InsetCircle"
+							PrimaryAccent="#fd9929"
+							SecondaryAccent="#e37700"
+							>
+							<actipro:QrCodeSymbology ErrorCorrectionLevel="Quartile" Version="Version4" ModuleScale="6" FinderPatternOuterShapeKind="RoundedRectangle" FinderPatternInnerShapeKind="Circle" />
+						</actipro:BarcodePresenter>
+
+						<Border Width="54" Height="54" Background="{Binding #logoPresenter.Background}" HorizontalAlignment="Center" VerticalAlignment="Center">
+							<Border Margin="3" CornerRadius="10">
+								<Image actipro:BorderChildClipConverter.ClipToContainingBorder="True">
+									<Image.Source>
+										<actiproImages:ActiproLogo48 />
+									</Image.Source>
+								</Image>
+							</Border>
+						</Border>
+					</Panel>
+					
+					<actipro:BarcodePresenter
+						Value="Invert your QR Codes with a styled light on dark appearance."
+						ModuleShapeKind="InsetCircle"
+						Background="#002d50"
+						Foreground="#74bdf5"
+						CornerRadius="40"
+						>
+						<actipro:QrCodeSymbology Version="Version4" ModuleScale="6" FinderPatternOuterShapeKind="Circle" FinderPatternInnerShapeKind="Circle" />
+					</actipro:BarcodePresenter>
+					
+					<actipro:BarcodePresenter
+						Value="You can use linear and radial gradients."
+						ModuleShapeKind="RoundedRectangle"
+						PrimaryAccent="#242824"
+						>
+						<actipro:BarcodePresenter.Foreground>
+							<RadialGradientBrush>
+								<GradientStop Offset="0" Color="#0c2b0c" />
+								<GradientStop Offset="1" Color="#037a03" />
+							</RadialGradientBrush>
+						</actipro:BarcodePresenter.Foreground>
+						<actipro:BarcodePresenter.SecondaryAccent>
+							<LinearGradientBrush EndPoint="0%,100%">
+								<GradientStop Offset="0" Color="#da00ee" />
+								<GradientStop Offset="1" Color="#8c1197" />
+							</LinearGradientBrush>
+						</actipro:BarcodePresenter.SecondaryAccent>
+
+						<actipro:QrCodeSymbology Version="Version4" ModuleScale="6" />
+					</actipro:BarcodePresenter>
+
+					<actipro:BarcodePresenter
+						Value="Apply a gradient effect over the background."
+						ModuleShapeKind="Circle"
+						Foreground="#ffffff"
+						CornerRadius="20"
+						>
+						<actipro:BarcodePresenter.Background>
+							<LinearGradientBrush EndPoint="100%,100%">
+								<GradientStop Offset="0" Color="#3494e6" />
+								<GradientStop Offset="1" Color="#ec6ead" />
+							</LinearGradientBrush>
+						</actipro:BarcodePresenter.Background>
+						<actipro:QrCodeSymbology Version="Version4" ModuleScale="6" FinderPatternOuterShapeKind="RoundedRectangle" />
+					</actipro:BarcodePresenter>
+
+				</WrapPanel>
+			</Border>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:BarcodePresenter
+	Value="QR Codes can have their appearance customized. 😎"
+	ModuleShapeKind="RoundedRectangle">
+	<actipro:BarcodePresenter.Foreground>
+		<LinearGradientBrush EndPoint="0%,100%">
+			<GradientStop Offset="0" Color="#dc4b1e" />
+			<GradientStop Offset="0.5" Color="#811f68" />
+			<GradientStop Offset="1" Color="#3300bb" />
+		</LinearGradientBrush>
+	</actipro:BarcodePresenter.Foreground>
+
+	<actipro:QrCodeSymbology Version="Version4" ModuleScale="6" 
+		FinderPatternOuterShapeKind="RoundedRectangle" />
+</actipro:BarcodePresenter>
+
+<actipro:BarcodePresenter
+	Value="Various shapes are available for finder patterns and modules."
+	ModuleShapeKind="Circle"
+	PrimaryAccent="#1934a7"
+	SecondaryAccent="#081033"
+	>
+	<actipro:BarcodePresenter.Foreground>
+		<RadialGradientBrush RadiusX="80%" RadiusY="80%">
+			<GradientStop Offset="0" Color="#0022b4" />
+			<GradientStop Offset="1" Color="#081033" />
+		</RadialGradientBrush>
+	</actipro:BarcodePresenter.Foreground>
+	<actipro:QrCodeSymbology Version="Version4" ModuleScale="6" 
+		FinderPatternOuterShapeKind="Diamond" FinderPatternInnerShapeKind="Diamond" />
+</actipro:BarcodePresenter>
+					
+<Panel>
+	<actipro:BarcodePresenter
+		x:Name="logoPresenter"
+		Value="Add a logo and module dots for a clean look."
+		ModuleShapeKind="InsetCircle"
+		PrimaryAccent="#fd9929"
+		SecondaryAccent="#e37700"
+		>
+		<actipro:QrCodeSymbology ErrorCorrectionLevel="Quartile" Version="Version4" 
+			ModuleScale="6" FinderPatternOuterShapeKind="RoundedRectangle" FinderPatternInnerShapeKind="Circle" />
+	</actipro:BarcodePresenter>
+
+	<Border Width="54" Height="54" Background="{Binding #logoPresenter.Background}" 
+		HorizontalAlignment="Center" VerticalAlignment="Center">
+		<Border Margin="3" CornerRadius="10">
+			<Image actipro:BorderChildClipConverter.ClipToContainingBorder="True">
+				<Image.Source>
+					<!-- Your logo here -->
+				</Image.Source>
+			</Image>
+		</Border>
+	</Border>
+</Panel>
+					
+<actipro:BarcodePresenter
+	Value="Invert your QR Codes with a styled light on dark appearance."
+	ModuleShapeKind="InsetCircle"
+	Background="#002d50"
+	Foreground="#74bdf5"
+	CornerRadius="40"
+	>
+	<actipro:QrCodeSymbology Version="Version4" ModuleScale="6" 
+		FinderPatternOuterShapeKind="Circle" FinderPatternInnerShapeKind="Circle" />
+</actipro:BarcodePresenter>
+					
+<actipro:BarcodePresenter
+	Value="You can use linear and radial gradients."
+	ModuleShapeKind="RoundedRectangle"
+	PrimaryAccent="#242824"
+	>
+	<actipro:BarcodePresenter.Foreground>
+		<RadialGradientBrush>
+			<GradientStop Offset="0" Color="#0c2b0c" />
+			<GradientStop Offset="1" Color="#037a03" />
+		</RadialGradientBrush>
+	</actipro:BarcodePresenter.Foreground>
+	<actipro:BarcodePresenter.SecondaryAccent>
+		<LinearGradientBrush EndPoint="0%,100%">
+			<GradientStop Offset="0" Color="#da00ee" />
+			<GradientStop Offset="1" Color="#8c1197" />
+		</LinearGradientBrush>
+	</actipro:BarcodePresenter.SecondaryAccent>
+
+	<actipro:QrCodeSymbology Version="Version4" ModuleScale="6" />
+</actipro:BarcodePresenter>
+
+<actipro:BarcodePresenter
+	Value="Apply a gradient effect over the background."
+	ModuleShapeKind="Circle"
+	Foreground="#ffffff"
+	CornerRadius="20"
+	>
+	<actipro:BarcodePresenter.Background>
+		<LinearGradientBrush EndPoint="100%,100%">
+			<GradientStop Offset="0" Color="#3494e6" />
+			<GradientStop Offset="1" Color="#ec6ead" />
+		</LinearGradientBrush>
+	</actipro:BarcodePresenter.Background>
+	<actipro:QrCodeSymbology Version="Version4" ModuleScale="6" FinderPatternOuterShapeKind="RoundedRectangle" />
+</actipro:BarcodePresenter>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Basic usage"
+			DataContext="{Binding #primaryBarcode}"
+			>
+			
+			<ScrollViewer HorizontalScrollBarVisibility="Auto">
+				<Border Background="{Binding #primaryBarcode.Background}" BorderBrush="{actipro:ThemeResource Container1BorderBrush}" BorderThickness="1" 
+						CornerRadius="10" Padding="10" HorizontalAlignment="Center">
+
+					<actipro:BarcodePresenter x:Name="primaryBarcode" Symbology="{StaticResource PrimarySymbology}" Value="This is an example QR Code" ZoomLevel="2" />
+
+				</Border>
+			</ScrollViewer>
+			
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel MinWidth="220" Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Value" />
+						<TextBox Text="{Binding Value}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Zoom level" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type={x:Type x:Double}, DelimitedText='1, 2, 3, 4, 5'}" SelectedItem="{Binding ZoomLevel}" DisplayMemberBinding="{Binding StringFormat={}{0:P0}}" />
+					</StackPanel>
+
+					<StackPanel Spacing="10" DataContext="{Binding Symbology}" x:DataType="actipro:QrCodeSymbology">
+						<StackPanel>
+							<TextBlock Classes="theme-form-control-label" Text="Error correction level" />
+							<ComboBox ItemsSource="{actipro:DelimitedArray Type=actipro:QrErrorCorrectionLevel, DelimitedText='Low, Medium, Quartile, High'}" SelectedValue="{Binding ErrorCorrectionLevel}" />
+						</StackPanel>
+						<StackPanel>
+							<TextBlock Classes="theme-form-control-label" Text="Version" />
+							<ComboBox ItemsSource="{actipro:DelimitedArray Type=actipro:QrCodeVersion}" SelectedValue="{Binding Version}" />
+						</StackPanel>
+						<StackPanel>
+							<TextBlock Classes="theme-form-control-label" Text="ECI mode" />
+							<ComboBox ItemsSource="{actipro:DelimitedArray Type=actipro:EciMode}" SelectedValue="{Binding EciMode}" />
+						</StackPanel>
+						<StackPanel>
+							<TextBlock Classes="theme-form-control-label" Text="Module scale" />
+							<NumericUpDown Value="{Binding ModuleScale}" Minimum="1" Maximum="10" Increment="1" />
+						</StackPanel>
+						<StackPanel>
+							<TextBlock Classes="theme-form-control-label" Text="Quiet zone thickness" />
+							<ComboBox SelectedItem="{Binding QuietZoneThickness}">
+								<Thickness>0</Thickness>
+								<Thickness>4</Thickness>
+								<Thickness>8</Thickness>
+							</ComboBox>
+						</StackPanel>
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:BarcodePresenter Value="$(ValueAttribute)"$(ZoomLevelAttribute)>
+	<actipro:QrCodeSymbology$(EciModeAttribute)$(ErrorCorrectionLevelAttribute)$(VersionAttribute)$(ModuleScaleAttribute)$(QuietZoneThicknessAttribute) />
+</actipro:BarcodePresenter>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ValueAttribute" Value="{Binding Value}" />
+						<sampleBrowser:CodeExampleSubstitution Key="ZoomLevelAttribute"
+															   IsEnabled="{Binding ZoomLevel, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='1'}"
+															   Value="{Binding ZoomLevel, StringFormat='&#xA;&#x9;ZoomLevel=&quot;{0}&quot;'}" />
+
+						<sampleBrowser:CodeExampleSubstitution Key="ErrorCorrectionLevelAttribute"
+															   IsEnabled="{Binding Source={StaticResource PrimarySymbology}, Path=ErrorCorrectionLevel, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Medium'}"
+															   Value="{Binding Source={StaticResource PrimarySymbology}, Path=ErrorCorrectionLevel, StringFormat='&#xA;&#x9;&#x9;ErrorCorrectionLevel=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="VersionAttribute"
+															   IsEnabled="{Binding Source={StaticResource PrimarySymbology}, Path=Version, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Auto'}"
+															   Value="{Binding Source={StaticResource PrimarySymbology}, Path=Version, StringFormat='&#xA;&#x9;&#x9;Version=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="EciModeAttribute"
+															   IsEnabled="{Binding Source={StaticResource PrimarySymbology}, Path=EciMode, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Auto'}"
+															   Value="{Binding Source={StaticResource PrimarySymbology}, Path=EciMode, StringFormat='&#xA;&#x9;&#x9;EciMode=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="ModuleScaleAttribute"
+															   IsEnabled="{Binding Source={StaticResource PrimarySymbology}, Path=ModuleScale, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='4'}"
+															   Value="{Binding Source={StaticResource PrimarySymbology}, Path=ModuleScale, StringFormat='&#xA;&#x9;&#x9;ModuleScale=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="QuietZoneThicknessAttribute"
+															   IsEnabled="{Binding Source={StaticResource PrimarySymbology}, Path=QuietZoneThickness, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='4'}"
+															   Value="{Binding Source={StaticResource PrimarySymbology}, Path=QuietZoneThickness, StringFormat='&#xA;&#x9;&#x9;QuietZoneThickness=&quot;{0}&quot;'}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+</UserControl>

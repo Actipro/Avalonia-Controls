@@ -39,6 +39,7 @@
 			Key="{Binding Key}"
 			KeyTipText="{Binding KeyTipText}"
 			Label="{Binding Label}"
+			StaysOpenOnClick="{Binding StaysOpenOnClick}"
 			Tag="{Binding Tag}"
 			Title="{Binding Title}"
 			ToggleType="CheckBox"

@@ -78,21 +78,28 @@
 							<actipro:BarButton Key="Advanced Footer"
 								LargeIcon="/Images/Icons/QuickStart32.png"
 								SmallIcon="/Images/Icons/QuickStart16.png"
-								ToolTip.Tip="The Header and Footer can be set to any content."
 								>
-								<actipro:BarButton.ScreenTipFooter>
-									<Grid Margin="0,4" ColumnDefinitions="Auto,*">
-										<Image Margin="0,0,8,0" Width="16" Height="16" Source="/Images/Icons/Help16.png" />
-										<TextBlock Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" Text="Press F1 for more help." />
-									</Grid>
-								</actipro:BarButton.ScreenTipFooter>
+								<ToolTip.Tip>
+									<actipro:ScreenTip
+										Header="Advanced Footer"
+										Content="The Header and Footer can be set to any content."
+										Tag="[AdvancedFooterHelpId]"
+										>
+										<actipro:ScreenTip.Footer>
+											<Grid Margin="0,4" ColumnDefinitions="Auto,*">
+												<Image Margin="0,0,8,0" Width="16" Height="16" Source="/Images/Icons/Help16.png" />
+												<TextBlock Grid.Column="1" TextWrapping="Wrap" VerticalAlignment="Center" Text="Press F1 for more help." />
+											</Grid>
+										</actipro:ScreenTip.Footer>
+									</actipro:ScreenTip>
+								</ToolTip.Tip>
 							</actipro:BarButton>
 
 							<actipro:BarButton Key="Complex"
 								LargeIcon="/Images/Icons/QuickStart32.png"
 								SmallIcon="/Images/Icons/QuickStart16.png">
 								<ToolTip.Tip>
-									<actipro:ScreenTip ComplexContentWidth="350" Header="ScreenTip Customization">
+									<actipro:ScreenTip ComplexContentWidth="350" Header="ScreenTip Customization" Tag="[ComplexScreenTipHelpId]">
 										<actipro:ScreenTip.Content>
 											<Grid Margin="8" ColumnDefinitions="Auto,*">
 												<Image Margin="0,0,8,0" StretchDirection="DownOnly" Source="/Images/Other/CoverPageScreenTip.png" />
@@ -334,12 +341,12 @@ public partial class MainControl : UserControl {
 
 			<sampleBrowser:ControlExample.Options>
 				<StackPanel Spacing="10" DataContext="{Binding #sampleRootControl.BasicUsageBarButtonViewModel}">
-					<TextBox x:Name="basicUsageLabel" Watermark="Label" UseFloatingWatermark="True" Text="{Binding Label, Mode=TwoWay}" />
+					<TextBox x:Name="basicUsageLabel" PlaceholderText="Label" UseFloatingPlaceholder="True" Text="{Binding Label, Mode=TwoWay}" />
 					<CheckBox x:Name="basicUsageIsInputGestureTextVisibleCheckBox" Content="Is input gesture text visible" IsChecked="{Binding IsInputGestureTextVisible}" />
 					<sampleBrowser:NullableStringSettingControl x:Name="basicUsageHeader" Label="Header" Text="{Binding Title, Mode=TwoWay}" CoerceEmptyAsNull="True" />
-					<TextBox x:Name="basicUsageToolTip" Watermark="ToolTip" UseFloatingWatermark="True" Text="{Binding Description, Mode=TwoWay}" />
+					<TextBox x:Name="basicUsageToolTip" PlaceholderText="ToolTip" UseFloatingPlaceholder="True" Text="{Binding Description, Mode=TwoWay}" />
 					<StackPanel>
-						<sampleBrowser:NullableStringSettingControl x:Name="basicUsageFooter" Label="Footer" Text="The footer content is separated from the rest" CoerceEmptyAsNull="True" IsCoerceCheckBoxVisible="False" IsWatermarkVisible="False"
+						<sampleBrowser:NullableStringSettingControl x:Name="basicUsageFooter" Label="Footer" Text="The footer content is separated from the rest" CoerceEmptyAsNull="True" IsCoerceCheckBoxVisible="False" IsPlaceholderVisible="False"
 							IsEnabled="{Binding $parent[sampleBrowser:ControlExample].SelectedCodeExampleKind, Converter={StaticResource XamlComparisonConverter}}" />
 						<TextBlock Classes="theme-form-control-message warning" Text="Not directly supported by default view models"
 							IsVisible="{Binding $parent[sampleBrowser:ControlExample].SelectedCodeExampleKind, Converter={StaticResource MvvmComparisonConverter}}" />
@@ -734,7 +741,7 @@ public partial class MainControl : UserControl {
 
 			<TextBox Text="Hover over this TextBox to see how a ScreenTip can be shown for any control." TextWrapping="Wrap">
 				<ToolTip.Tip>
-					<actipro:ScreenTip Header="TextBox with screen tip">
+					<actipro:ScreenTip Header="TextBox with screen tip" Tag="[TextBoxHelpId]">
 						Screen tips can be used with any control to enhance the user experience.
 					</actipro:ScreenTip>
 				</ToolTip.Tip>

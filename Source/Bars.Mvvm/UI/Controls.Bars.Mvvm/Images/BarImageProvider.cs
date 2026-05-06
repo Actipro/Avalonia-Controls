@@ -9,9 +9,9 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 
 		private readonly Dictionary<string, Func<BarImageOptions, object?>> _factories = new();
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// NON-PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Returns whether there is a registration for the specified key.
@@ -23,9 +23,9 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		private bool IsRegistered(string key)
 			=> _factories.ContainsKey(key);
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <inheritdoc cref="IBarImageProvider.GetImage(string, BarImageSize)"/>
 		public object? GetImage(string? key, BarImageSize size)

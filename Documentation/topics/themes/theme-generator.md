@@ -7,7 +7,7 @@ order: 15
 
 A theme generator uses options in a [theme definition](theme-definitions.md) to guide it on how to create theme resources like brushes, thicknesses, etc.  Distinct theme resources are generated for both `Light` and `Dark` theme variants, allowing for the theme generator to run a single time regardless of if an application toggles between light and dark modes at run-time.
 
-The colors of theme-generated brushes are based on a customizable color palette.  This allows all the theme's neutral colors to be tinted towards a certain color tone, accent and other semantic colors to be configurable, and more.
+The colors of theme-generated brushes are based on a customizable color palette.  This allows all the theme's neutral colors to be tinted towards a certain color tone, darkness level controlled, accent and other semantic colors to be configurable, and more.
 
 ## Generation Workflow
 
@@ -31,7 +31,7 @@ Some developers may wish to adjust the default color palette.  The midtone color
 
 ### Tinting a Theme
 
-Since a majority of a themes brushes are based on the neutral color ramp, changing the [DefaultColorPaletteFactory](xref:@ActiproUIRoot.Themes.Generation.DefaultColorPaletteFactory).[NeutralMidtoneColor](xref:@ActiproUIRoot.Themes.Generation.DefaultColorPaletteFactory.NeutralMidtoneColor) will tint a theme.  The default neutral midtone color is a basic gray with a slight blue tone.
+Since a majority of a themes brushes are based on the neutral color ramp, changing the [DefaultColorPaletteFactory](xref:@ActiproUIRoot.Themes.Generation.DefaultColorPaletteFactory).[NeutralMidtoneColor](xref:@ActiproUIRoot.Themes.Generation.DefaultColorPaletteFactory.NeutralMidtoneColor) property will tint a theme.  The default neutral midtone color is a basic gray with a slight blue tone.
 
 These subtle neutral midtone colors are recommended starting points:
 
@@ -47,7 +47,18 @@ By using a more saturated color, the tinting effect will be more dramatic.  Tint
 - `#716378` - Purple
 
 > [!TIP]
-> Use the [Color Palette](../utilities/color-palette.md) utility in the samples app to visualize the generated color palette, and even perform some adjustments to neutral color tints and the theme accent color.
+> Use the [Color Palette](../utilities/color-palette.md) utility in the samples app to visualize the generated color palette, and even perform some adjustments to neutral color tints, darkness, and the theme accent color.
+
+### Neutral Color Ramp Darkness (Gray vs. Black)
+
+The [DefaultColorPaletteFactory](xref:@ActiproUIRoot.Themes.Generation.DefaultColorPaletteFactory).[NeutralDarkness](xref:@ActiproUIRoot.Themes.Generation.DefaultColorPaletteFactory.NeutralDarkness) property determines the darkness level of the darker end of the neutral (e.g., grayscale) color ramp that will be generated, which directly affects the overall appearance of a dark theme variant.
+
+A default value of `0.0` (0%) yields a dark gray appearance, whereas changing the value to `1.0` (100%) yields a black appearance.  Any percentage in between can also be specified to set the perfect darkness level for your application when in a dark theme variant.
+
+> [!TIP]
+> Set the [NeutralDarkness](xref:@ActiproUIRoot.Themes.Generation.DefaultColorPaletteFactory.NeutralDarkness) property to `1.0` to have a "black" theme for your dark theme variant.
+
+Note that the theme tinting features described above still apply to any darkness setting scenario.
 
 ## Generator Sessions
 

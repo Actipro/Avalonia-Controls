@@ -24,9 +24,9 @@ namespace ActiproSoftware.SampleBrowser.Utilities.ThemeResourceBrowser {
 		private ThemeResourceReferenceTextKind _referenceTextKind = ThemeResourceReferenceTextKind.XamlDynamicResource;
 		private ThemeVariant _theme;
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Initializes a new instance of the class with the current application theme.
@@ -43,9 +43,9 @@ namespace ActiproSoftware.SampleBrowser.Utilities.ThemeResourceBrowser {
 			RefreshFilteredResourcesAsync();
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// NON-PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		private async Task<List<ThemeResourceViewModel>> GetFilteredResourcesViewModels(CancellationToken token) {
 			var filterText = FilterText;
@@ -161,9 +161,9 @@ namespace ActiproSoftware.SampleBrowser.Utilities.ThemeResourceBrowser {
 			return Application.Current?.TryGetResource(keyName, theme, out resource) == true;
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// The collection of resources for the current theme with filtering applied.

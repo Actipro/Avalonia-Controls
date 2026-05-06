@@ -32,10 +32,10 @@
 						Padding="{actipro:ScaledThickness 5}">
 					<StackPanel Spacing="{actipro:ScaledDouble 1.5}">
 
-						<TextBox Classes="has-clear-button" Text="sales@actiprosoftware.com" UseFloatingWatermark="True" Watermark="E-mail address" />
+						<TextBox Classes="has-clear-button" Text="sales@actiprosoftware.com" UseFloatingPlaceholder="True" PlaceholderText="E-mail address" />
 
 						<StackPanel>
-							<TextBox Classes="has-reveal-password-button danger" UseFloatingWatermark="True" Watermark="Password" PasswordChar="{actipro:ThemeResource EditPasswordChar}" />
+							<TextBox Classes="has-reveal-password-button danger" UseFloatingPlaceholder="True" PlaceholderText="Password" PasswordChar="{actipro:ThemeResource EditPasswordChar}" />
 							<TextBlock Classes="theme-form-control-message danger" Text="Password is required." />
 						</StackPanel>
 
@@ -72,10 +72,10 @@
 			
 		<StackPanel Spacing="{actipro:ScaledDouble 1.5}">
 
-			<TextBox ... Watermark="E-mail Address" />
+			<TextBox ... PlaceholderText="E-mail Address" />
 
 			<StackPanel>
-				<TextBox ... Watermark="Password" />
+				<TextBox ... PlaceholderText="Password" />
 				<TextBlock ... Text="Password is required." />
 			</StackPanel>
 

@@ -16,9 +16,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.DynamicPopupMen
 		private readonly Random _random = new();
 		private List<RecentDocumentItem>? _recentDocuments;
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		public MainControl() {
 			// Configure the MVVM-based sample.
@@ -32,9 +32,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.DynamicPopupMen
 			mvvmTextBox.ContextFlyout = CreateTextBoxContextFlyout();
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// NON-PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Creates a view model that is used as a placeholder child item in the MVVM sample.
@@ -383,9 +383,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.DynamicPopupMen
 			return (menu?.ItemsSource as IList) ?? menu?.Items;
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// The ribbon view model for the MVVM sample.

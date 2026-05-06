@@ -266,6 +266,11 @@ await UserPromptBuilder.Configure()
 > [!WARNING]
 > The [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl).[DefaultResult](xref:@ActiproUIRoot.Controls.UserPromptControl.DefaultResult) property is ignored if any button has set `Button.IsDefault` to `true`.
 
+@if (avalonia) {
+> [!TIP]
+> The default button receives focus when the prompt is displayed.  Use the  [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl).[DefaultButtonFocusNavigationMethod](xref:@ActiproUIRoot.Controls.UserPromptControl.DefaultButtonFocusNavigationMethod) to indicate the navigation method to be used when setting focus.  For example, setting the property to `NavigationMethod.Directional` will also move keyboard focus to the default button and result in the focus adorner being displayed.
+}
+
 ### Responding Event
 
 The [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl).[Responding](xref:@ActiproUIRoot.Controls.UserPromptControl.Responding) event is raised when the [UserPromptControl](xref:@ActiproUIRoot.Controls.UserPromptControl).[Result](xref:@ActiproUIRoot.Controls.UserPromptControl.Result) property is changed. [UserPromptWindow](xref:@ActiproUIRoot.Controls.UserPromptWindow) listens to this event to know when to close the dialog.

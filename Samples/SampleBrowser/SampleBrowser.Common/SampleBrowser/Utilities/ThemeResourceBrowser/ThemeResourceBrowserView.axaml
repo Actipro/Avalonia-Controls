@@ -30,7 +30,7 @@
 				<StackPanel Margin="0,0,12,0" HorizontalAlignment="Stretch">
 					<TextBlock Classes="theme-form-control-label" Text="Filter" />
 					<TextBox Classes="has-clear-button" Text="{Binding FilterText}"
-							 Watermark="example: &quot;edit background, button border&quot;" />
+							 PlaceholderText="example: &quot;edit background, button border&quot;" />
 				</StackPanel>
 
 			</DockPanel>

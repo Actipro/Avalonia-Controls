@@ -57,7 +57,7 @@
 						<TextBlock Classes="theme-form-control-label" Text="Size" />
 						<ComboBox x:Name="sampleSize" SelectedIndex="2" ItemsSource="{actipro:DelimitedArray 'Extra Large, Large, Default (Medium), Small, Extra Small'}" />
 					</StackPanel>
-					<TextBox x:Name="sampleText" Text="Actipro typography sample text" Watermark="Content" UseFloatingWatermark="True" />
+					<TextBox x:Name="sampleText" Text="Actipro typography sample text" PlaceholderText="Content" UseFloatingPlaceholder="True" />
 				</StackPanel>
 			</sampleBrowser:ControlExample.Options>
 			<sampleBrowser:ControlExample.CodeExamples>

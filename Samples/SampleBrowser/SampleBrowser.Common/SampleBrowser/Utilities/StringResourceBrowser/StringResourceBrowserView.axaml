@@ -4,7 +4,6 @@
 	xmlns="https://github.com/avaloniaui"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
-	xmlns:actiproPrimitives="using:ActiproSoftware.UI.Avalonia.Controls.Primitives"
 	xmlns:resourceBrowser="using:ActiproSoftware.SampleBrowser.Utilities.StringResourceBrowser"
 	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
 	Classes="sample-presenter"

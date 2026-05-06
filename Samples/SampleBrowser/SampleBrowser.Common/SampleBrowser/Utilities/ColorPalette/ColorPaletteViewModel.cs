@@ -17,11 +17,12 @@ namespace ActiproSoftware.SampleBrowser {
 		private IList<MidtoneColorViewModel>? _neutralMidtoneColors;
 		private IEnumerable<ColorRampViewModel>? _ramps;
 		private Hue _selectedAccentColorRampHue = Hue.Blue;
+		private double _selectedNeutralDarkness;
 		private MidtoneColorViewModel _selectedNeutralMidtoneColor;
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		public ColorPaletteViewModel() {
 			_selectedNeutralMidtoneColor = NeutralMidtoneColors.First();
@@ -35,9 +36,9 @@ namespace ActiproSoftware.SampleBrowser {
 			UpdatePalette();
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// NON-PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		
 		private int ShadeIncrement
 			=> _includeMoreShades ? 50 : 100;
@@ -46,6 +47,7 @@ namespace ActiproSoftware.SampleBrowser {
 			// Set the palette factory's neutral midtone color
 			ModernTheme.TryGetCurrent(out var theme);
 			var factory = theme?.Definition?.ColorPaletteFactory as DefaultColorPaletteFactory ?? new DefaultColorPaletteFactory();
+			factory.NeutralDarkness = SelectedNeutralDarkness;
 			factory.NeutralMidtoneColor = SelectedNeutralMidtoneColor.Color;
 
 			// Update the current theme to use the select neutral midtone color
@@ -64,15 +66,15 @@ namespace ActiproSoftware.SampleBrowser {
 			Ramps = _colorPalette?.Ramps.Select(colorRamp => new ColorRampViewModel(colorRamp, ShadeIncrement));
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		public bool IncludeMoreShades {
 			get => _includeMoreShades;
 			set {
-				SetProperty(ref _includeMoreShades, value);
-				UpdateRamps();
+				if (SetProperty(ref _includeMoreShades, value))
+					UpdateRamps();
 			}
 		}
 
@@ -83,7 +85,7 @@ namespace ActiproSoftware.SampleBrowser {
 					var factory = theme?.Definition?.ColorPaletteFactory as DefaultColorPaletteFactory ?? new DefaultColorPaletteFactory();
 
 					_neutralMidtoneColors ??= new List<MidtoneColorViewModel> {
-						new MidtoneColorViewModel("(From Current Theme)", factory.NeutralMidtoneColor),
+						new MidtoneColorViewModel("(Theme)", factory.NeutralMidtoneColor),
 						// Subtle tones
 						new MidtoneColorViewModel("Gray", UIColor.Parse("#6c7281")),
 						new MidtoneColorViewModel("Slate", UIColor.Parse("#64738a")),
@@ -108,16 +110,24 @@ namespace ActiproSoftware.SampleBrowser {
 		public Hue SelectedAccentColorRampHue {
 			get => _selectedAccentColorRampHue;
 			set {
-				SetProperty(ref _selectedAccentColorRampHue, value);
-				UpdatePalette();
+				if (SetProperty(ref _selectedAccentColorRampHue, value))
+					UpdatePalette();
+			}
+		}
+		
+		public double SelectedNeutralDarkness {
+			get => _selectedNeutralDarkness;
+			set {
+				if (SetProperty(ref _selectedNeutralDarkness, value))
+					UpdatePalette();
 			}
 		}
 		
 		public MidtoneColorViewModel SelectedNeutralMidtoneColor {
 			get => _selectedNeutralMidtoneColor;
 			set {
-				SetProperty(ref _selectedNeutralMidtoneColor, value);
-				UpdatePalette();
+				if (SetProperty(ref _selectedNeutralMidtoneColor, value))
+					UpdatePalette();
 			}
 		}
 

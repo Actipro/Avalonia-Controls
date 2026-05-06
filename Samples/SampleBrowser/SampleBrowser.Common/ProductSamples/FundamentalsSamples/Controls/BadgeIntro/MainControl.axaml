@@ -77,7 +77,7 @@
 						<TextBlock Classes="theme-form-control-label" Text="Variant" />
 						<ComboBox x:Name="basicUsageVariant" SelectedIndex="1" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
 					</StackPanel>
-					<TextBox x:Name="basicUsageContent" Text="Badge" Watermark="Content" UseFloatingWatermark="True" />
+					<TextBox x:Name="basicUsageContent" Text="Badge" PlaceholderText="Content" UseFloatingPlaceholder="True" />
 					<CheckBox Content="Is active" IsChecked="{Binding IsActive}" />
 				</StackPanel>
 			</sampleBrowser:ControlExample.Options>
@@ -150,7 +150,7 @@
 						<TextBlock Classes="theme-form-control-label" Text="{Binding OverflowCount, StringFormat='Overflow count: {0}'}" />
 						<Slider Minimum="0" Maximum="100" Value="{Binding OverflowCount}" />
 					</StackPanel>
-					<TextBox Text="{Binding OverflowStringFormat}" Watermark="Overflow format:" UseFloatingWatermark="True" />
+					<TextBox Text="{Binding OverflowStringFormat}" PlaceholderText="Overflow format:" UseFloatingPlaceholder="True" />
 					<CheckBox Content="Is active when zero" IsChecked="{Binding IsActiveWhenZero}" />
 				</StackPanel>
 			</sampleBrowser:ControlExample.Options>

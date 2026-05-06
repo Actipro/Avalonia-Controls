@@ -81,7 +81,7 @@
 						<TextBlock Classes="theme-form-control-label" Text="Variant" />
 						<ComboBox x:Name="sampleVariant" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Accent, Success, Warning, Danger'}" />
 					</StackPanel>
-					<TextBox Text="{Binding PlaceholderText}" Watermark="Placeholder text" UseFloatingWatermark="True" />
+					<TextBox Text="{Binding PlaceholderText}" PlaceholderText="Placeholder text" UseFloatingPlaceholder="True" />
 					<StackPanel>
 						<TextBlock Classes="theme-form-control-label" Text="Scroll theme" />
 						<ComboBox x:Name="sampleScrollTheme" SelectedIndex="0" ItemsSource="{actipro:DelimitedArray 'Default, Overlay'}" />

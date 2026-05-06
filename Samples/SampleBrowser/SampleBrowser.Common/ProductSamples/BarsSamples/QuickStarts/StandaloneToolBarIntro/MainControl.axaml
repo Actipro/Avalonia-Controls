@@ -112,15 +112,8 @@
 															   IsEnabled="{Binding #basicUsageSupportsKeyTipsCheckBox.IsChecked}"
 															   Value="&#xD;&#x9;actipro:KeyTipService.IsRootKeyTipScope==&quot;True&quot;" />
 						<sampleBrowser:CodeExampleSubstitution Key="ItemSpacingAttribute"
-															   Value="{Binding #basicUsageItemSpacingNumeric.Value, StringFormat='&#xD;&#x9;ItemSpacing=&quot;{0:0}&quot;'}">
-							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
-								<Binding Path="#basicUsageItemSpacingNumeric.Value" Converter="{StaticResource NotEqualToComparisonConverter}">
-									<Binding.ConverterParameter>
-										<x:Decimal>1.0</x:Decimal>
-									</Binding.ConverterParameter>
-								</Binding>
-							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
-						</sampleBrowser:CodeExampleSubstitution>
+															   IsEnabled="{Binding #basicUsageItemSpacingNumeric.Value, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='1.0'}"
+															   Value="{Binding #basicUsageItemSpacingNumeric.Value, StringFormat='&#xD;&#x9;ItemSpacing=&quot;{0:0}&quot;'}" />
 					</sampleBrowser:CodeExample.Substitutions>
 				</sampleBrowser:CodeExample>
 				<sampleBrowser:CodeExample Kind="Mvvm" xml:space="preserve">
@@ -139,15 +132,8 @@
 															   IsEnabled="{Binding #basicUsageSupportsKeyTipsCheckBox.IsChecked}"
 															   Value="&#xD;&#x9;actipro:KeyTipService.IsRootKeyTipScope==&quot;True&quot;" />
 						<sampleBrowser:CodeExampleSubstitution Key="ItemSpacingAttribute"
-															   Value="{Binding #basicUsageItemSpacingNumeric.Value, StringFormat='&#xD;&#x9;ItemSpacing=&quot;{0:0}&quot;'}">
-							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
-								<Binding Path="#basicUsageItemSpacingNumeric.Value" Converter="{StaticResource NotEqualToComparisonConverter}">
-									<Binding.ConverterParameter>
-										<x:Decimal>1.0</x:Decimal>
-									</Binding.ConverterParameter>
-								</Binding>
-							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
-						</sampleBrowser:CodeExampleSubstitution>
+															   IsEnabled="{Binding #basicUsageItemSpacingNumeric.Value, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='1.0'}"
+															   Value="{Binding #basicUsageItemSpacingNumeric.Value, StringFormat='&#xD;&#x9;ItemSpacing=&quot;{0:0}&quot;'}" />
 					</sampleBrowser:CodeExample.Substitutions>
 				</sampleBrowser:CodeExample>
 				<sampleBrowser:CodeExample Kind="Mvvm" Language="C#" xml:space="preserve">
@@ -198,7 +184,14 @@ public partial class SampleRootControl : UserControl {
 				BorderThickness="1"
 				>
 
-				<Grid ColumnDefinitions="Auto,*,8,300" MinHeight="200">
+				<Grid MinHeight="200">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="8" />
+						<ColumnDefinition Width="300" MinWidth="100" />
+					</Grid.ColumnDefinitions>
+
 					<actipro:StandaloneToolBar x:Name="verticalUsageToolBarMvvm" Grid.Column="0"
 						Background="{actipro:ThemeResource Container2BackgroundBrush}"
 						BorderThickness="0"
@@ -208,10 +201,8 @@ public partial class SampleRootControl : UserControl {
 						/>
 
 					<TabControl Classes="theme-outline" Grid.Column="1" Margin="0,8" Padding="4" BorderBrush="{actipro:ThemeResource Container2BorderBrush}">
-						<TabItem Header="Document1.txt" Margin="0" Background="{actipro:ThemeResource Container5BackgroundBrush}" BorderThickness="0">
-							<sampleBrowser:AdvancedTextBox x:Name="verticalUsageTextBox"
-								Margin="0"
-								Padding="0"
+						<TabItem Header="Document1.txt" Background="{actipro:ThemeResource Container5BackgroundBrush}" BorderThickness="0">
+							<TextBox x:Name="verticalUsageTextBox"
 								BorderThickness="0"
 								Text="The standalone toolbar on the left has a vertical orientation."
 								TextWrapping="Wrap" 
@@ -235,9 +226,8 @@ public partial class SampleRootControl : UserControl {
 								Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.StandaloneToolBarControlTheme}}"
 								/>
 							
-							<sampleBrowser:AdvancedTextBox x:Name="toolWindowUsageTextBox"
+							<TextBox x:Name="toolWindowUsageTextBox"
 								BorderThickness="0"
-								CornerRadius="0"
 								Text="The standalone toolbar in this pane arranges to the pane's width. Use the resize gripper to the left of this pane to adjust the width."
 								TextWrapping="Wrap"
 								/>
@@ -249,6 +239,215 @@ public partial class SampleRootControl : UserControl {
 
 			</Border>
 
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<!-- Vertical Usage -->
+<actipro:StandaloneToolBar Orientation="Vertical" ... />
+
+<!-- Embedded Usage -->
+<DockPanel>
+	<actipro:StandaloneToolBar DockPanel.Dock="Top"
+		Background="{actipro:ThemeResource Container2BackgroundBrush}"
+		BorderBrush="{actipro:ThemeResource Container2BorderBrush}"
+		BorderThickness="0,0,0,1"
+		CornerRadius="0"
+		ItemSpacing="0"
+		...
+		/>
+
+	<TextBox Text="Appears below the toolbar" />
+</DockPanel>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+		
+
+		<sampleBrowser:ControlExample
+			Header="Spacer separators"
+			Footer="Separators can indicate whether they should render like a traditional separator or alternatively as a spacer when used within a standalone toolbar."
+			>
+
+			<Border 
+				Background="{actipro:ThemeResource Container2BackgroundBrush}"
+				BorderBrush="{actipro:ThemeResource Container2BorderBrush}"
+				BorderThickness="1"
+				>
+
+				<Grid RowDefinitions="*,8,*" MinHeight="200">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="8" />
+						<ColumnDefinition Width="300" MinWidth="150" />
+					</Grid.ColumnDefinitions>
+					
+					<TabControl Classes="theme-outline" Grid.RowSpan="3" Margin="8,8,0,8" Padding="4" BorderBrush="{actipro:ThemeResource Container2BorderBrush}">
+						<TabItem Header="Document1.txt" Background="{actipro:ThemeResource Container5BackgroundBrush}" BorderThickness="0">
+							<TextBox
+								BorderThickness="0"
+								Text="When spacer separators are present in a non-overflowed standalone toolbar, they distribute the available space evenly.  A single spacer separator causes the items after it to appear right or bottom-aligned, depending on orientation.  Multiple spacer separators can also be used to distribute items across the available space in groups."
+								TextWrapping="Wrap" 
+								/>
+						</TabItem>
+					</TabControl>
+
+					<GridSplitter Grid.RowSpan="3" Grid.Column="1" />
+					
+					<Border Grid.Column="2"
+						BorderBrush="{actipro:ThemeResource Container2BorderBrush}"
+						BorderThickness="1,0,0,1"
+						>
+						<DockPanel>
+							<actipro:StandaloneToolBar 
+								DockPanel.Dock="Top"
+								Background="{actipro:ThemeResource Container2BackgroundBrush}"
+								BorderBrush="{actipro:ThemeResource Container2BorderBrush}"
+								BorderThickness="0,0,0,1"
+								CornerRadius="0"
+								ItemSpacing="0"
+								Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.StandaloneToolBarControlTheme}}"
+								>
+								<actipro:BarButton Key="Undo" SmallIcon="/Images/Icons/Undo16.png" ToolBarItemVariantBehavior="AlwaysMedium" />
+								<actipro:BarButton Key="Redo" SmallIcon="/Images/Icons/Redo16.png" ToolBarItemVariantBehavior="AlwaysMedium" />
+								<actipro:BarSeparator StandaloneToolBarSeparatorMode="Spacer" />
+								<actipro:BarButton Key="Share" SmallIcon="/Images/Icons/Share16.png" ToolBarItemVariantBehavior="AlwaysMedium" />
+							</actipro:StandaloneToolBar>
+							
+							<TextBox
+								BorderThickness="0"
+								Text="The standalone toolbar in this pane has a separator that is set to Spacer mode.  Since the spacer separator appears before the Share button, the Share button effectively aligns to the right edge."
+								TextWrapping="Wrap"
+								/>
+
+						</DockPanel>
+					</Border>
+					
+					<Border Grid.Row="2" Grid.Column="2"
+						BorderBrush="{actipro:ThemeResource Container2BorderBrush}"
+						BorderThickness="1,1,0,0"
+						>
+						<DockPanel>
+							<actipro:StandaloneToolBar 
+								DockPanel.Dock="Top"
+								Background="{actipro:ThemeResource Container2BackgroundBrush}"
+								BorderBrush="{actipro:ThemeResource Container2BorderBrush}"
+								BorderThickness="0,0,0,1"
+								CornerRadius="0"
+								ItemSpacing="0"
+								Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.StandaloneToolBarControlTheme}}"
+								>
+								<actipro:BarButton Key="Undo" SmallIcon="/Images/Icons/Undo16.png" ToolBarItemVariantBehavior="AlwaysMedium" />
+								<actipro:BarButton Key="Redo" SmallIcon="/Images/Icons/Redo16.png" ToolBarItemVariantBehavior="AlwaysMedium" />
+								<actipro:BarSeparator />
+								<actipro:BarButton Key="Share" SmallIcon="/Images/Icons/Share16.png" ToolBarItemVariantBehavior="AlwaysMedium" />
+							</actipro:StandaloneToolBar>
+							
+							<TextBox
+								BorderThickness="0"
+								Text="The standalone toolbar in this pane has a separator that is set to Default mode.  Note how a visual separator is rendered and everything is left-aligned."
+								TextWrapping="Wrap"
+								/>
+
+						</DockPanel>
+					</Border>
+
+				</Grid>
+
+			</Border>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:StandaloneToolBar ... >
+
+	<actipro:BarButton Key="Undo" ToolBarItemVariantBehavior="AlwaysMedium" ... />
+	<actipro:BarButton Key="Redo" ToolBarItemVariantBehavior="AlwaysMedium" ... />
+
+	<!-- Spacer Separator -->
+	<actipro:BarSeparator StandaloneToolBarSeparatorMode="Spacer" />
+
+	<actipro:BarButton Key="Share" ToolBarItemVariantBehavior="AlwaysMedium" ... />
+
+</actipro:StandaloneToolBar>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Multiple spacer separators"
+			Footer="Multiple spacer separators will create groups of items that have equal space between them."
+			>
+
+			<actipro:StandaloneToolBar HasShadow="True">
+
+				<actipro:BarButton Key="Undo" SmallIcon="/Images/Icons/Undo16.png" />
+				<actipro:BarButton Key="Redo" SmallIcon="/Images/Icons/Redo16.png" />
+				
+				<actipro:BarSeparator StandaloneToolBarSeparatorMode="Spacer" />
+				
+				<actipro:BarButton Key="Cut" SmallIcon="/Images/Icons/Cut16.png" />
+				<actipro:BarButton Key="Copy" SmallIcon="/Images/Icons/Copy16.png" />
+				<actipro:BarSplitButton Key="PasteMenu" Label="Paste" SmallIcon="/Images/Icons/Paste16.png">
+					<actipro:BarMenuItem Key="Paste" SmallIcon="/Images/Icons/Paste16.png" />
+					<actipro:BarMenuItem Key="PasteSpecial" SmallIcon="/Images/Icons/PasteSpecial16.png" />
+				</actipro:BarSplitButton>
+				<actipro:BarSeparator />
+				<actipro:BarButton Key="FormatPainter" SmallIcon="/Images/Icons/FormatPainter16.png" />
+				
+				<actipro:BarSeparator StandaloneToolBarSeparatorMode="Spacer" />
+				
+				<actipro:BarButton Key="Bold" SmallIcon="/Images/Icons/Bold16.png" />
+				<actipro:BarButton Key="Italic" SmallIcon="/Images/Icons/Italic16.png" />
+				<actipro:BarButton Key="Underline" SmallIcon="/Images/Icons/Underline16.png" />
+				
+				<actipro:BarSeparator StandaloneToolBarSeparatorMode="Spacer" />
+				
+				<actipro:BarButton Key="IncreaseFontSize" SmallIcon="/Images/Icons/GrowFont16.png" />
+				<actipro:BarButton Key="DecreaseFontSize" SmallIcon="/Images/Icons/ShrinkFont16.png" />
+				<actipro:BarButton Key="Subscript" SmallIcon="/Images/Icons/Subscript16.png" />
+				<actipro:BarButton Key="Superscript" SmallIcon="/Images/Icons/Superscript16.png" />
+
+			</actipro:StandaloneToolBar>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:StandaloneToolBar HasShadow="True">
+
+	<actipro:BarButton Key="Undo" SmallIcon="/Images/Icons/Undo16.png" />
+	<actipro:BarButton Key="Redo" SmallIcon="/Images/Icons/Redo16.png" />
+
+	<actipro:BarSeparator StandaloneToolBarSeparatorMode="Spacer" />
+
+	<actipro:BarButton Key="Cut" SmallIcon="/Images/Icons/Cut16.png" />
+	<actipro:BarButton Key="Copy" SmallIcon="/Images/Icons/Copy16.png" />
+	<actipro:BarSplitButton Key="PasteMenu" Label="Paste" SmallIcon="/Images/Icons/Paste16.png">
+		<actipro:BarMenuItem Key="Paste" SmallIcon="/Images/Icons/Paste16.png" />
+		<actipro:BarMenuItem Key="PasteSpecial" SmallIcon="/Images/Icons/PasteSpecial16.png" />
+	</actipro:BarSplitButton>
+	<actipro:BarSeparator />
+	<actipro:BarButton Key="FormatPainter" SmallIcon="/Images/Icons/FormatPainter16.png" />
+
+	<actipro:BarSeparator StandaloneToolBarSeparatorMode="Spacer" />
+
+	<actipro:BarButton Key="Bold" SmallIcon="/Images/Icons/Bold16.png" />
+	<actipro:BarButton Key="Italic" SmallIcon="/Images/Icons/Italic16.png" />
+	<actipro:BarButton Key="Underline" SmallIcon="/Images/Icons/Underline16.png" />
+
+	<actipro:BarSeparator StandaloneToolBarSeparatorMode="Spacer" />
+
+	<actipro:BarButton Key="IncreaseFontSize" SmallIcon="/Images/Icons/GrowFont16.png" />
+	<actipro:BarButton Key="DecreaseFontSize" SmallIcon="/Images/Icons/ShrinkFont16.png" />
+	<actipro:BarButton Key="Subscript" SmallIcon="/Images/Icons/Subscript16.png" />
+	<actipro:BarButton Key="Superscript" SmallIcon="/Images/Icons/Superscript16.png" />
+
+</actipro:StandaloneToolBar>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
 		</sampleBrowser:ControlExample>
 
 	</sampleBrowser:ControlExampleItemsControl>

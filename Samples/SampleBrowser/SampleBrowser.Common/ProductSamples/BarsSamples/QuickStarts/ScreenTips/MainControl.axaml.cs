@@ -2,16 +2,22 @@ using ActiproSoftware.SampleBrowser;
 using ActiproSoftware.UI.Avalonia.Controls.Bars;
 using ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm;
 using Avalonia.Controls;
+using Avalonia.Controls.Notifications;
+using Avalonia.Controls.Primitives;
+using Avalonia.Input;
 using Avalonia.Interactivity;
+using Avalonia.LogicalTree;
 using System;
 
 namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.ScreenTips {
 
 	public partial class MainControl : UserControl {
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		private IDisposable? _inputElementKeyDownEventRegistration;
+
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		public MainControl() {
 			InitializeComponent();
@@ -20,9 +26,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.ScreenTips {
 			ScreenTipService.Current.ScreenTipOpening += this.OnScreenTipOpening;
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// NON-PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Creates the ribbon view model for the "Basic Usage" sample.
@@ -70,9 +76,9 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.ScreenTips {
 			}
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// The button view model used within the "Basic Usage" sample that is bound to the sample's options.
@@ -83,6 +89,48 @@ namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.ScreenTips {
 		/// The ribbon view model for the "Basic Usage" sample.
 		/// </summary>
 		public RibbonViewModel BasicUsageRibbonViewModel { get; } = CreateBasicUsageRibbonViewModel();
+
+		private void OnInputElementKeyDown(InputElement sender, KeyEventArgs e) {
+			// Check for any ScreenTip that might have contextual help
+			if (!e.Handled && (e.Key == Key.F1)) {
+				
+				// The CurrentScreenTip property is assigned when a ScreenTip opens and cleared when
+				//   it closes.  Since pressing a key also causes the ScreenTip to close, it is important
+				//   to check the CurrentScreenTip property during KeyDown events.
+				if (ScreenTipService.Current.CurrentScreenTip is { } screenTip) {
+
+					// This sample uses the ScreenTip.Tag property to store contextual help information.
+					//   This could be a unique identifier or URI for online help.
+					if (screenTip.Tag is { } helpId) {
+						e.Handled = true;
+
+						// This sample will show a message in the application
+						var message = "Here is where you can show contextual help for the following:" + Environment.NewLine + Environment.NewLine + helpId;
+
+						// Include target control in the message if it can be determined
+						if (screenTip?.FindLogicalAncestorOfType<Popup>()?.PlacementTarget is { } targetControl)
+							message += Environment.NewLine + Environment.NewLine + "Target: " + targetControl.GetType();
+
+						ApplicationViewModel.Instance.MessageService?.ShowMessage(message, "Contextual Help", NotificationType.Information);
+					}
+				}
+			}
+		}
+
+		protected override void OnLoaded(RoutedEventArgs e) {
+			// Listen for F1 key to show contextual help from screen tip
+			_inputElementKeyDownEventRegistration = InputElement.KeyDownEvent.AddClassHandler<InputElement>(OnInputElementKeyDown, RoutingStrategies.Bubble, handledEventsToo: false);
+			
+			base.OnLoaded(e);
+		}
+
+		protected override void OnUnloaded(RoutedEventArgs e) {
+			// Stop listening for key events
+			_inputElementKeyDownEventRegistration?.Dispose();
+			_inputElementKeyDownEventRegistration = null;
+
+			base.OnUnloaded(e);
+		}
 
 	}
 

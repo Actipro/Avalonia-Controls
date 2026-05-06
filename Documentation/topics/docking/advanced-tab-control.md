@@ -30,7 +30,7 @@ Preview tabs show up right-aligned in the tab strip.  They are meant to show tem
 ## Tab Images
 
 @if (avalonia) {
-Tabs can show images on them if the [AdvancedTabControl](xref:@ActiproUIRoot.Controls.Docking.AdvancedTabControl).[HasTabIcons](xref:@ActiproUIRoot.Controls.Docking.AdvancedTabControl.HasTabIcons) property is set to `true` and the [AdvancedTabItem](xref:@ActiproUIRoot.Controls.Docking.AdvancedTabItem).[Icon](xref:@ActiproUIRoot.Controls.Docking.AdvancedTabItem.Icon) property is set to a valid object.
+Tabs can show images on them if the [AdvancedTabControl](xref:@ActiproUIRoot.Controls.Docking.AdvancedTabControl).[HasTabIcons](xref:@ActiproUIRoot.Controls.Docking.AdvancedTabControl.HasTabIcons) property is set to `true` and the [AdvancedTabItem](xref:@ActiproUIRoot.Controls.Docking.AdvancedTabItem).`Icon` property is set to a valid object.
 
 Any content supported by [Icon Presenter](../themes/icon-presenter.md) can be used (like `IImage` data, `PathIcon` control, or [DynamicImage](../shared/controls/dynamic-image.md) control)
 }

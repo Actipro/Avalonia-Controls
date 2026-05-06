@@ -8,9 +8,9 @@ namespace ActiproSoftware.ProductSamples.DockingSamples.Common {
 
 	public partial class ErrorListToolWindow : ToolWindow {
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Initializes an instance of the class.
@@ -22,9 +22,9 @@ namespace ActiproSoftware.ProductSamples.DockingSamples.Common {
 			InitializeComponent();
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// NON-PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		public IEnumerable<ErrorListItem> CreateSampleErrorListItems() {
 			yield return new ErrorListItem() { Project = "Docking/MDI", IconKey = SharedImageSourceKeys.Information, FileName = "ErrorList.axaml", Description = "This tool window is for demonstration purposes only and is not fully functional." };
@@ -32,9 +32,9 @@ namespace ActiproSoftware.ProductSamples.DockingSamples.Common {
 			yield return new ErrorListItem() { Project = "Docking/MDI", IconKey = SharedImageSourceKeys.Error, FileName = "SampleFile.axaml", Description = "One or more errors occurred." };
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// The collection of items to be displayed in the list.

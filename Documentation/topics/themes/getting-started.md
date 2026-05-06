@@ -203,6 +203,13 @@ The following example shows how to use Avalonia's *Simple* theme for native Aval
 </Application>
 ```
 
+### AvaloniaUI OÜ's Avalonia Pro Support
+
+[Avalonia Pro](https://avaloniaui.net/avalonia/) is a set of commercial UI controls created by AvaloniaUI OÜ.  When these controls are used alongside Actipro's themes, their default brush resources may not match the Actipro color palette, causing visual inconsistencies.  Actipro's theme generator can override Avalonia Pro theme resources at generation time so that Avalonia Pro controls render with the same color system as all other Actipro-themed controls.
+
+> [!TIP]
+> See the [Avalonia Pro Support](avalonia-pro-support.md) topic to learn how Actipro's themes can generate resources for AvaloniaUI OÜ's Avalonia Pro controls, keeping them consistent with the rest of your application.  Note that this feature requires an [Actipro Avalonia Pro](../licensing.md) license.
+
 ### Theme Definition Setting
 
 The [ModernTheme.Definition](xref:@ActiproUIRoot.Themes.ModernTheme.Definition) property can be set to a [theme definition](theme-definitions.md) instance, which contains options for how theme resources will be generated.  This property only needs to be set if you wish to customize how the options are used by the [theme generator](theme-generator.md).

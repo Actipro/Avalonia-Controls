@@ -4,9 +4,7 @@ using Nuke.Common.Tools.DotNet;
 using Nuke.Common.Tools.MSBuild;
 using Nuke.Common.Tools.NuGet;
 using Serilog;
-using System;
-using System.Linq;
-using static Nuke.Common.Tools.MSBuild.MSBuildTasks;
+using static Nuke.Common.Tools.DotNet.DotNetTasks;
 
 namespace ActiproSoftware.Tools.Builds {
 
@@ -27,7 +25,12 @@ namespace ActiproSoftware.Tools.Builds {
 		[Solution("Samples/SampleBrowser/SampleBrowser.Web.sln")]
 		readonly Solution SampleBrowserWebSolution;
 
-		Solution[] SampleSolutions => new Solution[] { SampleBrowserDesktopSolution, SampleBrowserWebSolution };  // MSBuild
+		[Solution("Source/Avalonia-Libraries.sln")]
+		readonly Solution SourceLibrariesSolution;
+
+		Solution[] SampleSolutions => [SampleBrowserDesktopSolution, SampleBrowserWebSolution];  // MSBuild
+
+		Solution[] SourceSolutions => [SourceLibrariesSolution];  // MSBuild
 
 		#endregion
 
@@ -58,14 +61,34 @@ namespace ActiproSoftware.Tools.Builds {
 			.Executes(() => {
 
 				foreach (var solution in SampleSolutions) {
-					MSBuild(_ => _
-						.SetSolutionFile(solution)
-						.SetRestore(true)
-						.SetConfiguration(Configuration)
-						.SetVerbosity(MSBuildVerbosity.Minimal)
-						.SetMaxCpuCount(Environment.ProcessorCount)
-						.SetProperty("BuildInParallel", "true")
-					);
+					if (solution is not null) {
+						DotNetBuild(_ => _
+							.SetProjectFile(solution)
+							.SetConfiguration(Configuration)
+						);
+					}
+					else
+						Log.Error($"A solution was not found.");
+
+					Log.Debug(string.Empty);
+				}
+
+			});
+
+		Target CompileSourceProjects => _ => _
+			.Unlisted()
+			.Executes(() => {
+
+				foreach (var solution in SourceSolutions) {
+					if (solution is not null) {
+						DotNetBuild(_ => _
+							.SetProjectFile(solution)
+							.SetConfiguration(Configuration)
+						);
+					}
+					else
+						Log.Error($"A solution was not found.");
+
 					Log.Debug(string.Empty);
 				}
 
@@ -73,7 +96,7 @@ namespace ActiproSoftware.Tools.Builds {
 
 		Target Compile => _ => _
 			.Unlisted()
-			.DependsOn(CompileSampleProjects)
+			.DependsOn(CompileSourceProjects, CompileSampleProjects)
 			.Executes();
 
 		#endregion

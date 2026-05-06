@@ -8,9 +8,9 @@ namespace ActiproSoftware.ProductSamples.ThemeSamples.NativeControls {
 
 	public partial class HyperlinkButtonSamples : UserControl {
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		public HyperlinkButtonSamples() {
 			InitializeComponent();
@@ -19,9 +19,9 @@ namespace ActiproSoftware.ProductSamples.ThemeSamples.NativeControls {
 			commandSample.Command = HyperlinkCommand;
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// NON-PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		private bool HyperlinkCommandCanExecute(object? parameter)
 			=> commandIsEnabledCheckBox.IsChecked == true;
@@ -35,9 +35,9 @@ namespace ActiproSoftware.ProductSamples.ThemeSamples.NativeControls {
 		private void OnHyperlinkTextBlockClicked(object? sender, RoutedEventArgs e)
 			=> ApplicationViewModel.Instance.MessageService?.ShowMessage("The hyperlink was clicked.");
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		public DelegateCommand<object> HyperlinkCommand { get; }
 

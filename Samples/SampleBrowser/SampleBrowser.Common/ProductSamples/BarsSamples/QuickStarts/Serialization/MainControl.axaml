@@ -61,7 +61,7 @@
 
 					</actipro:Ribbon>
 					
-					<TextBox x:Name="xamlEditor" MinLines="10" Watermark="Layout data" UseFloatingWatermark="True" />
+					<TextBox x:Name="xamlEditor" MinLines="10" PlaceholderText="Layout data" UseFloatingPlaceholder="True" />
 				</StackPanel>
 
 			</sampleBrowser:ControlExample.XamlContent>
@@ -76,7 +76,7 @@
 						Theme="{StaticResource {x:Static actipro:BarsMvvmResourceKeys.RibbonControlTheme}}"
 						/>
 
-					<TextBox x:Name="mvvmEditor" MinLines="10" Watermark="Layout data" UseFloatingWatermark="True" />
+					<TextBox x:Name="mvvmEditor" MinLines="10" PlaceholderText="Layout data" UseFloatingPlaceholder="True" />
 					
 				</StackPanel>
 
@@ -230,11 +230,10 @@ public partial class SampleRootControl : UserControl {
 	
 	private void OnQuickAccessToolBarItemAdding(object? sender, RibbonQuickAccessToolBarItemAddingEventArgs e) {
 		// This event is raised when an item is being added to the Quick Access Toolbar.
-		// The event data defines the Key of the item being added and, if found, the Item
+		// The event data may define the Key of the item being added and, if found, the Item
 		// that will be added. If the Ribbon is unable to automatically locate an item with
-		// the desired key, the Item property will be NULL. When this happens, you can manually
-		// assign an Item that corresponds to the given Key. If Item is NULL or Cancel is set
-		// to TRUE then nothing will be added.
+		// the desired key, the Item property will be NULL. When this happens, you can manually assign
+		// a corresponding Item. If Item is NULL or Cancel is set to TRUE then nothing will be added.
 		//
 		// This event can also be used to notify a user if an attempt was made to add an item
 		// to the Quick Access Toolbar that might no longer be available.

@@ -24,6 +24,7 @@ Actipro Fundamentals is a library that contains professionally-developed control
 - [Card](controls/card.md) displays visually grouped information for a single subject.
 - [CircularProgressBar](controls/circular-progressbar.md) displays a ranged progress value using fluent animations.  It is similar to a native linear `ProgressBar`, except that it renders the progress in a ring shape.
 - [InfoBar](controls/info-bar.md) displays essential information to a user without disrupting the user flow.
+- [RangeSlider](controls/range-slider.md) can be used to select one or more values within a pre-defined range of available values.
 - [RingSpinner](controls/progress-spinners.md) renders a circular busy indicator.
 - [SegmentedBar](controls/segmented-bar.md) allows a user to select a single item with support for fluent animations when changing selection.
 - [SettingsCard](controls/settings-card.md), [SettingsExpander](controls/settings-expander.md), and [Settings Group](controls/settings-group.md) controls are used together to organize and present configurable settings.

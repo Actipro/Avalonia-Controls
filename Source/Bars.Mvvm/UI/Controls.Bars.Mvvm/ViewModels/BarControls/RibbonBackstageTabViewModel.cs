@@ -20,9 +20,9 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		private string? _title;
 		private VariantSize _variantSize = VariantSize.Medium;
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <inheritdoc cref="BarButtonViewModel()"/>
 		public RibbonBackstageTabViewModel()  // Parameterless constructor required for XAML support
@@ -51,9 +51,9 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 			_keyTipText = keyTipText ?? BarControlService.KeyTipTextGenerator.FromLabel(this._label);
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// INTERFACE IMPLEMENTATION
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <inheritdoc/>
 		object? IHasVariantImages.MediumIcon {
@@ -61,9 +61,9 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 			set { /* No-op since a medium image is not supported by the control */ }
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// The content for the tab's content area, which can be a UI control, a data object, or even this view model instance.

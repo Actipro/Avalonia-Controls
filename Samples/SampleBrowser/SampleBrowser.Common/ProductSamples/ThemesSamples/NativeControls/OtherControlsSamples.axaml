@@ -10,6 +10,11 @@
 		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
 		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
 
+		<!-- Icons from: https://icon-sets.iconify.design/fluent-mdl2/ -->
+		<StreamGeometry x:Key="icon-fluent-mdl2-home">m1024 165l941 942l-90 90l-83-82v805h-640v-640H896v640H256v-805l-83 82l-90-90zm640 1627V987l-640-640l-640 640v805h384v-640h512v640z</StreamGeometry>
+		<StreamGeometry x:Key="icon-fluent-mdl2-heart">M1504 128q113 0 212 43t173 116t116 173t43 212q0 109-41 209t-118 176l-865 864l-865-864Q83 981 42 881T0 672q0-112 42-211t117-173t173-117t212-43q83 0 148 19t120 52t106 81t106 103q55-56 105-103t106-80t121-53t148-19m294 838q59-59 90-135t31-159q0-87-32-162t-88-131t-132-87t-163-32q-84 0-149 26t-120 70t-105 97t-106 111q-54-54-105-109t-106-99t-121-72t-148-28q-86 0-162 32t-132 89t-89 133t-33 162q0 83 31 159t91 135l774 774z</StreamGeometry>
+		<StreamGeometry x:Key="icon-fluent-mdl2-settings">M1783 988v18q0 9 1 18v18q0 9-1 18l259 161l-159 383l-297-68q-24 26-50 50l68 297l-383 159l-161-259h-18q-9 0-18 1h-18q-9 0-18-1l-161 259l-383-159l68-297q-26-24-50-50l-297 68L6 1221l259-161v-18q0-9-1-18v-18q0-9 1-18L6 827l159-383l297 68q24-26 50-50l-68-297L827 6l161 259h18q9 0 18-1h18q9 0 18 1L1221 6l383 159l-68 297q26 24 50 50l297-68l159 383zm-117 130q2-24 4-47t2-48q0-23-2-47t-4-47l236-147l-86-208l-271 63q-31-38-63-70t-71-64l63-271l-208-86l-148 236q-23-2-47-4t-47-2q-24 0-47 2t-48 4L782 146l-208 86l63 271q-38 31-70 63t-64 71l-271-63l-86 208l236 148q-2 24-4 47t-2 48q0 23 2 47t4 47l-236 147l86 208l271-63q31 38 63 70t71 64l-63 271l208 86l148-236q23 2 47 4t47 2q24 0 47-2t48-4l147 236l208-86l-63-271q38-31 70-63t64-71l271 63l86-208zm-642-470q78 0 146 29t120 81t80 119t30 147q0 78-29 146t-81 120t-119 80t-147 30q-78 0-146-29t-120-81t-80-119t-30-147q0-78 29-146t81-120t119-80t147-30m0 640q55 0 103-20t84-57t56-84t21-103q0-55-20-103t-57-84t-84-56t-103-21q-55 0-103 20t-84 57t-56 84t-21 103q0 55 20 103t57 84t84 56t103 21</StreamGeometry>
+
 	</UserControl.Resources>
 
 	<sampleBrowser:ControlExampleItemsControl
@@ -55,6 +60,149 @@
 
 
 		<sampleBrowser:ControlExample
+			Header="CarouselPage"
+			>
+
+			<DockPanel>
+				<PipsPager
+					DockPanel.Dock="Bottom"
+					Margin="0,0,0,10"
+					HorizontalAlignment="Center"
+					NumberOfPages="3"
+					SelectedPageIndex="{Binding #carouselPageSample.SelectedIndex}"
+					VerticalAlignment="Bottom"
+					/>
+
+				<Border MaxWidth="300" Height="200" BorderBrush="{actipro:ThemeResource Container2BorderBrush}"  BorderThickness="1" CornerRadius="0">
+					<CarouselPage x:Name="carouselPageSample" BorderThickness="1" Header="CarouselPage Sample">
+						<CarouselPage.PageTransition>
+							<PageSlide Orientation="Horizontal" FillMode="Forward"
+									   Duration="{actipro:AnimationSetting StandardMoveDuration}"
+									   SlideInEasing="{actipro:AnimationSetting StandardMoveEasing}"
+									   SlideOutEasing="{actipro:AnimationSetting StandardMoveEasing}" />
+						</CarouselPage.PageTransition>
+
+						<ContentPage Header="Page 1" Background="#e0e4f2" Foreground="#21264b">
+							<TextBlock Text="First page" HorizontalAlignment="Center" VerticalAlignment="Center" />
+						</ContentPage>
+						<ContentPage Header="Page 2" Background="#b7c9e8" Foreground="#21264b">
+							<TextBlock Text="Second page" HorizontalAlignment="Center" VerticalAlignment="Center" />
+						</ContentPage>
+						<ContentPage Header="Page 3" Background="#a1b2d4" Foreground="#21264b">
+							<TextBlock Text="Third page" HorizontalAlignment="Center" VerticalAlignment="Center" />
+						</ContentPage>
+					</CarouselPage>
+				</Border>
+			</DockPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Navigation" />
+						<StackPanel Orientation="Horizontal" Spacing="10">
+							<Button Click="OnCarouselPagePreviousButtonClick" ContentTemplate="{actipro:GlyphTemplate Previous16}" />
+							<Button Click="OnCarouselPageNextButtonClick" ContentTemplate="{actipro:GlyphTemplate Next16}" />
+						</StackPanel>
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="ContentPage"
+			>
+
+			<Border Height="200" BorderBrush="{actipro:ThemeResource Container2BorderBrush}"  BorderThickness="1" CornerRadius="0">
+				<ContentPage BorderThickness="1" Header="ContentPage Sample">
+					<ContentPage.TopCommandBar>
+						<CommandBar Background="{actipro:ThemeResource Container3BackgroundBrush}">
+							<CommandBar.PrimaryCommands>
+								<CommandBarButton Label="Help" />
+							</CommandBar.PrimaryCommands>
+							<CommandBar.SecondaryCommands>
+								<CommandBarButton Label="Settings" />
+							</CommandBar.SecondaryCommands>
+
+							<CommandBar.Content>
+								<TextBlock Margin="10,0" FontSize="{actipro:ThemeResource HeadingFontSizeMedium}" Text="Application Name" />
+							</CommandBar.Content>
+						</CommandBar>
+					</ContentPage.TopCommandBar>
+					<ContentPage.BottomCommandBar>
+						<CommandBar Margin="10,0" MinHeight="0" Content="Ready" Background="{actipro:ThemeResource Container2BackgroundBrush}">
+							<CommandBar.Styles>
+								<Style Selector="CommandBarButton">
+									<Setter Property="MinHeight" Value="0" />
+								</Style>
+							</CommandBar.Styles>
+							<CommandBar.PrimaryCommands>
+								<CommandBarButton Label="v1.0" />
+							</CommandBar.PrimaryCommands>
+						</CommandBar>
+					</ContentPage.BottomCommandBar>
+
+					<TextBlock Margin="20" TextWrapping="Wrap">This is a ContentPage that demonstrates the use of a top and bottom CommandBar.</TextBlock>
+				</ContentPage>
+			</Border>
+
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="DrawerPage"
+			DataContext="{Binding #drawerPageSample}"
+			>
+
+			<Border Height="200" BorderBrush="{actipro:ThemeResource Container2BorderBrush}"  BorderThickness="1" CornerRadius="0">
+				<DrawerPage
+					x:Name="drawerPageSample"
+					Header="DrawerPage Sample"
+					DrawerLength="125"
+					>
+					<DrawerPage.DrawerHeader>
+						<TextBlock Margin="0,5" Text="Header" FontSize="{actipro:ThemeResource DefaultFontSizeExtraSmall}" FontWeight="SemiBold" TextAlignment="Center" />
+					</DrawerPage.DrawerHeader>
+					<DrawerPage.Drawer>
+						<TextBlock MinWidth="48" Text="Drawer area" FontSize="{actipro:ThemeResource DefaultFontSizeSmall}" TextWrapping="Wrap" TextAlignment="Center" VerticalAlignment="Center"/>
+					</DrawerPage.Drawer>
+					<DrawerPage.DrawerFooter>
+						<TextBlock Margin="0,5" Text="Footer" FontSize="{actipro:ThemeResource DefaultFontSizeExtraSmall}" TextAlignment="Center" />
+					</DrawerPage.DrawerFooter>
+
+					<TextBlock Text="This is the content area of a DrawerPage."  HorizontalAlignment="Center" VerticalAlignment="Center"/>
+				</DrawerPage>
+			</Border>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Drawer placement" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type={x:Type DrawerPlacement}}" SelectedItem="{Binding DrawerPlacement}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Display mode" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type={x:Type SplitViewDisplayMode}}" SelectedItem="{Binding DisplayMode}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Drawer behavior" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type={x:Type DrawerBehavior}}" SelectedItem="{Binding DrawerBehavior}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="{Binding CompactDrawerLength, StringFormat='Compact drawer length: {0}'}" />
+						<Slider Minimum="10" Maximum="100" Value="{Binding CompactDrawerLength}" TickFrequency="1" IsSnapToTickEnabled="True" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="{Binding DrawerLength, StringFormat='Drawer length: {0}'}" />
+						<Slider Minimum="100" Maximum="400" Value="{Binding DrawerLength}" TickFrequency="1" IsSnapToTickEnabled="True" />
+					</StackPanel>
+					<CheckBox IsChecked="{Binding IsOpen}">Is drawer open</CheckBox>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
 			Header="GridSplitter"
 			>
 
@@ -78,6 +226,43 @@
 					<CheckBox x:Name="gridSplitterShowsPreview" IsChecked="False">Shows preview</CheckBox>
 				</StackPanel>
 			</sampleBrowser:ControlExample.Options>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="GroupBox"
+			>
+			<sampleBrowser:ControlExample.Resources>
+				<!--
+				An Avalonia issue is causing the bottom border of GroupBox to be clipped when using
+				Inter 14pt font (the default for HeadingFontSizeExtraSmall used by Actipro tempalte),
+				so changing to 15pt to work around the issue until it is resolved.
+				https://github.com/AvaloniaUI/Avalonia/issues/21052
+				-->
+				<x:Double x:Key="{actipro:ThemeResourceKey HeadingFontSizeExtraSmall}">15</x:Double>
+			</sampleBrowser:ControlExample.Resources>
+
+			<GroupBox Header="Header"
+				BorderThickness="1"
+				CornerRadius="8"
+				Background="{actipro:ThemeResource Container3BackgroundBrush}"
+				BorderBrush="{actipro:ThemeResource Container5BorderBrush}"
+				>
+				<TextBlock>Group Content</TextBlock>
+			</GroupBox>
+
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="NavigationPage"
+			>
+
+			<Border Height="200" Background="{actipro:ThemeResource Container1BackgroundBrush}" 
+					BorderBrush="{actipro:ThemeResource Container2BorderBrush}" BorderThickness="1" CornerRadius="0">
+				<NavigationPage x:Name="navigationPageSample" Header="NavigationPage Sample" />
+			</Border>
+
 		</sampleBrowser:ControlExample>
 
 
@@ -140,6 +325,18 @@
 
 
 		<sampleBrowser:ControlExample
+			Header="PipsPager"
+			>
+
+			<StackPanel Orientation="Horizontal" Spacing="30" HorizontalAlignment="Center" VerticalAlignment="Center">
+				<PipsPager NumberOfPages="5" SelectedPageIndex="1" VerticalAlignment="Center" />
+				<PipsPager NumberOfPages="5" SelectedPageIndex="1" Orientation="Vertical" />
+			</StackPanel>
+
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
 			Header="SplitView"
 			Footer="Pane background color is used to differentiate the areas of the SplitView and is not part of the theme."
 			DataContext="{Binding #splitViewSample}"
@@ -155,7 +352,15 @@
 					PaneBackground="{actipro:ThemeResource ControlBackgroundBrushSoftAccent}"
 					>
 					<SplitView.Pane>
-						<TextBlock Margin="4" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Pane Content" TextAlignment="Center" TextWrapping="Wrap" Foreground="{actipro:ThemeResource ControlForegroundBrushSoftAccent}" />
+						<TextBlock
+							Margin="4"
+							Foreground="{actipro:ThemeResource ControlForegroundBrushSoftAccent}"
+							HorizontalAlignment="Center" 
+							Text="Pane Content" 
+							TextAlignment="Center" 
+							TextWrapping="Wrap" 
+							VerticalAlignment="Center" 
+							/>
 					</SplitView.Pane>
 
 					<TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Primary Content" />
@@ -184,6 +389,27 @@
 					<CheckBox IsChecked="{Binding UseLightDismissOverlayMode}">Use light dismiss overlay mode</CheckBox>
 				</StackPanel>
 			</sampleBrowser:ControlExample.Options>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="TabbedPage"
+			>
+
+			<Border MaxWidth="400" Height="200" BorderBrush="{actipro:ThemeResource Container2BorderBrush}"  BorderThickness="1" CornerRadius="0">
+				<TabbedPage TabPlacement="Bottom" Header="TabbedPage Sample">
+					<ContentPage Header="Home" Icon="{StaticResource icon-fluent-mdl2-home}">
+						<TextBlock Text="This is the home page." HorizontalAlignment="Center" VerticalAlignment="Center" />
+					</ContentPage>
+					<ContentPage Header="Favorites" Icon="{StaticResource icon-fluent-mdl2-heart}">
+						<TextBlock Text="This is the favorites page." HorizontalAlignment="Center" VerticalAlignment="Center" />
+					</ContentPage>
+					<ContentPage Header="Settings" Icon="{StaticResource icon-fluent-mdl2-settings}">
+						<TextBlock Text="This is the settings page." HorizontalAlignment="Center" VerticalAlignment="Center" />
+					</ContentPage>
+				</TabbedPage>
+			</Border>
+
 		</sampleBrowser:ControlExample>
 
 

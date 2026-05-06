@@ -171,6 +171,9 @@ If necessary, inspect the [Reason](xref:@ActiproUIRoot.Controls.InfoBarClosingEv
 
 If enough space is available, all UI elements (except `Content`) are displayed on a single line.  Otherwise, the [Title](xref:@ActiproUIRoot.Controls.InfoBar.Title), [Message](xref:@ActiproUIRoot.Controls.InfoBar.Message), [Action](xref:@ActiproUIRoot.Controls.InfoBar.Action), and `Content` are stacked vertically in the middle.  When wrapped, the read-only [IsWrapped](xref:@ActiproUIRoot.Controls.InfoBar.IsWrappedProperty) property will be set to `true`.
 
+> [!TIP]
+> To force a wrapped layout, set the [IsSingleLineAllowed](xref:@ActiproUIRoot.Controls.InfoBar.IsSingleLineAllowed) property to `false` (the default value is `true`).
+
 ## Animation
 
 Fluent animation in the control is enabled by default but can be disabled by setting the [IsAnimationEnabled](xref:@ActiproUIRoot.Controls.InfoBar.IsAnimationEnabled) property to `false`.

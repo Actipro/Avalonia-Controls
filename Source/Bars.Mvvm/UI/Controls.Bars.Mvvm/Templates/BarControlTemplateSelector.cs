@@ -10,9 +10,9 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 	/// </summary>
 	public class BarControlTemplateSelector : IItemContainerTemplateSelector {
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Initializes an instance of the class.
@@ -57,9 +57,9 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 			this.RibbonTabRowToolBarDefaultTemplate = FindDataTemplateResource(BarsMvvmResourceKeys.RibbonTabRowToolBarDefaultItemContainerTemplate);
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		
 		/// <summary>
 		/// Loads an <see cref="IDataTemplate"/> with the specified key from application resources.
@@ -147,9 +147,9 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 			return DefaultTemplate;
 		}
 		
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC DATATEMPLATE PROPERTIES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// The <see cref="IDataTemplate"/> to use for a <see cref="BarButtonViewModel"/>.

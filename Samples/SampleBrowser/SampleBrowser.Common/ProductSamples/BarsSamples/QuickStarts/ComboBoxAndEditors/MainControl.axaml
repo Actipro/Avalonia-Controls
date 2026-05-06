@@ -262,15 +262,8 @@
 															   IsEnabled="{Binding #sampleRootControl.BasicComboBoxUsageOptions.IsUnmatchedTextSupported}"
 															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;UnmatchedTextCommand=&quot;{Binding #sampleRootControl.ComboBoxUnmatchedTextCommand}&quot;" />
 						<sampleBrowser:CodeExampleSubstitution Key="MenuResizeModeAttribute"
-															   Value="{Binding #sampleRootControl.BasicComboBoxUsageOptions.MenuResizeMode, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;MenuResizeMode=&quot;{0}&quot;'}">
-							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
-								<Binding Path="#sampleRootControl.BasicComboBoxUsageOptions.MenuResizeMode" Converter="{StaticResource NotEqualToComparisonConverter}">
-									<Binding.ConverterParameter>
-										<actipro:ControlResizeMode>None</actipro:ControlResizeMode>
-									</Binding.ConverterParameter>
-								</Binding>
-							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
-						</sampleBrowser:CodeExampleSubstitution>
+															   IsEnabled="{Binding #sampleRootControl.BasicComboBoxUsageOptions.MenuResizeMode, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='None'}"
+															   Value="{Binding #sampleRootControl.BasicComboBoxUsageOptions.MenuResizeMode, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;MenuResizeMode=&quot;{0}&quot;'}" />
 						<sampleBrowser:CodeExampleSubstitution Key="PlaceholderTextAttribute"
 															   IsEnabled="{Binding #sampleRootControl.BasicComboBoxUsageOptions.PlaceholderText, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
 															   Value="{Binding #sampleRootControl.BasicComboBoxUsageOptions.PlaceholderText, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;PlaceholderText=&quot;{0}&quot;'}" />
@@ -478,15 +471,8 @@ $(UnmatchedTextCommandPropertyDeclaration)
 															   IsEnabled="{Binding #sampleRootControl.BasicComboBoxUsageOptions.IsUnmatchedTextSupported}"
 															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;UnmatchedTextCommand = ComboBoxUnmatchedTextCommand," />
 						<sampleBrowser:CodeExampleSubstitution Key="MenuResizeModeSetter"
-															   Value="{Binding #sampleRootControl.BasicComboBoxUsageOptions.MenuResizeMode, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;MenuResizeMode = ControlResizeMode.{0},'}">
-							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
-								<Binding Path="#sampleRootControl.BasicComboBoxUsageOptions.MenuResizeMode" Converter="{StaticResource NotEqualToComparisonConverter}">
-									<Binding.ConverterParameter>
-										<actipro:ControlResizeMode>None</actipro:ControlResizeMode>
-									</Binding.ConverterParameter>
-								</Binding>
-							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
-						</sampleBrowser:CodeExampleSubstitution>
+															   IsEnabled="{Binding #sampleRootControl.BasicComboBoxUsageOptions.MenuResizeMode, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='None'}"
+															   Value="{Binding #sampleRootControl.BasicComboBoxUsageOptions.MenuResizeMode, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;MenuResizeMode = ControlResizeMode.{0},'}" />
 						<sampleBrowser:CodeExampleSubstitution Key="PlaceholderTextSetter"
 															   IsEnabled="{Binding #sampleRootControl.BasicComboBoxUsageOptions.PlaceholderText, Converter={x:Static StringConverters.IsNotNullOrEmpty}}"
 															   Value="{Binding #sampleRootControl.BasicComboBoxUsageOptions.PlaceholderText, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;PlaceholderText = &quot;{0}&quot;,'}" />

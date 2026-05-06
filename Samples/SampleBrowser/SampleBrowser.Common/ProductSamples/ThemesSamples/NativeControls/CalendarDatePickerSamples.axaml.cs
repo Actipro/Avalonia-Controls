@@ -7,9 +7,9 @@ namespace ActiproSoftware.ProductSamples.ThemeSamples.NativeControls {
 
 	public partial class CalendarDatePickerSamples : UserControl {
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		public CalendarDatePickerSamples() {
 			InitializeComponent();
@@ -18,9 +18,9 @@ namespace ActiproSoftware.ProductSamples.ThemeSamples.NativeControls {
 			sampleBlackoutTomorrow.IsCheckedChanged += this.OnSampleBlackoutTomorrowIsCheckedChanged;
 		}
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// NON-PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		private static void ClearBlackouts(CalendarDatePicker picker)
 			=> picker?.BlackoutDates?.Clear();

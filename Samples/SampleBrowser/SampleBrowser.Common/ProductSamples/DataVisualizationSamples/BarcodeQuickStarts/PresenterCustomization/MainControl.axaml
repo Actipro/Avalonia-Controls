@@ -1,0 +1,201 @@
+<UserControl
+	x:Name="sampleRootControl"
+	x:Class="ActiproSoftware.ProductSamples.DataVisualizationSamples.BarcodeQuickStarts.PresenterCustomization.MainControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:barcodeQuickStarts="using:ActiproSoftware.ProductSamples.DataVisualizationSamples.BarcodeQuickStarts"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="The BarcodePresenter control renders a barcode and any surrounding chrome like an optional header.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Barcode Basics" Url="https://www.actiprosoftware.com/docs/controls/avalonia/data-visualization/barcodes/barcode-basics" />
+			<sampleBrowser:ControlExampleLinkItem Title="Presenter Customization" Url="https://www.actiprosoftware.com/docs/controls/avalonia/data-visualization/barcodes/presenter-customization" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+
+		<sampleBrowser:ControlExample
+			Header="Basic options"
+			DataContext="{Binding #primaryBarcode}"
+			>
+			
+			<ScrollViewer HorizontalScrollBarVisibility="Auto">
+				<actipro:BarcodePresenter x:Name="primaryBarcode" Header="Sample Barcode" Value="12345" ZoomLevel="2" BorderThickness="1" CornerRadius="5" Padding="4,2">
+					<actipro:Code39Symbology />
+				</actipro:BarcodePresenter>
+			</ScrollViewer>
+			
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel MinWidth="220" Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Symbology" />
+						<ComboBox
+							x:Name="symbologyComboBox"
+							ItemsSource="{x:Static barcodeQuickStarts:BarcodeSymbologies.All}" 
+							DisplayMemberBinding="{Binding Name}"
+							SelectionChanged="OnSymbologyComboBoxSelectionChanged"
+							/>
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Zoom level" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type={x:Type x:Double}, DelimitedText='1, 2, 3, 4, 5'}" SelectedItem="{Binding ZoomLevel}" DisplayMemberBinding="{Binding StringFormat={}{0:P0}}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Header" />
+						<TextBox Text="{Binding Header}" />
+					</StackPanel>
+					<CheckBox IsChecked="{Binding UseThemeColors}" Content="Use theme colors vs. black/white" />
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Border thickness" />
+						<ComboBox SelectedItem="{Binding BorderThickness}">
+							<Thickness>0</Thickness>
+							<Thickness>1</Thickness>
+							<Thickness>2</Thickness>
+							<Thickness>3</Thickness>
+						</ComboBox>
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Corner radius" />
+						<ComboBox SelectedItem="{Binding CornerRadius}">
+							<CornerRadius>0</CornerRadius>
+							<CornerRadius>1</CornerRadius>
+							<CornerRadius>2</CornerRadius>
+							<CornerRadius>3</CornerRadius>
+							<CornerRadius>4</CornerRadius>
+							<CornerRadius>5</CornerRadius>
+							<CornerRadius>6</CornerRadius>
+							<CornerRadius>7</CornerRadius>
+							<CornerRadius>8</CornerRadius>
+							<CornerRadius>9</CornerRadius>
+							<CornerRadius>10</CornerRadius>
+						</ComboBox>
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Padding" />
+						<ComboBox SelectedItem="{Binding Padding}">
+							<Thickness>0</Thickness>
+							<Thickness>4,0</Thickness>
+							<Thickness>4,2</Thickness>
+							<Thickness>4</Thickness>
+							<Thickness>6</Thickness>
+							<Thickness>8</Thickness>
+							<Thickness>10</Thickness>
+						</ComboBox>
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:BarcodePresenter Header="$(HeaderAttribute)" Value="$(ValueAttribute)"$(ZoomLevelAttribute)$(UseThemeColorsAttribute)$(BorderThicknessAttribute)$(CornerRadiusAttribute)$(PaddingAttribute)>
+	<!-- Symbology goes here -->
+</actipro:BarcodePresenter>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="HeaderAttribute" Value="{Binding Header}" />
+						<sampleBrowser:CodeExampleSubstitution Key="ValueAttribute" Value="{Binding Value}" />
+						<sampleBrowser:CodeExampleSubstitution Key="ZoomLevelAttribute" Value="{Binding ZoomLevel, StringFormat='&#xA;&#x9;ZoomLevel=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="UseThemeColorsAttribute" IsEnabled="{Binding UseThemeColors}" Value="{Binding UseThemeColors, StringFormat='&#xA;&#x9;UseThemeColors=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="BorderThicknessAttribute" Value="{Binding BorderThickness, StringFormat='&#xA;&#x9;BorderThickness=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="CornerRadiusAttribute" Value="{Binding CornerRadius, StringFormat='&#xA;&#x9;CornerRadius=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="PaddingAttribute" Value="{Binding Padding, StringFormat='&#xA;&#x9;Padding=&quot;{0}&quot;'}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Theme colors vs. black on white"
+			Footer="The UseThemeColors property determines whether the presenter uses theme-aware foreground and background colors or always uses black on white, the default.  Not all scanners may support reading inverted barcodes."
+			>
+			
+			<ThemeVariantScope RequestedThemeVariant="Dark">
+				<Border Padding="20"
+					Background="{actipro:ThemeResource Container3BackgroundBrush}"
+					BorderBrush="{actipro:ThemeResource Container3BorderBrush}"
+					BorderThickness="1"
+					CornerRadius="8">
+					<StackPanel Orientation="Horizontal" Spacing="50" HorizontalAlignment="Center">
+						<StackPanel Spacing="10">
+							<TextBlock Classes="theme-text-heading size-xs" Text="UseThemeColors = True" HorizontalAlignment="Center" />
+							<actipro:BarcodePresenter Value="12345" ZoomLevel="2" BorderThickness="1" CornerRadius="5" Padding="5" UseThemeColors="True">
+								<actipro:Code39Symbology />
+							</actipro:BarcodePresenter>
+						</StackPanel>
+
+						<StackPanel Spacing="10">
+							<TextBlock Classes="theme-text-heading size-xs" Text="UseThemeColors = False" HorizontalAlignment="Center" />
+							<actipro:BarcodePresenter Value="12345" ZoomLevel="2" BorderThickness="1" CornerRadius="5" Padding="5" UseThemeColors="False">
+								<actipro:Code39Symbology />
+							</actipro:BarcodePresenter>
+						</StackPanel>
+					</StackPanel>
+				</Border>
+			</ThemeVariantScope>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<!-- Use theme colors for foreground and background -->
+<actipro:BarcodePresenter Value="12345" ... UseThemeColors="True">
+	<actipro:Code39Symbology />
+</actipro:BarcodePresenter>
+
+<!-- Always use black foreground and white background -->
+<actipro:BarcodePresenter Value="12345" ... UseThemeColors="False">
+	<actipro:Code39Symbology />
+</actipro:BarcodePresenter>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Custom header"
+			Footer="The custom HeaderTemplate in this sample changes the presentation of the header."
+			>
+			
+			<ScrollViewer HorizontalScrollBarVisibility="Auto">
+				<actipro:BarcodePresenter Header="Custom Header" Value="12345" ZoomLevel="2" BorderThickness="1" CornerRadius="5" Padding="4,2">
+					<actipro:BarcodePresenter.HeaderTemplate>
+						<DataTemplate>
+							<TextBlock Text="{Binding}" 
+								FontSize="8"
+								FontWeight="Bold"
+								Foreground="{actipro:ThemeResource ControlForegroundBrushOutlineAccent}" 
+								/>
+						</DataTemplate>
+					</actipro:BarcodePresenter.HeaderTemplate>
+					<actipro:Code39Symbology />
+				</actipro:BarcodePresenter>
+			</ScrollViewer>
+			
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:BarcodePresenter Header="Custom Header" ... >
+	<actipro:BarcodePresenter.HeaderTemplate>
+		<DataTemplate>
+			<TextBlock Text="{Binding}"
+				FontSize="8"
+				FontWeight="Bold"
+				Foreground="{actipro:ThemeResource ControlForegroundBrushOutlineAccent}"
+				/>
+		</DataTemplate>
+	</actipro:BarcodePresenter.HeaderTemplate>
+
+	<actipro:Code39Symbology />
+</actipro:BarcodePresenter>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+		
+
+	</sampleBrowser:ControlExampleItemsControl>
+</UserControl>

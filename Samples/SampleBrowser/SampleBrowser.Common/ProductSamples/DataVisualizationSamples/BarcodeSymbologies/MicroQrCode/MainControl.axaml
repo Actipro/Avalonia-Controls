@@ -1,0 +1,254 @@
+<UserControl
+	x:Name="sampleRootControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+
+		<actipro:MicroQrCodeSymbology x:Key="PrimarySymbology" />
+
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Micro QR Code is a compact variant of QR Code designed for space-constrained applications such as small PCBs, medical devices, and product labels.  It uses a single finder pattern and supports versions M1 through M4.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Barcode Basics" Url="https://www.actiprosoftware.com/docs/controls/avalonia/data-visualization/barcodes/barcode-basics" />
+			<sampleBrowser:ControlExampleLinkItem Title="QR Code Symbologies" Url="https://www.actiprosoftware.com/docs/controls/avalonia/data-visualization/barcodes/qr-code-symbologies" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+
+		<sampleBrowser:ControlExample
+			Header="All versions at a glance"
+			Footer="Micro QR Code versions range from M1 (11×11 modules) to M4 (17×17 modules).  Higher versions encode more data but produce larger symbols."
+			HorizontalContentAlignment="Center"
+			>
+
+			<Border Background="{Binding #primaryBarcode.Background}" BorderBrush="{actipro:ThemeResource Container1BorderBrush}" BorderThickness="1" 
+					CornerRadius="10" Padding="20">
+				<WrapPanel LineSpacing="20" ItemSpacing="20">
+
+					<actipro:BarcodePresenter Value="12345">
+						<actipro:MicroQrCodeSymbology Version="VersionM1" ModuleScale="6" ErrorCorrectionLevel="ErrorDetectionOnly" />
+					</actipro:BarcodePresenter>
+
+					<actipro:BarcodePresenter Value="ABC123">
+						<actipro:MicroQrCodeSymbology Version="VersionM2" ModuleScale="6" />
+					</actipro:BarcodePresenter>
+
+					<actipro:BarcodePresenter Value="Hello!">
+						<actipro:MicroQrCodeSymbology Version="VersionM3" ModuleScale="6" />
+					</actipro:BarcodePresenter>
+
+					<actipro:BarcodePresenter Value="Micro QR Code">
+						<actipro:MicroQrCodeSymbology Version="VersionM4" ModuleScale="6" />
+					</actipro:BarcodePresenter>
+
+				</WrapPanel>
+			</Border>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<!-- M1: Numeric only (11x11 modules) -->
+<actipro:BarcodePresenter Value="12345">
+	<actipro:MicroQrCodeSymbology Version="VersionM1" ModuleScale="6" ErrorCorrectionLevel="ErrorDetectionOnly" />
+</actipro:BarcodePresenter>
+
+<!-- M2: Numeric and Alphanumeric (13x13 modules) -->
+<actipro:BarcodePresenter Value="ABC123">
+	<actipro:MicroQrCodeSymbology Version="VersionM2" ModuleScale="6" />
+</actipro:BarcodePresenter>
+
+<!-- M3: All modes (15x15 modules) -->
+<actipro:BarcodePresenter Value="Hello!">
+	<actipro:MicroQrCodeSymbology Version="VersionM3" ModuleScale="6" />
+</actipro:BarcodePresenter>
+
+<!-- M4: All modes with highest capacity (17x17 modules) -->
+<actipro:BarcodePresenter Value="Micro QR Code">
+	<actipro:MicroQrCodeSymbology Version="VersionM4" ModuleScale="6" />
+</actipro:BarcodePresenter>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Styled to match your brand"
+			Footer="Micro QR Codes support the same appearance customizations as QR Codes, including module shapes, finder pattern shapes, colors, and gradients."
+			HorizontalContentAlignment="Center"
+			>
+
+			<Border Background="{Binding #primaryBarcode.Background}" BorderBrush="{actipro:ThemeResource Container1BorderBrush}" BorderThickness="1" 
+					CornerRadius="10" Padding="20">
+				<WrapPanel LineSpacing="20" ItemSpacing="20">
+
+					<actipro:BarcodePresenter
+						Value="Micro QR"
+						ModuleShapeKind="RoundedRectangle">
+						<actipro:BarcodePresenter.Foreground>
+							<LinearGradientBrush EndPoint="0%,100%">
+								<GradientStop Offset="0" Color="#dc4b1e" />
+								<GradientStop Offset="0.5" Color="#811f68" />
+								<GradientStop Offset="1" Color="#3300bb" />
+							</LinearGradientBrush>
+						</actipro:BarcodePresenter.Foreground>
+
+						<actipro:MicroQrCodeSymbology Version="VersionM4" ModuleScale="8" FinderPatternOuterShapeKind="RoundedRectangle" />
+					</actipro:BarcodePresenter>
+
+					<actipro:BarcodePresenter
+						Value="12345"
+						ModuleShapeKind="Circle"
+						PrimaryAccent="#1934a7"
+						SecondaryAccent="#081033"
+						>
+						<actipro:BarcodePresenter.Foreground>
+							<RadialGradientBrush RadiusX="80%" RadiusY="80%">
+								<GradientStop Offset="0" Color="#0022b4" />
+								<GradientStop Offset="1" Color="#081033" />
+							</RadialGradientBrush>
+						</actipro:BarcodePresenter.Foreground>
+						<actipro:MicroQrCodeSymbology Version="VersionM4" ModuleScale="8" />
+					</actipro:BarcodePresenter>
+
+					<actipro:BarcodePresenter
+						Value="67890"
+						ModuleShapeKind="InsetCircle"
+						Background="#002d50"
+						Foreground="#74bdf5"
+						CornerRadius="20"
+						>
+						<actipro:MicroQrCodeSymbology Version="VersionM4" ModuleScale="8" FinderPatternOuterShapeKind="Circle" FinderPatternInnerShapeKind="Circle" />
+					</actipro:BarcodePresenter>
+
+				</WrapPanel>
+			</Border>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:BarcodePresenter Value="Micro QR" ModuleShapeKind="RoundedRectangle">
+	<actipro:BarcodePresenter.Foreground>
+		<LinearGradientBrush EndPoint="0%,100%">
+			<GradientStop Offset="0" Color="#dc4b1e" />
+			<GradientStop Offset="0.5" Color="#811f68" />
+			<GradientStop Offset="1" Color="#3300bb" />
+		</LinearGradientBrush>
+	</actipro:BarcodePresenter.Foreground>
+
+	<actipro:MicroQrCodeSymbology Version="VersionM4" ModuleScale="8" 
+		FinderPatternOuterShapeKind="RoundedRectangle" />
+</actipro:BarcodePresenter>
+
+<actipro:BarcodePresenter Value="12345" ModuleShapeKind="Circle"
+	PrimaryAccent="#1934a7" SecondaryAccent="#081033">
+	<actipro:BarcodePresenter.Foreground>
+		<RadialGradientBrush RadiusX="80%" RadiusY="80%">
+			<GradientStop Offset="0" Color="#0022b4" />
+			<GradientStop Offset="1" Color="#081033" />
+		</RadialGradientBrush>
+	</actipro:BarcodePresenter.Foreground>
+	<actipro:MicroQrCodeSymbology Version="VersionM4" ModuleScale="8" />
+</actipro:BarcodePresenter>
+
+<actipro:BarcodePresenter Value="67890" ModuleShapeKind="InsetCircle"
+	Background="#002d50" Foreground="#74bdf5" CornerRadius="20">
+	<actipro:MicroQrCodeSymbology Version="VersionM4" ModuleScale="8" 
+		FinderPatternOuterShapeKind="Circle" FinderPatternInnerShapeKind="Circle" />
+</actipro:BarcodePresenter>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Basic usage"
+			DataContext="{Binding #primaryBarcode}"
+			>
+			
+			<ScrollViewer HorizontalScrollBarVisibility="Auto">
+				<Border Background="{Binding #primaryBarcode.Background}" BorderBrush="{actipro:ThemeResource Container1BorderBrush}" BorderThickness="1" 
+						CornerRadius="10" Padding="10" HorizontalAlignment="Center">
+
+					<actipro:BarcodePresenter x:Name="primaryBarcode" Symbology="{StaticResource PrimarySymbology}" Value="12345" ZoomLevel="2" />
+
+				</Border>
+			</ScrollViewer>
+			
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel MinWidth="220" Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Value" />
+						<TextBox Text="{Binding Value}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Zoom level" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type={x:Type x:Double}, DelimitedText='1, 2, 3, 4, 5'}" SelectedItem="{Binding ZoomLevel}" DisplayMemberBinding="{Binding StringFormat={}{0:P0}}" />
+					</StackPanel>
+
+					<StackPanel Spacing="10" DataContext="{Binding Symbology}" x:DataType="actipro:MicroQrCodeSymbology">
+						<StackPanel>
+							<TextBlock Classes="theme-form-control-label" Text="Error correction level" />
+							<ComboBox ItemsSource="{actipro:DelimitedArray Type=actipro:QrErrorCorrectionLevel, DelimitedText='ErrorDetectionOnly, Low, Medium, Quartile'}" SelectedValue="{Binding ErrorCorrectionLevel}" />
+						</StackPanel>
+						<StackPanel>
+							<TextBlock Classes="theme-form-control-label" Text="Version" />
+							<ComboBox ItemsSource="{actipro:DelimitedArray Type=actipro:MicroQrCodeVersion}" SelectedValue="{Binding Version}" />
+						</StackPanel>
+						<StackPanel>
+							<TextBlock Classes="theme-form-control-label" Text="Module scale" />
+							<NumericUpDown Value="{Binding ModuleScale}" Minimum="1" Maximum="10" Increment="1" />
+						</StackPanel>
+						<StackPanel>
+							<TextBlock Classes="theme-form-control-label" Text="Quiet zone thickness" />
+							<ComboBox SelectedItem="{Binding QuietZoneThickness}">
+								<Thickness>0</Thickness>
+								<Thickness>2</Thickness>
+								<Thickness>4</Thickness>
+								<Thickness>8</Thickness>
+							</ComboBox>
+						</StackPanel>
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:BarcodePresenter Value="$(ValueAttribute)"$(ZoomLevelAttribute)>
+	<actipro:MicroQrCodeSymbology$(ErrorCorrectionLevelAttribute)$(VersionAttribute)$(ModuleScaleAttribute)$(QuietZoneThicknessAttribute) />
+</actipro:BarcodePresenter>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ValueAttribute" Value="{Binding Value}" />
+						<sampleBrowser:CodeExampleSubstitution Key="ZoomLevelAttribute"
+															   IsEnabled="{Binding ZoomLevel, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='1'}"
+															   Value="{Binding ZoomLevel, StringFormat='&#xA;&#x9;ZoomLevel=&quot;{0}&quot;'}" />
+
+						<sampleBrowser:CodeExampleSubstitution Key="ErrorCorrectionLevelAttribute"
+															   IsEnabled="{Binding Source={StaticResource PrimarySymbology}, Path=ErrorCorrectionLevel, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Low'}"
+															   Value="{Binding Source={StaticResource PrimarySymbology}, Path=ErrorCorrectionLevel, StringFormat='&#xA;&#x9;&#x9;ErrorCorrectionLevel=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="VersionAttribute"
+															   IsEnabled="{Binding Source={StaticResource PrimarySymbology}, Path=Version, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Auto'}"
+															   Value="{Binding Source={StaticResource PrimarySymbology}, Path=Version, StringFormat='&#xA;&#x9;&#x9;Version=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="ModuleScaleAttribute"
+															   IsEnabled="{Binding Source={StaticResource PrimarySymbology}, Path=ModuleScale, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='4'}"
+															   Value="{Binding Source={StaticResource PrimarySymbology}, Path=ModuleScale, StringFormat='&#xA;&#x9;&#x9;ModuleScale=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="QuietZoneThicknessAttribute"
+															   IsEnabled="{Binding Source={StaticResource PrimarySymbology}, Path=QuietZoneThickness, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='2'}"
+															   Value="{Binding Source={StaticResource PrimarySymbology}, Path=QuietZoneThickness, StringFormat='&#xA;&#x9;&#x9;QuietZoneThickness=&quot;{0}&quot;'}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+</UserControl>

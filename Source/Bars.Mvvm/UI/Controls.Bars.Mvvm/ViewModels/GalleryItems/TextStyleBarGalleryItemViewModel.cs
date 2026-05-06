@@ -7,9 +7,9 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 	/// </summary>
 	public class TextStyleBarGalleryItemViewModel : BarGalleryItemViewModel<TextStyle> {
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// OBJECT
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// Initializes a new instance of the class with a default text style and category.
@@ -41,9 +41,9 @@ namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
 		public TextStyleBarGalleryItemViewModel(TextStyle? value, string? category, string? label) 
 			: base(value, category, label) { }
 
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 		// PUBLIC PROCEDURES
-		/////////////////////////////////////////////////////////////////////////////////////////////////////
+		// --------------------------------------------------------------------------------------------------
 
 		/// <summary>
 		/// The localizable default category to be used for view models of this type.

@@ -365,56 +365,21 @@ $(OneRowLayoutResources)$(TwoRowLayoutResources)$(ThreeRowLayoutResources)
 															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;CanFilterOnMenu=&quot;True&quot;" />
 						<sampleBrowser:CodeExampleSubstitution Key="ItemSpacing" Value="{Binding #sampleRootControl.Options.ItemSpacing}" />
 						<sampleBrowser:CodeExampleSubstitution Key="MaxColumnCountAttribute"
-															   Value="{Binding #sampleRootControl.Options.MaxRibbonColumnCount, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;MaxColumnCount=&quot;{0}&quot;'}">
-							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
-								<Binding Path="#sampleRootControl.Options.MaxRibbonColumnCount" Converter="{StaticResource NotEqualToComparisonConverter}">
-									<Binding.ConverterParameter>
-										<x:Int32>15</x:Int32>
-									</Binding.ConverterParameter>
-								</Binding>
-							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
-						</sampleBrowser:CodeExampleSubstitution>
+															   IsEnabled="{Binding #sampleRootControl.Options.MaxRibbonColumnCount, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='15'}"
+															   Value="{Binding #sampleRootControl.Options.MaxRibbonColumnCount, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;MaxColumnCount=&quot;{0}&quot;'}" />
 						<sampleBrowser:CodeExampleSubstitution Key="MinMediumColumnCountAttribute"
-															   Value="{Binding #sampleRootControl.Options.MinMediumRibbonColumnCount, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;MinMediumColumnCount=&quot;{0}&quot;'}">
-							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
-								<Binding Path="#sampleRootControl.Options.MinMediumRibbonColumnCount" Converter="{StaticResource NotEqualToComparisonConverter}">
-									<Binding.ConverterParameter>
-										<x:Int32>3</x:Int32>
-									</Binding.ConverterParameter>
-								</Binding>
-							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
-						</sampleBrowser:CodeExampleSubstitution>
+															   IsEnabled="{Binding #sampleRootControl.Options.MinMediumRibbonColumnCount, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='3'}"
+															   Value="{Binding #sampleRootControl.Options.MinMediumRibbonColumnCount, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;MinMediumColumnCount=&quot;{0}&quot;'}" />
 						<sampleBrowser:CodeExampleSubstitution Key="MinLargeColumnCountAttribute"
-															   Value="{Binding #sampleRootControl.Options.MinLargeRibbonColumnCount, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;MinLargeColumnCount=&quot;{0}&quot;'}">
-							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
-								<Binding Path="#sampleRootControl.Options.MinLargeRibbonColumnCount" Converter="{StaticResource NotEqualToComparisonConverter}">
-									<Binding.ConverterParameter>
-										<x:Int32>5</x:Int32>
-									</Binding.ConverterParameter>
-								</Binding>
-							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
-						</sampleBrowser:CodeExampleSubstitution>
+															   IsEnabled="{Binding #sampleRootControl.Options.MinLargeRibbonColumnCount, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='5'}"
+															   Value="{Binding #sampleRootControl.Options.MinLargeRibbonColumnCount, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;MinLargeColumnCount=&quot;{0}&quot;'}" />
 						<sampleBrowser:CodeExampleSubstitution Key="MaxMenuColumnCount" Value="{Binding #sampleRootControl.Options.MaxMenuColumnCount}" />
 						<sampleBrowser:CodeExampleSubstitution Key="MinMenuColumnCountAttribute"
-															   Value="{Binding #sampleRootControl.Options.MinMenuColumnCount, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;MinMenuColumnCount=&quot;{0}&quot;'}">
-							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
-								<Binding Path="#sampleRootControl.Options.MinMenuColumnCount" Converter="{StaticResource NotEqualToComparisonConverter}">
-									<Binding.ConverterParameter>
-										<x:Int32>1</x:Int32>
-									</Binding.ConverterParameter>
-								</Binding>
-							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
-						</sampleBrowser:CodeExampleSubstitution>
+															   IsEnabled="{Binding #sampleRootControl.Options.MinMenuColumnCount, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='1'}"
+															   Value="{Binding #sampleRootControl.Options.MinMenuColumnCount, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;MinMenuColumnCount=&quot;{0}&quot;'}" />
 						<sampleBrowser:CodeExampleSubstitution Key="MenuResizeModeAttribute"
-															   Value="{Binding #sampleRootControl.Options.MenuResizeMode, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;MenuResizeMode=&quot;{0}&quot;'}">
-							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
-								<Binding Path="#sampleRootControl.Options.MenuResizeMode" Converter="{StaticResource NotEqualToComparisonConverter}">
-									<Binding.ConverterParameter>
-										<actipro:ControlResizeMode>None</actipro:ControlResizeMode>
-									</Binding.ConverterParameter>
-								</Binding>
-							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
-						</sampleBrowser:CodeExampleSubstitution>
+															   IsEnabled="{Binding #sampleRootControl.Options.MenuResizeMode, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='None'}"
+															   Value="{Binding #sampleRootControl.Options.MenuResizeMode, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;MenuResizeMode=&quot;{0}&quot;'}" />
 						<sampleBrowser:CodeExampleSubstitution Key="OneRowLayoutResourceKey"
 															   IsEnabled="{Binding #sampleRootControl.Options.IsUsingOneRowLayout}"
 															   Value="LargeItemDataTemplate" />
@@ -778,56 +743,21 @@ public partial class SampleRootControl : UserControl {
 															   Value="&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;CanFilterOnMenu = true," />
 						<sampleBrowser:CodeExampleSubstitution Key="ItemSpacing" Value="{Binding #sampleRootControl.Options.ItemSpacing}" />
 						<sampleBrowser:CodeExampleSubstitution Key="MaxRibbonColumnCountSetter"
-															   Value="{Binding #sampleRootControl.Options.MaxRibbonColumnCount, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;MaxRibbonColumnCount = {0},'}">
-							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
-								<Binding Path="#sampleRootControl.Options.MaxRibbonColumnCount" Converter="{StaticResource NotEqualToComparisonConverter}">
-									<Binding.ConverterParameter>
-										<x:Int32>15</x:Int32>
-									</Binding.ConverterParameter>
-								</Binding>
-							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
-						</sampleBrowser:CodeExampleSubstitution>
+															   IsEnabled="{Binding #sampleRootControl.Options.MaxRibbonColumnCount, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='15'}"
+															   Value="{Binding #sampleRootControl.Options.MaxRibbonColumnCount, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;MaxRibbonColumnCount = {0},'}" />
 						<sampleBrowser:CodeExampleSubstitution Key="MinMediumRibbonColumnCountSetter"
-															   Value="{Binding #sampleRootControl.Options.MinMediumRibbonColumnCount, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;MinMediumRibbonColumnCount = {0},'}">
-							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
-								<Binding Path="#sampleRootControl.Options.MinMediumRibbonColumnCount" Converter="{StaticResource NotEqualToComparisonConverter}">
-									<Binding.ConverterParameter>
-										<x:Int32>3</x:Int32>
-									</Binding.ConverterParameter>
-								</Binding>
-							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
-						</sampleBrowser:CodeExampleSubstitution>
+															   IsEnabled="{Binding #sampleRootControl.Options.MinMediumRibbonColumnCount, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='3'}"
+															   Value="{Binding #sampleRootControl.Options.MinMediumRibbonColumnCount, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;MinMediumRibbonColumnCount = {0},'}" />
 						<sampleBrowser:CodeExampleSubstitution Key="MinLargeRibbonColumnCountSetter"
-															   Value="{Binding #sampleRootControl.Options.MinLargeRibbonColumnCount, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;MinLargeRibbonColumnCount = {0},'}">
-							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
-								<Binding Path="#sampleRootControl.Options.MinLargeRibbonColumnCount" Converter="{StaticResource NotEqualToComparisonConverter}">
-									<Binding.ConverterParameter>
-										<x:Int32>5</x:Int32>
-									</Binding.ConverterParameter>
-								</Binding>
-							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
-						</sampleBrowser:CodeExampleSubstitution>
+															   IsEnabled="{Binding #sampleRootControl.Options.MinLargeRibbonColumnCount, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='5'}"
+															   Value="{Binding #sampleRootControl.Options.MinLargeRibbonColumnCount, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;MinLargeRibbonColumnCount = {0},'}" />
 						<sampleBrowser:CodeExampleSubstitution Key="MaxMenuColumnCount" Value="{Binding #sampleRootControl.Options.MaxMenuColumnCount}" />
 						<sampleBrowser:CodeExampleSubstitution Key="MinMenuColumnCountSetter"
-															   Value="{Binding #sampleRootControl.Options.MinMenuColumnCount, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;MinMenuColumnCount = {0},'}">
-							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
-								<Binding Path="#sampleRootControl.Options.MinMenuColumnCount" Converter="{StaticResource NotEqualToComparisonConverter}">
-									<Binding.ConverterParameter>
-										<x:Int32>1</x:Int32>
-									</Binding.ConverterParameter>
-								</Binding>
-							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
-						</sampleBrowser:CodeExampleSubstitution>
+															   IsEnabled="{Binding #sampleRootControl.Options.MinMenuColumnCount, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='1'}"
+															   Value="{Binding #sampleRootControl.Options.MinMenuColumnCount, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;MinMenuColumnCount = {0},'}" />
 						<sampleBrowser:CodeExampleSubstitution Key="MenuResizeModeSetter"
-															   Value="{Binding #sampleRootControl.Options.MenuResizeMode, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;MenuResizeMode = ControlResizeMode.{0},'}">
-							<sampleBrowser:CodeExampleSubstitution.IsEnabled>
-								<Binding Path="#sampleRootControl.Options.MenuResizeMode" Converter="{StaticResource NotEqualToComparisonConverter}">
-									<Binding.ConverterParameter>
-										<actipro:ControlResizeMode>None</actipro:ControlResizeMode>
-									</Binding.ConverterParameter>
-								</Binding>
-							</sampleBrowser:CodeExampleSubstitution.IsEnabled>
-						</sampleBrowser:CodeExampleSubstitution>
+															   IsEnabled="{Binding #sampleRootControl.Options.MenuResizeMode, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='None'}"
+															   Value="{Binding #sampleRootControl.Options.MenuResizeMode, StringFormat='&#xD;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;&#x9;MenuResizeMode = ControlResizeMode.{0},'}" />
 						<sampleBrowser:CodeExampleSubstitution Key="IsSetColorCommandEnabled" Value="{Binding #sampleRootControl.Options.IsSetColorCommandEnabled, Converter={x:Static actipro:StringConverters.ToLowerInvariant}}" />
 						<sampleBrowser:CodeExampleSubstitution Key="OneRowLayoutResourceKey"
 															   IsEnabled="{Binding #sampleRootControl.Options.IsUsingOneRowLayout}"
