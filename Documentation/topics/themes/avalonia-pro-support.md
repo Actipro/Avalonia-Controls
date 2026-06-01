@@ -18,6 +18,7 @@ The [AvaloniaProResourceIncludes](xref:@ActiproUIRoot.Themes.Generation.Avalonia
 |-----|-----|-----|
 | `None` | *(none)* | None of AvaloniaUI OÜ's Avalonia Pro resources will be overridden. This is the default. |
 | `Markdown` | [Avalonia.Controls.Markdown](https://www.nuget.org/packages/Avalonia.Controls.Markdown) | Overrides resources for the `Markdown` viewer control, including hyperlinks, selection, code blocks, quote blocks, tables, alert blocks, and more. |
+| `RichTextEditor` | [Avalonia.Controls.RichTextEditor](https://www.nuget.org/packages/Avalonia.Controls.RichTextEditor) | Overrides resources for the `RichTextEditor` control, including its toolbar. |
 | `TreeDataGrid` | [Avalonia.Controls.TreeDataGrid](https://www.nuget.org/packages/Avalonia.Controls.TreeDataGrid) | Overrides resources for the `TreeDataGrid` control, including grid lines, column header states, and selected cell background. |
 | `VirtualKeyboard` | [Avalonia.Controls.VirtualKeyboard](https://www.nuget.org/packages/Avalonia.Controls.VirtualKeyboard) | Overrides resources for the virtual keyboard control, including pane background, button appearances, and action button states. |
 
