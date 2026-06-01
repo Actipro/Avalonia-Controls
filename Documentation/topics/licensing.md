@@ -95,21 +95,42 @@ public static AppBuilder BuildAvaloniaApp() {
 
 ### Notes on Unit Tests
 
-If your application build job runs any unit tests that create Actipro UI controls, the `ActiproLicenseManager.RegisterLicense` method must be called before the Actipro UI controls are created to avoid any licensing-related prompts or exceptions.  `ActiproLicenseManager.RegisterLicense` is the core method invoked by the `AppBuilder.RegisterActiproLicense` extension method.
+If you have any unit tests that create Actipro UI controls, the `ActiproLicenseManager.RegisterLicense` method must be called before the Actipro UI controls are created to avoid any licensing-related prompts or exceptions.  `ActiproLicenseManager.RegisterLicense` is the core method invoked by the `AppBuilder.RegisterActiproLicense` extension method.
+
+The following code is one recommended way to achieve this:
 
 ```csharp
 using ActiproSoftware.Licensing;
 ...
-public void OnTestActiproControl() {
-	// NOTE: Set "licensee" and "licenseKey" variables to your license information
-	ActiproLicenseManager.RegisterLicense(licensee, licenseKey);
+// Place this class in a central location, accessible by all unit test assemblies
+public static class ThirdPartyLicensing {
 
-	// Unit test logic here that creates an Actipro control
-	...
+	private static readonly Lazy<bool> _registerActiproLicense = new(() => {
+		// NOTE: Set "licensee" and "licenseKey" variables to your license information
+		ActiproLicenseManager.RegisterLicense(licensee, licenseKey);
+		return true;
+	});
+
+	public static void EnsureActiproControlsLicensed() {
+		_ = _registerActiproLicense.Value;
+	}
+
+}
+...
+// Unit test class
+public class MyUnitTests {
+
+	public void OnTestActiproControl() {
+		ThirdPartyLicensing.EnsureActiproControlsLicensed();
+
+		// Unit test logic here that creates an Actipro control
+		...
+	}
+
 }
 ```
 
-The license registration could alternatively be placed in a more centralized location, such as in the unit test class constructor.  The important thing is that it is called before Actipro UI controls are created.
+The `RegisterLicense` call may only be made once per application session. Using a static lazy initializer in a centralized class accessible by all unit test assemblies as in the code above ensures the registration only occurs once.
 
 ## Open-Source Project Licensing Considerations
 
