@@ -36,7 +36,7 @@ In summary, a [BarMenuGallery](xref:@ActiproUIRoot.Controls.Bars.BarMenuGallery)
 | Has popup | Yes, which shows a [BarMenuGallery](xref:@ActiproUIRoot.Controls.Bars.BarMenuGallery) with the same items, and optionally additional menu items. |
 | Is checkable | No. |
 | Variant sizes | None. |
-| Command support | Yes, via the [Command](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarGalleryBase.Command) and [UnmatchedTextCommand](xref:@ActiproUIRoot.Controls.Bars.BarComboBox.UnmatchedTextCommand) properties. |
+| Command support | Yes, via the [Command](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarGalleryBase.Command), [UnmatchedTextCommand](xref:@ActiproUIRoot.Controls.Bars.BarComboBox.UnmatchedTextCommand), [PopupOpeningCommand](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarMenuGalleryHostBase.PopupOpeningCommand), and [PopupClosedCommand](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarMenuGalleryHostBase.PopupClosedCommand) properties. |
 | Key tip support | Yes, via the [KeyTipText](xref:@ActiproUIRoot.Controls.Bars.BarComboBox.KeyTipText) property.  Auto-generated from the `Label` value if not specified. |
 | [Ribbon QAT](../ribbon-features/quick-access-toolbar.md) support | Yes, via the [CanCloneToRibbonQuickAccessToolBar](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarGalleryBase.CanCloneToRibbonQuickAccessToolBar) property. |
 | [MVVM Library](../mvvm-support.md) VM | [BarComboBoxViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarComboBoxViewModel) class. |
@@ -237,6 +237,8 @@ On the other hand, if no matching gallery item is located and the [IsUnmatchedTe
 In either case, a [TextCommitted](xref:@ActiproUIRoot.Controls.Bars.BarComboBox.TextCommitted) event is raised whenever this process completes.
 
 The [PopupOpeningCommand](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarMenuGalleryHostBase.PopupOpeningCommand) command, if assigned, is executed prior to the popup opening.  This command can be handled in a view model, allowing for a MVVM way to update the items on the popup prior to display.
+
+The [PopupClosedCommand](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarMenuGalleryHostBase.PopupClosedCommand) command, if assigned, is executed after the popup closes.  The [BarGalleryViewModel.PopupClosedCommand](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarGalleryViewModel.PopupClosedCommand) property inherited by [BarComboBoxViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarComboBoxViewModel) exposes this capability in the MVVM Library.
 
 See the [Using Commands](using-commands.md) topic for more information on commands.
 

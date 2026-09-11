@@ -18,9 +18,11 @@ Actipro Fundamentals is a library that contains professionally-developed control
 
 ### General Controls
 
+- [AnimatedTextPresenter](controls/animated-text-presenter.md) presents single-line text with configurable text and foreground transitions plus culture-aware numeric motion.
 - [Avatar](controls/avatar.md) represents people or objects.
 - [AvatarGroup](controls/avatar-group.md) renders multiple [Avatar](controls/avatar.md) controls.
 - [Badge](controls/badge.md) displays contextual information for other elements or can be used stand-alone.
+- [BorderBeam](controls/border-beam.md) adds a traveling or pulsing border and soft inner illumination around content.
 - [Card](controls/card.md) displays visually grouped information for a single subject.
 - [CircularProgressBar](controls/circular-progressbar.md) displays a ranged progress value using fluent animations.  It is similar to a native linear `ProgressBar`, except that it renders the progress in a ring shape.
 - [InfoBar](controls/info-bar.md) displays essential information to a user without disrupting the user flow.

@@ -17,19 +17,9 @@ CHANGES SINCE LAST STEP:
 
 using ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm;
 
-namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.Step10 {
+namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.Step10;
 
-	/// <summary>
-	/// Defines the view model for the "Home" tab of the ribbon backstage.
-	/// </summary>
-	public class HomeRibbonBackstageTabViewModel : RibbonBackstageTabViewModel {
-
-		/// <summary>
-		/// Initializes a new instance of the class.
-		/// </summary>
-		public HomeRibbonBackstageTabViewModel()
-			: base(SampleBarControlKeys.BackstageTabHome, "Home") { }
-
-	}
-
-}
+/// <summary>
+/// Defines the view model for the "Home" tab of the ribbon backstage.
+/// </summary>
+public class HomeRibbonBackstageTabViewModel() : RibbonBackstageTabViewModel(SampleBarControlKeys.BackstageTabHome, "Home") { }

@@ -1,7 +1,4 @@
-using Avalonia.Data;
 using Avalonia.Data.Converters;
-using System;
-using System.Globalization;
 
 namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.RangeSliderIntro;
 

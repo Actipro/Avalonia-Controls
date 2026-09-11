@@ -17,6 +17,7 @@
 
 		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
 			<sampleBrowser:ControlExampleLinkItem Title="ListBox" Url="/ProductSamples/ThemesSamples/NativeControls/ListBoxSamples" />
+			<sampleBrowser:ControlExampleLinkItem Title="TableView" Url="/ProductSamples/ThemesSamples/NativeControls/TableViewSamples" />
 			<sampleBrowser:ControlExampleLinkItem Title="TreeView" Url="/ProductSamples/ThemesSamples/NativeControls/TreeViewSamples" />
 		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
 

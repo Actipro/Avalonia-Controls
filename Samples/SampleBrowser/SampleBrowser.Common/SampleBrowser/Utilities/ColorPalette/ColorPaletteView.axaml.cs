@@ -1,19 +1,15 @@
-using Avalonia.Controls;
+namespace ActiproSoftware.SampleBrowser.Utilities.ColorPalette;
 
-namespace ActiproSoftware.SampleBrowser.Utilities.ColorPalette {
+public partial class ColorPaletteView : UserControl {
 
-	public partial class ColorPaletteView : UserControl {
+	// --------------------------------------------------------------------------------------------------
+	// OBJECT
+	// --------------------------------------------------------------------------------------------------
 
-		// --------------------------------------------------------------------------------------------------
-		// OBJECT
-		// --------------------------------------------------------------------------------------------------
+	public ColorPaletteView() {
+		InitializeComponent();
 
-		public ColorPaletteView() {
-			InitializeComponent();
-
-			this.DataContext = new ColorPaletteViewModel();
-		}
-
+		DataContext = new ColorPaletteViewModel();
 	}
 
 }

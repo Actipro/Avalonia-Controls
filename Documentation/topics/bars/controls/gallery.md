@@ -39,7 +39,7 @@ Use the [RibbonGallery](xref:@ActiproUIRoot.Controls.Bars.RibbonGallery) control
 | Has popup | Yes, which shows a [BarMenuGallery](xref:@ActiproUIRoot.Controls.Bars.BarMenuGallery) with the same items, and optionally additional menu items. |
 | Is checkable | No. |
 | Variant sizes | `Small` (collapsed gallery popup button), `Medium` (several columns), `Large` (many columns). |
-| Command support | Yes, via the [Command](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarGalleryBase.Command) property.  The gallery item that is selected/previewed is passed as the command parameter. |
+| Command support | Yes, via the [Command](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarGalleryBase.Command), [PopupOpeningCommand](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarMenuGalleryHostBase.PopupOpeningCommand), and [PopupClosedCommand](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarMenuGalleryHostBase.PopupClosedCommand) properties.  The gallery item that is selected/previewed is passed to `Command` as the command parameter. |
 | Key tip support | Yes, via the [KeyTipText](xref:@ActiproUIRoot.Controls.Bars.RibbonGallery.KeyTipText) property, for the `More` button when expanded and the collapsed gallery popup button.  Auto-generated from the `Label` value if not specified. |
 | [Ribbon QAT](../ribbon-features/quick-access-toolbar.md) support | Yes, via the [CanCloneToRibbonQuickAccessToolBar](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarGalleryBase.CanCloneToRibbonQuickAccessToolBar) property. |
 | [MVVM Library](../mvvm-support.md) VM | [BarGalleryViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarGalleryViewModel) class. |
@@ -397,7 +397,9 @@ The `ICommand` in the [RibbonGallery](xref:@ActiproUIRoot.Controls.Bars.RibbonGa
 
 An [IPreviewableCommand](xref:@ActiproUIRoot.Input.IPreviewableCommand) interface is defined in the Shared Library that allows special `ICommand` implementations to support live preview features.  A section below describes how to implement live preview.
 
-The [PopupOpeningCommand](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarMenuGalleryHostBase.PopupOpeningCommand) command, if assigned, is executed prior to the popup opening.  This command can be handled in a view model, allowing for a MVVM way to update the items on the popup prior to display.
+The [RibbonGallery](xref:@ActiproUIRoot.Controls.Bars.RibbonGallery).[PopupOpeningCommand](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarMenuGalleryHostBase.PopupOpeningCommand) command, if assigned, is executed prior to the popup opening.  This command can be handled in a view model, allowing for a MVVM way to update the items on the popup prior to display.
+
+The [RibbonGallery](xref:@ActiproUIRoot.Controls.Bars.RibbonGallery).[PopupClosedCommand](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarMenuGalleryHostBase.PopupClosedCommand) command, if assigned, is executed after the popup closes.  The [BarGalleryViewModel.PopupClosedCommand](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarGalleryViewModel.PopupClosedCommand) property exposes this capability in the MVVM Library.
 
 A [RibbonGallery](xref:@ActiproUIRoot.Controls.Bars.RibbonGallery).`SelectionChanged` and [BarMenuGallery](xref:@ActiproUIRoot.Controls.Bars.BarMenuGallery).`SelectionChanged` event is raised when the gallery's selection changes.
 

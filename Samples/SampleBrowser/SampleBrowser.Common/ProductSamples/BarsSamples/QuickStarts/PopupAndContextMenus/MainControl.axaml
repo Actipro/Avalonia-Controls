@@ -16,7 +16,7 @@
 		</ControlTheme>
 		
 		<!-- Custom DataTemplate used by XAML and MVVM samples to use circles (instead of squares) for gallery items -->
-		<DataTemplate x:Key="CircleStyleGalleryItemItemplate" x:DataType="{x:Type actipro:ColorBarGalleryItemViewModel}">
+		<DataTemplate x:Key="CircleStyleGalleryItemTemplate" x:DataType="{x:Type actipro:ColorBarGalleryItemViewModel}">
 			<!-- The CornerRadius defined here must match the CornerRadius defined by CircularColorSwatchGalleryItemTheme -->
 			<Border Width="16" Height="16"
 				BorderBrush="{actipro:ThemeResource Container3BorderBrush}"
@@ -977,7 +977,7 @@ public class PasteOptionGalleryItem : BarGalleryItemViewModel<PasteSpecialKind> 
 	// --------------------------------------------------------------------------------------------------
 
 	/// <summary>
-	/// Initializes a new instance of the <see cref="PasteOptionGalleryItem"/> class.
+	/// Initializes an instance of the class.
 	/// </summary>
 	/// <param name="kind">The kind of special paste operation represented by the gallery item.</param>
 	public PasteOptionGalleryItem(PasteSpecialKind kind)
@@ -1071,7 +1071,7 @@ public enum PasteSpecialKind {
 								ItemContainerTheme="{StaticResource CircularColorSwatchGalleryItemTheme}"
 								ItemSpacing="6"
 								ItemsSource="{Binding #sampleRootControl.TagColors}"
-								ItemTemplate="{StaticResource CircleStyleGalleryItemItemplate}"
+								ItemTemplate="{StaticResource CircleStyleGalleryItemTemplate}"
 								MinColumnCount="7"
 								UseAccentedItemBorder="True"
 								UseMenuItemIndent="True" />
@@ -1100,7 +1100,7 @@ public enum PasteSpecialKind {
 		</ControlTheme>
 		
 		<!-- Custom DataTemplate used by XAML and MVVM samples to use circles (instead of squares) for gallery items -->
-		<DataTemplate x:Key="CircleStyleGalleryItemItemplate" x:DataType="{x:Type actipro:ColorBarGalleryItemViewModel}">
+		<DataTemplate x:Key="CircleStyleGalleryItemTemplate" x:DataType="{x:Type actipro:ColorBarGalleryItemViewModel}">
 			<!-- The CornerRadius defined here must match the CornerRadius defined by CircularColorSwatchGalleryItemTheme -->
 			<Border Width="16" Height="16"
 				BorderBrush="{actipro:ThemeResource Container3BorderBrush}"
@@ -1137,7 +1137,7 @@ public enum PasteSpecialKind {
 					ItemContainerTheme="{StaticResource CircularColorSwatchGalleryItemTheme}"
 					ItemSpacing="6"
 					ItemsSource="{Binding #sampleRootControl.TagColors}"
-					ItemTemplate="{StaticResource CircleStyleGalleryItemItemplate}"
+					ItemTemplate="{StaticResource CircleStyleGalleryItemTemplate}"
 					MinColumnCount="7"
 					UseAccentedItemBorder="True"
 					UseMenuItemIndent="True" />
@@ -1187,7 +1187,7 @@ public class TagColorGalleryItem : ColorBarGalleryItemViewModel {
 	// --------------------------------------------------------------------------------------------------
 
 	/// <summary>
-	/// Initializes a new instance of the <see cref="TagColorGalleryItem"/> class.
+	/// Initializes an instance of the class.
 	/// </summary>
 	/// <param name="value">The color associated with the tag.</param>
 	/// <param name="label">The label associated with the tag.</param>

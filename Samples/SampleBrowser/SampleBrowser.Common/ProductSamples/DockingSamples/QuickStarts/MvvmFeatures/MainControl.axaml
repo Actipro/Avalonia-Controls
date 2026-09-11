@@ -132,9 +132,6 @@ public partial class DocumentsSampleMainViewModel : ObservableObjectBase {
 	// OBJECT
 	// --------------------------------------------------------------------------------------------------
 
-	/// <summary>
-	/// Initializes a new instance of the class.
-	/// </summary>
 	public DocumentsSampleMainViewModel() {
 		CreateNewTextDocument(activate: false);
 		CreateNewTextDocument(activate: false);
@@ -314,9 +311,6 @@ public abstract class DockingItemViewModelBase : ObservableObjectBase {
 	/// <summary>
 	/// Whether the view is currently active.
 	/// </summary>
-	/// <value>
-	/// <c>true</c> if the view is currently active; otherwise, <c>false</c>.
-	/// </value>
 	public bool IsActive {
 		get => _isActive;
 		set => SetProperty(ref _isActive, value);
@@ -325,9 +319,6 @@ public abstract class DockingItemViewModelBase : ObservableObjectBase {
 	/// <summary>
 	/// Whether the view is floating.
 	/// </summary>
-	/// <value>
-	/// <c>true</c> if the view is floating; otherwise, <c>false</c>.
-	/// </value>
 	public bool IsFloating {
 		get => _isFloating;
 		set => SetProperty(ref _isFloating, value);
@@ -336,9 +327,6 @@ public abstract class DockingItemViewModelBase : ObservableObjectBase {
 	/// <summary>
 	/// Whether the view is currently open.
 	/// </summary>
-	/// <value>
-	/// <c>true</c> if the view is currently open; otherwise, <c>false</c>.
-	/// </value>
 	public bool IsOpen {
 		get => _isOpen;
 		set => SetProperty(ref _isOpen, value);
@@ -347,20 +335,14 @@ public abstract class DockingItemViewModelBase : ObservableObjectBase {
 	/// <summary>
 	/// Whether the view is currently selected in its parent container.
 	/// </summary>
-	/// <value>
-	/// <c>true</c> if the view is currently selected in its parent container; otherwise, <c>false</c>.
-	/// </value>
 	public bool IsSelected {
 		get => _isSelected;
 		set => SetProperty(ref _isSelected, value);
 	}
 
 	/// <summary>
-	/// Indicates whether the container generated for this view model should be a tool window.
+	/// Whether the container generated for this view model should be a tool window.
 	/// </summary>
-	/// <value>
-	/// <c>true</c> if the container generated for this view model should be a tool window; otherwise, <c>false</c>.
-	/// </value>
 	public abstract bool IsTool { get; }
 
 	/// <summary>
@@ -437,9 +419,6 @@ public class ImageDocumentItemViewModel : DocumentItemViewModel {
 	// OBJECT
 	// --------------------------------------------------------------------------------------------------
 
-	/// <summary>
-	/// Initializes a new instance of the class.
-	/// </summary>
 	public ImageDocumentItemViewModel() {
 		Description = "Image document";
 		Icon = ImageLoader.GetIcon("Picture16.png");
@@ -490,9 +469,6 @@ public class TextDocumentItemViewModel : DocumentItemViewModel {
 	// OBJECT
 	// --------------------------------------------------------------------------------------------------
 
-	/// <summary>
-	/// Initializes a new instance of the class.
-	/// </summary>
 	public TextDocumentItemViewModel() {
 		Description = "Text document";
 		Icon = ImageLoader.GetIcon("TextDocument16.png");
@@ -625,9 +601,6 @@ public partial class ToolsSampleMainViewModel : ObservableObjectBase {
 	// OBJECT
 	// --------------------------------------------------------------------------------------------------
 
-	/// <summary>
-	/// Initializes a new instance of the class.
-	/// </summary>
 	public ToolsSampleMainViewModel() {
 		_toolItems.Add(new ToolItem1ViewModel());
 		_toolItems.Add(new ToolItem2ViewModel() { State = ToolItemState.Document });
@@ -727,9 +700,6 @@ public abstract class DockingItemViewModelBase : ObservableObjectBase {
 	/// <summary>
 	/// Whether the view is currently active.
 	/// </summary>
-	/// <value>
-	/// <c>true</c> if the view is currently active; otherwise, <c>false</c>.
-	/// </value>
 	public bool IsActive {
 		get => _isActive;
 		set => SetProperty(ref _isActive, value);
@@ -738,9 +708,6 @@ public abstract class DockingItemViewModelBase : ObservableObjectBase {
 	/// <summary>
 	/// Whether the view is floating.
 	/// </summary>
-	/// <value>
-	/// <c>true</c> if the view is floating; otherwise, <c>false</c>.
-	/// </value>
 	public bool IsFloating {
 		get => _isFloating;
 		set => SetProperty(ref _isFloating, value);
@@ -749,9 +716,6 @@ public abstract class DockingItemViewModelBase : ObservableObjectBase {
 	/// <summary>
 	/// Whether the view is currently open.
 	/// </summary>
-	/// <value>
-	/// <c>true</c> if the view is currently open; otherwise, <c>false</c>.
-	/// </value>
 	public bool IsOpen {
 		get => _isOpen;
 		set => SetProperty(ref _isOpen, value);
@@ -760,20 +724,14 @@ public abstract class DockingItemViewModelBase : ObservableObjectBase {
 	/// <summary>
 	/// Whether the view is currently selected in its parent container.
 	/// </summary>
-	/// <value>
-	/// <c>true</c> if the view is currently selected in its parent container; otherwise, <c>false</c>.
-	/// </value>
 	public bool IsSelected {
 		get => _isSelected;
 		set => SetProperty(ref _isSelected, value);
 	}
 
 	/// <summary>
-	/// Indicates whether the container generated for this view model should be a tool window.
+	/// Whether the container generated for this view model should be a tool window.
 	/// </summary>
-	/// <value>
-	/// <c>true</c> if the container generated for this view model should be a tool window; otherwise, <c>false</c>.
-	/// </value>
 	public abstract bool IsTool { get; }
 
 	/// <summary>
@@ -843,9 +801,6 @@ public class ToolItemViewModel : DockingItemViewModelBase {
 // ToolItem1ViewModel.cs
 public class ToolItem1ViewModel : ToolItemViewModel {
 
-	/// <summary>
-	/// Initializes a new instance of the class.
-	/// </summary>
 	public ToolItem1ViewModel() {
 		SerializationId = "Tool1";  // NOTE: Every docking window must have a unique SerializationId if you wish to use layout serialization
 		Title = "Tool 1";
@@ -859,9 +814,6 @@ public class ToolItem1ViewModel : ToolItemViewModel {
 // ToolItem2ViewModel.cs
 public class ToolItem2ViewModel : ToolItemViewModel {
 
-	/// <summary>
-	/// Initializes a new instance of the class.
-	/// </summary>
 	public ToolItem1ViewModel() {
 		SerializationId = "Tool2";  // NOTE: Every docking window must have a unique SerializationId if you wish to use layout serialization
 		Title = "Tool 2";
@@ -875,9 +827,6 @@ public class ToolItem2ViewModel : ToolItemViewModel {
 // ToolItem3ViewModel.cs
 public class ToolItem3ViewModel : ToolItemViewModel {
 
-	/// <summary>
-	/// Initializes a new instance of the class.
-	/// </summary>
 	public ToolItem3ViewModel() {
 		SerializationId = "Tool3";  // NOTE: Every docking window must have a unique SerializationId if you wish to use layout serialization
 		Title = "Tool 3";

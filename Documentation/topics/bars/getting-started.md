@@ -74,7 +74,7 @@ Bars is a paid product that is included with a Pro license.  During the evaluati
 
 Once a license is purchased (or a short-term evaluation license is obtained), the license must be registered during application startup to prevent the licensing prompt from being displayed.
 
-See the section [Licensing](../licensing.md) topic for more details on licensing, including how to apply a license.
+See the [Licensing](../licensing.md) topic for more details on licensing, including how to apply a license.
 
 }
 

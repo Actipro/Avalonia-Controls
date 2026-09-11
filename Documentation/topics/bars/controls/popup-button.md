@@ -34,7 +34,7 @@ Use the [BarPopupButton](xref:@ActiproUIRoot.Controls.Bars.BarPopupButton) contr
 | Has popup | Yes. |
 | Is checkable | No. |
 | Variant sizes | `Small` (image only), `Medium` (image and label), `Large` (tall size, image and multi-line label). |
-| Command support | Yes, via the [PopupOpeningCommand](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarPopupButtonBase.PopupOpeningCommand) property. |
+| Command support | Yes, via the [PopupOpeningCommand](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarPopupButtonBase.PopupOpeningCommand) and [PopupClosedCommand](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarPopupButtonBase.PopupClosedCommand) properties. |
 | Key tip support | Yes, via the [KeyTipText](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarPopupButtonBase.KeyTipText) property.  Auto-generated from the `Label` value if not specified. |
 | [Ribbon QAT](../ribbon-features/quick-access-toolbar.md) support | Yes, via the [CanCloneToRibbonQuickAccessToolBar](xref:@ActiproUIRoot.Controls.Bars.BarPopupButton.CanCloneToRibbonQuickAccessToolBar) property. |
 | [MVVM Library](../mvvm-support.md) VM | [BarPopupButtonViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarPopupButtonViewModel) class. |
@@ -49,7 +49,7 @@ Use the [BarPopupButton](xref:@ActiproUIRoot.Controls.Bars.BarPopupButton) contr
 | Has popup | Yes. |
 | Is checkable | No. |
 | Variant sizes | `Small` (image only), `Medium` (image and label), `Large` (tall size, image and multi-line label). |
-| Command support | Yes, via the [PopupOpeningCommand](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarPopupButtonBase.PopupOpeningCommand) property. |
+| Command support | Yes, via the [PopupOpeningCommand](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarPopupButtonBase.PopupOpeningCommand) and [PopupClosedCommand](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarPopupButtonBase.PopupClosedCommand) properties. |
 | Key tip support | Yes, via the [KeyTipText](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarPopupButtonBase.KeyTipText) property.  Auto-generated from the `Label` value if not specified. |
 | [Ribbon QAT](../ribbon-features/quick-access-toolbar.md) support | Yes, via the [CanCloneToRibbonQuickAccessToolBar](xref:@ActiproUIRoot.Controls.Bars.BarPopupButton.CanCloneToRibbonQuickAccessToolBar) property. |
 | UI density support | Yes, via the [UserInterfaceDensity](xref:@ActiproUIRoot.Controls.Bars.BarPopupButton.UserInterfaceDensity) property. |
@@ -124,7 +124,7 @@ Use the [BarMenuItem](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem) control to 
 | Has popup | Yes. |
 | Is checkable | No. |
 | Variant sizes | None, but has a [UseLargeSize](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem.UseLargeSize) property that triggers a large height and displays an extended [Description](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem.Description). |
-| Command support | Yes, via the [PopupOpeningCommand](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem.PopupOpeningCommand) property. |
+| Command support | Yes, via the [PopupOpeningCommand](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem.PopupOpeningCommand) and [PopupClosedCommand](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem.PopupClosedCommand) properties. |
 | Key tip support | Yes, via the [KeyTipText](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem.KeyTipText) property.  Auto-generated from the `Label` value if not specified. |
 | [Ribbon QAT](../ribbon-features/quick-access-toolbar.md) support | Yes, via the [CanCloneToRibbonQuickAccessToolBar](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem.CanCloneToRibbonQuickAccessToolBar) property. |
 | [MVVM Library](../mvvm-support.md) VM | [BarPopupButtonViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarPopupButtonViewModel) class. |
@@ -139,7 +139,7 @@ Use the [BarMenuItem](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem) control to 
 | Has popup | Yes. |
 | Is checkable | No. |
 | Variant sizes | None, but has a [UseLargeSize](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem.UseLargeSize) property that triggers a large height and displays an extended [Description](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem.Description). |
-| Command support | Yes, via the [PopupOpeningCommand](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem.PopupOpeningCommand) property. |
+| Command support | Yes, via the [PopupOpeningCommand](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem.PopupOpeningCommand) and [PopupClosedCommand](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem.PopupClosedCommand) properties. |
 | Key tip support | Yes, via the [KeyTipText](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem.KeyTipText) property.  Auto-generated from the `Label` value if not specified. |
 | [Ribbon QAT](../ribbon-features/quick-access-toolbar.md) support | Yes, via the [CanCloneToRibbonQuickAccessToolBar](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem.CanCloneToRibbonQuickAccessToolBar) property. |
 | UI density support | None. |
@@ -279,6 +279,8 @@ The `ICommand` in the [BarPopupButton](xref:@ActiproUIRoot.Controls.Bars.BarPopu
 }
 
 The `ICommand` in the [BarPopupButton](xref:@ActiproUIRoot.Controls.Bars.BarPopupButton).[PopupOpeningCommand](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarPopupButtonBase.PopupOpeningCommand) property, and similarly the [BarMenuItem](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem).[PopupOpeningCommand](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem.PopupOpeningCommand), is executed prior to the popup or sub-menu opening.  This command can be handled in a view model, allowing for a MVVM way to update the items on the popup prior to display.
+
+The `ICommand` in the [BarPopupButton](xref:@ActiproUIRoot.Controls.Bars.BarPopupButton).[PopupClosedCommand](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarPopupButtonBase.PopupClosedCommand) property, and similarly the [BarMenuItem](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem).[PopupClosedCommand](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem.PopupClosedCommand), is executed after the popup or sub-menu closes.  The [BarPopupButtonViewModel.PopupClosedCommand](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarPopupButtonViewModel.PopupClosedCommand) property exposes this capability in the MVVM Library.
 
 @if (avalonia) {
 [BarPopupButton](xref:@ActiproUIRoot.Controls.Bars.BarPopupButton).[Opening](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarPopupButtonBase.Opening) and `MenuBase.Opened` events are raised when the popup is opened.  The former event allows you to customize the popup menu prior to display.

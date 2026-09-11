@@ -1,4 +1,4 @@
-﻿# Actipro Avalonia Controls
+# Actipro Avalonia Controls
 
 [![Latest](https://img.shields.io/nuget/v/ActiproSoftware.Controls.Avalonia?label=Latest&logo=nuget)](https://www.nuget.org/packages/ActiproSoftware.Controls.Avalonia) 
 [![Downloads](https://img.shields.io/nuget/dt/ActiproSoftware.Controls.Avalonia?label=Downloads)](https://www.nuget.org/packages/ActiproSoftware.Controls.Avalonia) 
@@ -40,7 +40,7 @@ Elevate your application by licensing professionally designed commercial control
 
 ![Fundamentals](.github/image-content/fundamentals-welcome.png)
 
-[Actipro Fundamentals](https://www.actiprosoftware.com/docs/controls/avalonia/fundamentals/index) provides a collection of advanced controls that are useful for many different types of applications, including settings editors, user prompts, message boxes, info bars, avatars, badges, segmented bars, range sliders, progress indicators, and more.
+[Actipro Fundamentals](https://www.actiprosoftware.com/docs/controls/avalonia/fundamentals/index) provides a collection of advanced controls that are useful for many different types of applications, including animated border beams and text transitions, settings editors, user prompts, message boxes, info bars, avatars, badges, segmented bars, range sliders, progress indicators, and more.
 
 ![Data Visualization](.github/image-content/data-visualization-welcome.png)
 

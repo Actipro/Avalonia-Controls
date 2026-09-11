@@ -1,4 +1,5 @@
 ﻿<UserControl
+	x:Class="ActiproSoftware.ProductSamples.FundamentalsSamples.Overview"
 	x:DataType="sampleBrowser:ApplicationViewModel"
 	xmlns="https://github.com/avaloniaui"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -44,7 +45,6 @@
 						<actipro:Card.Footer>
 							<TextBlock FlowDirection="LeftToRight" Foreground="{actipro:ThemeResource DefaultForegroundBrushTertiary}" Text="@erik_lai" TextAlignment="Center" />
 						</actipro:Card.Footer>
-
 					</actipro:Card>
 
 					<StackPanel Margin="{actipro:ScaledThickness '0,1,0,0'}" Spacing="{actipro:ScaledDouble 4}">
@@ -103,14 +103,29 @@
 					</StackPanel>
 				</StackPanel>
 
-				<actipro:SegmentedBar Classes="theme-outline accent" HorizontalAlignment="Center" SelectedIndex="2">
-					<actipro:SegmentedBarItem>Never</actipro:SegmentedBarItem>
-					<actipro:SegmentedBarItem>Daily</actipro:SegmentedBarItem>
-					<actipro:SegmentedBarItem>Weekly</actipro:SegmentedBarItem>
-					<actipro:SegmentedBarItem>Monthly</actipro:SegmentedBarItem>
-					<actipro:SegmentedBarItem IsEnabled="False">Quarterly</actipro:SegmentedBarItem>
-					<actipro:SegmentedBarItem>Annually</actipro:SegmentedBarItem>
-				</actipro:SegmentedBar>
+				<actipro:BorderBeam 
+					Background="{actipro:ThemeResource Container2BackgroundBrush}" CornerRadius="{Binding #updateIntervalSegmentedBar.CornerRadius}"
+					BorderBrush="{actipro:ThemeResource Container3BorderBrush}" BorderThickness="1"
+					HorizontalAlignment="Center">
+					<StackPanel>
+						<actipro:SegmentedBar x:Name="updateIntervalSegmentedBar" Classes="theme-outline accent" SelectedIndex="2" BorderThickness="0" Padding="5">
+							<actipro:SegmentedBarItem Tag="Not scheduled">Never</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem Tag="In 1 day">Daily</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem Tag="In 7 days">Weekly</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem Tag="In 30 days">Monthly</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem IsEnabled="False" Tag="In 90 days">Quarterly</actipro:SegmentedBarItem>
+							<actipro:SegmentedBarItem Tag="In 365 days">Annually</actipro:SegmentedBarItem>
+						</actipro:SegmentedBar>
+
+						<Border BorderBrush="{actipro:ThemeResource Container3BorderBrush}" BorderThickness="0,1,0,0" Padding="0,3">
+							<StackPanel Margin="{actipro:ScaledThickness 1}" Orientation="Horizontal" HorizontalAlignment="Center" Spacing="{actipro:ScaledDouble 1}">
+								<TextBlock Text="Next update:" Foreground="{actipro:ThemeResource DefaultForegroundBrushSecondary}" VerticalAlignment="Center" />
+								<actipro:AnimatedTextPresenter x:Name="nextUpdateTextPresenter" ToolTip.Tip="AnimatedTextPresenter Control"
+									FontWeight="SemiBold" Text="In 7 days" VerticalAlignment="Center" />
+							</StackPanel>
+						</Border>
+					</StackPanel>
+				</actipro:BorderBeam>
 				
 				<actipro:UserPromptControl ToolTip.Tip="UserPromptControl with Checkbox and Expanded Information"
 					Width="400"

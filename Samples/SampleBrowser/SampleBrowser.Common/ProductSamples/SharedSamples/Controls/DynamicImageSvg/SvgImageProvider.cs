@@ -1,5 +1,4 @@
 ﻿using ActiproSoftware.UI.Avalonia.Media;
-using Avalonia.Media;
 using Avalonia.Svg.Skia;
 using ShimSkiaSharp;
 
@@ -18,7 +17,6 @@ public class SvgImageProvider : ImageProvider {
 	/// Converts a <see cref="SKColor"/> to an Avalonia <see cref="Color"/>.
 	/// </summary>
 	/// <param name="color">The color to convert.</param>
-	/// <returns>The converted color.</returns>
 	private static Color ToColor(SKColor color)
 		=> Color.FromArgb(color.Alpha, color.Red, color.Green, color.Blue);
 
@@ -26,7 +24,6 @@ public class SvgImageProvider : ImageProvider {
 	/// Converts an Avalonia <see cref="Color"/> to <see cref="SKColor"/>.
 	/// </summary>
 	/// <param name="color">The color to convert.</param>
-	/// <returns>The converted color.</returns>
 	private static SKColor ToSKColor(Color color)
 		=> new(color.R, color.G, color.B, color.A);
 
@@ -36,13 +33,16 @@ public class SvgImageProvider : ImageProvider {
 	/// <param name="command">The <see cref="CanvasCommand"/> to examine.</param>
 	/// <param name="request">The <see cref="ImageProviderRequest"/> containing the adaptation request.</param>
 	private void UpdatePaintColorsInCommand(CanvasCommand? command, ImageProviderRequest request) {
-		if (command is DrawPathCanvasCommand drawPathCommand)
-			UpdatePaintColors(drawPathCommand.Paint, request);
-		else if (command is DrawPictureCanvasCommand drawPictureCommand) {
-			if (drawPictureCommand.Picture?.Commands is { } commands) {
-				foreach (var childCommand in commands)
-					UpdatePaintColorsInCommand(childCommand, request);
-			}
+		switch (command) {
+			case DrawPathCanvasCommand drawPathCommand:
+				UpdatePaintColors(drawPathCommand.Paint, request);
+				break;
+			case DrawPictureCanvasCommand drawPictureCommand:
+				if (drawPictureCommand.Picture?.Commands is { } commands) {
+					foreach (var childCommand in commands)
+						UpdatePaintColorsInCommand(childCommand, request);
+				}
+				break;
 		}
 	}
 
@@ -62,7 +62,7 @@ public class SvgImageProvider : ImageProvider {
 				paint.Color = ToSKColor(adaptedColor);
 		}
 
-		if ((paint.Shader is ColorShader shader) && (shader.Color is { } skShaderColor)) {
+		if (paint.Shader is ColorShader { Color: { } skShaderColor } shader) {
 			var color = ToColor(skShaderColor);
 			var adaptedColor = AdaptColor(color, request);
 			if (adaptedColor != color)

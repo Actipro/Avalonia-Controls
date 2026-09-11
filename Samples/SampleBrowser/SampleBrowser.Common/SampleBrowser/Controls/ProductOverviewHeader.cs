@@ -1,10 +1,6 @@
-using Avalonia.Controls;
+namespace ActiproSoftware.SampleBrowser;
 
-namespace ActiproSoftware.SampleBrowser {
-
-	/// <summary>
-	/// Renders a product overview header.
-	/// </summary>
-	public class ProductOverviewHeader : ContentControl { }
-
-}
+/// <summary>
+/// Renders a product overview header.
+/// </summary>
+public class ProductOverviewHeader : ContentControl { }

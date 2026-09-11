@@ -1,60 +1,52 @@
 ﻿using Avalonia.Markup.Xaml;
-using Avalonia.Media;
-using Avalonia.Media.Imaging;
 using Avalonia.Platform;
-using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
-namespace ActiproSoftware.SampleBrowser {
+namespace ActiproSoftware.SampleBrowser;
+
+/// <summary>
+/// Provides the ability to load images.
+/// </summary>
+public static class ImageLoader {
+
+	// --------------------------------------------------------------------------------------------------
+	// NON-PUBLIC PROCEDURES
+	// --------------------------------------------------------------------------------------------------
 
 	/// <summary>
-	/// Provides the ability to load images.
+	/// Returns an <see cref="IImage"/>.
 	/// </summary>
-	public static class ImageLoader {
+	/// <param name="relPath">The path of the resource file relative to the <c>Images</c> folder.</param>
+	[UnconditionalSuppressMessage("Aot", "IL2026:Requires unreferenced code", Justification = "Only local resources are loaded with AvaloniaXamlLoader and this assembly, by design, should not be trimmed.")]
+	private static IImage? LoadImageResource(string relPath) {
+		ArgumentNullException.ThrowIfNull(relPath);
 
-		// --------------------------------------------------------------------------------------------------
-		// NON-PUBLIC PROCEDURES
-		// --------------------------------------------------------------------------------------------------
+		var assemblyName = Assembly.GetExecutingAssembly().GetName().Name;
+		var resourceUriText = $"avares://{assemblyName}/Images{relPath}";
 
-		/// <summary>
-		/// Gets an <see cref="IImage"/>.
-		/// </summary>
-		/// <param name="relPath">The path of the resource file relative to the <c>Images</c> folder.</param>
-		/// <returns>An <see cref="IImage"/>.</returns>
-		[UnconditionalSuppressMessage("Aot", "IL2026:Requires unreferenced code", Justification = "Only local resources are loaded with AvaloniaXamlLoader and this assembly, by design, should not be trimmed.")]
-		private static IImage? LoadImageResource(string relPath) {
-			if (relPath is null)
-				throw new ArgumentNullException(nameof(relPath));
+		if (resourceUriText.EndsWith(".axaml", StringComparison.OrdinalIgnoreCase))
+			return AvaloniaXamlLoader.Load(new Uri(resourceUriText)) as IImage;
 
-			var assemblyName = Assembly.GetExecutingAssembly().GetName().Name;
-			string resourceUriText = $"avares://{assemblyName}/Images{relPath}";
-
-			if (resourceUriText.EndsWith(".axaml", StringComparison.OrdinalIgnoreCase))
-				return AvaloniaXamlLoader.Load(new Uri(resourceUriText)) as IImage;
-
-			// Assume all other resources are image files
-			return new Bitmap(AssetLoader.Open(new Uri(resourceUriText)));
-		}
-
-		// --------------------------------------------------------------------------------------------------
-		// PUBLIC PROCEDURES
-		// --------------------------------------------------------------------------------------------------
-
-		/// <summary>
-		/// Gets an <see cref="IImage"/> for an icon.
-		/// </summary>
-		/// <param name="fileName">The name of the file in the <c>/Images/Icons</c> folder.</param>
-		/// <returns>An <see cref="IImage"/>.</returns>
-		public static IImage? GetIcon(string fileName) => LoadImageResource("/Icons/" + fileName);
-
-		/// <summary>
-		/// Gets an <see cref="IImage"/> for a profile photo.
-		/// </summary>
-		/// <param name="fileName">The name of the file in the <c>/Images/ProfilePhotos</c> folder.</param>
-		/// <returns>An <see cref="IImage"/>.</returns>
-		public static IImage? GetProfilePhoto(string fileName) => LoadImageResource("/ProfilePhotos/" + fileName);
-
+		// Assume all other resources are image files
+		return new Bitmap(AssetLoader.Open(new Uri(resourceUriText)));
 	}
+
+	// --------------------------------------------------------------------------------------------------
+	// PUBLIC PROCEDURES
+	// --------------------------------------------------------------------------------------------------
+
+	/// <summary>
+	/// Returns an <see cref="IImage"/> for an icon.
+	/// </summary>
+	/// <param name="fileName">The name of the file in the <c>/Images/Icons</c> folder.</param>
+	public static IImage? GetIcon(string fileName)
+		=> LoadImageResource("/Icons/" + fileName);
+
+	/// <summary>
+	/// Returns an <see cref="IImage"/> for a profile photo.
+	/// </summary>
+	/// <param name="fileName">The name of the file in the <c>/Images/ProfilePhotos</c> folder.</param>
+	public static IImage? GetProfilePhoto(string fileName)
+		=> LoadImageResource("/ProfilePhotos/" + fileName);
 
 }

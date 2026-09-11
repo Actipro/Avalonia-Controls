@@ -105,8 +105,6 @@ public partial class MainControl : UserControl {
 	/// <summary>
 	/// Occurs before one or more docking windows are closed, allowing for cancellation of the close.
 	/// </summary>
-	/// <param name="sender">The sender of the event.</param>
-	/// <param name="e">The <c>DockingWindowsEventArgs</c> that contains data related to this event.</param>
 	private async void OnDockSiteWindowsClosing(object sender, DockingWindowsEventArgs e) {
 		// Prevent re-entry
 		if (_ignorePromptOnClose)

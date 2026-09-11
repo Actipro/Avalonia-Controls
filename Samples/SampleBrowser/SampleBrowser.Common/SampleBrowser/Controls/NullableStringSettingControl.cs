@@ -1,121 +1,113 @@
-using Avalonia;
-using Avalonia.Controls.Primitives;
+namespace ActiproSoftware.SampleBrowser;
 
-namespace ActiproSoftware.SampleBrowser {
+/// <summary>
+/// Renders a section heading.
+/// </summary>
+public class NullableStringSettingControl : TemplatedControl {
+
+	#region Property Definitions
 
 	/// <summary>
-	/// Renders a section heading.
+	/// Defines the <see cref="CoerceEmptyAsNull"/> property.
 	/// </summary>
-	public class NullableStringSettingControl : TemplatedControl {
+	public static readonly StyledProperty<bool> CoerceEmptyAsNullProperty
+		= AvaloniaProperty.Register<NullableStringSettingControl, bool>(nameof(CoerceEmptyAsNull));
 
-		#region Property Definitions
+	/// <summary>
+	/// Defines the <see cref="IsCoerceCheckBoxVisible"/> property.
+	/// </summary>
+	public static readonly StyledProperty<bool> IsCoerceCheckBoxVisibleProperty
+		= AvaloniaProperty.Register<NullableStringSettingControl, bool>(nameof(IsCoerceCheckBoxVisible), defaultValue: true);
 
-		/// <summary>
-		/// Defines the <see cref="CoerceEmptyAsNull"/> property.
-		/// </summary>
-		public static readonly StyledProperty<bool> CoerceEmptyAsNullProperty
-			= AvaloniaProperty.Register<NullableStringSettingControl, bool>(nameof(CoerceEmptyAsNull));
+	/// <summary>
+	/// Defines the <see cref="IsPlaceholderVisible"/> property.
+	/// </summary>
+	public static readonly StyledProperty<bool> IsPlaceholderVisibleProperty
+		= AvaloniaProperty.Register<NullableStringSettingControl, bool>(nameof(IsPlaceholderVisible), defaultValue: true);
 
-		/// <summary>
-		/// Defines the <see cref="IsCoerceCheckBoxVisible"/> property.
-		/// </summary>
-		public static readonly StyledProperty<bool> IsCoerceCheckBoxVisibleProperty
-			= AvaloniaProperty.Register<NullableStringSettingControl, bool>(nameof(IsCoerceCheckBoxVisible), defaultValue: true);
+	/// <summary>
+	/// Defines the <see cref="Label"/> property.
+	/// </summary>
+	public static readonly StyledProperty<string?> LabelProperty
+		= AvaloniaProperty.Register<NullableStringSettingControl, string?>(nameof(Label));
 
-		/// <summary>
-		/// Defines the <see cref="IsPlaceholderVisible"/> property.
-		/// </summary>
-		public static readonly StyledProperty<bool> IsPlaceholderVisibleProperty
-			= AvaloniaProperty.Register<NullableStringSettingControl, bool>(nameof(IsPlaceholderVisible), defaultValue: true);
+	/// <summary>
+	/// Defines the <see cref="Text"/> property.
+	/// </summary>
+	public static readonly StyledProperty<string?> TextProperty
+		= AvaloniaProperty.Register<NullableStringSettingControl, string?>(nameof(Text), coerce: CoerceTextPropertyValue);
 
-		/// <summary>
-		/// Defines the <see cref="Label"/> property.
-		/// </summary>
-		public static readonly StyledProperty<string?> LabelProperty
-			= AvaloniaProperty.Register<NullableStringSettingControl, string?>(nameof(Label));
+	#endregion
 
-		/// <summary>
-		/// Defines the <see cref="Text"/> property.
-		/// </summary>
-		public static readonly StyledProperty<string?> TextProperty
-			= AvaloniaProperty.Register<NullableStringSettingControl, string?>(nameof(Text), coerce: CoerceTextPropertyValue);
+	// --------------------------------------------------------------------------------------------------
+	// OBJECT
+	// --------------------------------------------------------------------------------------------------
 
-		#endregion
+	public NullableStringSettingControl() {
+		CoerceEmptyAsNullProperty.Changed.AddClassHandler<NullableStringSettingControl>((x, _) => x.CoerceValue(TextProperty));
+	}
 
-		// --------------------------------------------------------------------------------------------------
-		// OBJECT
-		// --------------------------------------------------------------------------------------------------
+	// --------------------------------------------------------------------------------------------------
+	// NON-PUBLIC PROCEDURES
+	// --------------------------------------------------------------------------------------------------
 
-		/// <summary>
-		/// Initializes an instance of the class.
-		/// </summary>
-		public NullableStringSettingControl() {
-			CoerceEmptyAsNullProperty.Changed.AddClassHandler<NullableStringSettingControl>((x, _) => x.CoerceValue(TextProperty));
-		}
+	private static string? CoerceTextPropertyValue(AvaloniaObject obj, string? value) {
+		if ((obj is NullableStringSettingControl { CoerceEmptyAsNull: true }) && string.IsNullOrEmpty(value))
+			return null;
 
-		// --------------------------------------------------------------------------------------------------
-		// NON-PUBLIC PROCEDURES
-		// --------------------------------------------------------------------------------------------------
+		// Don't allow non-coerced null value to be returned
+		return value ?? string.Empty;
+	}
 
-		private static string? CoerceTextPropertyValue(AvaloniaObject obj, string? value) {
-			if (obj is NullableStringSettingControl control && control.CoerceEmptyAsNull && string.IsNullOrEmpty(value))
-				return control.CoerceEmptyAsNull ? null : string.Empty;
+	// --------------------------------------------------------------------------------------------------
+	// PUBLIC PROCEDURES
+	// --------------------------------------------------------------------------------------------------
 
-			// Don't allow non-coerced null value to be returned
-			return value ?? string.Empty;
-		}
+	/// <summary>
+	/// Indicates if the text should be coerced to null when it is an empty string.
+	/// </summary>
+	public bool CoerceEmptyAsNull {
+		get => GetValue(CoerceEmptyAsNullProperty);
+		set => SetValue(CoerceEmptyAsNullProperty, value);
+	}
 
-		// --------------------------------------------------------------------------------------------------
-		// PUBLIC PROCEDURES
-		// --------------------------------------------------------------------------------------------------
+	/// <summary>
+	/// Indicates if the coerce checkbox should be visible.
+	/// </summary>
+	public bool IsCoerceCheckBoxVisible {
+		get => GetValue(IsCoerceCheckBoxVisibleProperty);
+		set => SetValue(IsCoerceCheckBoxVisibleProperty, value);
+	}
 
-		/// <summary>
-		/// Indicates if the text should be coerced to null when it is an empty string.
-		/// </summary>
-		public bool CoerceEmptyAsNull {
-			get => GetValue(CoerceEmptyAsNullProperty);
-			set => SetValue(CoerceEmptyAsNullProperty, value);
-		}
+	/// <summary>
+	/// Indicates if the textbox placeholder text is visible.
+	/// </summary>
+	public bool IsPlaceholderVisible {
+		get => GetValue(IsPlaceholderVisibleProperty);
+		set => SetValue(IsPlaceholderVisibleProperty, value);
+	}
 
-		/// <summary>
-		/// Indicates if the coerce checkbox should be visible.
-		/// </summary>
-		public bool IsCoerceCheckBoxVisible {
-			get => GetValue(IsCoerceCheckBoxVisibleProperty);
-			set => SetValue(IsCoerceCheckBoxVisibleProperty, value);
-		}
+	/// <summary>
+	/// The label.
+	/// </summary>
+	public string? Label {
+		get => GetValue(LabelProperty);
+		set => SetValue(LabelProperty, value);
+	}
 
-		/// <summary>
-		/// Indicates if the textbox placeholder text is visible.
-		/// </summary>
-		public bool IsPlaceholderVisible {
-			get => GetValue(IsPlaceholderVisibleProperty);
-			set => SetValue(IsPlaceholderVisibleProperty, value);
-		}
+	/// <inheritdoc/>
+	protected override void OnApplyTemplate(TemplateAppliedEventArgs e) {
+		base.OnApplyTemplate(e);
 
-		/// <summary>
-		/// The label.
-		/// </summary>
-		public string? Label {
-			get => GetValue(LabelProperty);
-			set => SetValue(LabelProperty, value);
-		}
+		CoerceValue(TextProperty);
+	}
 
-		/// <inheritdoc/>
-		protected override void OnApplyTemplate(TemplateAppliedEventArgs e) {
-			base.OnApplyTemplate(e);
-
-			this.CoerceValue(TextProperty);
-		}
-
-		/// <summary>
-		/// The text.
-		/// </summary>
-		public string? Text {
-			get => GetValue(TextProperty);
-			set => SetValue(TextProperty, value);
-		}
-
+	/// <summary>
+	/// The text.
+	/// </summary>
+	public string? Text {
+		get => GetValue(TextProperty);
+		set => SetValue(TextProperty, value);
 	}
 
 }

@@ -15,7 +15,7 @@
 		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
 		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
 		
-		<local:InvalidDoubleToNulllConverter x:Key="InvalidDoubleToNulllConverter" />
+		<local:InvalidDoubleToNullConverter x:Key="InvalidDoubleToNullConverter" />
 
 	</UserControl.Resources>
 	<UserControl.Styles>
@@ -865,11 +865,11 @@ public class TotalMinutesToTimeOfDayConverter : IValueConverter {
 				<StackPanel Spacing="10">
 					<StackPanel>
 						<TextBlock Classes="theme-form-control-label" Text="Range start" />
-						<NumericUpDown Value="{Binding RangeStart, Converter={StaticResource InvalidDoubleToNulllConverter}}" Minimum="{Binding Minimum}" Maximum="{Binding Maximum}" IsEnabled="{Binding IsRanged}" FormatString="G8" />
+						<NumericUpDown Value="{Binding RangeStart, Converter={StaticResource InvalidDoubleToNullConverter}}" Minimum="{Binding Minimum}" Maximum="{Binding Maximum}" IsEnabled="{Binding IsRanged}" FormatString="G8" />
 					</StackPanel>
 					<StackPanel>
 						<TextBlock Classes="theme-form-control-label" Text="Range end" />
-						<NumericUpDown Value="{Binding RangeEnd, Converter={StaticResource InvalidDoubleToNulllConverter}}" Minimum="{Binding Minimum}" Maximum="{Binding Maximum}" FormatString="G8" />
+						<NumericUpDown Value="{Binding RangeEnd, Converter={StaticResource InvalidDoubleToNullConverter}}" Minimum="{Binding Minimum}" Maximum="{Binding Maximum}" FormatString="G8" />
 					</StackPanel>
 					<StackPanel>
 						<TextBlock Classes="theme-form-control-label" Text="Values collection" />

@@ -1,0 +1,215 @@
+<UserControl
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:system="using:System"
+	>
+	<UserControl.Resources>
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+		<system:Double x:Key="DefaultInnerGlowIntensity">0.35</system:Double>
+		<system:TimeSpan x:Key="DefaultSlingCircuitDuration">0:0:2</system:TimeSpan>
+	</UserControl.Resources>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="BorderBeam adds an animated perimeter and soft inner illumination to a Border-compatible content surface.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="Border Beam" Url="https://www.actiprosoftware.com/docs/controls/avalonia/fundamentals/controls/border-beam" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExample
+			Header="An illuminated content surface"
+			Footer="Sling completes a circuit in the configured duration, Uniform travels at a constant DIP speed, and Pulse lights different portions of the perimeter independently. Ocean colors adapt to the current light or dark theme when GradientStops is unset."
+			DataContext="{Binding #beam}"
+			x:DataType="actipro:BorderBeam"
+			>
+			<actipro:BorderBeam x:Name="beam"
+				MaxWidth="520" MinHeight="180" Padding="24" CornerRadius="18"
+				Background="{actipro:ThemeResource Container1BackgroundBrush}"
+				BorderBrush="{actipro:ThemeResource Container3BorderBrush}" BorderThickness="1">
+				<StackPanel Spacing="12" VerticalAlignment="Center">
+					<TextBlock FontSize="20" FontWeight="SemiBold" Text="Bring attention to your content" TextWrapping="Wrap" />
+					<TextBlock Foreground="{actipro:ThemeResource DefaultForegroundBrushSecondary}"
+						Text="A subtle highlight for a card, panel, or input. The child keeps its normal keyboard and pointer interaction." TextWrapping="Wrap" />
+					<TextBox PlaceholderText="Try typing here" />
+				</StackPanel>
+			</actipro:BorderBeam>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel MinWidth="230" Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Mode" />
+						<ComboBox ItemsSource="{actipro:DelimitedArray Type=actipro:BorderBeamMode}" SelectedValue="{Binding Mode, Mode=TwoWay}" />
+					</StackPanel>
+					<CheckBox Content="Effect active" IsChecked="{Binding IsActive, Mode=TwoWay}" />
+					<CheckBox Content="Animation enabled" IsChecked="{Binding IsAnimationEnabled, Mode=TwoWay}" />
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="{Binding BeamLength, StringFormat='Beam length: {0:0} DIPs'}" ToolTip.Tip="Used by Sling and Uniform modes." />
+						<Slider Minimum="0" Maximum="360" TickFrequency="10" IsSnapToTickEnabled="True" Value="{Binding BeamLength, Mode=TwoWay}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="{Binding BeamThickness, StringFormat='Beam thickness: {0:0} DIPs'}" />
+						<Slider Minimum="0" Maximum="6" TickFrequency="1" IsSnapToTickEnabled="True" Value="{Binding BeamThickness, Mode=TwoWay}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="{Binding InnerGlowIntensity, StringFormat='Inner glow intensity: {0:0.00}'}" />
+						<Slider Minimum="0" Maximum="1" TickFrequency="0.05" IsSnapToTickEnabled="True" Value="{Binding InnerGlowIntensity, Mode=TwoWay}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="{Binding InnerGlowRadius, StringFormat='Inner glow radius: {0:0} DIPs'}" />
+						<Slider Minimum="0" Maximum="40" TickFrequency="1" IsSnapToTickEnabled="True" Value="{Binding InnerGlowRadius, Mode=TwoWay}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="{Binding BeamSpeed, StringFormat='Uniform speed: {0:0} DIPs/second'}" />
+						<Slider Minimum="0" Maximum="600" TickFrequency="25" IsSnapToTickEnabled="True" Value="{Binding BeamSpeed, Mode=TwoWay}" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Sling circuit duration" />
+						<ComboBox SelectedValue="{Binding SlingCircuitDuration, Mode=TwoWay}" SelectedValueBinding="{Binding Tag, DataType=ComboBoxItem}">
+							<ComboBoxItem Content="1 second">
+								<ComboBoxItem.Tag><system:TimeSpan>0:0:1</system:TimeSpan></ComboBoxItem.Tag>
+							</ComboBoxItem>
+							<ComboBoxItem Content="2 seconds (default)">
+								<ComboBoxItem.Tag><system:TimeSpan>0:0:2</system:TimeSpan></ComboBoxItem.Tag>
+							</ComboBoxItem>
+							<ComboBoxItem Content="3 seconds">
+								<ComboBoxItem.Tag><system:TimeSpan>0:0:3</system:TimeSpan></ComboBoxItem.Tag>
+							</ComboBoxItem>
+							<ComboBoxItem Content="4 seconds">
+								<ComboBoxItem.Tag><system:TimeSpan>0:0:4</system:TimeSpan></ComboBoxItem.Tag>
+							</ComboBoxItem>
+						</ComboBox>
+					</StackPanel>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve"><![CDATA[
+<!-- Uses theme-tailored Ocean colors without assigning GradientStops -->
+<actipro:BorderBeam$(ModeAttribute)$(IsActiveAttribute)$(IsAnimationEnabledAttribute)$(BeamLengthAttribute)$(BeamThicknessAttribute)$(InnerGlowIntensityAttribute)$(InnerGlowRadiusAttribute)$(BeamSpeedAttribute)$(SlingCircuitDurationAttribute)
+	Padding="24" CornerRadius="18"
+	Background="{actipro:ThemeResource Container1BackgroundBrush}"
+	BorderBrush="{actipro:ThemeResource Container3BorderBrush}" BorderThickness="1">
+	<TextBox PlaceholderText="Try typing here" />
+</actipro:BorderBeam>
+				]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="ModeAttribute"
+							IsEnabled="{Binding Mode, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Sling'}"
+							Value="{Binding Mode, StringFormat='&#xD;&#x9;Mode=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsActiveAttribute"
+							IsEnabled="{Binding !IsActive}" Value="&#xD;&#x9;IsActive=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsAnimationEnabledAttribute"
+							IsEnabled="{Binding !IsAnimationEnabled}" Value="&#xD;&#x9;IsAnimationEnabled=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="BeamLengthAttribute"
+							IsEnabled="{Binding BeamLength, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='180'}"
+							Value="{Binding BeamLength, StringFormat='&#xD;&#x9;BeamLength=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="BeamThicknessAttribute"
+							IsEnabled="{Binding BeamThickness, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='1'}"
+							Value="{Binding BeamThickness, StringFormat='&#xD;&#x9;BeamThickness=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="InnerGlowIntensityAttribute"
+							IsEnabled="{Binding InnerGlowIntensity, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter={StaticResource DefaultInnerGlowIntensity}}"
+							Value="{Binding InnerGlowIntensity, StringFormat='&#xD;&#x9;InnerGlowIntensity=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="InnerGlowRadiusAttribute"
+							IsEnabled="{Binding InnerGlowRadius, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='15'}"
+							Value="{Binding InnerGlowRadius, StringFormat='&#xD;&#x9;InnerGlowRadius=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="BeamSpeedAttribute"
+							IsEnabled="{Binding BeamSpeed, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='275'}"
+							Value="{Binding BeamSpeed, StringFormat='&#xD;&#x9;BeamSpeed=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="SlingCircuitDurationAttribute"
+							IsEnabled="{Binding SlingCircuitDuration, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter={StaticResource DefaultSlingCircuitDuration}}"
+							Value="{Binding SlingCircuitDuration, StringFormat='&#xD;&#x9;SlingCircuitDuration=&quot;{0}&quot;'}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+		<sampleBrowser:ControlExample
+			Header="Custom gradient stops"
+			Footer="Supply any number of GradientStops with explicit colors and offsets. This Sunset palette is a sample recipe, not a built-in preset. Explicit colors remain unchanged when the theme switches; null or empty stops restore the theme default.">
+			<actipro:BorderBeam MaxWidth="520" MinHeight="140" Padding="24" CornerRadius="18" Mode="Pulse"
+				Background="{actipro:ThemeResource Container1BackgroundBrush}"
+				BorderBrush="{actipro:ThemeResource Container3BorderBrush}" BorderThickness="1">
+				<actipro:BorderBeam.GradientStops>
+					<GradientStops>
+						<GradientStop Color="#FB7185" Offset="0" />
+						<GradientStop Color="#FB923C" Offset="0.34" />
+						<GradientStop Color="#FAE85B" Offset="0.66" />
+						<GradientStop Color="#F472B6" Offset="0.84" />
+						<GradientStop Color="#FB7185" Offset="1" />
+					</GradientStops>
+				</actipro:BorderBeam.GradientStops>
+				<StackPanel Spacing="8" VerticalAlignment="Center">
+					<TextBlock FontSize="20" FontWeight="SemiBold" Text="Sunset illumination" />
+					<TextBlock Text="Independent lights and matching inner clouds." TextWrapping="Wrap" />
+				</StackPanel>
+			</actipro:BorderBeam>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve"><![CDATA[
+<actipro:BorderBeam Mode="Pulse" Padding="24" CornerRadius="18">
+	<actipro:BorderBeam.GradientStops>
+		<GradientStops>
+			<GradientStop Color="#FB7185" Offset="0" />
+			<GradientStop Color="#FB923C" Offset="0.34" />
+			<GradientStop Color="#FAE85B" Offset="0.66" />
+			<GradientStop Color="#F472B6" Offset="0.84" />
+			<GradientStop Color="#FB7185" Offset="1" />
+		</GradientStops>
+	</actipro:BorderBeam.GradientStops>
+	<TextBlock Text="Sunset illumination" />
+</actipro:BorderBeam>
+				]]></sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+		<sampleBrowser:ControlExample
+			Header="Normal Border composition"
+			Footer="IsActive fades only the decorative effect; normal background, border, layout, and content remain. Disabling animation retains a static effect without activation fades; high contrast suppresses the decorative layers. Prefer a few active effects for emphasis, rather than decorating every item in a large list.">
+			<Grid ColumnDefinitions="*,*" ColumnSpacing="16" MaxWidth="680">
+				<actipro:BorderBeam MinHeight="150" Padding="20" CornerRadius="16"
+					IsActive="{Binding #compositionActive.IsChecked}" IsAnimationEnabled="{Binding #compositionAnimation.IsChecked}"
+					Background="{actipro:ThemeResource Container1BackgroundBrush}"
+					BorderBrush="{actipro:ThemeResource Container3BorderBrush}" BorderThickness="1">
+					<StackPanel Spacing="8" VerticalAlignment="Center">
+						<TextBlock FontWeight="SemiBold" Text="Fallback surface" />
+						<TextBlock Text="The normal fill and border remain when the effect is off." TextWrapping="Wrap" />
+					</StackPanel>
+				</actipro:BorderBeam>
+				<actipro:BorderBeam Grid.Column="1" MinHeight="150" Padding="20" CornerRadius="16" Mode="Uniform"
+					IsActive="{Binding #compositionActive.IsChecked}" IsAnimationEnabled="{Binding #compositionAnimation.IsChecked}">
+					<StackPanel Spacing="8" VerticalAlignment="Center">
+						<TextBlock FontWeight="SemiBold" Text="Transparent surface" />
+						<TextBlock Text="No background or fallback border is required." TextWrapping="Wrap" />
+					</StackPanel>
+				</actipro:BorderBeam>
+			</Grid>
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<CheckBox x:Name="compositionActive" Content="Effect active" IsChecked="True" />
+					<CheckBox x:Name="compositionAnimation" Content="Animation enabled" IsChecked="True" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve"><![CDATA[
+<!-- The normal surface remains even while the effect is inactive -->
+<actipro:BorderBeam IsActive="$(IsActive)" IsAnimationEnabled="$(IsAnimationEnabled)" Padding="20" CornerRadius="16"
+	Background="{actipro:ThemeResource Container1BackgroundBrush}"
+	BorderBrush="{actipro:ThemeResource Container3BorderBrush}" BorderThickness="1">
+	<TextBlock Text="Fallback surface" />
+</actipro:BorderBeam>
+
+<!-- Without fill or fallback border, only the child and effect are drawn -->
+<actipro:BorderBeam Mode="Uniform" IsActive="$(IsActive)" IsAnimationEnabled="$(IsAnimationEnabled)" Padding="20" CornerRadius="16">
+	<TextBlock Text="Transparent surface" />
+</actipro:BorderBeam>
+				]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="IsActive" Value="{Binding #compositionActive.IsChecked}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsAnimationEnabled" Value="{Binding #compositionAnimation.IsChecked}" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+	</sampleBrowser:ControlExampleItemsControl>
+</UserControl>

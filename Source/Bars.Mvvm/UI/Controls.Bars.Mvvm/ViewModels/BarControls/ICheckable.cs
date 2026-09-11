@@ -1,15 +1,13 @@
-﻿namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
+﻿namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm;
+
+/// <summary>
+/// Provides the base requirements for a control that is checkable.
+/// </summary>
+public interface ICheckable {
 
 	/// <summary>
-	/// Provides the base requirements for a control that is checkable.
+	/// Indicates whether the control is checked.
 	/// </summary>
-	public interface ICheckable {
-		
-		/// <summary>
-		/// Indicates whether the control is checked.
-		/// </summary>
-		bool IsChecked { get; set; }
-		
-	}
+	bool IsChecked { get; set; }
 
 }

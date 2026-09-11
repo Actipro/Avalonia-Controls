@@ -1,7 +1,5 @@
 using ActiproSoftware.UI.Avalonia.Controls.Barcodes;
 using ActiproSoftware.UI.Avalonia.Controls.Barcodes.Implementation;
-using Avalonia;
-using Avalonia.Controls;
 
 namespace ActiproSoftware.ProductSamples.DataVisualizationSamples.BarcodeQuickStarts.Exporting;
 

@@ -36,7 +36,7 @@ If the button should be checkable, use the [BarSplitToggleButton](xref:@ActiproU
 | Has popup | Yes. |
 | Is checkable | Yes, but only when using [BarSplitToggleButton](xref:@ActiproUIRoot.Controls.Bars.BarSplitToggleButton). |
 | Variant sizes | `Small` (image only), `Medium` (image and label), `Large` (tall size, image and multi-line label). |
-| Command support | Yes, via the [Command](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarPopupButtonBase.Command) property (related to the button portion) and the [PopupOpeningCommand](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarPopupButtonBase.PopupOpeningCommand) property (related to the popup portion). |
+| Command support | Yes, via the [Command](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarPopupButtonBase.Command) property (related to the button portion) and the [PopupOpeningCommand](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarPopupButtonBase.PopupOpeningCommand) and [PopupClosedCommand](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarPopupButtonBase.PopupClosedCommand) properties (related to the popup portion). |
 | Key tip support | Yes, via the [KeyTipText](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarPopupButtonBase.KeyTipText) property.  Auto-generated from the `Label` value if not specified. |
 | [Ribbon QAT](../ribbon-features/quick-access-toolbar.md) support | Yes, via the [CanCloneToRibbonQuickAccessToolBar](xref:@ActiproUIRoot.Controls.Bars.BarPopupButton.CanCloneToRibbonQuickAccessToolBar) property. |
 | [MVVM Library](../mvvm-support.md) VM | [BarSplitButtonViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarSplitButtonViewModel) class for regular buttons, [BarSplitToggleButtonViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarSplitToggleButtonViewModel) class for toggle buttons. |
@@ -51,7 +51,7 @@ If the button should be checkable, use the [BarSplitToggleButton](xref:@ActiproU
 | Has popup | Yes. |
 | Is checkable | Yes, but only when using [BarSplitToggleButton](xref:@ActiproUIRoot.Controls.Bars.BarSplitToggleButton). |
 | Variant sizes | `Small` (image only), `Medium` (image and label), `Large` (tall size, image and multi-line label). |
-| Command support | Yes, via the [Command](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarPopupButtonBase.Command) property (related to the button portion) and the [PopupOpeningCommand](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarPopupButtonBase.PopupOpeningCommand) property (related to the popup portion). |
+| Command support | Yes, via the [Command](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarPopupButtonBase.Command) property (related to the button portion) and the [PopupOpeningCommand](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarPopupButtonBase.PopupOpeningCommand) and [PopupClosedCommand](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarPopupButtonBase.PopupClosedCommand) properties (related to the popup portion). |
 | Key tip support | Yes, via the [KeyTipText](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarPopupButtonBase.KeyTipText) property.  Auto-generated from the `Label` value if not specified. |
 | [Ribbon QAT](../ribbon-features/quick-access-toolbar.md) support | Yes, via the [CanCloneToRibbonQuickAccessToolBar](xref:@ActiproUIRoot.Controls.Bars.BarPopupButton.CanCloneToRibbonQuickAccessToolBar) property. |
 | UI density support | Yes, via the [UserInterfaceDensity](xref:@ActiproUIRoot.Controls.Bars.BarPopupButton.UserInterfaceDensity) property. |
@@ -123,7 +123,7 @@ The [BarSplitMenuItem](xref:@ActiproUIRoot.Controls.Bars.BarSplitMenuItem) class
 | Has popup | Yes. |
 | Is checkable | Yes, when the `ToggleType` property is set to `CheckBox` or `Radio`. |
 | Variant sizes | None, but has a [UseLargeSize](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem.UseLargeSize) property that triggers a large height and displays an extended [Description](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem.Description). |
-| Command support | Yes, via the `Command` property (related to the button portion) and the [PopupOpeningCommand](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem.PopupOpeningCommand) property (related to the popup portion). |
+| Command support | Yes, via the `Command` property (related to the button portion) and the [PopupOpeningCommand](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem.PopupOpeningCommand) and [PopupClosedCommand](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem.PopupClosedCommand) properties (related to the popup portion). |
 | Key tip support | Yes, via the [KeyTipText](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem.KeyTipText) property.  Auto-generated from the `Label` value if not specified. |
 | [Ribbon QAT](../ribbon-features/quick-access-toolbar.md) support | Yes, via the [CanCloneToRibbonQuickAccessToolBar](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem.CanCloneToRibbonQuickAccessToolBar) property. |
 | [MVVM Library](../mvvm-support.md) VM | [BarSplitButtonViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarSplitButtonViewModel) class for non-checkable menu items, [BarSplitToggleButtonViewModel](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarSplitToggleButtonViewModel) class for checkable menu items. |
@@ -138,7 +138,7 @@ The [BarSplitMenuItem](xref:@ActiproUIRoot.Controls.Bars.BarSplitMenuItem) class
 | Has popup | Yes. |
 | Is checkable | Yes, when the `IsCheckable` property is set to `true`. |
 | Variant sizes | None, but has a [UseLargeSize](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem.UseLargeSize) property that triggers a large height and displays an extended [Description](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem.Description). |
-| Command support | Yes, via the `Command` property (related to the button portion) and the [PopupOpeningCommand](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem.PopupOpeningCommand) property (related to the popup portion). |
+| Command support | Yes, via the `Command` property (related to the button portion) and the [PopupOpeningCommand](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem.PopupOpeningCommand) and [PopupClosedCommand](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem.PopupClosedCommand) properties (related to the popup portion). |
 | Key tip support | Yes, via the [KeyTipText](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem.KeyTipText) property.  Auto-generated from the `Label` value if not specified. |
 | [Ribbon QAT](../ribbon-features/quick-access-toolbar.md) support | Yes, via the [CanCloneToRibbonQuickAccessToolBar](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem.CanCloneToRibbonQuickAccessToolBar) property. |
 | UI density support | None. |
@@ -283,6 +283,8 @@ The `ICommand` in the [BarSplitButton](xref:@ActiproUIRoot.Controls.Bars.BarSpli
 A [BarSplitButton](xref:@ActiproUIRoot.Controls.Bars.BarSplitButton).[Click](xref:@ActiproUIRoot.Controls.Bars.BarSplitButton.Click) and [BarSplitMenuItem](xref:@ActiproUIRoot.Controls.Bars.BarSplitMenuItem).`Click` event is also raised in these scenarios.
 
 The [PopupOpeningCommand](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarPopupButtonBase.PopupOpeningCommand) command, if assigned, is executed prior to the popup opening.  This command can be handled in a view model, allowing for a MVVM way to update the items on the popup prior to display.  The command's can-execute result determines the enabled state of the control's popup portion.
+
+The `ICommand` in the [BarSplitButton](xref:@ActiproUIRoot.Controls.Bars.BarSplitButton).[PopupClosedCommand](xref:@ActiproUIRoot.Controls.Bars.Primitives.BarPopupButtonBase.PopupClosedCommand) property, and similarly the [BarSplitMenuItem](xref:@ActiproUIRoot.Controls.Bars.BarSplitMenuItem).[PopupClosedCommand](xref:@ActiproUIRoot.Controls.Bars.BarMenuItem.PopupClosedCommand), is executed after the popup or sub-menu closes.  The [BarPopupButtonViewModel.PopupClosedCommand](xref:@ActiproUIRoot.Controls.Bars.Mvvm.BarPopupButtonViewModel.PopupClosedCommand) property exposes this capability in the MVVM Library.
 
 See the [Using Commands](using-commands.md) topic for more information on commands.
 

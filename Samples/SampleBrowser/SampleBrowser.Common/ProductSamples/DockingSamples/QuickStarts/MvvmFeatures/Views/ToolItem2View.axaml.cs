@@ -1,17 +1,13 @@
-﻿using Avalonia.Controls;
+﻿namespace ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.MvvmFeatures.Views;
 
-namespace ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.MvvmFeatures.Views {
+public partial class ToolItem2View : UserControl {
 
-	public partial class ToolItem2View : UserControl {
+	// --------------------------------------------------------------------------------------------------
+	// OBJECT
+	// --------------------------------------------------------------------------------------------------
 
-		// --------------------------------------------------------------------------------------------------
-		// OBJECT
-		// --------------------------------------------------------------------------------------------------
-
-		public ToolItem2View() {
-			InitializeComponent();
-		}
-
+	public ToolItem2View() {
+		InitializeComponent();
 	}
 
 }

@@ -18,7 +18,7 @@
 		</ControlTheme>
 
 		<!-- Custom DataTemplate used by XAML and MVVM samples to use circles (instead of squares) for gallery items -->
-		<DataTemplate x:Key="CircleStyleGalleryItemItemplate" x:DataType="{x:Type actipro:ColorBarGalleryItemViewModel}">
+		<DataTemplate x:Key="CircleStyleGalleryItemTemplate" x:DataType="{x:Type actipro:ColorBarGalleryItemViewModel}">
 			<!-- The CornerRadius defined here must match the CornerRadius defined by BarGalleryItemCircleTheme -->
 			<Border Width="18" Height="18"
 				BorderBrush="{actipro:ThemeResource Container3BorderBrush}"
@@ -1529,7 +1529,7 @@ public partial class SampleRootControl : UserControl {
 										MinColumnCount="7"
 										UseAccentedItemBorder="True"
 										ItemContainerTheme="{StaticResource BarGalleryItemCircleTheme}"
-										ItemTemplate="{StaticResource CircleStyleGalleryItemItemplate}"
+										ItemTemplate="{StaticResource CircleStyleGalleryItemTemplate}"
 										>
 
 										<actipro:ColorBarGalleryItemViewModel Value="Red" />
@@ -1574,7 +1574,7 @@ public partial class SampleRootControl : UserControl {
 		</ControlTheme>
 
 		<!-- Custom DataTemplate to use circles (instead of squares) for gallery items -->
-		<DataTemplate x:Key="CircleStyleGalleryItemItemplate" x:DataType="{x:Type actipro:ColorBarGalleryItemViewModel}">
+		<DataTemplate x:Key="CircleStyleGalleryItemTemplate" x:DataType="{x:Type actipro:ColorBarGalleryItemViewModel}">
 			<!-- The CornerRadius defined here must match the CornerRadius defined by BarGalleryItemCircleTheme -->
 			<Border Width="18" Height="18"
 				BorderBrush="{actipro:ThemeResource Container3BorderBrush}"
@@ -1596,7 +1596,7 @@ public partial class SampleRootControl : UserControl {
 
 					<actipro:BarMenuGallery Key="ColorPickerGallery" ...
 						ItemContainerTheme="{StaticResource BarGalleryItemCircleTheme}"
-						ItemTemplate="{StaticResource CircleStyleGalleryItemItemplate}"
+						ItemTemplate="{StaticResource CircleStyleGalleryItemTemplate}"
 						MinColumnCount="7"
 						>
 
@@ -1637,7 +1637,7 @@ public partial class SampleRootControl : UserControl {
 		</ControlTheme>
 
 		<!-- Custom DataTemplate to use circles (instead of squares) for gallery items -->
-		<DataTemplate x:Key="CircleStyleGalleryItemItemplate" x:DataType="{x:Type actipro:ColorBarGalleryItemViewModel}">
+		<DataTemplate x:Key="CircleStyleGalleryItemTemplate" x:DataType="{x:Type actipro:ColorBarGalleryItemViewModel}">
 			<!-- The CornerRadius defined here must match the CornerRadius defined by BarGalleryItemCircleTheme -->
 			<Border Width="18" Height="18"
 				BorderBrush="{actipro:ThemeResource Container3BorderBrush}"
@@ -1677,7 +1677,7 @@ public partial class SampleRootControl : UserControl {
 											MinMenuColumnCount = 7,
 											ItemSpacing = 4,
 											ItemContainerTheme = customThemeRibbonMvvm.FindResource("BarGalleryItemCircleTheme") as ControlTheme,
-											ItemTemplate = customThemeRibbonMvvm.FindResource("CircleStyleGalleryItemItemplate") as IDataTemplate,
+											ItemTemplate = customThemeRibbonMvvm.FindResource("CircleStyleGalleryItemTemplate") as IDataTemplate,
 											Items = new [] {
 												new ColorBarGalleryItemViewModel(Colors.Red),
 												new ColorBarGalleryItemViewModel(Colors.Orange),

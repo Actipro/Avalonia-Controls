@@ -1,33 +1,25 @@
 ﻿using ActiproSoftware.UI.Avalonia.Controls.Docking;
-using Avalonia;
-using System;
-using System.Collections.ObjectModel;
-using PropertyItem = System.Collections.Generic.KeyValuePair<string, object?>;
 
-namespace ActiproSoftware.ProductSamples.DockingSamples.Common {
+namespace ActiproSoftware.ProductSamples.DockingSamples.Common;
 
-	public partial class DocumentPropertiesToolWindow : ToolWindow {
+public partial class DocumentPropertiesToolWindow : ToolWindow {
 
-		// --------------------------------------------------------------------------------------------------
-		// OBJECT
-		// --------------------------------------------------------------------------------------------------
+	// --------------------------------------------------------------------------------------------------
+	// OBJECT
+	// --------------------------------------------------------------------------------------------------
 
-		/// <summary>
-		/// Initializes an instance of the class.
-		/// </summary>
-		public DocumentPropertiesToolWindow() {
-			InitializeComponent();
-		}
+	public DocumentPropertiesToolWindow() {
+		InitializeComponent();
+	}
 
-		// --------------------------------------------------------------------------------------------------
-		// PUBLIC PROCEDURES
-		// --------------------------------------------------------------------------------------------------
+	// --------------------------------------------------------------------------------------------------
+	// PUBLIC PROCEDURES
+	// --------------------------------------------------------------------------------------------------
 
-		/// <inheritdoc/>
-		protected override Type StyleKeyOverride
-			// Ensure ToolWindow implicit styles are applied to the derived class
-			=> typeof(ToolWindow);
-
+	/// <inheritdoc/>
+	protected override Type StyleKeyOverride {
+		// Ensure ToolWindow implicit styles are applied to the derived class
+		get => typeof(ToolWindow);
 	}
 
 }

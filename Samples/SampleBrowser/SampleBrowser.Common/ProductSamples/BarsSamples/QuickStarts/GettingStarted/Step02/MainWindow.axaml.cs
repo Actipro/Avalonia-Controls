@@ -21,39 +21,35 @@ CHANGES SINCE LAST STEP:
 
 using ActiproSoftware.UI.Avalonia.Controls.Bars;
 
-namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.Step02 {
+namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.Step02;
 
-	public partial class MainWindow : RibbonWindow {
+public partial class MainWindow : RibbonWindow {
 
-		// --------------------------------------------------------------------------------------------------
-		// OBJECT
-		// --------------------------------------------------------------------------------------------------
+	// --------------------------------------------------------------------------------------------------
+	// OBJECT
+	// --------------------------------------------------------------------------------------------------
 
-		/// <summary>
-		/// Initializes a new instance of the class.
-		/// </summary>
-		public MainWindow() {
-			InitializeComponent();
+	public MainWindow() {
+		InitializeComponent();
 
-			//	SAMPLE NOTE 2.1:
-			//		Configure this view with the new view model
-			ViewModel = new SampleWindowViewModel();
-		}
-
-		// --------------------------------------------------------------------------------------------------
-		// PUBLIC PROCEDURES
-		// --------------------------------------------------------------------------------------------------
-
-		/// <summary>
-		/// The view model for this view.
-		/// </summary>
-		private SampleWindowViewModel? ViewModel {
-			//	SAMPLE NOTE 2.2:
-			//		The view model is assigned directly to the DataContext of this window to easily support bindings.
-
-			get => DataContext as SampleWindowViewModel;
-			set => DataContext = value;
-		}
-
+		// SAMPLE NOTE 2.1:
+		//   Configure this view with the new view model
+		ViewModel = new SampleWindowViewModel();
 	}
+
+	// --------------------------------------------------------------------------------------------------
+	// PUBLIC PROCEDURES
+	// --------------------------------------------------------------------------------------------------
+
+	/// <summary>
+	/// The view model for this view.
+	/// </summary>
+	private SampleWindowViewModel? ViewModel {
+		// SAMPLE NOTE 2.2:
+		//   The view model is assigned directly to the DataContext of this window to easily support bindings.
+
+		get => DataContext as SampleWindowViewModel;
+		set => DataContext = value;
+	}
+
 }

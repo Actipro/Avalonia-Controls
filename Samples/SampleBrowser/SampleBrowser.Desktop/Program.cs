@@ -1,46 +1,45 @@
 using Avalonia;
 using System;
 
-namespace ActiproSoftware.SampleBrowser {
+namespace ActiproSoftware.SampleBrowser;
+
+/// <summary>
+/// Defines the core program for the application.
+/// </summary>
+internal class Program {
+		
+	// --------------------------------------------------------------------------------------------------
+	// PUBLIC PROCEDURES
+	// --------------------------------------------------------------------------------------------------
 
 	/// <summary>
-	/// Defines the core program for the application.
+	/// Provides the main entry point of the application.
 	/// </summary>
-	internal class Program {
-		
-		// --------------------------------------------------------------------------------------------------
-		// PUBLIC PROCEDURES
-		// --------------------------------------------------------------------------------------------------
+	/// <param name="args">The string arguments.</param>
+	[STAThread]
+	public static void Main(string[] args) {
+		BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
+	}
 
-		/// <summary>
-		/// Provides the main entry point of the application.
-		/// </summary>
-		/// <param name="args">The string arguments.</param>
-		[STAThread]
-		public static void Main(string[] args) {
-			BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
-		}
+	/// <summary>
+	/// Creates an Avalonia application builder.
+	/// </summary>
+	/// <returns>The <see cref="AppBuilder"/> object that was created.</returns>
+	public static AppBuilder BuildAvaloniaApp() {
+		return AppBuilder.Configure<App>()
 
-		/// <summary>
-		/// Creates an Avalonia application builder.
-		/// </summary>
-		/// <returns>The <see cref="AppBuilder"/> object that was created.</returns>
-		public static AppBuilder BuildAvaloniaApp()
-			=> AppBuilder.Configure<App>()
+			// NOTE: See the 'Licensing' documentation topic for details on how to register an evaluation or paid license here:
+			// .RegisterActiproLicense(licensee, licenseKey)
+			#if DEBUG
+			.WithDeveloperTools()
+			#endif
 
-				// NOTE: See the 'Licensing' documentation topic for details on how to register an evaluation or paid license here:
-				// .RegisterActiproLicense(licensee, licenseKey)
-				#if DEBUG
-				.WithDeveloperTools()
-				#endif
+			// This SkiaOptions setting is required if using SVGs with DynamicImage (https://github.com/wieslawsoltes/Svg.Skia/discussions/82)
+			.With(new SkiaOptions { UseOpacitySaveLayer = true })
 
-				// This SkiaOptions setting is required if using SVGs with DynamicImage (https://github.com/wieslawsoltes/Svg.Skia/discussions/82)
-				.With(new SkiaOptions { UseOpacitySaveLayer = true })
-
-				.WithInterFont()
-				.UsePlatformDetect()
-				.LogToTrace();
-
+			.WithInterFont()
+			.UsePlatformDetect()
+			.LogToTrace();
 	}
 
 }

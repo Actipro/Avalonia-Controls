@@ -7,6 +7,12 @@ order: 1
 
 The Fundamentals product contains various using interface controls that may be used in your applications.
 
+## Animated Text Presenter
+
+![Animated Text Presenter dashboard values](../images/animated-text-presenter.png)
+
+[Animated Text Presenter](animated-text-presenter.md) presents single-line values that animate as text changes, with configurable transition modes and scopes plus culture-aware numeric motion.
+
 ## Avatar
 
 ![Screenshot](../images/avatar.png)
@@ -25,6 +31,12 @@ The Fundamentals product contains various using interface controls that may be u
 
 [Badge](badge.md) provides contextual information for other elements or can be used stand-alone.
 
+## Border Beam
+
+![Screenshot](../images/border-beam.png)
+
+[Border Beam](border-beam.md) decorates content with a traveling or pulsing border and soft inner illumination while preserving normal border composition and child interaction.
+
 ## Card
 
 ![Screenshot](../images/card.png)
@@ -35,7 +47,7 @@ The Fundamentals product contains various using interface controls that may be u
 
 ![Screenshot](../images/circular-progressbar.png)
 
-[CircularProgressBar](circular-progressbar.md) displays a ranged progress value using fluent animations.  It is similar to a native linear `ProgressBar`, except that it renders the progress in a ring shape.
+[Circular ProgressBar](circular-progressbar.md) displays a ranged progress value using fluent animations.  It is similar to a native linear `ProgressBar`, except that it renders the progress in a ring shape.
 
 ## Info Bar
 

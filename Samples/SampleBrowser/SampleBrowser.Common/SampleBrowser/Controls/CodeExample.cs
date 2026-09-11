@@ -1,212 +1,204 @@
-using Avalonia;
-using Avalonia.Metadata;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace ActiproSoftware.SampleBrowser {
+namespace ActiproSoftware.SampleBrowser;
+
+/// <summary>
+/// Stores example code for a sample.
+/// </summary>
+public class CodeExample : AvaloniaObject {
+
+	private static readonly Regex SubstitutionPattern = new(@"\$\(([^\)]+)\)");
+
+	private string? _text;
+	private bool _textUsesActiproXamlNamespace;
+	private bool _textUsesActiproPrimitivesXamlNamespace;
+
+	#region Property Definitions
 
 	/// <summary>
-	/// Stores example code for a sample.
+	/// Defines the <see cref="IsVisible"/> property.
 	/// </summary>
-	public class CodeExample : AvaloniaObject {
+	public static readonly StyledProperty<bool> IsVisibleProperty
+		= AvaloniaProperty.Register<CodeExample, bool>(nameof(IsVisible), defaultValue: true);
 
-		private static readonly Regex SubstitutionPattern = new(@"\$\(([^\)]+)\)");
+	/// <summary>
+	/// Defines the <see cref="Kind"/> property.
+	/// </summary>
+	public static readonly StyledProperty<CodeExampleKind> KindProperty
+		= AvaloniaProperty.Register<CodeExample, CodeExampleKind>(nameof(Kind), defaultValue: CodeExampleKind.Unspecified);
 
-		private string? _text;
-		private bool _textUsesActiproXamlNamespace;
-		private bool _textUsesActiproPrimitivesXamlNamespace;
+	/// <summary>
+	/// Defines the <see cref="Language"/> property.
+	/// </summary>
+	public static readonly StyledProperty<string?> LanguageProperty
+		= AvaloniaProperty.Register<CodeExample, string?>(nameof(Language), defaultValue: CodeTextBlockProperties.XamlLanguageName);
 
-		#region Property Definitions
+	/// <summary>
+	/// Defines the <see cref="Text"/> property.
+	/// </summary>
+	public static readonly DirectProperty<CodeExample, string?> TextProperty
+		= AvaloniaProperty.RegisterDirect<CodeExample, string?>(nameof(Text), x => x.Text);
 
-		/// <summary>
-		/// Defines the <see cref="IsVisible"/> property.
-		/// </summary>
-		public static readonly StyledProperty<bool> IsVisibleProperty
-			= AvaloniaProperty.Register<CodeExample, bool>(nameof(IsVisible), defaultValue: true);
+	/// <summary>
+	/// Defines the <see cref="TextUsesActiproPrimitivesXamlNamespace"/> property.
+	/// </summary>
+	public static readonly DirectProperty<CodeExample, bool> TextUsesActiproPrimitivesXamlNamespaceProperty
+		= AvaloniaProperty.RegisterDirect<CodeExample, bool>(nameof(TextUsesActiproPrimitivesXamlNamespace), x => x.TextUsesActiproPrimitivesXamlNamespace);
 
-		/// <summary>
-		/// Defines the <see cref="Kind"/> property.
-		/// </summary>
-		public static readonly StyledProperty<CodeExampleKind> KindProperty
-			= AvaloniaProperty.Register<CodeExample, CodeExampleKind>(nameof(Kind), defaultValue: CodeExampleKind.Unspecified);
+	/// <summary>
+	/// Defines the <see cref="TextUsesActiproXamlNamespace"/> property.
+	/// </summary>
+	public static readonly DirectProperty<CodeExample, bool> TextUsesActiproXamlNamespaceProperty
+		= AvaloniaProperty.RegisterDirect<CodeExample, bool>(nameof(TextUsesActiproXamlNamespace), x => x.TextUsesActiproXamlNamespace);
 
-		/// <summary>
-		/// Defines the <see cref="Language"/> property.
-		/// </summary>
-		public static readonly StyledProperty<string?> LanguageProperty
-			= AvaloniaProperty.Register<CodeExample, string?>(nameof(Language), defaultValue: CodeTextBlockProperties.XamlLanguageName);
+	/// <summary>
+	/// Defines the <see cref="UnformattedText"/> property.
+	/// </summary>
+	public static readonly StyledProperty<string?> UnformattedTextProperty
+		= AvaloniaProperty.Register<CodeExample, string?>(nameof(UnformattedTextProperty));
 
-		/// <summary>
-		/// Defines the <see cref="Text"/> property.
-		/// </summary>
-		public static readonly DirectProperty<CodeExample, string?> TextProperty
-			= AvaloniaProperty.RegisterDirect<CodeExample, string?>(nameof(Text), x => x.Text);
+	#endregion
 
-		/// <summary>
-		/// Defines the <see cref="TextUsesActiproPrimitivesXamlNamespace"/> property.
-		/// </summary>
-		public static readonly DirectProperty<CodeExample, bool> TextUsesActiproPrimitivesXamlNamespaceProperty
-			= AvaloniaProperty.RegisterDirect<CodeExample, bool>(nameof(TextUsesActiproPrimitivesXamlNamespace), x => x.TextUsesActiproPrimitivesXamlNamespace);
+	// --------------------------------------------------------------------------------------------------
+	// OBJECT
+	// --------------------------------------------------------------------------------------------------
 
-		/// <summary>
-		/// Defines the <see cref="TextUsesActiproXamlNamespace"/> property.
-		/// </summary>
-		public static readonly DirectProperty<CodeExample, bool> TextUsesActiproXamlNamespaceProperty
-			= AvaloniaProperty.RegisterDirect<CodeExample, bool>(nameof(TextUsesActiproXamlNamespace), x => x.TextUsesActiproXamlNamespace);
+	static CodeExample() {
+		UnformattedTextProperty.Changed.AddClassHandler<CodeExample>((x, _) => x.UpdateTextWithSubstitutions());
+		LanguageProperty.Changed.AddClassHandler<CodeExample>((x, _) => x.UpdateTextUsesActiproXamlNamespace());
+	}
 
-		/// <summary>
-		/// Defines the <see cref="UnformattedText"/> property.
-		/// </summary>
-		public static readonly StyledProperty<string?> UnformattedTextProperty
-			= AvaloniaProperty.Register<CodeExample, string?>(nameof(UnformattedTextProperty));
+	public CodeExample() {
+		Substitutions.CollectionChanged += OnSubstitutionsCollectionChanged;
+	}
 
-		#endregion
+	// --------------------------------------------------------------------------------------------------
+	// NON-PUBLIC PROCEDURES
+	// --------------------------------------------------------------------------------------------------
 
-		// --------------------------------------------------------------------------------------------------
-		// OBJECT
-		// --------------------------------------------------------------------------------------------------
+	private void OnSubstitutionPropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs e) {
+		if (e.Property == CodeExampleSubstitution.ValueProperty || e.Property == CodeExampleSubstitution.IsEnabledProperty)
+			UpdateTextWithSubstitutions();
+	}
 
-		static CodeExample() {
-			UnformattedTextProperty.Changed.AddClassHandler<CodeExample>((obj, _) => obj.UpdateTextWithSubstitutions());
-			LanguageProperty.Changed.AddClassHandler<CodeExample>((obj, _) => obj.UpdateTextUsesActiproXamlNamespace());
+	private void OnSubstitutionsCollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) {
+		if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Reset)
+			throw new InvalidOperationException("Resetting the collection is not allowed.");
+
+		if (e.OldItems is not null) {
+			foreach (var substitution in e.OldItems.OfType<CodeExampleSubstitution>())
+				substitution.PropertyChanged -= OnSubstitutionPropertyChanged;
 		}
-
-		public CodeExample() {
-			Substitutions.CollectionChanged += this.OnSubstitutionsCollectionChanged;
+		if (e.NewItems is not null) {
+			foreach (var substitution in e.NewItems.OfType<CodeExampleSubstitution>())
+				substitution.PropertyChanged += OnSubstitutionPropertyChanged;
 		}
+	}
 
-		// --------------------------------------------------------------------------------------------------
-		// NON-PUBLIC PROCEDURES
-		// --------------------------------------------------------------------------------------------------
+	private void UpdateTextUsesActiproXamlNamespace() {
+		TextUsesActiproXamlNamespace = (Language == CodeTextBlockProperties.XamlLanguageName)
+			&& (Text?.Contains("actipro:") == true || Text?.Contains("(actipro|") == true);
 
-		private void OnSubstitutionPropertyChanged(object? sender, AvaloniaPropertyChangedEventArgs e) {
-			if (e.Property == CodeExampleSubstitution.ValueProperty || e.Property == CodeExampleSubstitution.IsEnabledProperty)
-				UpdateTextWithSubstitutions();
-		}
+		TextUsesActiproPrimitivesXamlNamespace = (Language == CodeTextBlockProperties.XamlLanguageName)
+			&& (Text?.Contains("actiproPrimitives:") == true || Text?.Contains("(actiproPrimitives|") == true);
+	}
 
-		private void OnSubstitutionsCollectionChanged(object? sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) {
-			if (e.Action == System.Collections.Specialized.NotifyCollectionChangedAction.Reset)
-				throw new InvalidOperationException("Resetting the collection is not allowed.");
+	private void UpdateTextWithSubstitutions() {
+		int nestLevel = 0;
+		string PerformReplacement(string? text) {
+			nestLevel++;
+			try {
+				if (string.IsNullOrEmpty(text))
+					return string.Empty;
 
-			if (e.OldItems is not null) {
-				foreach (var substitution in e.OldItems.OfType<CodeExampleSubstitution>())
-					substitution.PropertyChanged -= this.OnSubstitutionPropertyChanged;
+				// Limit nested replacement to avoid potential infinite recursion
+				if (nestLevel > 10)
+					return text;
+
+				return SubstitutionPattern.Replace(text, match => {
+					var keyName = match.Groups[1].Value;
+					var substitution = Substitutions.FirstOrDefault(s => s?.Key == keyName)
+						?? throw new KeyNotFoundException(keyName);
+					var valueAsString = substitution.ValueAsString();
+					if (substitution.AllowNestedSubstitution)
+						valueAsString = PerformReplacement(valueAsString);
+					return valueAsString;
+				});
 			}
-			if (e.NewItems is not null) {
-				foreach (var substitution in e.NewItems.OfType<CodeExampleSubstitution>())
-					substitution.PropertyChanged += this.OnSubstitutionPropertyChanged;
+			finally {
+				nestLevel--;
 			}
 		}
 
-		private void UpdateTextUsesActiproXamlNamespace() {
-			this.TextUsesActiproXamlNamespace = this.Language == CodeTextBlockProperties.XamlLanguageName
-				&& (this.Text?.Contains("actipro:") == true || this.Text?.Contains("(actipro|") == true);
+		Text = PerformReplacement(UnformattedText?.Trim());
 
-			this.TextUsesActiproPrimitivesXamlNamespace = this.Language == CodeTextBlockProperties.XamlLanguageName
-				&& (this.Text?.Contains("actiproPrimitives:") == true || this.Text?.Contains("(actiproPrimitives|") == true);
-		}
+		UpdateTextUsesActiproXamlNamespace();
+	}
 
-		private void UpdateTextWithSubstitutions() {
-			int nestLevel = 0;
-			string PerformReplacement(string? text) {
-				nestLevel++;
-				try {
-					if (string.IsNullOrEmpty(text))
-						return string.Empty;
+	// --------------------------------------------------------------------------------------------------
+	// PUBLIC PROCEDURES
+	// --------------------------------------------------------------------------------------------------
 
-					// Limit nested replacement to avoid potential infinite recursion
-					if (nestLevel > 10)
-						return text;
+	/// <summary>
+	/// Indicates if the code example is visible.
+	/// </summary>
+	public bool IsVisible {
+		get => GetValue(IsVisibleProperty);
+		set => SetValue(IsVisibleProperty, value);
+	}
 
-					return SubstitutionPattern.Replace(text, match => {
-						var keyName = match.Groups[1].Value;
-						var substitution = Substitutions.FirstOrDefault(s => s?.Key == keyName)
-							?? throw new KeyNotFoundException(keyName);
-						var valueAsString = substitution.ValueAsString();
-						if (substitution.AllowNestedSubstitution)
-							valueAsString = PerformReplacement(valueAsString);
-						return valueAsString;
-					});
-				}
-				finally {
-					nestLevel--;
-				}
-			}
+	/// <summary>
+	/// The kind of code example.
+	/// </summary>
+	public CodeExampleKind Kind {
+		get => GetValue(KindProperty);
+		set => SetValue(KindProperty, value);
+	}
 
-			this.Text = PerformReplacement(this.UnformattedText?.Trim());
+	/// <summary>
+	/// The sample code's language (e.g., <c>XAML</c>, <c>XML</c>).
+	/// </summary>
+	public string? Language {
+		get => GetValue(LanguageProperty);
+		set => SetValue(LanguageProperty, value);
+	}
 
-			UpdateTextUsesActiproXamlNamespace();
-		}
+	/// <summary>
+	/// The collection of substitutions to be applied to the <see cref="Text"/> when producing <see cref="TextWithSubstitutions"/>.
+	/// </summary>
+	public ObservableCollection<CodeExampleSubstitution?> Substitutions { get; } = [];
 
-		// --------------------------------------------------------------------------------------------------
-		// PUBLIC PROCEDURES
-		// --------------------------------------------------------------------------------------------------
+	/// <summary>
+	/// The sample code text with all formatting applied.
+	/// </summary>
+	public string? Text {
+		get => _text;
+		private set => SetAndRaise(TextProperty, ref _text, value);
+	}
 
-		/// <summary>
-		/// Indicates if the code example is visible.
-		/// </summary>
-		public bool IsVisible {
-			get => GetValue(IsVisibleProperty);
-			set => SetValue(IsVisibleProperty, value);
-		}
+	/// <summary>
+	/// Tests if XAML-based <see cref="Text"/> uses the Actipro Primitives namespace (e.g., <c>actiproPrimitives:ClassName</c>).
+	/// </summary>
+	public bool TextUsesActiproPrimitivesXamlNamespace {
+		get => _textUsesActiproPrimitivesXamlNamespace;
+		private set => SetAndRaise(TextUsesActiproPrimitivesXamlNamespaceProperty, ref _textUsesActiproPrimitivesXamlNamespace, value);
+	}
 
-		/// <summary>
-		/// The kind of code example.
-		/// </summary>
-		public CodeExampleKind Kind {
-			get => GetValue(KindProperty);
-			set => SetValue(KindProperty, value);
-		}
+	/// <summary>
+	/// Tests if XAML-based <see cref="Text"/> uses the Actipro namespace (e.g., <c>actipro:ClassName</c>).
+	/// </summary>
+	public bool TextUsesActiproXamlNamespace {
+		get => _textUsesActiproXamlNamespace;
+		private set => SetAndRaise(TextUsesActiproXamlNamespaceProperty, ref _textUsesActiproXamlNamespace, value);
+	}
 
-		/// <summary>
-		/// The sample code's language (e.g., <c>XAML</c>, <c>XML</c>).
-		/// </summary>
-		public string? Language {
-			get => GetValue(LanguageProperty);
-			set => SetValue(LanguageProperty, value);
-		}
-
-		/// <summary>
-		/// The collection of substitutions to be applied to the <see cref="Text"/> when producing <see cref="TextWithSubstitutions"/>.
-		/// </summary>
-		public ObservableCollection<CodeExampleSubstitution?> Substitutions { get; } = new ObservableCollection<CodeExampleSubstitution?>();
-
-		/// <summary>
-		/// The sample code text with all formatting applied.
-		/// </summary>
-		public string? Text {
-			get => _text;
-			private set => SetAndRaise(TextProperty, ref _text, value);
-		}
-
-		/// <summary>
-		/// Tests if XAML-based <see cref="Text"/> uses the Actipro Primitivies namespace (e.g., <c>actiproPrimitives:ClassName</c>).
-		/// </summary>
-		public bool TextUsesActiproPrimitivesXamlNamespace {
-			get => _textUsesActiproPrimitivesXamlNamespace;
-			private set => SetAndRaise(TextUsesActiproPrimitivesXamlNamespaceProperty, ref _textUsesActiproPrimitivesXamlNamespace, value);
-		}
-
-		/// <summary>
-		/// Tests if XAML-based <see cref="Text"/> uses the Actipro namespace (e.g., <c>actipro:ClassName</c>).
-		/// </summary>
-		public bool TextUsesActiproXamlNamespace {
-			get => _textUsesActiproXamlNamespace;
-			private set => SetAndRaise(TextUsesActiproXamlNamespaceProperty, ref _textUsesActiproXamlNamespace, value);
-		}
-
-		/// <summary>
-		/// The unformatted sample code text.
-		/// </summary>
-		[Content]
-		public string? UnformattedText {
-			get => GetValue(UnformattedTextProperty);
-			set => SetValue(UnformattedTextProperty, value);
-		}
-
+	/// <summary>
+	/// The unformatted sample code text.
+	/// </summary>
+	[Content]
+	public string? UnformattedText {
+		get => GetValue(UnformattedTextProperty);
+		set => SetValue(UnformattedTextProperty, value);
 	}
 
 }
