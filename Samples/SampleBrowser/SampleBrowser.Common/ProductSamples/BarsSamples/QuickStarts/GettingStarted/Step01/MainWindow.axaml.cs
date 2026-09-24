@@ -21,20 +21,16 @@ CHANGES SINCE LAST STEP:
 
 using ActiproSoftware.UI.Avalonia.Controls.Bars;
 
-namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.Step01 {
+namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.Step01;
 
-	public partial class MainWindow : RibbonWindow {
+public partial class MainWindow : RibbonWindow {
 
-		// --------------------------------------------------------------------------------------------------
-		// OBJECT
-		// --------------------------------------------------------------------------------------------------
+	// --------------------------------------------------------------------------------------------------
+	// OBJECT
+	// --------------------------------------------------------------------------------------------------
 
-		/// <summary>
-		/// Initializes a new instance of the class.
-		/// </summary>
-		public MainWindow() {
-			InitializeComponent();
-		}
-
+	public MainWindow() {
+		InitializeComponent();
 	}
+
 }

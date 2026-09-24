@@ -68,6 +68,16 @@ It's easy to toggle an application between light and dark theme variants.  If th
 > [!TIP]
 > Place a [ToggleThemeButton](../shared/controls/toggle-theme-button.md) control in the user interface to give the end user the ability to toggle between light and dark themes.
 
+## Platform Theme Preferences
+
+[PlatformThemeSettings](xref:@ActiproUIRoot.Themes.PlatformThemeSettings) provides access to platform theme preferences associated with a visual's root. Call [GetFor](xref:@ActiproUIRoot.Themes.PlatformThemeSettings.GetFor*) on the UI thread after the visual is attached. Visuals with the same platform settings source share an instance; a detached visual normally returns `null`.
+
+The read-only [IsHighContrast](xref:@ActiproUIRoot.Themes.PlatformThemeSettings.IsHighContrast) property indicates whether the platform prefers high-contrast presentation. This preference is independent of a control's `ActualThemeVariant` and does not itself change theme resources or control appearance.
+
+To respond to changes, subscribe to [ColorValuesChanged](xref:@ActiproUIRoot.Themes.PlatformThemeSettings.ColorValuesChanged), then read the current properties to initialize your presentation. The event runs on the UI thread after the exposed values have been updated. Currently, only a change to `IsHighContrast` raises the event; subscribing does not raise an initial notification.
+
+Unsubscribe when the visual detaches and call `GetFor` again when it reattaches, since it may belong to a different root. Platform notifications are disconnected when the last consumer unsubscribes. Reading `IsHighContrast` without a subscription still queries the current platform preference, so retained instances remain useful for occasional checks.
+
 ## Using Actipro Themes
 
 Actipro's themes can be integrated by adding a special [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme) class, which inherits Avalonia's `Styles` class, to an application's `Application.Styles` collection.
@@ -118,8 +128,14 @@ Since the property uses a flags enumeration, more than one value can be specifie
 | [None](xref:@ActiproUIRoot.Themes.ThemeStyleIncludes.None) | No additional Actipro assembly styles beyond those for the `ActiproSoftware.Controls.Avalonia` NuGet package are included. |
 | [NativeColorPicker](xref:@ActiproUIRoot.Themes.ThemeStyleIncludes.NativeColorPicker) | Styles for all assemblies in the `ActiproSoftware.Controls.Avalonia.Themes.ColorPicker` NuGet package. |
 | [NativeDataGrid](xref:@ActiproUIRoot.Themes.ThemeStyleIncludes.NativeDataGrid) | Styles for all assemblies in the `ActiproSoftware.Controls.Avalonia.Themes.DataGrid` NuGet package. |
+| [Fundamentals](xref:@ActiproUIRoot.Themes.ThemeStyleIncludes.Fundamentals) | Styles for the `ActiproSoftware.Avalonia.Fundamentals` assembly, part of [Pro](xref:@ActiproUIRoot.Themes.ThemeStyleIncludes.Pro). |
+| [Bars](xref:@ActiproUIRoot.Themes.ThemeStyleIncludes.Bars) | Styles for the `ActiproSoftware.Avalonia.Bars` assembly, part of [Pro](xref:@ActiproUIRoot.Themes.ThemeStyleIncludes.Pro). |
+| [DataVisualization](xref:@ActiproUIRoot.Themes.ThemeStyleIncludes.DataVisualization) | Styles for the `ActiproSoftware.Avalonia.DataVisualization` assembly, part of [Pro](xref:@ActiproUIRoot.Themes.ThemeStyleIncludes.Pro). |
+| [Docking](xref:@ActiproUIRoot.Themes.ThemeStyleIncludes.Docking) | Styles for the `ActiproSoftware.Avalonia.Docking` assembly, part of [Pro](xref:@ActiproUIRoot.Themes.ThemeStyleIncludes.Pro), and its [Fundamentals](xref:@ActiproUIRoot.Themes.ThemeStyleIncludes.Fundamentals) prerequisite. |
 | [Pro](xref:@ActiproUIRoot.Themes.ThemeStyleIncludes.Pro) | Styles for all assemblies in the `ActiproSoftware.Controls.Avalonia.Pro` NuGet package. |
 | [All](xref:@ActiproUIRoot.Themes.ThemeStyleIncludes.All) | Styles for all assemblies and NuGet packages listed above. |
+
+Product values automatically include prerequisite product styles.  For example, [Docking](xref:@ActiproUIRoot.Themes.ThemeStyleIncludes.Docking) also includes [Fundamentals](xref:@ActiproUIRoot.Themes.ThemeStyleIncludes.Fundamentals).
 
 > [!TIP]
 > See the [Deployment](../deployment.md) topic for details on what is included in each NuGet package offering.  Be sure to reference the appropriate NuGet packages mentioned above before adding related [ThemeStyleIncludes](xref:@ActiproUIRoot.Themes.ThemeStyleIncludes) values.
@@ -162,6 +178,18 @@ When using Actipro's Pro controls, but not the native ColorPicker or DataGrid co
 </Application>
 ```
 
+When using only the Bars and Docking products, where the Docking value automatically includes its Fundamentals prerequisite:
+
+```xaml
+<Application ... xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui">
+	<Application.Styles>
+
+		<actipro:ModernTheme Includes="Bars, Docking" />
+
+	</Application.Styles>
+</Application>
+```
+
 When using all controls:
 
 ```xaml
@@ -183,7 +211,7 @@ Native Avalonia controls must have themes applied or else an application window 
 
 The [ModernTheme.AreNativeControlThemesEnabled](xref:@ActiproUIRoot.Themes.ModernTheme.AreNativeControlThemesEnabled) property determines if native Avalonia controls are themed using Actipro's themes.
 
-The default value of this property is `true`, meaning native Avalonia control theming is enabled by default when using Actipro themes.  Set the property to `false` to prevent this behavior.
+The default value of this property is `true`, meaning native Avalonia control theming is enabled by default when using Actipro themes.  Set the property to `false` to prevent this behavior.  Named native control theme resources required by Actipro controls remain available when the property is `false`.
 
 > [!TIP]
 > See the [Native Control Themes](native-control-themes.md) topic to learn more about Actipro's themes for native controls and the special styles and classes available.
@@ -201,6 +229,30 @@ The following example shows how to use Avalonia's *Simple* theme for native Aval
 
 	</Application.Styles>
 </Application>
+```
+
+### Animation Support
+
+Actipro controls use [AnimationSettings](xref:@ActiproUIRoot.Animation.AnimationSettings) to determine whether animations are supported. By default, [AnimationSettings.IsAnimationSupported](xref:@ActiproUIRoot.Animation.AnimationSettings.IsAnimationSupported) is based on system settings where supported.
+
+- On Windows, animation is disabled when client area animation is disabled by the operating system or when running in a remote session.
+- Other platforms default to enabling animations.
+
+When animation support is disabled, Actipro animation duration settings return `TimeSpan.Zero`, and theme-level `IsAnimationEnabled` values are coerced to `false`. Control-specific `IsAnimationEnabled` properties can still be set to `false` to opt out locally, but setting them to `true` will not force animations when global animation support is disabled.
+
+Use [AnimationSettings.IsAnimationSupportedOverride](xref:@ActiproUIRoot.Animation.AnimationSettings.IsAnimationSupportedOverride) to apply an application or user preference:
+
+```csharp
+using ActiproSoftware.UI.Avalonia.Animation;
+
+// Disable animations throughout Actipro controls and themes
+AnimationSettings.Instance.IsAnimationSupportedOverride = false;
+
+// Force animations even when automatic detection disables them
+AnimationSettings.Instance.IsAnimationSupportedOverride = true;
+
+// Return to automatic detection
+AnimationSettings.Instance.IsAnimationSupportedOverride = null;
 ```
 
 ### AvaloniaUI OÜ's Avalonia Pro Support

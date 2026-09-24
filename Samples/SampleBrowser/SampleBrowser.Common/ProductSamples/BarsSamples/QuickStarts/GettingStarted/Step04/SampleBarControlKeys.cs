@@ -13,23 +13,21 @@ CHANGES SINCE LAST STEP:
 
 */
 
-namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.Step04 {
+namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.Step04;
+
+/// <summary>
+/// Defines the keys used to reference controls used by Ribbon and related menus.
+/// </summary>
+public class SampleBarControlKeys {
 
 	/// <summary>
-	/// Defines the keys used to reference controls used by Ribbon and related menus.
+	/// The key for the Ribbon Group of help resource controls.
 	/// </summary>
-	public class SampleBarControlKeys {
+	public const string GroupHelpResources = nameof(GroupHelpResources);
 
-		/// <summary>
-		/// The key for the Ribbon Group of help resource controls.
-		/// </summary>
-		public const string GroupHelpResources = nameof(GroupHelpResources);
-
-		/// <summary>
-		/// The key for the Help control.
-		/// </summary>
-		public const string Help = nameof(Help);
-
-	}
+	/// <summary>
+	/// The key for the Help control.
+	/// </summary>
+	public const string Help = nameof(Help);
 
 }

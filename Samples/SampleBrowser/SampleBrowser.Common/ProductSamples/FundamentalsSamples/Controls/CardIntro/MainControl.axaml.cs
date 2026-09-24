@@ -1,26 +1,22 @@
 ﻿using ActiproSoftware.UI.Avalonia.Controls;
-using Avalonia.Controls;
-using Avalonia.Interactivity;
 
-namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.CardIntro {
+namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.CardIntro;
 
-	public partial class MainControl : UserControl {
+public partial class MainControl : UserControl {
 
-		// --------------------------------------------------------------------------------------------------
-		// OBJECT
-		// --------------------------------------------------------------------------------------------------
+	// --------------------------------------------------------------------------------------------------
+	// OBJECT
+	// --------------------------------------------------------------------------------------------------
 
-		public MainControl() {
-			InitializeComponent();
-		}
-
-		// --------------------------------------------------------------------------------------------------
-		// NON-PUBLIC PROCEDURES
-		// --------------------------------------------------------------------------------------------------
-
-		private void OnActionableCardClick(object? sender, RoutedEventArgs e) {
-			MessageBox.Show("Respond to click events or assign a Command.");
-		}
+	public MainControl() {
+		InitializeComponent();
 	}
+
+	// --------------------------------------------------------------------------------------------------
+	// NON-PUBLIC PROCEDURES
+	// --------------------------------------------------------------------------------------------------
+
+	private void OnActionableCardClick(object? sender, RoutedEventArgs e)
+		=> MessageBox.Show("Respond to click events or assign a Command.");
 
 }

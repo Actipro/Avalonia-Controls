@@ -424,7 +424,7 @@
 
 		<sampleBrowser:ControlExample
 			Header="Animation"
-			Footer="Badge and NumericBadge animate in and out, but only due to changes in the IsActive property, not changes in general visibility."
+			Footer="Badge and NumericBadge animate in and out, but only due to changes in the IsActive property, not changes in general visibility.  Text-based content also animates when changed."
 			>
 			<StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Spacing="20">
 
@@ -454,10 +454,22 @@
 					</actipro:BadgeService.Badge>
 				</Border>
 
+				<Border Classes="block" IsVisible="{Binding #animationUsageIsAdornedVisible.IsChecked}">
+					<actipro:BadgeService.Badge>
+						<actipro:NumericBadge x:Name="animationUsageNumericSample" Classes="theme-solid accent" Count="10"
+									   IsActive="{Binding #animationUsageIsActive.IsChecked}"
+									   IsAnimationEnabled="{Binding #animationUsageIsAnimationEnabled.IsChecked}" />
+					</actipro:BadgeService.Badge>
+				</Border>
+
 			</StackPanel>
 
 			<sampleBrowser:ControlExample.Options>
 				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="{Binding #animationUsageNumericSample.Count, StringFormat='Count: {0}'}" />
+						<Slider Minimum="0" Maximum="100" Value="{Binding #animationUsageNumericSample.Count}" />
+					</StackPanel>
 					<CheckBox x:Name="animationUsageIsActive" Content="Is active" IsChecked="True" />
 					<CheckBox x:Name="animationUsageIsAdornedVisible" Content="Adorned visible" IsChecked="True" />
 					<CheckBox Content="Badge visible" IsChecked="{Binding #animationUsagePrimarySample.IsVisible, Mode=OneWay}" IsEnabled="False" />
@@ -470,6 +482,7 @@
 					<![CDATA[
 <!-- Animation can be enabled/disabled -->
 <actipro:Badge ... IsAnimationEnabled="$(IsAnimationEnabled)" />
+<actipro:NumericBadge ... IsAnimationEnabled="$(IsAnimationEnabled)" />
 					]]>
 					<sampleBrowser:CodeExample.Substitutions>
 						<sampleBrowser:CodeExampleSubstitution Key="IsAnimationEnabled" Value="{Binding #animationUsageIsAnimationEnabled.IsChecked}" />

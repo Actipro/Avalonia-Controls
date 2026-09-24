@@ -31,11 +31,11 @@ Security updates apply to the following:
 
 | Component | Supported for Security Fixes |
 |---|---|
-| Commercial Actipro Avalonia Controls | Yes (latest release) |
+| Commercial Actipro Avalonia Controls | Yes (current major version and any active LTS versions) |
 | Open-source code in this repo | Yes (latest release) |
 | Documentation | Yes (latest release) |
 
-Older releases are not maintained for security fixes.
+Security fixes for the commercial product are delivered in the latest released build of each supported major or LTS version. Other commercial versions are not maintained for security fixes.
 
 ## Our Disclosure Process
 
@@ -68,6 +68,12 @@ When you report a vulnerability, we follow a structured, coordinated workflow de
 5. **Researcher Credit**  
    We are happy to acknowledge reporters unless anonymity is requested.
    We do not offer monetary bounties at this time.
+
+## Security Advisory Notifications
+
+Public security advisories for Actipro Avalonia Controls are published only in the Security section of this public repository. Actipro does not maintain a separate mechanism for directly notifying third parties through other channels.
+
+To receive notifications in GitHub, open the repository's **Watch** menu, select **Custom**, and enable **Security alerts**. GitHub delivers notifications according to the web, email, or mobile preferences configured for your account. For more information, see GitHub's [Configuring notifications](https://docs.github.com/en/subscriptions-and-notifications/get-started/configuring-notifications) documentation.
 
 ## Security Best Practices for Users
 

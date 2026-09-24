@@ -2,7 +2,7 @@
 <Project>
 
 	<PropertyGroup>
-		<AvaloniaVersion>12.0.2</AvaloniaVersion>
+		<AvaloniaVersion>12.1.3</AvaloniaVersion>
 		<AvaloniaUIDiagnosticsSupportVersion>2.2.0-*</AvaloniaUIDiagnosticsSupportVersion>
 	</PropertyGroup>
 	

@@ -102,8 +102,6 @@ public partial class MainControl : UserControl {
 	/// <summary>
 	/// Occurs when a new window is requested by the user.
 	/// </summary>
-	/// <param name="sender">The sender of the event.</param>
-	/// <param name="e">The <c>RoutedEventArgs</c> that contained data related to this event.</param>
 	private void OnDockSiteNewWindowRequested(object? sender, RoutedEventArgs e) {
 		// Create the new document
 		var documentWindow = new DocumentWindow(dockSite) {

@@ -1,185 +1,176 @@
-using Avalonia;
 using Avalonia.Animation;
-using Avalonia.Controls;
 using Avalonia.Controls.Notifications;
-using Avalonia.Interactivity;
-using Avalonia.Layout;
-using System;
-using System.Linq;
 
-namespace ActiproSoftware.ProductSamples.ThemeSamples.NativeControls {
+namespace ActiproSoftware.ProductSamples.ThemeSamples.NativeControls;
 
-	public partial class OtherControlsSamples : UserControl {
+public partial class OtherControlsSamples : UserControl {
 
-		private WindowNotificationManager? _notificationManager;
+	private WindowNotificationManager? _notificationManager;
 
-		// --------------------------------------------------------------------------------------------------
-		// OBJECT
-		// --------------------------------------------------------------------------------------------------
+	// --------------------------------------------------------------------------------------------------
+	// OBJECT
+	// --------------------------------------------------------------------------------------------------
 
-		public OtherControlsSamples() {
-			InitializeComponent();
+	public OtherControlsSamples() {
+		InitializeComponent();
 
-			carouselSample.PageTransition = new PageSlide(TimeSpan.FromSeconds(0.25), PageSlide.SlideAxis.Horizontal);
+		carouselSample.PageTransition = new PageSlide(TimeSpan.FromSeconds(0.25), PageSlide.SlideAxis.Horizontal);
 
-			InitializeNavigationPageSample();
-		}
+		InitializeNavigationPageSample();
+	}
 
-		// --------------------------------------------------------------------------------------------------
-		// NON-PUBLIC PROCEDURES
-		// --------------------------------------------------------------------------------------------------
+	// --------------------------------------------------------------------------------------------------
+	// NON-PUBLIC PROCEDURES
+	// --------------------------------------------------------------------------------------------------
 
-		private void InitializeNavigationPageSample() {
-			var gotoPage2Button = new Button() {
-				Content = "Next Page",
+	private void InitializeNavigationPageSample() {
+		var gotoPage2Button = new Button() {
+			Content = "Next Page",
+			HorizontalAlignment = HorizontalAlignment.Center
+		};
+
+		gotoPage2Button.Click += (s, e) => {
+			var openModalPage3Button = new Button() {
+				Content = "Open Modal",
 				HorizontalAlignment = HorizontalAlignment.Center
 			};
 
-			gotoPage2Button.Click += (s, e) => {
-				var openModalPage3Button = new Button() {
-					Content = "Open Modal",
+			openModalPage3Button.Click += (s, e) => {
+				var closeModalButton = new Button() {
+					Content = "Close Modal",
 					HorizontalAlignment = HorizontalAlignment.Center
 				};
 
-				openModalPage3Button.Click += (s, e) => {
-					var closeModalButton = new Button() {
-						Content = "Close Modal",
-						HorizontalAlignment = HorizontalAlignment.Center
-					};
-
-					closeModalButton.Click += (s, e) => {
-						navigationPageSample.PopModalAsync();
-					};
-
-					var page3 = new ContentPage() {
-						Header = "Modal Page Header",
-						Content = new StackPanel() {
-							Spacing = 20,
-							HorizontalAlignment = HorizontalAlignment.Center,
-							VerticalAlignment = VerticalAlignment.Center,
-							Children = {
-								new TextBlock {
-									Text = "This is a third ContentPage within a NavigationPage that is opened modally.",
-									HorizontalAlignment = HorizontalAlignment.Center,
-									VerticalAlignment = VerticalAlignment.Center,
-								},
-								closeModalButton,
-							}
-						}
-					};
-
-					NavigationPage.SetHasBackButton(page3, true);
-					NavigationPage.SetHasNavigationBar(page3, true);
-
-					navigationPageSample.PushModalAsync(page3);
+				closeModalButton.Click += (s, e) => {
+					navigationPageSample.PopModalAsync();
 				};
 
-				var page2 = new ContentPage() {
-					Header = "Second Page Header",
+				var page3 = new ContentPage() {
+					Header = "Modal Page Header",
 					Content = new StackPanel() {
 						Spacing = 20,
 						HorizontalAlignment = HorizontalAlignment.Center,
 						VerticalAlignment = VerticalAlignment.Center,
 						Children = {
 							new TextBlock {
-								Text = "This is the second ContentPage within a NavigationPage.",
+								Text = "This is a third ContentPage within a NavigationPage that is opened modally.",
+								HorizontalAlignment = HorizontalAlignment.Center,
+								VerticalAlignment = VerticalAlignment.Center,
 							},
-							openModalPage3Button,
-						},
-					},
+							closeModalButton,
+						}
+					}
 				};
 
-				// For testing CommandBars
-				/*
-				NavigationPage.SetTopCommandBar(page2, new CommandBar() {
-					PrimaryCommands = {
-							new CommandBarButton() {
-								Label = "Top"
-							},
-						},
-					SecondaryCommands = {
-							new CommandBarButton() {
-								Label = "Settings"
-							},
-						}
-				});
+				NavigationPage.SetHasBackButton(page3, true);
+				NavigationPage.SetHasNavigationBar(page3, true);
 
-				NavigationPage.SetBottomCommandBar(page2, new CommandBar() {
-					PrimaryCommands = {
-							new CommandBarButton() {
-								Label = "Bottom"
-							},
-						},
-					SecondaryCommands = {
-							new CommandBarButton() {
-								Label = "Settings"
-							},
-						}
-				});
-				//*/
-
-				NavigationPage.SetHasBackButton(page2, true);
-				NavigationPage.SetHasNavigationBar(page2, true);
-
-				navigationPageSample.PushAsync(page2);
+				navigationPageSample.PushModalAsync(page3);
 			};
 
-			var page1 = new ContentPage() {
-				Header = "First Page Header",
+			var page2 = new ContentPage() {
+				Header = "Second Page Header",
 				Content = new StackPanel() {
 					Spacing = 20,
 					HorizontalAlignment = HorizontalAlignment.Center,
 					VerticalAlignment = VerticalAlignment.Center,
 					Children = {
 						new TextBlock {
-							Text = "This is the first ContentPage within a NavigationPage.",
+							Text = "This is the second ContentPage within a NavigationPage.",
 						},
-						gotoPage2Button,
-					}
-				}
+						openModalPage3Button,
+					},
+				},
 			};
 
-			NavigationPage.SetHasBackButton(page1, true);
-			NavigationPage.SetHasNavigationBar(page1, true);
-			navigationPageSample.PushAsync(page1);
-		}
+			// For testing CommandBars
+			/*
+			NavigationPage.SetTopCommandBar(page2, new CommandBar() {
+				PrimaryCommands = {
+					new CommandBarButton() {
+						Label = "Top"
+					},
+				},
+				SecondaryCommands = {
+					new CommandBarButton() {
+						Label = "Settings"
+					},
+				}
+			});
 
-		private void OnCarouselNextButtonClick(object? sender, RoutedEventArgs e) {
-			carouselSample.Next();
-		}
+			NavigationPage.SetBottomCommandBar(page2, new CommandBar() {
+				PrimaryCommands = {
+					new CommandBarButton() {
+						Label = "Bottom"
+					},
+				},
+				SecondaryCommands = {
+					new CommandBarButton() {
+						Label = "Settings"
+					},
+				}
+			});
+			//*/
 
-		private void OnCarouselPageNextButtonClick(object? sender, RoutedEventArgs e) {
-			if (carouselPageSample.SelectedIndex < carouselPageSample.Pages?.Count() - 1)
-				carouselPageSample.SelectedIndex++;
-		}
+			NavigationPage.SetHasBackButton(page2, true);
+			NavigationPage.SetHasNavigationBar(page2, true);
 
-		private void OnCarouselPagePreviousButtonClick(object? sender, RoutedEventArgs e) {
-			if (carouselPageSample.SelectedIndex > 0)
-				carouselPageSample.SelectedIndex--;
-		}
+			navigationPageSample.PushAsync(page2);
+		};
 
-		private void OnCarouselPreviousButtonClick(object? sender, RoutedEventArgs e) {
-			carouselSample.Previous();
-		}
-
-		private void OnNotificationCardButtonClicked(object? sender, RoutedEventArgs e) {
-			if (_notificationManager is not null) {
-				if ((sender is Button button) && (button.Tag is NotificationType notificationType))
-					_notificationManager?.Show(new Notification($"{notificationType} Notification", $"This message has a notification type of {notificationType} and was generated at {DateTime.Now:HH:mm:ss}.", notificationType));
-				else
-					_notificationManager?.Show("This message is a simple text string.");
+		var page1 = new ContentPage() {
+			Header = "First Page Header",
+			Content = new StackPanel() {
+				Spacing = 20,
+				HorizontalAlignment = HorizontalAlignment.Center,
+				VerticalAlignment = VerticalAlignment.Center,
+				Children = {
+					new TextBlock {
+						Text = "This is the first ContentPage within a NavigationPage.",
+					},
+					gotoPage2Button,
+				}
 			}
+		};
+
+		NavigationPage.SetHasBackButton(page1, true);
+		NavigationPage.SetHasNavigationBar(page1, true);
+		navigationPageSample.PushAsync(page1);
+	}
+
+	private void OnCarouselNextButtonClick(object? sender, RoutedEventArgs e)
+		=> carouselSample.Next();
+
+	private void OnCarouselPageNextButtonClick(object? sender, RoutedEventArgs e) {
+		if (carouselPageSample.SelectedIndex < carouselPageSample.Pages?.Count() - 1)
+			carouselPageSample.SelectedIndex++;
+	}
+
+	private void OnCarouselPagePreviousButtonClick(object? sender, RoutedEventArgs e) {
+		if (carouselPageSample.SelectedIndex > 0)
+			carouselPageSample.SelectedIndex--;
+	}
+
+	private void OnCarouselPreviousButtonClick(object? sender, RoutedEventArgs e)
+		=> carouselSample.Previous();
+
+	private void OnNotificationCardButtonClicked(object? sender, RoutedEventArgs e) {
+		if (_notificationManager is not null) {
+			if (sender is Button { Tag: NotificationType notificationType })
+				_notificationManager?.Show(new Notification($"{notificationType} Notification", $"This message has a notification type of {notificationType} and was generated at {DateTime.Now:HH:mm:ss}.", notificationType));
+			else
+				_notificationManager?.Show("This message is a simple text string.");
 		}
+	}
 
-		// --------------------------------------------------------------------------------------------------
-		// PUBLIC PROCEDURES
-		// --------------------------------------------------------------------------------------------------
+	// --------------------------------------------------------------------------------------------------
+	// PUBLIC PROCEDURES
+	// --------------------------------------------------------------------------------------------------
 
-		protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e) {
-			_notificationManager ??= new WindowNotificationManager(TopLevel.GetTopLevel(this));
-			base.OnAttachedToVisualTree(e);
-		}
+	protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e) {
+		_notificationManager ??= new WindowNotificationManager(TopLevel.GetTopLevel(this));
 
+		base.OnAttachedToVisualTree(e);
 	}
 
 }

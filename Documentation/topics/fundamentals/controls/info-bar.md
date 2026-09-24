@@ -114,6 +114,9 @@ xmlns:shared="http://schemas.actiprosoftware.com/winfx/xaml/shared"
 > [!NOTE]
 > [InfoBar](xref:@ActiproUIRoot.Controls.InfoBar) is designed for use with 16x16 icons.  See the @if (avalonia) { "Theme Resources" }@if (wpf) { "Theme Assets" } section below for more information on customizing the icon size.
 
+> [!TIP]
+> Icons can automatically adapt to dark themes if the [ImageProvider](xref:@ActiproUIRoot.Media.ImageProvider).[Default](xref:@ActiproUIRoot.Media.ImageProvider.Default) instance is properly configured.  See the [Image Provider](../../themes/image-provider.md) topic for more details.  To dynamically adapt between light and dark themes at runtime, make sure the `Foreground` property is assigned to a dynamic resource that changes based on the current theme.
+
 ## Custom Content
 
 ![Screenshot](../images/info-bar-content.png)

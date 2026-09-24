@@ -1,10 +1,5 @@
 ﻿using ActiproSoftware.Extensions;
 using ActiproSoftware.UI.Avalonia.Input;
-using Avalonia;
-using Avalonia.Controls;
-using System;
-using System.Collections.ObjectModel;
-using System.Windows.Input;
 
 namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.RangeSliderIntro;
 
@@ -38,8 +33,8 @@ public partial class MainControl : UserControl {
 	/// <summary>
 	/// The command to add a random new value to <see cref="MultiValues"/>.
 	/// </summary>
-	public ICommand AddMultiValueCommand
-		=> _addMultiValueCommand ??= new DelegateCommand<object>(_ => {
+	public ICommand AddMultiValueCommand {
+		get => _addMultiValueCommand ??= new DelegateCommand<object>(_ => {
 			// Create a new value that is within the allowed range
 			double newValue = Random.Shared.Next(
 				(int)multiSlider.Minimum.Round(RoundMode.Ceiling),
@@ -47,6 +42,7 @@ public partial class MainControl : UserControl {
 
 			MultiValues.Add(newValue);
 		});
+	}
 
 	/// <summary>
 	/// The command to clear all values from <see cref="MultiValues"/>.
@@ -65,13 +61,14 @@ public partial class MainControl : UserControl {
 	/// <summary>
 	/// The command to remove a value <see cref="MultiValues"/>.
 	/// </summary>
-	public ICommand RemoveMultiValueCommand
-		=> _removeMultiValueCommand ??= new DelegateCommand<double?>(
+	public ICommand RemoveMultiValueCommand {
+		get => _removeMultiValueCommand ??= new DelegateCommand<double?>(
 			executeAction: param => {
 				if (param.HasValue)
 					MultiValues.Remove(param.Value);
 			},
 			canExecuteFunc: param => param.HasValue
 		);
+	}
 
 }

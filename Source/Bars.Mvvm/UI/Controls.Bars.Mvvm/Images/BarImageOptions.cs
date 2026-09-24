@@ -1,42 +1,28 @@
-﻿namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm {
+﻿namespace ActiproSoftware.UI.Avalonia.Controls.Bars.Mvvm;
+
+/// <summary>
+/// Stores options data for an image used in a bar control.
+/// </summary>
+/// <param name="size">A <see cref="BarImageSize"/> indicating the image size.</param>
+public struct BarImageOptions(BarImageSize size) {
 
 	/// <summary>
-	/// Stores options data for an image used in a bar control.
+	/// The default image options instance.
 	/// </summary>
-	public struct BarImageOptions {
+	public static BarImageOptions Default { get; } = new BarImageOptions(BarImageSize.Small);
 
-		/// <summary>
-		/// The default image options instance.
-		/// </summary>
-		public static BarImageOptions Default { get; } = new BarImageOptions(BarImageSize.Small);
-		
-		// --------------------------------------------------------------------------------------------------
-		// OBJECT
-		// --------------------------------------------------------------------------------------------------
-		
-		/// <summary>
-		/// Initializes a new instance of the class.
-		/// </summary>
-		/// <param name="size">A <see cref="BarImageSize"/> indicating the image size.</param>
-		public BarImageOptions(BarImageSize size) {
-			this.ContextualColor = null;
-			this.Size = size;
-		}
-		
-		// --------------------------------------------------------------------------------------------------
-		// PUBLIC PROCEDURES
-		// --------------------------------------------------------------------------------------------------
+	// --------------------------------------------------------------------------------------------------
+	// PUBLIC PROCEDURES
+	// --------------------------------------------------------------------------------------------------
 
-		/// <summary>
-		/// The optional contextual <see cref="Color"/>.
-		/// </summary>
-		public Color? ContextualColor { get; set; }
+	/// <summary>
+	/// The optional contextual <see cref="Color"/>.
+	/// </summary>
+	public Color? ContextualColor { get; set; }
 
-		/// <summary>
-		/// The <see cref="BarImageSize"/> indicating the image size.
-		/// </summary>
-		public BarImageSize Size { get; set; }
-
-	}
+	/// <summary>
+	/// The <see cref="BarImageSize"/> indicating the image size.
+	/// </summary>
+	public BarImageSize Size { get; set; } = size;
 
 }

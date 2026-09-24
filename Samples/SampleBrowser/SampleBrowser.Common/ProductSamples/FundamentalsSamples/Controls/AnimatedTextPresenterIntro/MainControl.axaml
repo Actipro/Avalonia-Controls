@@ -1,0 +1,612 @@
+<UserControl
+	x:Class="ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.AnimatedTextPresenterIntro.MainControl"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:system="using:System"
+	xmlns:systemGlobalization="using:System.Globalization"
+	>
+	<UserControl.Resources>
+
+		<actipro:ComparisonConverter x:Key="EqualToComparisonConverter" Operator="EqualTo" />
+		<actipro:ComparisonConverter x:Key="NotEqualToComparisonConverter" Operator="NotEqualTo" />
+		<systemGlobalization:CultureInfo x:Key="ArabicSaudiArabiaCulture">
+			<x:Arguments>
+				<x:String>ar-SA</x:String>
+			</x:Arguments>
+		</systemGlobalization:CultureInfo>
+		<systemGlobalization:CultureInfo x:Key="EnglishUnitedStatesCulture">
+			<x:Arguments>
+				<x:String>en-US</x:String>
+			</x:Arguments>
+		</systemGlobalization:CultureInfo>
+
+	</UserControl.Resources>
+	<UserControl.Styles>
+
+		<Style Selector="Border.metric-panel">
+			<Setter Property="Background" Value="{actipro:ThemeResource Container1BackgroundBrush}" />
+			<Setter Property="BorderBrush" Value="{actipro:ThemeResource Container3BorderBrush}" />
+			<Setter Property="BorderThickness" Value="1" />
+			<Setter Property="CornerRadius" Value="5" />
+			<Setter Property="MinWidth" Value="180" />
+			<Setter Property="Padding" Value="15" />
+		</Style>
+
+		<Style Selector="TextBlock.metric-label">
+			<Setter Property="Foreground" Value="{actipro:ThemeResource DefaultForegroundBrushSecondary}" />
+		</Style>
+
+		<Style Selector="TextBlock.metric-trend">
+			<Setter Property="Foreground" Value="{actipro:ThemeResource DefaultForegroundBrushTertiary}" />
+		</Style>
+
+		<Style Selector="actipro|AnimatedTextPresenter.large-value">
+			<Setter Property="FontSize" Value="36" />
+			<Setter Property="FontWeight" Value="SemiBold" />
+		</Style>
+
+		<Style Selector="actipro|AnimatedTextPresenter.metric-value">
+			<Setter Property="FontSize" Value="30" />
+			<Setter Property="FontWeight" Value="SemiBold" />
+		</Style>
+
+	</UserControl.Styles>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="AnimatedTextPresenter displays single-line text and animates value changes with configurable transitions, perfect for dashboard values, counters, and status updates.">
+
+		<sampleBrowser:ControlExample
+			Header="Dashboard values"
+			Footer="Text and foreground changes share one transition, including foregrounds supplied by semantic style classes."
+			>
+
+			<StackPanel HorizontalAlignment="Center">
+				<Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
+					<Border Classes="metric-panel">
+						<StackPanel Spacing="3">
+							<TextBlock Classes="metric-label" Text="Requests/min" />
+							<actipro:AnimatedTextPresenter x:Name="requestsTextPresenter" Classes="metric-value" Text="1,284" />
+
+							<StackPanel Orientation="Horizontal" Spacing="3">
+								<actipro:AnimatedTextPresenter x:Name="requestsTrendTextPresenter" Classes="success" Text="+12%" TransitionMode="Fade" />
+								<TextBlock Classes="metric-trend" Text="from prior hour" />
+							</StackPanel>
+						</StackPanel>
+					</Border>
+
+					<Border Grid.Column="1" Classes="metric-panel">
+						<StackPanel Spacing="3">
+							<TextBlock Classes="metric-label" Text="Build status" />
+							<actipro:AnimatedTextPresenter x:Name="buildTextPresenter" Classes="metric-value success" Text="Passed" TransitionScope="Line" />
+							<TextBlock Classes="metric-trend" Text="Main branch" />
+						</StackPanel>
+					</Border>
+
+					<Border Grid.Column="2" Classes="metric-panel">
+						<StackPanel Spacing="3">
+							<TextBlock Classes="metric-label" Text="Open issues" />
+							<actipro:AnimatedTextPresenter x:Name="issuesTextPresenter" Classes="metric-value" Text="42" />
+
+							<StackPanel Orientation="Horizontal" Spacing="3">
+								<actipro:AnimatedTextPresenter
+									x:Name="issuesTrendTextPresenter"
+									Classes="success"
+									Text="-8"
+									TransitionMode="Fade"
+									/>
+								<TextBlock Classes="metric-trend" Text="this week" />
+							</StackPanel>
+						</StackPanel>
+					</Border>
+				</Grid>
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<ToggleSwitch
+					x:Name="dashboardAutoUpdateToggleSwitch"
+					Content="Auto update"
+					IsChecked="True"
+					IsCheckedChanged="OnDashboardAutoUpdateIsCheckedChanged"
+					/>
+			</sampleBrowser:ControlExample.Options>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<StackPanel>
+	<TextBlock Text="Build status" />
+	<actipro:AnimatedTextPresenter
+		Text="{Binding BuildStatusText}"
+		Classes.success="{Binding IsBuildSuccessful}"
+		Classes.danger="{Binding IsBuildFailed}"
+		TransitionScope="Line"
+		/>
+	<TextBlock Text="Main branch" />
+</StackPanel>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Transition options"
+			Footer="Compare how transition mode and scope change the same value updates."
+			DataContext="{Binding #transitionOptionsTextPresenter}"
+			>
+
+			<actipro:AnimatedTextPresenter
+				x:Name="transitionOptionsTextPresenter"
+				Classes="large-value"
+				HorizontalAlignment="Center"
+				Text="Build Passed"
+				TransitionScope="Word"
+				/>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<Button Classes="theme-solid accent" Content="Toggle value" Tag="Build Passed|Build Failed" Click="OnTextPairButtonClick" />
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Mode" />
+						<ComboBox
+							ItemsSource="{actipro:DelimitedArray Type=actipro:AnimatedTextPresenterTransitionMode}"
+							SelectedValue="{Binding TransitionMode, Mode=TwoWay}"
+							/>
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Scope" />
+						<ComboBox
+							ItemsSource="{actipro:DelimitedArray Type=actipro:AnimatedTextPresenterTransitionScope}"
+							SelectedValue="{Binding TransitionScope, Mode=TwoWay}"
+							/>
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Direction" />
+						<ComboBox
+							ItemsSource="{actipro:DelimitedArray Type=actipro:AnimatedTextPresenterTransitionDirection}"
+							SelectedValue="{Binding TransitionDirection, Mode=TwoWay}"
+							/>
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Duration" />
+						<ComboBox x:Name="transitionDurationComboBox" SelectedIndex="0" SelectedValue="{Binding TransitionDuration, Mode=TwoWay}" SelectedValueBinding="{Binding Tag, DataType=ComboBoxItem}">
+							<ComboBoxItem Content="Default" Tag="{x:Null}" />
+							<ComboBoxItem Content="0.25 seconds">
+								<ComboBoxItem.Tag>
+									<system:TimeSpan>0:0:0.25</system:TimeSpan>
+								</ComboBoxItem.Tag>
+							</ComboBoxItem>
+							<ComboBoxItem Content="0.5 seconds">
+								<ComboBoxItem.Tag>
+									<system:TimeSpan>0:0:0.5</system:TimeSpan>
+								</ComboBoxItem.Tag>
+							</ComboBoxItem>
+							<ComboBoxItem Content="1 second">
+								<ComboBoxItem.Tag>
+									<system:TimeSpan>0:0:1</system:TimeSpan>
+								</ComboBoxItem.Tag>
+							</ComboBoxItem>
+							<ComboBoxItem Content="2 seconds">
+								<ComboBoxItem.Tag>
+									<system:TimeSpan>0:0:2</system:TimeSpan>
+								</ComboBoxItem.Tag>
+							</ComboBoxItem>
+							<ComboBoxItem Content="5 seconds">
+								<ComboBoxItem.Tag>
+									<system:TimeSpan>0:0:5</system:TimeSpan>
+								</ComboBoxItem.Tag>
+							</ComboBoxItem>
+						</ComboBox>
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Easing" />
+						<ComboBox x:Name="transitionEasingComboBox" SelectedIndex="0" SelectedValue="{Binding TransitionEasing, Mode=TwoWay}" SelectedValueBinding="{Binding Tag, DataType=ComboBoxItem}">
+							<ComboBoxItem Content="Default" Tag="{x:Null}" />
+							<ComboBoxItem Content="Standard move" Tag="{actipro:AnimationSetting StandardMoveEasing}" />
+							<ComboBoxItem Content="Pop" Tag="{actipro:AnimationSetting PopEasing}" />
+						</ComboBox>
+					</StackPanel>
+					<CheckBox
+						Content="Animation enabled"
+						IsChecked="{Binding IsAnimationEnabled, Mode=TwoWay}"
+						/>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:AnimatedTextPresenter
+	Text="{Binding StatusText}"$(TransitionModeAttribute)$(TransitionScopeAttribute)$(TransitionDirectionAttribute)$(TransitionDurationAttribute)$(TransitionEasingAttribute)$(IsAnimationEnabledAttribute)
+	/>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="TransitionModeAttribute"
+															   IsEnabled="{Binding TransitionMode, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Roll'}"
+															   Value="{Binding TransitionMode, StringFormat='&#xD;&#x9;TransitionMode=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="TransitionScopeAttribute"
+															   IsEnabled="{Binding TransitionScope, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Character'}"
+															   Value="{Binding TransitionScope, StringFormat='&#xD;&#x9;TransitionScope=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="TransitionDirectionAttribute"
+															   IsEnabled="{Binding TransitionDirection, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Auto'}"
+															   Value="{Binding TransitionDirection, StringFormat='&#xD;&#x9;TransitionDirection=&quot;{0}&quot;'}" />
+						<sampleBrowser:CodeExampleSubstitution Key="TransitionDurationAttribute"
+															   AllowNestedSubstitution="True"
+															   Value="$(TransitionDuration025Attribute)$(TransitionDuration05Attribute)$(TransitionDuration1Attribute)$(TransitionDuration2Attribute)$(TransitionDuration5Attribute)" />
+						<sampleBrowser:CodeExampleSubstitution Key="TransitionDuration025Attribute"
+															   IsEnabled="{Binding #transitionDurationComboBox.SelectedIndex, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='1'}"
+															   Value="&#xD;&#x9;TransitionDuration=&quot;0:0:0.25&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="TransitionDuration05Attribute"
+															   IsEnabled="{Binding #transitionDurationComboBox.SelectedIndex, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='2'}"
+															   Value="&#xD;&#x9;TransitionDuration=&quot;0:0:0.5&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="TransitionDuration1Attribute"
+															   IsEnabled="{Binding #transitionDurationComboBox.SelectedIndex, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='3'}"
+															   Value="&#xD;&#x9;TransitionDuration=&quot;0:0:1&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="TransitionDuration2Attribute"
+															   IsEnabled="{Binding #transitionDurationComboBox.SelectedIndex, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='4'}"
+															   Value="&#xD;&#x9;TransitionDuration=&quot;0:0:2&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="TransitionDuration5Attribute"
+															   IsEnabled="{Binding #transitionDurationComboBox.SelectedIndex, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='5'}"
+															   Value="&#xD;&#x9;TransitionDuration=&quot;0:0:5&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="TransitionEasingAttribute"
+															   AllowNestedSubstitution="True"
+															   Value="$(TransitionEasingStandardMoveAttribute)$(TransitionEasingPopAttribute)" />
+						<sampleBrowser:CodeExampleSubstitution Key="TransitionEasingStandardMoveAttribute"
+															   IsEnabled="{Binding #transitionEasingComboBox.SelectedIndex, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='1'}"
+															   Value="&#xD;&#x9;TransitionEasing=&quot;{actipro:AnimationSetting StandardMoveEasing}&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="TransitionEasingPopAttribute"
+															   IsEnabled="{Binding #transitionEasingComboBox.SelectedIndex, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='2'}"
+															   Value="&#xD;&#x9;TransitionEasing=&quot;{actipro:AnimationSetting PopEasing}&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsAnimationEnabledAttribute"
+															   IsEnabled="{Binding !IsAnimationEnabled}"
+															   Value="&#xD;&#x9;IsAnimationEnabled=&quot;False&quot;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Bidirectional text and culture"
+			Footer="Compare centered LTR and RTL text while changing signs, affixes, widths, and the culture used for text layout."
+			DataContext="{Binding #rightToLeftTextPresenter}"
+			>
+
+			<StackPanel HorizontalAlignment="Stretch" Spacing="30">
+				<StackPanel HorizontalAlignment="Stretch" Spacing="3">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Left-to-right reference" HorizontalAlignment="Center" />
+					<actipro:AnimatedTextPresenter
+						x:Name="leftToRightTextPresenter"
+						Classes="large-value"
+						Culture="{Binding Culture}"
+						HorizontalAlignment="Center"
+						IsAnimationEnabled="{Binding IsAnimationEnabled}"
+						Text="Balance: +$1,245.50"
+						/>
+				</StackPanel>
+
+				<StackPanel HorizontalAlignment="Stretch" Spacing="3">
+					<TextBlock Classes="theme-text-heading size-xs" Text="Right-to-left" HorizontalAlignment="Center" />
+					<actipro:AnimatedTextPresenter
+						x:Name="rightToLeftTextPresenter"
+						Classes="large-value"
+						FlowDirection="RightToLeft"
+						HorizontalAlignment="Center"
+						Text="&#x627;&#x644;&#x631;&#x635;&#x64A;&#x62F;: +$1,245.50"
+						/>
+				</StackPanel>
+
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Scenario" />
+						<ComboBox SelectedIndex="0" SelectedValueBinding="{Binding Tag, DataType=ComboBoxItem}" SelectionChanged="OnBidirectionalScenarioSelectionChanged">
+							<ComboBoxItem Content="Signed currency" Tag="SignedCurrency" />
+							<ComboBoxItem Content="Multiple numbers" Tag="MultipleNumbers" />
+							<ComboBoxItem Content="Percentage" Tag="Percentage" />
+						</ComboBox>
+						<Button Margin="0,3,0,0" Classes="theme-solid accent" Content="Toggle value" Click="OnBidirectionalToggleButtonClick" />
+					</StackPanel>
+					<StackPanel>
+						<TextBlock Classes="theme-form-control-label" Text="Culture" />
+						<ComboBox x:Name="bidirectionalCultureComboBox" SelectedIndex="0" SelectedValue="{Binding Culture, Mode=TwoWay}" SelectedValueBinding="{Binding Tag, DataType=ComboBoxItem}">
+							<ComboBoxItem Content="Current culture" Tag="{x:Null}" />
+							<ComboBoxItem Content="Invariant culture" Tag="{x:Static systemGlobalization:CultureInfo.InvariantCulture}" />
+							<ComboBoxItem Content="Arabic (Saudi Arabia)" Tag="{StaticResource ArabicSaudiArabiaCulture}" />
+						</ComboBox>
+					</StackPanel>
+					<CheckBox
+						Content="Animation enabled"
+						IsChecked="{Binding IsAnimationEnabled, Mode=TwoWay}"
+						/>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:AnimatedTextPresenter
+	Text="{Binding BalanceText}"
+	FlowDirection="RightToLeft"$(BidirectionalCultureAttribute)$(BidirectionalAnimationAttribute)
+	/>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="BidirectionalCultureAttribute"
+													   AllowNestedSubstitution="True"
+													   Value="$(InvariantCultureAttribute)$(ArabicCultureAttribute)" />
+						<sampleBrowser:CodeExampleSubstitution Key="InvariantCultureAttribute"
+													   IsEnabled="{Binding #bidirectionalCultureComboBox.SelectedIndex, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='1'}"
+													   Value="&#xD;&#x9;Culture=&quot;{x:Static systemGlobalization:CultureInfo.InvariantCulture}&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="ArabicCultureAttribute"
+													   IsEnabled="{Binding #bidirectionalCultureComboBox.SelectedIndex, Converter={StaticResource EqualToComparisonConverter}, ConverterParameter='2'}"
+													   Value="&#xD;&#x9;Culture=&quot;{Binding ArabicCulture}&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="BidirectionalAnimationAttribute"
+													   IsEnabled="{Binding !IsAnimationEnabled}"
+													   Value="&#xD;&#x9;IsAnimationEnabled=&quot;False&quot;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Semantic numeric transitions"
+			Footer="Numeric tokens use their overall value trend while integer and fractional places remain aligned across width changes."
+			DataContext="{Binding #semanticNumericTextPresenter}"
+			>
+
+			<actipro:AnimatedTextPresenter
+				x:Name="semanticNumericTextPresenter"
+				Classes="large-value"
+				Culture="{x:Static systemGlobalization:CultureInfo.InvariantCulture}"
+				HorizontalAlignment="Center"
+				Text="Value: 28"
+				VerticalAlignment="Center"
+				/>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel>
+					<TextBlock Classes="theme-form-control-label" Text="Scenario" />
+					<ComboBox x:Name="semanticNumericScenarioComboBox" SelectedIndex="0" SelectedValueBinding="{Binding Tag, DataType=ComboBoxItem}" SelectionChanged="OnSemanticNumericScenarioSelectionChanged">
+						<ComboBoxItem Content="Overall token direction" Tag="Value: 28|Value: 35" />
+						<ComboBoxItem Content="Grouped width change" Tag="1,245|989" />
+						<ComboBoxItem Content="Integer and decimal places" Tag="1|35.2" />
+						<ComboBoxItem Content="Independent numeric runs" Tag="Step 2 of 120|Step 10 of 99" />
+					</ComboBox>
+					<Button Margin="0,3,0,0" Classes="theme-solid accent" Content="Toggle value" Tag="{Binding #semanticNumericScenarioComboBox.SelectedValue}" Click="OnTextPairButtonClick" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:AnimatedTextPresenter
+	Text="{Binding ValueText}"
+	/>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Temporary transition foregrounds"
+			Footer="The status uses the generic accent brush. Price digits and separators prefer success or danger based on value, while the stable currency symbol keeps the normal foreground."
+			>
+
+			<StackPanel HorizontalAlignment="Center" Spacing="3">
+				<TextBlock
+					Classes="theme-text-heading size-xs"
+					HorizontalAlignment="Center"
+					Text="AAPL"
+					/>
+				<StackPanel Orientation="Horizontal" Spacing="15">
+					<actipro:AnimatedTextPresenter
+						x:Name="quotePriceTextPresenter"
+						Classes="large-value"
+						Culture="{StaticResource EnglishUnitedStatesCulture}"
+						NumericDecreaseTransitionForeground="{actipro:ThemeResource ControlForegroundBrushOutlineDanger}"
+						NumericIncreaseTransitionForeground="{actipro:ThemeResource ControlForegroundBrushOutlineSuccess}"
+						Text="$181.42"
+						TransitionDuration="0:0:1"
+						TransitionForeground="{actipro:ThemeResource ControlForegroundBrushOutlineAccent}"
+						/>
+					<actipro:AnimatedTextPresenter
+						x:Name="quoteStatusTextPresenter"
+						Classes="size-md"
+						IsAnimationEnabled="{Binding #quotePriceTextPresenter.IsAnimationEnabled}"
+						Text="Delayed"
+						TransitionDuration="0:0:1"
+						TransitionForeground="{actipro:ThemeResource ControlForegroundBrushOutlineAccent}"
+						TransitionMode="Fade"
+						VerticalAlignment="Center"
+						/>
+				</StackPanel>
+			</StackPanel>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<Button
+						Classes="theme-solid accent"
+						Click="OnQuoteUpdateButtonClick"
+						Content="Update quote"
+						/>
+					<CheckBox
+						Content="Animation enabled"
+						IsChecked="{Binding #quotePriceTextPresenter.IsAnimationEnabled, Mode=TwoWay}"
+						/>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<StackPanel Orientation="Horizontal" Spacing="8">
+	<actipro:AnimatedTextPresenter
+		Text="{Binding QuotePriceText}"
+		Culture="{Binding QuoteCulture}"
+		TransitionDuration="0:0:1"
+		TransitionForeground="{actipro:ThemeResource ControlForegroundBrushOutlineAccent}"
+		NumericIncreaseTransitionForeground="{actipro:ThemeResource ControlForegroundBrushOutlineSuccess}"
+		NumericDecreaseTransitionForeground="{actipro:ThemeResource ControlForegroundBrushOutlineDanger}"
+		/>
+	<actipro:AnimatedTextPresenter
+		Text="{Binding QuoteStatusText}"
+		TransitionDuration="0:0:1"
+		TransitionForeground="{actipro:ThemeResource ControlForegroundBrushOutlineAccent}"
+		TransitionMode="Fade"
+		/>
+</StackPanel>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Rapid counter updates"
+			Footer="Repeat buttons exercise interrupted transitions during frequent updates."
+			>
+
+			<actipro:AnimatedTextPresenter
+				x:Name="counterTextPresenter"
+				Classes="large-value"
+				HorizontalAlignment="Center"
+				Text="Count: 1999"
+				/>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Orientation="Horizontal" Spacing="8">
+					<RepeatButton Click="OnCounterAdjustmentButtonClick" Content="-1" Tag="-1" />
+					<RepeatButton Click="OnCounterAdjustmentButtonClick" Content="+1" Tag="1" />
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:AnimatedTextPresenter
+	Text="{Binding CountText}"
+	/>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+		
+		<sampleBrowser:ControlExample
+			Header="Foreground transition"
+			Footer="Toggle a semantic foreground while the text remains unchanged. A longer duration makes the color interpolation easier to observe."
+			>
+
+			<actipro:AnimatedTextPresenter
+				Classes="large-value"
+				Classes.success="{Binding #foregroundTransitionToggleSwitch.IsChecked}"
+				HorizontalAlignment="Center"
+				Text="Connection ready"
+				TransitionDuration="0:0:1"
+				/>
+
+			<sampleBrowser:ControlExample.Options>
+				<ToggleSwitch
+					x:Name="foregroundTransitionToggleSwitch"
+					Content="Use success foreground"
+					IsChecked="True"
+					/>
+			</sampleBrowser:ControlExample.Options>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:AnimatedTextPresenter
+	Text="Connection ready"
+	Classes.success="{Binding IsConnectionReady}"
+	TransitionDuration="0:0:1"
+	/>
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+		<sampleBrowser:ControlExample
+			Header="Style classes"
+			Footer="Size and semantic style classes can be combined to produce the desired text presentation."
+			>
+
+			<Grid RowDefinitions="Auto,20,Auto,20,Auto,20,Auto,20,Auto" ColumnDefinitions="*,Auto,40,Auto,40,Auto,40,Auto,40,Auto,*">
+				<actipro:AnimatedTextPresenter Grid.Row="0" Grid.Column="1" Classes="size-xs" Text="Default (XS)" />
+				<actipro:AnimatedTextPresenter Grid.Row="0" Grid.Column="3" Classes="size-xs accent" Text="Accent" />
+				<actipro:AnimatedTextPresenter Grid.Row="0" Grid.Column="5" Classes="size-xs success" Text="Success" />
+				<actipro:AnimatedTextPresenter Grid.Row="0" Grid.Column="7" Classes="size-xs warning" Text="Warning" />
+				<actipro:AnimatedTextPresenter Grid.Row="0" Grid.Column="9" Classes="size-xs danger" Text="Danger" />
+
+				<actipro:AnimatedTextPresenter Grid.Row="2" Grid.Column="1" Classes="size-sm" Text="Default (SM)" />
+				<actipro:AnimatedTextPresenter Grid.Row="2" Grid.Column="3" Classes="size-sm accent" Text="Accent" />
+				<actipro:AnimatedTextPresenter Grid.Row="2" Grid.Column="5" Classes="size-sm success" Text="Success" />
+				<actipro:AnimatedTextPresenter Grid.Row="2" Grid.Column="7" Classes="size-sm warning" Text="Warning" />
+				<actipro:AnimatedTextPresenter Grid.Row="2" Grid.Column="9" Classes="size-sm danger" Text="Danger" />
+
+				<actipro:AnimatedTextPresenter Grid.Row="4" Grid.Column="1" Classes="size-md" Text="Default (MD)" />
+				<actipro:AnimatedTextPresenter Grid.Row="4" Grid.Column="3" Classes="size-md accent" Text="Accent" />
+				<actipro:AnimatedTextPresenter Grid.Row="4" Grid.Column="5" Classes="size-md success" Text="Success" />
+				<actipro:AnimatedTextPresenter Grid.Row="4" Grid.Column="7" Classes="size-md warning" Text="Warning" />
+				<actipro:AnimatedTextPresenter Grid.Row="4" Grid.Column="9" Classes="size-md danger" Text="Danger" />
+
+				<actipro:AnimatedTextPresenter Grid.Row="6" Grid.Column="1" Classes="size-lg" Text="Default (LG)" />
+				<actipro:AnimatedTextPresenter Grid.Row="6" Grid.Column="3" Classes="size-lg accent" Text="Accent" />
+				<actipro:AnimatedTextPresenter Grid.Row="6" Grid.Column="5" Classes="size-lg success" Text="Success" />
+				<actipro:AnimatedTextPresenter Grid.Row="6" Grid.Column="7" Classes="size-lg warning" Text="Warning" />
+				<actipro:AnimatedTextPresenter Grid.Row="6" Grid.Column="9" Classes="size-lg danger" Text="Danger" />
+
+				<actipro:AnimatedTextPresenter Grid.Row="8" Grid.Column="1" Classes="size-xl" Text="Default (XL)" />
+				<actipro:AnimatedTextPresenter Grid.Row="8" Grid.Column="3" Classes="size-xl accent" Text="Accent" />
+				<actipro:AnimatedTextPresenter Grid.Row="8" Grid.Column="5" Classes="size-xl success" Text="Success" />
+				<actipro:AnimatedTextPresenter Grid.Row="8" Grid.Column="7" Classes="size-xl warning" Text="Warning" />
+				<actipro:AnimatedTextPresenter Grid.Row="8" Grid.Column="9" Classes="size-xl danger" Text="Danger" />
+			</Grid>
+
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<actipro:AnimatedTextPresenter Classes="size-xs" Text="Default (XS)" />
+<actipro:AnimatedTextPresenter Classes="size-xs accent" Text="Accent" />
+<actipro:AnimatedTextPresenter Classes="size-xs success" Text="Success" />
+<actipro:AnimatedTextPresenter Classes="size-xs warning" Text="Warning" />
+<actipro:AnimatedTextPresenter Classes="size-xs danger" Text="Danger" />
+
+<actipro:AnimatedTextPresenter Classes="size-sm" Text="Default (SM)" />
+<actipro:AnimatedTextPresenter Classes="size-sm accent" Text="Accent" />
+<actipro:AnimatedTextPresenter Classes="size-sm success" Text="Success" />
+<actipro:AnimatedTextPresenter Classes="size-sm warning" Text="Warning" />
+<actipro:AnimatedTextPresenter Classes="size-sm danger" Text="Danger" />
+
+<actipro:AnimatedTextPresenter Classes="size-md" Text="Default (MD)" />
+<actipro:AnimatedTextPresenter Classes="size-md accent" Text="Accent" />
+<actipro:AnimatedTextPresenter Classes="size-md success" Text="Success" />
+<actipro:AnimatedTextPresenter Classes="size-md warning" Text="Warning" />
+<actipro:AnimatedTextPresenter Classes="size-md danger" Text="Danger" />
+
+<actipro:AnimatedTextPresenter Classes="size-lg" Text="Default (LG)" />
+<actipro:AnimatedTextPresenter Classes="size-lg accent" Text="Accent" />
+<actipro:AnimatedTextPresenter Classes="size-lg success" Text="Success" />
+<actipro:AnimatedTextPresenter Classes="size-lg warning" Text="Warning" />
+<actipro:AnimatedTextPresenter Classes="size-lg danger" Text="Danger" />
+
+<actipro:AnimatedTextPresenter Classes="size-xl" Text="Default (XL)" />
+<actipro:AnimatedTextPresenter Classes="size-xl accent" Text="Accent" />
+<actipro:AnimatedTextPresenter Classes="size-xl success" Text="Success" />
+<actipro:AnimatedTextPresenter Classes="size-xl warning" Text="Warning" />
+<actipro:AnimatedTextPresenter Classes="size-xl danger" Text="Danger" />
+					]]>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+
+	</sampleBrowser:ControlExampleItemsControl>
+</UserControl>

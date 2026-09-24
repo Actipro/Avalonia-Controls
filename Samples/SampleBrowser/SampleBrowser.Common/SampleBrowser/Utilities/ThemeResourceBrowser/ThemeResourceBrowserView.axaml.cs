@@ -1,39 +1,34 @@
-using Avalonia.Controls;
+namespace ActiproSoftware.SampleBrowser.Utilities.ThemeResourceBrowser;
 
-namespace ActiproSoftware.SampleBrowser.Utilities.ThemeResourceBrowser {
+public partial class ThemeResourceBrowserView : UserControl {
 
-	public partial class ThemeResourceBrowserView : UserControl {
+	// --------------------------------------------------------------------------------------------------
+	// OBJECT
+	// --------------------------------------------------------------------------------------------------
 
-		// --------------------------------------------------------------------------------------------------
-		// OBJECT
-		// --------------------------------------------------------------------------------------------------
+	public ThemeResourceBrowserView() {
+		InitializeComponent();
 
-		public ThemeResourceBrowserView() {
-			InitializeComponent();
+		ViewModel = new ThemeResourceBrowserViewModel(ActualThemeVariant);
+		ActualThemeVariantChanged += OnActualThemeVariantChanged;
+	}
 
-			ViewModel = new ThemeResourceBrowserViewModel(this.ActualThemeVariant);
-			ActualThemeVariantChanged += this.OnActualThemeVariantChanged;
-		}
+	// --------------------------------------------------------------------------------------------------
+	// NON-PUBLIC PROCEDURES
+	// --------------------------------------------------------------------------------------------------
 
-		// --------------------------------------------------------------------------------------------------
-		// NON-PUBLIC PROCEDURES
-		// --------------------------------------------------------------------------------------------------
+	private void OnActualThemeVariantChanged(object? sender, EventArgs e) {
+		if (ViewModel is { } viewModel)
+			viewModel.Theme = ActualThemeVariant;
+	}
 
-		private void OnActualThemeVariantChanged(object? sender, System.EventArgs e) {
-			var viewModel = this.ViewModel;
-			if (viewModel is not null)
-				viewModel.Theme = this.ActualThemeVariant;
-		}
-		
-		// --------------------------------------------------------------------------------------------------
-		// PUBLIC PROCEDURES
-		// --------------------------------------------------------------------------------------------------
+	// --------------------------------------------------------------------------------------------------
+	// PUBLIC PROCEDURES
+	// --------------------------------------------------------------------------------------------------
 
-		public ThemeResourceBrowserViewModel? ViewModel {
-			get => DataContext as ThemeResourceBrowserViewModel;
-			set => DataContext = value;
-		}
-
+	public ThemeResourceBrowserViewModel? ViewModel {
+		get => DataContext as ThemeResourceBrowserViewModel;
+		set => DataContext = value;
 	}
 
 }

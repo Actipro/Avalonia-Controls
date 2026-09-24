@@ -1,50 +1,48 @@
-﻿namespace ActiproSoftware.ProductSamples.BarsSamples.Common {
-	
+﻿namespace ActiproSoftware.ProductSamples.BarsSamples.Common;
+
+/// <summary>
+/// Specifies the kind of border.
+/// </summary>
+public enum BorderKind {
+
 	/// <summary>
-	/// Specifies the kind of border.
+	/// No borders.
 	/// </summary>
-	public enum BorderKind {
-		
-		/// <summary>
-		/// No borders.
-		/// </summary>
-		None,
+	None,
 
-		/// <summary>
-		/// All borders.
-		/// </summary>
-		All,
+	/// <summary>
+	/// All borders.
+	/// </summary>
+	All,
 
-		/// <summary>
-		/// Outside borders.
-		/// </summary>
-		Outside,
+	/// <summary>
+	/// Outside borders.
+	/// </summary>
+	Outside,
 
-		/// <summary>
-		/// Inside borders.
-		/// </summary>
-		Inside,
+	/// <summary>
+	/// Inside borders.
+	/// </summary>
+	Inside,
 
-		/// <summary>
-		/// Bottom border.
-		/// </summary>
-		Bottom,
+	/// <summary>
+	/// Bottom border.
+	/// </summary>
+	Bottom,
 
-		/// <summary>
-		/// Top border.
-		/// </summary>
-		Top,
+	/// <summary>
+	/// Top border.
+	/// </summary>
+	Top,
 
-		/// <summary>
-		/// Left border.
-		/// </summary>
-		Left,
+	/// <summary>
+	/// Left border.
+	/// </summary>
+	Left,
 
-		/// <summary>
-		/// Right border.
-		/// </summary>
-		Right,
-
-	}
+	/// <summary>
+	/// Right border.
+	/// </summary>
+	Right,
 
 }

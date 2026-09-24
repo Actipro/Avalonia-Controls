@@ -136,8 +136,10 @@
 						BorderBrush="{actipro:ThemeResource StatusBarBorderBrush}" BorderThickness="{actipro:ThemeResource StatusBarBorderThickness}"
 						TextElement.Foreground="{actipro:ThemeResource StatusBarForegroundBrush}">
 					<Grid Margin="0,0,0,1" ColumnDefinitions="*,Auto,Auto" IsVisible="{Binding !ViewHasCustomStatusBar}">
-						<TextBlock Margin="{actipro:ScaledThickness '2.5,0.5'}" Text="{Binding StatusMessage}" />
-						<TextBlock Grid.Column="1" Margin="{actipro:ScaledThickness '0,0.5'}" Text="{Binding ProductData.ProductVersionWithBuildText}" />
+						<TextBlock Margin="{actipro:ScaledThickness '2.5,0.5'}" Text="{Binding StatusMessage}" VerticalAlignment="Center" />
+						<Button Grid.Column="1" Classes="theme-subtle" Padding="{actipro:ScaledThickness '0.5,0.25'}" 
+								Command="{Binding ViewEnvironmentCommand}"
+								Content="{Binding ProductData.ProductVersionWithBuildText}" ToolTip.Tip="View Environment" />
 						<actipro:WindowResizeGrip Grid.Column="2" />
 					</Grid>
 				</Border>

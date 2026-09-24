@@ -1,20 +1,16 @@
-using Avalonia.Controls;
+namespace ActiproSoftware.SampleBrowser;
 
-namespace ActiproSoftware.SampleBrowser {
+/// <summary>
+/// Provides the user control for the home page.
+/// </summary>
+public partial class HomeControl : UserControl {
 
-	/// <summary>
-	/// Provides the user control for the home page.
-	/// </summary>
-	public partial class HomeControl : UserControl {
+	// --------------------------------------------------------------------------------------------------
+	// OBJECT
+	// --------------------------------------------------------------------------------------------------
 
-		// --------------------------------------------------------------------------------------------------
-		// OBJECT
-		// --------------------------------------------------------------------------------------------------
-
-		public HomeControl() {
-			InitializeComponent();
-		}
-
+	public HomeControl() {
+		InitializeComponent();
 	}
 
 }

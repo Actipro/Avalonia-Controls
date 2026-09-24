@@ -1,10 +1,6 @@
-using Avalonia.Controls;
+namespace ActiproSoftware.SampleBrowser;
 
-namespace ActiproSoftware.SampleBrowser {
-
-	/// <summary>
-	/// Displays a collection of categorized sample items.
-	/// </summary>
-	public class CategorizedSampleItemsControl : ItemsControl { }
-
-}
+/// <summary>
+/// Displays a collection of categorized sample items.
+/// </summary>
+public class CategorizedSampleItemsControl : ItemsControl { }

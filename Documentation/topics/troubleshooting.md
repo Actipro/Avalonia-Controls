@@ -11,7 +11,7 @@ This topic provides several tips on common questions or issues that you may enco
 
 If a control does not appear the way it should (especially if it is blank), this can be caused by missing themes.  Actipro Avalonia controls require the [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme) to be loaded for control templates and resources to be available for the controls.
 
-If [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme) is loaded but controls from the `ActiproSoftware.Controls.Avalonia.Pro` NuGet package are still not rendering properly (like the [Fundamentals](fundamentals/index.md) product controls), make sure [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme).[Includes](xref:@ActiproUIRoot.Themes.ModernTheme.Includes) property includes the [Pro](xref:@ActiproUIRoot.Themes.ThemeStyleIncludes.Pro) controls.
+If [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme) is loaded but controls from the `ActiproSoftware.Controls.Avalonia.Pro` NuGet package are still not rendering properly (like the [Fundamentals](fundamentals/index.md) product controls), make sure [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme).[Includes](xref:@ActiproUIRoot.Themes.ModernTheme.Includes) property includes the appropriate product values or the composite [Pro](xref:@ActiproUIRoot.Themes.ThemeStyleIncludes.Pro) value.
 
 See the "Using Actipro Themes" section of the [Themes Getting Started](themes/getting-started.md) topic for more details on loading the theme, including sample code.
 
@@ -26,7 +26,7 @@ Some controls require specific parts to be defined in the control theme, and thi
 
 If native themes are missing for basic controls (like `TextBox`), make sure the [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme) is loaded since it defines the control templates and resources used for native controls.
 
-If the [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme) is loaded but native controls are still not properly themed, verify that the [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme) is loaded *after* any other themes since the last loaded theme will override the themes defined before it.  Also make sure that the [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme).[AreNativeControlThemesEnabled](xref:@ActiproUIRoot.Themes.ModernTheme.AreNativeControlThemesEnabled) property is *not* set to `false` as this would prevent the themes from being loaded.
+If the [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme) is loaded but native controls are still not properly themed, verify that the [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme) is loaded *after* any other themes since the last loaded theme will override the themes defined before it.  Also make sure that the [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme).[AreNativeControlThemesEnabled](xref:@ActiproUIRoot.Themes.ModernTheme.AreNativeControlThemesEnabled) property is *not* set to `false`, which prevents Actipro control themes from being applied automatically to native controls.
 
 If basic native controls are themed and native `ColorPicker` or `DataGrid` are not, you may be missing a NuGet package and/or theme include setting.
 
@@ -61,7 +61,7 @@ No precompiled XAML found for avares://ActiproSoftware.Avalonia.Fundamentals/The
 
 To resolve the issue, the application will need to explicitly reference the necessary styles to prevent them from being trimmed.  The following shows how to redefine `ModernTheme` to explicitly include all the possible style resources:
 
-```xml
+```xaml
 <Application ...
 	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 	>
@@ -71,19 +71,22 @@ To resolve the issue, the application will need to explicitly reference the nece
 		<actipro:ModernTheme>
 
 			<!-- When using Native ColorPicker -->
-			<StyleInclude Source="avares://ActiproSoftware.Avalonia.Themes.Native.ColorPicker/Themes/Common.axaml"/>
+			<StyleInclude Source="avares://ActiproSoftware.Avalonia.Themes.Native.ColorPicker/Themes/Common.axaml" />
 
 			<!-- When using Native DataGrid -->
-			<StyleInclude Source="avares://ActiproSoftware.Avalonia.Themes.Native.DataGrid/Themes/Common.axaml"/>
+			<StyleInclude Source="avares://ActiproSoftware.Avalonia.Themes.Native.DataGrid/Themes/Common.axaml" />
 
 			<!-- When using Pro components from Fundamentals library -->
-			<StyleInclude Source="avares://ActiproSoftware.Avalonia.Fundamentals/Themes/Common.axaml"/>
+			<StyleInclude Source="avares://ActiproSoftware.Avalonia.Fundamentals/Themes/Common.axaml" />
 
 			<!-- When using Pro components from Bars library -->
-			<StyleInclude Source="avares://ActiproSoftware.Avalonia.Bars/Themes/Common.axaml"/>
+			<StyleInclude Source="avares://ActiproSoftware.Avalonia.Bars/Themes/Common.axaml" />
+
+			<!-- When using Pro components from Data Visualization library -->
+			<StyleInclude Source="avares://ActiproSoftware.Avalonia.DataVisualization/Themes/Common.axaml" />
 
 			<!-- When using Pro components from Docking library -->
-			<StyleInclude Source="avares://ActiproSoftware.Avalonia.Docking/Themes/Common.axaml"/>
+			<StyleInclude Source="avares://ActiproSoftware.Avalonia.Docking/Themes/Common.axaml" />
 
 		</actipro:ModernTheme>
 
@@ -93,7 +96,7 @@ To resolve the issue, the application will need to explicitly reference the nece
 
 Basically, whichever resource was mentioned by the error message will need to be explicitly listed like shown above.
 
-The [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme).[Includes](xref:@ActiproUIRoot.Themes.ModernTheme.Includes) property does not have to be defined when explicitly including the styles, and you should only include styles for the assemblies used by your application.
+The [ModernTheme](xref:@ActiproUIRoot.Themes.ModernTheme).[Includes](xref:@ActiproUIRoot.Themes.ModernTheme.Includes) property does not have to be defined when explicitly including the styles, and you should only include styles for the assemblies used by your application.  Explicit style includes do not automatically expand product dependencies, so include Fundamentals before Docking when Docking is used.
 
 ## WebAssembly (WASM) Performance Issues
 

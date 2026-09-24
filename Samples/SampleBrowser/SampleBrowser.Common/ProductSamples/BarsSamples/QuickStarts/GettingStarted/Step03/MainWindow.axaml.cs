@@ -14,35 +14,31 @@ CHANGES SINCE LAST STEP:
 
 using ActiproSoftware.UI.Avalonia.Controls.Bars;
 
-namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.Step03 {
+namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.GettingStarted.Step03;
 
-	public partial class MainWindow : RibbonWindow {
+public partial class MainWindow : RibbonWindow {
 
-		// --------------------------------------------------------------------------------------------------
-		// OBJECT
-		// --------------------------------------------------------------------------------------------------
+	// --------------------------------------------------------------------------------------------------
+	// OBJECT
+	// --------------------------------------------------------------------------------------------------
 
-		/// <summary>
-		/// Initializes a new instance of the class.
-		/// </summary>
-		public MainWindow() {
-			InitializeComponent();
+	public MainWindow() {
+		InitializeComponent();
 
-			// Configure this view with the new view model
-			ViewModel = new SampleWindowViewModel();
-		}
-
-		// --------------------------------------------------------------------------------------------------
-		// PUBLIC PROCEDURES
-		// --------------------------------------------------------------------------------------------------
-
-		/// <summary>
-		/// The view model for this view.
-		/// </summary>
-		private SampleWindowViewModel? ViewModel {
-			get => DataContext as SampleWindowViewModel;
-			set => DataContext = value;
-		}
-
+		// Configure this view with the new view model
+		ViewModel = new SampleWindowViewModel();
 	}
+
+	// --------------------------------------------------------------------------------------------------
+	// PUBLIC PROCEDURES
+	// --------------------------------------------------------------------------------------------------
+
+	/// <summary>
+	/// The view model for this view.
+	/// </summary>
+	private SampleWindowViewModel? ViewModel {
+		get => DataContext as SampleWindowViewModel;
+		set => DataContext = value;
+	}
+
 }

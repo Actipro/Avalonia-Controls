@@ -73,7 +73,7 @@ The visibility of a [Badge](xref:@ActiproUIRoot.Controls.Badge) is primarily man
 When shown ([IsActive](xref:@ActiproUIRoot.Controls.Badge.IsActive) = `true`), the badge will animate into position using a "pop" animation.  A similar but opposite animation is used when hiding ([IsActive](xref:@ActiproUIRoot.Controls.Badge.IsActive) = `false`).
 
 @if (avalonia) {
-Animations are automatically enabled. To turn off animations, set the [IsAnimationEnabled](xref:@ActiproUIRoot.Controls.Badge.IsAnimationEnabled) property to `false`.
+Animations are enabled by default when animation support is available. To manually turn off animations, set the [IsAnimationEnabled](xref:@ActiproUIRoot.Controls.Badge.IsAnimationEnabled) property to `false`.
 }
 @if (wpf) {
 Animations are automatically disabled, as appropriate, based on system settings. To manually turn off animations, set the [IsAnimationEnabled](xref:@ActiproUIRoot.Controls.Badge.IsAnimationEnabled) property to `false`.
@@ -135,7 +135,7 @@ xmlns:shared="http://schemas.actiprosoftware.com/winfx/xaml/shared"
 ```
 }
 
-## Using as an adornment
+## Using as an Adornment
 
 A common scenario for a badge is to be used as an adornment to another element. Examples include showing availability status on a user's avatar or a count of unread messages.
 

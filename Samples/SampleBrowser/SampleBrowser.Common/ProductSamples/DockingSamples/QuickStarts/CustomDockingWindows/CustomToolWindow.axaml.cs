@@ -1,30 +1,25 @@
 ﻿using ActiproSoftware.UI.Avalonia.Controls.Docking;
-using System;
 
-namespace ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.CustomDockingWindows {
+namespace ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.CustomDockingWindows;
 
-	public partial class CustomToolWindow : ToolWindow {
+public partial class CustomToolWindow : ToolWindow {
 
-		// --------------------------------------------------------------------------------------------------
-		// OBJECT
-		// --------------------------------------------------------------------------------------------------
+	// --------------------------------------------------------------------------------------------------
+	// OBJECT
+	// --------------------------------------------------------------------------------------------------
 
-		/// <summary>
-		/// Initializes an instance of the class.
-		/// </summary>
-		public CustomToolWindow() {
-			InitializeComponent();
-		}
+	public CustomToolWindow() {
+		InitializeComponent();
+	}
 
-		// --------------------------------------------------------------------------------------------------
-		// PUBLIC PROCEDURES
-		// --------------------------------------------------------------------------------------------------
+	// --------------------------------------------------------------------------------------------------
+	// PUBLIC PROCEDURES
+	// --------------------------------------------------------------------------------------------------
 
-		/// <inheritdoc/>
-		protected override Type StyleKeyOverride
-			// Ensure ToolWindow implicit styles are applied to the derived class
-			=> typeof(ToolWindow);
-
+	/// <inheritdoc/>
+	protected override Type StyleKeyOverride {
+		// Ensure ToolWindow implicit styles are applied to the derived class
+		get => typeof(ToolWindow);
 	}
 
 }

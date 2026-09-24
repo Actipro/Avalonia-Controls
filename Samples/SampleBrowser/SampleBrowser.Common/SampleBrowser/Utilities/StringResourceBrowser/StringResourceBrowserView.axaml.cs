@@ -1,51 +1,45 @@
-using Avalonia.Controls;
-using Avalonia.Threading;
+namespace ActiproSoftware.SampleBrowser.Utilities.StringResourceBrowser;
 
-namespace ActiproSoftware.SampleBrowser.Utilities.StringResourceBrowser {
+public partial class StringResourceBrowserView : UserControl {
 
-	public partial class StringResourceBrowserView : UserControl {
+	// --------------------------------------------------------------------------------------------------
+	// OBJECT
+	// --------------------------------------------------------------------------------------------------
 
-		// --------------------------------------------------------------------------------------------------
-		// OBJECT
-		// --------------------------------------------------------------------------------------------------
+	public StringResourceBrowserView() {
+		InitializeComponent();
 
-		public StringResourceBrowserView() {
-			InitializeComponent();
+		ViewModel = new StringResourceBrowserViewModel();
 
-			ViewModel = new StringResourceBrowserViewModel();
+		// Select the first item
+		assemblyComboBox.SelectionChanged += (sender, e) => {
+			Dispatcher.UIThread.InvokeAsync(() => {
+				if (stringResourceListBox.SelectedIndex == -1)
+					stringResourceListBox.SelectedIndex = 0;
+			});
+		};
+		assemblyComboBox.Loaded += (sender, e) => assemblyComboBox.SelectedIndex = 0;
+		stringResourceListBox.SelectionChanged += (sender, e) => UpdateCodeTextBlock();
+		customValueTextBox.TextChanged += (sender, e) => UpdateCodeTextBlock();
+	}
 
-			// Select the first item
-			assemblyComboBox.SelectionChanged += (sender, e) => {
-				Dispatcher.UIThread.InvokeAsync(() => {
-					if (stringResourceListBox.SelectedIndex == -1)
-						stringResourceListBox.SelectedIndex = 0;
-				});
-			};
-			assemblyComboBox.Loaded += (sender, e) => assemblyComboBox.SelectedIndex = 0;
-			stringResourceListBox.SelectionChanged += (sender, e) => UpdateCodeTextBlock();
-			customValueTextBox.TextChanged += (sender, e) => UpdateCodeTextBlock();
-		}
+	// --------------------------------------------------------------------------------------------------
+	// NON-PUBLIC PROCEDURES
+	// --------------------------------------------------------------------------------------------------
 
-		// --------------------------------------------------------------------------------------------------
-		// NON-PUBLIC PROCEDURES
-		// --------------------------------------------------------------------------------------------------
+	private void UpdateCodeTextBlock() {
+		codeTextBlock.Text = (stringResourceListBox.SelectedItem is StringResourceModel resource)
+			? $"{resource.SRType.FullName}.SetCustomString({resource.Name.GetType().FullName}.{resource.Name}, \"{customValueTextBox.Text}\");"
+			: null;
+	}
 
-		private void UpdateCodeTextBlock() {
-			if (stringResourceListBox.SelectedItem is StringResourceModel resource)
-				codeTextBlock.Text = $"{resource.SRType.FullName}.SetCustomString({resource.Name.GetType().FullName}.{resource.Name}, \"{customValueTextBox.Text}\");";
-			else
-				codeTextBlock.Text = null;
-		}
+	// --------------------------------------------------------------------------------------------------
+	// PUBLIC PROCEDURES
+	// --------------------------------------------------------------------------------------------------
 
-		// --------------------------------------------------------------------------------------------------
-		// PUBLIC PROCEDURES
-		// --------------------------------------------------------------------------------------------------
-
-		public StringResourceBrowserViewModel? ViewModel {
-			get => DataContext as StringResourceBrowserViewModel;
-			set => DataContext = value;
-		}
-
+	public StringResourceBrowserViewModel? ViewModel {
+		get => DataContext as StringResourceBrowserViewModel;
+		set => DataContext = value;
 	}
 
 }

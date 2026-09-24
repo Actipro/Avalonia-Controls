@@ -1,207 +1,197 @@
 using ActiproSoftware.Extensions;
 using ActiproSoftware.UI.Avalonia.Themes;
-using Avalonia;
-using Avalonia.Styling;
-using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 
-namespace ActiproSoftware.SampleBrowser.Utilities.ThemeResourceBrowser {
+namespace ActiproSoftware.SampleBrowser.Utilities.ThemeResourceBrowser;
+
+/// <summary>
+/// The resource browser view model.
+/// </summary>
+public class ThemeResourceBrowserViewModel : ObservableObjectBase {
+
+	private CancellationTokenSource? _cancellationTokenSource;
+	private readonly ConcurrentBag<ThemeResourceViewModel> _currentThemeResources = [];
+	private string _filterText = string.Empty;
+	private ThemeResourceReferenceTextKind _referenceTextKind = ThemeResourceReferenceTextKind.XamlDynamicResource;
+	private ThemeVariant _theme;
+
+	// --------------------------------------------------------------------------------------------------
+	// OBJECT
+	// --------------------------------------------------------------------------------------------------
 
 	/// <summary>
-	/// The resource browser view model.
+	/// Initializes an instance of the class with the current application theme.
 	/// </summary>
-	public class ThemeResourceBrowserViewModel : ObservableObjectBase {
+	public ThemeResourceBrowserViewModel()
+		: this(Application.Current?.ActualThemeVariant ?? ThemeVariant.Light) { }
 
-		private CancellationTokenSource? _cancellationTokenSource;
-		private readonly ConcurrentBag<ThemeResourceViewModel> _currentThemeResources = new();
-		private string _filterText = string.Empty;
-		private ThemeResourceReferenceTextKind _referenceTextKind = ThemeResourceReferenceTextKind.XamlDynamicResource;
-		private ThemeVariant _theme;
+	/// <summary>
+	/// Initializes an instance of the class with the given theme.
+	/// </summary>
+	/// <param name="theme">The theme variant.</param>
+	public ThemeResourceBrowserViewModel(ThemeVariant theme) {
+		_theme = theme;
+		RefreshFilteredResourcesAsync();
+	}
 
-		// --------------------------------------------------------------------------------------------------
-		// OBJECT
-		// --------------------------------------------------------------------------------------------------
+	// --------------------------------------------------------------------------------------------------
+	// NON-PUBLIC PROCEDURES
+	// --------------------------------------------------------------------------------------------------
 
-		/// <summary>
-		/// Initializes a new instance of the class with the current application theme.
-		/// </summary>
-		public ThemeResourceBrowserViewModel()
-			: this(Application.Current?.ActualThemeVariant ?? ThemeVariant.Light) { }
+	private async Task<List<ThemeResourceViewModel>> GetFilteredResourcesViewModels(CancellationToken token) {
+		var filterText = FilterText;
+		return await Task.Run(() => {
+			var filteredResourceList = new List<ThemeResourceViewModel>();
 
-		/// <summary>
-		/// Initializes a new instance of the class with the given theme.
-		/// </summary>
-		/// <param name="theme">The theme variant.</param>
-		public ThemeResourceBrowserViewModel(ThemeVariant theme) {
-			_theme = theme;
-			RefreshFilteredResourcesAsync();
-		}
+			var filters = new HashSet<string[]>();
+			var sections = (filterText ?? string.Empty).Split([','], StringSplitOptions.RemoveEmptyEntries);
+			foreach (var section in sections) {
+				var parts = (section ?? string.Empty).Split([' '], StringSplitOptions.RemoveEmptyEntries);
+				filters.Add(parts);
+			}
 
-		// --------------------------------------------------------------------------------------------------
-		// NON-PUBLIC PROCEDURES
-		// --------------------------------------------------------------------------------------------------
+			filteredResourceList.AddRange(_currentThemeResources.Where(x => Filter(x.Name)).OrderBy(x => x.Name));
 
-		private async Task<List<ThemeResourceViewModel>> GetFilteredResourcesViewModels(CancellationToken token) {
-			var filterText = FilterText;
-			return await Task.Run(() => {
-				var filteredResourceList = new List<ThemeResourceViewModel>();
+			bool Filter(string key) {
+				if (filters.Count == 0)
+					return true;
 
-				var filters = new HashSet<string[]>();
-				var sections = (filterText ?? string.Empty).Split(new[] { ',' }, System.StringSplitOptions.RemoveEmptyEntries);
-				foreach (var section in sections) {
-					var parts = (section ?? string.Empty).Split(new[] { ' ' }, System.StringSplitOptions.RemoveEmptyEntries);
-					filters.Add(parts);
-				}
-
-				filteredResourceList.AddRange(_currentThemeResources.Where(x => Filter(x.Name)).OrderBy(x => x.Name));
-
-				bool Filter(string key) {
-					if (!filters.Any())
-						return true;
-
-					// At least one section must match all the parts to be included
-					if (!string.IsNullOrEmpty(key)) {
-						foreach (var parts in filters) {
-							if (parts.All(part => key.Contains(part, System.StringComparison.InvariantCultureIgnoreCase)))
-								return true;
-						}
+				// At least one section must match all the parts to be included
+				if (!string.IsNullOrEmpty(key)) {
+					foreach (var parts in filters) {
+						if (parts.All(part => key.Contains(part, StringComparison.InvariantCultureIgnoreCase)))
+							return true;
 					}
-					return false;
 				}
+				return false;
+			}
 
-				return filteredResourceList;
+			return filteredResourceList;
 
-			}, token);
+		}, token);
+	}
+
+	private static IEnumerable<KeyValuePair<string, string>> GetResourceNames() {
+		foreach (var resourceKind in Enum.GetValues<ThemeResourceKind>())
+			yield return new KeyValuePair<string, string>(resourceKind.ToString(), resourceKind.ToResourceKey());
+	}
+
+	private IEnumerable<ThemeResourceViewModel> GetThemeResourceViewModels(ThemeVariant themeVariant) {
+		foreach (var pair in GetResourceNames().OrderBy(x => x.Key)) {
+			if (TryCreateResourceViewModel(themeVariant, pair.Key, pair.Value, out var viewModel))
+				yield return viewModel;
 		}
+	}
 
-		private static IEnumerable<KeyValuePair<string, string>> GetResourceNames() {
-			foreach (var resourceKind in Enum.GetValues<ThemeResourceKind>())
-				yield return new KeyValuePair<string, string>(resourceKind.ToString(), resourceKind.ToResourceKey());
-		}
+	private void RefreshFilteredResourcesAsync()
+		=> RefreshFilteredResourcesAsync(TimeSpan.Zero, CancellationToken.None);
 
-		private IEnumerable<ThemeResourceViewModel> GetThemeResourceViewModels(ThemeVariant themeVariant) {
-			foreach (var kvp in GetResourceNames().OrderBy(x => x.Key)) {
-				if (TryCreateResourceViewModel(themeVariant, kvp.Key, kvp.Value, out var viewModel))
-					yield return viewModel;
+	private async void RefreshFilteredResourcesAsync(TimeSpan delay, CancellationToken token) {
+		if (delay.TotalMilliseconds > 0) {
+			try {
+				await Task.Delay((int)delay.TotalMilliseconds.Round(RoundMode.Ceiling), token);
+			}
+			catch (TaskCanceledException) {
+				return;
 			}
 		}
 
-		private void RefreshFilteredResourcesAsync()
-			=> RefreshFilteredResourcesAsync(TimeSpan.Zero, CancellationToken.None);
-
-		private async void RefreshFilteredResourcesAsync(TimeSpan delay, CancellationToken token) {
-			if (delay.TotalMilliseconds > 0) {
-				try {
-					await Task.Delay((int)delay.TotalMilliseconds.Round(RoundMode.Ceiling), token);
-				}
-				catch (TaskCanceledException) {
-					return;
-				}
-			}
-
-			// Build theme resources if not already built
-			if (!_currentThemeResources.Any()) {
-				foreach (var resource in GetThemeResourceViewModels(Theme)) {
-					if (token.IsCancellationRequested)
-						return;
-				
-					_currentThemeResources.Add(resource);
-				}
-
+		// Build theme resources if not already built
+		if (_currentThemeResources.IsEmpty) {
+			foreach (var resource in GetThemeResourceViewModels(Theme)) {
 				if (token.IsCancellationRequested)
 					return;
-			}
 
-			var filteredResources = await GetFilteredResourcesViewModels(token);
+				_currentThemeResources.Add(resource);
+			}
 
 			if (token.IsCancellationRequested)
 				return;
-
-			FilteredResources.Clear();
-			foreach (var resource in filteredResources) {
-				if (token.IsCancellationRequested)
-					break;
-
-				FilteredResources.Add(resource);
-			}
 		}
 
-		public ThemeResourceReferenceTextKind ResourceReferenceTextKind {
-			get => _referenceTextKind;
-			set {
-				if (SetProperty(ref _referenceTextKind, value)) {
-					// Push to all the resource view models
-					foreach (var resource in _currentThemeResources)
-						resource.ResourceReferenceTextKind = value;
-				}
+		var filteredResources = await GetFilteredResourcesViewModels(token);
+
+		if (token.IsCancellationRequested)
+			return;
+
+		FilteredResources.Clear();
+		foreach (var resource in filteredResources) {
+			if (token.IsCancellationRequested)
+				break;
+
+			FilteredResources.Add(resource);
+		}
+	}
+
+	public ThemeResourceReferenceTextKind ResourceReferenceTextKind {
+		get => _referenceTextKind;
+		set {
+			if (SetProperty(ref _referenceTextKind, value)) {
+				// Push to all the resource view models
+				foreach (var resource in _currentThemeResources)
+					resource.ResourceReferenceTextKind = value;
 			}
 		}
+	}
 
-		private bool TryCreateResourceViewModel(ThemeVariant themeVariant, string resourceName, string resourceKey, [NotNullWhen(returnValue: true)] out ThemeResourceViewModel? viewModel) {
-			if (TryGetResource(resourceKey, themeVariant, out var resourceValue)) {
-				viewModel = new ThemeResourceViewModel(resourceName, resourceValue) {
-					ResourceReferenceTextKind = this.ResourceReferenceTextKind
-				};
-				return true;
-			}
-			else {
-				viewModel = null;
-				return false;
-			}
+	private bool TryCreateResourceViewModel(ThemeVariant themeVariant, string resourceName, string resourceKey, [NotNullWhen(returnValue: true)] out ThemeResourceViewModel? viewModel) {
+		if (TryGetResource(resourceKey, themeVariant, out var resourceValue)) {
+			viewModel = new ThemeResourceViewModel(resourceName, resourceValue) {
+				ResourceReferenceTextKind = this.ResourceReferenceTextKind
+			};
+			return true;
 		}
-
-		private static bool TryGetResource(string keyName, ThemeVariant theme, [NotNullWhen(returnValue: true)]out object? resource) {
-			resource = null;
-			return Application.Current?.TryGetResource(keyName, theme, out resource) == true;
+		else {
+			viewModel = null;
+			return false;
 		}
+	}
 
-		// --------------------------------------------------------------------------------------------------
-		// PUBLIC PROCEDURES
-		// --------------------------------------------------------------------------------------------------
+	private static bool TryGetResource(string keyName, ThemeVariant theme, [NotNullWhen(returnValue: true)] out object? resource) {
+		resource = null;
+		return Application.Current?.TryGetResource(keyName, theme, out resource) == true;
+	}
 
-		/// <summary>
-		/// The collection of resources for the current theme with filtering applied.
-		/// </summary>
-		public ObservableCollection<ThemeResourceViewModel> FilteredResources { get; } = new();
+	// --------------------------------------------------------------------------------------------------
+	// PUBLIC PROCEDURES
+	// --------------------------------------------------------------------------------------------------
 
-		/// <summary>
-		/// The filter to be applied.
-		/// </summary>
-		public string FilterText {
-			get => _filterText;
-			set {
-				if (SetProperty(ref _filterText, value)) {
-					var newCancellationTokenSource = new CancellationTokenSource();
-					var oldCancellationTokenSource = Interlocked.Exchange(ref _cancellationTokenSource, newCancellationTokenSource);
-					oldCancellationTokenSource?.Cancel();
+	/// <summary>
+	/// The collection of resources for the current theme with filtering applied.
+	/// </summary>
+	public ObservableCollection<ThemeResourceViewModel> FilteredResources { get; } = [];
 
-					var token = newCancellationTokenSource.Token;
+	/// <summary>
+	/// The filter to be applied.
+	/// </summary>
+	public string FilterText {
+		get => _filterText;
+		set {
+			if (SetProperty(ref _filterText, value)) {
+				var newCancellationTokenSource = new CancellationTokenSource();
+				var oldCancellationTokenSource = Interlocked.Exchange(ref _cancellationTokenSource, newCancellationTokenSource);
+				oldCancellationTokenSource?.Cancel();
 
-					var delay = (string.IsNullOrEmpty(_filterText)) ? TimeSpan.Zero : TimeSpan.FromMilliseconds(250);
-					RefreshFilteredResourcesAsync(delay, token);
-				}
-			}
-		}
+				var token = newCancellationTokenSource.Token;
 
-		/// <summary>
-		/// The current theme variant.
-		/// </summary>
-		public ThemeVariant Theme {
-			get => _theme;
-			set {
-				if (SetProperty(ref _theme, value)) {
-					_currentThemeResources.Clear();
-					RefreshFilteredResourcesAsync();
-				}
+				var delay = (string.IsNullOrEmpty(_filterText)) ? TimeSpan.Zero : TimeSpan.FromMilliseconds(250);
+				RefreshFilteredResourcesAsync(delay, token);
 			}
 		}
+	}
 
+	/// <summary>
+	/// The current theme variant.
+	/// </summary>
+	public ThemeVariant Theme {
+		get => _theme;
+		set {
+			if (SetProperty(ref _theme, value)) {
+				_currentThemeResources.Clear();
+				RefreshFilteredResourcesAsync();
+			}
+		}
 	}
 
 }

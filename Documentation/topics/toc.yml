@@ -243,12 +243,16 @@ items:
     items:
     - name: "Overview"
       href: fundamentals/controls/index.md
+    - name: "Animated Text Presenter"
+      href: fundamentals/controls/animated-text-presenter.md
     - name: "Avatar"
       href: fundamentals/controls/avatar.md
     - name: "Avatar Group"
       href: fundamentals/controls/avatar-group.md
     - name: "Badge"
       href: fundamentals/controls/badge.md
+    - name: "Border Beam"
+      href: fundamentals/controls/border-beam.md
     - name: "Card"
       href: fundamentals/controls/card.md
     - name: "Circular Progressbar"
@@ -391,6 +395,8 @@ items:
   items:
   - name: "Overview"
     href: conversion/index.md
+  - name: "Converting to v26.2"
+    href: conversion/converting-to-v26-2.md
   - name: "Converting to v26.1"
     href: conversion/converting-to-v26-1.md
   - name: "Converting to v25.2.3"

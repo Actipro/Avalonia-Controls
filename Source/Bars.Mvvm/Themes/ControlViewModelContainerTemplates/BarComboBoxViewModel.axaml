@@ -46,6 +46,7 @@
 			MinItemWidth="{Binding MinItemWidth}"
 			MinMenuColumnCount="{Binding MinMenuColumnCount}"
 			PlaceholderText="{Binding PlaceholderText}"
+			PopupClosedCommand="{Binding PopupClosedCommand}"
 			PopupOpeningCommand="{Binding PopupOpeningCommand}"
 			RequestedWidth="{Binding RequestedWidth}"
 			SelectedItem="{Binding SelectedItem, Mode=TwoWay}"

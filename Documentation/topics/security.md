@@ -21,6 +21,8 @@ You can find the product-specific instructions for reporting vulnerabilities and
 
 Actipro @@PlatformName controls are developed and maintained in accordance with the requirements of the EU Cyber Resilience Act (CRA). We follow a secure development lifecycle, provide a defined support period, publish vulnerability reporting instructions, and maintain the technical documentation and evidence required for CE marking under Module A (Internal Control).
 
+Actipro @@PlatformName controls fall within the CRA's default product category. Their core functionality consists of user interface controls and components and does not fall within the important or critical product categories listed in Annex III or Annex IV.
+
 ## Dynamic Code and Trusted Type Validation
 
 Some product features may attempt to dynamically create and use .NET types from a string type/assembly name.  In accordance with our secure-by-default design, types specified by string type/assembly names will be considered untrusted by default.

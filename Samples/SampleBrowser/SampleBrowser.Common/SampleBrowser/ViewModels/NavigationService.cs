@@ -1,70 +1,66 @@
-using System.Collections.Generic;
+namespace ActiproSoftware.SampleBrowser;
 
-namespace ActiproSoftware.SampleBrowser {
+/// <summary>
+/// Implements a navigation service for samples.
+/// </summary>
+public class NavigationService {
+
+	private readonly List<ProductItemInfo?> _history = [];
+	private int _historyIndex = -1;
+
+	private const int MaxHistoryCount = 100;
+
+	// --------------------------------------------------------------------------------------------------
+	// PUBLIC PROCEDURES
+	// --------------------------------------------------------------------------------------------------
 
 	/// <summary>
-	/// Implements a navigation service for samples.
+	/// Whether a navigation backward can occur.
 	/// </summary>
-	public class NavigationService {
+	public bool CanGoBack
+		=> _historyIndex > 0;
 
-		private readonly List<ProductItemInfo?> _history = new();
-		private int _historyIndex = -1;
+	/// <summary>
+	/// Whether a navigation forward can occur.
+	/// </summary>
+	public bool CanGoForward
+		=> (0 <= _historyIndex) && (_historyIndex < _history.Count - 1);
 
-		private const int MaxHistoryCount = 100;
+	/// <summary>
+	/// Navigates backward in history.
+	/// </summary>
+	/// <returns>The <see cref="ProductItemInfo"/> to navigate to.</returns>
+	public ProductItemInfo? GoBack()
+		=> CanGoBack ? _history[--_historyIndex] : null;
 
-		// --------------------------------------------------------------------------------------------------
-		// PUBLIC PROCEDURES
-		// --------------------------------------------------------------------------------------------------
+	/// <summary>
+	/// Navigates forward in history.
+	/// </summary>
+	/// <returns>The <see cref="ProductItemInfo"/> to navigate to.</returns>
+	public ProductItemInfo? GoForward()
+		=> CanGoForward ? _history[++_historyIndex] : null;
 
-		/// <summary>
-		/// Whether a navigation backward can occur.
-		/// </summary>
-		public bool CanGoBack
-			=> (_historyIndex > 0);
+	/// <summary>
+	/// Whether a navigation through history is currently occurring.
+	/// </summary>
+	public bool IsNavigatingThroughHistory { get; set; }
 
-		/// <summary>
-		/// Whether a navigation forward can occur.
-		/// </summary>
-		public bool CanGoForward
-			=> (_historyIndex >= 0) && (_historyIndex < _history.Count - 1);
+	/// <summary>
+	/// Navigates to the specified <see cref="ProductItemInfo"/>.
+	/// </summary>
+	/// <param name="itemInfo">The <see cref="ProductItemInfo"/> to navigate to.</param>
+	public void NavigateTo(ProductItemInfo? itemInfo) {
+		if (IsNavigatingThroughHistory)
+			return;
 
-		/// <summary>
-		/// Navigates backward in history.
-		/// </summary>
-		/// <returns>The <see cref="ProductItemInfo"/> to navigate to.</returns>
-		public ProductItemInfo? GoBack()
-			=> (CanGoBack ? _history[--_historyIndex] : null);
+		_historyIndex++;
+		_history.RemoveRange(_historyIndex, _history.Count - _historyIndex);
+		_history.Add(itemInfo);
 
-		/// <summary>
-		/// Navigates forward in history.
-		/// </summary>
-		/// <returns>The <see cref="ProductItemInfo"/> to navigate to.</returns>
-		public ProductItemInfo? GoForward()
-			=> (CanGoForward ? _history[++_historyIndex] : null);
-
-		/// <summary>
-		/// Whether a navigation through history is currently occurring.
-		/// </summary>
-		public bool IsNavigatingThroughHistory { get; set; }
-
-		/// <summary>
-		/// Navigates to the specified <see cref="ProductItemInfo"/>.
-		/// </summary>
-		/// <param name="itemInfo">The <see cref="ProductItemInfo"/> to navigate to.</param>
-		public void NavigateTo(ProductItemInfo? itemInfo) {
-			if (IsNavigatingThroughHistory)
-				return;
-
-			_historyIndex++;
-			_history.RemoveRange(_historyIndex, _history.Count - _historyIndex);
-			_history.Add(itemInfo);
-
-			if (_history.Count > MaxHistoryCount) {
-				_historyIndex--;
-				_history.RemoveAt(0);
-			}
+		if (_history.Count > MaxHistoryCount) {
+			_historyIndex--;
+			_history.RemoveAt(0);
 		}
-
 	}
 
 }

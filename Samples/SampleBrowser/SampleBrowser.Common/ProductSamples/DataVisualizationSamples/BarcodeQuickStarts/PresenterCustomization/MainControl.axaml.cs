@@ -1,5 +1,4 @@
 using ActiproSoftware.UI.Avalonia.Controls.Barcodes;
-using Avalonia.Controls;
 
 namespace ActiproSoftware.ProductSamples.DataVisualizationSamples.BarcodeQuickStarts.PresenterCustomization;
 

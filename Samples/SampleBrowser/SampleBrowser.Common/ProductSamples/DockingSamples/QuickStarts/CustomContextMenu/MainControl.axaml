@@ -108,8 +108,6 @@ public partial class MainControl : UserControl {
 	/// <summary>
 	/// Occurs when a docking-related context menu is opening, allowing for customization before it is displayed.
 	/// </summary>
-	/// <param name="sender">The sender of the event.</param>
-	/// <param name="e">The <c>DockingMenuEventArgs</c> that contains data related to this event.</param>
 	private void OnDockSiteMenuOpening(object? sender, DockingMenuEventArgs e) {
 		var message = new StringBuilder($"WindowContextMenu: Kind={e.Kind}");
 

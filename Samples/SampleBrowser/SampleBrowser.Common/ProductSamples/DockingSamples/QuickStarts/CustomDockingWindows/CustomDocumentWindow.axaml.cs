@@ -1,30 +1,25 @@
 ﻿using ActiproSoftware.UI.Avalonia.Controls.Docking;
-using System;
 
-namespace ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.CustomDockingWindows {
+namespace ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.CustomDockingWindows;
 
-	public partial class CustomDocumentWindow : DocumentWindow {
+public partial class CustomDocumentWindow : DocumentWindow {
 
-		// --------------------------------------------------------------------------------------------------
-		// OBJECT
-		// --------------------------------------------------------------------------------------------------
+	// --------------------------------------------------------------------------------------------------
+	// OBJECT
+	// --------------------------------------------------------------------------------------------------
 
-		/// <summary>
-		/// Initializes an instance of the class.
-		/// </summary>
-		public CustomDocumentWindow() {
-			InitializeComponent();
-		}
+	public CustomDocumentWindow() {
+		InitializeComponent();
+	}
 
-		// --------------------------------------------------------------------------------------------------
-		// PUBLIC PROCEDURES
-		// --------------------------------------------------------------------------------------------------
+	// --------------------------------------------------------------------------------------------------
+	// PUBLIC PROCEDURES
+	// --------------------------------------------------------------------------------------------------
 
-		/// <inheritdoc/>
-		protected override Type StyleKeyOverride
-			// Ensure DocumentWindow implicit styles are applied to the derived class
-			=> typeof(DocumentWindow);
-
+	/// <inheritdoc/>
+	protected override Type StyleKeyOverride {
+		// Ensure DocumentWindow implicit styles are applied to the derived class
+		get => typeof(DocumentWindow);
 	}
 
 }

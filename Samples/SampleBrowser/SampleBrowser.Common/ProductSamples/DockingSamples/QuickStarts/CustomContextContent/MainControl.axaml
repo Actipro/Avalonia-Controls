@@ -183,9 +183,6 @@ namespace ActiproSoftware.ProductSamples.DockingSamples.QuickStarts.CustomContex
 		/// <summary>
 		/// Whether the data is approved.
 		/// </summary>
-		/// <value>
-		/// <c>true</c> if the data is approved; otherwise, <c>false</c>.
-		/// </value>
 		public bool IsApproved {
 			get => _isApproved;
 			set => SetProperty(ref _isApproved, value);

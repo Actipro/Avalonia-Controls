@@ -8,8 +8,8 @@ using Avalonia.Browser;
 
 internal partial class Program {
 
-	private static Task Main(string[] args)
-		=> BuildAvaloniaApp()
+	private static Task Main(string[] args) {
+		return BuildAvaloniaApp()
 
 			// NOTE: See the 'Licensing' documentation topic for details on how to register an evaluation or paid license here:
 			// .RegisterActiproLicense(licensee, licenseKey)
@@ -19,6 +19,7 @@ internal partial class Program {
 
 			.WithInterFont()
 			.StartBrowserAppAsync("out");
+	}
 
 	public static AppBuilder BuildAvaloniaApp()
 		=> AppBuilder.Configure<App>();

@@ -35,7 +35,7 @@ Elevate your application by [licensing](licensing.md) professionally designed co
 
 ![Screenshot](fundamentals/images/overview.png)
 
-[Actipro Fundamentals](fundamentals/index.md) provides a collection of advanced controls that are useful for many different types of applications, including settings configuration controls, user prompts, message boxes, info bars, avatars, badges, segmented bars, progress spinners, and more.
+[Actipro Fundamentals](fundamentals/index.md) provides a collection of advanced controls that are useful for many different types of applications, including settings configuration controls, user prompts, message boxes, info bars, animated border beams and text, avatars, badges, segmented bars, progress spinners, and more.
 
 ## Actipro @@PlatformName Free Products
 

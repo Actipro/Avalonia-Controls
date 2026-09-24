@@ -1,29 +1,27 @@
-﻿namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.PopupAndContextMenus {
+﻿namespace ActiproSoftware.ProductSamples.BarsSamples.QuickStarts.PopupAndContextMenus;
+
+/// <summary>
+/// Defines the kind of "Paste Special" operation to be performed.
+/// </summary>
+public enum PasteSpecialKind {
 
 	/// <summary>
-	/// Defines the kind of "Paste Special" operation to be performed.
+	/// Default.
 	/// </summary>
-	public enum PasteSpecialKind {
+	Default = 0,
 
-		/// <summary>
-		/// Default.
-		/// </summary>
-		Default = 0,
+	/// <summary>
+	/// Merge formatting.
+	/// </summary>
+	MergeFormatting,
 
-		/// <summary>
-		/// Merge formatting.
-		/// </summary>
-		MergeFormatting,
+	/// <summary>
+	/// Paste as picture.
+	/// </summary>
+	Picture,
 
-		/// <summary>
-		/// Paste as picture.
-		/// </summary>
-		Picture,
-
-		/// <summary>
-		/// Text only.
-		/// </summary>
-		TextOnly,
-	}
-
+	/// <summary>
+	/// Text only.
+	/// </summary>
+	TextOnly,
 }

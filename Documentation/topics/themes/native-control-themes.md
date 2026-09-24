@@ -320,6 +320,26 @@ The following additional control theme is used by the default control theme:
 
 - [ListBoxItem](xref:@ActiproUIRoot.Themes.ControlThemeKind.ListBoxItem) - Default control theme.
 
+#### TableView Type
+
+![Screenshot](images/table-view.png)
+
+*TableView control in the default theme*
+
+- [TableView](xref:@ActiproUIRoot.Themes.ControlThemeKind.TableView) - Default control theme.
+
+#### TableViewCell Type
+
+- [TableViewCell](xref:@ActiproUIRoot.Themes.ControlThemeKind.TableViewCell) - Default control theme.
+
+#### TableViewColumnHeader Type
+
+- [TableViewColumnHeader](xref:@ActiproUIRoot.Themes.ControlThemeKind.TableViewColumnHeader) - Default control theme.
+
+#### TableViewRow Type
+
+- [TableViewRow](xref:@ActiproUIRoot.Themes.ControlThemeKind.TableViewRow) - Default control theme.
+
 #### TreeView Type
 
 ![Screenshot](images/tree-view.png)

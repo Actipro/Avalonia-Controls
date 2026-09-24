@@ -59,7 +59,7 @@ public partial class SampleRootControl : UserControl {
 	/// <summary>
 	/// Customizes a context menu.
 	/// </summary>
-	/// <param name="e">A <see cref="BarMenuEventArgs"/> that contains the event data.</param>
+	/// <param name="e">The event data.</param>
 	private void CustomizeMenu(BarMenuEventArgs e) {
 		var menu = e.Menu;
 		if (menu is null)

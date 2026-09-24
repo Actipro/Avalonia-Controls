@@ -1,15 +1,12 @@
 using ActiproSoftware.Extensions;
-using Avalonia.Data;
 using Avalonia.Data.Converters;
-using System;
-using System.Globalization;
 
 namespace ActiproSoftware.ProductSamples.FundamentalsSamples.Controls.RangeSliderIntro;
 
 /// <summary>
-/// Represents a value converter that converts <c>NaN</c>, <c>PositiveInfinity</c>, and <c>NegativeInfinith</c> to <c>null</c>.
+/// Represents a value converter that converts <c>NaN</c>, <c>PositiveInfinity</c>, and <c>NegativeInfinity</c> to <c>null</c>.
 /// </summary>
-public class InvalidDoubleToNulllConverter : IValueConverter {
+public class InvalidDoubleToNullConverter : IValueConverter {
 
 	// --------------------------------------------------------------------------------------------------
 	// PUBLIC PROCEDURES

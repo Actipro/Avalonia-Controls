@@ -1,0 +1,92 @@
+<UserControl
+	x:Class="ActiproSoftware.ProductSamples.ThemeSamples.NativeControls.TableViewSamples"
+	xmlns="https://github.com/avaloniaui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
+	xmlns:sampleBrowser="using:ActiproSoftware.SampleBrowser"
+	xmlns:commonSamples="using:ActiproSoftware.ProductSamples.ThemesSamples.Common"
+	>
+
+	<sampleBrowser:ControlExampleItemsControl
+		Header="Actipro's control themes create a modern appearance for native TableView controls.">
+
+		<sampleBrowser:ControlExampleItemsControl.Documentation>
+			<sampleBrowser:ControlExampleLinkItem Title="List control themes" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/native-control-themes#list-controls" />
+			<sampleBrowser:ControlExampleLinkItem Title="Scrolling" Url="https://www.actiprosoftware.com/docs/controls/avalonia/themes/scrolling" />
+		</sampleBrowser:ControlExampleItemsControl.Documentation>
+
+		<sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+			<sampleBrowser:ControlExampleLinkItem Title="DataGrid" Url="/ProductSamples/ThemesSamples/NativeControls/DataGridSamples" />
+			<sampleBrowser:ControlExampleLinkItem Title="ListBox" Url="/ProductSamples/ThemesSamples/NativeControls/ListBoxSamples" />
+			<sampleBrowser:ControlExampleLinkItem Title="TreeView" Url="/ProductSamples/ThemesSamples/NativeControls/TreeViewSamples" />
+		</sampleBrowser:ControlExampleItemsControl.RelatedSamples>
+
+
+		<sampleBrowser:ControlExample
+			Header="TableView usage"
+			DataContext="{Binding #sample}"
+			>
+			<sampleBrowser:ControlExample.Resources>
+				<ControlTheme x:Key="MyTableView" TargetType="TableView">
+					<Setter Property="Template">
+						<ControlTemplate>
+							<Border Width="200" Height="200" Background="Red" />
+						</ControlTemplate>
+					</Setter>
+				</ControlTheme>
+			</sampleBrowser:ControlExample.Resources>
+
+			<TableView x:Name="sample" BorderThickness="1" Height="250">
+				<TableView.Columns>
+					<TableViewColumn x:DataType="commonSamples:FruitDataItemModel" Header="Name" Binding="{Binding Name}" />
+					<TableViewColumn x:DataType="commonSamples:FruitDataItemModel" Header="Color Category" Binding="{Binding ColorCategory}" />
+					<TableViewColumn x:DataType="commonSamples:FruitDataItemModel" Header="Leading Producer" Binding="{Binding LeadingProducer}" />
+					<TableViewColumn x:DataType="commonSamples:FruitDataItemModel" Header="Serving Calories" Binding="{Binding ServingCalories}" />
+					<TableViewColumn Header="Popular?" HorizontalContentAlignment="Center">
+						<TableViewColumn.CellTemplate>
+							<DataTemplate>
+								<CheckBox x:DataType="commonSamples:FruitDataItemModel" IsChecked="{Binding IsPopular}" IsEnabled="False" />
+							</DataTemplate>
+						</TableViewColumn.CellTemplate>
+					</TableViewColumn>
+				</TableView.Columns>
+			</TableView>
+
+			<sampleBrowser:ControlExample.Options>
+				<StackPanel Spacing="10">
+					<CheckBox IsChecked="{Binding CanUserResizeColumns}">Can user resize columns</CheckBox>
+					<CheckBox IsChecked="{Binding (actipro:ThemeProperties.ScrollBarHasLineButtons)}">Has scroll line buttons</CheckBox>
+					<CheckBox IsChecked="{Binding (ScrollViewer.AllowAutoHide)}">Allow scroll auto-hide</CheckBox>
+					<CheckBox IsChecked="{Binding IsEnabled}">Enabled</CheckBox>
+				</StackPanel>
+			</sampleBrowser:ControlExample.Options>
+			<sampleBrowser:ControlExample.CodeExamples>
+				<sampleBrowser:CodeExample xml:space="preserve">
+					<![CDATA[
+<TableView CanUserResizeColumns="$(CanUserResizeColumns)"$(AllowAutoHideAttribute)$(IsEnabledAttribute)$(ScrollBarHasLineButtonsAttribute)>
+
+	<TableView.Columns>
+		<!-- Define columns -->
+	</TableView.Columns>
+
+</TableView>
+					]]>
+					<sampleBrowser:CodeExample.Substitutions>
+						<sampleBrowser:CodeExampleSubstitution Key="AllowAutoHideAttribute"
+															   IsEnabled="{Binding !(ScrollViewer.AllowAutoHide)}"
+															   Value=" ScrollViewer.AllowAutoHide=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="CanUserResizeColumns" Value="{Binding CanUserResizeColumns}" />
+						<sampleBrowser:CodeExampleSubstitution Key="IsEnabledAttribute"
+															   IsEnabled="{Binding !IsEnabled}"
+															   Value=" IsEnabled=&quot;False&quot;" />
+						<sampleBrowser:CodeExampleSubstitution Key="ScrollBarHasLineButtonsAttribute"
+															   IsEnabled="{Binding (actipro:ThemeProperties.ScrollBarHasLineButtons)}"
+															   Value="&#xD;&#x9;actipro:ThemeProperties.ScrollBarHasLineButtons=&quot;True&quot;" />
+					</sampleBrowser:CodeExample.Substitutions>
+				</sampleBrowser:CodeExample>
+			</sampleBrowser:ControlExample.CodeExamples>
+		</sampleBrowser:ControlExample>
+
+	</sampleBrowser:ControlExampleItemsControl>
+
+</UserControl>

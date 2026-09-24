@@ -354,7 +354,7 @@ xmlns:actipro="http://schemas.actiprosoftware.com/avaloniaui"
 
 When used as a `Button` and the elevated theme is applied (`theme-elevated` style class name), an animation is applied when the pointer is over the [Card](xref:@ActiproUIRoot.Controls.Card) that slides the control up while raising the elevation of the shadow.
 
-Animations are automatically enabled. To turn off animations, set the [IsAnimationEnabled](xref:@ActiproUIRoot.Controls.Card.IsAnimationEnabled) property to `false`.
+Animations are enabled by default when animation support is available. To manually turn off animations, set the [IsAnimationEnabled](xref:@ActiproUIRoot.Controls.Card.IsAnimationEnabled) property to `false`.
 }
 @if (wpf) {
 ## Elevated Appearance

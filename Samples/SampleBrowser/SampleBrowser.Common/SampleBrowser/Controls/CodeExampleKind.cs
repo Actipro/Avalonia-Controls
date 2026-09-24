@@ -1,20 +1,17 @@
-﻿
-namespace ActiproSoftware.SampleBrowser {
+﻿namespace ActiproSoftware.SampleBrowser;
 
-	public enum CodeExampleKind {
+public enum CodeExampleKind {
 
-		Unspecified = 0,
+	Unspecified = 0,
 
-		/// <summary>
-		/// Model-View-ViewModel
-		/// </summary>
-		Mvvm = 1,
+	/// <summary>
+	/// Model-View-ViewModel
+	/// </summary>
+	Mvvm = 1,
 
-		/// <summary>
-		/// XAML
-		/// </summary>
-		Xaml = 2,
-
-	}
+	/// <summary>
+	/// XAML
+	/// </summary>
+	Xaml = 2,
 
 }
