@@ -230,7 +230,7 @@
 															   IsEnabled="{Binding TransitionScope, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Character'}"
 															   Value="{Binding TransitionScope, StringFormat='&#xD;&#x9;TransitionScope=&quot;{0}&quot;'}" />
 						<sampleBrowser:CodeExampleSubstitution Key="TransitionDirectionAttribute"
-															   IsEnabled="{Binding TransitionDirection, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Automatic'}"
+															   IsEnabled="{Binding TransitionDirection, Converter={StaticResource NotEqualToComparisonConverter}, ConverterParameter='Auto'}"
 															   Value="{Binding TransitionDirection, StringFormat='&#xD;&#x9;TransitionDirection=&quot;{0}&quot;'}" />
 						<sampleBrowser:CodeExampleSubstitution Key="TransitionDurationAttribute"
 															   AllowNestedSubstitution="True"

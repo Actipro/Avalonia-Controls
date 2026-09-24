@@ -109,6 +109,6 @@ When the platform requests high contrast, the animated border and inner illumina
 
 Use illumination selectively for a few important surfaces rather than animating every item in a dense list. Pulse mode illuminates multiple regions and can cost more than a single traveling beam. Setting the effect inactive lets rendering settle after the fade-out, while disabling inner illumination removes its rendering work.
 
-Animation work is suspended when the control is detached, effectively hidden, or has unusable bounds. A control covered by another window or visual is not necessarily considered hidden.
+Animation work is suspended when the control is detached, effectively hidden, or has unusable bounds. Ancestor visibility changes may take effect on the next animation frame. A control covered by another window or visual is not necessarily considered hidden.
 
 Treat the effect as decoration, not the sole indication of progress or status. Keep meaningful text, accessible names, and any required progress semantics on the content itself, so users can understand the state with animation disabled or high contrast enabled.
